@@ -1,0 +1,5 @@
+*.dvi
+**/*/auto/*
+_region_.tex
+*.fls
+*.pdf
