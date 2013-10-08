@@ -7,19 +7,11 @@
 \usepackage{graphicx}
 \usepackage{enumerate}
 \usepackage{listings}
+\usepackage{booktabs}
 \usepackage{hyperref}
-\onehalfspacing            
+\hypersetup{colorlinks=true}
 
-% FONTS
-\usepackage{fontspec} 
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{xunicode}
-\usepackage{xltxtra}
-\defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Bembo Std}
-\setsansfont[Mapping=tex-text,Numbers=OldStyle,Scale=MatchLowercase]{Gill
-Sans}
-\setmonofont[Mapping=tex-text,Scale=MatchLowercase]{Monaco}
+\onehalfspacing            
 
 \theoremstyle{plain}% default 
 \newtheorem{thm}{Theorem}[chapter] 
@@ -40,3 +32,5 @@ Sans}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+\setcounter{secnumdepth}{2}
