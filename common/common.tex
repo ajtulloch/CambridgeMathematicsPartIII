@@ -1,6 +1,25 @@
-\usepackage{amsthm, amsmath, amssymb, geometry, setspace, graphicx,
-  enumerate, listings, hyperref}
-\onehalfspacing                 
+% Utility packages
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{hyperref}
+\onehalfspacing            
+
+% FONTS
+\usepackage{fontspec} 
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Bembo Std}
+\setsansfont[Mapping=tex-text,Numbers=OldStyle,Scale=MatchLowercase]{Gill
+Sans}
+\setmonofont[Mapping=tex-text,Scale=MatchLowercase]{Monaco}
 
 \theoremstyle{plain}% default 
 \newtheorem{thm}{Theorem}[chapter] 
