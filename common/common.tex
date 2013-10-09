@@ -1,3 +1,4 @@
+\documentclass{tufte-book}
 % Utility packages
 \usepackage{amsthm}
 \usepackage{amsmath}
@@ -9,28 +10,17 @@
 \usepackage{listings}
 \usepackage{booktabs}
 \usepackage{hyperref}
+\usepackage{thmtools}
 \hypersetup{colorlinks=true}
 
-\onehalfspacing            
-
-\theoremstyle{plain}% default 
-\newtheorem{thm}{Theorem}[chapter] 
-\newtheorem{lem}[thm]{Lemma} 
-\newtheorem{prop}[thm]{Proposition} 
-\newtheorem{exer}[thm]{Exercise} 
-\newtheorem*{cor}{Corollary} 
-
-\theoremstyle{definition} 
-\newtheorem{defn}[thm]{Definition}
-\newtheorem{conj}[thm]{Conjecture}
-\newtheorem{exmp}[thm]{Example}
-
-\theoremstyle{remark} 
-\newtheorem*{rem}{Remark} 
-\newtheorem*{note}{Note} 
-\newtheorem{case}{Case} 
+\declaretheorem[numberwithin=chapter,name=Theorem]{thm}
+\declaretheorem[name=Lemma,sibling=thm]{lem}
+\declaretheorem[name=Definition,sibling=thm]{defn}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
 \setcounter{secnumdepth}{2}
+\onehalfspacing
+
+\author{Andrew Tulloch}
