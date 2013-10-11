@@ -1,0 +1,85 @@
+
+\chapter{Introduction}
+\label{cha:introduction}
+
+\section{Setup}
+\label{sec:setup}
+
+A setup is
+\begin{enumerate}
+\item A function $f: U \rightarrow \Omega$ (energy), an input image (i), and
+  a reconstructed candidate image ($u$) and find the minimizer of the problem 
+  \begin{equation}
+    \label{eq:1}
+    \min_{u \in U} f(u, i)
+  \end{equation} where $f$ is typically of the form
+  \begin{equation}
+    \label{eq:2}
+    f(u, i) = \underbrace{l(u, i)}_{\text{cost}} + \underbrace{r(u)}_{\text{regulariser}}
+  \end{equation}
+\end{enumerate}
+
+\begin{exmp}[Rudin-Osher-Fortem]
+  \begin{equation}
+    \label{eq:3}
+    min_{u} \frac{1}{2} \int_{\Omega} (u - I)^{2} dx + \int_{\Omega}
+    \| \nabla u \| du
+  \end{equation}
+
+  \begin{itemize}
+  \item Will reduce contrast
+  \item Will not introduce new jumps
+  \end{itemize}
+\end{exmp}
+
+\begin{exmp}[Total variation (TV) L1]
+  \begin{equation}
+    \label{eq:4}
+    min_{u} \frac{1}{2} \int_{\Omega} |u - I| dx + \lambda \int_{\Omega}
+    \| \nabla u \| du
+  \end{equation}
+  \begin{itemize}
+  \item In general does not cause contrast loss.
+  \item Can show that if $I = B_{r}(0)$, then
+    \begin{equation}
+      u =
+      \begin{cases}
+        I & r \geq \frac{\lambda}{2} \\
+        c & r < \frac{\lambda}{2}
+      \end{cases}
+    \end{equation}
+  \end{itemize}
+\end{exmp}
+
+
+\begin{exmp}[Inpainting]
+  \begin{equation}
+    \label{eq:5}
+    \min_{u} \frac{1}{2} \int_{\Omega / A} | u - I | dx + \lambda
+      \int_{\Omega} \| \nabla u \| dx
+  \end{equation}
+\end{exmp}
+
+\section{Convexity}
+\label{sec:convexity}
+
+\begin{boxthm}
+  If a function $f$ is convex, every local optimizer is a global optimizer.
+\end{boxthm}
+
+\begin{boxthm}
+  If a function $f$ is convex, it can (very often) be efficiently
+  optimized (polynomial time in number of bits in the input)
+\end{boxthm}
+
+In computer vision, problems are:
+
+\begin{itemize}
+\item Usually large-scale ($10^5$ - $10^7$ variables)
+\item Usually non-differentiable
+\end{itemize}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

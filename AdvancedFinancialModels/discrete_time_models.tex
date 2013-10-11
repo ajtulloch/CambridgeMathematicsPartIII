@@ -1,0 +1,69 @@
+\chapter{Discrete Time Models}
+\label{cha:discrete-time-models}
+
+\section{Standing Assumptions}
+\label{sec:standing-assumptions}
+
+\begin{enumerate}
+\item Zero dividends
+\item Zero tick size
+\item Zero transaction costs
+\item Infinitely divisible transactions
+\item No short-selling constraints
+\item No bid-ask spread
+\item No market impact (infinitely deep market)
+\end{enumerate}
+
+\section{Setup}
+\label{sec:setup}
+
+Consider a probability space $(\Omega, \mathcal{F}, \mathbb{P})$.
+
+\begin{defn}
+  \label{defn:1}
+  A random variable is a measurable map $X: \Omega \rightarrow \mathbb{R}$
+\end{defn}
+
+\begin{defn}
+  \label{defn:2}
+  A stochastic process $Y = (Y_{t})_{t \in I}$ is a collection of
+  random variables.  For us, $I = \{ 0, 1, \dots \}$ or $[0, \infty)$. 
+\end{defn}
+
+
+\begin{defn}
+  \label{defn:3}
+  A filtration $\mathbb{F} = (\mathcal{F})_{t \geq 0}$ is a collection
+  of sub-$\sigma$-algebras on $\mathcal{F}$ such that $\mathcal{F}_{s}
+  \subseteq \mathcal{F}_{t}$ for all $0 \leq s \leq t$ (discrete and
+  continuous time).
+\end{defn}
+
+\begin{exmp}
+  Tossing coins.
+  \begin{enumerate}
+  \item $\Omega = \{ HH, HT, TH, TT \}$
+  \item $\mathcal{F}$ is all 16 subsets of $\Omega$
+  \item $\mathbb{P}(A) = \frac{|A|}{4}$
+  \end{enumerate}
+
+  Possible filtration
+  \begin{enumerate}
+  \item $\mathcal{F}_{0} = \{ \emptyset, \Omega \}$
+  \item $\mathcal{F}_{1} = \{ \emptyset, \Omega, \{ HH, HT \}, \{ TH,
+    TT \} \}$
+  \item $\mathcal{F}_{2} = \mathcal{F}$
+  \end{enumerate}
+\end{exmp}
+
+\begin{defn}
+  \label{defn:4}
+  A process $Y$ is adapted if and only if $Y_{t}$ is $\mathcal{F}_{t}$-measurable.
+\end{defn}
+
+Throughout the course, $\mathcal{F}_{0}$ is assumed trivial.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

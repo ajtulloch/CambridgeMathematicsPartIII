@@ -1,0 +1,139 @@
+
+\chapter{Constrainted Optimization}
+\label{cha:constr-optim}
+
+Minimize $f(x)$ subject to $h(x) = b, x \in X$.  
+
+Objective function $f: R^{n} \rightarrow R$
+Vector $x \in R^{n}$ of decision variables,
+Functional constraint where $h: R^{n} -> R^{m}, b \in R^{m}$
+Regional constraint where $X \subseteq R^{n}$.
+
+\begin{defn}
+  \label{defn:1}
+  The feasible set is $X(b) = \{ x \in X : h(x) = b \}$.
+\end{defn}
+
+An inequality of the form $g(x) \leq b$ can be written as $g(x) + z =
+b$, where $z \in R^{m}$ called a slack variable with regional
+constraint $z \geq 0$.
+
+\section{Lagrangian Multipliers}
+\label{sec:lagr-mult}
+
+\begin{defn}
+  \label{defn:2}
+  Define the Lagrangian of a problem  as
+  \begin{equation}
+    \label{eq:1}
+    L(x, \lambda) = f(x) - \lambda^{T}(h(x) - b)
+  \end{equation} where $\lambda \in R^{m}$ is a vector of
+  \textbf{Lagrange multipliers}
+\end{defn}
+
+\begin{thm}[Lagrangian Sufficiency Theorem]
+  Let $x \in X$ and $\lambda \in R^{m}$ such that
+  \begin{equation}
+    \label{eq:2}
+    L(x, \lambda) = \inf_{x' \in X} L(x', \lambda)
+  \end{equation} and $h(x) = b$.  Then $x$ is optimal for $P$.
+\end{thm}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:3}
+    \min_{x' \in X(b)} f(x') &= \min_{x' \in X(b)} [f(x) - \lambda^{T}(h(x') - b)] \\
+                             &\geq \min_{x' \in X} [ f(x') - \lambda^{T}(h(x') - b)] \\
+                             &= f(x) - \lambda^{T}(h(x) - b) \\
+                             &= f(x)
+  \end{align}
+\end{proof}
+
+\section{Lagrange Dual}
+\label{sec:lagrange-dual}
+
+\begin{defn}
+  \label{defn:3}
+
+  Let
+  \begin{equation}
+    \label{eq:6}
+    \phi(b) = \inf_{x \in X(b)} f(x).
+  \end{equation}
+
+  Define the Lagrange dual function $g: R^{m} \rightarrow R$ with
+  \begin{equation}
+    \label{eq:4}
+    g(\lambda) = inf_{x \in X} L(x, \lambda)
+  \end{equation}
+  
+  Then, for all $\lambda \in R^{m}$,
+  \begin{equation}
+    \label{eq:5}
+    \inf_{x \in X(b)} f(x) = \inf_{x \in X(b)} L(x, \lambda) \geq
+    \inf_{x \in X} L(x, \lambda) = g(\lambda)
+  \end{equation} That is, $g(\lambda)$ is a lower bound on our
+  optimization function.
+\end{defn}
+
+This motivates the \textbf{dual problem} to maximize $g(\lambda)$ subject to
+$\lambda \in Y$, where $Y = \{ \lambda \in R^{m} : g(\lambda) >
+-\infty \}$.
+
+\begin{thm}[Duality]
+  From \eqref{eq:5}, we see that the optimal value of the primal is
+  always greater than the optimal value of the dual.  This is
+  \textbf{weak duality}. 
+\end{thm}
+
+\section{Supporting Hyperplanes}
+\label{sec:supp-hyperpl}
+
+
+Fix $b \in R^{m}$ and consider $\phi$ as a function of $c \in R^{m}$.
+Further consider the hyperplane given by $\alpha: R^{m} \rightarrow R$
+with
+\begin{equation}
+  \label{eq:7}
+  \alpha(c) = \beta - \lambda^{T}(b - c)
+\end{equation}
+
+Now, try to find $\phi(b)$ as follow.
+\begin{enumerate}
+\item For each $\lambda$, find
+  \begin{equation}
+    \label{eq:8}
+    \beta_{\lambda} = \max \{ \beta: \alpha(c) \leq \phi(c), \forall c
+    \in R^{m} \}
+  \end{equation}
+\item Choose $\lambda$ to maximize $\beta_{\lambda}$
+
+\end{enumerate}
+
+\begin{defn}
+  \label{defn:4}
+  Call $\alpha: R^{m} \rightarrow R$ a \textbf{supporting hyperplane}
+  to $\phi$ at $b$ if
+  \begin{equation}
+    \label{eq:9}
+    \alpha(c) = \phi(b) - \lambda^{T}(b - c)
+  \end{equation} and 
+  \begin{equation}
+    \label{eq:10}
+    \phi(c) \geq \phi(b) - \lambda^{T}(b - c)
+  \end{equation} for all $c \in R^{m}$.
+\end{defn}
+
+\begin{thm}
+  The following are equivalent
+  \begin{enumerate}
+  \item There exists a (non-vertical) supporting hyperplane to $\phi$
+    at $b$,
+  \item XXXXXXXXXXXXXXXXXXXXXXXXXX
+  \end{enumerate}
+\end{thm}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

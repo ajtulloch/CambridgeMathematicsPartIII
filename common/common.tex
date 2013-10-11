@@ -11,12 +11,14 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{thmtools}
+\usepackage{xparse}
 \hypersetup{colorlinks=true}
 
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
 \declaretheorem[name=Lemma,sibling=thm]{lem}
 \declaretheorem[name=Definition,sibling=thm]{defn}
 \declaretheorem[name=Example,sibling=thm]{exmp}
+\declaretheorem[name=Theorem,sibling=thm,thmbox=L]{boxthm}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -33,3 +35,25 @@
 \newcommand{\cp}{\overset{p}{\rightarrow}}
 % convergence almost surely
 \newcommand{\cas}{\overset{as}{\rightarrow}}
+
+% Expectation
+\NewDocumentCommand{\E}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{E}
+    }    
+    {%
+      \mathbb{E}\!\left(#1\right)
+    }%
+}
+
+% Probability
+\NewDocumentCommand{\Prob}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{P}
+    }    
+    {%
+      \mathbb{P}\!\left(#1\right)
+    }%
+}
