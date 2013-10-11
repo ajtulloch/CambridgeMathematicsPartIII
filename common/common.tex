@@ -16,6 +16,7 @@
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
 \declaretheorem[name=Lemma,sibling=thm]{lem}
 \declaretheorem[name=Definition,sibling=thm]{defn}
+\declaretheorem[name=Example,sibling=thm]{exmp}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -24,3 +25,11 @@
 \onehalfspacing
 
 \author{Andrew Tulloch}
+\publisher{Trinity College\\The University of Cambridge}
+% Shortcuts
+% convergence in probability
+\newcommand{\cd}{\overset{d}{\rightarrow}}    
+% convergence in distribution
+\newcommand{\cp}{\overset{p}{\rightarrow}}
+% convergence almost surely
+\newcommand{\cas}{\overset{as}{\rightarrow}}

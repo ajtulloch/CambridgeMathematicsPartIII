@@ -1,0 +1,10 @@
+\addvspace {10\p@ }
+\contentsline {defn}{\numberline {1.1}Definition}{7}{defn.1.1}
+\contentsline {exmp}{\numberline {1.2}Example\thmtformatoptarg {Linear Regression}}{7}{exmp.1.2}
+\contentsline {exmp}{\numberline {1.3}Example\thmtformatoptarg {Nonlinear regression}}{7}{exmp.1.3}
+\contentsline {exmp}{\numberline {1.4}Example\thmtformatoptarg {High dimensional linear model}}{7}{exmp.1.4}
+\addvspace {10\p@ }
+\contentsline {defn}{\numberline {2.1}Definition\thmtformatoptarg {Random Variable}}{9}{defn.2.1}
+\contentsline {defn}{\numberline {2.2}Definition\thmtformatoptarg {Convergence almost surely}}{9}{defn.2.2}
+\contentsline {defn}{\numberline {2.3}Definition\thmtformatoptarg {Convergence in probability}}{9}{defn.2.3}
+\contentsline {defn}{\numberline {2.4}Definition\thmtformatoptarg {Convergence in distribution}}{9}{defn.2.4}

@@ -1,0 +1,76 @@
+\chapter{Introduction}
+\label{cha:introduction}
+
+Consider observations $X_{1}, \dots, X_{n}$ are copies of a random
+variable (r.v.) with distribution $$F(t) = P(X \leq t), t \in
+\mathbb{R}.$$
+
+\begin{defn}
+  A statistical model is a family of candidate distributions 
+  $$\mathbb{P}_{\Theta} = \{ P_{\theta} | \theta \in \Theta \}$$ where
+  $\Theta$ is a parameter space.
+\end{defn}
+
+\begin{exmp}[Linear Regression]
+  Consider
+  \begin{equation}
+    \label{eq:1}
+    \mathbf{Y} = \mathbf{X \Theta} + \epsilon
+  \end{equation}
+  $\mathbf{X}$ is our design matrix, $\mathbf{X}_{i}$ are our
+  explanatory variables, $\mathbf{Y}$ is our response, $\epsilon$ is
+  our measurement error (e.g. $\epsilon ~ N(0, \sigma^{2})$).
+\end{exmp}
+
+
+\begin{exmp}[Nonlinear regression]
+  \begin{equation}
+    \label{eq:2}
+    \mathbf{Y} = g(\mathbf{X}, \mathbf{\Theta}) + \epsilon
+  \end{equation}
+\end{exmp}
+
+\begin{exmp}[High dimensional linear model]
+  \begin{equation}
+    \label{eq:3}
+    \mathbf{Y} = \mathbf{X \Theta} + \epsilon
+  \end{equation}
+  with $\mathbf{\Theta}$ being sparse.
+
+  If $\mathbf{X}$ has some ``properties'' (restricted isometry property), then ``miracle happens''.
+\end{exmp}
+
+\section{Asymptotic Statistics}
+\label{sec:asympt-stat}
+
+Investigate statistical problems where the sample size $n$ is large
+($n \rightarrow \infty$).
+\begin{enumerate}
+\item Quick intuitions (about the complexity of $\Theta$.
+\item Large sample approximation can often proven to be good
+  (concentration of measure).
+\item Nice mathematics.
+\item For $n$ finite, $\Theta$ can be useless.
+\item Does not consider computation cost.
+\end{enumerate}
+
+\section{Statistical Inference}
+\label{sec:stat-infer}
+
+\begin{enumerate}
+\item Estimation: construct $\hat{\theta}_{n} - \hat{\theta}(X_{1},
+  \dots, X_{n})$, that estimates (approximates) $\theta$ well when
+  $X_{i} \sim P_{\theta}$.
+\item Hypothesis testing: $H_{0}: \theta = \theta_{0}$ vs $H_{1}:
+  \theta \neq \theta_{0}$.  Find test/decision rule $\psi_{n} =
+  \psi(X_{1}, \dots, X_{n})$ such that $\psi_{n} = 0$ if $H_{0}$ is true.
+\item Confidence Sets: Find $C_{n} = C(X_{1}, \dots, X_{n}, \alpha)
+  \subseteq \Theta, 0 \leq \alpha \leq 1$ such that $P_{\theta}(\theta
+  \in C_{n}) = 1-\alpha$ for all $n \in \mathbb{N}$.
+  This is \textbf{uncertainty quantification}.
+\end{enumerate}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

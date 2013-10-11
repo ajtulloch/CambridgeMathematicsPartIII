@@ -1,14 +1,19 @@
 \input{../common/common.tex}
 
-\title{Administration}
+\title{StatisticalTheory}
 
 \begin{document}
 
+\frontmatter
 \maketitle
 \tableofcontents
+\listoftheorems[ignoreall, onlynamed={defn, thm}]
+\cleardoublepage
+\mainmatter
 
-\input{advice.tex}
-\input{safety.tex}
+\input{general.tex}
+\input{introduction.tex}
+\input{stochastic_convergence_concepts.tex}
 
 \bibliographystyle{plainnat}
 \bibliography{../common/bibliography}
