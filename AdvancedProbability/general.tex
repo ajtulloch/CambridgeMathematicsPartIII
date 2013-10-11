@@ -1,16 +1,15 @@
-
 \chapter{Conditional Expectation}
 \label{cha:cond-expect}
 
-Let $(\Sigma, \mathcal{F}, \mathbb{P})$ be a probability space.
-$\Sigma$ is a set, $\mathcal{F}$ is a $\sigma$-algebra on $\Omega$,
+Let $(\Omega, \mathcal{F}, \Prob)$ be a probability space.
+$\Omega$ is a set, $\mathcal{F}$ is a $\sigma$-algebra on $\Omega$,
 and $\mathbb{P}$ is a probability measure on ($\Omega, \mathcal{F}$).
 
 \begin{defn}
   \label{defn:1}
-  $\mathcal{F}$ is a $\sigma$-algebra on $\Sigma$ if it satisfies
+  $\mathcal{F}$ is a $\sigma$-algebra on $\Omega$ if it satisfies
   \begin{itemize}
-  \item $\emptyset, \Sigma \in \mathcal{F}$
+  \item $\emptyset, \Omega \in \mathcal{F}$
   \item $A \in \mathcal{F} ==> A^{c} \in \mathcal{F}$
   \item $(A_n)_{n \geq 0}$ is a collection of sets in $\mathcal{F}$
     then $\cup_{n} A_{n} \in \mathcal{F}$.
@@ -19,13 +18,13 @@ and $\mathbb{P}$ is a probability measure on ($\Omega, \mathcal{F}$).
 
 \begin{defn}
   \label{defn:2}
-  $\mathbb{P}$ is a probability measure on $(\Omega, \mathcal{F})$ if
+  $\Prob$ is a probability measure on $(\Omega, \mathcal{F})$ if
   \begin{itemize}
-  \item $\mathbb{P}: \mathcal{F} \rightarrow [0, 1]$ is a set function.
-  \item $\mathbb{P}(\emptyset) = 0$, $\mathbb{P}(\Omega) = 1$,
+  \item $\Prob: \mathcal{F} \rightarrow [0, 1]$ is a set function.
+  \item $\Prob{\emptyset} = 0$, $\Prob{\Omega} = 1$,
   \item $(A_{n})_{n \geq 0}$ is a collection of pairwise disjoint
-      sets in $\mathcal{F}$, then $\mathbb{P}(\cup_{n} A_{n}) =
-      \sum_{n} \mathbb{P}(A_{n})$.
+      sets in $\mathcal{F}$, then $\Prob{\cup_{n} A_{n}} =
+      \sum_{n} \Prob{A_{n}}$.
   \end{itemize}
 \end{defn}
 
@@ -55,15 +54,17 @@ and $\mathbb{P}$ is a probability measure on ($\Omega, \mathcal{F}$).
   \mathcal{F}$ for all $V$ open sets in $\mathbb{R}$.
 \end{defn}
 
-Exercise: If $X$ is a random varaible then $\{ B \subseteq \mathbb{R}, X^{-1}(B)
-\in \mathcal{F} \}$ is a $\sigma$-algebra and contains
-$\mathbb{B}(\mathbb{R})$.
+\begin{exer}
+  If $X$ is a random varaible then $\{ B \subseteq \mathbb{R}, X^{-1}(B)
+  \in \mathcal{F} \}$ is a $\sigma$-algebra and contains
+  $\mathbb{B}(\mathbb{R})$.
+\end{exer}
 
-If $(X_{i}, i \in I)$ is a collection of random varaibles, then we
+If $(X_{i}, i \in I)$ is a collection of random variables, then we
 write $\sigma(X_{i}, i \in I) = \sigma(\{ \omega \in \Omega:
 X_{i(\omega) \in \mathcal{B} \}, i \in I, B \in
   \mathbb{B}(\mathbb{R}))) }$
-and it is the smallest $\sigma$ algebra that makes all the $X_{i}$'s
+and it is the smallest $\sigma$-algebra that makes all the $X_{i}$'s
 measurable.
 
 \begin{defn}
@@ -72,8 +73,8 @@ measurable.
 
   \begin{equation}
     \label{eq:2}
-    \mathbb{E}[\sum_{i=1}^{n} c_{i} \mathbf{1}(A_{i})] =
-    \sum_{i=1}^{n} \mathbb{P}(A_{i}).
+    \E{\sum_{i=1}^{n} c_{i} \mathbf{1}(A_{i})} =
+    \sum_{i=1}^{n} \Prob{A_{i}}.
   \end{equation}
   with $c_{i}$ positive constants, $(A_{i}) \in \mathcal{F}$.
 
@@ -84,26 +85,26 @@ measurable.
   0), X^{-} = \max(-X, 0)$.
 \end{defn}
 
-If at least one of $\mathbb{E}[X^{+}]$ or $\mathbb{E}[X^{-}]$ is
-finite, then we define $\mathbb{E}[X] = \mathbb{E}[X^{+}] +
-\mathbb{E}[X^{-}]$.
+If at least one of $\E{X^{+}}$ or $\E{X^{-}}$ is
+finite, then we define $\E{X} = \E{X^{+}} +
+\E{X^{-}}$.
 
-We call $X$ integrable if $\mathbb{E}[|X|] < \infty$.
+We call $X$ integrable if $\E{|X|} < \infty$.
 
 \begin{defn}
   \label{defn:7}
-  Let $A, B \in \mathcal{F}, \mathbb{P}(B) > 0$. Then
+  Let $A, B \in \mathcal{F}, \Prob{B} > 0$. Then
   \begin{align*}
-    \mathbb{P}(A | B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)} \\
-    \mathbb{E}[X | B] = \frac{\mathbb{E}[X \mathbb{1}(B)]}{\mathbb{P}(B)}
+    \Prob{A | B} = \frac{\Prob{A \cap B}}{\Prob{B}} \\
+    \mathbb{E}[X | B] = \frac{\E{X \mathbb{1}(B)}}{\Prob{B}}
   \end{align*}
 \end{defn}
 
-Goal - we want to define $\mathbb{E}[X | \mathcal{G}]$ that is a
+Goal - we want to define $\E{X | \mathcal{G}}$ that is a
 random variable measurable with respect to the $\sigma$-algebra
 $\mathcal{G}$.
 
-\subsection{Discrete Case}
+\section{Discrete Case}
 \label{sec:discrete-case}
 
 Suppose $\mathcal{G}$ is a $\sigma$-algebra countably generated
@@ -116,8 +117,8 @@ It is easy to check that $\mathcal{G} = \{ \cup_{j \in J} B_{j}, J
 
 Let $X$ be an integrable random variable.  Then
 \begin{align*}
-  X' = \mathbb{E}[X | \mathcal{G}] = \sum_{i \in \mathbb{N}}
-  \mathbb{E}[X | \mathcal{B_{i}}] \mathbb{1}(B_{i})
+  X' = \E{X | \mathcal{G}} = \sum_{i \in \mathbb{N}}
+  \E{X | \mathcal{B}_{i}} \mathbb{1}(B_{i})
 \end{align*}
 
 \begin{enumerate}
@@ -125,12 +126,12 @@ Let $X$ be an integrable random variable.  Then
 \item
   \begin{equation}
     \label{eq:3}
-    \mathbb{E}[|X'|] \leq \mathbb{E}[|X|]
+    \E{|X'|} \leq \E{|X|}
   \end{equation} and so $X'$ is integrable.
 \item $\forall G \in \mathcal{G}$, then
   \begin{equation}
     \label{eq:4}
-    \mathbb{E}[X 1(G)] = E[X' 1(G)]
+    \E{X \mathbb{1}(G)} = \E{X' \mathbb{1}(G)}
   \end{equation} (check).
 \end{enumerate}
 
@@ -140,7 +141,7 @@ Let $X$ be an integrable random variable.  Then
 \begin{defn}
   \label{defn:8}
   $A \in \mathcal{F}$, $A$ happens almost surely (a.s.) if
-  $\mathbb{P}(A) = 1$.
+  $\Prob{A} = 1$.
 \end{defn}
 
 \begin{thm}[Monotone Convergence Theorem]
@@ -148,14 +149,14 @@ Let $X$ be an integrable random variable.  Then
   \uparrow X$ as $n \rightarrow \infty$ a.s, then
   \begin{equation}
     \label{eq:5}
-    E[X_{n}] \uparrow E[X]
+    \E{X_{n}} \uparrow \E{X}
   \end{equation} almost surely as $n \rightarrow \infty$.
 \end{thm}
 
 \begin{thm}[Dominated Convergence Theorem]
   If $(X_{n})$ is a sequence of random variables such that $|X_{n}|
   \leq Y$ for $Y$ an integrable random variable, then if $X_{n} \cas
-  X$ then $E[X_{n}] \cas E[X]$. 
+  X$ then $\E{X_{n}} \cas \E{X}$. 
 \end{thm}
 
 \begin{defn}
@@ -181,12 +182,12 @@ Let $X$ be an integrable random variable.  Then
 
 \begin{thm}
   The space $(L^{2}, \| \cdot \|_{2})$ is a Hilbert space with
-  $\langle U, V \rangle> = E[UV]$.
+  $\langle U, V \rangle> = \E{UV}$.
 
   Suppose $\mathcal{H}$ is a closed subspace, then $\forall f \in
   L^{2}$ there exists a unique $g \in \mathcal{H}$ such that $\| f - g
   \|_{2} = \inf \{ \| f- h \|_{2}, h \in \mathcal{H}$ and $\langle f
-  -g, h \range = 0$ for all $h \in \mathcal{H}$.
+  -g, h \rangle = 0$ for all $h \in \mathcal{H}$.
 
   We call $g$ the orthogonal projection of $f$ onto $\mathcal{H}$.
 \end{thm}
