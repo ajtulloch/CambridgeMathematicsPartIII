@@ -63,7 +63,162 @@ Consider a probability space $(\Omega, \mathcal{F}, \mathbb{P})$.
 
 Throughout the course, $\mathcal{F}_{0}$ is assumed trivial.
 
+\begin{defn}
+  \label{defn:discrete_time_models:1}
+  Given a filtration $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$ in
+  discrete time, a process $X = (X_{t})_{t \geq 1}$ is predictable if
+  and only if $X_{t}$ is $\mathcal{F}_{t-1}$-measurable.
+
+  Sometimes we need $X_{0}$ to be defined, so we just ask that $X_{0}$
+  is $\mathcal{F}_{0}$-measurable.
+\end{defn}
+
+\begin{defn}
+  \label{defn:discrete_time_models:2}
+  Given $P = (P_{t})_{t \geq 0}$ prices process in discrete time.  An
+  investment/consumption strategy is a predictable process $(H, c)$
+  where $H_{t}$ takes values in $R^{n}$ and $c_{t} \geq 0$ and
+  satisfies the \textbf{self-financing condition}
+  \begin{equation}
+    \label{eq:1}
+    H_{t - 1} - P_{t - 1} = H_{t} \cdot P_{t} + c_{t}
+  \end{equation} for all $t \geq 1$.
+\end{defn}
+
+$H_{t}$ models the portfolio during $(t - 1, t]$, and $c_{t}$ models
+the consumption during $(t-1, t]$.
+
+\begin{notation}
+  $X_{t}(H) = H_{t} \cdot P_{t}$ is the wealth at time $t$.
+  Note that given $H$, we can find $C$ by solving the self-financing
+  condition.
+\end{notation}
+
+If $c_{t} = 0$ a.s. for all $t$ then $H$ is a pure investment
+strategy. 
+\begin{exmp}
+  \label{defn:discrete_time_models:3}
+  Given an initial wealth $x > 0$, find $(H, c)$ to maximize
+  \begin{equation}
+    \label{eq:2}
+    \sum_{i=1}^{T} \E{U(c_{t}))}
+  \end{equation} subject to $X_{T}(H) = 0$ where $T > 0$ is not
+  random.
+
+  Assume that $U$ is strictly increasing, strongly concave, and
+  bounded from above.
+\end{exmp}
+
+\section{A Detour into Martingales}
+\label{sec:deto-into-mart}
+
+
+\begin{proposition}
+  Let $X$ be integrable and $\mathcal{G} \subseteq \mathcal{F}$. Then
+  there exists an integrable, $\mathcal{G}$-measurable random variable
+  $\bar{X}$ such that
+  \begin{equation}
+    \label{eq:3}
+    \E{X \I{G}} = \E{\bar{X} \I{G})}
+  \end{equation} for all $G \in \mathcal{G}$.  Moreover, it is unique
+  in the sense that if $\bar{\bar{X}}$ has the same property, then $\bar
+  X = \bar{\bar{X}}$.
+\end{proposition}
+
+\begin{defn}
+  \label{defn:discrete_time_models:4}
+  Such $\bar X$ is written $\E{X | \mathcal{G}}$, the conditional
+  expectation of $X$ given $\mathcal{G}$.
+\end{defn}
+
+Useful properties of conditional expectation:
+\begin{enumerate}
+\item If $X$ is $\mathcal{G}$-measurable, then $\E{X | \mathcal{G}} = X$.
+\item If $X$ is independent of $\mathcal{G}$ (that is, $X$ and $\I{G}$
+  are independent for all $G \in \mathcal{G}$), then $\E{X |
+    \mathcal{G}} = \E{X}$.
+\item (Tower property) If $\mathcal{H} \subseteq \mathcal{G}
+  \subseteq \mathcal{F}$, then
+  \begin{equation}
+    \label{eq:4}
+    \E{\E{X | \mathcal{G}} | \mathcal{H}} = \E{ \E{X | \mathcal{H}} |
+      \mathcal{G}} = \E{X | \mathcal{H}}
+  \end{equation}
+\item (Slot property) If $Y$ is $\mathcal{G}$-measurable and $XY$ is
+  integrable, then
+  \begin{equation}
+    \label{eq:5}
+    \E{XY | \mathcal{G}} = Y \E{X | \mathcal{G}}
+  \end{equation}
+\end{enumerate}
+
+\begin{defn}
+  \label{defn:discrete_time_models:5}
+  A martingale $(X_{t})_{t \geq 0}$ with respect to a filtration
+  $\mathbb{F}$ has the properties
+  \begin{itemize}
+  \item $\E{|X_{t}|} < \infty$ for all $t$,
+  \item $\E{X_{t} | \mathcal{F}_{s}} = X_{s}$ for all $0 \leq s \leq t$.
+  \end{itemize}
+
+  Note that $X$ is automatically adapted.
+\end{defn}
+
+\begin{exer}
+  Suppose $X$ is an integrable discrete-time process such that
+  $\E{X_{t}| \mathcal{F}_{t-1}} = X_{t-1}$ for all $t \geq 1$. Show
+  that $X$ is a martingale.
+\end{exer}
+
+\begin{exmp}
+  \label{defn:discrete_time_models:6}
+  Let $\xi_{i}$, $i = 1, 2, ...$ be independent, integrable random
+  variables with $\E{\xi_{i}} = 0$.  Let $\mathcal{F}_{t} =
+  \sigma(\xi_{1}, \dots, \xi_{t}), X_{t} = \xi_{1} + \xi_{2} + \dots +
+    \xi_{t}$.
+
+    Then $X$ is a martingale.
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:discrete_time_models:7}
+  Let $\xi$ be integrable and let $\mathbb{F}$ be a filtration, and
+  $X_{t} = \E{\xi | \mathcal{F}_{t}}$
+\end{exmp}
+
+\begin{proof}
+  Integrability comes from integrability of conditional expectations.
+
+  \begin{align*}
+    \E{X_{t} | \mathcal{F}_{s}} & = \E{\E{\xi | \mathcal{F}_{t}} |
+      \mathcal{F}_{s}}                                        \\
+                                & = \E{\xi | \mathcal{F}_{s}} \\ 
+                                & = X_{s}
+  \end{align*}
+\end{proof}
+
+
+\begin{exmp}
+  \label{defn:discrete_time_models:8}
+  Suppose $X$ is a discrete-time martingale and $Y$ is predictable and
+  bounded.  Let $Z_{t} = \sum_{s=1}^{t} Y_{s} (X_{s} - X_{s-1})$. Then
+  $Z$ is a martingale.
+\end{exmp}
+
+\begin{proof}
+  Integrability checked by integrability of $X$ and boundedness of
+  $Y$.
+
+  $Z_{t-1}$ is $\mathcal{F}_{t-1}$ measurable since measurability
+  respects algebraic operations.
+  \begin{align*}
+    \E{Z_{t} | \mathcal{F}_{t-1}} & = \E{Z_{t-1} + Y_{t}(X_{t} -
+      X_{t-1}) | \mathcal{F}_{t-1}} \\
+                                  & = Z_{t-1} + \underbrace{Y_{t}}_{\text{slot property}} \E{\underbrace{X_{t} - X_{t-1}}_{=0} | \mathcal{F}_{t-1}}
+  \end{align*}
+
+\end{proof}
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: t
+%%% TeX-master: "master"
 %%% End: 

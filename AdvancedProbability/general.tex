@@ -192,6 +192,177 @@ Let $X$ be an integrable random variable.  Then
   We call $g$ the orthogonal projection of $f$ onto $\mathcal{H}$.
 \end{thm}
 
+
+\begin{thm}
+  Let $(\Omega, \mathcal{F}, \P)$ be an underlying probability space,
+  and let $X$ be an integrable random variable, and let $\mathcal{G}
+  \subset \mathcal{F}$ sub $\sigma$-algebra.  Then there exists a
+  random variable $Y$ such that
+  \begin{enumerate}
+  \item $Y$ is $\mathcal{G}$-measurable
+  \item If $A \in \mathcal{G}$,
+    \begin{equation}
+      \label{exmp:general:1}
+      \E{X \mathbb{1}(A)} = \E{Y \mathbb{1}(A)}
+    \end{equation} and $Y$ is integrable.
+  \end{enumerate}
+  Moreover, if $Y'$ also satisfies the above properties, then $Y = Y'$ a.s.
+\end{thm}
+\begin{remark}
+  $Y$ is called a version of the conditioanl expectiation of $X$ given
+  $\mathcal{G}$ and we write $\mathcal{G} = \sigma(Z)$ as $Y = \E{X |
+    \mathcal{G}}$.
+\end{remark}
+
+
+\begin{remark}
+  (b) could be replaced by the following condition: for all $Z$
+  $\mathcal{G}$-measurable, bounded random variables,
+  \begin{equation}
+    \label{exmp:general:2}
+    \E{XZ} = \E{YZ}
+  \end{equation}
+\end{remark}
+
+\begin{proof}
+
+  \textbf{Uniqueness} - let $Y'$ satisfy (a) and (b).  If we consider
+  $\{Y' - Y > 0 \} = A$, $A$ is $\mathcal{G}$ measurable.
+  From (b),
+  \begin{align*}
+    \E{(Y' - Y)\mathbb{1}(A)} = \E{X\mathbb{1}(A)} - \E{X
+      \mathbb{1}(A)} = 0
+  \end{align*} and hence $\P{Y' - Y > 0)} = 0$ which implies that $Y'
+    \leq Y$ a.s.  Similarly, $Y' \geq Y$ a.s.
+
+  \textbf{Existence} - Complete the following three steps:
+  \begin{enumerate}
+  \item $X \in L^2(\Omega, \mathcal{F}, \P)$ is a Hilbert space with
+    $\langle U, V \rangle = \E{UV}$.
+    The space $L^{2}(\Omega, \mathcal{G}, \P)$ is a closed
+    subspace.
+    \begin{equation}
+      \label{exmp:general:3}
+      X_{n} \rightarrow X (L^{2}) => X_{n} \cp X => \exists subseq
+      X_{n_{k}} \cas X => X' = \limsup X_{n_{k}}
+    \end{equation}
+
+  We can write
+  \begin{align*}
+    L^{2}(\Omega, \mathcal{F}, \P) = L^{2}(\Omega, \mathcal{G}, \P) +
+    L^{2}(\Omega, \mathcal{G}, \P)^{\perp} \\
+    X = Y + Z
+  \end{align*}  Set $Y = \E{X | \mathcal{G}}$, $Y$ is
+  $\mathcal{G}$-measurable, $A \in \mathcal{G}$.
+  
+  \begin{align*}
+    \E{X \mathbb{1}(A)} = E{Y \mathbb{1}(A)} + \underbrace{E{Z \mathbb{1}(A)}}_{=0}
+  \end{align*}
+  
+\item   If $X \geq 0$ then $Y \geq 0$ a.s. Consider $A = \{ Y < 0 \}$, then
+  \begin{equation}
+    \label{exmp:general:4}
+    0 \leq \E{X \mathbb{1}(A)} = \E{Y \mathbb{1}(A)} \leq 0
+  \end{equation}
+  Thus $\P{A} = 0 \Rightarrow Y \geq 0$ a.s.
+
+  Let $X \geq 0$, Set $0 \leq X_{n} = max(X, n) \leq n$, so $X_{n} \in
+  L^{2}$ for all $n$. Write $Y_{n} = \E{X_{n} | \mathcal{G}}$, then
+  $Y_{n} \geq 0$ a.s., $Y_{n}$ is increasing a.s..  Set $Y = \limsup
+  Y_{n}$.  So $Y$ is $\mathcal{G}$-measurable.  We will show $Y = \E{X
+    | \mathcal{G}}$ a.s.  For all $A \in \mathcal{G}$, we need to
+  check $\E{X \mathbb{1}(A)} = \E{Y \mathbb{1}(A)}.$ We know that
+  $\E{X_{n} \mathbb{1}(A)} = \E{Y_{n} \mathbb{1}(A)}$, and $Y_{n}
+  \uparrow Y$ a.s.  Thus, by monotone convergence theorem, $\E{X
+    \mathbb{1}(A)} = \E{Y\mathbb{1}(A)}$.
+  
+  If $X$ is integrable, setting $A = \Omega$, we have $Y$ is
+  integrable.
+\item $X$ is a general random variable, not necessarily in $L^{2}$ or
+  $\geq 0$.  Then we have that $X = X^{+} + X^{-}$.  We define $\E{X |
+    \mathcal{G}} = \E{X^{+} | \mathcal{G}} - \E{X^{-} | \mathcal{G}}$.
+  This satisfies (a), (b).
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+  If $X \geq 0$, we can always define $Y = \E{X | \mathcal{G}}$ a.s.
+  The integrability condition of $Y$ may not be satisfied.
+\end{remark}
+
+\begin{defn}
+  \label{defn:general:1}
+  Let $\mathcal{G}_{0}, \mathcal{G}_{1}, \dots$ be sub $\sigma$-algebas of
+  $\mathcal{F}$.  Then they are called independent if for all $i, j
+  \in \mathbb{N}$,
+  \begin{equation}
+    \label{exmp:general:5}
+    \P{G_i \cap \dots \cap G_j} = \Pi_{i = 1}^{n} \P{G_{i}}
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \begin{enumerate}
+  \item If $X \geq 0$ then $\E{X | \mathcal{G}} \geq 0$
+  \item $\E{\E{X | \mathcal{G}}} = \E{X}$ ($A = \Omega$)
+  \item $X$ is $\mathcal{G}$-measurable implies $\E{X | \mathcal{G}} = X$ a.s.
+  \item $X$ is independent of $\mathcal{G}$, then $\E{X|\mathcal{G}} = \E{X}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}[Fatao's theorem] $X_{n} \geq 0$, then for all $n$,
+  \begin{equation}
+    \label{exmp:general:6}
+    \E{\liminf X_{n}} \leq \liminf \E{X_{n}}
+  \end{equation}
+\end{thm}
+
+\begin{thm}[Conditional Monotone Convergence]  Let $X_{n} \geq 0$,
+  $X_{n} \uparrow X$ a.s.  Then
+  \begin{equation}
+    \label{exmp:general:7}
+    \E{X_{n} | \mathcal{G}} \uparrow \E{X | \mathcal{G}} a.s.
+  \end{equation} 
+\end{thm}
+
+\begin{proof}
+  Set $Y_{n} = \E{X_{n} | \mathcal{G}$.  Then $Y_{n} \geq 0$ and
+    $Y_{n}$ is increasing.  Set $Y  = \limsup Y_{n}$.  Then $Y$ is
+    $\mathcal{G}$-measurable.  
+CONTINUED>
+\end{proof}
+
+\begin{thm}[Conditional Fatou]  $X_{n} \geq 0$, then
+  \begin{equation}
+    \label{exmp:general:8}
+    \E{ liminf X_{n} | \mathcal{G}} \leq \liminf \E{X_{n} |
+      \mathcal{G}} a.s.
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  $\inf_{k \geq n} X_{n}$ increases in $n$ to $\liminf{n \rightarrow
+    \infty} X_{n}$.
+  
+  \begin{align*}
+    \lim_{n \rightarrow \infty} \E{\inf_{k \geq n} X_{k} |
+      \mathcal{G}} &= \E{\liminf_{n \rightarrow \infty} X_{n} |
+      \mathcal{G}} a.s.  \\
+    \E{\inf_{k \geq n} X_{n} | \mathcal{G}} &\leq \inf_{k \geq n}
+        \E{X_{n} | \mathcal{G}} a.s.
+  \end{align*} 
+  Taking limits as $n \rightarrow \infty$ on both sides gives
+  \begin{equation}
+    \label{exmp:general:9}
+    \E{\liminf{n \rightarrow \infty} X_{n} | \mathcal{G}} \leq
+    \liminf{n \rightarrow \infty} \E{X_{n} | \mathcal{G}} a.s.
+  \end{equation}
+\end{proof}
+
+
+\begin{thm}[Conditional dominated convergence] TODO
+  
+\end{thm}
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

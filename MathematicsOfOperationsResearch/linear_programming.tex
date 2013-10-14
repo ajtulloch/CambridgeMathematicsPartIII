@@ -1,0 +1,139 @@
+
+\chapter{Linear Programming}
+\label{cha:linear-programming}
+
+\section{Convexity and Strong Duality}
+\label{sec:conv-strong-dual-1}
+
+
+\begin{defn}
+  \label{defn:linear_programming:1}
+  Let $S \subseteq R^{n}$.  $S$ is convex if for all $\delta \in [0,
+  1]$, $x, y \in S$ implies that $\delta x + (1 - \delta) y \in S$.
+
+  $f: S \rightarrow R$ is convex if for all $x, y \in S$ and $\delta
+  \in [0, 1]$, $\delta f(x) + (1-\delta) f(y) \geq f(\delta x + (1 -
+  \delta)y$.
+
+  Visually, the area under the function is a convex set.
+\end{defn}
+
+\begin{defn}
+  \label{defn:linear_programming:2}
+  $x \in S$ is an interior point of $S$ if there exists $\epsilon > 0$
+  such $\{ y: \| y - x \|_{2} \leq \epsilon \} \subseteq S$.
+  
+  $x \in S$ is an extreme point of $S$ if for all $y, z \in S$ and $S
+  \in (0, 1)$, $x = \delta y + (1 - \delta) z$ implies $x = y = z$.
+\end{defn}
+
+\begin{thm}[Supporting Hyperplane]
+  \label{thm:linear_programming:supporting-hyperplane}
+  Suppose that our function $\phi$ is convex and $b$ lies in the
+  interior of the set of points where $\phi$ is finite.
+  Then there is a (non-vertical) supporting hyperplane to $\phi$ at
+  $b$.
+\end{thm}
+
+\begin{thm}
+  Let $X(b) = \{ x \in X : h(x) \leq b \}$, $\phi(b) = \inf_{x \in
+    X(b)} f(x)$.  Then $\phi$ is convex if $X$, $f$, and $h$ are convex.
+\end{thm}
+
+\begin{proof}
+  Let $b_{1}, b_{2} \in R^{m}$ such that $\phi(b_{1})$, $\phi(b_{2})$
+  are defined.  Let $\delta \in [0, 1]$ and $b = \delta b_{1} + (1 -
+  \delta) b_{2}$.  Consider $x_{1} \in X(b_{1})$, $x_{2} \in X(b_{2})$
+  and let $x = \delta x_{1} + (1 - \delta) x_{2}$.
+
+  By convexity of $Y$, $x \in X$.  By convexity of $h$,
+  \begin{align*}
+    h(x)    & = h(\delta x_{1} + (1-\delta) x_{2})         \\
+            & \leq \delta h(x_{1}) + (1-\delta) h(x_{2})   \\
+            & \leq \delta b_{1} + (1 - \delta) b_{2} = b
+  \end{align*}
+  Thus $x \in X(b)$, and by convexity of $f$,
+  \begin{align*}
+    \phi(b) & \leq f(x)                                    \\
+            & = f(\delta x_{1} + (1 - \delta) x_{2})       \\
+            & \leq \delta f(x_{1}) + (1 - \delta) f(x_{2}) \\
+            & \leq \delta \phi(b_{1}) + (1 - \delta) \phi(b_{2})
+  \end{align*}
+\end{proof}
+
+\section{Linear Programs}
+\label{sec:linear-programs}
+
+\begin{defn}
+  \label{defn:linear_programming:3}
+  General form of a linear program is
+  \begin{equation}
+    \label{exmp:linear_programming:1}
+    \min\{c^{T} x : Ax \geq b, x \geq 0 \}
+  \end{equation}
+
+  Standard form of a linear program is
+  \begin{equation}
+    \label{exmp:linear_programming:3}
+    \min\{c^{T}x : Ax = b, x \geq 0 \}
+  \end{equation}
+\end{defn}
+
+\section{Linear Program Duality}
+\label{sec:line-progr-dual}
+
+Introduce slack variables to turn problem $\Prob$ into the form
+\begin{equation}
+  \label{eq:11}
+  \min \{ c^{T} x : Ax - z = b, x, z \geq 0 \}
+\end{equation}
+
+We have $X = \{ (x, z) : x, z \geq 0 \} \subseteq R^{m + n}$.  
+The Lagrangian is
+\begin{align}
+  L((x, z), \lambda) & = c^{T} x - \lambda^{T}(Ax - z - b) \\
+                     & = (c^{T} - \lambda^{T}A)x + \lambda^{T} z + \lambda^{T} b
+\end{align}
+
+and has a finite minimum if and only if
+\begin{equation}
+  \label{eq:13}
+  \lambda \in Y = \{ \lambda : c^{T} - \lambda^{T} A \geq 0, \lambda
+  \geq 0 \}
+\end{equation}
+
+For a fixed  $\lambda \in Y$, the minimum of $L$ is satisfied when
+$(c^{T} - \lambda^{T} A) x = 0$ and $\lambda^{T} z = 0$, and thus
+\begin{equation}
+  \label{eq:14}
+  g(\lambda) = \inf_{(x, z) \in X} L((x, z), \lambda) = \lambda^{T} b
+\end{equation}
+
+We obtain that the dual problem
+\begin{equation}
+  \label{eq:15}
+  \max \{ \lambda^{T} b : A^{T} \lambda \leq c, \lambda \geq 0 \}
+\end{equation}
+
+and it can be shown (exercise) that the dual of the dual of a linear
+program is the original program.
+
+
+\section{Complementary Slackness}
+\label{sec:compl-slackn}
+
+\begin{thm}
+  \label{defn:linear_programming:4}
+  Let $x$ and $\lambda$ be feasible for $\Prob$ and its dual.  Then
+  $x$ and $\lambda$ are optimal if and only if
+  \begin{align}
+    \label{eq:16}
+    (c^{T} - \lambda^{T}A)x & = 0 \\
+    \lambda^{T}(Ax - b)     & = 0
+  \end{align}
+\end{thm}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

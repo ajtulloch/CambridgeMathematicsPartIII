@@ -16,15 +16,22 @@
 
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
 \declaretheorem[name=Lemma,sibling=thm]{lem}
-\declaretheorem[name=Definition,sibling=thm]{defn}
+\declaretheorem[name=Definition,sibling=thm,style=definition]{defn}
+\declaretheorem[name=Proposition,sibling=thm]{proposition}
 \declaretheorem[name=Example,sibling=thm]{exmp}
 \declaretheorem[name=Exercise,sibling=thm]{exer}
+\declaretheorem[name=Remark,sibling=thm]{remark}
+\declaretheorem[name=Notation,numbered=no]{notation}
 \declaretheorem[name=Theorem,sibling=thm,thmbox=L]{boxthm}
+
+\let\proof\relax
+\declaretheorem[style=remark,numbered=no,qed=\qedsymbol]{proof}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
 \setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
 \onehalfspacing
 
 \author{Andrew Tulloch}
@@ -56,5 +63,15 @@
     }    
     {%
       \mathbb{P}\!\left(#1\right)
+    }%
+}
+% Indicator
+\NewDocumentCommand{\I}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{I}
+    }    
+    {%
+      \mathbb{I}\!\left(#1\right)
     }%
 }
