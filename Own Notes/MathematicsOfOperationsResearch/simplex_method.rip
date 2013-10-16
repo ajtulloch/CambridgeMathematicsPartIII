@@ -1,0 +1,9 @@
+% -*- mode: reftex-index-phrases; TeX-master: "simplex_method.tex" -*-
+%                              Key      Macro Format            Repeat
+%---------------------------------------------------------------------
+>>>INDEX_MACRO_DEFINITION:	i	\index{%s}          	t
+>>>INDEX_MACRO_DEFINITION:	g	\glossary{%s}       	t
+%---------------------------------------------------------------------
+
+
+	\xspace

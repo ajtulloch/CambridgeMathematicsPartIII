@@ -118,7 +118,7 @@ It is easy to check that $\mathcal{G} = \{ \cup_{j \in J} B_{j}, J
 Let $X$ be an integrable random variable.  Then
 \begin{align*}
   X' = \E{X | \mathcal{G}} = \sum_{i \in \mathbb{N}}
-  \E{X | \mathcal{B}_{i}} \mathbb{1}(B_{i})
+  \E{X | \mathcal{B}_{i}} \I{B_{i}}
 \end{align*}
 
 \begin{enumerate}
@@ -131,7 +131,7 @@ Let $X$ be an integrable random variable.  Then
 \item $\forall G \in \mathcal{G}$, then
   \begin{equation}
     \label{eq:4}
-    \E{X \mathbb{1}(G)} = \E{X' \mathbb{1}(G)}
+    \E{X \I{G} = \E{X' \I{G}}}
   \end{equation} (check).
 \end{enumerate}
 
@@ -203,7 +203,7 @@ Let $X$ be an integrable random variable.  Then
   \item If $A \in \mathcal{G}$,
     \begin{equation}
       \label{exmp:general:1}
-      \E{X \mathbb{1}(A)} = \E{Y \mathbb{1}(A)}
+      \E{X \I{A} = \E{Y \I{A}}}
     \end{equation} and $Y$ is integrable.
   \end{enumerate}
   Moreover, if $Y'$ also satisfies the above properties, then $Y = Y'$ a.s.
@@ -230,9 +230,9 @@ Let $X$ be an integrable random variable.  Then
   $\{Y' - Y > 0 \} = A$, $A$ is $\mathcal{G}$ measurable.
   From (b),
   \begin{align*}
-    \E{(Y' - Y)\mathbb{1}(A)} = \E{X\mathbb{1}(A)} - \E{X
-      \mathbb{1}(A)} = 0
-  \end{align*} and hence $\P{Y' - Y > 0)} = 0$ which implies that $Y'
+    \E{(Y' - Y)\I{A} = \E{X\I{A}}} - \E{X
+      \I{A}} = 0
+  \end{align*} and hence $\Prob{Y' - Y > 0)} = 0$ which implies that $Y'
     \leq Y$ a.s.  Similarly, $Y' \geq Y$ a.s.
 
   \textbf{Existence} - Complete the following three steps:
@@ -256,25 +256,25 @@ Let $X$ be an integrable random variable.  Then
   $\mathcal{G}$-measurable, $A \in \mathcal{G}$.
   
   \begin{align*}
-    \E{X \mathbb{1}(A)} = E{Y \mathbb{1}(A)} + \underbrace{E{Z \mathbb{1}(A)}}_{=0}
+    \E{X \I{A}} = E{Y \I{A}} + \underbrace{E{Z \I{A}}}_{=0}
   \end{align*}
   
 \item   If $X \geq 0$ then $Y \geq 0$ a.s. Consider $A = \{ Y < 0 \}$, then
   \begin{equation}
     \label{exmp:general:4}
-    0 \leq \E{X \mathbb{1}(A)} = \E{Y \mathbb{1}(A)} \leq 0
+    0 \leq \E{X \I{A}} = \E{Y \I{A}} \leq 0
   \end{equation}
-  Thus $\P{A} = 0 \Rightarrow Y \geq 0$ a.s.
+  Thus $\Prob{A} = 0 \Rightarrow Y \geq 0$ a.s.
 
   Let $X \geq 0$, Set $0 \leq X_{n} = max(X, n) \leq n$, so $X_{n} \in
   L^{2}$ for all $n$. Write $Y_{n} = \E{X_{n} | \mathcal{G}}$, then
   $Y_{n} \geq 0$ a.s., $Y_{n}$ is increasing a.s..  Set $Y = \limsup
   Y_{n}$.  So $Y$ is $\mathcal{G}$-measurable.  We will show $Y = \E{X
     | \mathcal{G}}$ a.s.  For all $A \in \mathcal{G}$, we need to
-  check $\E{X \mathbb{1}(A)} = \E{Y \mathbb{1}(A)}.$ We know that
-  $\E{X_{n} \mathbb{1}(A)} = \E{Y_{n} \mathbb{1}(A)}$, and $Y_{n}
+  check $\E{X \I{A}} = \E{Y \I{A}}.$ We know that
+  $\E{X_{n} \I{A}} = \E{Y_{n} \I{A}}$, and $Y_{n}
   \uparrow Y$ a.s.  Thus, by monotone convergence theorem, $\E{X
-    \mathbb{1}(A)} = \E{Y\mathbb{1}(A)}$.
+    \I{A}} = \E{Y\I{A}}$.
   
   If $X$ is integrable, setting $A = \Omega$, we have $Y$ is
   integrable.
@@ -297,7 +297,7 @@ Let $X$ be an integrable random variable.  Then
   \in \mathbb{N}$,
   \begin{equation}
     \label{exmp:general:5}
-    \P{G_i \cap \dots \cap G_j} = \Pi_{i = 1}^{n} \P{G_{i}}
+    \Prob{G_i \cap \dots \cap G_j} = \Pi_{i = 1}^{n} \Prob{G_{i}}
   \end{equation}
 \end{defn}
 
@@ -310,7 +310,7 @@ Let $X$ be an integrable random variable.  Then
   \end{enumerate}
 \end{thm}
 
-\begin{thm}[Fatao's theorem] $X_{n} \geq 0$, then for all $n$,
+\begin{thm}[Fatou's lemma] $X_{n} \geq 0$, then for all $n$,
   \begin{equation}
     \label{exmp:general:6}
     \E{\liminf X_{n}} \leq \liminf \E{X_{n}}
@@ -326,43 +326,59 @@ Let $X$ be an integrable random variable.  Then
 \end{thm}
 
 \begin{proof}
-  Set $Y_{n} = \E{X_{n} | \mathcal{G}$.  Then $Y_{n} \geq 0$ and
+  Set $Y_{n} = \E{X_{n} | \mathcal{G}}$.  Then $Y_{n} \geq 0$ and
     $Y_{n}$ is increasing.  Set $Y  = \limsup Y_{n}$.  Then $Y$ is
     $\mathcal{G}$-measurable.  
-CONTINUED>
 \end{proof}
 
-\begin{thm}[Conditional Fatou]  $X_{n} \geq 0$, then
+\begin{thm}[Conditional Fatou's Lemma]  $X_{n} \geq 0$, then
   \begin{equation}
     \label{exmp:general:8}
-    \E{ liminf X_{n} | \mathcal{G}} \leq \liminf \E{X_{n} |
+    \E{\liminf X_{n} | \mathcal{G}} \leq \liminf \E{X_{n} |
       \mathcal{G}} a.s.
   \end{equation}
 \end{thm}
 
 \begin{proof}
-  $\inf_{k \geq n} X_{n}$ increases in $n$ to $\liminf{n \rightarrow
-    \infty} X_{n}$.
-  
-  \begin{align*}
-    \lim_{n \rightarrow \infty} \E{\inf_{k \geq n} X_{k} |
-      \mathcal{G}} &= \E{\liminf_{n \rightarrow \infty} X_{n} |
-      \mathcal{G}} a.s.  \\
-    \E{\inf_{k \geq n} X_{n} | \mathcal{G}} &\leq \inf_{k \geq n}
-        \E{X_{n} | \mathcal{G}} a.s.
-  \end{align*} 
-  Taking limits as $n \rightarrow \infty$ on both sides gives
+  Let $X$ denote the limit inferior of the $X_{n}$. For every natural number
+  $k$ define pointwise the random variable $Y_k= \inf_{n \geq k} X_n$.
+  Then the sequence $Y_{1}, Y_{2}, \dots$ is increasing and converges pointwise
+  to $X$. For $k \leq n$, we have $Y_{k} \leq X_{n}$, so that 
   \begin{equation}
-    \label{exmp:general:9}
-    \E{\liminf{n \rightarrow \infty} X_{n} | \mathcal{G}} \leq
-    \liminf{n \rightarrow \infty} \E{X_{n} | \mathcal{G}} a.s.
+    \label{eq:6}
+    \E{Y_k | \mathcal{G}} \leq \E{X_n | \mathcal{G}} a.s
   \end{equation}
+
+  by the monotonicity of conditional expectation, hence
+  \begin{equation}
+    \label{eq:7}
+    \E{Y_k|\mathcal{G}} \leq \inf_{n \geq k} \E{X_n | \mathcal{G}} a.s.
+  \end{equation}
+
+  because the countable union of the exceptional sets of probability
+  zero is again a null set. Using the definition of X, its
+  representation as pointwise limit of the Yk, the monotone convergence
+  theorem for conditional expectations, the last inequality, and the
+  definition of the limit inferior, it follows that almost surely
+
+  \begin{align}
+  \E{\liminf_{n \rightarrow \infty} X_{n} | \mathcal{G}} 
+ & = \E{X |
+    \mathcal{G}}                                         \\
+ & = \E{\lim_{k \rightarrow \infty} Y_{k} | \mathcal{G}} \\
+ & = \lim_{k \rightarrow \infty} \E{Y_{k} | \mathcal{G}} \\
+ & \leq \lim_{k \rightarrow \infty} \inf_{n \geq k} \E{X_{n} |
+    \mathcal{G}}                                         \\
+ & = \liminf_{n \rightarrow \infty} \E{X_{n} | \mathcal{G}}
+ \end{align}
 \end{proof}
 
 
 \begin{thm}[Conditional dominated convergence] TODO
   
 \end{thm}
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

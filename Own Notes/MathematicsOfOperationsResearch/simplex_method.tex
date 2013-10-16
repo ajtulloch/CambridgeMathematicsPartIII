@@ -1,0 +1,92 @@
+\chapter{Simplex Method}
+\label{cha:simplex-method}
+
+\section{Basic Solutions}
+\label{sec:basic-solutions}
+
+Maximize $c^{T}x$ subject to $Ax = b$, $x \geq 0$, $A \in \R^{m \times
+n}$.
+
+Call a solution $x \in R^{n}$ of $Ax = b$ \textbf{basic} if it has at
+most $m$ non-zero entries, that is, there exists $B \subseteq \{1, \dots, n
+\}$ with $|B| = m$ and $x_{i} = 0$ if $i \notin B$.
+
+\newcommand{\bfs}{\textsc{bfs}{}}
+A basic solution $x$ with $x \geq 0$ is called a \textbf{basic
+  feasible solution} (\bfs).
+
+\section{Extreme Points and Optimal Solutions}
+\label{sec:extr-points-optim}
+
+We make the following assumptions:
+
+\begin{enumerate}
+\item The rows of $A$ are linearly independent
+\item Every set of $m$ columns of $A$ are linearly independent.
+\item Every basic solution is non-degenerate - that is, it has exactly
+  $m$ non-zero entries.
+\end{enumerate}
+
+\begin{thm}
+  \label{defn:simplex_method:1}
+  $x$ is a \bfs of $Ax = b$ if and only if it is an extreme point of
+  the set  $X(b) = \{ x: Ax = b, x \geq 0 \}$.
+\end{thm}
+
+\begin{thm}
+  \label{defn:simplex_method:2}
+  If the problem has a finite optimum (feasible and bounded), then it has an optimal solution
+  that is a \bfs.
+\end{thm}
+
+
+\section{The Simplex Tableau}
+\label{sec:simplex-tableau}
+
+Let $A \in \R^{m \times n}, b \in \R^{m}$.  Let $B$ be a basis (in the
+\bfs sense), and $x \in R^{n}$, such that $Ax = b$.  Then
+\begin{equation}
+  \label{eq:20}
+  A_{B} x_{B} + A_{N} x_{N} = b
+\end{equation} where $A_{B} \in R^{m \times m}$ and $A_{N} \in R^{m
+  \times ( n - m)}$ respectively consist of the columns of $A$ indexed
+by $B$ and those not indexed by $B$. Moreover, if $x$ is a basic
+solution, then there is a basic $B$ such that $x_{N} = 0$ and $A_{B}
+x_{B} = b$, and if $x$ is a basic feasible solution, there is a basis
+$B$ such that $x_{n} = 0$, $A_{B} x_{B} = b$, and $x_{B} \geq 0$.
+
+For every $x$ with $Ax = b$ and every basis $B$, we have
+\begin{equation}
+  \label{eq:21}
+  x_{B} = A_{B}^{-1} (b - A_{N} x_{N})
+\end{equation} as we assume that $A_{B}$ has full rank.  Thus,
+
+\begin{align}
+  \label{eq:23}
+  f(x) & = c^{T} x = c_{B}^{T} x_{B} + c^{T}_{N} x_{N}             \\
+       & = c_{B}^{T} A_{B}^{-1}(b - A_{N} X_{N}) + c^{T}_{N} x_{N} \\
+       & = C_{B}^{T} A_{B}^{-1} b + (c_{N}^{T} - c_{B}^{T} A_{B}^{-1} A_{N}) x_{N}
+\end{align}
+
+Assume we can guarantee that $A_{B}^{-1} b = 0$.  Then $x^{\star}$ with
+$x_{B}^{\star} = A_{B}^{-1} b$ and $x_{N}^{\star} = 0$ is a \bfs with
+\begin{equation}
+  \label{eq:24}
+  f(x^{\star}) = C_{B}^{T} A_{B}^{-1} b
+\end{equation}
+
+Assume that we are maximizing $c^{T} x$.  There are two different
+cases:
+\begin{enumerate}
+\item If $C_{N}^{T} - C_{B}^{T} A_{B}^{-1} A_{N} \leq 0$, then $f(x)
+  \leq c_{B}^{T} A_{B}^{-1} b$ for every feasible $x$, so $x^{\star}$
+  is optimal.
+\item If $(c_{N}^{T} - c_{B}^{T} A_{B}^{-1} A_{N})_{i} > 0$, then we
+  can increase the objective value by increasing the corresponding row
+  of $(x_{N})_{i}$.
+\end{enumerate}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -16,6 +16,7 @@
 
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
 \declaretheorem[name=Lemma,sibling=thm]{lem}
+\declaretheorem[name=Corollary,sibling=thm]{corollary}
 \declaretheorem[name=Definition,sibling=thm,style=definition]{defn}
 \declaretheorem[name=Proposition,sibling=thm]{proposition}
 \declaretheorem[name=Example,sibling=thm]{exmp}
@@ -43,6 +44,8 @@
 \newcommand{\cp}{\overset{p}{\rightarrow}}
 % convergence almost surely
 \newcommand{\cas}{\overset{as}{\rightarrow}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
 
 % Expectation
 \NewDocumentCommand{\E}{g}{%
@@ -73,5 +76,27 @@
     }    
     {%
       \mathbb{I}\!\left(#1\right)
+    }%
+}
+
+% Expectation
+\NewDocumentCommand{\Var}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{V}
+    }    
+    {%
+      \mathbb{V}\!\left(#1\right)
+    }%
+}
+
+% Expectation
+\NewDocumentCommand{\Cov}{gg}{%
+  \IfNoValueTF{#1}
+    {%
+      \text{Cov}
+    }   
+    {%
+      \text{Cov}\!\left(#1, #2\right)
     }%
 }

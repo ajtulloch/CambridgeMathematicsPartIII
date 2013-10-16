@@ -1,0 +1,224 @@
+
+\section{Conditional Jensen's Inequalities}
+\label{sec:cond-jens-ineq}
+
+Let $X$ be an integrable random variable such that $\phi(x)$ is
+integrable of $\phi $ is non-negative. Suppose $\mathcal{G} \subset
+\mathcal{F}$ is a $\sigma$-algebra. Then
+\begin{equation}
+  \label{eq:8}
+  \E{\phi(X)|\mathcal{G}} \geq \phi(\E{X|\mathcal{G}})
+\end{equation} almost surely.  In particular, if $1 \leq p < \infty$,
+then
+\begin{equation}
+  \label{eq:9}
+  \| \E{X | \mathcal{G}} \|_{p} \leq \| X \|_{p}
+\end{equation}
+
+\begin{proof}
+  Every convex function can be written as $\phi(x) = \sup_{i \in
+    \N}(a_{i} x + b_{i}), a_{i}, b_{i} \in \R$.  Then
+  \begin{align*}
+    \E{\phi(X) | \mathcal{G}} & \geq a \E{X | \mathcal{G}} + b_{i} \\
+    \E{\phi(X) | \mathcal{G}} & \geq \sup_{i \in \N} (a_{i} \E{X |
+      \mathcal{G}} + b_{i})                                        \\
+                              & = \phi(\E{X | \mathcal{G}}
+  \end{align*}
+
+  The second part follows from
+  \begin{equation}
+    \label{eq:10}
+    \| \E{X | \mathcal{G}} \|_{p}^{p} = \E{|\E{X | \mathcal{G}}|^{p}}
+    \leq \E{\E{|X|^{p} | \mathcal{G}}} = \E{|X|^{p}} = \|X\|_{p}^{p}
+  \end{equation}
+\end{proof}
+
+\begin{proposition}[Tower Property]
+  Let $X \in L^{1}$, $\mathcal{H} \subset \mathcal{G} \subset
+  \mathcal{F}$ be sub-$\sigma$-algebras.  Then
+  \begin{equation}
+    \label{eq:11}
+    \E{\E{X | \mathcal{G}} | \mathcal{H}} = \E{X | \mathcal{H}}
+  \end{equation} almost surely.
+\end{proposition}
+
+\begin{proof}
+  Clearly $\E{X | \mathcal{H}}$ is $\mathcal{H}$-measurable.  Let $A
+  \in \mathcal{H}$.  Then
+  \begin{equation}
+    \label{eq:12}
+    \E{\E{X | \mathcal{H}} \I{A}} = \E{X \I{A}} = \E{\E{X |
+        \mathcal{G}} \I{A}}
+  \end{equation}
+\end{proof}
+
+\begin{proposition}
+  Let $X \in L^{1}$, $\mathcal{G} \subset \mathcal{F}$ be
+  sub-$\sigma$-algebras.  Suppose that $Y$ is bounded,
+  $\mathcal{G}$-measurable.  Then
+  \begin{equation}
+    \label{eq:14}
+    \E{XY | \mathcal{G}} = Y \E{X | \mathcal{G}}
+  \end{equation} almost surely.
+\end{proposition}
+
+\begin{proof}
+  Clearly $Y \E{X|\mathcal{G}}$ is $\mathcal{G}$-measurable.  Let $A
+\in \mathcal{G}$.  Then
+\begin{equation}
+  \label{eq:15}
+  \E{Y \E{X | \mathcal{G}} \I{A}} = \E{\E{X | \mathcal{G}}
+    \underbrace{(Y \I{A})}_{\text{$\mathcal{G}$-measurable, bounded}}}
+  = \E{XY \I{A}}
+\end{equation}
+\end{proof}
+
+\begin{defn}
+  \label{defn:inequalities:1}
+  A collection $\mathcal{A}$ of subsets of $\Omega$ is called a
+  $\pi$-system if for all $A, B \in \mathcal{A}$, then $A \cap B \in
+  \mathcal{A}$.
+\end{defn}
+
+\begin{proposition}[Uniqueness of extension] Suppose that $\xi$ is a
+  $\sigma$-algebra on $E$.  Let $\mu_{1}, \mu_{2}$ be two measures on
+  $(E, \xi)$ that agree on a $\pi$-system generating $\xi$ and
+  $\mu_{1}(E) = \mu_{2}(E) < \infty$.  Then $\mu_{1} = \mu_{2}$
+  everywhere on $\xi$.
+\end{proposition}
+
+\begin{thm}
+  \label{defn:inequalities:2}
+  Let $X \in L^{1}$, $\mathcal{G}, \mathcal{H} \subset \mathcal{F}$
+  two sub-$\sigma$-algebras.  If $\sigma(X, \mathcal{G})$ is
+  independent of $\mathcal{H}$, then
+  \begin{equation}
+    \label{eq:17}
+    \E{X| \sigma(\mathcal{G}, \mathcal{H})} = \E{X | \mathcal{G}}
+  \end{equation} almost surely.
+\end{thm}
+
+\begin{proof}
+  Take $A \in \mathcal{G}, B \in \mathcal{H}$.
+  \begin{align*}
+    \E{\E{X | \mathcal{G}} \I{A} \I{B}} = \Prob{B} \E{\E{X |
+        \mathcal{G}} \I{A}} \\
+    &= \Prob{B} \E{X \I{A}} \\
+    &= \E{X \I{A} \I{B}} \\
+    &= \E{\E{X | \sigma(\mathcal{G}, \mathcal{H})} \I{A \cap B}}
+  \end{align*}
+  
+  Assume $X \geq 0$, the general case follows by writing $X = X^{+} -
+  X^{-}$.
+
+  Now, letting $F \in \mathcal{F}$, we have that $\mu(F) = \E{\E{X |
+      \mathcal{G}} \I{F}}$, and if $\mu, \nu$ are two measures on $(\Omega,p
+  \mathcal{F})$, setting $\mathcal{A} = \{ A \cap B, A \in
+  \mathcal{G}, B \in \mathcal{H} \}$.  Then $\mathcal{A}$ is a
+$\pi$-system.
+
+  $\mu, \nu$ are two measruabes that agree on the $\pi$-system
+  $\mathcal{A}$ and $\mu(\Omega) = \E{\E{X|\mathcal{G}}} = \E{X} =
+  \nu{\Omega} < \infty$, since $X$ is integrable.  Note that
+  $\mathcal{A}$ generates $\sigma(\mathcal{G}, \mathcal{H})$.
+
+  So, by the uniqueness of extension theorem, $\mu, \nu$ agree
+  everywhere on $\sigma(\mathcal{G}, \mathcal{H})$.
+\end{proof} 
+
+\begin{remark}
+  If we only had $X$ independent of $\mathcal{H}$ and $\mathcal{G}$
+  independent of $\mathcal{H}$, the conclusion can fail.  For example,
+  consider coin tosses $X, Y$ independent 0, 1 with probability
+  $\frac{1}{2}$, and $Z = \I{X = Y}$.
+\end{remark}
+
+
+\section{Product Measures and Fubini's Theorem}
+\label{sec:prod-meas-fubin}
+
+\begin{defn}
+  \label{defn:inequalities:3}
+  A measure space $(E, \xi, \mu)$ is called $\sigma$-finite if there
+  exists sets $(S_{n})_{n}$ with $\cup S_{n} = E$ and $\mu(S_{n}) <
+  \infty$ for all $n$.
+\end{defn}
+
+Let $(E_{1}, \xi_{1}, \mu_{1})$ and $(E_{2}, \xi_{2}, \mu_{2})$ be two
+$\sigma$-finite measure spaces, with $\mathcal{A} = \{ A_{1} \times
+A_{2} : A_{1} \in \xi_{1}, A_{2} \in \xi_{2} \}$ a $\pi$-system of
+subsets of $E = E_{1} \times E_{2}$.  Define $\xi = \xi_{1} \otimes
+\xi_{2} = \sigma(A)$.
+
+\begin{defn}[Product measure]
+  \label{defn:inequalities:4}
+  Let $(E_{1}, \xi_{1}, \mu_{1})$ and $(E_{2}, \xi_{2}, \mu_{2})$ be
+  two $\sigma$-finite measure spaces. Then there exists a unique
+  measure $\mu$ on $(E, \xi)$ ($\mu = \mu_{1} \otimes \mu_{2}$)
+  satisfying
+  \begin{equation}
+    \label{eq:18}
+    \mu(A_{1} \times A_{2}) = \mu_{1}(A_{1})\mu_{2}(A_{2})
+  \end{equation} for all $A_{1} \in \xi_{1}, A_{2} \in \xi_{2}$.
+\end{defn}
+
+\begin{thm}[Fubini's Theorem]
+  \label{defn:inequalities:5}
+  Let $(E_{1}, \xi_{1}, \mu_{1})$ and $(E_{2}, \xi_{2}, \mu_{2})$ be
+  $\sigma$-finite measure spaces.  Let $f \geq 0$, $f$ is
+  $\xi$-measurable.  Then
+  \begin{equation}
+    \label{eq:19}
+    \mu(f)  = \int_{E_{1}} \left( \int_{E_{2}} f(x_{1}, x_{2})
+      \mu_{2}(dx_{2}) \right) \mu_{1}(dx_{1})
+  \end{equation}
+  If $f$ is integrable, then $x_{2} \mapsto f(x_{1}, x_{2})$ is
+  $u_{2}$-integrable for $u_{1}$-almost all $x$.
+
+  Moreover, $x_{1} \mapsto \int_{E_{2}} f(x_{1}, x_{2}
+  \mu_{2}(dx_{2})$ is $\mu_{1}$-integrable and $\mu(f)$ is given by \eqref{eq:19}.
+\end{thm}
+
+\section{Examples of Conditional Expectation}
+\label{sec:exampl-cond-expect}
+
+\begin{defn}
+  \label{defn:inequalities:6}
+  A random vector $(X_1, X_{2}, \dots, X_{n}) \in \R^{n}$ is called a
+  Gaussian random vector if and only if for all $a_{1}, \dots, a_{n} \in \R$,
+  \begin{equation}
+    \label{eq:20}
+    a_{1} X_{1} + \dots + a_{n} X_{n}
+  \end{equation} is a Gaussian random variable.
+
+  $(X_{t})_{t \geq 0}$ is called a Gaussian process if for all $0 \leq
+  t_{1} \leq t_{2} \leq \dots \leq t_{n}$, the vector $X_{t_{1}},
+  \dots, X_{t_{n}}$ is a Gaussian random vector.
+\end{defn}
+
+\begin{exmp}[Gaussian case]
+  \label{defn:inequalities:7}
+  Let $(X, Y)$ e a Gaussian vector in $\R^{2}$.  We want to calculate
+  \begin{equation}
+    \label{eq:21}
+    \E{X | Y} = \E{X | \sigma(Y) } = X'
+  \end{equation} where $X' = f(Y)$ with $f$ a Borel function.  Let's
+  try $f$ of a linear function $X' = aY = b, a, b \in \R$ to be
+  determined.
+
+  Note that $\E{X} = \E{X'}$ and $E{(X' - X) Y} = 0 \Rightarrow
+  \Cov{X-X'}{Y} = 0$ by laws of
+  conditional expectation.  Then we have that
+  \begin{align}
+    \label{eq:22}
+    a\E{Y} + b = \E{X}
+    \Cov{X}{Y} = a \Var{X}
+  \end{align}
+
+  TODO - continue inference
+\end{exmp}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

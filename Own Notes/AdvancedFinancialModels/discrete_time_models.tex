@@ -216,8 +216,128 @@ Useful properties of conditional expectation:
       X_{t-1}) | \mathcal{F}_{t-1}} \\
                                   & = Z_{t-1} + \underbrace{Y_{t}}_{\text{slot property}} \E{\underbrace{X_{t} - X_{t-1}}_{=0} | \mathcal{F}_{t-1}}
   \end{align*}
-
 \end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:9}
+  Suppose $u: [0, \infty) \rightarrow \R$ is strictly increasing,
+  strictly concave, differentiable, bounded from above.  Suppose there
+  exists investment strategy $H^{\star}$ and consumption
+  $c^{\star}_{t}= (H^{\star}_{t-1} - H^{\star}_{t}) \cdot P_{t-1}$,
+  and a state price density $Y^{\star}$ such that $u'(c^{\star}_{t}) =
+  Y^{\star}_{t-1}$.  Then $(H^{\star}, c^{\star})$ is optimal for the
+  problem $\max \sum_{t=1}^{T} \E{u(c_{t})}$, subject to $X_{0}(H) =
+  x, X_{T}(H) = 0$.
+\end{thm}
+
+\begin{proof}
+  We consider the case where $\Omega$ is finite.
+
+  Let $L(H, c, Y) = \E{\sum_{t=1}^{T} \left( u(c_{t}) +
+      Y_{t+1}(H_{t+1} P(t+1)
+      - c_{t} - H_{t} \cdot P_{t-1}) \right)}$
+  Note that $L(H, c, Y)$ is the objective when $(H, c)$ is feasible.
+  Then
+  \begin{align*}
+    L(H, c, Y) &= \E{\sum_{t=1}^{T} \left(u(c_{t}) - c_{t}
+        Y_{t-1}\right)}
+    +  Y_{0} X - Y_{t-1} H_{t} P_{t-1} + \sum_{t=1}^{T-1} H_{t}(Y_{t}
+    P_{t} - Y_{t-1} P_{t-1})
+  \end{align*}
+
+  First note that $u(c^{\star}_{t}) - Y^{\star}_{t-1} c^{\star}_{t}
+  \geq u(c_{t}) - Y^{\star}_{t-1} c_{t}$ since $u'(c^{\star}_{t}) =
+  Y^{\star}_{t-1}$ (first order condition for the maximum of the
+  concave function $c \mapsto u(c) - yc$).
+
+  Second, by definition, $YP$ is a martingale, and by finiteness of
+  $\Omega$, the predictable process $H$ is bounded. Therefore, $M_{t}
+  = \sum_{s=1}^{t} H_{s}(Y_{s} P_{s} - Y_{s-1} P_{s-1})$ is a
+  martingale and $E(M_{t}) = M_{s} = 0$.
+
+  Putting this together, $L(H, c, Y^{\star}) \leq L(H^{\star},
+  c^{\star}, Y^{\star})$.
+\end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:10}
+  An absolute arbitrage is an investment/consumption strategy $(H, c)$
+  such that $X_{0}(H) = 0, X_T(H) = 0$, at some non-random time horizon
+  $T > 0$, and $\Prob{\sum_{t=1}^T c_t > 0} > 0$.
+\end{thm}
+
+\begin{defn}
+  \label{defn:discrete_time_models:11}
+  A numeraire asset is one whose price is strictly positive almost surely.
+\end{defn}
+
+\begin{exmp}
+  \label{defn:discrete_time_models:12}
+  Here is a market without a numeraire. $P_{0} = 1, P_{0} = -1, P_{2}
+  = 1$.
+
+  Arbitrage:
+  \begin{align*}
+    H_{1} = -1, c_{1} = 1
+    X_{1}= 1, c_{2} = 1, H_{2} = 0
+    X_{2}= 0
+  \end{align*}
+\end{exmp}
+
+\begin{exer}
+  Suppose $H_{1}$ is an arbitrage and the market has a numeraire.
+  Then there exists a pure investment strategy $H'$ and a time horizon $T'$ such that
+  $X_{0}(H') = 0, X_{T'}(H') \geq 0$ a.s., and $\Prob{X_{T'}(H') > 0}
+    > 0$.
+\end{exer}
+
+\begin{thm}
+  \label{defn:discrete_time_models:13}
+  A market model has no arbitrage if and only if there exists a state
+  price density.
+\end{thm}
+
+\begin{proof}
+  $T = 1$ case.  Suppose there exists a state price density
+  $(Y_{t})_{t = 0, 1}$ without loss $Y_{0} = 1$.  Let $Y = Y_{1}$ for
+  clarity, $Y > 0$ a.s.
+
+  Suppose $(H_{t})_{t = 1} = H_{1} = H$ (non-random vector) is a
+  candidate arbitrage, so $H \cdot P_{0} \leq 0$ and $H \cdot P_{1}
+  \geq 0$ a.s.  We must show $H \cdot P_{0} = 0 = H \cdot P_{1}$ a.s.
+
+  Since $Y > 0$, $H \cdot P_{1} \geq 0 \Rightarrow \E{Y H P_{1}} \geq
+    0$, but $H \underbrace{\E{Y P_{1}}}_{\text{state price density}} =
+    H P_{0} \leq 0$.
+
+  By the pigeonhole principle, if $Z \geq 0$ a.s and $E(Z) = 0$, then
+  $Z = 0$ a.s.
+
+  Thus, $Y H \cdot P_{1} = 0$ a.s., and since $Y > 0$ a.s., $H_{0}
+  P_{1} = 0 = H P_{0} = 0$ a.s.
+
+  Now consider the other direction.  Let $\mathcal{Y} = \{ Y > 0 a.s,
+  \E{Y \| P_{1} \|} < a \}$.  $\mathcal{Y}$ is non-empty since $Y_{0}
+  = e^{-\| P_{1} \|} \in \mathcal{Y}$ and $\mathcal{Y}$ is convex.
+  Let $\mathcal{C} = \{ \E{YP_{1}}, y \in \mathcal{Y} \}$.  Suppose
+  $P_{0} \notin \mathcal{C}$.
+
+  By the separating hyperplane theorem, there exists $H \in \R^{n}$ such
+  that
+  \begin{enumerate}
+  \item For all $c \in \mathcal{C}$, $H(c - P_{0}) \geq 0$.
+  \item There exists $c^{\star} \in \mathcal{C}$, $H(c^{\star} - P_{0}) > 0$.
+  \end{enumerate}
+
+  This implies
+  \begin{enumerate}
+  \item For all $Y \in \mathcal{Y}$, $\E{YH \cdot P_{1}} \geq H \cdot
+    P_{0}$
+  \item There exists $Y^{\star} \in \mathcal{Y}$, $\E{Y H \cdot P_{1}} > H
+    \cdot P_{0}$.
+  \end{enumerate}
+\end{proof}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

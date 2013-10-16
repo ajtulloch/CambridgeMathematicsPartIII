@@ -1,0 +1,108 @@
+\chapter{Monochromatic Systems}
+\label{cha:monochr-syst}
+
+\begin{thm}[Ramsay's theorem]
+  \label{defn:ramsay:3}
+  Whenever $\N^{(2)}$ is two-coloured, there exists an infinite
+  monochromatic set.
+\end{thm}
+
+\begin{enumerate}
+\item Called a ``two-pass'' proof.
+\item Same proof that whenever $N^{(2)}$ is $k$-coloured.
+  Alternatively, view color as 1 and ``2 or 3 or ... or $k$''.   and
+  by theorem one we get an infinite set of colour 1 - then just induct
+  on $k$.
+\item Having an infinite monochromatic set is stronger than asking for
+  an arbitrarily large finite monochromatic set.
+\end{enumerate}
+
+\begin{exmp}
+  \label{defn:ramsay:1}
+  Any sequence $x_{1}, x_{2}, \dots$ in $\R$ (or any totally ordered
+  set) has a monotone subsequence.
+\end{exmp}
+
+\begin{proof}
+  Color \textbf{up} if $x_{i} < x_{j}$, \textbf{down} if $x_{i} \geq
+  x_{j}$, and apply Theorem \ref{defn:ramsay:3}. 
+\end{proof}
+
+What about $\N^{(r)}, r = 3, 4, \dots$.  If we two-color $\N^{(r)}$,
+can we get an infinite monochromatic set?
+
+For example, consider $n=3$.  Color $N^{(3)}$ by colouring $(i,j,k)$
+\textbf{red} if $i$ divides $j + k$, \textbf{blue} if not.
+
+\begin{thm}[Ramsay's theorem for $r$-sets]
+  \label{defn:ramsay:2}
+  Whenever $\N^{(r)}$ is two-coloured, there exists an infinite
+  monochromatic set.
+\end{thm}
+
+\begin{proof}
+  Induction on $r$.  $r = 1$ is trivial by the pigeonhole principle.
+  $r = 2$ is shown by Theorem \ref{defn:ramsay:3}.
+
+  Now, given a two-colouring of $N^{(r)}$.  Choose $a_{1} \in \N$.  We
+  induce a two-colouring $c'$ of $(\N - \{ a_{1} )^{(r-1)}$ by $c'(F)
+  = c(F \cup \{ a_{1} \})$  for all $F \in (\N - \{ a_{1} \})^{(r -
+    1)}$.  By induction, there exists an infinite monochromatic set
+  $B_{1} \subseteq N - \{ a_{1} \}$ for $c'$.
+
+  So all $r$-sets $F \cup \{ a_{1} \}$, $F \subset B_{1}$ have the
+  same color ($c_{1}$, say).  Choose $a_{2} \in B_{1}$.  By the same
+  argument, there exists an infinite set $B_{2} \subset B_{1} - \{
+  a_{2} \}$ such that all $r$-sets $F \cup \{ a_{2} \}$, $F \subset
+  B_{2}$ have the same colour.  Continue inductively.  We obtain a
+  sequence of points $a_{1}, a_{2}, \dots$ and colors $c_{1}, c_{2},
+  \dots$ such that each $r$-set $a_{i_{1}}, \dots, a_{i_{r}}$ with
+  $i_{1} < \dots < i_{2}$ has color $c_{i_{1}}$.  But we must have
+  $c_{i_{1}} = c_{i_{2}} = c_{i_{3}} = \dots$ for some infinite
+  subsequence.  Then $\{ a_{i_{1}}, a_{i_{2}}, \dots \}$ is an
+  infinite monochromatic sequence.
+\end{proof}
+
+\begin{exmp}
+  \label{defn:ramsay:4}
+  We can show that given any $(1, x_{1}), (2, x_{2}), \dots$ we can
+  find a subsequence inducing a monotone function.  Consider the
+ three-colouring of $(1, x_{1}), (2, x_{2}), (3, x_{3}),
+  \dots$ by colouring triples of points \textbf{convex} or
+  \textbf{convex} depending on the colouring of the set.
+\end{exmp}
+
+\begin{thm}
+  \label{defn:ramsay:5}
+  Infinite Ramsay (Theorem \ref{defn:ramsay:2}) implies the finite
+  version.  That is, for all $m, r \in \N$, whenever $[m]^{(r)}$ is
+  two-coloured there exists a monochromatic $m$-set.
+\end{thm}
+
+\begin{proof}
+  Suppose not, so for all $n \geq r$ there exists a two-colouring
+  $c_{n}$ of $[m]^{(r)}$ without a monochromatic $m$-set.  We'll
+  construct a 2-colouring of $\N^{(r)}$ without a monochromatic
+  $m$-set, contradicting Theorem \ref{defn:ramsay:2}.\sidenote{
+    If the $c_{n}$ nested - that is, if $c_{n}|_{[n-1]^{(r)}} =
+    c_{n-1}$, can take union, but they may \textbf{not} be nested
+  }
+
+  There are only finitely many ways to two-color $[r]^{(r)}$ (two, in
+  fact). So infinitely many of the $c_{n}$ agree on $[r + 1]^{(r)}$.
+  Say, $c_{i} | [r+1]^{(r)} = d_{r+1}$. Now, 
+  \begin{enumerate}
+  \item the $d_{i}$ are nested, and
+  \item no $d_{n}$ has a monochromatic $m$-set (as there is some $k$
+    such that $d_{n}$ = $c_{k} | [n]^{(r)}$.
+  \end{enumerate}
+
+  Define a colouring $c: \N^{(r)} \rightarrow [2]$ by $c(F) =
+  d_{n}(F)$ for any $n \geq \max F$.  We obtain our contradiction.
+
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

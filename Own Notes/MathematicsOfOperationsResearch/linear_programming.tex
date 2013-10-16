@@ -133,6 +133,37 @@ program is the original program.
   \end{align}
 \end{thm}
 
+\begin{proof}
+  If $x, \lambda$ are optimal, then
+  \begin{align}
+    \label{eq:12}
+    c^{T} x & = \underbrace{\lambda^{T} b}_{\text{by strong duality}} \\
+    &= \inf_{x' \in X} (c^{T} x' - \lambda^{T} (Ax' - b))
+    &\leq c^{T} x - \underbrace{\lambda^{T}(Ax - b)}_{\text{primal and
+      dual optimality}}
+    &\leq c^{T} x
+  \end{align}
+
+  Then the inequalities must be equalities. Thus
+  \begin{equation}
+    \label{eq:17}
+    \lambda^{T} b = c^{T} x - \lambda^{T}(Ax - b) = \underbrace{(c^{T} -
+      \lambda^{T} A)x}_{=0} + \lambda^{T} b
+  \end{equation} and
+  \begin{equation}
+    \label{eq:18}
+    c^{T}x - \underbrace{\lambda^{T}(Ax - b)}_{=0} = c^{T} x
+  \end{equation}
+
+  If $(c^{T} -\lambda^{T}A)x = 0$ and $\lambda^{T}(Ax - b) = 0$, then
+  \begin{equation}
+    \label{eq:19}
+    c^{T} x = c^{T} - \lambda^{T}(Ax - b) = (c^{T} - \lambda^{T} a) x
+    + \lambda^{T} b = \lambda^{T} b
+  \end{equation} and so by weak duality, $x$ and $\lambda$ are
+  optimal.
+\end{proof}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
