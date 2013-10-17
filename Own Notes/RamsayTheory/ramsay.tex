@@ -34,7 +34,7 @@ can we get an infinite monochromatic set?
 For example, consider $n=3$.  Color $N^{(3)}$ by colouring $(i,j,k)$
 \textbf{red} if $i$ divides $j + k$, \textbf{blue} if not.
 
-\begin{thm}[Ramsay's theorem for $r$-sets]
+\begin{thm}[Ramsey's theorem for $r$-sets]
   \label{defn:ramsay:2}
   Whenever $\N^{(r)}$ is two-coloured, there exists an infinite
   monochromatic set.
@@ -74,7 +74,7 @@ For example, consider $n=3$.  Color $N^{(3)}$ by colouring $(i,j,k)$
 
 \begin{thm}
   \label{defn:ramsay:5}
-  Infinite Ramsay (Theorem \ref{defn:ramsay:2}) implies the finite
+  Infinite Ramsey (Theorem \ref{defn:ramsay:2}) implies the finite
   version.  That is, for all $m, r \in \N$, whenever $[m]^{(r)}$ is
   two-coloured there exists a monochromatic $m$-set.
 \end{thm}
@@ -99,8 +99,119 @@ For example, consider $n=3$.  Color $N^{(3)}$ by colouring $(i,j,k)$
 
   Define a colouring $c: \N^{(r)} \rightarrow [2]$ by $c(F) =
   d_{n}(F)$ for any $n \geq \max F$.  We obtain our contradiction.
-
 \end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+  \item Proof gives no bound on what $n = n(m, r)$ we could take.
+    There \textbf{are} direct proofs that do give upper bounds.
+  \item Called a ``compactness argument''.  Essentially, we are
+    proving that the space $[0, 1]^{\N}$ (all infinite 0-1 sequences)
+    with the product topology (e.g. the metric $d(f, g) =
+    \frac{1}{\min(n: f_{n} \neq g_{n})}$ is (sequentially) compact.
+  \end{enumerate}
+\end{remark}
+
+What if we coloured $\N^{(2)}$ with $\infty$ many colours (i.e. w have
+$c: \N^{(2)} \rightarrow X$ for some set $X$).  Obviously, we cannot
+find an infinite $M$ on which $c$ is constant - for example, let $c$
+be injective.
+
+Can we always find an infinite $M$ such that $c$ is either constant on
+$M^{(2)}$ or injective on $M^{(2)}$?  No - for example, $1 \mapsto
+\{2,3,4, \dots \}, 2 \mapsto \{ 3, 4, 5, \dots \}, \dots$ as different
+colours as a counterexample.
+
+\begin{thm}[Canonical Ramsey Theorem]
+  \label{defn:ramsay:6}
+  Let $c: \N^{(2)} \rightarrow X$ for some set $X$.  Then there exists
+  an infinite $M \in \N$ such that one of the following holds:
+  \begin{enumerate}
+  \item \label{item:1}$c$ is constant on $M^{(2)}$,
+  \item \label{item:2}$c$ is injective on $M^{(2)}$,
+  \item \label{item:3}$c(i, j) = c(k, l) \iff i = k$ with ($i, j, k, l \in M, i < j, k < l$)
+  \item \label{item:4}$c(i, j) = c(k, l) \iff j = l)$ with ($i, j, k, l \in M, i < j, k < l$)
+  \end{enumerate}
+\end{thm}
+
+\begin{remark}
+  This generalizes enormously Theorem \ref{defn:ramsay:3} - if $X$ is
+  finite then \ref{item:1}, \ref{item:3}, \ref{item:4} cannot arise.
+\end{remark}
+
+\begin{proof}
+  We'll apply this for Ramsey's theorem on 4-sets.  Two-colour
+  $\N^{(4)}$ by giving $(i,j,k,l)$ colour \textbf{same} if $c(i, j) =
+  c(k, l)$, \textbf{different} otherwise.
+
+  By Ramsey's theorem for 4-sets (Theorem \ref{defn:ramsay:2}), there
+  exists an infinite set $M_{1}$ that is monochromatic for this
+  colouring.
+
+  If $M_{1}$ is coloured \textbf{same}, for any $i, j$ and $k, l$ in
+  $M_{1}^{2}$, choose $m, n \in M_{1}^{(2)}$ within $m > j, l$.  Then
+  $c(i, j) = c(m, n)$ and $c(k, l) = c(m, n)$.  So $c(i, j) = c(k, l)$
+  so $c$ is constant on $M_{1}^{(2)}$.
+
+  So now, we may assume $M_{1}$ is coloured differently.  Now
+  two-colour $M_{1}^{(4)}$ by giving $(i,j,k,l)$ \textbf{same} if
+  $c(i, l) = c(j, k)$, \textbf{different} otherwise. By Theorem
+  \ref{defn:ramsay:2}, there exists an infinite set $M_{2} \subset
+  M_{1}$ that is monochromatic for this colouring.
+
+  If $M_{2}$ are coloured the same, choose $i < j < k < l < m < n$ in
+  $M_{2}$. Then $c(j, k) = c(i, n)$ and $c(l, m) = c(i, n)$, whence
+  $c(j, k) = c(l, m)$, which is a contradiction, as $M_{2} \subset
+  M_{1}$.
+  Thus, $M_{2}$ is coloured \textbf{different}.
+
+  Two-colour $M_{2}^{(4)}$ by giving $(i,j,k,l)$ colour \textbf{same}
+  if $c(i, k)  = c(j, l)$, \textbf{different} otherwise.  We have an
+  infinite monochromatic colouring $M_{3} \subset M_{2}$ for this
+  colouring.  If $M_{3}$ coloured \textbf{same}, choose $i < j < k < l
+  < m < n$ in $M_{3}$.  Then $c(i,l) = c(j,m)$ and $c(i, l) = c(k,
+  m)$, so $c(j, n) = c(k, m)$, a contradiction.  So $M_{3}$ is
+  coloured \textbf{different}.
+
+  Two-colour $M_{3}^{(3)}$ by giving $(i,j,k)$ colour \textbf{same} if
+  $c(i,j) = c(j, k)$, \textbf{different} otherwise.  We have an
+  infinite monochromatic sequence $M_{4} \subset M_{3}$ for this
+  colouring.  If $M_{4}$ is coloured same, choose $i < j < k < l$ in
+  $M_{4}$.  Then $c(i, j) = c(j, k) = c(k, l)$, a contradiction.  So,
+  $M_{4}$ is coloured \textbf{differently}.
+
+  Two-colour $M_{4}^{(3)}$, by giving $(i, j, k)$ colour
+  \textbf{left-same} if $c(i, j) = c(i, k)$, \textbf{left-different}
+  otherwise. We have an infinite monochromatic set $M_{5} \subset
+  M_{4}$ for this.  Then two-colour $M_{5}^{(3)}$ by giving $(i, j,
+  k)$ colour \textbf{right-same} if $c(j, k) = c(i, k)$,
+  \textbf{right-different} if not.  We get an infinite monochromatic
+  sequence $M_{6}$ for this colouring.
+
+  If $M_{6}$ is \textbf{left-different, right-different}, we have case
+  \ref{item:3}.  If $M_{6}$ is \textbf{left-same, right-different}, we
+  have case \ref{item:2}.  If $M_{6}$ is \textbf{left-different,
+    right-same}, we have case \ref{item:4}.  If $M_{6}$ is
+  \textbf{left-same, right-same}, choosing $i < j < k$ in $M_{6}$,
+  then $c(i, j) = c(i, k) = c(j, k)$, which is a contradiction.
+\end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+  \item Could use just one colouring, according to the pattern of
+    colours on the 2-sets inside a given 4-set.
+  \item For any $r$, one can show similarly.  For \textbf{any}
+    colouring $c$ of $\N^{(r)}$, there exists an infinite $M \subset
+    \N$ and $I \subset [r]$ such that for all $i_{1} < \dots < i_{r}$
+    and $j_{1} < \dots < j_{r}$ in $M$, $c(i_1, \dots, i_{r}) =
+    c(j_{1}, \dots, j_{r}) \iff i_{n} = j_{n}$ for all $n \in I$.
+    These $2^{r}$ colourings are the canonical colourings of
+    $\N^{(r)}$.  
+
+    For example, let $r = 2$.  $I = \{ 1 \}$ is case \ref{item:3}.
+    $I = \{ 2 \}$ is case 
+  \end{enumerate}
+\end{remark}
 
 %%% Local Variables: 
 %%% mode: latex

@@ -12,6 +12,7 @@
 \usepackage{hyperref}
 \usepackage{thmtools}
 \usepackage{xparse}
+\usepackage{enumitem}
 \hypersetup{colorlinks=true}
 
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
@@ -30,6 +31,8 @@
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+\setlist[enumerate]{label=(\roman*)}
 
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{2}

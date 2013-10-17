@@ -1,0 +1,153 @@
+\chapter{Parametric Statistical Models}
+\label{cha:param-stat-models}
+
+Let $Y_{1}, \dots, Y_{n}$ observations.
+
+\begin{exmp}
+  \label{defn:parametric_statistical_models:3}
+  $Y_{1} = (Z_{i}, X_{i})$ where the $Z_{i}$'s are response variables,
+  and the covariates $X_{i}$ are related to $Z_{i}$ by the regression
+  relationship $Z_{i} = g(X_{i}, \theta) + \epsilon_{i}$ for $\theta
+  \in \Theta \subseteq \R^{p}$, $\epsilon_{i}$ IID with
+  $\E{\epsilon_{i}} = 0$, and $g: X \times \Theta \rightarrow \R$.
+
+  A regression function (possibly non-linear) and known - for example,
+  \begin{equation}
+    \label{eq:14}
+    g(X_{i}, \theta) = X_{i}^{T} \theta,
+  \end{equation} a linear model.
+\end{exmp}
+
+
+A natural way to estimate $\theta$ is by nonlinear least squares (NLS)
+which finds $\hat \theta$ that minimizes
+\begin{equation}
+  \label{eq:20}
+  Q_{n}(\theta) = \frac{1}{n} \sum_{i=1}^{n}(Z_{i}- g(X_{i}, \theta))^{2}
+\end{equation}
+
+\begin{exmp}
+  \label{defn:parametric_statistical_models:2}
+  We are given a model of PDF/PMF's $\{ f(\cdot, \theta): \theta \in
+  \Theta \}, \Theta \subseteq \R^{p}$ for the distribution of a random
+  variable $Y$.  We view $Y_{1}, \dots, Y_{n}$ as IID copies of $Y$.
+
+  The likelihood function of the model  is defined as
+  \begin{equation}
+    \label{eq:30}
+    L_{n}(\theta) = \Pi_{i=1}^{n} f(Y_{i}, \theta)
+  \end{equation}
+
+  The log-likelihood function $l_{n}(\theta) = \log L_{n}(\theta)$.  A
+  \textbf{maximum likelihood estimator} (MLE) is any value $\hat
+  \theta = \hat \theta_{MLE} \in \Theta$ that maximizes
+  $L_{n}(\theta)$ over $\Theta$.  Equivalently, we minimize
+  \begin{equation}
+    \label{eq:31}
+    Q_{n}(\theta) = -\frac{1}{n} l_{n}(\theta) = - \frac{1}{n}
+    \sum_{i=1}^{n} \log f(Y_{i}, \theta)
+  \end{equation}
+\end{exmp}
+
+\section{Consistency of M-Estimators}
+\label{sec:cons-m-estim}
+
+In both the examples, $\hat \theta_{n}$ is found by minimizing a
+random criterion function $Q_{n}(\theta)$ over $\Theta$, and proved a
+``limiting function'' $Q(\theta)$ exists, we expect these minimizers
+to converge to the minimizers of $Q$.
+
+\begin{thm}
+  \label{defn:parametric_statistical_models:1}
+  Let $\Theta \subseteq \R^{p}$ be compact.  Let $Q: \Theta
+  \rightarrow \R$ be a continuous, non-random function that has a
+  unique minimizer $\theta_{0} \in \Theta$.
+
+  Let $Q_{n}: \Theta \rightarrow \R$ be any sequence of random
+  functions such that
+  \begin{equation}
+    \label{eq:32}
+    \sup_{\theta \in \Theta} |Q_{n}(\theta) - Q(\theta)| \cp 0
+  \end{equation} as $n \rightarrow \infty$.
+
+  If $\theta_{n}$ is \textbf{any} sequence of minimizers of $Q_{n}$,
+  then $\hat \theta_{n} \cp \theta_{0}$ as $n \rightarrow \infty$.
+\end{thm}
+
+\begin{proof}
+  Let $\epsilon > 0$ be arbitrary. The set $\Theta_{\epsilon} = \{
+  \theta \in \Theta : \| \theta - \theta_{0} \| \geq \epsilon \}$ is
+  compact and $Q$ is continuous on $\Theta_{\epsilon}$, so $Q$ attains
+  its infimum
+  \begin{equation}
+    \label{eq:33}
+    c(\epsilon) = \inf_{\theta \in \Theta_{\epsilon}} Q(\theta) =
+    Q(\bar \theta_{\epsilon}) \in \Theta_{\epsilon} > Q(\theta_{0})
+  \end{equation} as $\theta_{0}$ is the minimizer.
+
+  Pick $0 < \delta(\epsilon) < \frac{c(\epsilon) - Q(\theta_{0})}{2}$,
+  which implies
+  \begin{equation}
+    \label{eq:34}
+    c(\epsilon) - \delta(\epsilon) > Q(\theta_{0}) + \delta(\epsilon)
+  \end{equation}
+
+  Define the event
+  \begin{equation}
+    \label{eq:35}
+    A_{n}(\epsilon) = \{ \sup_{\theta \in \Theta} |Q_{n}(\theta) -
+    Q(\theta)| < \delta(\epsilon) \}.
+  \end{equation}  On this event we have
+  \begin{align*}
+    \inf_{\theta \in \Theta_{\epsilon}} Q_{n}(\theta) & = \inf_{\theta
+      \in \Theta_{\epsilon}} [Q_{n}(\theta) - Q(\theta) + Q(\theta)]
+                                                                                              \\
+                                                      & \geq \inf_{\theta \in \Theta_{\epsilon}} Q(\theta) - \sup_{\theta
+      \in \Theta} |Q_{n}(\theta) - Q(\theta)|                                                 \\
+                                                      & \geq C(\epsilon) - \delta(\epsilon)   \\
+                                                      & \geq Q(\theta_{0}) + \delta(\epsilon) \\
+                                                      & \geq Q(\theta_{0}) + \delta(\epsilon) - |Q_{n}(\theta_{0}) -
+    Q(\theta_{0})|                                                                            \\
+                                                      & \geq Q_{n}(\theta_{0})
+  \end{align*} since on $A_{n}(\epsilon)$, in particular
+  $|Q_{n}(\theta_{0}) - Q(\theta_{0})| < \delta(\epsilon)$.
+
+  We conclude
+  \begin{equation}
+    \label{eq:36}
+    \inf_{\theta: \|\theta - \theta_{0} \| \geq \epsilon}
+    Q_{n}(\theta) > Q_{n}(\theta_{0})
+  \end{equation}
+
+  Now suppose $\hat \theta_{n} \in \Theta_{\epsilon}$, then
+  $Q_{n}(\hat \theta_{n}) \geq \inf_{\theta \in \Theta_{\epsilon}}
+  Q_{n}(\theta) > Q_{n}(\theta_{0})$.
+
+  Hence, on $A_{n}(\epsilon)$, we have $\| \hat \theta_{n} -
+  \theta_{0}\| < \epsilon$, $A_{n}(\epsilon) \subseteq \{ \| \hat
+  \theta_{n} - \theta_{0} \| < \epsilon \}$, so since by hypothesis
+  $\Prob{A_{n}(\epsilon)} \rightarrow 1$ for all $\epsilon > 0$, we
+  see $\Prob{\| \hat \theta_{n} - \theta_{0} \| < \epsilon}
+  \rightarrow 1$, as $\Prob{\| \hat \theta_{n} - \theta_{0} \| \geq
+    \epsilon} \rightarrow 0$ as $n \rightarrow \infty$. Since
+  $\epsilon > 0$ was arbitrary, the result follows.
+\end{proof}
+
+\begin{remark}
+  Uniform convergence of $Q_{n} \rightarrow Q$ is necessary. In fact,
+  none of the conditions can be relaxed.
+\end{remark}
+
+\begin{exer}
+  \begin{enumerate}
+  \item What is $Q$ in Examples
+    \ref{defn:parametric_statistical_models:3}, \ref{defn:parametric_statistical_models:2}?
+  \item What is $\Theta_{0}$?
+  \item When does uniform convergence occur?
+  \end{enumerate}
+\end{exer}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
