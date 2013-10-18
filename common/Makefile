@@ -8,7 +8,7 @@ view:
 	open master.pdf
 
 clean:
-	rm -rf *.dvi *.aux *.fls *.fdb_latexmk *.log *.out *.pdf _region_.tex auto
+	rm -rf *.dvi *.aux *.fls *.fdb_latexmk *.log *.out *.pdf _region_.tex auto/ *.bbl *.blg *.synctex.gz *.toc
 
 publish:
 	rm -rf PDFs
