@@ -1,0 +1,148 @@
+
+\chapter{Discrete Time Martingales}
+\label{cha:discr-time-mart}
+
+Let $(\Omega, \mathcal{F}, \Prob)$ be a probabilty space and $(E,
+\xi)$ a measurable space.  Usually $E = \R, \R^{d}, \mathbb{C}$.  For
+us, $E = \R$.  A sequence $X = (X_{n})_{n \geq 0}$ of random variables
+taking values in $E$ is called a \textbf{stochastic process}.
+
+A \textbf{filtration} is an increasing family $(\mathcal{F}_{n})_{n
+  \geq 0}$ of sub-$\sigma$-algebras of $\mathcal{F}_{n}$, so
+$\mathcal{F}_{n} \subseteq \mathcal{F}_{n+1}$.
+
+Intuitively, $\mathcal{F}_{n}$ is the information available to us at
+time $n$.  To every stochsatic process $X$ we assoicate a filtration
+called the natural filtration
+\begin{equation}
+  \label{eq:24}
+  (\mathcal{F}^{X}_{n})_{n \geq 0}, \mathcal{F}_{n}^{X} =
+  \sigma(X_{k}, k \leq n)
+\end{equation}
+
+A stochastic process $X$ is called adapted to $(\mathcal{F}_{n})_{n
+  \geq 0}$ if $X_{n}$ is $\mathcal{F}_{n}$-measurable for all $n$.
+
+A stochastic process $X$ is called integrable if $X_{n}$ is integrable
+for all $n$.
+
+\begin{defn}
+  \label{defn:discrete_time_martingales:1}
+  An adapted integrable process $(X_{n})_{n \geq 0}$ taking values in
+  $\R$ is called a
+  \begin{enumerate}
+  \item \textbf{martingale} if $\E{X_{n} | \mathcal{F}_{m}} = X_{m}$
+    for all $n \geq m$.
+  \item \textbf{super-martingale} if $\E{X_{n} | \mathcal{F}_{m}} \leq
+    X_{m}$ for all $n \geq m$.
+  \item \textbf{sub-martingale} if $\E{X_{n} | \mathcal{F}_{m}} \geq
+    X_{m}$ for all $n \geq m$.
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  A (sub,super)-martingale with respect to a filtration
+  $\mathcal{F}_{n}$ is also a (sub, super)-martingale with respect to
+  the natural filtration of $X_{n}$ (by the tower property)
+\end{remark}
+
+
+\begin{exmp}
+  \label{defn:discrete_time_martingales:2}
+  Suppose $(\xi_{i})$ are IID random variables with $\E{\xi_{i}} = 0$.
+  Set $X_{n} = \sum_{i=1}^{n} \xi_{i}$.  Then $(X_{n})$ is a martingale.
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:discrete_time_martingales:3}
+  As above, but let $(\xi_{i})$ be IID with $\E{\xi_{i}} = 1$. Then
+  $X_{n} = \Pi_{i=1}^{n} \xi_{i}$ is a martingale.
+\end{exmp}
+
+\begin{defn}
+  \label{defn:discrete_time_martingales:4}
+  A random variables $T: \Omega \rightarrow \mathbb{Z}_{+} \cup \{ \infty \}$
+  is called a stopping time if $\{ T \leq n \} \in \mathcal{F}_{n}$
+  for all $n$.  Equivalently, $\{ T = n \} \in \mathcal{F}_{n}$ for
+  all $n$.
+\end{defn}
+
+\begin{exmp}
+  \label{defn:discrete_time_martingales:5}
+  \begin{enumerate}
+  \item Constant times are trivial stopping times.
+  \item $A \in \mathcal{B}(\R)$.  Define $T_{A} = \inf \{ n \geq 0 |
+    X_{n} \in A \}$, with $\inf \emptyset = \infty$.  Then $T_{A}$ is a
+    stopping time.
+  \end{enumerate}
+\end{exmp}
+
+\begin{proposition}
+  Let $S, T, (T_{n})$ be stopping times on the filtered probability
+  space $(\Omega, \mathcal{F}, (\mathcal{F}_{n}), \Prob)$.  Then $S \wedge
+  T, S \vee T, \inf_{n} T_{n}, \liminf_{n} T_{n}, \limsup_{n} T_{n}$
+  are stopping times. 
+\end{proposition}
+
+\begin{notation}
+  $T$ stopping time, then $X_{T}(\omega) = X_{T(\omega)}(\omega)$. The
+  stopped process $X^{T}$ is defined by $X^{T}_{t} = X_{T \wedge t}$.
+
+  $\mathcal{F}_{T} = \{ A \in \mathcal{F} | A \cap {T \leq T} \in
+  \mathcal{F}_{t}, \forall t \}$.
+\end{notation}
+
+\begin{proposition}
+  $(\Omega, \mathcal{F}, (\mathcal{F}_{n}), \Prob)$, $X = (X_{n})_{n
+    \geq 0}$ is adapted.
+  \begin{enumerate}
+  \item $S \leq T$, stopping times, then $\mathcal{F}_{S} \subseteq \mathcal{F}_{T}$
+  \item $X_{T} \I{T < \infty}$ is $\mathcal{F}_{T}$-measurable.
+  \item $T$ a stopping time, then $X^{T}$ is adapted
+  \item If $X$ is integrable, then $X^{T}$ is integrable.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Let $A \in \xi$.  Need to show that $\{ X_{T} \I{T < \infty} \in A
+  \} \in \mathcal{F}_{T}$.
+  \begin{align}
+    \label{eq:25}
+    \{ X_{T} \I{T < \infty} \} \cap \{ T \leq t \} = \cup_{s \leq t}
+    \left( \underbrace{\{ T = s \}}_{\mathcal{F}_{s} \subseteq
+        \mathcal{F}_{t}} \cap \underbrace{\{ X_{s} \in A \}}_{\in
+        \mathcal{F}_{s} \subseteq \mathcal{F}_{t}} \right) \in \mathcal{F}_{t}
+  \end{align}
+\end{proof}
+
+
+\section{Optional Stopping}
+\label{sec:optional-stopping}
+
+\begin{thm}
+  \label{defn:discrete_time_martingales:6}
+  Let $X$ be a martingale.
+  \begin{enumerate}
+  \item If $T$ is a stopping time, then $X^{T}$ is also a martingale.
+    In particular, $\E{X_{T \wedge t}} = \E{X_{0}}$ for all $t$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  By the tower property, it is sufficient to check
+  \begin{align*}
+    \label{eq:26}
+    \E{X_{T \wedge t} | \mathcal{F}_{t - 1}} &= 
+    \E{\sum_{i=1}^{t-1} X_{s} \underbrace{\I{T=s}}_{\in
+        \mathcal{F}_{s} \subseteq \mathcal{F}_{t-1}}  |
+      \mathcal{F}_{t-1}} + \E{X_{t} \I{T > t -1} | \mathcal{F}_{t-1}}
+    \\
+    &= \sum_{s=0}^{t-1} \I{T=s} X_{s} + \I{t>t-1}X_{t-1} = X_{T \wedge (t-1)}
+  \end{align*}  Since it is a martingale, $\E{X_{T \wedge t}} = \E{X_{0}}$.
+\end{proof}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -336,7 +336,131 @@ Useful properties of conditional expectation:
   \item There exists $Y^{\star} \in \mathcal{Y}$, $\E{Y H \cdot P_{1}} > H
     \cdot P_{0}$.
   \end{enumerate}
+
+  Let $y \{ Y > 0: \E{Y \| P_{1} \|} \infty \}$.  Let $\mathcal{P} =
+  \{ \E{YP_{1}} : Y \in \mathcal{Y} \} \subseteq \R^{n}$. Suppose
+  $P_{0} \notin \mathcal{P}$.
+
+  \textbf{separating/supporting hyperplane theorem} there exists a
+  vector $H \in \R^{n}$ such that
+  \begin{enumerate}
+  \item For all $p \in \mathcal{P}$, $H \cdot (p - P_{0}) \geq 0$,
+  \item There exists $p^{\star} \in \mathcal{P}$ such that $H \cdot
+    (p^{\star} - P_{0}) > 0$.
+  \end{enumerate}
+
+  If $p \in \mathcal{P}$ then $p = \E{YP_{1}}$ for some $Y$.  Then
+  \begin{equation}
+    \label{eq:6}
+    H \cdot p = \E{Y \underbrace{H \cdot P_{1}}_{\text{$X$,
+          time 1 wealth}}}, H \cdot P_{0} =
+    \underbrace{-c}_{\text{consumption in $(0, 1]$}}
+  \end{equation}
+
+  Restating, we then have:
+  \begin{enumerate}
+  \item \label{item:1} For all $Y \in \mathcal{Y}$, $\E{YH \cdot P_{1}} \geq H \cdot
+    P_{0}$
+  \item \label{item:2} There exists $Y^{\star} \in \mathcal{Y}$, $\E{Y H \cdot P_{1}} > H
+    \cdot P_{0}$.
+  \end{enumerate}
+  
+
+  We need to show that $X \geq 0$ a.s., $c \geq 0$, $\Prob{X + c > 0}
+  > 0$.  Let $Y_{0} = e^{-\| P_{0} \|} \in \mathcal{Y}$.  For
+  $\epsilon > 0$, let $Y = \epsilon Y_{0}$ in \ref{item:1}, then $\epsilon
+  \E{Y_0 X} \geq c \Rightarrow c \geq 0$ by taking $\epsilon
+  \rightarrow 0$.
+
+  Let $Y = ( \frac{1}{\epsilon} \I{X < 0} + 1) Y_{0}$ in \ref{item:1}, which
+  implies
+  \begin{equation}
+    \label{eq:7}
+    \E{Y_{0} X \I{X < 0}} \geq - \epsilon (\E{X_{0} Y} + c)
+    \rightarrow 0
+  \end{equation} as $\epsilon \rightarrow 0$.
+
+  Then $Y_{0} > 0$, $X\I{X < 0} \leq 0$ by pigeonhole principle,
+  \begin{equation}
+    \label{eq:8}
+    \Prob{X < 0} = 0 \Rightarrow X \geq 0
+  \end{equation} a.s.
+
+  By \ref{item:2}, $\Prob{X = 0, c = 0} < 1$.
 \end{proof}
+
+\begin{defn}
+  \label{defn:discrete_time_models:14}
+  An integrable adapted process $X$ is a supermartingale is a
+  supermartingale if
+  \begin{equation}
+    \label{eq:9}
+    \E{X_{t} | \mathcal{F}_{s}} \leq X_{s}
+  \end{equation} for all $0 \leq s \leq t$.
+\end{defn}
+
+\begin{proposition}
+  If $X$ is a supermartingale and $\E{X_{T}} = X_{0}$ for some
+  non-random $T > 0$, then $(X_{t})_{0 \leq t \leq T}$ is a martingale.
+\end{proposition}
+
+\begin{proof}
+  Let $Y_{s, t} = X_{s} - \E{X_{t} | \mathcal{F}_{s}} \geq 0$ by
+  assumption. Then
+  \begin{align*}
+    \E{Y_{s, t}} & = \E{X_{s} - \E{\E{X_{T} | \mathcal{F}_{s}}}} \\
+                 & = \E{X_{s}} - \E{X_{T}}                       \\
+                 & \leq \underbrace{X_{0}}_{\text{supermartingale}} -
+    \underbrace{X_{0}}_{\text{by assumption}}
+  \end{align*}
+
+  By pigeonhole, $Y_{s, T} = 0$ a.s.  Then $X_{s} = \E{X_{T} |
+    \mathcal{F}_{s}}$ for all $0 \leq s \leq T$.  So by the tower
+  property, $(X_{s})_{0 \leq s \leq T}$ is a martingale.
+\end{proof}
+
+\begin{proof}[Easy direction of 1FTAP]
+  Let $T > 1$, and finite sample space. Let $H$ be a strategy, and $X
+  = X(H)$ be a corresponding wealth process. Let $Y$ be a state price
+  density. Then $XY$ is a supermartingale, as\footnote{This relies on
+    the finiteness of $\Omega$ since this guarantees that $H$ is
+    bounded, and so we cal use the slot property}
+
+  \begin{align*}
+    \E{X_{t} Y_{t} | \mathcal{F}_{t-1}} & = \E{H_{t} \cdot P_{t} Y_{t}
+      | \mathcal{F}_{t-1}}                                                                                                      \\
+                                        & = \underbrace{H_{t}}_{\text{slot property}} \cdot \E{P_{t} Y_{t} | \mathcal{F}_{t-1}} \\
+                                        & = H_{t} \cdot P_{t-1} Y_{t-1}                                                         \\
+                                        & = (H_{t-1} P_{t-1} - c_{t}) Y_{t-1}                                                   \\
+                                        & \leq X_{t-1} Y_{t-1}.
+  \end{align*}
+
+  Suppose $H$ is such that $X_{0} = 0$ and $X_{T}= 0$ a.s. for some
+  non-random $T > 0$. Then
+  \begin{equation}
+    \label{eq:10}
+    \E{Y_{T} X_{T}} = 0 = Y_{0} X_{0}
+  \end{equation} and so $XY$ is a martingale by the previous
+  proposition.  This implies $Y_{t} X_{t} = \E{Y_{t} X_{t} |
+    \mathcal{F}_{t}} = 0$, which implies $X_{t} = 0$ for all $t$.
+
+  By the calculation,
+  \begin{align*}
+    \E{X_{t} Y_{t} | \mathcal{F}_{t-1}} & = (X_{t-1} + c_{t}) Y_{t-1}
+ \\
+                                        & \Rightarrow c_{t} = 0
+  \end{align*} for all $t$.
+\end{proof}
+
+\begin{defn}
+  \label{defn:discrete_time_models:15}
+  A stopping time for a filtration $(F_{t})_{t \in \mathbb{T}}$ is a
+  random variable $\tau: \Omega \rightarrow \mathbb{T} \cup \{ \infty
+  \}$ such that $\{ \tau \leq t \} \in \mathcal{F}_{t}$ for all $t \in
+  \mathbb{T}$ (discrete or continuous time). 
+\end{defn}
+
+
 
 %%% Local Variables: 
 %%% mode: latex

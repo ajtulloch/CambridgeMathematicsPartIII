@@ -1,0 +1,245 @@
+\chapter{Convexity}
+\label{cha:convexity}
+
+\begin{defn}
+  \label{defn:convexity:1}
+  \begin{enumerate}
+  \item $f: \R^{n} \rightarrow \bar \R$ is \textbf{convex} if
+    \begin{equation}
+      \label{eq:10}
+      f((1 - \tau) x + \tau y) \leq (1 - \tau) f(x) + \tau f(y)
+    \end{equation} for all $x, y \in \R^{n}, \tau \in (0, 1)$.
+  \item A set $C \subseteq \R^{n}$ is convex if and only if $\I{C}$ is convex.
+  \item $f$ is \textbf{strictly convex} if and only if \eqref{eq:10}
+    holds strictly whenever $x \neq y$ and $f(x), f(y) \in \R$.
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  $C \subseteq \R^{n}$ is convex if and only if for all $x, y \in C$,
+  the connecting line segment is contained in $C$.
+\end{remark}
+
+\begin{exer}
+  Show 
+  \begin{equation}
+    \label{eq:11}
+    \{ x | a^{T} x  + b \geq 0 \}    
+  \end{equation} is convex.
+
+  \begin{equation}
+    \label{eq:12}
+    f(x) = a^{T}x + b
+  \end{equation} is convex.
+\end{exer}
+
+\begin{defn}
+  \label{defn:convexity:2}
+  $x_{0}, \dots, x_{m} \in \R^{n}$, $\lambda_{0}, \dots, \lambda_{m}
+  \geq 0$ with $\sum_{i=0}^{m} \lambda_{i} = 1$, then $\sum_{i}
+  \lambda_{i} x_{i}$ is a convex combination of the $x_{i}$.  
+\end{defn}
+
+\begin{thm}
+  \label{defn:convexity:3}
+  $\R^{n} \rightarrow \bar \R$ is convex if and only if
+  \begin{equation}
+    \label{eq:13}
+    f(\sum_{i=1}^{n} \lambda_{i} x_{i}) \leq \sum_{i=1}^{n}
+    \lambda_{i} f(x_{i})
+  \end{equation}
+
+  $C \subseteq \R^{n}$ is convex if and only if $C$ contains all
+  convex combinations of it's elements.
+\end{thm}
+\begin{proof}
+  \begin{align}
+    \sum_{i=1}^{n} \lambda_{i} x_{i} = \lambda_{m} x_{m} +
+    (1-\lambda_{m} \frac{\lambda_{i}}{1 - \lambda_{m}} x_{i})
+  \end{align} which is a convex combination of two points, and proceed
+  by induction on $m$.
+
+  The set version is proven by application on $\I{C}$.
+\end{proof}
+
+\begin{proposition}
+  $f: \R^{n} \rightarrow \bar \R$ is convex implies that the domain of
+  $f$ is convex.
+\end{proposition}
+
+% Expectation
+\NewDocumentCommand{\Epi}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \text{epi}\xspace
+    }   
+    {%
+      \text{epi}\xspace #1
+    }%
+}
+
+
+\begin{proposition}
+  \begin{enumerate}
+  \item $f: \R^{n} \rightarrow \bar \R$ is convex if and only if
+    $\Epi{f}$ is convex in $\R^{n} \times \R$ if and only if
+    \begin{equation}
+      \label{eq:14}
+      \{ (x, \alpha) \in \R^{n} \times \R | f(x) < \alpha \}
+    \end{equation} is convex in $\R^{n} \times \R$.
+  \end{enumerate}
+\end{proposition}
+
+
+\begin{proof}
+  $\Epi{f}$ is convex if and only if for all $\tau \in (0, 1), \forall
+  x, y, \alpha \geq f(x), \beta > f(y)$, $(x, \alpha), (y, \beta) \in
+  \Epi{f}$, we have  $f((1-\tau)x + \tau y) \leq (1-\tau)\alpha + \tau
+  \beta \iff \forall \tau \in (0,1), \forall x, y, f((1-\tau)x + \tau
+  y) \leq (1-\tau) f(x) + \tau f(y) \iff f$ is convex. 
+\end{proof}
+
+\begin{proposition}
+  $f: R^{n} \rightarrow \bar \R$ is convex implies $lev_{\leq \alpha}
+  f$ is convex for all $\alpha \in \bar R$.
+\end{proposition}
+
+\begin{proof}
+  \begin{align*}
+    f((1-\tau) x + \tau y) \leq (1-\tau)f(x) + \tau f(y) \leq \alpha
+  \end{align*} which implies $lev_{\leq \alpha}$ is convex.
+  
+  $\alpha = \infty$ then the $lev_{\leq \alpha} f = \R^{n}$ which is convex.
+\end{proof}
+
+\begin{thm}
+  \label{defn:convexity:4}
+  $f: \R^{n} \rightarrow \bar \R$ is convex.  Then
+  \begin{enumerate}
+  \item $\argmin f$ is convex
+  \item $x$ is a local minimizer of $f$ implies $x$ is a global
+    minimizer of $f$
+  \item $f$ is strictly convex and proper implies $f$ has at most
+    \textbf{one} global minimizer.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item $f = \infty \Rightarrow \argmin f = \emptyset$. $f \neq \infty
+    \Rightarrow \argmin f = lev_{\leq \inf f} f$ is convex by previous proposition.
+  \item Assume $x$ is a local minimizer and there exists $y$ with
+    $f(y) < f(x)$.  Then
+    \begin{align*}
+      f((1-\tau)x + \tau y) \leq (1-\tau) f(x) + \tau
+      \underbrace{f(y)}_{< f(x)} < f(x)
+    \end{align*} Taking $\tau \rightarrow 0$ shows that $x$ cannot be
+    a local minimizer, and thus $y$ cannot exist.
+  \item Assume $x, y$ minimizes, which implies $f(x) = f(y)$.  Then
+    \begin{align*}
+      f(\frac{1}{2} x + \frac{1}{2} y) < \frac{1}{2} f(x) +
+      \frac{1}{2} f(y) = f(x) = f(y)
+    \end{align*} which implies $x, y$ not global minimizers.
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  To construct convex functions:
+  \begin{enumerate}
+  \item Let $f_{i}, i \in \mathbb{I}$ convex, then
+    \begin{equation}
+      \label{eq:15}
+      f(x) = \sup_{i \in \mathbb{I}} f(x)
+    \end{equation} is convex.
+  \item Let $f_{i}, i \in \mathbb{I}$ strictly convex, $\mathbb{I}$
+    finite, then
+    \begin{equation}
+      \label{eq:16}
+      \sup_{i \in \mathbb{I}} f(i)
+    \end{equation} is strictly convex.
+  \item $C_{i}, i \in \mathbb{I}$ convex sets, then
+    \begin{equation}
+      \label{eq:17}
+      \cap_{i \in \mathbb{I}} C_{i}
+    \end{equation} is convex.
+  \item $f_{k}, k \in \mathbb{N}$ convex,
+    \begin{equation}
+      \label{eq:18}
+      \limsup_{k \rightarrow \infty} f_{k}(x)
+    \end{equation} is convex.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{exmp}
+  \label{defn:convexity:5}
+  \begin{enumerate}
+  \item $C, D$ convex does not imply $C \cup D$ is convex (e.g. disjoint)
+  \item $f: R^{n} \rightarrow R$ is convex, $C$ is convex implies $f +
+    \I{C}$ is convex.
+  \item $f(x) = |x| = \max \{ x' - x \}$ is convex.
+  \item $f(x) = \| x \|_{p}, p \geq 1$ is convex, as
+    \begin{equation}
+      \label{eq:19}
+      \| \cdot \|_{p} = \sup_{\| y \|_{p} = 1} \langle \cdot, y \rangle
+    \end{equation}
+  \end{enumerate}
+\end{exmp}
+
+\begin{thm}
+  \label{defn:convexity:6}
+  Let $C \subseteq \R^{n}$ be open and convex.  Let $f: C \rightarrow
+  \R$ be differentiable. Then the following are equivalent:
+  \begin{enumerate}
+  \item \label{item:1} $f$ is [strictly] convex
+  \item \label{item:2} $\langle y - x, \nabla f(y) - \nabla f(x) \rangle \geq 0 0$ for all
+    $x, y \in C$ [with $> 0$ for $x \neq y$]
+  \item \label{item:3} $f(x) + \langle \nabla f(x), y - x \rangle \leq f(y)$ for all
+    $x, y \in C$ [with $<$ for $x \neq y$]
+  \item \label{item:4} If $f$ is additionally twice differentiable, then $\nabla^{2}
+    f$ is positive semidefinite for all $x \in C$.
+  \end{enumerate}
+
+  \ref{item:2} is monotonicity of $\nabla f$.
+\end{thm}
+
+\begin{proof}
+  Exercise (reduce to $n=1$, then extend by a convex function is
+  convex on $R^{n}$ iff it is convex on all $R^{n-1}$ subsets.)
+\end{proof}
+
+\begin{remark}
+  Note that the inverse of \ref{item:4} does not necessarily hold, for
+  example $f(x) = x^{4}$.
+\end{remark}
+
+\begin{proposition}
+  \begin{enumerate}
+  \item $f_{i}, \dots, f_{m}: \R^{n} \rightarrow \bar \R$ is convex,
+    $\lambda_{i}, \dots, \lambda_{m} \geq 0$, the n
+    \begin{equation}
+      \label{eq:20}
+      f = \sum_{i} \lambda_{i} f_{i}
+    \end{equation} is convex, and \textbf{strictly} convex if there
+    exists $i$ such that $\lambda_{i} > 0$ and $f_{i}$ is strictly convex.
+  \item $f_{i}: \R^{n} \rightarrow \R$ is convex implies $f(x_{1},
+    \dots, x_{m}) = \sum f_{i}(x_{i})$ is convex, strictly convex if
+    \textbf{all} $f_i$ are strictly convex.
+  \item $f: \R^{n} \rightarrow \bar \R$ is convex, $A \in \R^{n \times
+    n}, b \in \R^{n}$ implies $g(x) = f(Ax + b)$ is convex.
+  \end{enumerate}
+\end{proposition}
+
+\begin{remark}
+  \begin{align*}
+    \| M \|_{\epsilon} = \sup_{x \in \R^{n}} (\| M x\|)
+  \end{align*} is convex.
+\end{remark}
+
+%%% Local Variables 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
