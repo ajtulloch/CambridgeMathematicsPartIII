@@ -4,7 +4,7 @@ import shutil
 from string import Template
 
 MASTER = Template(
-r"""\input{../common/common.tex}
+r"""\input{../../common/common.tex}
 
 \title{$course_name}
 
@@ -16,7 +16,7 @@ r"""\input{../common/common.tex}
 \input{$chapter}
 
 \bibliographystyle{plainnat}
-\bibliography{../common/bibliography}
+\bibliography{../../common/bibliography}
 \end{document}
 
 %%% Local Variables:
@@ -38,7 +38,7 @@ def main():
         f.write("\n")
 
     with open(course_dir + "/" + "Makefile", "w+") as f:
-        f.write("include ../common/Makefile")
+        f.write("include ../../common/Makefile")
 
 if __name__ == "__main__":
     main()
