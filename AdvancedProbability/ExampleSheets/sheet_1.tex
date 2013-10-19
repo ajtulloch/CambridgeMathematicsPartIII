@@ -1,6 +1,221 @@
+\chapter{Example Sheet 1}
+\label{cha:example-sheet-1}
 
+\begin{enumerate}
+\item For $c \in \R$, let
+  \begin{align*}
+    A_{c} &= \{ Y \leq c < X \} \\
+    B_{c} &= \{ c < Y, c < X \} \\
+    C_{c} &= \{ Y \leq c, X \leq c \}
+  \end{align*}
+  Then
+  \begin{align*}
+    A_{c} \cup B_{c} &= \{ Y \leq c, X > C \} \cup \{ c < X, c < Y \} =
+    \{ X > c \} \\
+    A_{c} \cup C_{c} &= \{ Y \leq c, c < X \} \cup \{ Y \leq c, c \geq
+    X \} = \{ Y \leq c \}
+  \end{align*} and these unions are clearly disjoint.
+
+  Note that $\E{(X-Y)\I{A_{c}}} \geq 0$ as $(X > Y)$ on $A_{c}$. Then,
+  we have
+  \begin{align}
+    \label{eq:1}
+    0 &= \E{(X - Y)\I{A_{c}}} + \E{(X-Y)\I{B_{c}}} \\
+    &= \E{(X-Y)\I{A_{c}}} + \E{(X-Y)\I{C_{c}}}
+  \end{align}
+  Summing these equalities, we obtain
+  \begin{equation}
+    \label{eq:2}
+    \E{(X-Y)\I{B_{c} \cup C_{c}}} \leq 0
+  \end{equation} and by symmetry (as $B_{c} \cup C_{c}$ is symmetric
+  with respect to $X, Y$, we have
+  \begin{equation}
+    \label{eq:3}
+    \E{(X-Y)\I{B_{c} \cup C_{c}}} = 0
+  \end{equation} and by \eqref{eq:1}, we have
+  \begin{equation}
+    \label{eq:4}
+    \E{(X-Y)\I{A_{c}}} = 0
+  \end{equation}
+
+  However, $X > Y$ on $A_{c}$, and thus by the pigeonhole principle,
+  we must have $A_{c}$ has measure zero. Taking the the countable
+  union over all rational $c$, we obtain that $\Prob{X > Y} = 0$.  By
+  symmetry, we have $\Prob{X < Y} = 0$.  This completes the proof.
+
+\item Note that $Z \in \{-2, 0, 2\}$. We have
+  \begin{equation}
+    \label{eq:5}
+    \E{X|Z=z} =
+    \begin{cases}
+      1 & z = 2 \\
+      B(0, p) & z = 0 \\
+      -1 & z = -1
+    \end{cases}
+  \end{equation}
+
+\item As all distribution functions are continuous on $[0, \infty)$,
+  by direct calculation, we have for $z \geq 0$,
+  \begin{align}
+    \label{eq:6}
+    f_{Z}(z) &= \int_{-\infty}^{\infty} f_{X}(y) f_{Y}(z - y) dy \\
+    &= \int_{0}^{z} \theta e^{-\theta y} \theta e^{-\theta(z - y)} dy
+    \\
+    &= \theta^{2} \int_{0}^{z} e^{-\theta z} dy \\
+    &= \theta^{2} z e^{-\theta z}
+  \end{align} and $0$ if $z < 0$ as required.
+
+  For the second half, we have for $c \in \R$
+  \begin{align}
+    \label{eq:7}
+    \Prob{X \leq c} &= \E{\I{X \leq c}} \\
+    &= \E{\E{\I{X \leq c} |Z}} \\
+    &= \E{\frac{1}{Z}\int_{0}^{Z}\I{u \leq c} du} \\
+    &= \int_{0}^{\infty} \theta^{2} z e^{-\theta z} \int_{0}^{z} \I{u
+      \leq c} du dz \\
+    &= \int_{0}^{\infty} \int_{u}^{\infty} \theta^{2} e^{-\theta z} dz
+    \I{u \leq c} du \\
+    &= \int_{0}^{c} [-\theta e^{-\theta z}]_{u}^{\infty} du \\
+    &= \int_{0}^{c} \theta e^{-\theta u} du \\
+    &= 1 - e^{-\theta c}
+  \end{align} for $c \geq 0$, and $0$ for $c < 0$. By uniqueness, we
+  have the $X$ is exponentially distributed with parameter $\theta$.
+
+  Similarly, we have that $E{Z - X | Z}$ is uniformly distributed on
+  $[0, Z]$. An identical calculation gives that $Z - X$ is
+  exponentially distributed with parameter $\theta$.
+
+  We have
+  \begin{align*}
+    f_{X|Z}(x, z) = \frac{1}{z} \I{0 \leq x \leq z} = \frac{f_{X,Z}(x,
+      z)}{f_{Z}(z)} = \theta^{2} e ^{-\theta z}
+  \end{align*} for $z, x > 0$ and zero elsewhere.
+
+  We then have\sidenote{This is kind of dodgy?}
+  \begin{align}
+    \label{eq:9}
+    f_{X}(x) f_{Z-X}(z-x) &= \left(\theta e^{-\theta x} \right)
+    \left(\theta e^{-\theta (z -x)} \right) \\
+    &= \theta^{2} e^{-\theta z} \\
+    &= f_{X, (Z-X)} f_{X, (Z-X)}(x, z-x)
+  \end{align} and thus the random variables $X$ and $Z-X$ are
+  independent.
+
+\item
+  \begin{enumerate}
+  \item Assume the proposition is false. Let $Y = \E{X |
+      \mathcal{G}}$. Then there exists $A \in \mathcal{G}$ with
+    positive measure such that $\E{X \I{A}} \leq 0$. Then
+    \begin{align}
+      \label{eq:8}
+      0 \geq \E{X \I{A}} &= \E{Y \I{A}}
+    \end{align} as $X > 0$ on $\I{A}$.\sidenote{Is this some
+      pigeonhole argument needed?}
+  \item ...
+  \end{enumerate}
+
+
+\item We have
+  \begin{equation}
+    \label{eq:12}
+    f_{X, Y}(n, y) = b \frac{(ay)^{n}}{n!} e^{-(a+b)y}
+  \end{equation} by differentiating with respect to $t$.
+  \begin{align}
+    \label{eq:10}
+    f_{X}(x) &= b \int_{0}^{\infty} \frac{(ay)^{n}}{n!} e^{-(a+b)y} dy
+    \\
+    &= \frac{ba^{n}}{n!} \int_{0}^{\infty} y^{\alpha - 1} e^{-\beta y}
+    dy \\
+    &= \frac{ba^{n} \Gamma(n+1)}{n! (a+b)^{n+1}} \\
+    &= \frac{ba^{n}}{(a+b)^{n+1}}
+  \end{align}
+
+  Then we can compute
+  \begin{align}
+    \label{eq:11}
+    \E{h(Y) | X = n} &= \int_{0}^{\infty} f_{Y|X}(y, n) h(y) dy \\
+    &= \int_{0}^{\infty} \frac{f_{X, Y}(n, y)}{f_{X}(n)} h(y) dy \\
+    &= \int_{0}^{\infty} \frac{b \frac{(ay)^{n}}{n!} e^{-(a+b)
+        y}}{\frac{ba^{n}}{(a+b)^{n+1}}} h(y) dy \\
+    &= \int_{0}^{\infty} \frac{h(y) y^{n} e^{-(a+b)y}(a+b)^{n+1}}{n!}
+    dy
+  \end{align}
+  as required.
+
+  We can now compute $\E{\frac{Y}{X+1}}$. We have (by Fubini's
+  theorem)
+  \begin{align}
+    \label{eq:16}
+    \E{\frac{Y}{X+1}} &= \int_{0}^{\infty} \sum_{n=0}^{\infty} f_{X,
+      Y}(n, y) dy \\
+    &= \int_{0}^{\infty} \sum_{n=0}^{\infty} \frac{y}{n+1}
+    \frac{(ay)^{n}}{n!} e^{-(a+b)y} dy \\
+    &= \int_{0}^{\infty} \sum_{n=0}^{\infty} \left[
+      \frac{(ay)^{n+1}}{(n+1)!} \right] \frac{1}{a} e^{-(a+b)y} dy \\
+    &= \int_{0}^{\infty} (e^{ay}- ay - 1) \frac{1}{a} e^{-(a+b)y} dy
+    \\
+    &= \int_{0}^{\infty} \frac{e^{-by}}{a} dy - \int_{0}^{\infty}
+    ye^{-(a+b)y} dy - \int_{0}^{\infty} \frac{1}{a} e^{-(a+b)y} dy \\
+    &= \frac{1}{ab} - \frac{1}{(a+b)^{2}} - \frac{1}{a(a+b)}
+  \end{align}
+  
+  We now compute $f_{Y}(y)$. We have
+  \begin{align}
+    \label{eq:15}
+    f_{Y}(y) &= \sum_{n=0}^{\infty} f_{X, Y}(n, y) \\
+    &= \sum_{n=0}^{\infty} \frac{b(ay)^{n}}{n!} e^{-(a+b)y} \\
+    &= b e^{-(a+b)y} \sum_{n=0}^{\infty} \frac{(ay)^{n}}{n!} \\
+    &= b e^{-(a+b)y} e^{ay} \\
+    &= be^{-by}
+  \end{align}
+  and thus the unconditional distribution of $Y$ is exponential with
+  parameter $b$.
+
+  We now compute $\E{\I{X=n|Y}} = \Prob{X=n|Y} = f_{X|Y}(n, y)$. We have
+  \begin{align}
+    \label{eq:13}
+    f_{X|Y}(n, y) &= \frac{f_{X,Y}(n, y)}{f_{Y}(y)} \\
+    &= \frac{\frac{b(ay)^{n}}{n!} e^{-(a+b)y}}{be^{-by}} \\
+    &= \frac{(ay)^{n}e^{-ay}}{n!}
+  \end{align}
+
+  We now compute $\E{X|Y}$.  We have
+  \begin{align}
+    \label{eq:14}
+    \E{X|Y=y} &= \sum_{n=0}^{\infty} n f_{X|Y}(n, y) \\
+    &= \sum_{n=0}^{\infty} n  \frac{(ay)^{n} e^{-ay}}{n!} \\
+    &= \sum_{n=0}^{\infty} \frac{(ay)^{n} e^{-ay}}{(n-1)!} \\
+    &= \sum_{n=0}^{\infty} e^{-ay} \sum_{n=0}^{\infty}
+    \frac{(ay)^{n}}{(n-1)!} \\
+    &= e^{-ay} (ay e^{ay}) \\
+    &= ay
+  \end{align}
+\item For example, constant functions are trivially independent on all
+  $\sigma$-algebras $\mathcal{G}$.
+
+  We need to show the following are equivalent.  Let $f, g \geq 0$ and
+  measurable.  Let $Z \geq 0$ and $\mathcal{G}$-measurable.  
+  \begin{enumerate}
+  \item \label{item:1}
+    \begin{equation}
+      \label{eq:17}
+      \E{f(X) g(Y) | \mathcal{G}} = \E{f(X) | \mathcal{G}} \E{g(Y) | \mathcal{G}}
+    \end{equation}
+  \item \label{item:2}
+    \begin{equation}
+      \label{eq:18}
+      \E{f(X) g(Y) Z} = \E{f(X) Z \E{g(Y) | \mathcal{G}}} 
+    \end{equation}
+  \item \label{item:3}
+    \begin{equation}
+      \label{eq:19}
+      \E{g(Y) | \mathcal{G} \vee \sigma(X)} = \E{g(Y) | \mathcal{G}}
+    \end{equation}
+  \end{enumerate}
+
+  The proof proceeds
+\end{enumerate}
 
 %%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: "master"
+%%% TeX-master: "master""
 %%% End: 
