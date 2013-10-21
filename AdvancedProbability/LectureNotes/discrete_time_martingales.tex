@@ -49,13 +49,13 @@ for all $n$.
 
 \begin{exmp}
   \label{defn:discrete_time_martingales:2}
-  Suppose $(\xi_{i})$ are IID random variables with $\E{\xi_{i}} = 0$.
+  Suppose $(\xi_{i})$ are \iid random variables with $\E{\xi_{i}} = 0$.
   Set $X_{n} = \sum_{i=1}^{n} \xi_{i}$.  Then $(X_{n})$ is a martingale.
 \end{exmp}
 
 \begin{exmp}
   \label{defn:discrete_time_martingales:3}
-  As above, but let $(\xi_{i})$ be IID with $\E{\xi_{i}} = 1$. Then
+  As above, but let $(\xi_{i})$ be \iid with $\E{\xi_{i}} = 1$. Then
   $X_{n} = \Pi_{i=1}^{n} \xi_{i}$ is a martingale.
 \end{exmp}
 
@@ -123,8 +123,11 @@ for all $n$.
   \label{defn:discrete_time_martingales:6}
   Let $X$ be a martingale.
   \begin{enumerate}
-  \item If $T$ is a stopping time, then $X^{T}$ is also a martingale.
+  \item \label{item:1} If $T$ is a stopping time, then $X^{T}$ is also a martingale.
     In particular, $\E{X_{T \wedge t}} = \E{X_{0}}$ for all $t$.
+  \item \label{item:2}
+  \item \label{item:3}
+  \item \label{item:4}
   \end{enumerate}
 \end{thm}
 
@@ -141,6 +144,174 @@ for all $n$.
   \end{align*}  Since it is a martingale, $\E{X_{T \wedge t}} = \E{X_{0}}$.
 \end{proof}
 
+\begin{thm}
+  \label{defn:discrete_time_martingales:7}
+  Let $X$ be a martingale.
+  \begin{enumerate}
+  \item If $T$ is a stopping time, then $X^{T}$ is also a martingale,
+    so in particular
+    \begin{equation}
+      \label{eq:27}
+      \E{X_{T \wedge t}} = \E{X_{0}}
+    \end{equation}
+  \item If $X \leq T$ are bounded stopping times, then $\E{X_{T}|
+      \mathcal{F}_{S}} = X_{S}$ almost surely.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Let $S \leq T \leq n$.  Then $X_{T} = (X_{T} - X_{T-1}) + (X_{T-1} -
+  X_{T-2}) + \dots + (X_{S+1} - X_{S}) + X_{S} = X_{s} +
+  \sum_{k=0}^{n} (X_{k+1} - X_{k}) \I{S \leq k < T}$.
+
+  Let $A \in \mathcal{F}_{s}$.  Then
+  \begin{align}
+    \label{eq:28}
+    \E{X_{T}\I{A}} &= \E{X_{s}\I{A}} + \sum_{k=0}^{n} \E{(X_{k+1} -
+      X_{k})\I{S \leq k < T} \I{A}} \\
+    &= \E{X_{s} \I{A}}
+  \end{align}
+\end{proof}
+
+\begin{remark}
+  The optimal stopping theorem also holds for {super/sub}-martingales
+  with the respective martingale inequalities in the statement.
+\end{remark}
+
+\begin{exmp}
+  \label{defn:discrete_time_martingales:8}
+  Suppose that $(\xi_{i})_{i}$ are random variables with
+  \begin{equation}
+    \label{eq:29}
+    \Prob{\xi_{i} = 1} = \Prob{\xi_{i} = -1} = \frac{1}{2}
+  \end{equation}  Set $X_{0} = 0, X_{n} = \sum_{i=1}^{n} \xi_{i}$.
+  This is a simply symmetric random walk on $X_{n}$.
+
+  Let $T = \inf \{ n \geq 0 : X_{n} = 1 \}$.  Then $\P{T < \infty} =
+  1$, but $T$ is not bounded.
+\end{exmp}
+
+\begin{proposition}
+  If $X$ is a positive supermartingale and $T$ is a stopping time
+  which is finite almost surely ($\Prob{T < \infty} = 1$), then
+  \begin{equation}
+    \label{eq:30}
+    \E{X_{T}} \leq \E{X_{0}}
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:31}
+    \E{X_{T}} = \E{\liminf_{t \rightarrow \infty} X_{t \wedge T}} \leq
+    \liminf_{t \rightarrow \infty} \E{X_{t \wedge T}} \leq \E{X_{0}}
+  \end{align}
+\end{proof}
+
+\section{Hitting Probabilities for a Simple Symmetric Random Walk}
+\label{sec:hitt-prob-simple}
+
+Let $(\xi_{i})$ be \iid $\pm 1$ equally likely. Let $X_{0} = 0, X_{n} =
+\sum_{i=1}^{n} \xi_{i}$.  For all $x \in Z$ let
+\begin{equation}
+  \label{eq:32}
+  T_{x} = \inf \{ n \geq 0 : X_{n} = x \}
+\end{equation} which is a stopping time. We want to explore hitting
+probabilities ($\Prob{T_{-a} < T_{b}})$ for $a, b > 0$.
+If $\E{T} < \infty$, then by \ref{item:4} in Theorem
+\ref{defn:discrete_time_martingales:7}, $\E{X_{T}} = \E{X_{0}} = 0$.
+\begin{align}
+  \label{eq:33}
+  \E{X_{T}} = -a \Prob{T_{-a} < T_{b}} + b \Prob{T_{b} < T_{-a}} = 0
+\end{align} and thus obtain that
+\begin{equation}
+  \label{eq:34}
+  \Prob{T_{-a} < T_{b}} = \frac{b}{a+b}.
+\end{equation}
+
+Remains to check $\E{T} < \infty$.  We have $\Prob{\xi_{1} = 1,
+  \xi_{a+b} = 1} = \frac{1}{2^{a+b}}$.
+
+\section{Martingale Convergence Theorem}
+\label{sec:mart-conv-theor}
+
+\begin{thm}
+  \label{defn:discrete_time_martingales:9}
+  Let $X = (X_{n})_{n \geq 0}$ be a (super-)-martingale bounded in
+  $L^{1}$, that is, $\sup_{n \geq 0} \E{|X_{n}|} < \infty$.  Then
+  $X_{n}$ converges as $n \rightarrow \infty$ almost surely towards an
+  a.s. finite limit $X \in L^{1}(\mathcal{F}_{\infty})$ with
+  $\mathcal{F}_{\infty} = \sigma(\mathcal{F}_{n}, n \geq 0)$.  To
+  prove it we will use Doob's trick which counts upcrossings of
+  intervals with rational endpoints. 
+\end{thm}
+
+\begin{corollary}
+  Let $X$ be a positive supermartingale.  Then it converges to an
+  almost surely finite limit as $n \rightarrow \infty$.
+\end{corollary}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:36}
+    \E{|X_{n}|} = \E{X_{n}} \leq \E{X_{0}} < \infty
+  \end{align}
+\end{proof}
+
+\begin{proof}
+  Let $x = (x_{n})_{n}$ be a sequence of real numbers, and let $a < b$
+  be two real numbers.  Let $T_{0}(x) = 0$ and inductively for $k \geq
+  0$,
+  \begin{align}
+    \label{eq:37}
+    S_{k+1}(x) = \inf \{ n \geq T_{k}(x): x_{n} \leq a \}
+    T_{k+1}(x) = \inf \{ n \geq S_{k+1}(x): x_{n} \geq b \}
+  \end{align} with the usual convention that $\inf \emptyset =
+  \infty$.
+
+  Define $N_{n}([a, b], x) = \sup \{ k \geq 0 : T_{k}(x) \leq n \}$ -
+  the number of upcrossings of the interval $[a, b]$ by the sequence
+  $x$ by the time $n$. As $n \rightarrow \infty$, we have
+  \begin{equation}
+    \label{eq:38}
+    N_{n}([a,b], x) \uparrow N([a, b], x) = \sup \{ k \geq 0 :
+    T_{k}(x) < \infty \}, 
+  \end{equation} the total number of upcrossings of the interval $[a, b]$.
+\end{proof}
+
+\begin{lem}
+  A sequence of rationals $x = (x_{n})_{n}$ converges in $\bar \R = \R
+  \cup \{ \pm \infty \}$ if and only if $N([a, b], x) < \infty$ for
+  all rationals $a, b$.
+\end{lem}
+
+\begin{proof}
+  Assume $x$ converges.  Then if for some $a < b$ we had that
+  $N([a,b], x) = \infty$, then $\liminf_{n} x_{n} \leq a < b \leq
+  \limsup_{n} x_{n}$, which is a contradiction.
+
+  Then, suppose that $x$ does converge.  Then $\liminf_{n} x_{n} >
+  \limsup_{n} x_{n}$, and so taking $a, b$ rationals between these two
+  numbers gives that $N([a,b], x) = \infty$ as required.
+\end{proof}
+
+\begin{thm}[Doob's upcrossing inequality]
+  \label{defn:discrete_time_martingales:10}
+  Let $X$ be a supermartingale and $a < b$ be two real numbers. Then
+  for all $n \geq 0$,
+  \begin{equation}
+    \label{eq:39}
+    (b-a) \E{N_{n}([a, b], X)} \leq \E{(X_{n} - a)^{-}}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  For all $k$,
+  \begin{equation}
+    \label{eq:40}
+    X_{T_{k}} - X_{S_{k}} \geq b - a
+  \end{equation}
+\end{proof}
 
 %%% Local Variables:
 %%% mode: latex

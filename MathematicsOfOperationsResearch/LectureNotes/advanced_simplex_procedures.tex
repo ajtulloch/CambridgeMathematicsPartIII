@@ -12,6 +12,34 @@ b$ where $b \geq 0$, as
   Ax + z = b, (x, z) = (0, b)
 \end{equation}
 
+\section{Gomory's Cutting Plane Method}
+\label{sec:gomorys-cutt-plane}
+
+Used in integer programming (IP).  This is a linear program where in
+addition some of the variables are required to be integral.
+
+Assume that for a given integer program we have found an optimal
+fractional solution $x^{\star}$ with basis $B$ and let $a_{ij} =
+(A_{B}^{-1}A_{j})$ and $a_{i0} = (A_{B}^{-1}b)$ be the entries of the
+final tableaux.  If $x^{\star}$ is not integral, the for some row $i$,
+$a_{i0}$ is not integral.  For every feasible solution $x$,
+\begin{equation}
+  \label{eq:25}
+  x_{i} = \sum_{j \in \N} \lfloor a_{ij} \rfloor x_{j} \leq x_{i} +
+  \sum_{j \in \N} a_{ij} x_{j} = a_{i0}.
+\end{equation}  If $x$ is integral, then the left hand side is
+integral as well, and the inequality must still hold if the right hand
+side is rounded down.
+
+Thus,
+\begin{equation}
+  \label{eq:26}
+  x_{i} + \sum_{j \in \N} \lfloor a_{ij} \rfloor x_{j} \leq \lfloor a_{i0} \rfloor.
+\end{equation}
+
+Then, we can add this constraint to the problem and solve the
+augmented program. One can show that this procedure converges in a
+finite number of steps.
 
 %%% Local Variables: 
 %%% mode: latex

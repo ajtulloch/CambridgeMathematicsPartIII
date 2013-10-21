@@ -1,0 +1,85 @@
+\chapter{Example Sheet 1}
+\label{cha:example-sheet-1}
+
+\newcommand{\dual}{\overset{\star}\equiv}
+
+\begin{enumerate}
+\item \label{item:1}
+  The Lagrangian of the problem is
+  \begin{equation}
+    \label{eq:4}
+    L(x, \lambda) = -2x_{1}^{2} - x_{2}^{2} + x_{1} x_{2} -
+    \lambda(3x_{1} + x_{2} - 10)
+  \end{equation} with partial derivatives
+  \begin{align}
+    \label{eq:5}
+    \frac{\partial L}{\partial x_{1}} = -4x_{1} + x_{2} + 8 - 3\lambda \\
+    \label{eq:6}
+    \frac{\partial L}{\partial x_{2}} = -2x_{2} + x_{1} + 3 - \lambda \\ \\
+    \label{eq:7}
+    \frac{\partial L}{\partial \lambda} = 3x_{1} + x_{2} - 10
+  \end{align}
+
+  and second partial derivatives
+  \begin{align}
+    \label{eq:8}
+    \frac{\partial^{2} L}{\partial x_{1}^{2}} = -4 \\
+    \frac{\partial^{2} L}{\partial x_{2}^{2}} = -2 \\
+    \frac{\partial^{2} L}{\partial x_{1} \partial x_{2}} = 1 
+  \end{align}
+
+  Setting \eqref{eq:5}, \eqref{eq:6}, \eqref{eq:7} to zero and solving
+  the set of equations gives
+  \begin{align}
+    \label{eq:9}
+    x_{1} = \frac{69}{28} \\
+    x_{2} = \frac{73}{28}
+  \end{align}
+
+  The Hessian matrix is
+  \begin{equation}
+    \label{eq:10}
+    \begin{vmatrix}
+      -4 & 1 \\
+      1 & -2 \\
+    \end{vmatrix} = 7 > 0
+  \end{equation}
+  and $\frac{\partial^{2} L}{\partial x_{1}^{2}} < 0$, so the solution
+  is the maximizer of $L$.  Thus, by the Lagrangian Sufficiency
+  theorem, the solution is a maximizer of original problem.
+  
+\item \label{item:2}
+  
+\item \label{item:3}
+  
+\item \label{item:4}
+  Let $A \dual B$ indicate that $A$ is the dual of $B$.  Then we have
+  \begin{equation}
+    \label{eq:2}
+    \min \{ c^{T}x | Ax \geq b, x \geq 0 \} \dual \max \{ b^{T} x |
+    A^{T}x \leq c, x \geq 0 \}
+  \end{equation}
+
+  Let a linear program be given in the general form. Then
+  \begin{align}
+    \label{eq:3}
+    \min \{ c^{T} x | Ax \geq b, x \geq 0 \} &\dual \max \{ b^{T} x |
+    A^{T}x \leq c, x \geq 0 \} \\
+    &= \min \{ (-b)^{T} x | (-A)^{T} x \geq (-c), x \geq 0 \} \\
+    &\dual \{ (-c)^{T} x | ((-A)^{T})^{T} x \leq -b, x \geq 0 \} \\
+    &= \min \{ c^{T}x | Ax \geq b, x \geq 0 \}
+  \end{align}
+  and thus the dual of the dual of a linear program is identical to
+  the linear program.
+\item \label{item:5}
+  
+\item \label{item:6}
+  
+\item \label{item:7}
+  
+\item \label{item:8}
+  
+\end{enumerate}
+%%% Local Variables: 
+%%% TeX-master: "master""
+%%% End: 

@@ -1,6 +1,9 @@
 \chapter{Example Sheet 1}
 \label{cha:example-sheet-1}
 
+\section{Conditional Expectation}
+\label{sec:cond-expect}
+
 \begin{enumerate}
 \item For $c \in \R$, let
   \begin{align*}
@@ -81,7 +84,7 @@
   \end{align} for $c \geq 0$, and $0$ for $c < 0$. By uniqueness, we
   have the $X$ is exponentially distributed with parameter $\theta$.
 
-  Similarly, we have that $E{Z - X | Z}$ is uniformly distributed on
+  Similarly, we have that $\E{Z - X | Z}$ is uniformly distributed on
   $[0, Z]$. An identical calculation gives that $Z - X$ is
   exponentially distributed with parameter $\theta$.
 
@@ -213,8 +216,46 @@
     \end{equation}
   \end{enumerate}
 
-  The proof proceeds
+  The proof proceeds .......
+\item 
 \end{enumerate}
+
+\section{Discrete-time Martingales}
+\label{sec:discr-time-mart}
+
+\begin{enumerate}
+\item Recall the definition of the natural filtration $F_{t}^{X}$ as
+  $\sigma(X_{s}, s \leq t)$.  We need to show that
+  \begin{equation}
+    \label{eq:20}
+    \E{X_{t}|\mathcal{F}_{s}^{T}} = X_{s} \iff \E{X_{t} |
+      \sigma(X_{s}, s \leq t)} = X_{s}
+  \end{equation}
+
+  
+\item Note that if $C_{n}$ is bounded then we can trivially bound
+  $|Y_{n}|$, and so $Y_{n}$ is integrable.  We need to show that for
+  $n > 0$, $\E{Y_{n} | \mathcal{F}_{n-1}} = Y_{n-1}$. 
+  \begin{align}
+    \label{eq:21}
+    \E{Y_{n} | \mathcal{F}_{n-1}} &= \E{\sum_{k \leq n} C_{k} (X_{k} -
+      X_{k-1}) | \mathcal{F}_{n-1}} \\
+    &= \E{c_{n}(X_{n} - X_{n-1}) | \mathcal{F}_{n-1}} + \E{\sum_{k \leq
+        n-1} c_{k} (X_{k} - X_{k-1}) | \mathcal{F}_{n-1}} \\
+    &= c_{n} (\E{X_{n} | \mathcal{F}_{n-1}} - X_{n-1}) + Y_{n-1} \\
+    \label{eq:23}
+    &= Y_{n-1}
+  \end{align}
+
+  If $X$ is a supermartingale, then we have
+  $\E{X_{n} | \mathcal{F}_{n-1}} \leq X_{n-1}$, and if $c_{n}$ is
+  non-negative, we can replace the equality in \eqref{eq:23} with
+  \begin{equation}
+    \label{eq:24}
+    c_{n}(\underbrace{\E{X_{n} | \mathcal{F}_{n-1}} - X_{n-1}}_{\leq 0}) + Y_{n-1} \leq Y_{n-1}
+  \end{equation}
+\end{enumerate}
+
 
 %%% Local Variables: 
 %%% TeX-master: "master""
