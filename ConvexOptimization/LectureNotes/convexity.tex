@@ -239,7 +239,119 @@
   \end{align*} is convex.
 \end{remark}
 
-%%% Local Variables 
+\begin{proposition}
+  \begin{enumerate}
+  \item $c_{1}, \dots, C_{m}$ convex implis $C_{1} \times \dots \times
+    C_{m}$ convex
+  \item $C \subseteq \R^{n}$, $A \in \R^{m \times n}$, $b \in \R^{m}$
+    implies $L(C)$ is convex with $L(x) = Ax + b$.
+  \item $C \subseteq \R^{m}, ... \Rightarrow L^{\star}(C)$ is convex.
+  \item $f, g$ convex implies $f + g$ are convex
+  \item $f$ convex, $\lambda \in \R$ implies $\lambda f$ is convex
+  \end{enumerate}
+\end{proposition}
+
+
+\begin{defn}
+  \label{defn:convexity:7}
+  For $S \subseteq \R^{n}, x \in \R^{n}$, define the projection of $x$
+  onto $S$ as
+  \begin{equation}
+    \Pi_{S}(y) = \argmin_{x \in S} \| x - y \|_{2}
+  \end{equation}
+\end{defn}
+
+\begin{proposition}
+  If $C \subseteq \R^{n}$ is convex, closed, and non-empty, then
+  $\Pi_{C}$ is single-valued - that is, the projection is unique.
+\end{proposition}
+
+\begin{proof}
+  Let
+  \begin{equation}
+    \Pi_{S}(y) = \argmin_{x \in S} \frac{1}{2} \| x - y \|_{2}^{2} + \I_{C}(x)
+  \end{equation}
+
+  To show uniqueness, $\frac{1}{2} \| x - y \|^{2}$ is strictly
+  convex, and $\nabla^{2} \frac{1}{2} \| x - y \|^{2} = I > 0$, so $f$
+  is strictly convex.
+
+  $f$ is proper ($C \neq \emptyset$), and thus $f$ has at most one
+  minimizer.
+
+  To show existence, we have that $f$ is proper, lower semicontinuous
+  (left part from continuous, right part from $C$ closed). Level
+  bounded as $\| x - y \|_{2}^{2} \rightarrow \infty$ as $\| x \|_{2}
+  \rightarrow \infty$, and $\I{C} \geq 0$.
+
+  Thus, the $\argmin f \neq \emptyset$.
+\end{proof}
+
+\begin{defn}
+  \label{defn:convexity:8}
+  Let $S \subseteq \R^{n}$ is arbitrary. Then
+  \begin{equation}
+    \label{eq:21}
+  con S = \cap_{\text{$C$ convex, $C \supseteq S$}} C  
+  \end{equation}
+  is the convex ball of $S$.
+\end{defn}
+
+\begin{remark}
+  $con S$ is the \textbf{smallest} convex set that contains $S$.
+\end{remark}
+
+\begin{thm}
+  \label{defn:convexity:9}
+  Let $S \subseteq \R^{n}$, then
+  \begin{equation}
+    \label{eq:22}
+    con S = \{ \sum_{i=0}^{n} \lambda_{i} x_{i} | x_{i} \in S,
+    \lambda_{i} \geq 0, \sum_{i=0}^{n} \lambda_{i} = 1 \}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  $D$ is convex and contains $S$ - if $x, y \in D$, then $(1-\tau)x +
+  (\tau)y \in D$.  Thus $con S \subseteq D$.
+
+  From a previous theorem, $con S$ convex implies $con S$ contains all
+  convex combinations of points in $S$.  Thus $con S \supseteq D$
+
+  Thus $con S = D$.
+\end{proof}
+
+\begin{defn}
+  \label{defn:convexity:10}
+  For a set $C \subseteq \R^{n}$, define $cl C$ as
+  \begin{equation}
+    \label{eq:23}
+    cl C = \{ x \in \R^{n} | \text{for all open neighbourhoods $N$ of
+      $x$, $N \cap C \neq \emptyset$} \}
+  \end{equation}
+
+  $int C$ as
+  \begin{equation}
+    \label{eq:24}
+    int C = \{ x \in \R^{n} | \text{there exists an open neigbourhood $N$ of
+      $x$ with $N \subseteq C$} \}
+  \end{equation}
+
+  $bound C$ as
+  \begin{equation}
+    \label{eq:25}
+    bound C = cl C \backslash int C
+  \end{equation}
+\end{defn}
+
+\begin{remark}
+  \begin{equation}
+    \label{eq:26}
+    cl G = \cap_{\text{$S$ closed, $S \supseteq G$}} S
+  \end{equation}
+\end{remark}
+
+%%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
 %%% End: 

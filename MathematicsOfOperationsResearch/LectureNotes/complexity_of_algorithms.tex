@@ -5,6 +5,22 @@
 \section{Asymptotic Complexity}
 \label{sec:asympt-compl}
 
+We measure complexity as a function of input size.  The input of a
+linear programming problem: $c \in R^{n}, A \in R^{m \times n}, b \in
+\R^{m}$ is represented in $(n + m \cdot n + m) \cdot k$ bits if we
+represent each number using $k$ bits.
+
+For two functions $f: \R \rightarrow \R$ and $g: \R \rightarrow \R$
+write
+\begin{equation}
+  \label{eq:27}
+  f(n) = \mathcal{O}(g(n))
+\end{equation} if there exists $c, n_{0}$ such that for all $n \geq n_{0}$,
+\begin{equation}
+  \label{eq:27}
+  f(n) \leq c \cdot g(n)
+\end{equation}, ... (similarly for $\Omega \rightarrorw \geq$, and
+$\Theta \rightarrow (\Omega + \mathcal{O})$)
 
 
 %%% Local Variables: 

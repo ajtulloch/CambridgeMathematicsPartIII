@@ -460,7 +460,146 @@ Useful properties of conditional expectation:
   \mathbb{T}$ (discrete or continuous time). 
 \end{defn}
 
+\begin{notation}
+  $M_{t \wedge \tau} = M_{t}^{\tau}$ is the martingale $M$ stopped at $\tau$.
+\end{notation}
 
+\begin{proposition}
+  Let $M$ be a martingale and $\tau$ a stopping time, and let $N_{t} =
+  M_{t \wedge \tau}$.  Then $N$ is also a martingale.
+\end{proposition}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:11}
+    N_{t} = M_{0} + \sum_{s=1}^{t} \I{s \leq \tau} (M_{s} - M_{s-1})
+  \end{align} and $\I{\tau \leq s-1}$ is
+  $\mathcal{F}_{s-1}$-measurable and bounded.
+\end{proof}
+
+\begin{defn}
+  \label{defn:discrete_time_models:16}
+  A local martingale is an adapted process $X$ such that there exists
+  an increasing sequence of stopping times $\tau_{n} \uparrow \infty$
+  such that $X^{\tau_{n}}$ is a martingale for all $n$.
+\end{defn}
+
+\begin{remark}
+  Martingales are local martingales.
+\end{remark}
+
+\begin{proposition}
+  Let $X$ be a local martingale (discrete time). Let $K$ be
+  predictable and let $Y_{t} = \sum_{s=1}^{t} K_{s}(X_{s} - X_{s-1})$.
+  Then $Y$ is a local martingale.
+\end{proposition}
+
+\begin{proof}
+  Since $X$ is a local martingale, there exists a sequence $\sigma_{n}
+  \rightarrow \infty$ stopping times such that $X^{\sigma_{n}}$ is a
+  martingale. Let
+  \begin{equation}
+    \label{eq:13}
+    \tau_{n} = \inf \{ t \geq 0 : |K_{t+1}| > N \}
+  \end{equation} Then we have
+  \begin{align}
+    \label{eq:14}
+    X_{t \wedge (\underbrace{\sigma_{n} \wedge \tau_{n}}_{\text{stopping time}})} = \sum_{s = 1}^{t} \underbrace{K_{s} \I{s
+      \leq \tau_{n}}}_{\text{bounded and predictable}} (\underbrace{X_{s}^{\tau_{n}} -
+      X_{s-1}^{\tau_{n}}}_{\text{martingale difference}})
+  \end{align}
+\end{proof}
+
+\begin{exmp}
+  \label{defn:discrete_time_models:17}
+  Let $\nu, \xi$ be random variables with $\xi$ integrable and $\E{\xi}
+  = 0$.  Let $\mathcal{F}_{1} = \sigma(\nu), \mathcal{F}_{2} =
+  \sigma(\nu, \xi)$.  Let $X_{1} = 0$, $X_{2} = \nu \xi$.  Then $X$ is
+  a local martingale.
+
+  If the product $\nu \xi$ is also integrable, then $X$ is a true
+  martingale, otherwise $\E{X_{2} | \mathcal{F}_{1}}$ is not defined.
+\end{exmp}
+
+\begin{proposition}
+  Let $X$ be a local martingale such that there exists an integrable
+  process $Y$ such that $Y_{t} \geq |X_{s} |$ for all $0 \leq s \leq
+  t$. Then $X$ is a true martingale.
+\end{proposition}
+
+\begin{proof}
+  By assumptions there exists a sequence $\tau_{N} \rightarrow \infty$
+  such that $X^{\tau_{N}}$ is a martingale.  Also, $|X_{t \wedge
+    \tau_{N}} \leq Y_{t}$ which is integrable.  Then
+  \begin{align}
+    \label{eq:15}
+    \E{X_{t} | \mathcal{F}_{s}} &= \E{\lim_{N \rightarrow \infty} X_{t
+        \wedge \tau_{N}} | \mathcal{F}_{s}} \\
+    &= \lim_{N \rightarrow \infty} \E{X_{t \wedge \tau_{N}} |
+      \mathcal{F}_{s}} \\
+    &= \lim_{N \rightarrow \infty} X_{s \wedge \tau_{N}} \\
+    &= X_{s}
+  \end{align}
+\end{proof}
+
+\begin{corollary}
+  \textbf{In discrete time}, if $X$ is a local martingale and
+  $\E{|X_{t}|} < \infty$ for all $t \geq 0$ then $X$ is a martingale.
+\end{corollary}
+
+\begin{proof}
+  Let $Y_{t} = \sum_{s=0}^{t} | X_{s} |$, and $Y$ is integrable by
+  assumption.
+\end{proof}
+
+\begin{proposition}
+  If $X$ is a local martingale (in discrete or continuous time) and
+  $X_{t} \geq 0$ almost surely for all $t$, then $X$ is a
+  supermartingale.
+\end{proposition}
+
+\begin{proof}
+  First, $X_{t}$ is integrable, since
+  \begin{align}
+    \label{eq:17}
+    \E{|X_{t}|} &= \E{X_{t}} \\
+    &= \E{\lim_{N \rightarrow \infty} X_{t \wedge \tau_{N}}} \\
+    &\leq \liminf_{N \rightarrow \infty} \E{X_{t \wedge \tau_{N}}} \\
+    &= \liminf_{N \rightarrow \infty} X_{0 \wedge \tau_{n}} \\
+    &= X_{0} < \infty.
+  \end{align}
+  
+  Now,
+  \begin{align}
+    \label{eq:16}
+    \E{X_{t} | \mathcal{F}_{s}} &= \E{\lim X_{t \wedge \tau_{N}} |
+      \mathcal{F}_{s}} \\
+    &\leq \liminf \E{X_{t \wedge \tau_{N}} | \mathcal{F}_{s}} \\
+    &= \liminf X_{s \wedge \tau_{N}} \\
+    &= X_{s}
+  \end{align}
+\end{proof}
+
+\begin{corollary}
+  \textbf{In discrete time}, non-negative local martingales in
+  discrete time are martingales.
+\end{corollary}
+
+\begin{proof}
+  Let $X$ be the local martingale. Then $\E{|X_{t}|} < \infty$ for all
+  $t \geq 0$ by Fatau. The result follows from the last corollary.
+\end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:18}
+  Let $X$ be a \textbf{discrete} time local martingale. Fix $T > 0$
+  non-random. Then $(X_{t})_{0 \leq t \leq T}$ is a true martingale if
+  either
+  \begin{enumerate}
+  \item $\E{|X_{T}|} < \infty$, or
+  \item $X_T \geq 0$ 
+  \end{enumerate}
+\end{thm}
 
 %%% Local Variables: 
 %%% mode: latex

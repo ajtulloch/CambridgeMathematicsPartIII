@@ -1,0 +1,57 @@
+\chapter{Cones and Generalized Inequalities}
+\label{cha:cones-gener-ineq}
+
+\begin{defn}
+  \label{defn:cones_and_generalized_inequalities:1}
+  $K \subseteq \R^{n}$ is a cone if and only if $0 \in K$ and $\lambda x
+  \in K$ for all $x \in K, \lambda \geq 0$.
+\end{defn}
+
+\begin{defn}
+  \label{defn:cones_and_generalized_inequalities:1}
+  A cone ins \textbf{pointed} if and only if
+  \begin{equation}
+    \label{eq:27}
+     x_{1} + \dots + x_{n} = 0 \iff x_{1} = \dots = x_{n} = 0
+  \end{equation}
+\end{defn}
+
+\begin{exmp}
+  \label{defn:cones_and_generalized_inequalities:1}
+  \begin{enumerate}
+  \item $R^{n}$ is a pointed cone.
+  \item $\{ (x_{1}, x_{2}) \in \R^{2} | x_{2} > 0 \}$ is not a cone.
+  \item $\{ (x_{1}, x_{2}) \in \R^{2} | x_{2} \geq 0 \}$ is a cone,
+    but is not pointed.
+  \item $\{ x \in \R^{n} | x_{i} \geq 0, i \in 1, \dots, n \}$ is a
+    pointed cone.
+  \end{enumerate}
+\end{exmp}
+
+\begin{proposition}
+  $K \subseteq \R^{n}$ be any set.  Then the following are equivalent:
+  \begin{enumerate}
+  \item $K$ is a convex cone.
+  \item $K$ is a cone and $K + K \subseteq K$.
+  \item $K \neq \emptyset$ and $\sum_{i=0}^{n} \alpha_{i} x_{i} \in K$
+    for all $x_{i} \in K$, $\alpha_{i} \geq 0$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{proposition}
+  If $K$ is a convex cone, then $K$ is pointed if and only if $K \cap
+  (-K) = \{ 0 \}$.
+\end{proposition}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
