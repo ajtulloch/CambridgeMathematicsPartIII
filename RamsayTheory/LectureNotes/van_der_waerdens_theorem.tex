@@ -1,0 +1,76 @@
+
+\chapter{Van der Waerden's Theorem}
+\label{cha:van-der-waerdens}
+
+\begin{thm}
+  \label{defn:van_der_waerdens_theorem:1}
+  Whenever $\N$ is two-coloured, there exists a monochromatic
+  arithmetic progression of length $m$, for any $m \in \N$.
+\end{thm}
+
+\begin{thm}
+  \label{defn:van_der_waerdens_theorem:2}
+  Let $k \in \N$. Then there exists $n \in \N$ such that whenever
+  $[n]$ is $2$-coloured, there exists a monochromatic arithmetic
+  progression of length $m$.
+\end{thm}
+
+One idea in the proof is - we show that $\forall m, k \in \N$,
+whenever $[n]$ is $k$-coloured, there exists a monochromatic
+arithmetic progression of length $m$.\sidenote{Harder results
+  \textbf{could} be easier to prove - if the proof is by induction!}
+
+Write $W(m, k)$ for the least such $n$ (if it exists) - a ``Wan der
+Waerden's number''.  Let $A_{1}, \dots, A_{r}$ be arithmetic
+progressions of length $m-1$, say
+\begin{equation}
+  \label{eq:1}
+  A_{i}= \{ a_{i}, a_{i} + d_{i}, \dots, a_{i}+ (m-2) * d_{i} \}
+\end{equation}
+
+We say $A_{1}, \dots, A_{r}$ are \textbf{focused} at $f$ if $a_{i} +
+(m-1) d_{i} = f$ for all $i$ - for example, $\{ 1, 4\}$ and $\{ 5, 6
+\}$ are focused at 7.  If each $A_{i}$ are monochromatic (for a given
+colouring), with no two $A_{i}$ the same colour, say that $A_{i},
+\dots, A_{r}$ are colour-focused at $f$.\sidenote{So if we have a
+  $r$-colouring, and $A_{1}, \dots, A_{r}$ are colour-focused.  Then,
+  we get a monochromatic arithmetic progression of length $m$ - by
+  asking, what colour is the focus $f$.}
+
+\begin{proposition}
+  Let $k \in \N$.  Then there exists $n \in \N$ such that whenever
+  $[n]$ is $k$-coloured, there exists a monochromatic arithmetic
+  progression of length 3.\sidenote{This will be subsumed by Van der
+    Waerden's theorem}
+\end{proposition}
+
+\begin{lem}
+  We claim the following result - for all $r \leq k$, there exists $n$
+  such that whenever $[n]$ is $k$-coloured, there exists a
+  monochromatic arithmetic progression of length 3 or there exist $r$
+  colour-focused arithmetic progressions of length 2.
+\end{lem}
+
+\begin{proof}
+  Proceed by induction on $r$.  This is true for $r = 1$ (setting $n =
+  k + 1$.)  We'll show that if $n$ is suitable for $r - 1$ then
+  \begin{equation}
+    \label{eq:2}
+    (k^{2n} + 1) \cdot 2n
+  \end{equation} is suitable for $r$.  Indeed, given a $k$-colouring
+  of $[(k^{2n} + 1) 2n]$ with no monochromatic arithmetic progression
+  of length 3.
+
+  Break up $[(k^{2n} + 1)2n]$ into intervals $B_{1}, \dots, B^{k^{2n}
+    + 1}$ of length $2m$ - so $B_{i} = [2m(i-1)  +1, 2ni]$ for $i = 1,
+  2, \dots, k^{2n} +1$.Now, there are $k^{2m}$ ways to $k$-colour a
+  block. Thus, there exist two blocks coloured identically - say
+  $B_{s}$ and $B_{s+t}$.  
+
+  ...
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

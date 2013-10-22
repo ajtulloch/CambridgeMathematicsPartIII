@@ -147,6 +147,196 @@ to converge to the minimizers of $Q$.
   \end{enumerate}
 \end{exer}
 
+\begin{exmp}
+  \label{defn:parametric_statistical_models:4}
+  Let $Y = (Z, X)$ such that $Z = g(X, \theta_{0}) + \epsilon$, where
+  $\E{\epsilon | X} = 0$, $\theta_{0}$ is the ``true value'', and
+  based on \iid observations $Y_{1}, \dots, Y_{n}$, we minimize
+  \begin{equation}
+    \label{eq:38}
+    Q_{n}(\theta)= \frac{1}{n} \sum_{i=1}^{n} (Z_{i} - g(X_{i}, \theta))^{2}
+  \end{equation} over $\Theta$.  We expect
+  \begin{equation}
+    \label{eq:40}
+    Q(\theta) = \E{(Z - g(X, \theta))^{2}}{\theta_{0}}
+  \end{equation}  Inserting the model equation
+  \begin{equation}
+    \label{eq:41}
+    Q(\theta) = \E{(g(X_{1}, \theta_{0}) - g(X,
+    \theta) + \epsilon)^{2}}{\theta_{0}} = \E{g(X, \theta_{0}) - g(X, \theta)}^{2}
+    + \E{\epsilon^{2}}
+  \end{equation}
+
+  Hence $Q(\theta)$ is minimized at $\theta_{0}$ if the regression
+  parameterization is identifiable, that is
+  \begin{equation}
+    \label{eq:42}
+    \theta = \theta' \iff g(\cdot, \theta) = g(\cdot, \theta')
+  \end{equation} ${\Prob}_{X}$ almost surely.
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:parametric_statistical_models:5}
+  Let $Y_{1}, \dots, Y_{n}$ be \iid copies of $Y$, and we maintain a
+  parametric model
+  \begin{equation}
+    \label{eq:43}
+    \{ f(\cdot, \theta): \theta \in \Theta \}
+  \end{equation} of PDFs/PMFs and the MLE is found by minimizing
+  \begin{equation}
+    \label{eq:44}
+    Q_{n}(\theta) = - \frac{1}{n} \sum_{i=1}^{n} \log f(Y_{i}, \theta)
+  \end{equation}
+
+  By the law of large numbers, assuming $f(y, \theta) > 0$ for all $y,
+  \theta$ and
+  \begin{equation}
+    \label{eq:45}
+    \E{|\log f(Y, \theta)|}{\theta_{0}} < \infty
+  \end{equation} where $Y$ is assumed to be distributed as $f(\cdot,
+  \theta_{0})$, then the limiting criterion function is
+  \begin{equation}
+    \label{eq:46}
+    Q(\theta) = - \E{\log f(Y, \theta)}{\theta_{0}}
+  \end{equation}
+
+  Then
+  \begin{align}
+    \label{eq:47}
+    Q(\theta_{0}) - Q(\theta) &= \mathbb{E}_{\theta_{0}} \log f(Y,
+    \theta) - \mathbb{E}{\theta_{0}} - \log f(Y, \theta_{0}) \\
+    &= \E{\log \frac{f(Y, \theta)}{f(Y, \theta_{0})}}{\theta_{0}} \\
+    &\leq \log \E{\frac{f(Y, \theta)}{f(Y, \theta_{0})}}{\theta_{0}}
+  \\
+  &= \log \int \frac{f(y, \theta)}{f(y, \theta_{0})} f(y, \theta_{0})
+  \, dy \\
+  &= \log 1 \\
+  &= 0
+  \end{align} or in other words,
+  \begin{equation}
+    \label{eq:48}
+    Q(\theta_{0}) \leq Q(\theta) \forall \theta \in \Theta
+  \end{equation}
+\end{exmp}
+
+Equality in Jensen's inequality can only occur when
+\begin{equation}
+  \label{eq:49}
+  \frac{f(\cdot, \theta)}{f(\cdot, \theta_{0})} = C \in \R
+\end{equation} so since $\int f(y, \theta) dy = 1$, we see $C = 1$,
+and hence if the model is identifiable in the sense that $\theta =
+\theta' \iff f(\cdot, \theta) = f(\cdot, \theta')$ for all $\theta,
+\theta' \in \Theta$, then the value $\theta_{0}$ that minimizes
+$\theta_{0}$ is unique.
+
+\section{Verifying uniform convergence}
+\label{sec:verify-unif-conv}
+
+\begin{proposition}
+  Let $\Theta$ be compact in $\R^{p}$, and let $\mathcal{X} \subseteq \R^{d}$
+  and consider observing $X_{1}, \dots, X_{n}$ \iid from $X \sim
+  \Prob$ on $X$.  Let $q: \mathcal{X} \times \Theta \rightarrow \R$
+  that is continuous in $\theta$ for all $x$ and measurable in $x$ for
+  all $\theta \subseteq \Theta$.
+
+  Assume
+  \begin{equation}
+    \label{eq:50}
+    \E{\sup_{\theta \in \Theta} | q(X, \theta)|} < \infty
+  \end{equation}
+
+  Then
+  \begin{equation}
+    \label{eq:51}
+    \sup_{\theta \in \Theta} | \frac{1}{n} q(X_{i}, \theta) - \E{q(X,
+      \theta)} | \cas 0
+  \end{equation} as $n \rightarrow \infty$
+\end{proposition}
+
+\begin{proof}
+  We apply the uniform law of large numbers from Proposition
+  \ref{defn:ulln}  and we need to cover the set
+  \begin{equation}
+    \label{eq:52}
+    \mathcal{H} = \{ q(\cdot, \theta) : \theta \in \Theta \}
+  \end{equation} by suitable brackets.
+
+  Define open balls
+  \begin{equation}
+    \label{eq:53}
+    B(\theta, m) = \{ \theta' \in \Theta: \| \theta -  \theta' \| <
+    \eta \}
+  \end{equation}
+  Construct ``brute-force'' brackets
+  \begin{align}
+    \label{eq:54} \overline q(X, \theta, \eta) = \sup_{\theta' \in
+      B(\theta, \epsilon)} q(X, \theta') \\ \underline q(X, \theta,
+    \eta) = \inf_{\theta' \in B(\theta, \eta)} q(X, \theta')
+  \end{align} which obviously cover all the $\{ q(\cdot, \theta') :
+  \theta' \in B(\theta, \eta) \}$.
+
+  Clearly,
+  \begin{align}
+    \label{eq:55} \E{\overline{\underline q}(x, \theta, \eta)} \leq
+    \E{\sup_{\theta \in \Theta} | q(X, \theta) |} < \infty
+  \end{align} by the domination condition.
+
+  By continuity and compactness, the supremum/infimum above are
+  attained at $\overline \theta, \underline \theta \in \Theta$ such
+  that $\| \overline \theta - \theta \| \leq \eta$. So
+  \begin{align}
+    \label{eq:56} | \overline q (X, \theta, \eta) - \underline q(X,
+    \theta, \eta) | &\leq | \overline q(X, \theta, \eta) - q(X,
+    \theta) | + | q(X, \theta) - \underline q (X, \theta, \eta) |
+  \end{align} which again by continuity tends to zero as $\eta
+  \rightarrow 0$.
+
+  So $| \overline q(X, \theta, \eta) - \underline q(X, \theta, \eta)|
+  \rightarrow 0$ as $\eta \rightarrow 0$.
+
+  By the dominated convergence theorem we can integrat this limit with
+  respect to $\E$, (using the dominance condition).  So,
+  \begin{equation}
+    \label{eq:57}
+    \E{|\overline q(X, \theta, \eta) - \underline q(X, \theta, \eta)}
+    \rightarrow 0
+  \end{equation} as $\eta \rightarrow 0$.
+
+  Then for all $\epsilon > 0$, there exists $\eta = \eta(\epsilon,
+  \theta)$ such that
+  \begin{equation}
+    \label{eq:58}
+    \E{|\overline q(X, \theta, \eta(\epsilon, \theta)) - \underline
+      q(X, \theta, \eta(\epsilon, \theta))|} < \epsilon
+  \end{equation}
+
+  The balls $\{ B(\theta, \eta(\epsilon, \theta)) : \theta \in \Theta
+  \}$ form an open covering of $\Theta$, so by compactness
+  (Heine-Borel theorem in $\R^{p}$), there exists a finite subcover of
+  $\theta$, say with centres $\theta_{1}, \dots,
+  \theta_{N(\epsilon)}$.  Then the corresponding brackets
+  \begin{equation}
+    \label{eq:59}
+    [\underline q_{i}, \overline q_{i}] = [ \underline q(\cdot,
+    \theta_{j}, \eta(\epsilon, \theta_{j})), \overline q(\cdot,
+    \theta_{j}, \eta(\epsilon, \theta_{j}))]
+  \end{equation} cover $\mathcal{H}$ and satisfy the conditions of
+  Proposition \ref{defn:ulln}
+\end{proof}
+
+\begin{remark}
+  The above result is simply a law of large numbers in the Banach
+  space of continuous functions on $\Theta$, and
+  \begin{equation}
+    \label{eq:60}
+    \E{\sup_{\theta \in \Theta} | q(X, \Theta) |} = \E{\|Z\|} < \infty
+  \end{equation} which is necessary for the result to hold.
+\end{remark}
+
+
+
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

@@ -53,13 +53,19 @@
 \newcommand{\iid}{\textsc{iid}\xspace}
 
 % Expectation
-\NewDocumentCommand{\E}{g}{%
+\NewDocumentCommand{\E}{gg}{%
   \IfNoValueTF{#1}
     {%
       \mathbb{E}
     }    
     {%
-      \mathbb{E}\!\left(#1\right)
+      \IfNoValueTF{#2}
+      {%
+        \mathbb{E}\!\left(#1\right)
+      }
+      {%
+        \mathbb{E}_{#2}\!\left(#1\right)
+      }
     }%
 }
 

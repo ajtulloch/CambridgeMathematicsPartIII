@@ -1,0 +1,75 @@
+\chapter{Example Sheet 1}
+\label{cha:example-sheet-1}
+
+\begin{enumerate}
+\item \label{item:1} Let $Y_{t}$ be a candidate state price density. Then $Y_{1}(t) =
+  [\alpha_{1}, \alpha_{2}, \alpha_{3}]$ must satisfy the requirement
+  that $Y_{t} P_{t}$ is a martingale, and $\alpha_{i} > 0$. Thus we
+  have the linear equations
+  \begin{align}
+    \label{eq:2}
+    4 = \frac{1}{4} \cdot \alpha_{1} \cdot 3 + \frac{1}{4} \cdot
+    \alpha_{2} \cdot 6 + \frac{1}{2} \cdot \alpha_{3} \cdot 6 \\
+    6 = \frac{1}{4} \cdot \alpha_{1} \cdot 9 + \frac{1}{4} \cdot
+    \alpha_{2} \cdot 8 + \frac{1}{2} \cdot \alpha_{3} \cdot 4
+  \end{align}
+  Solving these set of equations, we have the augmented matrix
+  \begin{equation}
+    \label{eq:4}
+    \begin{bmatrix}
+      3 & 6 & 12 & 16 \\
+      9 & 8 & 8  & 24 
+    \end{bmatrix}
+  \end{equation}
+  which has the set of solutions
+  \begin{align}
+    \label{eq:5}
+    z = t \\
+    y = \frac{12 - 14t}{5} \\
+    x = \frac{8 + 24t}{15}
+  \end{align} for $0 < t < \frac{5}{6}$.
+\item \label{item:2} Similar to above, we have the discount factor is unity, and so
+  we have to solve the augmented matrix
+  \begin{equation}
+    \label{eq:6}
+    \begin{bmatrix}
+      9 & 8 & 18 \\
+      6 & 10 & 21
+    \end{bmatrix}
+  \end{equation}
+\item \label{item:3}
+\item \label{item:4}
+\item \label{item:5}
+\item \label{item:6}
+\item \label{item:7}
+\item \label{item:8}
+\item \label{item:9}
+\item \label{item:10}
+\item \label{item:11} Note that $Z_{t} = X_{t} - Y_{t}$ is a
+  martingale, and thus $|Z_{t}|$ is a submartingale (as a convex
+  function of a martingale, by Jensen's inequality). Then for any $0 \leq t \leq
+  T$, we have
+  \begin{align}
+    \label{eq:1}
+    0 &= \E{|X_{T} - Y_{T}| | \mathcal{F}_{t}} \\
+    &= \E{|Z_{T}| | \mathcal{F}_{t}} \\
+    &\geq |Z_{s}| \\
+    &\geq 0
+  \end{align} where the first line follows from $Z_{T} = 0$ almost
+  surely and the second follows from the submartingale property. Thus
+  the equalities are strict, and we have $Z_{t} = 0$ almost surely,
+  and so
+  \begin{equation}
+    \label{eq:3}
+    X_{t} = Y_{t}
+  \end{equation} almost surely.
+\item \label{item:12} 
+\item \label{item:13}
+\item \label{item:14}
+\end{enumerate}
+
+
+
+%%% Local Variables: 
+%%% TeX-master: "master""
+%%% End: 
