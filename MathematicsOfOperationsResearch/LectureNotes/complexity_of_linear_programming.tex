@@ -1,0 +1,99 @@
+
+\chapter{The Complexity of Linear Programming}
+\label{cha:compl-line-progr}
+
+\section{A Lower Bound for the Simplex Method}
+\label{sec:lower-bound-simplex}
+
+\begin{thm}
+  \label{defn:complexity_of_linear_programming:1}
+  There exists a LP of size $\mathcal{O}(n^{2})$, a pivoting rule, and
+  an initial BFS such that the simplex method requires $2^{n} - 1$ iterations.
+\end{thm}
+
+\begin{proof}
+  Consider the unit cube in $\R^{n}$, given by constraints $0 \leq
+  x_{i} \leq 1$ for $i = 1, \dots, n$.  Define a spanning path
+  inductively as follows.  In dimension 1, go from $x_{1} = 0$ to
+  $x_{1} = 1$.  In dimension $k$, set $x_{k} = 0$ and follow the path
+  for dimension $1, \dots, k - 1$. Then set $x = 1$, and follow the
+  path for diemsnion $1, \dots, k-1$ backwards.
+
+  The objective $x_{n}$ currently increases only once.  Instead
+  consider the peturbed unit cube givn by the constraints $\epsilon
+  \leq x_{1} \leq 1$, $\epsilon x_{i-1} \leq x_{i} \leq 1 - \epsilon
+  x_{i-1}$ with $\epsilon \in (0, \frac{1}{2})$.
+\end{proof}
+
+\section{The Idea for a New Method}
+\label{sec:idea-new-method}
+
+\begin{align}
+  \label{eq:29}
+  \min \{ c^{T} x : Ax = b, x \geq 0 \} \\
+  \max \{ b^{T} \lambda: A^{T} \lambda \leq c \}
+\end{align}
+
+By strong duality, each of these problems has a bounded optimal
+solution if and only if the following set of constraints is feasible:
+\begin{align}
+  \label{eq:30}
+  c^{T} x      & = b^{T} \lambda \\
+  Ax           & = b             \\
+  x            & \geq 0          \\
+  A^{T}\lambda & \leq c
+\end{align}
+
+It is thus enough to decide, for a given $A' \in \R^{m \times n}$ and
+$b' \in \R^{m}$, whether $\{ x \in \R^{n} : Ax \geq b \} \neq
+\emptyset$.
+
+\begin{defn}
+  \label{defn:complexity_of_linear_programming:2}
+  A symmetric matrix $D \in \R^{n \times n}$ is called positive
+  definite if $x^{T} D x > 0$ for every $x \in \R^{n}$.
+  Alternatively, all eigenvalues of the matrix are strictly positive.
+\end{defn}
+
+\begin{defn}
+  \label{defn:complexity_of_linear_programming:3}
+  A set $E \subseteq \R^{n}$ given by
+  \begin{equation}
+    \label{eq:31}
+    E = E(z, D) = \{ x \in \R^{n} : (x - z)^{T} D(x - z)\leq 1 \}
+  \end{equation} for a positive definite symmetric $D \in \R^{n \times
+    n}$ and $z \in \R^{n}$ is called an ellipsoid with center $z$.
+\end{defn}
+
+Let $P = \{ x \in \R^{n} : Ax \geq b \}$ for some $A \in \R^{m \times
+  n}$ and $b \in \R^{m}$.  To decide whether $P \neq \emptyset$, we
+generate a sequence $\{ E_{t} \}$ of ellipsoids $E_{t}$ with centers
+$x_{t}$.  If $x_{t} \in P$, then $P$ is non-empty and the method
+stops.  If $x_{t} \notin P$, then one of the constraints is violated -
+so there exists a row $j$ of $A$ such that $a_{j}^{T} x_{t} < b_{j}$.
+Therefore, $P$ is contained in the half-space $\{ x \in R^{n} :
+a_{j}^{T} x \geq a_{j}^{T} x_{t}$, and in particular the intersection
+of this half-space with $E_{t}$, which we will call a half-ellipsoid.
+
+\begin{thm}
+  \label{defn:complexity_of_linear_programming:4}
+  Let $E = E(z, D)$ be an ellipsoid in $\R^{n}$ and $a \in R^{n} \neq
+  0$.  Consider the half-space $H = \{ x \in \R^{n} | a^{T} x \geq
+  a^{T} z \}$, and  let
+  \begin{align}
+    \label{eq:32}
+    z' &= z + \frac{1}{n+1} \frac{Da}{\sqrt{a^{T}Da}} \\
+    D' &= \frac{n^{2}}{n^{2} - 1} \left( D  -
+      \frac{2}{n+1}\frac{Daa^{T}D}{a^{T}Da} \right)
+  \end{align}
+
+  Then $D'$ is symmetric and positive definite, and therefore $E' =
+  E(z', D')$ is an ellipsoid.  Moreover, $E \cap H \subseteq E'$ and
+  $\text{Vol}(E') < e^{\frac{-1}{2(n+1)}} \text{Vol}(E)$.
+\end{thm}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

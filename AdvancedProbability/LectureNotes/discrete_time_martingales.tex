@@ -313,6 +313,179 @@ Remains to check $\E{T} < \infty$.  We have $\Prob{\xi_{1} = 1,
   \end{equation}
 \end{proof}
 
+\section{Uniform Integrability}
+\label{sec:unif-integr}
+
+\begin{thm}
+  \label{defn:discrete_time_martingales:11}
+  Suppose $X \in L^{1}$.  Then the collection of random variables
+  \begin{equation}
+    \label{eq:35}
+    \{ \E{X | \mathcal{G}} \}
+  \end{equation} for $\mathcal{G} \subseteq \mathcal{F}$ a
+  sub-$\sigma$-algebra is uniformly integrable.
+\end{thm}
+
+\begin{proof}
+  Since $X \in L^{1}$, for all $\epsilon > 0$ there exists $S > 0$
+  such that if $A \in \mathcal{F}$ and $\Prob{A} < \delta$, then
+  $\E{|X| \I{A}} \leq \epsilon$.
+
+  Set $Y = \E{X | \mathcal{G}}$.  Then $\E{|Y|} \leq \E{|X|}$.  Choose
+  $\lambda < \infty$ such that $\E{|X|} \leq \lambda \delta$.  Then
+  \begin{align}
+    \label{eq:41}
+    \Prob{|Y| \geq \lambda} \leq \frac{\E{|Y|}}{\lambda} \leq \delta
+  \end{align} by Markov's inequality.
+
+  Then
+  \begin{align}
+    \label{eq:42}
+    \E{|Y| \I{|Y| \geq \lambda}} \leq \E{\E{|X| | \mathcal{G}} \I{|Y|
+        \geq \lambda}} \\
+    &= \E{|X| \I{|Y| \geq \lambda}} \\
+    &\leq \epsilon
+  \end{align}
+\end{proof}
+
+
+\begin{defn}
+  \label{defn:discrete_time_martingales:12}
+  A process $X = (X_{n})_{n \geq 0}$ is called a uniformly integrable
+  martingale if it is a martingale and the collection $(X_{n})$ is
+  uniformly integrable.
+\end{defn}
+
+\begin{thm}
+  \label{defn:discrete_time_martingales:13}
+  Let $X$ be a martingale.  Then the following are equivalent.
+  \begin{enumerate}
+  \item \label{item:5} $X$ is a uniformly integrable martingale.
+  \item \label{item:6} $X$ converges almost surely and in $L^{1}$ to a limit
+    $X_{\infty}$ as $n \rightarrow \infty$.
+  \item \label{item:7} There exists a random variable $Z \in L^{1}$ such that $X_{n}
+    = \E{Z | \mathcal{F}_{n}}$ almost surely for all $n \geq 0$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}[Chapter 13 of Williams]
+  \label{defn:discrete_time_martingales:14}
+  Let $X_{n}, X \in L^{1}$ for all $n \geq 0$ and suppose that $X_{n}
+  \cas X$ as $n \rightarrow \infty$.  Then $X_{n}$ converges to $X$ in
+  $L^{1}$ if and only if $(X_{n})$ is uniformly integrable.
+\end{thm}
+
+\begin{proof}
+  We proceed as follows.
+
+  \begin{enumerate}
+  \item[$~\ref{item:5} \Rightarrow \ref{item:6}$] Since $X$ is
+    uniformly integrable, it is bounded in $L^{1}$ and by the
+    martingale convergence theorem, we get that $X_{n}$ converges
+    almost surely to a finite limit $X_{\infty}$.  By the previous
+    theorem, Theorem \ref{defn:discrete_time_martingales:14} gives
+    $L^{1}$ convergence.
+  \item[$~\ref{item:6} \Rightarrow \ref{item:7}$] Set $Z =
+    X_{\infty}$.  We need to show that $X_{n} = \E{Z |
+      \mathcal{F}_{n}}$ almost surely for all $n \geq 0$. For all $m
+    \geq n$ by the martingale property we have 
+    \begin{align}
+      \label{eq:43}
+      \| X_{n} - \E{X_{\infty} | \mathcal{F}_{n}} \|_{1} = \| \E{X_{m}
+      - X_{\infty} | \mathcal{F}_{n}} \|_{1} \leq \| X_{m}- X_{\infty}
+    \|_{1} \rightarrow 0
+    \end{align} as $m \rightarrow \infty$.
+  \item[$~\ref{item:7} \Rightarrow \ref{item:5}$] $\E{Z |
+      \mathcal{F}_{n}}$ is a martingale by the tower property of
+    conditional expectation.  Uniform integrability follows from
+    Theorem \ref{defn:discrete_time_martingales:11}.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  If $X$ is UI then $X_{\infty} = \E{Z | \mathcal{F}_{\infty}}$ a.s
+  where $F_{\infty} = \sigma(\mathcal{F}_{n}, n \geq 0)$.
+\end{remark}
+
+\begin{remark}
+  If $X$ is a super/sub-martingale UI, then it converges almost surely
+  and in $L^{1}$ to a finite limit $X_{\infty}$ with $\E{X_{\infty} |
+    \mathcal{F}_{n}} (\geq) (\leq) X_{n}$ almost surely.
+\end{remark}
+
+\begin{exmp}
+  \label{defn:discrete_time_martingales:15}
+  Let $X_{1}, X_{2}, \dots$ be \iid random variables with $\Prob{X =
+    0} = \Prob{X = 2} = \frac{1}{2}$.   Set $Y_{n}= X_{1}\cdot \dots
+  \cdot X_{n}$.  Then $Y_{n}$ is a martingale.
+
+  As $\E{Y_{n}} = 1$ for all $n$, we have $(Y_{n})$ is bounded in
+  $L^{1}$, and it converges almost surely to 0.  But $\E{Y_{n}} = 1$
+  for all $n$, and hence it does not converge in $L^{1}$.
+\end{exmp}
+
+If $X$ is a UI martingale and $T$ is a stopping time, then we can
+unambiguously define
+\begin{equation}
+  \label{eq:44}
+  X_{T} = \sum_{n=0}^{\infty} X_{n} \I{T = n} + X_{\infty} \I{T = \infty}
+\end{equation}
+
+
+\begin{thm}[Optional stopping for UI martingales]
+  \label{defn:discrete_time_martingales:16}
+  Let $X$ be a UI martingale and let $S, T$ be stopping times with $S
+  \leq T$.  Then
+  \begin{equation}
+    \label{eq:45}
+    \E{X_{T} | \mathcal{F}_{S}} = X_{S}    
+  \end{equation} almost surely.
+\end{thm}
+
+\begin{proof}
+  We first show that $\E{X_{\infty} | \mathcal{F}_{T}} = X_{T}$ almost
+  surely for any stopping time $T$.  First, check that $X_{T} \in
+  L^{1}$. Since $|X_{n}| \leq \E{|X_{\infty}| | \mathcal{F}_{n}}$, we
+  have
+  \begin{align}
+    \label{eq:46}
+    \E{|X_{T}|}= \sum_{n=0}^{\infty} \E{|X_{n}|\I{T=n} +
+      \E{|X_{\infty}| \I{T = \infty}}} \\
+    &\leq \sum_{n \in \Z^{+} \cup \{ \infty \}} \E{|X_{\infty}|
+      \I{T=n}} \\
+    &= \E{|X_{\infty}|}
+  \end{align}  Let $B \in \mathcal{F}_{T}$. Then
+  \begin{align}
+    \label{eq:48}
+    \E{\I{B} X_{T}} &= \sum_{n \in \Z^{+} \cup \{ \infty \}} \E{\I{B}
+      \I{T=n} X_{n}} \\
+    &= \sum_{n \in Z^{+} \cup \{ \infty \}} \E{\I{B} \I{T =n}
+      X_{\infty}} \\
+    &= \E{\I{B} X_{\infty}}
+  \end{align} where for the second equality we used that
+  $\E{X_{\infty} | \mathcal{F}_{n}} = X_{n}$ almost surely.
+
+  Clearly $X_{T} is \mathcal{F}_{T}$-measurable, and hence
+  $\E{X_{\infty} | \mathcal{F}_{T}} = X_{T}$ almost surely.  Using the
+  tower property of conditional expectation, we have for stopping
+  times $S \leq T$ (as $\mathcal{F}_{S} \subseteq \mathcal{F}_{T}$),
+  \begin{align}
+    \label{eq:49}
+    \E{X_{T} | \mathcal{F}_{S}} = \E{\E{X_{\infty} | \mathcal{F}_{T}}
+      | \mathcal{F}_{S}} \\
+    &= \E{X_{\infty} | \mathcal{F}_{S}} \\
+    &= X_{S}
+  \end{align} almost surely.
+\end{proof}
+
+\section{Backwards Martingales}
+\label{sec:backw-mart}
+
+Let $... \subseteq \mathcal{G}_{-2} \subseteq G_{-1} \subseteq G_{0}$
+be a sequence of $...$.
+
+%%% TODO(tulloch) - fill in 
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "master"
