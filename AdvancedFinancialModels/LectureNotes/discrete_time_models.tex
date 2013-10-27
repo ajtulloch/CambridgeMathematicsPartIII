@@ -601,6 +601,122 @@ Useful properties of conditional expectation:
   \end{enumerate}
 \end{thm}
 
+\todo{Lecture on Wednesday 23 October}
+
+\section{Contigent Claims}
+\label{sec:contigent-claims}
+
+Setup - $P$ is a price process ($n$-dimensional space, adapted).
+
+Two types of claims
+\begin{enumerate}
+\item European - specified by a time horizon $T$
+  (maturity date or expiry) and a $\mathcal{F}_{T}$-measurable random
+  variable $\xi_{T}$ (the payout of the claim).
+\item American - specified maturity date $T$ and an adapted process
+  $(\xi_{t})_{0 \leq t \leq T}$ where $\xi_{t}$ is the payout if owner
+  of claim chooses to exercise at time $t \leq T$.
+\end{enumerate}
+
+
+\begin{exmp}
+  \label{defn:discrete_time_models:19}
+  A call option is the right, but not the obligation, to buy a certain
+  stock at a fixed price sometime in the future.
+
+  \begin{align}
+    \label{eq:12}
+    \xi_{T} = (S_{T} - k)^{+} \\
+    \xi_{t} = (S_{t} - k)^{+}
+  \end{align} for all $0 \leq t \leq T$.
+\end{exmp}
+
+\begin{defn}
+  \label{defn:discrete_time_models:20}
+  A European contingent claim is \textbf{attainable} or
+  \textbf{replicable} if there exists a pure investment strategy $H$
+  such that $X_{T}(H) = \xi_{T}$ almost surely.
+\end{defn}
+
+\begin{thm}
+  \label{defn:discrete_time_models:21}
+  Suppose $\xi_{t}$ is the price of attainable claim for $0 \leq t
+  \leq T$.  If the augmented market $(P, \xi)$ has no arbitrage then
+  $\xi_{t} = X_{t}(H)$ a.s.
+\end{thm}
+
+\begin{proof}
+  Let $\tau = \inf \{ t \geq 0: X_{t} \neq \xi_{t} \}$.  Let $\bar
+  H_{t} = \text{sign}(\xi_{t}, X_{t}) \I{t \geq \tau}(H_{t}, -1)$.
+
+  Then $c_{\tau+1} = |\xi_{\tau} - X_{\tau}|$, $\bar X_{t}(\bar H) =
+  \bar H_{t} \cdot (P_{t}, \xi_{t})$, $\bar X_{0}(\bar H) = 0, \bar
+  X_{T}(\bar H) = 0$, and $c_{t} = 0$ for all $t$ if and only if there
+  is no arbitrage.
+\end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:22}
+  Suppose $Y$ is a state price density of the original market with
+  prices $P$.  Suppose $\xi_{T}$ is the payout of an attainable claim,
+  suppose either
+  \begin{enumerate}
+  \item $\E{|\xi_{T}|Y_{T}} < \infty$, or
+  \item $\xi_{T} \geq 0$ a.s.
+  \end{enumerate}
+
+  If the augmented market $(P, \xi)$ has no arbitrage, then
+  \begin{equation}
+    \label{eq:18}
+    \xi_{t} = \frac{1}{Y_{t}} \E{Y_{T} \xi_{T} | \mathcal{F}_{t}}
+  \end{equation} for all $0 \leq t \leq T$.
+\end{thm}
+
+\begin{proof}
+  By the previous result, there exists $H$ (pure investment strategy)
+  such that $X_{t}(H) = \xi_{t}$ for all $t$.  But $XY$ is a local
+  martingale.  From before, if either $X_{T} Y_{T}$ is integrable or
+  non-negative, the process $XY$ is a true martingale.
+
+  \begin{equation}
+    \label{eq:19}
+    \xi_{t} Y_{t} = X_{t} Y_{t} = \E{X_{T} Y_{T} | \mathcal{F}_{t}} =
+    \E{\xi_{T} Y_{T} | \mathcal{F}_{t}}
+  \end{equation} as required.
+\end{proof}
+
+\begin{remark}
+  When our price process can be decomposed into a numeraire, so $P =
+  (N, S)$, we can let $\Q$ be an equivalent martingale measure.  If
+  either $\E{\frac{\xi_{T}}{N_{T}}}{\Q} < \infty$, or $\xi_{T} \geq 0$,
+  then
+  \begin{equation}
+    \label{eq:20}
+    \xi_{t} = N_{t} \E{\frac{\xi_{T}}{N_{T}} | \mathcal{F}_{t}}{\Q}
+  \end{equation}
+\end{remark}
+
+\begin{thm}
+  \label{defn:discrete_time_models:23}
+  Suppose $\xi_{t}$ is the price of a contingent claim at time $t$
+  (not necessarily attainable).  Suppose that the augmented market
+  $(P, \xi)$ has no arbitrage.  Then there exists a positive process
+  $Y$ such that
+  \begin{align}
+    \label{eq:21}
+    P_{t} = \frac{1}{Y_{t}} \E{Y_{T} P_{T} | \mathcal{F}_{t}} \\
+    \label{eq:22}
+    \xi_{t} = \frac{1}{Y_{t}} \E{Y_{T} \xi_{T} | \mathcal{F}_{t}}
+  \end{align}
+  Here, \eqref{eq:21} shows $Y$ is a state price density for the original
+  market, and \eqref{eq:22} shows $Y$ is a state price density for the
+  augmented market.
+\end{thm}
+
+\begin{proof}
+  The proof is just \textsc{1ftap} applied to the augmented market.
+\end{proof}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

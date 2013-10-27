@@ -1,0 +1,327 @@
+\chapter{Example Sheet 1}
+\label{cha:example-sheet-1}
+
+\begin{enumerate}[label*=Ex \arabic*.]
+\item \label{item:1}
+  \begin{enumerate}
+  \item Theorem 3.5 is proven in the lecture notes.
+  \item Proposition 3.10 is proven as follows
+    \begin{enumerate}
+    \item Recall that a function $f$ is convex if and only if $\epi f$
+      is convex. Then we have
+      \begin{equation}
+        \label{eq:1}
+        \epi \sup_{i \in I} f_{i} = \cap_{i \in I} \epi f_{i}
+      \end{equation} which is the intersection of convex sets, hence
+      convex.  Thus, $\sup_{i \in I} f_{i}$ is convex.
+    \item The case for $|I| = 1$ is trivial. For $|I| = 2$, let $f, g$
+      be strictly convex and $h = \sup \{ f, g \}$. Let $x, y \in X,
+      \lambda \in (0, 1), z = \lambda x + (1-\lambda) y$. Then
+      \begin{align}
+        \label{eq:2}
+        h(z) &= \sup \{ f(z), g(z) \} \\
+        &< \sup \{ \lambda f(x) + (1-\lambda) f(y), \lambda g(x) +
+        (1-\lambda) g(y) \} \\
+        &\leq \lambda \sup \{ f(x), g(x) \} + (1-\lambda) \sup \{
+        f(y), g(y) \} \\
+        &= \lambda h(x) + (1 - \lambda) h(y)
+      \end{align}
+    \item Let $C_{i}, i \in I$ be convex, and let $C' = \cap_{i \in I}
+      C_{i}$. Let $x, y \in C', \lambda \in (0, 1), z = \lambda x +
+      (1-\lambda)y$.  Then $z \in C_{i}$ for all $i \in I$ (as $C_{i}$
+      are convex), and so $z \in C'$. Thus $C'$ is convex.
+    \item Let $f^{k} = \sup_{k \geq n} f_{i}$. $f^{k}$ is convex as a
+      pointwise supremum of convex functions.  Let $x, y \in X, \lambda
+      \in (0, 1), z = \lambda x + (1-\lambda)y$. Then
+      \begin{align}
+        \label{eq:4}
+        f^{k}(z) &\leq \lambda f^{k}(x) + (1-\lambda) f^{k}(y) \\
+      \end{align} and taking $k \rightarrow \infty$ on both sides, we
+      have
+      \begin{align}
+        \label{eq:5}
+        \limsup f_{i}(z) &= \lim_{n \rightarrow \infty} f^{k}(z) \\
+        &\leq \lim_{n \rightarrow \infty} f^{k}(x) + (1- \lambda)
+        f^{k}(y) \\
+        &= \lambda \limsup f_{i}(x) + (1-\lambda) \limsup f_{i}(y) 
+      \end{align} and so $\limsup f_{i}$ is convex.
+    \end{enumerate}
+  \item Proposition 3.15 proceeds as follows.
+    \begin{enumerate}
+    \item It is sufficient to prove for $m = 2$ and use induction. Let
+      $A, B$ be convex sets, let $u, v = (a_{1}, b_{1}), (a_{2},
+      b_{2}) \in A \times B, \lambda \in (0, 1), z = \lambda u +
+      (1-\lambda)v$.  Then
+      \begin{equation}
+        \label{eq:7}
+        z = (\lambda a_{1} + (1-\lambda) a_{2}, \lambda b_{1} +
+        (1-\lambda) b_{2}) \in A \times B
+      \end{equation} as $A, B$ are convex.
+    \item Let $y_{1}, y_{2} \in L(C)$. Then $y_{i} = Ax_{i} + b$ for
+      some $x_{i} \in C$. Let $\lambda \in (0, 1), z = \lambda y_{1} +
+      (1-\lambda) y_{2}$.  Then
+      \begin{align}
+        \label{eq:8}
+        z &= \lambda (A x_{1} + b) + (1-\lambda)(Ax_{2} + b) \\
+        &= A(\underbrace{\lambda x_{1} + (1-\lambda) x_{2}}_{\in C}) + b \\
+        &\in L(C)
+      \end{align} as $C$ is convex. 
+    \item Let $x_{1}, x_{2} \in L^{-1}(C)$.  Let $y_{i} = Ax_{i} + b$.
+      Let $\lambda \in (0, 1), z = \lambda x_{1} + (1-\lambda) x_{2}$.
+      Note that $L(z) = \lambda y_{1} + (1-\lambda) y_{2} \in C$, and
+      so $z \in L^{-1}(C)$ as required.
+    \item This is the image of the function $f(x_{1}, x_{2}) = x_{1} +
+      x_{2}$ on the convex set $C_{1} \times C_{2}$, and is thus convex.
+    \item This is the image of the function $f(x) = \lambda x$ on the
+      convex set $C$, and is thus convex.
+    \end{enumerate}
+  \end{enumerate}
+  
+\item \label{item:2}
+  \begin{enumerate}
+  \item This is the intersection of the half planes formed by
+    perpendicular bisectors between points, thus intersection of
+    convex sets, and hence convex.
+  \item Let $(x_{1}, t_{1}), (x_{2}, t_{2}) \in K, \lambda \in (0,
+    1)$. Then by properties of the norm,
+    \begin{align}
+      \label{eq:10}
+      \| \lambda x_{1} + (1-\lambda) x_{2} \| &\leq \lambda \| x_{1}
+      \| + (1-\lambda) \| x_{2} \| \\
+      &\leq \lambda t_{1} + (1-\lambda) t_{2}
+    \end{align}  Thus $(\lambda x_{1} + (1-\lambda) x_{2}, \lambda
+    t_{1} + (1-\lambda) t_{2}) \in K$, and so $K$ is convex.
+  \item $Y_{1}$ is convex as the unit sphere is convex.  $Y_{2}$ is
+    the intersection of the half planes $x_{1} \leq 2, x_{1} \geq 0,
+    x_{2} \leq 1, x_{2} \geq -1$, and thus the intersection of convex
+    sets. Thus $Y_{1} + Y_{2}$ is the sum of convex sets, and hence convex.
+  \end{enumerate}
+\item \label{item:3} Let $x \in \Delta_{n}$. For purposes of
+  contradiction, assume $x$ can be written in two different forms $x =
+  \sum_{i=0}^{m} \lambda_{i} v_{i} = \sum_{i=0}^{m} \gamma_{i} v_{i},
+  \lambda_{i}, \gamma_{i} \geq 0, \sum_{i=0}^{m} \gamma_{i} =
+  \sum_{i=0}^{m} \lambda_{i} = 0$. Then consider
+  \begin{equation}
+    \label{eq:12}
+    0 = x - x =  \sum_{i=0}^{m} (\lambda_{i} - \gamma_{i}) v_{i}    
+  \end{equation}
+  Then by affine independence of $v_{i}$, we have $\lambda_{i} = \gamma_{i}$  for all
+  $i$ as required.
+  
+\item \label{item:4}
+  If $f$ is an improper convex function, then $f(x) = -\infty$ for
+  every $x \in \rint \dom f$. To show this, let $f(u) = -\infty$, and
+  let $x \in \rint \dom f$. Then there exists $\mu > 1$ such that $y
+  \in \dom f$, where $y = (1-\mu) u + \mu x$. Then $x = (1-\lambda) u
+  + \lambda y$.  Then
+  \begin{equation}
+    \label{eq:16}
+    f(x) \leq (1-\lambda)f(u) + \lambda f(y) < (1-\lambda) \alpha +
+    \lambda \beta
+  \end{equation} for any $\alpha > f(u)$ and $\beta > f(y)$.  As $f(u)
+  = -\infty$ and $f(y) < \infty$, we must have $f(x) = -\infty$.
+
+  If $f$ is an improper lower semicontinuous convex function, then the
+  set of points for $f(x) = -\infty$ includes $\cl \rint \dom f$ by
+  lower semi-continuity, and
+  \begin{equation}
+    \label{eq:17}
+    \cl \rint \dom f = \cl \dom f \subset \dom f
+  \end{equation} and so an improper lower semicontinuous convex
+  function can have no finite values.
+
+\item \label{item:5}
+  \begin{enumerate}
+  \item
+    \begin{enumerate}
+    \item $f''(x) = \frac{2}{x^{3}} > 0$, thus convex.
+    \item $f''(x) = \exp x > 0$, thus convex.
+    \item $f''(x) = \frac{1}{x^{2}} > 0$, thus convex.
+    \item
+      \begin{align}
+        \label{eq:13}
+        H(x, y) &= \frac{2}{y^{3}}
+        \begin{bmatrix}
+          y^{2} & -xy \\
+          -xy & x^{2}
+        \end{bmatrix} \\
+        &= \frac{2}{y^{3}}
+        \begin{bmatrix}
+          y \\
+          -x
+        \end{bmatrix}^{T}
+        \begin{bmatrix}
+          y \\
+          -x
+        \end{bmatrix}
+      \end{align}
+      and so $H$ is positive semidefinite as required.
+
+    \item $\| X \|_{\sigma}$ is a norm on the s, and all norms are
+      convex. This follows as $x, y \in X, \lambda \in (0, 1)$ gives
+      \begin{align}
+        \label{eq:11}
+        \| \lambda x + (1-\lambda) y \| \leq \lambda \| x \| +
+        (1-\lambda) \| y \|
+      \end{align} by triangle inequality and homogeneity.
+
+    \item
+      \begin{equation}
+        \label{eq:15}
+        \lambda_{\max}(X) = \sup_{\| v \| = 1} \langle Xv, v \rangle
+      \end{equation} which is the supremum of convex functions $v
+      \mapsto \langle Xv, v \rangle$, and is hence convex.
+    \end{enumerate}
+    \item If $f$ is convex, then $g$ is the composition of $f$ with an
+      affine mapping.
+    \item The forward direction is trivial, as it is the composition
+      of a convex function with an affine function, and so is convex.
+
+      If $g$ is convex for all $t$ and $u, v \in \R^{n}$, then for any
+      $\lambda \in (0, 1), u, v \in \R^{n}$ and $t_{1}, t_{2} \in \R$,
+      we must have
+      \begin{align}
+        \label{eq:18}
+        f(u + [\lambda t_{1} + (1-\lambda) t_{2}] v) &= g(\lambda
+        t_{1} + (1-\lambda) t_{2}) \\
+        &\leq \lambda g(t_{1}) + (1-\lambda) g(t_{2}) \\
+        &= \lambda f(u + t_{1} v) + (1-\lambda) f(u + t_{2} v)
+      \end{align}
+
+      Now, we show $f$ is necessarily convex.  Let $x, y \in \R^{n},
+      \lambda \in (0, 1)$. Then, we must show
+      \begin{equation}
+        \label{eq:20}
+        f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y)
+      \end{equation}
+      we just choose $u, v, t_{1}, t_{2}$ such that
+      \begin{align}
+        \label{eq:19}
+        \lambda x + (1-\lambda) y = u + [\lambda t_{1} + (1-\lambda)
+        t_{2}] v \\
+        x = u + t_{1} v \\
+        y = u + t_{2} v
+      \end{align}
+      Such $u, v, t_{1}, t_{2}$ can always be found, and thus $f$ is convex.
+  \end{enumerate}
+\item \label{item:6}
+  As $x \mapsto -log(x)$ is convex on $\R^{+}$, we have
+  \begin{align}
+    \label{eq:21}
+    - \log \sum_{i=1}^{k} \lambda_{i} x_{i} \leq - \sum_{i=1}^{k}
+    \lambda_{i} \log x_{i} \\
+    \sum_{i=1}^{k} \lambda_{i} x_{i} \geq e^{\sum_{i=1}^{k} \lambda_{i} \log x_{i}} \\
+    \prod_{i=1}^{k} x_{i}^{\lambda_{i}} \leq \sum_{i=1}^{k}
+    \lambda_{i} x_{i}
+  \end{align} and letting $\lambda_{i} = \frac{1}{k}$, we obtain
+  \begin{equation}
+    \label{eq:22}
+    \prod_{i=1}^{n} x_{i}^{\frac{1}{n}} = \left(\prod_{i=1}^{n} x_{i}
+    \right)^{\frac{1}{n}} \leq \frac{1}{n} \sum_{i=1}^{n} x_{i}
+  \end{equation} as required.
+
+\item \label{item:7}
+  We first prove for $n = 1$.
+  \begin{enumerate}
+  \item ($(1) \Rightarrow (3)$)  Let $f$ be convex.  Then for $x, y
+    \in C, t \in (0, 1)$, we have
+    \begin{align}
+      \label{eq:23}
+      f(x + t(y-x)) \leq (1-t) f(x) + t f(y) \\
+      f(y) \leq f(x) + \frac{f(x + t(y-x)) - f(x)}{t}
+    \end{align} and letting $t \rightarrow 0$, we obtain
+    \begin{equation}
+      \label{eq:24}
+      f(y) \geq f(x) + f'(x) (y - x)
+    \end{equation}
+  \item ($(3) \Rightarrow (2)$) Adding the identities for $(x, y)$ and
+    $(y, x)$ gives
+    \begin{equation}
+      \label{eq:25}
+      f(x) + f(y) \leq f'(x)(y - x) + f'(y)(x-y) + f(x) + f(y)
+    \end{equation} which when re-arranged yields
+    \begin{equation}
+      \label{eq:26}
+      (x-y)(f'(x) - f'(y)) \geq 0
+    \end{equation} as required.
+  \item ($(2) \Rightarrow (1)$) \todo{Fill this in}
+  \item ($(1) \Rightarrow (4)$) \todo{Fill this in}
+  \item ($(4) \Rightarrow (1)$) \todo{Fill this in}
+  \end{enumerate}
+\item \label{item:8}
+  Let $x \in \con X$, so $x = \sum_{i=1}^{p} \lambda_{i} x_{i}$ with
+  $\lambda_{i} \geq 0, \sum_{i=1}^{p} \lambda_{i} = 1$. If $p \leq n +
+  1$, there is nothing to prove.  Thus, assume $p > n + 1$
+
+  Consider the elements $x_{j} - x_{1}$, $2 \leq j \leq p$.  These are
+  $p - 1 > n$ elements of $\R^{n}$, and thus are linearly dependent.
+  Let $\sum_{i=2}^{p} \gamma_{i} (x_{i} - x_{1}) = 0$ with not all
+  $\gamma_{i}$ zero.  Let $\gamma_{1} = - \sum_{i=2}^{p} \gamma_{i}$,
+  and then we have
+  \begin{equation}
+    \label{eq:27}
+    \sum_{i=1}^{p} \gamma_{i} x_{i} = 0
+  \end{equation} with $\sum_{i=1}^{p} \gamma_{i} = 0$.
+
+  Let $\alpha = \min \{ \frac{\lambda_{i}}{\gamma_{i}} | \gamma_{i} >
+  0 \}$. Then $\lambda_{i} - \alpha \gamma_{i}$ is non-negative and
+  zero for at least on $i$. Then we have
+  \begin{equation}
+    \label{eq:28}
+    x = x - 0 = \sum_{i=1}^{p} x_{i} (\lambda_{i} - \alpha
+    \gamma_{i}) = \sum_{i=1}^{p} \theta_{i} x_{i}  
+  \end{equation}
+  with at least one $\theta_{i}$ zero. Thus, we can write $x$ as a
+  convex combination of $p - 1$ coefficients. Induction on $p$ shows
+  that every element $x \in \con X$ can be written as a convex
+  combination of at most $n+1$ elements of $X$ as required.
+\item \label{item:9} Let $\{ v_{j} \} \in \con C$ be an infinite
+  sequence. By Caratheordory's theorem, there exist $\lambda_{ij} \geq
+  0$ and $x_{ij} \in X$ such that for every $j$,
+  \begin{equation}
+    \label{eq:3}
+    v_{j} = \sum_{i=1}^{n+1} \lambda_{ij} x_{ij}
+  \end{equation} and $\sum_{i=1}^{n+1} \lambda_{ij} = 1$.
+
+  Note that the simplex $K = \{ (\lambda_{1}, \dots, \lambda_{n+1}) |
+  \lambda_{i} \geq 0, \sum_{i=1}^{n+1} \lambda_{i} = 1 \}$ is closed
+  and bounded in $\R^{n+1}$, and is thus compact. Then, we can take an
+  infinite subsequence $j'$ of the $\lambda_{ij}$ and $x_{ij}$ such
+  that $x_{ij'} \rightarrow x_{i} \in C, \lambda_{ij'} \rightarrow
+  \lambda_{i} \in K$. The subsequence $\{ v_{j'} \}$ converges to
+  $\sum_{i=1}^{n+1} \lambda_{i} x_{i} \in \con X$ as required. Thus,
+  every sequence has a convergent subsequence, and so $\con X$ is
+  compact.
+\item \label{item:10}
+  \begin{enumerate}
+  \item $K = K_{n}^{SDP}$ is a cone as $0 \in K$, $A \in K \Rightarrow \lambda A \in
+    K$ for $\lambda \geq 0$ ($x^{T}Ax \geq 0 \Rightarrow x^{T} \lambda
+    A x \geq 0$). $K$ is a convex cone as $K + K \subseteq K$ (the sum of
+    positive semidefinite matrices is positive semidefinite).
+
+    \todo{Show $K$ is closed.}
+  \item
+    \todo{Isn't this question incorrect?}
+    Note that $f(X) = - \log \det X^{-1} = \log \det X$ by
+    properties of the determinant. Consider the function $g(t)$
+    defined by $g(t) = \log \det (Z + tV)$ for $Z, V \in K$.  Then
+    \begin{align}
+      \label{eq:6}
+      g(t) &= \log \det (Z + tV) \\
+      &= \log \det (Z^{\frac{1}{2}}(I + t Z^{-\frac{1}{2}} V
+      Z^{-\frac{1}{2}})Z^{\frac{1}{2}}) \\
+      &= \sum_{i=1}^{n} \log (1 + t \lambda_{i}) + \log \det Z
+    \end{align} where $\lambda_{1}, \dots, \lambda_{n}$ are the
+    eigenvalues of $Z^{-\frac{1}{2}} V Z^{-\frac{1}{2}}$.  Then we
+    have
+    \begin{equation}
+      \label{eq:9}
+      g''(t) = -\sum_{i=1}^{n} \frac{\lambda_{i}^{2}}{(1 + t
+        \lambda_{i})^{2}} < 0
+    \end{equation} and thus $g''(t) \leq 0$, and so $f$ is concave.
+  \end{enumerate}
+\end{enumerate}
+
+%%% Local Variables: 
+%%% TeX-master: "master""
+%%% End: 

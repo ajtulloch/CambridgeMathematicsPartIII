@@ -51,6 +51,200 @@
   Exercise.
 \end{proof}
 
+\begin{defn}
+  \begin{equation}
+    \partial f(x) = \{ v \in \R^{n} | f(x) + \langle v, y - x \rangle
+    \leq f(y) \forall y \}
+  \end{equation}
+  
+  \begin{equation}
+    f'(x) = \lim_{t \rightarrow 0} \frac{f(x + t) - f(x)}{t}
+  \end{equation}
+\end{defn}
+
+\begin{proposition}
+  Let $f, g: \R^{n} \rightarrow \bar \R$ be convex.  Then
+  \begin{enumerate}
+  \item \label{item:5} $f$ differentiable at $x$ implies $\partial f(x) = \{ \nabla
+    f(x) \}$.
+  \item \label{item:6} $f$ differentiable at $x$, $g(x) \in \R$ implies
+    \begin{equation}
+      \partial(f + g)(x) = \nabla f(x) + \partial g(x)
+    \end{equation}
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  We have
+  \begin{enumerate}
+  \item Equivalent to \ref{item:6} with $g = 0$.
+  \item To show $LHS \supseteq RHS$, if $v \in \partial g(x)$, then
+    $\langle v, y - x \rangle \leq g(y)$, which by Theorem 3.12 in
+    notes gives
+    \begin{align}
+      \label{eq:28}
+      \langle \nabla f(x), y - x \rangle + f(x) \leq f(y) \\
+      \langle v + \nabla f(x), y - x \rangle + (f + g)(x) \leq (f +
+      g)(y) \\
+      \iff v + \nabla f(x) \in \partial (f + g)
+    \end{align}
+
+    The other direction is given as
+    \begin{align}
+      \label{eq:29}
+      \liminf{z \rightarrow x} \frac{f(z) + g(z) - f(x) - g(x) -
+        \langle v, z - x \rangle}{\| z - x \|} &\geq 0 \\
+      \Rightarrow \liminf_{z \rightarrow x} \frac{g(z) - g(x) - \langle v -
+        \nabla f(x), z - x \rangle}{\| z - x \|} &\geq 0 \\
+      \Rightarrow \liminf_{t \downarrow 0} \frac{g(z(t)) - g(x) -
+        \langle v - \nabla f(x), (1 - t) x + ty - y \rangle}{t \| y -
+        x \|} &\geq 0 \\
+      \Rightarrow \liminf_{t \downarrow 0} \frac{t(g(y) - g(x)) - t
+        \langle v - \nabla f(x), y - x \rangle}{t \| y - x \|} &\geq 0
+    \\
+    \Rightarrow g(y) - g(x) - \langle v - \nabla f(x), y - x \rangle
+    &\geq 0
+    \Rightarrow v - \nabla f(x) &\in \partial g(x) \\
+    v &\in \nabla f(x) - \partial g(x)
+    \end{align}
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}
+  \label{defn:cones_and_generalized_inequalities:2}
+  Let $f: \R^{n} \rightarrow \bar R$ be proper.  Then
+  \begin{equation}
+    \label{eq:30}
+    x \in \argmin f \iff 0 \in \partial f(x)
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  \begin{equation}
+    \label{eq:31}
+    0 \in \partial f(x) \iff 
+    \underbrace{\langle 0, y -x \rangle}_{0} + f(x) \leq f(y)
+  \end{equation}
+\end{proof}
+
+\begin{defn}
+  \label{defn:cones_and_generalized_inequalities:3}
+  For a convex set $C \subseteq \R^{n}$ and point $x \in C$,
+  \begin{equation}
+    \label{eq:33}
+    N_{C}(x) = \{ v \in \R^{n} | \langle v, y -x \rangle \leq 0
+    \forall y \in G \}
+  \end{equation} is the ``normal cone'' of $x$.  By convention,
+  $N_{C}(x) = \emptyset$ for all $x \notin C$.
+\end{defn}
+
+\begin{proposition}
+  Let $C$ be convex and $C \neq \emptyset$.  Then
+  \begin{equation}
+    \label{eq:34}
+    \partial \I{C}(x) = N_{C}(x)
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  For $x \in C$, we have
+  \begin{equation}
+    \label{eq:35}
+    \partial \I{C} = \{ v | \I{C}(x) + \langle v, y - x \rangle \leq
+    \I{C}(y) \forall y \in C \} = N_{C}(x)
+  \end{equation}
+
+  For $x \notin C$, \todo{Fill in proof here}.
+\end{proof}
+
+
+\begin{proposition}
+  $C$, closed, $C \neq \emptyset$ and convex, $x \in \R^{n}$.  Then
+  \begin{equation}
+    \label{eq:36}
+    y = \Pi_{C}(x) \iff x - y \in N_{C}(y)
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  \begin{equation}
+    \label{eq:37}
+    y \in \Pi_{C}(x) \iff y \text{ minimizes } \underbrace{\frac{1}{2} \| y - x \|^{2} + \I{C}(y')}_{g(y)}.
+  \end{equation}
+
+  If and only if $0 \in \partial g(y)$ if and only if $0 \in y - x
+  + \partial \I{C}(y)$
+\end{proof}
+
+\begin{proposition}
+  Let $f: \R^{n} \rightarrow \bar \R$ be convex proper.  Then
+  \begin{equation}
+    \label{eq:38}
+    \partial f(x) =
+    \begin{cases}
+      \emptyset & x \notin \text{dom} f \\
+      \{ v \in \R^{n} | (u, -1) \in N_{\text{epi} f} (x, f(x))\} & x
+      \in \text{dom} f
+    \end{cases} 
+  \end{equation}
+
+  If $x \in \text{dom} f$,
+  \begin{equation}
+    \label{eq:39}
+    N_{\text{dom} f} = \{ v \in \R^{n} | (x, 0) \in N_{\text{epi} f}
+    (x, f(x)) \}
+  \end{equation}
+\end{proposition}
+
+\begin{exmp}
+  \label{defn:cones_and_generalized_inequalities:4}
+  Let subdifferential of $f: \R \rightarrow \R, f(x) = |x|$ is
+  \begin{equation}
+    \label{eq:40}
+    \partial f(x) = \begin{cases}
+      \text{sign} x & x \neq 0 \\
+      [-1, 1] & x = 0
+    \end{cases}
+  \end{equation}
+\end{exmp}
+
+
+\begin{defn}
+  \label{defn:cones_and_generalized_inequalities:5}
+  For $C \subseteq \R^{n}$, define the \textbf{affine hull} as
+  \begin{align}
+    \aff(C) &= \cap_{\text{$A$ affine, $C \subseteq A$}} A \\
+    \rint(C) &= \{ x \in \R^{n} | \text{there exists an open
+      neigbourhood $N$ of $x$ such that $N \cap \text{aff}(C)
+      \subseteq C$} \}
+  \end{align}
+\end{defn}
+
+\begin{exmp}
+  \label{defn:cones_and_generalized_inequalities:6}
+  \begin{align}
+    \label{eq:42}
+    \aff(\R^{n}) = \R^{n} \\
+    \aff(\R^{n}) = \R^{n} \\
+    \rint([0, 1]^{2}) = (0, 1)^{2} \\
+    \rint([0, 1] \times \{ 0 \}) = (0, 1) \times \{ 0 \}
+  \end{align}
+\end{exmp}
+
+\begin{exer}
+  We know \begin{align}
+    \label{eq:32}
+    \text{int} A \cap B \subseteq \int A \cap \int B
+  \end{align}
+
+  Does
+  \begin{equation}
+    \label{eq:41}
+    \rint(A \cap B) \subseteq \rint A \cap \rint B
+  \end{equation}
+
+\end{exer}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
