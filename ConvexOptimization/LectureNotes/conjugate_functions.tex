@@ -1,0 +1,92 @@
+
+\chapter{Conjugate Functions}
+\label{cha:conjugate-functions}
+
+\section{The Legendre-Fenchel Transform}
+\label{sec:legendre-fench-trans}
+
+\begin{defn}
+  \label{defn:conjugate_functions:1}
+  For $f: \R^{n} \rightarrow \bar \R$, define
+  \begin{equation}
+    \label{eq:46}
+    \con f(x) = \sup_{g \leq f, \text{$g$ convex}} g(x)
+  \end{equation} is the convex hull of $f$.
+\end{defn}
+
+\begin{proposition}
+  $\con f$ is the greatest convex function majorized by $f$.
+\end{proposition}
+
+\begin{defn}
+  \label{defn:conjugate_functions:2}
+  For $f: \R^{n} \rightarrow \bar \R$, the (lower) closure of $f$ is
+  defined as
+  \begin{equation}
+    \label{eq:47}
+    \cl f(x) = \liminf_{y \rightarrow x} f(y)
+  \end{equation}
+\end{defn}
+
+\begin{proposition}
+  For $f: \R^{n} \rightarrow \bar \R$,
+  \begin{equation}
+    \label{eq:48}
+    \epi (\cl f) = \cl (\epi f)
+  \end{equation}
+  In particular, if $f$ is convex, then $\cl f$ is convex.
+\end{proposition}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{proposition}
+  If $f: \R^{n} \rightarrow \bar \R$, then
+  \begin{equation}
+    \label{eq:49}
+    (\cl f)(x) = \sup_{g \leq f, \text{$g$ lsc}} g(x)
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  \todo{Fill in}
+\end{proof}
+
+\begin{thm}
+  \label{defn:conjugate_functions:3}
+  Let $C \subseteq \R^{n}$ be closed and convex.  Then
+  \begin{equation}
+    \label{eq:50}
+    C = \cap_{(b, \beta) s.t. c \subseteq H_{b, \beta}} H_{b, \beta}
+  \end{equation} where
+  \begin{equation}
+    \label{eq:51}
+    H_{b, \beta} = \{ x \in \R^{n} | \langle x, b \rangle - \beta
+    \leq 0 \}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  \todo{}
+\end{proof}
+
+\begin{thm}
+  \label{defn:conjugate_functions:4}
+  Let $f: \R^{n} \rightarrow \bar \R$ be proper, lsc, and convex.
+  Then
+  \begin{equation}
+    \label{eq:52}
+    f(x) = \sup_{g \leq f, \text{$g$ affine}} g(x)
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  \todo{This is quite an involved proof.}
+\end{proof}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

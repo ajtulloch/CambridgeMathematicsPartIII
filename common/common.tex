@@ -56,7 +56,6 @@
 \newcommand{\cas}{\overset{as}{\rightarrow}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
-\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\iid}{\textsc{iid}\xspace}
 
@@ -87,6 +86,19 @@
       \mathbb{P}\!\left(#1\right)
     }%
 }
+
+% Probability
+\NewDocumentCommand{\Q}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{Q}
+    }    
+    {%
+      \mathbb{Q}\!\left(#1\right)
+    }%
+}
+
+
 % Indicator
 \NewDocumentCommand{\I}{g}{%
   \IfNoValueTF{#1}

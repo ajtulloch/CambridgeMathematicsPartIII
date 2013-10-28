@@ -245,6 +245,40 @@
 
 \end{exer}
 
+\begin{proposition}
+  Let $f: \R^{n} \rightarrow \bar \R$ be convex.  Then
+  \begin{enumerate}
+  \item
+    \begin{enumerate}
+    \item $g(x) = f(x + y) \Rightarrow \partial g(x) = \partial
+      f(x+y)$
+    \item $g(x) = f(\lambda x) \Rightarrow \partial g(x) =
+      \lambda \partial f(x)$
+    \item $g(x) = \lambda f(x) \Rightarrow \partial g(x) =
+      \lambda \partial f(x)$
+    \end{enumerate}
+  \item $f: \R^{n} \rightarrow \bar \R$ proper, convex, $A \in \R^m
+    \times n$ such that
+    \begin{equation}
+      \label{eq:43}
+      \{  Ay | y \in \R^{m} \} \cap \rint \dom f \neq \emptyset
+    \end{equation}
+
+    Then for $x \in \dom (f \circ A)$ we have
+    \begin{equation}
+      \label{eq:44}
+      \partial (f \circ A)(x) = A^{T} \partial f(Ax)
+    \end{equation}
+  \item Let $f_{1}, \dots f_{m}: \R^{n} \rightarrow \bar \R$ be
+    proper, convex, and $\rint \dom f_{1} \cap \dots \cap \rint \dom
+    f_{m} \neq \emptyset$.  Then
+    \begin{equation}
+      \label{eq:45}
+      \partial f(x) = \partial f_{1}(x) + \dots + \partial f_{m}(x)
+    \end{equation}
+  \end{enumerate}
+\end{proposition}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

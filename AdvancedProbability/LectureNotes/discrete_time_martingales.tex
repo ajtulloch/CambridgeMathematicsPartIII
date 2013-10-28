@@ -483,8 +483,115 @@ unambiguously define
 
 Let $... \subseteq \mathcal{G}_{-2} \subseteq G_{-1} \subseteq G_{0}$
 be a sequence of $...$.
+\todo{Fill in proof from lecture notes}
 
-%%% TODO(tulloch) - fill in 
+\section{Applications of Martingales}
+\label{sec:appl-mart}
+
+\begin{thm}[Kolmogorov's $0-1$ law]
+  \label{defn:discrete_time_martingales:17}
+  Let $(X_{i})_{i \geq 1}$ be a sequence of IID random varables.  Let
+  $\mathcal{F}_{n} = \sigma(X_{k}, k \geq n)$ and
+  $\mathcal{F}_{\infty} = \cap_{n \geq 0} \mathcal{F}_{n}$.  Then
+  $\mathcal{F}_{\infty}$ is trivial - that is, every $A \in
+  \mathcal{F}_{\infty}$ has probability $\Prob{A} \in \{ 0, 1 \}$.
+\end{thm}
+
+\begin{proof}
+  Let $G_{n} = \sigma(X_{k}, k \leq n)$ and $A \in
+  \mathcal{F}_{\infty}$.  Since $\mathcal{G}_{n}$ is independent of
+  $\mathcal{F}_{n+1}$, we havethat
+  \begin{equation}
+    \label{eq:47}
+    \E{\I{A} | \mathcal{G}_{n}} = \Prob{A}
+  \end{equation}
+  Theorem 2.26 (LN \todo{link to correct theorem}) gives that
+  $\Prob{A} = \E{\I{A} | \mathcal{G}_{n}}$ converges to $\E{\I{A} |
+    \mathcal{G}_{\infty}}$ as $n \rightarrow \infty$, where
+  $\mathcal{G}_{\infty} = \sigma(\mathcal{G}_{n}, n \geq 0)$.  Then we
+  deduce that $\E{\I{A} | \mathcal{G}_{n}} = \I{A} = \Prob{A}$ as
+  $\mathcal{F}_{\infty} \subseteq \mathcal{G}_{\infty}$.  Therefore,
+  $\Prob{A} = $
+\end{proof}
+
+\begin{thm}[Strong law of large numbers]
+  \label{defn:discrete_time_martingales:18}
+  Let $(X_{i})_{i \geq 1}$ be a sequence of \iid random variables in
+  $L^{1}$ with $\mu = \E{X_{i}}$.  Let $S_{n} = \sum_{i=1}^{n} X_{i}$
+  and $S_{0} = 0$. Then $\frac{S_{n}}{n} \rightarrow \mu$ as $n
+  \rightarrow \infty$ almost surely and in $L^{1}$.
+\end{thm}
+
+\begin{proof}
+  \todo{fill in, this is somewhat involved.}
+\end{proof}
+
+\begin{thm}[Kakutani's product martingale theorem]
+  \label{defn:discrete_time_martingales:19}
+  Let $(X_{n})_{n \geq 0}$ be a sequence of independent non-negative
+  random variables of mean 1.  Let $M_{0} = 1$, $M_{n} =
+  \prod_{i=1}^{n} X_{i}$ for $n \in \N$.  Then $(M_{n})_{n \geq 0}$ is
+  a non-negative martingale and $M_{n} \rightarrow M_{\infty}$ a.s.
+  as $n \rightarrow \infty$ for some random variable $M_{\infty}$.  We
+  set $a_{n = \E{\sqrt{X_{n}}}}$, then $a_{n}\in (0, 1]$.  Moreover,
+  \begin{enumerate}
+  \item If $\prod_{n} a_{n} > 0$, then $M_{n} \rightarrow M_{\infty}$
+    in $L^{1}$ and $\E{M_{\infty}} = 1$,
+  \item If $\prod_{n} a_{n} = 0$, then $M_{\infty} = 0$ almost surely.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \todo{fill in}
+\end{proof}
+
+
+\subsection{Martingale proof of the Radon-Nikodym theorem}
+\label{sec:mart-proof-radon}
+
+Let $\Prob, \Q$ be two probability measures on the measurable space
+$\Omega, \mathcal{F}$.  Assume that $\mathcal{F}$ is countably
+generated, that is, there exists a collection of sets $(F_{n})_{n \in
+  \N}$ such that $\mathcal{F} = \sigma(F_{N}, n \in \N)$. Then the
+following are equivalent.
+\begin{enumerate}
+\item \label{item:8} $\Prob{A} = 0 \Rightarrow  \Q{A}$ for all $A \in \mathcal{F}$.
+  That is, $\Q$ is absolutely continuous with respect to $\Prob$ and
+  write $\Q << \Prob$
+\item \label{item:9} For all $\epsilon > 0$, there exists $\delta > 0$ such that
+  $\Prob{A} \leq \delta \Rightarrow \Q{A} \leq \epsilon$.
+\item \label{item:10} There exists a non-negative random variable $X$ such that
+  \begin{equation}
+    \label{eq:50}
+    \Q{A} = \E{X\I{A}}{\Prob}
+  \end{equation}
+\end{enumerate}
+
+\begin{proof}
+  $\ref{item:8} \rightarrow \ref{item:9}$.  If $\ref{item:9}$ does not
+  hold, then there exists $\epsilon > 0$ such that for all $n \geq 1$
+  there exists a set $A_{n}$ with $\Prob{A_n} \leq \frac{1}{n^{2}}$
+  and $\Q{A_{n}} \geq \epsilon$.  By Borel-Cantelli, we get that
+  $\Prob{A_{n} i.o} = 0$.  Therefore from $\ref{item:8}$ we get that
+  $\Q{A_{n} i.o} = 0$.  But
+  \begin{equation}
+    \label{eq:51}
+    \Q{A_{n} i.o} = \Q{\cap_{n} \cup_{k \geq n} A_{k}} = \lim_{n
+      \rightarrow \infty} Q(\cup_{k \geq n} A_{k}) \geq \epsilon
+  \end{equation} which is a contradiction.
+
+
+  $\ref{item:9} \rightarrow \ref{item:10}$. Consider the filtration
+  $\mathcal{F}_{n} = \sigma(F_{k}, k \leq n)$.  Let
+  \begin{equation}
+    \label{eq:52}
+    \mathcal{A}_{n} = \{ H_{1} \cap \dots \cap H_{n} | H_{i} = F_{i}
+    \text{ or } F_{i}^{c} \}
+  \end{equation} then it is easy to see that $\mathcal{F}_{n} =
+  \sigma(A_{n})$.  Note also that sets in $A_{n}$ are disjoint.
+
+  \todo{continue proof}
+\end{proof}
 
 %%% Local Variables:
 %%% mode: latex

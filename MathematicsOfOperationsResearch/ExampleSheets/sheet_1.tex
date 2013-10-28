@@ -72,12 +72,94 @@
   and thus the dual of the dual of a linear program is identical to
   the linear program.
 \item \label{item:5}
-  
+  \begin{enumerate}
+  \item The general linear program
+    \begin{equation}
+      \label{eq:11}
+      \min \{ c^{T}x | Ax \geq b, x \geq 0 \} \dual \max \{ b^{T} x |
+      A^{T}x \leq c, x \geq 0 \}
+    \end{equation}
+
+    We then have
+    \begin{align}
+      \label{eq:12}
+      \max \{ 0^{T} x | Ax = b, x \geq 0 \}  &\equiv \min \{ (-0)^{T}
+      x | Ax = b, x \geq 0 \} \\
+      \label{eq:13}
+      &\dual \max \{ z^{T}b | z^{T} A \leq 0^{T} \} \\
+      \label{eq:14}
+      &\equiv \min \{ y^{T}b | y^{T} A \geq 0^{T} \}
+    \end{align}
+
+
+    Thus, the dual of \eqref{eq:12} is \eqref{eq:14} as required.
+  \item By weak duality, we have for any feasible solutions $y$ of
+    \eqref{eq:12} and $x$ of \eqref{eq:14}, that
+    \begin{equation}
+      \label{eq:15}
+      0^{T}x = 0 \leq y^{T}b
+    \end{equation}
+
+    If \eqref{eq:12} is feasible, then by weak duality, \eqref{eq:14}
+    is bounded below by zero (by \eqref{eq:15}).
+
+    Now, assume \eqref{eq:14} is unbounded.  If there existed a
+    feasible solution to \eqref{eq:12}, then \eqref{eq:14} would be
+    bounded below by zero. By contradiction, \eqref{eq:12} has no
+    feasible solutions if \eqref{eq:14} is unbounded.
+  \item The two cases correspond to the two cases of the above result.
+    \eqref{eq:12} is feasible if and only if there exists $x \in
+    \R^{n}$ with $Ax = b$ and $x \geq 0$. \eqref{eq:12} is infeasible
+    if and only if \eqref{eq:14} is unbounded if and only if there
+    exists $y \in \R^{m}$ such that $y^{T}A \geq 0$ and $y^{T}b < 0$.
+  \end{enumerate}
 \item \label{item:6}
+  
   
 \item \label{item:7}
   
 \item \label{item:8}
+
+\item \label{item:9}
+  
+\item \label{item:10}
+\item \label{item:11}
+  \begin{enumerate}
+  \item
+    Trivial to verify this problem is in NP - given a certificate,
+    simply follow the path through the nodes, which is linear in the
+    number of nodes.
+  \item
+    Pretty tricky, just following construction in
+    \url{http://sma.epfl.ch/~moustafa/Other/Complexityslides/lec7.pdf}.
+  \item
+    Travelling salesman problem - given an instance of undirected
+    Hamiltonian cycle $G(V, E)$, construct an instance of TSP $T(V', d)$ by
+    placing a city at each $v \in V$ (so $V' = V$), and let
+    \begin{equation}
+      \label{eq:1}
+      d(v_{1}, v_{2}) =
+      \begin{cases}
+        1 & (v_{1}, v_{2}) \in E \\
+        2 & \text{otherwise}
+      \end{cases}
+    \end{equation}
+
+    There exists a TSP path of length $|V|$ if and only if there exists an
+    undirected Hamiltonian cycle in the original graph.
+
+    We now reduce directed Hamiltonian cycle to undirected Hamiltonian
+    cycle. For an instance $G(V, E)$ of the directed problem,
+    construct the undirected graph $G'(V', E')$ where each vertex $v_{i}$ is
+    replaced by three vertices $v'_{i1}, v'_{i2}, v'_{i3}$, with edges
+    $v'_{i1} \leftrightarrow v'_{i2}, v'_{i2} \leftrightarrow v'_{i3}$,
+    and $v'_{i3} \leftrightarrow v'_{j1}$ if $v'_{i} \rightarrow
+    v'_{j}$.
+
+    We then trivially have that any undirected Hamiltonian cycle in
+    $G'$ can be mapped to a directed Hamiltonian cycle in $G$, as
+    required.
+  \end{enumerate}
   
 \end{enumerate}
 %%% Local Variables: 

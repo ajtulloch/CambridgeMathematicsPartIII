@@ -717,6 +717,107 @@ Two types of claims
   The proof is just \textsc{1ftap} applied to the augmented market.
 \end{proof}
 
+\begin{exmp}
+  \label{defn:discrete_time_models:24}
+  Let $P_{t} = (B_{t, T}, S_{t})$.  $B_{t, T}$ is price of bond
+  maturing at $T$, with $B_{T, T} = 1$ almost surely.  $S_{t}$ is a
+  stock with $S_{t} \geq 0$ for all $t$.  Let $c_{t}$ be the price of
+  a call with payout $(S_{T} - K)^{+}$.  Suppose $(B_{t, T}, S_{t},
+  C_{t})_{t \in [0, T]}$ has no arbitrage.
+
+  In general, since the payout of the call is non-negative then $c_{t}
+  \geq 0$.  Also, $(S_{T} - K)^{+} \geq S_{T} - K = S_{T} - K B_{T, T}
+  = (-K, 1) \cdot (B_{t, T}, S_{t})$.
+
+  This implies
+  \begin{equation}
+    \label{eq:23}
+    c_{t} \geq S_{t} - K B_{t, T}
+  \end{equation}
+
+  Then $c_{t} \geq (S_{t} - KB_{t, T})^{+}$, and $(S_{T} - K)^{+} <
+  S_{T}$, thus $c_{t} \leq S_{t}$.
+
+  If there exists a state price density $Y$ for $(B, S)$ such that
+  $c_{t} = \frac{1}{Y_{t}} \E{Y_{T}(S_{T} - K)^{+} |
+    \mathcal{F}_{t}}$.
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:discrete_time_models:25}
+  A put option is equivalent to $(K - S_{T})^{+} = K - S_{T} + (S_{T}
+  - K)^{+} = (K, -1, 1) \cdot (B_{T, T}, S_{T}, C_{T})$.  If $p_{t}$
+  is a no-arbitrage price of the put, then
+  \begin{equation}
+    \label{eq:24}
+    p_{t} = K B_{t, T} - S_{t} + c_{t}.
+  \end{equation}
+\end{exmp}
+
+\begin{defn}
+  \label{defn:discrete_time_models:26}
+  A market is \textbf{complete} if and only if every European
+  contingent claim is attainable. A market that is not complete is
+  \textbf{incomplete}.
+\end{defn}
+
+\begin{thm}[Second fundamental theorem of asset pricing]
+  \label{defn:discrete_time_models:27}
+  A market with no arbitrage is complete if and only if there exists a
+  unique (up to scaling) state price density.
+\end{thm}
+
+\begin{proof}
+  Suppose the market is complete.  Let $Y, Y'$ be state price
+  densities with $Y_{0} = Y'_{0}  = 1$.  Fix $T > 0$ and let $\xi_{T}
+  \geq 0$ be $\mathcal{F}_{T}$-measurable.  By completeness, there
+  exists a pure investment strategy $H$ such that $X_{T}(H) =
+  \xi_{T}$.
+
+  From before,
+  \begin{equation}
+    \label{eq:25}
+    \E{Y_{T} \xi_{T}} = X_{0}(H) = \E{Y'_{T} \xi_{T}}
+  \end{equation} and thus $\E{\xi_{T}(Y_{T} - Y'_{T})} = 0$.  Let
+  $\xi_{T} = \I{Y_{T} > Y'_{T}}$. Then $Y_{T} \leq Y'_{T}$ almost
+  surely, and so by symmetry, $Y_{T} = Y'_{T}$.
+
+  A claim with payout $\xi_{T} \geq 0$ is attainable if there exists
+  $x \geq 0$ such that $\E{\frac{Y_{T} \xi_{T}}{Y_{0}}} = x =
+  X_{0}(H)$ for all state price densities.\sidenote{Proof in example
+    sheet}
+
+  Given there exists a unique state price density, every non-negative
+  claim is attainable.  The conclusion follows by observing $\xi_{T} =
+  \xi_{T}^{+} - \xi_{T}^{-}$.
+\end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:28}
+  Suppose that the price process $P$ is $n$-dimensional and the market
+  is complete.  The for each $t \geq 0$, there are no more than
+  $n^{t}$ disjoint sets of positive probability
+  $\mathcal{F}_{t}$-measurable sets of positive probability.  In
+  particular, the random vector $P_{t}$ takes on at most $n^{t} values$.
+\end{thm}
+
+\begin{proof}
+  Consider the $t=1$ case.  Let $A_{1}, \dots, A_{k}$ be  disjoint
+  $\mathcal{F}_{1}$-measurable sets with $\Prob{A_{i}} > 0$.  We clain
+  the set $\{ \I{A_{i}} \}$ is linearly independent.
+
+  Suppose $\sum_{i} a_{i} \I{A_{i}} = 0$.  Multiplying by $\I{A_{j}}$
+  implies $a_{j} \I{A_{j}} = 0$ almost surely by disjointness.  Since
+  $\Prob{A_{j}} > 0$ by assumption we have $a_{j} = 0$.
+
+  By completeness, each $\I{A_{i}}$ is attainable, so
+  \begin{equation}
+    \label{eq:26}
+    \span \{ \I{A_{i}} \} \subseteq \{ H \cdot P_{1}, H \in \R^{n} \}
+    = \underbrace\span \{ P_{1}^_{1}, \dots, P^{n}_{1} \}
+  \end{equation} 
+\end{proof}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
