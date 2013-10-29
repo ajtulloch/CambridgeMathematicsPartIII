@@ -103,10 +103,10 @@
     If \eqref{eq:12} is feasible, then by weak duality, \eqref{eq:14}
     is bounded below by zero (by \eqref{eq:15}).
 
-    Now, assume \eqref{eq:14} is unbounded.  If there existed a
-    feasible solution to \eqref{eq:12}, then \eqref{eq:14} would be
-    bounded below by zero. By contradiction, \eqref{eq:12} has no
-    feasible solutions if \eqref{eq:14} is unbounded.
+    \eqref{eq:14} is obviously feasible, since $y = 0$ is a feasible
+    solution.  If \eqref{eq:14} is bounded, we can solve it using the
+    Simplex method, which also gives us an optimal and therefore
+    feasible solution for \eqref{eq:12}.
   \item The two cases correspond to the two cases of the above result.
     \eqref{eq:12} is feasible if and only if there exists $x \in
     \R^{n}$ with $Ax = b$ and $x \geq 0$. \eqref{eq:12} is infeasible
@@ -126,7 +126,7 @@
 \item \label{item:11}
   \begin{enumerate}
   \item
-    Trivial to verify this problem is in NP - given a certificate,
+    Trivial to verify this problem is in \np, as given a certificate,
     simply follow the path through the nodes, which is linear in the
     number of nodes.
   \item

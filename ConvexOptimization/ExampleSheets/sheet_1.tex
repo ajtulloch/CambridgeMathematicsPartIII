@@ -244,7 +244,24 @@
       \label{eq:26}
       (x-y)(f'(x) - f'(y)) \geq 0
     \end{equation} as required.
-  \item ($(2) \Rightarrow (1)$) \todo{Fill this in}
+  \item ($(2) \Rightarrow (1)$) Let $y = x + \epsilon$ for $\epsilon >
+    0, x, y \in X$.  Then
+    \begin{equation}
+      \label{eq:14}
+      (x - y) (f'(x) - f'(y)) \geq 0 \Rightarrow f(x + \epsilon) \geq f(x)
+    \end{equation} or alternatively, $f'$ is an increasing function.
+
+    Let $x < z < y \in X$.
+    \begin{align}
+      \label{eq:29}
+      \frac{f(z) - f(x)}{z-x} = f'(\nu)
+      \frac{f(y) - f(z)}{y-z} = f'(\mu)
+    \end{align} for $\nu \in (x, z), \mu \in (z, y)$. Note that
+    $f'(\nu) \leq f'(\mu)$ as $f'$ is increasing.  Thus,
+    \begin{equation}
+      \label{eq:30}
+      \frac{f(z) - f(x)}{z - x} \leq \frac{f(y) - f(z)}{y - z}
+    \end{equation} and thus $f$ is convex.
   \item ($(1) \Rightarrow (4)$) \todo{Fill this in}
   \item ($(4) \Rightarrow (1)$) \todo{Fill this in}
   \end{enumerate}

@@ -1,3 +1,4 @@
+
 \chapter{Parametric Statistical Models}
 \label{cha:param-stat-models}
 
@@ -333,8 +334,88 @@ $\theta_{0}$ is unique.
   \end{equation} which is necessary for the result to hold.
 \end{remark}
 
+\todo{Fill in missing notes from previous lecture}
 
+\begin{defn}
+  \label{defn:parametric_statistical_models:6}
+  A consistent estimator $\tilde \theta$ in a model $\{ f(\cdot,
+  \theta) | \theta \in \Theta \}$ is called \textbf{asymtotically
+    efficient} if $\lim_{n} n \Var{\tilde \theta} = I(\theta)^{-1}$
+  for all $\theta \in \interior (\Theta)$ where $I(\theta)$ is the Fisher information.
+\end{defn}
 
+\begin{thm}
+  \label{defn:parametric_statistical_models:7}
+  In a model satisfying Assumption B,
+  \begin{equation}
+    \label{eq:39}
+    \sqrt{n} (\hat \theta_{MLE} - \theta_{0}) \cd N(0, I(\theta_{0})^{-1})
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Let $\Prob = \Prob_{\theta_{0}}^{N}$, $\E = \mathbb{E}_{\theta}$.
+
+  For $\ell_{n}(\theta) = -Q_{n}(\theta) = \frac{1}{n} \log f(Y_{i},
+  \theta)$.  When proving $Z_{n} \cd Z$ we may restrict to events
+  $E_{n}$ such that $\Prob{E_{n}} \rightarrow 1$, since
+  \begin{equation}
+    \label{eq:61}
+    \| \Prob{Z_{n} \leq t}- \Prob{Z_{n} \leq t, E_{n}} \| \leq
+    \Prob{E_{n}^{c}} \rightarrow 0
+  \end{equation} as $n \rightarrow \infty$.  Since $\hat \theta_{n}
+  \cp \theta_{0}$ as $n \rightarrow \infty$, we can restrict to $E_{n}
+  = \{ \hat \theta_{n} \}$ where $K$ is a closed ball centred at
+  $\theta_{0}$.  By the assumptions, $\ln$ is $C^{2}$ on $U$, and
+  $\\hat \theta_{n}$ is a maximizer on the open set $U$, so necessarily,
+  \begin{equation}
+    \label{eq:62}
+    0 = \frac{\partial}{\partial \theta} ln(\theta)_{|_{\theta = \hat \theta_{n}}} =
+    \frac{\partial}{\partial \theta} \ln (\hat \theta_{n}) =
+    \begin{bmatrix}
+      \frac{\partial}{\partial \theta_{1}} \ln (\hat \theta_{n}) \\
+      \vdots \\
+      \frac{\partial}{\partial \theta_{p}} \ln (\hat \theta_{n})
+    \end{bmatrix}
+  \end{equation}
+
+  For $h: K \rightarrow \R$ and $u, v \in K$ the line segment
+  \begin{equation}
+    \label{eq:63}
+    tu + (1-t)v
+  \end{equation} for $0 < t < 1$ connection $u, v$ does lie in the
+  ball $K$ by convexity, and the mean value theorm gives (for $h \in
+  C^{1}(U)$),
+  \begin{equation}
+    \label{eq:64}
+    h(u) = h(v) + \frac{\partial h}{\partial u} (\overline v)^{T} (u-v)
+  \end{equation} where $\overline \v$ is a mean-value on the line
+  segment.
+
+  Applying this $p$-times to $\frac{\partial}{\partial \theta_{i}}
+  \ell_{n}(\theta)$ we obtain
+  \begin{align}
+    \label{eq:65}
+    0 =
+    \begin{bmatrix}
+      \frac{\partial}{\partial \theta_{1}} \ell_{n}(\hat \theta_{n})  \\
+      \vdots \\
+      \frac{\partial}{\partial \theta_{p}} \ell_{n}(\hat \theta_{n})  \\
+    \end{bmatrix} + ....
+    
+  \end{align} \todo{Fill this in}
+
+  We have
+  \begin{align}
+    \label{eq:66}
+    (\overline{A_{n}})_{kj} = \frac{1}{n} \sum_{i=1}^{n} \left[
+    \frac{\partial^{2}}{\partial \theta_{k} \partial \theta_{j}} \log
+    f(Y_{i}, \overline{\theta}_{(j)}) -
+    \E{\frac{\partial^{2}}{\partial \theta_{i} \partial \theta_{j}}} \right]
+  \end{align} 
+
+  
+\end{proof}
 
 
 %%% Local Variables: 

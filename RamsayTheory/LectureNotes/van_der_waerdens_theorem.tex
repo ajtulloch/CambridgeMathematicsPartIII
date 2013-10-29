@@ -68,7 +68,39 @@ colouring), with no two $A_{i}$ the same colour, say that $A_{i},
   $B_{s}$ and $B_{s+t}$.  
 
   ...
+  \todo{Complete this proof}
 \end{proof}
+
+\todo{Missed lecture...}
+
+\begin{thm}[Strengthened Van Der Waerden]
+  \label{defn:van_der_waerdens_theorem:3}
+  Let $m \in \N$.  Then whenever $\N$ is finitely coloured there
+  exists an arithmetic progrression that (together with it's common
+  difference) is monochromatic.
+\end{thm}
+
+\begin{proof}
+  Induction on $k$, the number of colours.  Given $n$ suitable for $k
+  - 1$ (whenever $[n]$ is $k-1$ coloured there exists a monochromatic
+  arithmetic progression with common difference of length $n$), then
+  $W(n(m-1) + 1, k)$ is suitable for $k$.
+
+  Given $k$-colouring of $[W(n(m-1) + 1, k)]$, there exists a
+  monochromatic arithmetic progression of length $n(m-1) + 1$ - say
+  $a, a + d, a + 2d, \dots, a + n(m-1)d$. If $d$ or $2d$ or \dots{} is
+  the same color as the arithmetic progression, we are done.
+  Otherwise, $\{ d, 2d, \dots, nd \}$ is $k-1$coloured, so we are done
+  by induction.
+\end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+  \item Henceforth, we do not care about bounds.
+  \item The case $k = 2$ is Shur's theorem - whenever $\N$ is finitely
+    coloured, there exist $x, y, z$ monochromatic with $x + y = z$.
+  \end{enumerate}
+\end{remark}
 
 %%% Local Variables: 
 %%% mode: latex

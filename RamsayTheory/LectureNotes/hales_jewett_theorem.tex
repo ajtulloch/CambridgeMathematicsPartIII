@@ -1,0 +1,38 @@
+\chapter{The Hales-Jewett Theorem}
+\label{cha:hales-jewett-theorem}
+
+Let $X$ be a finite set.  Subset of $X^{n}$ is a \textbf{line} or
+\textbf{combinatorial line} if there exists $I \subset [n]$, $I \neq
+\emptyset$, and $a_{i} \in X$ for each $i \in [n] - I$, such that
+\begin{equation}
+  \label{eq:3}
+  L = \{ x \in X^{n} | x_{i} = a_{i} \forall i \notin I, x_{j} = x_{k}
+  forall j, k \in I \}
+\end{equation}
+
+\begin{thm}
+  \label{defn:hales_jewett_theorem:1}
+  Let $m, k \in \N$.  Then there exists $n \in \N$ such that whenever
+  $[m]^{n}$ is $k$-coloured there exists a monochromatic line.
+\end{thm}
+
+\begin{remark}
+  \begin{enumerate}
+  \item The smallest such $n$ is denoted $HJ(m, k)$.
+  \item So $m$-in-a-row noughts and crosses played in enough
+    dimensions cannot end in a draw.\sidenote{Exercise: show that
+      first-player winers.}
+  \item Hales-Jewett implies Van Der Waerden's theorem.
+    Indeed, given a $k$-colouring on $\N$, induce a $k$-colouring of
+    $[m]^{n}$ by $c'((x_{1}, x_{2}, \dots, x_{n}) = c(x_{1} + x_{2} +
+    \dots + x_{n})$. By Hales-Jewett, there exists a monchromatic line
+    for $c'$.
+  \end{enumerate}
+\end{remark}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
