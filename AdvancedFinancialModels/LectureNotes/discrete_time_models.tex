@@ -813,10 +813,133 @@ Two types of claims
   By completeness, each $\I{A_{i}}$ is attainable, so
   \begin{equation}
     \label{eq:26}
-    \span \{ \I{A_{i}} \} \subseteq \{ H \cdot P_{1}, H \in \R^{n} \}
-    = \underbrace\span \{ P_{1}^_{1}, \dots, P^{n}_{1} \}
+    \vecspan \{ \I{A_{i}} \} \subseteq \{ H \cdot P_{1}, H \in \R^{n} \}
+    =  \vecspan \{ P^{1}_{1}, \dots, P^{n}_{1} \}
   \end{equation} 
 \end{proof}
+
+\section{American Claims}
+\label{sec:american-claims}
+
+Recall that the payoff of an American claim is specified by an adapted
+process $(\xi_{t})_{0 \leq t \leq T}$ where $\xi_{t}$ is the payout if
+the claim is executed at time $t$.
+
+\begin{thm}
+  \label{defn:discrete_time_models:29}
+  Suppose the market is complete.  Then there exists a (pure
+  investment) strategy such that $X_{t}(H) \geq \xi_{t}$ for all $0
+  \leq t \leq T$, and there exists a stopping time $\tau^{\star}$ such
+  that $X_{\tau^{\star}}(H) = \xi_{\tau^{\star}}$.
+
+  Furthermore, $X_{0}(H) = \sup_{\text{stopping time $\tau \leq T$}}
+  \E{Y_{\tau} \xi_{\tau}}$ where $Y$ is the unique state price density
+  such that $Y_{0} = 1$.
+\end{thm}
+
+\begin{defn}
+  \label{defn:discrete_time_models:30}
+  Let $Z$ be an adapted integrable process $(Z_{t})_{0 \leq t \leq
+    T}$.  The Snell envelope of $Z$is the process $U$ defined by
+  $U_{T}= Z_{T}$, $U_{t} = \max \{ Z_{t}, \E{U_{t + 1} |
+    \mathcal{F}_{t} } \}$ for $0 \leq t \leq T - 1$.
+\end{defn}
+
+\begin{remark}
+  Note that $U_{t} \geq Z_{t}$for all $t$, and $U$ is a supermartingale
+  since $U_{t} \geq \E{U_{t+1} | \mathcal{F}_{t}}$.
+\end{remark}
+
+\begin{thm}[Doob decomposition]
+  \label{defn:discrete_time_models:31}
+  Let $U$ be a discrete-time supermartingale.  Then there exists a
+  martingale $M$ with $M_{0} = 0$, and a non-decreasing process $A$
+  with $A_{0} = 0$ such that $U_{t} = U_{0} + M_{t} - A_{t}$.
+\end{thm}
+
+\begin{proof}
+  Let $M_{0} = A_{0} = 0$, $M_{t+1} = M_{t} + U_{t+1} - \E{U_{t+1} |
+    \mathcal{F}_{t}}$, and $A_{t+1} = A_{t} + U_{t} - \E{U_{t+1} |
+    \mathcal{F}_{t}}$.  By induction, $A_{t}$ is predictable.  $A$ is
+  non-decreasing as $U$ is a supermartingale.
+
+  Now, we show uniqueness.  Suppose $U = U_{0} + M - A = U_{0} + M' -
+  A'$ .  Then $M - M' = A - A'$, and as $A - A'$ is predictable, we
+  have $M - M'$ is a predictable martingale.  In discrete time,
+  predictable martingales are almost surely constant.  Thus, $M_{t} -
+  M'_{t} = M_{0} - M'_{0} = 0$, and thus we have demonstrated uniqueness.
+\end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:32}
+  Let $Z$ be integrable and adapted, $U$ is a Snell envelope, with
+  Doob decomposition $U = U_{0} + M - A$.  Let $\tau^{\star} = \inf \{
+  t \geq 0 | A_{t + 1} > 0 \}$ with the convention $\tau^{\star} = T$
+  on $\{ A_{t} = 0 \forall t \}$.
+
+  Then $U_{\tau^{\star}} = U_{0} + M_{\tau^{\star}} = Z_{\tau^{\star}}$.
+\end{thm}
+
+\begin{remark}
+  $\tau^{\star}$ is a stopping time since $A$ is predictable.
+\end{remark}
+
+\begin{proof}
+  Note that $A_{\tau^{\star}} = 0$ but $A_{\tau^{\star} + 1} > 0$ .
+
+  We have $U_{t} = U_{0} + M_{t} - A_{t} = \max \{ Z_{t}, \E{U_{t+1} |
+    \mathcal{F}_{t}}  \} = \max \{ Z_{t}, U_{0} + M_{t} - A_{t+1} \}$.
+
+  So $U_{0} + M_{\tau^{\star}} = \max \{ Z_{\tau^{\star}}, U_{0} +
+  M_{\tau^{\star}} - A_{\tau^{\star} - 1} \}$, which implies $U_{0} +
+  M_{\tau^{\star}}= Z_{\tau^{\star}} = U_{\tau^{\star}}$ as required.
+\end{proof}
+
+\begin{thm}
+  \label{defn:discrete_time_models:33}
+  Under the same hypothesis as before,
+  \begin{equation}
+    \label{eq:27}
+    U_{0} = \sup_{\text{stopping times $\tau \leq T$}} \E{Z_{\tau}}.
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  By the optional stopping theorem, $U_{0} \geq \E{U_{\tau}} \leq \E{Z_{t}}$ for any
+  stopping time $\tau \leq T$, and since $U_{t} \geq Z_{t} \forall t$.
+
+  But $U_{0} = \E{U_{0} + M_{\tau^{\star}}} = \E{Z_{\tau^{\star}}}$.
+\end{proof}
+
+We now give a proof of the existence of the minimal super-replicating
+strategy. Let $U$ be the Snell envelope of $(Y_{t} \xi_{t})_{0 \leq t
+  \leq T}$. Let $U = U_{0} +M - A$ be its Doob decomposition.
+
+By completeness, there exists a strategy $H$ such that
+\begin{equation}
+  \label{eq:28}
+  X_{T}(H) = \frac{U_{0} + M_{T}}{Y_{T}}.
+\end{equation}  Since $XY$ is a martingale ($XY$ is a local martingale
+in general but by completeness all processes are bounded).  So
+\begin{align}
+  \label{eq:29}
+  X_{t} Y_{T} &= U_{0} + M_{t} \\
+  &\geq U_{0} + M_{t} - A_{t} \\
+  &= U_{t} \\
+  &\geq Y_{t} \xi_{t}.
+\end{align} Thus $X_{t} \geq \xi_{t}$ for all $0 \leq t \leq T$.
+
+Also, at $\tau^{\star} = \inf \{ t \geq 0 | A_{t+1} > 0 \}$, we have
+$X_{\tau^{\star}} Y_{\tau^{\star}} = U_{0} + M_{\tau^{\star}} =
+U_{\tau^{\star}} = Y_{\tau^{\star}} \xi_{\tau^{\star}}$, and so
+$X_{\tau^{\star}} = \xi_{\tau^{\star}}$.
+
+Note also that $X_{0} = \E{U_{0} + M_{T}} = U_{0} = \sup_{\tau \leq T}
+\E{\xi_{\tau} Y_{\tau}}$.
+ 
+\begin{remark}
+  
+\end{remark}
 
 %%% Local Variables: 
 %%% mode: latex

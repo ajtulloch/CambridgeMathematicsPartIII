@@ -1,0 +1,35 @@
+
+\chapter{Weak Convergence}
+\label{cha:weak-convergence}
+
+\begin{defn}
+  \label{defn:weak_convergence:1}
+  Let $(\mu_{n})_{n geq 0}$ be a sequence of probability measures on a
+  metric space $(M, d)$.   We say that $\mu_{n}$ converges weakly to
+  $\mu$ ($\mu_{n} \Rightarrow \mu$) if $\mu_{n}(f) \rightarrow \mu(f)$
+  as $n \rightarrow \infty$, for all bounded continuous functions $f$
+  on $M$, where $\mu(f) = \int_{M} f d\mu$ .
+\end{defn}
+
+\begin{exmp}
+  \label{defn:weak_convergence:1}
+  \todo{Fill in examples from lecture notes.}
+\end{exmp}
+
+\begin{thm}
+  \label{defn:weak_convergence:1}
+  Let $(\mu_{n})_{n \geq 0}$ be a sequence of probability measures.
+  Then the following are equivalent:
+  \begin{enumerate}
+  \item $\mu_{n} \Rightarrow \mu$ as $n \rightarrow \infty$,
+  \item $\liminf_{n} \mu_{n}(G) \geq \mu(G)$ for all open sets $G$,
+  \item $\liminf_{n} \mu_{n}(A) \leq \mu(A)$ for all closed sets $A$,
+  \item $\lim_{n} \mu_{n}(A) = \mu(A)$ for all sets $A$ with
+    $\mu(\partial A) = 0$.
+  \end{enumerate}
+\end{thm}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -85,6 +85,152 @@
   \todo{This is quite an involved proof.}
 \end{proof}
 
+\begin{defn}
+  \label{defn:conjugate_functions:5}
+  For $f: \R^{n} \rightarrow \bar \R$, let $f^{\star}: \R^{n}
+  \rightarrow \bar \R$ be defined by
+  \begin{equation}
+    \label{eq:53}
+    f^{\star}(v) = \sup_{x \in \R^{n}} \{ \langle v, x \rangle - f(x) \}
+  \end{equation}
+  as the \textbf{conjugate} to $f$. The mapping $f \mapsto f^{\star}$
+  is the \textbf{Legendre-Fenchel Transform}
+\end{defn}
+
+\begin{remark}
+  For $v \in \R^{n}$, $f^{\star}(v) = \sup \{ x \in \R^{n} \{ \langle
+  v, x \rangle - f(x) \} \Rightarrow f^{\star}(v) \geq \langle v, x
+  \rangle - f(x) \forall x \in \R^{n} \iff f(x) \geq \langle v, x
+  \rangle - f^{\star}(x) \forall x \in \R^n$.
+
+  Thus $f^{\star}$ is the largest affine function with gradient $v$
+  majorized by $f$.
+\end{remark}
+
+\begin{thm}
+  \label{defn:conjugate_functions:6}
+  Assume $f: \R^{n} \rightarrow \bar \R$.  Then
+  \begin{enumerate}
+  \item $f^{\star} = (\con f)^{\star} = (\cl f)^{\star} = (\cl \con
+    f)^{\star}$ and $f \geq f^{\star \star} = (f^{\star})^{\star}$,
+    the \textbf{biconjugate} of $f$.
+  \item If $\con f$ is proper, then $f^{\star}, f^{\star \star}$ as
+    proper, lower semicontinuous, convex and $f^{\star \star}= \cl
+    \con f$.
+  \item If $f: \R^{n} \rightarrow \bar \R$ is proper, lower
+    semicontinuous, and proper, then
+    \begin{equation}
+      \label{eq:54}
+      f^{\star \star} = f
+    \end{equation}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  We have
+  \begin{equation}
+    \label{eq:55}
+    (v, \beta) \in \epi f^{\star} \iff \beta \geq \langle v, x
+    \rangle - f(x) \forall x \in \R^{n} \iff f(x) \geq \langle v, x
+    \rangle - \beta \forall x \in \R^{n}
+  \end{equation}
+
+  We claim that for an affine function $h$, we have $h \leq f \iff h
+  \leq con f \iff h \leq \cl f \iff h \leq \cl \con f$. This is shown
+  as $\con f$ is the largest convex function less than or equal to
+  $f$, and $h$ is convex. Same for $\cl, \cl \con$, etc.
+
+  Thus in \eqref{eq:55} we can replace $f$ by $\con f$, $\cl f$, $\cl
+  \con f$, which gives our required result.
+
+  We also have
+  \begin{align}
+    \label{eq:56}
+    f^{\star \star}(y) & = \sup_{v \in \R^{n}} \{ \langle v, y \rangle - \sup_{x \in \R^{n}}  \{ \langle v, x \rangle - f(x) \} \} \\
+                       & \leq \sup_{v \in \R^{n}} \{ \langle v, y \rangle - \langle v, y  \rangle + f(y) \} \\
+                       & = f(y)
+ \end{align}
+                     
+  
+  For the second part, we have $\con f$ is proper, and claim that $\cl
+  \con f$ is proper, lower semicontinuous, and convex.
+
+  Lower semicontinuity is a give.  Convexity is given by the previous
+  proposition that $f$ is convex implies $\cl f$ is convex.
+  Properness is to be shown in an exercise.
+
+  Applying the previous theorem,
+  \begin{align}
+    \label{eq:57}
+    \cl \con f(x) = \sup_{g \in \cl \con f, \text{$g$ affine}} g(x) \\
+    &= \sup_{(v, \beta) \in \epi f^{\star}} \{ \langle v, x \rangle - \beta \}
+  \\
+    &= \sup_{(v, \beta) \in \epi f^{\star}} \{ \langle v, x \rangle -
+    f^{\star}(v) \} \\
+    &= \sup_{v \in \dom f^{\star}} \{ \langle v, x \rangle -
+    f^{\star}(v) \} \\
+    &= \sup_{v \in \R^{n}} \{ \langle v, x \rangle - f^{\star}(v) \} -
+    f^{\star \star}(x)
+  \end{align}
+  with $g(x) \leq \langle v, x \rangle - \beta$, $(v, \beta) \in \epi (\cl \con f)^{\star} \iff (v, \beta) \in \epi f^{\star}$.
+
+  To show $f^{\star}$ is proper, lower semicontinous, and convex, we
+  have $\epi f^{\star}$ is the intersecton of closed convex sets, and
+  therefore closed and convex, and hence $f^{\star}$ is lower
+  semicontinuous and convex.
+
+  To show properness, we have $\con f$ is proper implies there exists
+  $x \in \R^{n}$ with $\con f(x) < \infty$. Then $f^{\star}(v) =
+  \sup_{x \in \R^{n}} \{ \langle v, x \rangle - f(x) \}$, which is
+  greater than $-\infty$.
+
+  If $f^{\star} \equiv +\infty$, then $\cl \con f = f^{\star \star} =
+  \sup_{v} \langle v, x - f^{\star}(x) \equiv -\infty$, and so $\cl
+  \con f$ is proper, which implies $f^{\star}$ is proper, lower
+  semicontinuous, and convex.  Applying to $f^{\star}$ - we need $\con
+  f^{\star}$ proper (which is proper by previous result),, and thus $f^{\star
+    \star}$ is proper, lower semicontinuous, and convex.
+
+  For part 3, apply 2 - $f$ is convex, which implies $\con f = f$ and
+  $\con f$ is proper (as $f$ is proper), and $f$ is lsc and convex,
+  and thus $f^{\star \star} = \cl \con f = f$.
+\end{proof}
+
+
+\section{Duality Correspondences}
+\label{sec:dual-corr}
+
+\begin{thm}
+  \label{defn:conjugate_functions:7}
+  Let $f: \R^{n} \rightarrow \bar \R$ be proper, lower semicontinuous,
+  and convex. Then:
+  \begin{enumerate}
+  \item $\partial f^{\star} = (\partial f)^{-1}$
+  \item $v \in \partial f(x) \iff f(x) + f^{\star}(v) = \langle v, x
+    \rangle \iff x \in \partial (f^{\star})(v)$.
+  \item
+    \begin{align}
+      \label{eq:58}
+      \partial f(x) &= \argmax_{v'} \{ \langle v', x \rangle - f^{\star}(v') \}  \\
+      \partial f^{\star}(x) &= \argmax_{x'} \{ \langle v, x' \rangle - f(x') \}  \\
+    \end{align}
+
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item This is obvious from (2)
+  \item
+    \begin{align}
+      \label{eq:59}
+      f(x) + f^{\star}(v) &= \langle v, x \rangle \\
+      &\iff \{ f^{\star}(v) = \langle v, x \rangle - f(x)  \\
+      &\iff x \in \argmax \{ \langle v, x' \rangle - f(x') \}  \\
+      &...
+    \end{align}
+  \end{enumerate}
+\end{proof}
 
 %%% Local Variables: 
 %%% mode: latex
