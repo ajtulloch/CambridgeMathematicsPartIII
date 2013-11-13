@@ -1,0 +1,6 @@
+/* JS */ gapi.loaded_2(function(_){var window=this;
+_.hA["slide-menu"]=function(a){var c=new _.Tk((0,_.FC)(a)),f=new _.Zh(c);c.open=function(){};(0,_.nC)(c);a.attributes={height:"100%"};a.where=c.Ld;a.onClose=function(){c.close()};a.onRestyle=function(a){if(a){var f=!1;a.hasOwnProperty("showMenu")&&(c.Is(a.showMenu),f=!0);a.hasOwnProperty("setHideOnLeave")&&(c.Zq(a.setHideOnLeave),f=!0);f||c.resize(a)}};a.onCreate=function(a){a.ci=function(){return this.Zf("openerIframe")};f.wb=c.wb=a;a.qc(c.G);a.Q("_ready",(0,_.H)(c.Cg,c),_.Vz);c.nk=function(c,f){!a.Ma()&& a.ds([c,f])};(0,_.Xk)(c,c.ha);f.open()}};
+
+});
+
+// Copyright 2002-2013 Google Inc.

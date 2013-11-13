@@ -15,6 +15,12 @@
 \usepackage{xspace}
 \usepackage{enumitem}
 \usepackage{todonotes}
+\usepackage{dcolumn}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl, xcolor}
+\usepackage{longtable}
+
 \hypersetup{colorlinks=true}
 
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
@@ -35,13 +41,19 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\aff}{aff}
 \DeclareMathOperator*{\rint}{rint}
+\DeclareMathOperator*{\tr}{tr}
 \DeclareMathOperator*{\interior}{int}
 \DeclareMathOperator*{\epi}{epi}
 \DeclareMathOperator*{\dom}{dom}
 \DeclareMathOperator*{\vecspan}{span}
 \DeclareMathOperator*{\con}{con}
 \DeclareMathOperator*{\cl}{cl}
+\DeclareMathOperator*{\grad}{\nabla}
 \setlist[enumerate]{label=(\roman*)}
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{label=Ex. \arabic*}
+
 
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{2}
@@ -132,5 +144,12 @@
     }   
     {%
       \text{Cov}\!\left(#1, #2\right)
+    }%
+}
+
+% Expectation
+\NewDocumentCommand{\IP}{g}{%
+    {%
+      \left \langle #1 \right \rangle
     }%
 }

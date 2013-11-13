@@ -187,9 +187,9 @@
   If $f^{\star} \equiv +\infty$, then $\cl \con f = f^{\star \star} =
   \sup_{v} \langle v, x - f^{\star}(x) \equiv -\infty$, and so $\cl
   \con f$ is proper, which implies $f^{\star}$ is proper, lower
-  semicontinuous, and convex.  Applying to $f^{\star}$ - we need $\con
-  f^{\star}$ proper (which is proper by previous result),, and thus $f^{\star
-    \star}$ is proper, lower semicontinuous, and convex.
+  semicontinuous, and convex. Applying to $f^{\star}$ - we need $\con
+  f^{\star}$ proper (which is proper by previous result),, and thus
+  $f^{\star \star}$ is proper, lower semicontinuous, and convex.
 
   For part 3, apply 2 - $f$ is convex, which implies $\con f = f$ and
   $\con f$ is proper (as $f$ is proper), and $f$ is lsc and convex,
@@ -230,7 +230,201 @@
       &...
     \end{align}
   \end{enumerate}
+  \todo{Finish off proof}
 \end{proof}
+
+\begin{proposition}
+  Let $f: \R^{n} \rightarrow \bar \R$ be proper, lower semicontinuous,
+  and convex.  Then
+  \begin{align}
+    (f(\cdot) - \langle a, \cdot \rangle)^{\star} = f^{\star(\cdot +
+      a)} \\
+    (f(\cdot + b))^{\star} = f^{\star}(\cdot) - \langle \cdot, b
+    \rangle \\
+    (f(\cdot) + c)^{\star} = f^{\star}(\cdot) - c \\
+    (\lambda f(\cdot))^{\star} = \lambda
+    f^{\star}(\frac{\cdot}{\lambda}), \lambda > 0 \\
+    (\lambda f(\frac{\cdot}{\lambda}))^{\star} = \lambda f^{\star}(\cdot)
+  \end{align}
+\end{proposition}
+
+\begin{proof}
+  Exercise
+\end{proof}
+
+\begin{proposition}
+  $f_{i}: \R^{n} \rightarrow \bar \R$, $i: 1, \dots, m$ proper,
+  $f(x_{1}, \dots, x_{m}) = \sum_{i} f_{i}(x_{i})$.  Then
+  $f^{\star}(v_{1}, \dots, v_{m}) = \sum_{i} f^{\star}(v_{i})$
+\end{proposition}
+
+\begin{defn}
+  \label{defn:conjugate_functions:8}
+  For any set $S \subseteq \R^{n}$, define the support function
+  \begin{align}
+    \label{eq:63}
+    G_{S}(v) = \sup_{x \in S} \langle v, x \rangle = (\delta_{S})^{\star}(v)
+  \end{align}
+\end{defn}
+
+\begin{defn}
+  \label{defn:conjugate_functions:9}
+  A function $h: \R^{n} \rightarrow \bar \R$ is \textbf{positively
+    homogenous} if $0 \in \dom h$ and $h(\lambda x) = \lambda h(x)$
+  for all $\lambda > 0, x \in \R^{n}$.
+\end{defn}
+
+\begin{proposition}
+  The set of positive homogenous proper lowersemicontinuous convex
+  functions and the set of closed convex nonempty sets are in
+  one-to-one correspondence through the Legendre-Fenchel transform.
+  \begin{equation}
+    \label{eq:64}
+    \delta_{C} \leftrightarrow G_{C}    
+  \end{equation}
+  and
+  \begin{equation}
+    \label{eq:65}
+    x \in \partial G_{C}(v) \iff x \in C
+  \end{equation}
+  and
+  \begin{equation}
+    \label{eq:66}
+    G_{C}(v) = \langle v, x \rangle \iff v \in N_{C}(x) = \partial \delta_{C}(x)
+  \end{equation}
+
+  The set of closed convex cones is in one-to-one correspondence with
+  itself -
+  \begin{align}
+    \label{eq:67}
+    \delta_{K} \leftrightarrow \delta_{K^{\star}} \\
+    k^{\star} = \{ v \in \R^{n} | \langle v, x \rangle \leq 0 \forall
+    x \in K \}
+  \end{align}
+  and $x \in N_{K^{\star}}(v) \iff x \in K, v \in K^{\star}, \langle
+  x, v \rangle = 0 \iff v \in N_{K}(x)$.
+\end{proposition}
+
+\chapter{Duality in Optimization}
+\label{cha:duality-optimization}
+
+\begin{defn}
+  \label{defn:conjugate_functions:10}
+  For $f: \R^{n} \times \R^{m} \rightarrow \bar \R$ proper,
+  lowersemicontinuous, convex, we define the primal and dual problems
+  \begin{align}
+    \label{eq:68}
+    \inf_{x \in \R^{n}} \phi(x), \phi(x) = f(x, 0) \\
+    \sup_{y \in \R^{m}} \psi(y), \psi(y) = f^{\star}(0, y)
+  \end{align}
+  and the \textbf{$\inf$-projections}
+  \begin{align}
+    \label{eq:69}
+    p(u) = \inf_{x \in \R^{n}} f(x, u) \\
+    q(v) = \inf_{y \in \R^{m}} f^{\star}(v, y)
+  \end{align}
+
+  $f$ is the peturbation function for $\phi$, $p$ is the associated
+  projection function.
+
+  Consider the problem
+  \begin{equation}
+    \label{eq:70}
+    \inf_{x} \frac{1}{2} \| x - z \|^{2} + \delta_{\geq 0} (Ax - b) =
+    \inf \phi(x)
+  \end{equation}
+  Consider the perturbed problem
+  \begin{equation}
+    \label{eq:71}
+    f(x, u) = \frac{1}{2} \| x - z \|^{2} + \delta_{\geq 0} (Ax - b + u)
+  \end{equation}
+\end{defn}
+
+\begin{proposition}
+  Assume $f$ statisfying the assumptions in Definition
+  \ref{defn:conjugate_functions:10}.  Then
+  \begin{enumerate}
+  \item $\phi, -psi$ are convex and lower semicontinuous
+  \item $p, q$ are convex
+  \item $p(0) = \inf_{x} \phi(x)$
+  \item $p^{\star \star}(0) = \sup_{y} \psi(y)$
+  \item $\inf_{x} \phi(x) < \infty \iff 0 \in \dom p$
+  \item $\sup \psi(y) > -\infty \iff 0 \in \dom q$
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+  \item $\phi$ is clearly convex.  For $\psi$, $f^{\star}$ is
+    lowersemicontinuous and convex, which implies $-\psi$ is
+    lowersemicontinuous and convex.
+  \item Look at the strict epigraph of $p$:
+    \begin{align}
+      \label{eq:73}
+      E = \{ (u, \alpha) \in \R^{m} \times \R | p(u) < \alpha \} \\
+      &= \{ (u, \alpha) \in \R^{m} \times \R | \exists x : f(x, u) <
+      \alpha \} \\
+      &= A \{ (u, \alpha, x) \in \R^{m} \times \R \times \R^{n} | f(x,
+      u) \leq \alpha \} \\
+      &= A(u, \alpha, x) \mapsto (u, \alpha)
+    \end{align} as a linear map over a convex set.  As $E$ is convex,
+    $p$ must be convex.  Similarly with $q$.
+  \item For $p(0)$, this proceeds by definition.  For $p^{\star
+      \star}(0)$, 
+    \begin{align}
+      \label{eq:74}
+      p^{\star}(y) = \sup_{u} \{ \langle y, u \rangle - p(u) \} \\
+      &= \sup_{u, x} \langle y, u \rangle - f(x, u) \\
+      &= f^{\star}(0, y)
+    \end{align} and
+    \begin{align}
+      \label{eq:75}
+      p^{\star \star}(0) = \sup_{y} \langle 0, y \rangle -
+      p^{\star}(y) \\
+      &= \sup_{y} - f^{\star}(0, y) \\
+      &= \sup_{y} \psi(y)
+    \end{align}
+  \item By definition, $0 \in \dom p \iff p(0) = \inf_{x} f(x) < \infty$.
+  \end{enumerate}
+
+  \todo{complete proof}
+\end{proof}
+
+\begin{thm}
+  \label{defn:conjugate_functions:11}
+  Let $f$ as in Definition 7.1.  Then weak duality holds
+  \begin{equation}
+    \label{eq:60}
+    p(0) = \inf_{x} \phi(x) \geq \sup_{y} \psi(y) = p^{\star \star}(0)
+  \end{equation}
+  and under certain conditions the $\inf, \sup$ are equal and finite
+  (strong duality).
+
+  $p(0) \in \R$ and $p$ lower-semicontinuous at 0 if and only if $\inf
+  \phi(x) = \sup \psi(y) \in \R$.
+\end{thm}
+
+\begin{defn}
+  \label{defn:conjugate_functions:12}
+  \begin{equation}
+    \label{eq:61}
+    \inf \phi - \sup \psi
+  \end{equation} is the \textbf{duality gap}
+\end{defn}
+
+\begin{proof}
+  ($\Leftarrow$) $p^{\star \star} \leq \cl p \leq p \Rightarrow \cl
+  p(0) = p(0)$.
+  
+  ($\Rightarrow$) $\cl p$ is lowersemicontinuous, convex $\Rightarrow
+  \cl p(x)$  is proper, $\sup \psi = (p^{\star})^{\star}(0) = (\cl p)^{\star
+    \star}(0) = \cl p(0) = p(0) = \inf \phi$
+\end{proof}
+
+\begin{proposition}
+\end{proposition}
+
+\todo{Fill in notes from lecture}
 
 %%% Local Variables: 
 %%% mode: latex

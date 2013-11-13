@@ -1,0 +1,131 @@
+\chapter{Example Sheet 2}
+\label{cha:example-sheet-2}
+
+\begin{exercises}
+\item The first direction is trivial. Assume $0 \in \int (C - D)$ and
+  a separating hyperplane $(b, \beta)$ exists. Then there exists $\epsilon
+  > 0$ such that $B_{\epsilon}(0) \subseteq \int (C - D)$. Let $b_{i}$
+  be some non-zero element of $b$. Thus, there exists $(x^{1}, y^{1}),
+  (x^{2}, y^{2}), (x^{3}, y^{3}) \in C \times D$ such that $\IP{b,
+    x^{1} - y^{1}} = 0$, $\IP{b, x^{2} - y^{2}} = \epsilon b_{i}$ and
+  $\IP{b, x^{3} - y^{3}} = -\epsilon b_{i}$.
+
+  Note however, that the condition of the separating hyperplane is
+  such that $\IP{b, x - y} \leq 0$ for all $(x, y) \in C \times D$.
+  By contradiction, we have that no such hyperplane exists.
+
+  \todo{Opposite direction}
+\item
+  At points of continuity of $f$, the subgradient is simply the singleton set
+  $\{ \grad f \}$.  Thus, for $x \neq 0$, $\partial f(x) = \{
+  \frac{x}{\| x \|}$.  At $x = 0$, we seek the set of $v \in \R^{n}$
+  such that
+  \begin{equation}
+    \label{eq:31}
+    V = \| x \| \geq 0 + \IP{v, x} = \IP{v, x}
+  \end{equation} for all $x \in \R^{n}$.
+
+  We claim that $V = B_{1}$.  First, let $v \in B_{1}$. Then by
+  definition of the norm as
+  \begin{equation}
+    \label{eq:32}
+    \| x \| = \sup_{v \leq 1} \IP{v, x},
+  \end{equation} we have $v \in V$.
+
+  Now, let $v \in V$.  Then taking $x = v$ in \eqref{eq:32}, we have
+  $\| v \| \geq \| v \|^{2}$, and so $\| v \| \leq 1$.  Thus $v \in
+  B_{1}$.
+
+  Hence, $V = B_{1}$.
+\item The problem is convex (sum of composition of convex function $f:
+  x \mapsto x^{2}$ with affine transform $g: x \mapsto x - a^{i}$).
+  The function is convex, continuous, level bounded, and proper.
+  Thus, by Theorem 2.14, $\inf f$ is nonempty.
+
+  Optimality conditions at $x \in \R^{n}$ are equivalent to requiring
+  that $0 \in \partial f(x)$.  Taking derivatives, this is equivalent
+  to
+  \begin{align}
+    \label{eq:33}
+    0 =
+    \begin{cases}
+      \sum_{i=1}^{m} \frac{w_{i}(x - a_{i})}{\|x - a_{i} \|} & x \neq
+      a_{i} \forall i \\
+      \sum_{i=1}^{m} v_{i} & \| v_{i} \| \leq 1, a_{i} = x
+    \end{cases}
+  \end{align}
+  with obvious interpolation between the two solutions.
+
+  In the case where $n = 1$, then the $L^{1}$ and $L^{2}$ norms are
+  equal, and this is just computing the weighted medians of the
+  $a_{i}$.  Can just compute
+
+  \todo{What are the applications for this technique in image
+    processing}
+\item Note that $g(x)$ is affine sum of convex functions, and so is
+  convex. Let $x$ minimize $g$.  Then $0 \in \partial g(x)$, and we
+  have
+  \begin{equation}
+    \label{eq:34}
+    \partial_{i} g(x) =
+    \begin{cases}
+      1 + \mu \grad_{i} f(x) & x_{i} > 0 \\
+      [-1 + \mu \grad_{i} f(x), 1 + \mu \grad_{i} f(x)] & x_{i} = 0 \\
+      -1 + \mu \grad_{i} f(x) & x_{i} < 0
+    \end{cases}
+  \end{equation} and thus if $0 \in \partial g(x)$, we must have
+  \begin{align}
+    \label{eq:35}
+    \begin{cases}
+      x_{i} = x_{i} - \grad_{i} f(x) - \frac{1}{\mu} & x_{i} > 0 \\
+      | \grad_{i} f(x) | \leq \frac{1}{\mu} & x_{i} = 0 \\
+      x_{i} = x_{i} - \grad_{i} f(x) + \frac{1}{\mu} & x_{i} > 0
+    \end{cases} 
+  \end{align} which is equivalent to the shrinkage operation.
+\item Note that $K$ is a closed convex cone.  As such, we have that
+  $K^{\star \star} = \cl K = K$. We have
+  \begin{align}
+    \label{eq:37}
+    K^{\star \star} &= \{ w \in \R^{n} | \IP{w, x} \leq 0 \forall x \in
+    K^{\star} \} \\
+    &= \{ w \in \R^{n} | \IP{w, Ax} \leq 0 \forall x \geq 0 \} \\
+    &= \{ w \in \R^{n} | \IP{A^{T}w, x} \leq 0 \forall x \geq 0 \} \\
+    &= \{ w \in \R^{n} | A^{T} w \leq 0 \}
+  \end{align}
+
+  By uniqueness, we have our result.
+
+  Now, consider Farkas's lemma. Consider the cone $K$ as above, and
+  consider the two cases, $b \in K^{\star}$ and $b \notin K^{\star}$.
+  In the first case, we have that there exists $x \geq 0$ such that
+  $Ax = b$. In the second case, we have $b \notin K^{\star \star
+    \star} = K^{\star} = \{ w | \IP{w, x} \leq 0 \forall x \in K \}$,
+  and so there must exist $x \in K$ such that $\IP{b, x} > 0$, which
+  is equivalent to requiring that $A^{T} x \leq 0$ and $\IP{b, x} >
+  0$, and so letting $y = -x$, we have our alternative.
+
+  \todo{Is this correct? It seems like we must be taking a shortcut
+    since the separating hyperplane theorem is so deep and this seems
+    to require only elementary manipulation.}
+\item
+  \begin{enumerate}
+  \item $\aff C$ is a closed set, as  
+  \item $\cl C$ is the smallest closed set containing $C$.  Then $\cl
+    D$ is a closed set containing $D$.  Thus, $\cl D$ contains $C$,
+    and so $\cl C \subseteq \cl D$.
+  \item $\int D$ is the largest open set contained in $D$. Then $\int
+    C$ is an open set contained in $D$.  Thus, $\int C$ 
+
+  \item \todo{proof}
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item Recall that the affine
+  \end{enumerate}
+
+\end{exercises}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

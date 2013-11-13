@@ -1,0 +1,75 @@
+
+\chapter{Bayesian Inference}
+\label{cha:bayesian-inference}
+
+In any parametric model $\{ f(\cdot, \theta), \theta \in \Theta \}$,
+we can consider a prior distribution $\Pi$ on $\Theta$, and model the
+observations $X_{1}, \dots, X_{n}$ as IID copies of the random
+variable $X|\theta \sim f(\cdot, \theta)$, where $\theta \sim \Pi$.
+The posterior distribution is the law of $\theta | X_{1}, \dots, X_{n}$.
+
+Formally, if $\mathcal{X}$ is the sample space that $X$ takes values
+in, consider on $\mathcal{X} \times \Theta$ the probability
+distribution $Q$ with pdf/pmf by $dQ(x, \theta) = f(x, \theta)
+\Pi(\theta) dx d\theta$ by the laws/definition of conditional
+probability,
+\begin{equation}
+  \label{eq:100}
+  X|\theta \sim \frac{f(x, \theta) \Pi(\theta)
+    dx}{\int_{\mathcal{X}}f(x, \theta) dx \Pi(\theta)} = f(x, \theta) dx
+\end{equation} and conversely
+\begin{equation}
+  \label{eq:100}
+  \theta | X \sim \frac{f(x, \theta) \Pi(\theta)
+    d\theta}{\int_{\Theta} f(x, \theta) \Pi(\theta) d\theta} =
+  \Pi(\theta | X).
+\end{equation} In particular, for $(X_{i}, i = 1, \dots, n)$ \iid
+copies of $X|\theta$, the posterior distribution equals
+\begin{equation}
+  \label{eq:100}
+  \theta | X_{1}, \dots, X_{n} \sim \frac{\prod_{i=1}^{n} f(x_{i},
+    \theta) \Pi(\theta)}{\int_{\Theta} \prod_{i=1}^{n}f(X_{i}, \theta)
+  \Pi(\theta) d\theta}
+\end{equation}
+
+
+The posterior distribution can be used for all purposes of statistical
+inference on $\theta$:
+
+\begin{enumerate}
+\item
+  \begin{equation}
+    \label{eq:100}
+    \bar \theta(X_{1}, \dots, X_{n}) = \E{\theta | X_{1}, \dots, X_{n}}
+  \end{equation} estimates $\theta$,
+\item
+  \begin{equation}
+    \label{eq:100}
+    C_{n} = \{ \theta \in \Theta : \| \theta - \bar \theta \| \leq
+    R_{n} \}
+  \end{equation} where $R_{n}$ is such that $\Pi(C_{n}| X_{1}, \dots,
+  X_{n}) = 1 - \alpha$, giving a credible set for $\Theta$.
+\end{enumerate}
+
+\begin{thm}[Bernstein-von Mises theorem]
+  \label{defn:bayesian_inference:1}
+  The Bernstein-von Mises theorem states that in LAN-models $\{
+  f(\cdot, \theta), \theta \in \Theta \}$ and for \textbf{any} prior
+  that has a positive continouus density at $\theta_{0}$, we have
+  \begin{align}
+    \label{eq:100}
+    \Pi{\cdot, X_{1}, \dots, X_{n}} \approx N(\hat \theta_{MLE}, \frac{1}{n}I(\theta_{0})^{-1})
+  \end{align} under $P_{\theta_{0}}^{n}$ (in total variation
+  distance), which in particular implies that any credible set $C_{n}$
+  such that $\Pi(C_{n} | X_{1}, \dots, X_{n}) = 1 - \alpha$ satisfies
+  $P_{\theta_{0}}^{n}(\theta_{0} \in C_{n}) \rightarrow 1 - \alpha$ as
+  $n \rightarrow \infty$.  In particular, asymptotic Bayesian inference
+  coincides with asymptotic inference based on the MLE.
+\end{thm}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

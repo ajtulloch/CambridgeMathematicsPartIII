@@ -1,0 +1,144 @@
+
+\chapter{Gaussian Linear Model}
+\label{cha:gauss-line-model}
+
+Let $(Y_{i}, i = 1, \dots, n)$ be the response vaiable, with $X_{ij},
+i = 1, \dots, n, j = 1, \dots, p$ \textbf{covariates}. We have
+\textbf{influence parameters} $\theta_{j}$, related in a way that
+\begin{align}
+  \label{eq:100}
+  Y_{i} = \sum_{i=1}^{p} \theta_{j} X_{ij} + \text{error}_{i}, i = 1,
+  \dots, n
+\end{align}
+
+Assume that $\text{error}_{i}$ is a sum of \textbf{many small
+  independent} ``measurement'' errors,
+\begin{equation}
+  \label{eq:100}
+  \text{error}_{i} = \sum_{m=1}^{m} \epsilon_{im} 
+\end{equation} which is approximately normal.
+
+Assume that $\epsilon_{i} \sim N(0, \sigma^{2})$. Gauss proceeded to
+compute the maximum likelihood estimate.
+
+\begin{proposition}[Approach I --- MLE Interpretation]
+  Joint distribution of the $Y_{i}$'s is
+  \begin{align}
+    \label{eq:100}
+    f(y_{i}, \dots, y_{n}; \theta) = \frac{1}{(2 \pi
+      \sigma^{2})^{\frac{1}{2}}} \exp \{ - \frac{1}{2 \sigma^{2}}
+    \sum_{i=1}^{n} (Y_{i} - \sum_{j=1}^{p} \theta_{j} X_{ij})^{2} \}
+  \end{align} so the log likelihood is
+  \begin{align}
+    \label{eq:100}
+    l_{n}(\theta, \sigma^{2}) = -\frac{n}{2} \log 2 \pi \sigma^{2} -
+    \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n}(Y_{i}  - \sum_{i=1}^{p}
+    \theta_{j} X_{ij})^{2} \\
+    \frac{\partial}{\partial \theta_{j}} l_{n}(\theta, \sigma^{2}) = -
+    \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n} 2(Y_{i} - \sum_{j=1}^{p}
+    \theta_{j} X_{ij})(-X_{ij}) \\
+    \frac{\partial}{\partial (\sigma^{2})} l_{n}(\theta, \sigma^{2}) =
+    - \frac{n}{2} \frac{1}{\sigma^{2}} + \frac{1}{\sigma^{4}}
+    \sum_{i=1}^{n} \sum_{i=1}^{n} (Y_{i} - \sum_{i=1}^{p} \theta_{j} X_{ij})^{2}
+  \end{align}
+
+  Solving these for zero, we obtain $X^{T} Y = X^{T} X \hat \theta$,
+  and $\hat \sigma^{2} = \| Y - X \hat \theta \|^{2}$, where we
+  rewrite the linear model in matrix form as $Y = X \theta +
+  \epsilon$, and note that $\frac{\partial^{2}}{\partial
+    \theta_{j} \partial \theta_{k}} l_{n}(\theta) = -
+  \frac{1}{\sigma^{2}} (X^{T} X)_{jk}$.  If $X$ has full column rank
+  (the column vectors $X_{j}$ are linearly independent), then
+  \begin{equation}
+    \label{eq:100}
+    \hat \theta = \hat \theta_{MLE} = (X^{T} X)^{-1} X^{T} Y
+  \end{equation}
+\end{proposition}
+
+\begin{proposition}[Approach II --- Geometric Interpretation]
+  The model can be written as
+  \begin{align}
+    \label{eq:100}
+    Y = \sum_{j=1}^{p} \theta_{j} X_{j} + \epsilon
+  \end{align}
+
+  Heuristically, we can see to find the \textbf{best approximation} of
+  $Y \in \R^{n}$ from the $p$-dimensional subspace ($p \leq n$) of
+  $\R^{n}$ spanned by $X_{j}, j = 1, \dots, p$, assumed to be linearly
+  independent.  Setting
+  \begin{align}
+    \label{eq:100}
+    \langle Y - X \theta, X\theta \rangle = 0
+  \end{align} gives the projection.
+
+  The projection matrix $P$ onto $\langle X \rangle = \vecspan (X_{j}, j
+  = 1, \dots, p)$ is given by $P = X (X^{T} X)^{-1} X^{T}$ since
+  \begin{enumerate}
+  \item $PX = X (X^{T} X)^{-1} X^{T} X = X$,
+  \item $P = P^{T}$,
+  \item $P^{2} = P$,
+  \end{enumerate} and so the best approximation of $Y$ from $\langle X
+  \rangle$ is $PY = X (X^{T} X)^{-1} X^{T} Y = X \hat \theta$.
+
+  Inserting the model equation $Y = X \theta + \epsilon$, we see
+  \begin{align}
+    \label{eq:100}
+    \hat \theta &= (X^{T} X)^{-1} X^{T} (X \theta + \epsilon) \\
+    &= (X^{T} X)^{-1} (X^{T} X) \theta + (X^{T} X)^{-1} X^{T} \epsilon  \\
+    &\sim N(\theta, \sigma^{2} (X^{T} X)^{-1}) \\
+    &= N(\theta, I_{n}(\theta)^{-1})
+  \end{align} so we achieve the Cramer-Rao lower bound.  So $\hat
+  \theta$ is efficient among all unbiased estimators.
+\end{proposition}
+
+\section{Overfitting a linear model}
+\label{sec:overf-line-model}
+
+Consider adding $X_{p+1}$ to the model, then fit this model.  Then
+\begin{align}
+  \label{eq:100}
+  \| Y - P_{p+1}Y \|_{2}^{2} \leq \| Y - P_{p} Y \|_{2}^{2}
+\end{align} since we are projection to a lower dimensional subspace.
+If $p = n$, then
+\begin{align}
+  \label{eq:100}
+  \|Y - P_{n} Y \|_{2}^{2} = 0
+\end{align} and so the fit is perfect.
+
+In contrast, the prediction error increases with the dimensionality of
+the model $p$, since
+\begin{align}
+  \label{eq:100}
+  \E{\| X \hat \theta - X \theta \|^{2}} &= \E{\| PY - X \theta
+    \|^{2}} \\
+  &= \E{ \| P\epsilon \|^{2}} \\
+  &= \E{\epsilon^{T} P^{T} P \epsilon} \\
+  &= \E{\tr(\epsilon^{T}P\epsilon)} \\
+  &= \E{\tr(P \epsilon \epsilon^{T})} \\
+  &= \tr(P \E{\epsilon \epsilon^{T}}) \\
+  &= \sigma^{2} \tr(P)
+  &= \sigma^{2} \tr(X (X^{T} X)^{-1} X^{T}) \\
+  &= \sigma^{2} p
+\end{align} since $PY = PX\theta + P \epsilon = X \theta + P\epsilon$,
+and the trace of a projection matrix is the sum of the eigenvalues,
+which are either 0 or 1, and the number of multiplicity of the latter
+eigenvalues is equal to the dimension of the subspace.
+
+This tradeoff between the fit and predictive accuracy leads to the
+problem of model selection.  For typical matrices $X$, we have
+\begin{align}
+  \label{eq:100}
+  \| \hat \theta - \theta \|^{2} \sim \| X(\hat \theta - \theta)
+  \|^{2} \sigma^{2} \frac{p}{n}
+\end{align}
+
+When $p$ is moderate compared to $N$, we can use model selection
+criteria to choose the MLE of low-dimensional model.  When $p > n$,
+the vectors ($X_{j}, j =1, \dots, n$) can \textbf{never} be linearly
+independent, and $\hat \theta$ cannot be used at all ($X^{T} X$ is not
+invertible).
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

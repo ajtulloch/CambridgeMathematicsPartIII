@@ -1,0 +1,51 @@
+b\chapter{First-order Methods}
+\label{cha:first-order-methods}
+
+Idea is that we do gradient descent on our objective function $f$,
+with step size $\tau_{k}$.
+
+\begin{defn}
+  \label{defn:first_order_methods:1}
+  Let $f: \R^{n} \rightarrow \bar \R$, then
+  \begin{enumerate}
+  \item
+    \begin{equation}
+      \label{eq:1}
+      F_{\tau_{k}f}(x^{k}) = x^{k} - \tau_{k} \partial f(x^{k}) = (I -
+      \tau_{k} \partial f)(x^{k})
+    \end{equation}
+  \item
+    \begin{equation}
+      \label{eq:2}
+      B_{\tau_{k} f}(x^{k}) = (I + \tau_{k} \partial f)^{-1}(x^{k})
+    \end{equation} so
+    \begin{align}
+      \label{eq:3}
+    \end{align} \todo{Fill in}
+  \end{enumerate}
+\end{defn}
+
+\begin{proposition}
+  If $f: \R^{n} \rightarrow \bar \R$ is proper, lowersemicontinuous,
+  and convex, for $\tau > 0$, 
+
+  \begin{equation}
+    \label{eq:62}
+    B_{\tau_{k} f}(x) = \argmin_{y} \{
+    \frac{1}{2\tau_{k}} \| y - x \|_{2}^{2} + f(y) \}
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:72}
+    y \in \argmin \{ ... \} &\iff 0 \in \frac{1}{\tau_{k}}(y -x
+    ) \partial f(y) \\
+    &\
+  \end{align}
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

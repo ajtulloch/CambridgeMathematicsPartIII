@@ -12,7 +12,7 @@ Let $Y_{1}, \dots, Y_{n}$ observations.
   \in \Theta \subseteq \R^{p}$, $\epsilon_{i}$ IID with
   $\E{\epsilon_{i}} = 0$, and $g: X \times \Theta \rightarrow \R$.
 
-  A regression function (possibly non-linear) and known - for example,
+  A regression function (possibly non-linear) and known --- for example,
   \begin{equation}
     \label{eq:14}
     g(X_{i}, \theta) = X_{i}^{T} \theta,
@@ -367,7 +367,7 @@ $\theta_{0}$ is unique.
   \cp \theta_{0}$ as $n \rightarrow \infty$, we can restrict to $E_{n}
   = \{ \hat \theta_{n} \}$ where $K$ is a closed ball centred at
   $\theta_{0}$.  By the assumptions, $\ln$ is $C^{2}$ on $U$, and
-  $\\hat \theta_{n}$ is a maximizer on the open set $U$, so necessarily,
+  $\hat \theta_{n}$ is a maximizer on the open set $U$, so necessarily,
   \begin{equation}
     \label{eq:62}
     0 = \frac{\partial}{\partial \theta} ln(\theta)_{|_{\theta = \hat \theta_{n}}} =
@@ -389,7 +389,7 @@ $\theta_{0}$ is unique.
   \begin{equation}
     \label{eq:64}
     h(u) = h(v) + \frac{\partial h}{\partial u} (\overline v)^{T} (u-v)
-  \end{equation} where $\overline \v$ is a mean-value on the line
+  \end{equation} where $\overline v$ is a mean-value on the line
   segment.
 
   Applying this $p$-times to $\frac{\partial}{\partial \theta_{i}}
@@ -401,10 +401,9 @@ $\theta_{0}$ is unique.
       \frac{\partial}{\partial \theta_{1}} \ell_{n}(\hat \theta_{n})  \\
       \vdots \\
       \frac{\partial}{\partial \theta_{p}} \ell_{n}(\hat \theta_{n})  \\
-    \end{bmatrix} + ....
-    
+    \end{bmatrix} 
   \end{align} \todo{Fill this in}
-
+o
   We have
   \begin{align}
     \label{eq:66}
@@ -412,11 +411,391 @@ $\theta_{0}$ is unique.
     \frac{\partial^{2}}{\partial \theta_{k} \partial \theta_{j}} \log
     f(Y_{i}, \overline{\theta}_{(j)}) -
     \E{\frac{\partial^{2}}{\partial \theta_{i} \partial \theta_{j}}} \right]
-  \end{align} 
-
-  
+  \end{align}
+  \todo{Fill in rest of proof}
 \end{proof}
 
+\begin{remark}[Discussion of Theorem
+  \ref{defn:parametric_statistical_models:7}]
+  \begin{enumerate}
+  \item One can weaken the conditions to $\theta \mapsto f(\cdot,
+    \theta)$ being ``weakly $C1$'', to model the Laplace family. For
+    non-differentiable parameterisations, the asymptotics of the MLE
+    may be non-normal. For example, consider $U[0, \theta]$ with
+    $\theta \in \Theta = (0, \infty)$.
+  \item When the ``true'' $\theta_{0}$ is at the boundary of the
+    parameter space, the asymptotics of the MLE are also non-normal.
+    For example, $N(\theta, 1), \theta \in \Theta = [0, \infty), \hat
+    \theta_{MLE} = \max(\overline{X_{n}}, 0)$
+  \item Asymptotic efficiency is an optimality criterion that is
+    meaningful only for ``regular'' estimators, that rules out the
+    following superefficient estimator e.g.
+    \begin{equation}
+      \label{eq:67}
+      \tilde \theta =
+      \begin{cases}
+        \hat \theta_{MLE} & |\hat \theta_{MLE}| \geq n^{-\frac{1}{4}} \\
+        0 & \text{otherwise}
+      \end{cases}
+    \end{equation}
+
+    One shows that under $P_{\theta}, \theta \neq 0$, that
+    $\sqrt{n}(\tilde \theta - \theta) = \sqrt{n}(\hat \theta -
+    \theta) \cd N(0, I(\theta)^{-1})$ as $n \rightarrow \infty$.
+    However, under $P_{0}$, one shows easily that $\sqrt{n}(\tilde
+    \theta - \theta) \cd 0 = N(0, 0)$ which strictly beats the $N(0,
+    I(0)^{-1})$-distribution (Hodgen's estimator).
+  \end{enumerate}
+\end{remark}
+
+
+\section{Asmptotic Inference based on the MLE}
+\label{sec:asmpt-infer-based}
+
+Suppose we want a confidence interval for $\theta_{j}$, $j = 1, \dots,
+p$.   We can write $\theta_{j} = e_{j}^{T} \theta$, $e_{j} = (0,
+\dots, 0, \underbrace{1}_{\text{$j$-th position}}, \dots, 0)$.  By the
+continuous mapping theorem, we have
+\begin{align}
+  \label{eq:68}
+  \sqrt{n} (\hat \theta_{j} - \theta_{j}) = \sqrt{n} e_{j}^{T}(\hat
+  \theta - \theta) \cd N(0, e_{j}^{T} I(\theta)^{-1}e_{j}) = N(0, I^{-1}(\theta)_{jj})
+\end{align}
+
+
+Suggesting that
+\begin{align}
+  \label{eq:69}
+  C_{n} = \{ v \in \R : | \hat \theta_{n, j}  - v | \leq
+  \frac{(I(\theta)^{-1})^{\frac{1}{2}}_{jj} Z_{\alpha}}{\sqrt{n}} \}
+\end{align} where $Z_{\alpha}$ are such that $\Prob(|Z| \leq
+Z_{\alpha}) = 1 - \alpha$ is a confidence intervale for $\theta_{j}$,
+since
+\begin{align}
+  \label{eq:70}
+  \Prob_{\theta}^{n}(\theta_{j} \in C_{n}) =
+  \P_{\theta}^{n}(\sqrt{n}(I(\theta)^{-1})^{-\frac{1}{2}}_{jj} | \hat
+  \theta_{n, j} - \theta| \leq Z_{\alpha}) \rightarrow \Prob{|Z| \leq
+    Z_{\alpha}} = 1 - \alpha.
+\end{align}
+
+This can only be used if $I(\theta)$ is known, otherwise $I(\theta)$
+has to estimated consistently.
+
+\begin{defn}
+  \label{defn:parametric_statistical_models:8}
+  The \textbf{observed} Fisher information is defined as
+  \begin{equation}
+    \label{eq:71}
+    i_{n}(\theta) = \frac{1}{n} \sum_{i=1}^{n}
+    \frac{\partial}{\partial \theta} \log f(Y_{i}, \theta)
+    \frac{\partial}{\partial \theta} \log f(Y_{i}, \theta)^{T}
+  \end{equation}
+
+  One shows as in the proof of Theorem
+  \ref{defn:parametric_statistical_models:7} that
+  \begin{equation}
+    \label{eq:72}
+    \hat i_{n} = i_{n}(\hat \theta_{MLE}) \cp I(\theta_{0})
+  \end{equation} under $P_{\theta_{0}}$.
+
+  Alternative, one can use
+  \begin{align}
+    \label{eq:73}
+    \hat j_{n} = j_{n}(\hat \theta_{n})
+  \end{align} where
+  \begin{equation}
+    \label{eq:74}
+    j_{n}(\theta) = \frac{1}{n} \sum_{i=1}^{n}
+    \frac{\partial^{2}}{\partial \theta \partial \theta^{T}} \log
+    f(Y_{i}, \theta)
+  \end{equation} which does estimate $I(\theta_{0})$ consistently.
+\end{defn}
+
+To construct a confidence set for $\theta \in \Theta \subseteq
+\R^{p}$, it is consistent to consider the Wold-statistic
+\begin{equation}
+  \label{eq:75}
+  W_{n}(\theta) = n(\hat \theta - \theta)^{T} \hat i_{n}(\hat \theta - \theta)
+\end{equation} which can be shown to have, under $P_{\theta}^{N}$ to
+have the $\chi^{2}_{p}$ distribution. Thus
+\begin{equation}
+  \label{eq:76}
+  C_{n} = \{ \theta \in \R^{p} | W_{n}(t) \leq \xi_{\alpha} \}
+\end{equation} where $\xi_{\alpha}$ are the $1-\alpha$ quartiles of
+the $\chi^{2}_{p}$ distribution, is a confidence ellipsoid for
+$\theta$ of asymptotic converage probability $1-\alpha$.
+
+To test $H_{0}: \theta = \theta_{0}$ against $H_{1}: \Theta \in \theta
+\backslash \{ \theta_{0} \}$, we can refer $W_{n}(\theta_{0})$ to the
+quartiles of the $\chi^{2}_{p}$ distribution, since $W_{n}(\theta_{0})
+\cd \xi^{2}_{p}$ under $H_{0}$.
+
+For such testing problems there exists an alternative approached based
+on the \textbf{likelihood ratio test statistic} for $H_{0}: \theta \in
+\Theta_{0}$ vs $H_{1}: \theta \in \Theta \backslash \Theta_{0}$, with
+$\Theta_{0} \subseteq \Theta$ as
+\begin{align}
+  \label{eq:78}
+  \Lambda_{n}(\Theta, \Theta_{0}) &= 2 \log \frac{\sup_{\theta \in \Theta}
+    \prod_{i=1}^{n} f(Y_{i}, \theta)}{\sup_{\theta \in \Theta_{0}}
+    \prod_{i=1}^{n} f(Y_{i}, \theta)} \\
+  &= 2 \log \frac{\prod_{i=1}^{n} f(Y_{i}, \hat \theta_{n})}{\prod_{i=1}^{n}
+    f(Y_{i}, \hat \theta_{n, 0})}
+\end{align} where $\hat \theta_{n}$ is the unrestricted MLE and $\hat
+\theta_{n, 0}$ is the MLE restricted to $H_{0}$.
+
+\begin{thm}[Wilks']
+  \label{defn:parametric_statistical_models:9}
+  If $\dim(\theta_{0}) = p_{0} < \dim(\Theta) = p$, then
+  \begin{equation}
+    \label{eq:79}
+    \Lambda_{n}(\Theta, \Theta_{0}) \cd \chi^{2}_{p - p_{0}}
+  \end{equation} as $n \rightarrow \infty$.
+\end{thm}
+
+\begin{proof}
+  (Only for $H_{0} = \{ \theta_{0} \}, \dim \theta_{0} = 0$).
+
+  Recall
+  \begin{equation}
+    \label{eq:77}
+    Q_{n}(\theta) = - \frac{1}{n} \sum_{i=1}^{n} \log f(Y_{i}, \theta)
+    = -l_{n}(\theta)
+  \end{equation} and so
+  \begin{align}
+    \label{eq:80}
+    \Delta_{n}(\theta, \theta_{0}) &= 2n Q_{n}(\theta_{0}) - 2n Q_{n}(\hat \theta_{n}) \\
+    &= 2n \frac{\partial}{\partial \theta} Q_{n} (\hat
+    \theta_{n})^{T}(\theta_{0} - \hat \theta_{n}) +
+    \frac{2n}{2}(\theta_{0} - \hat \theta_{n})^{T}
+    \frac{\partial^{2}}{\partial \theta \partial \theta^{T}}Q_{n}(\bar
+    \theta)(\theta_{0} - \hat \theta_{n}) \\
+    &= \sqrt{n} (\hat \theta_{n} - \theta_{0})^{T} \bar A_{n} \sqrt{n}
+    (\theta_{0} - \hat \theta_{n}) \\
+    &= Z_{n}^{T} \bar A_{n} Z_{n}
+  \end{align}
+
+  where we then conclude that from Theorem 3 (in notes) that $Z_{n}
+  \cd Z \sim N(0, I(\theta_{0})^{-1})$, and, as in the proof of
+  Theorem 3, $\bar A_{n} \cp I(\theta_{0})$ as $n \rightarrow \infty$.
+  Rewrite this as
+  \begin{align}
+    \label{eq:81}
+    Z_{n}^{T} I(\theta_{0})Z_{n} + Z_{n}^{T}(\bar A_{n} -
+    I(\theta_{0})) Z_{n}
+  \end{align} which by repeated applications of Slutsky's lemma.
+
+  The mapping $X \mapsto X^{T} I(\theta_{0})X$ is continuous from
+  $\R^{p}$ into $\R$, so by the continuous mapping theorem,
+  \begin{equation}
+    \label{eq:82}
+    Z_{n}^{T} I(\theta_{0}) Z_{n} \cd Z^{T}I(\theta_{0})Z
+  \end{equation}
+  and as $I(\theta_{0})$ is positive semidefinite (and so has a square
+  root), we can write this as
+  \begin{equation}
+    \label{eq:83}
+    Z^{T} I(\theta_{0}) Z = Z_{T} I(\theta_{0})^{\frac{1}{2}}
+    I(\theta_{0})^{\frac{1}{2}}Z = W^{T} W = \sum_{i=1}^{p} W_{i}^{2}
+    \sim \chi^{2}_{p}
+  \end{equation} with $W \sim N(0, I)$.
+\end{proof}
+
+\section{Some Ideas from LeCam Theory}
+\label{sec:some-ideas-from}
+
+Consider first a Gaussian shift experiment
+\begin{equation}
+  \label{eq:84}
+  N(g, I(\theta)^{-1}), g \in \R^{p}, I(\theta)
+\end{equation} is the Fisher information of some statistical model
+\begin{equation}
+  \label{eq:85}
+  \{ f(\cdot, \theta), \theta \in \Theta \}
+\end{equation}
+
+The log-likelihood ratio
+\begin{equation}
+  \label{eq:86}
+  \log \frac{dN(h, I(\theta)^{-1})}{dN(0, I(\theta)^{-1})}(X) = h^{T}
+  I(\theta)X - \frac{1}{2}h^{T}I(\theta) h
+\end{equation} since the ratio is proportional to
+\begin{equation}
+  \label{eq:87}
+  \exp \left( - \frac{(X-h)^{T} I(\theta)(X-h)}{2} +
+    \frac{X^{T}I(\theta)X}{2} \right)
+\end{equation}
+
+\begin{defn}
+  \label{defn:parametric_statistical_models:10}
+  A model $\{ f(\cdot, \theta), \theta \in \Theta \}$ is called
+  \textbf{locally asmptotically normal (LAN)} at $\theta_{0} \in \int
+  \Theta$ if for all $h \in \R^{p}$ (small enough),
+  \begin{align}
+    \label{eq:88}
+    \log \frac{\prod_{i=1}^{n} f(Y_{i}, \theta_{0} +
+      \frac{h}{\sqrt{n}})}{\prod_{i=1}^{n} f(Y_{i}, \theta_{0})} =
+    \frac{1}{\sqrt{n}} \sum_{i=1}^{n} h^{T} \frac{\partial}{\partial
+      \theta} \log f(Y_{i}, \theta)_{|_{\theta = \theta_{0}}} -
+    \frac{1}{2} h^{T} I(\theta_{0}) h + Z_{n}
+  \end{align} as $n \rightarrow \infty$, where $Z_{n} \cp 0$ under $P_{\theta_{0}}^{n}$.
+\end{defn}
+
+\begin{remark}
+  The first term in the expansion (by the CLT) converges in
+  distribution to $N(0, h^{T} I(\theta_{0}) h)$ as $n \rightarrow
+  \infty$.
+\end{remark}
+
+
+\begin{proposition}
+  Any statistical model that satisfies the conditions of Theorem 3 is
+  also LAN.
+\end{proposition}
+
+\begin{proof}
+  The LHS of (dagger) \todo{find reference} equals
+  \begin{align}
+    \label{eq:89}
+    n l_{n}(\theta_{0} + \frac{h}{\sqrt{n}}) - n l_{n}(\theta_{0}) &=
+    \sqrt{n} \frac{1}{n} \sum_{i=1}^{n} h^{T} \frac{\partial}{\partial
+    \theta} \log f(Y_{i}, \theta_{0}) + \frac{n}{2} h^{T}
+  \frac{\partial^{2}}{\partial \theta \partial \theta^{T}} l_{n}(\bar
+  \theta) h  \\
+  &= \frac{1}{\sqrt{n}} \sum_{i=1}^{n} h^{T} \frac{\partial}{\partial
+    \theta} \log f(Y_{i}, \theta_{0}) - h^{T}I(\theta_{0})h + \underbrace{o_{p}(1)}_{Z_{n}}
+  \end{align}
+\end{proof}
+
+\begin{defn}
+  \label{defn:parametric_statistical_models:11}
+  Let $\mathbb{P}_{n}, \mathbb{Q}_{n}$ be sequences of probability
+  measures.  We say $\mathbb{Q}_{n}$ is \textbf{contiguous} with
+  respect to $\mathbb{P}_{n}$ ($\mathbb{Q}_{n} \lhd \mathbb{P}_{n}$) if
+  \begin{equation}
+    \label{eq:90}
+    \mathbb{P}_{n}(A_{n}) \rightarrow 0 \Rightarrow
+    \mathbb{Q}_{n}(A_{n}) \rightarrow 0
+  \end{equation} for any sequence of events $A_{n}$ in the probability
+  space.  We say $\mathbb{P}_{n}, \mathbb{Q}_{n}$ are mutually
+  contiguous if $\mathbb{P}_{n} \lhd \mathbb{Q}_{n}$ and
+  $\mathbb{P}_{n} \rhd \mathbb{Q}_{n}$ and write $\mathbb{P}_{n} \lhd
+  \rhd \mathbb{Q}_{n}$.
+\end{defn}
+
+\begin{lem}[LeCam's 1st lemma]
+  The following are equivalent:
+  \begin{enumerate}
+  \item $\mathbb{Q}_{n} \lhd \mathbb{P}_{n}$
+  \item
+    \begin{equation}
+      \label{eq:91}
+      \frac{dQ_{n}}{dP_{n}}(X_{n}) \cd U, X_{n} \sim P_{n}
+    \end{equation} along a subsequence, then $P(U > 0) = 1$.
+  \item
+    \begin{equation}
+      \label{eq:92}
+      \frac{dP_{n}}{dQ_{n}}(X_{n}) \cd V, X_{n} \sim Q_{n}
+    \end{equation} along a subsequence, $\E{V} = 1$.
+  \item For any sequence of statistics (measurable functions $T_{n} :
+    \Omega_{n} \rightarrow \R$), we have $T_{n} \cp 0$ under $P_{n}$
+    then $T_{n} \cp 0$ under $Q_{n}$ as $n \rightarrow \infty$.
+  \end{enumerate}
+\end{lem}
+
+\begin{remark}
+  For two probability measures $P, Q$ that are absolutely continouus with
+  respect to each other, the likelihood ratio is the random variable
+  $\frac{dP}{dQ}(X), X \sim Q$.
+\end{remark}
+
+\begin{corollary}
+  \begin{enumerate}
+  \item If $\frac{dQ_{n}}{dP_{n}} \cd e^{X}$ for $X_{n} \sim P_{n}$,
+        and $X \sim N(-\frac{\sigma^{2}}{2}), \sigma^{2})$, $\sigma^{2} > 0$, then
+    \begin{equation}
+      \label{eq:93}
+      Q_{n} \lhd \rhd P_{n}
+    \end{equation}
+  \item In any LAN model the product measures $P_{\theta_{0} +
+      \frac{h}{\sqrt{n}}}^{n}, P_{\theta_{0}}^{n}$, corresponding to
+    the joint distributions of a sample of size $n$ fro the PDF/PMF
+    $f(\theta_{0} + \frac{h}{\sqrt{n}}), f(\theta_{0})$ respectively,
+    are mutually contiguous (for arbitrary $h \in \R^{p}$).
+  \end{enumerate}
+\end{corollary}
+
+
+\begin{proof}
+  \begin{enumerate}
+  \item By LeCam's lemma, $P(e^{X} > 0) = 1$ for any normal random
+    variable $X$, and $\E{e^{X}} = e^{}$.
+  \end{enumerate}
+  \todo{Complete proof}
+\end{proof}
+
+
+IN a LAN model, the product measures $\P^{n}_{\Theta} =
+\otimes_{i=1}^{n} \P_{\Theta}$ and $P_{\theta + \frac{h}{\sqrt{n}}}$
+are mutually contiguous.
+
+\begin{exmp}
+  \label{defn:parametric_statistical_models:12}
+  Recall the Hodges' estimator
+  \begin{equation}
+    \label{eq:94}
+    \tilde \theta_{n} = \hat \theta_{n} \I{|\hat \theta_{n}| \geq n^{-\frac{1}{4}}}
+  \end{equation} in a regular parameteric model, $\Theta = \R$, and
+  where $\hat \theta_{n}$ is the MLE.  One shows under $P_{\theta},
+  \theta \neq 0$, we have
+  \begin{equation}
+    \label{eq:95}
+    \sqrt{n}(\tilde \theta - \theta) \cd N(0, I(\theta)^{-1})
+  \end{equation} as $n \rightarrow \infty$.  But when sampling from
+  $P_{0}$, then $P_{0}^{n} (\tilde \theta(X_{1}, \dots, X_{n}) \neq 0)
+  = P_{0}^{n}(|\hat \theta_{n}| \geq n^{-\frac{1}{4}}) =
+  P_{0}^{n}(\sqrt{n}|\theta_{n} - \theta| \geq n^{-\frac{1}{4}})
+  \rightarrow 0$.
+  This follows as $X_{n} \cd X \Rightarrow (X_{n}, n \in \N)$  is
+  stochastically bounded, that is, there exists $M(\epsilon)$ such
+  that $P(|X_{n}| > M(\epsilon)) < \epsilon)$.  Hence, under $P_{0}$,
+  $\sqrt{n}(\tilde \theta - \theta) \cd N(0, 0)$ which outperforms the
+  Cramer-Rao lower bound at $\theta = 0$.
+
+  Consider now the minimax quadratic risk of $\tilde \theta$, equal to
+  (for $n \in \N$ fixed),
+  \begin{equation}
+    \label{eq:96}
+    \sup_{\theta \in \Theta} \mathbb{E}^{h}_{\theta} (\sqrt{n}(\tilde
+    \theta - \theta))^{2}
+  \end{equation} Consider the local alternative $0 +
+  \frac{h}{\sqrt{n}}, h \in \R$ arbitrary.  Then the minimax risk
+  exceeds
+
+  \begin{align}
+    \label{eq:97}
+    &\geq \mathbb{E}^{n}_{\frac{h}{\sqrt{n}}} n(\tilde \theta -
+    \frac{h}{\sqrt{n}})^{2} \I{\tilde \theta = 0} \\
+    &= h^{2}P_{\frac{h}{\sqrt{n}}}^{n}(\tilde \theta = 0) \\
+    &= h^{2}(1 - P^{n}_{\frac{h}{\sqrt{n}}(\tilde \theta \neq 0)}) \\
+    &\geq \frac{h^{2}}{2}
+  \end{align} by contiguity of $P_{0}^{n} \lhd \rhd P^{n}_{\frac{h}{\sqrt{n}}}$.
+
+  Conclude that
+  \begin{align}
+    \label{eq:98}
+    \lim_{n \rightarrow \infty} \sup_{\theta \in \Theta}
+    \mathbb{E}_{\Theta}^{h}(\sqrt{n}(\tilde \theta - \theta))^{2}
+    \rightarrow \infty 
+  \end{align} whereas
+  \begin{align}
+    \label{eq:99}
+    \lim_{n \rightarrow \infty} \sup_{\theta \in \Theta}
+    \mathbb{E}^{n}_{\theta}(\sqrt{n}(\hat \theta - \theta))^{2} \leq
+    \sup_{\theta \in \Theta} I(\theta)^{-1} < \infty
+  \end{align}
+\end{exmp}
 
 %%% Local Variables: 
 %%% mode: latex

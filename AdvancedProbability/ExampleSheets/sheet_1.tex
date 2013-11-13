@@ -31,7 +31,7 @@
     \label{eq:2}
     \E{(X-Y)\I{B_{c} \cup C_{c}}} \leq 0
   \end{equation} and by symmetry (as $B_{c} \cup C_{c}$ is symmetric
-  with respect to $X, Y$, we have
+  with respect to $X, Y$), we have
   \begin{equation}
     \label{eq:3}
     \E{(X-Y)\I{B_{c} \cup C_{c}}} = 0
@@ -114,7 +114,7 @@
       0 \geq \E{X \I{A}} &= \E{Y \I{A}}
     \end{align} as $X > 0$ on $\I{A}$.\sidenote{Is this some
       pigeonhole argument needed?}
-  \item ...
+  \item \todo{Complete}
   \end{enumerate}
 
 
@@ -215,8 +215,8 @@
       \E{g(Y) | \mathcal{G} \vee \sigma(X)} = \E{g(Y) | \mathcal{G}}
     \end{equation}
   \end{enumerate}
+  \todo{Complete proof}
 
-  The proof proceeds .......
 \item 
 \end{enumerate}
 
@@ -231,8 +231,6 @@
     \E{X_{t}|\mathcal{F}_{s}^{T}} = X_{s} \iff \E{X_{t} |
       \sigma(X_{s}, s \leq t)} = X_{s}
   \end{equation}
-
-  
 \item Note that if $C_{n}$ is bounded then we can trivially bound
   $|Y_{n}|$, and so $Y_{n}$ is integrable.  We need to show that for
   $n > 0$, $\E{Y_{n} | \mathcal{F}_{n-1}} = Y_{n-1}$. 
@@ -254,8 +252,135 @@
     \label{eq:24}
     c_{n}(\underbrace{\E{X_{n} | \mathcal{F}_{n-1}} - X_{n-1}}_{\leq 0}) + Y_{n-1} \leq Y_{n-1}
   \end{equation}
-\end{enumerate}
+\item Note first that $\E{X_{n}} = 0, \E{|X_{n}} = 2$. Let $Y_{n} =
+  \frac{S_{n}}{n}$ and that
+  \begin{align}
+    \label{eq:22}
+    \E{Y_{n} | \mathcal{F}_{n-1}} &= \E{\frac{X_{n} + S_{n-1}}{n} |
+      \mathcal{F}_{n-1}} \\
+    &= \frac{1}{n}\E{X_{n}} + \frac{S_{n-1}}{n} \\
+    &= \frac{n-1}{n}Y_{n-1} \\
+    \leq Y_{n-1}
+  \end{align} and
+  \begin{align}
+    \label{eq:25}
+    \E{|Y_{n}|} &= \frac{1}{n}\E{|\sum_{i=1}^{n} X_{n}} \\
+    &\leq \frac{1}{n}\sum_{i=1}^{n} \E{|X_{i}|}\\
+    &= \frac{1}{n} 2n
+    &= 2
+  \end{align}
+  so $Y_{n}$ is a supermartingale bounded in $L^{1}$.
 
+  By the martingale convergence theorem, $Y_{n}$ converges almost
+  surely to some limit $Y_{\infty}$ for some $Y \in
+  L^{1}(\mathcal{F}_{\infty})$.  By Kolmogrov's 0-1 law, we can infer
+  that $\frac{S_{n}}{n}$ converges to some constant limit $c \in \R$,
+  and so $Y_{n} = \frac{S_{n}}{n} \rightarrow c$.
+
+  \todo{Show $c = 1$.}
+\item Note that $T = m\I{A} + m'\O{A^{c}}$ is simply the stopping time
+  \begin{equation}
+    \label{eq:26}
+    T(\omega) =
+    \begin{cases}
+      m & \omega \in A \\
+      m' & \omega \notin A
+    \end{cases}
+  \end{equation}
+  We must show that for all $k \in N$, the event $\{ T = k \}$ is
+  $\mathcal{F}_{k}$ measurable. As $\{ \omega \in A \}$ is
+  $\mathcal{F}_{n}$ measurable, and $\mathcal{F}_{m}, \mathcal{F}_{m'}
+  \supseteq \mathcal{F}_{n}$, and $\emptyset \in \mathcal{F}_{0}$ we
+  have our required result.
+
+  Let $X$ be a martingale and let $T$ be a bounded stopping time.
+  Recall that $X_{T \wedge n}$ is a martingale. Then by the dominated
+  convergence theorem, we have
+  \begin{align}
+    \label{eq:27}
+    \E{X_{0}} &= (\leq) \lim_{n \rightarrow \infty} \E{X_{T \wedge n}} \\
+    &= \E{\lim_{n \rightarrow \infty} X_{T \wedge n}} \\
+    &= \E{X_{T}} 
+  \end{align} where the application of dominated convergence
+  theorem is justified as there exists $K \in \N$ such that $T \leq
+  K$, and so $|X_{T \wedge n}|$ is dominated by $\sup_{k \leq K} |X_{k}| <
+  \infty$.
+
+  Now, let $X$ be an integrable adapted process and with the property
+  that for every bounded stopping time $T$, $\E{X_{T}} = \E{X_{0}}$.
+
+  We must show that for $m \geq n$, $\E{X_{m} | \mathcal{F}_{n}} =
+  X_{n}$. Let $m \geq n$ be given, and $A \in \mathcal{F}_{n}$. Let $T
+  = m I{A} + n I{A^{c}}$, and $T' = n$. Then we have
+  \begin{align}
+    \label{eq:28}
+    \E{X_{T}} = \E{X_{m}\I{A}} + \E{X_{n} \I{A^{c}}} = \E{X_{0}} \\
+    \E{X_{T'}} = \E{X_{n}} = \E{X_{n} \I{A}} + \E{X_{n} \I{A^{c}}} = \E{X_{0}}
+  \end{align}
+
+  Thus, $\E{X_{m} \I{A}} = \E{X_{n} \I{A}}$.  By properties of
+  conditional expectation, we then have $\E{X_{m} | \mathcal{F}_{n}} =
+  X_{n}$, and thus $X$ is a martingale.
+\item Let $X$ be bounded.  Then
+  \begin{align}
+    \label{eq:29}
+    \E{X_{0}} &= \lim_{n \rightarrow \infty} \E{X_{T \wedge n}} \\
+    &= \E{\lim_{n \rightarrow \infty} X_{T \wedge n}} \\
+    &= \E{X_{T}}
+  \end{align} by the dominated convergence theorem, as \eqref{eq:29}
+  is dominated by $M$.
+
+  Let $X$ have bounded increments. Then we can write $X_{T \wedge
+    n}(\omega) - X_{0}(\omega) = \sum_{k=1}^{T(\omega) \wedge n}
+  X_{k}(\omega) - W_{k-1}(\omega)$.  Note that we can bound the right
+  hand side by $M$, and thus $|X_{T \wedge n} - X_{0}| \leq M T$, and
+  as $X_{0}$ is integrable ($X$ is a martingale), we can conclude that
+  $X_{T \wedge n}$ is dominated as $n \rightarrow \infty$.
+
+  Note also that the right hand side is integrable, as $T$ is
+  integrable, and so the whole side is bounded by $M \E{T} < \infty$
+  Thus, we can apply the dominated convergence theorem to
+  $X_{T \wedge n}$ and conclude that
+  \begin{align}
+    \label{eq:30}
+    \E{X_{0}} = \lim_{n \rightarrow \infty} \E{X_{T \wedge n}} = \E{X_{T}}
+  \end{align} as required.
+\item Note that for a discrete random variable $X$, we have $\E{X} =
+  \sum_{i=1}^{\infty} \Prob{X \geq  i}$. From the given equation, we
+  have
+  \begin{equation}
+    \label{eq:36}
+    \Prob{T \leq N + n | \mathcal{F}_{n}} \geq \epsilon,
+  \end{equation} and so by taking $A \in \mathcal{F}_{n} = \{ T > n
+  \}$, we have
+  \begin{align}
+    \label{eq:31}
+    \E{\I{T \leq n + N} \I{T > n}} \geq \E{\epsilon \I{T > n}} \\
+    \Rightarrow \Prob{n < T \leq n + N} \geq \epsilon \Prob{T > n}
+  \end{align} and in particular,
+  \begin{align}
+    \label{eq:32}
+    \Prob{kN < T \leq (k+1)N} &\geq \epsilon \Prob{T \geq kN}
+  \end{align}
+
+  Then, we have
+  \begin{align}
+    \label{eq:33}
+    1 &\geq \Prob{T \leq mN} \\
+    &\geq \sum_{k=0}^{m-1} \epsilon \Prob{T \geq kN}
+  \end{align}, and so we have the bound
+  \begin{align}
+    \label{eq:34}
+    \sum_{k=0}^{m-1} \Prob{T \geq kN} \leq \frac{1}{\epsilon}
+  \end{align} and so we have the bound
+  \begin{align}
+    \label{eq:35}
+    \E{X} \leq N \sum_{k=0}^{m-1}\Prob{T \geq kN} \leq
+    \frac{N}{\epsilon} < \infty
+  \end{align}
+  as required.
+\item \todo{Finish this.}
+\end{enumerate}
 
 %%% Local Variables: 
 %%% TeX-master: "master""
