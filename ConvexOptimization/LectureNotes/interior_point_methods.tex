@@ -1,0 +1,141 @@
+\chapter{Interior Point Methods}
+\label{cha:inter-point-meth}
+
+\begin{thm}[Problem]
+  \label{defn:interior_point_methods:1}
+  Consider the problem
+  \begin{align}
+    \label{eq:76}
+    \inf_{x} \IP{c, x}  + \delta_{K}(Ax - b)
+  \end{align} with $K$ a closed convex cone - thus $Ax \geq_{K} b$.
+\end{thm}
+
+\begin{notation}
+\end{notation}
+
+The idea is to replace $\delta_{K}$ by a smooth approximation $F$,
+with $F(x) \rightarrow \infty$ as $x \rightarrow \boundary K$, and
+solve $\inf \IP{c, x} + \frac{1}{t} F(x)$, equivalent to solving $t
+\IP{c, x} + F(x)$.
+
+\begin{proposition}
+  $F$ is canonical barrier for $K$.  Then $F$ is smooth on $\dom F =
+  \int K$ and strictly convex, with
+  \begin{align}
+    \label{eq:77}
+    F(tx) = F(x) - \Theta_{F} \lambda t,
+  \end{align} and
+  \begin{enumerate}
+  \item $- \grad F(x) \in \dom F$
+  \item $\IP{\grad F(x), x} = - \Theta_{F}$
+  \item $- \grad F(- \grad F(x)) = x$
+  \item $- \grad F(tx) = - \frac{1}{t} \grad F(x)$.
+  \end{enumerate}
+\end{proposition}
+
+For the problem
+\begin{align}
+  \label{eq:78}
+  \inf_{x} \IP{c, x} 
+\end{align} such that $Ax \geq_{K} b$ with $K$ closed, convex,
+self-dual cone, we have
+\begin{align}
+  \label{eq:79}
+  \sup_{x} \inf_{x} \IP{c, x} + \delta_{K} (Ax - b) \\
+  \Rightarrow -\IP{b, y} - h^{\star}(-A^{T} y - c) - k^{\star}(y) \\
+  \iff \sup_{y} \IP{b, y} s.t. y \geq_{K} 0, A^{T} y = c \\
+  \iff \inf_{x} \IP{c, x} + F(ax - b) \\
+  \iff \sup_{y} \IP{b, y} - F(y) - \delta_{A^{T}y = c}
+\end{align}
+
+\todo{More conditions on, etc}
+
+\begin{proposition}
+  For $t > 0$, define
+  \begin{align}
+    \label{eq:80}
+    x(t) = \argmin \{ t \IP{c, x} + F(Ax - b) \} \\
+    y(t) = \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T} y = c} \} \\
+    z(t) = (x(t), y(t))
+  \end{align}
+  These paths exist, are unique, and
+  \begin{align}
+    \label{eq:81}
+    (x, y) = (x(t), y(t)) \iff
+    \begin{cases}
+      A^{T} y = c \\
+      ty + \grad F(Ax - b) = 0
+    \end{cases}
+  \end{align}
+\end{proposition}
+
+\begin{proof}
+  The first part follows by definition.
+
+  For~\eqref{eq:81},the primal optimality condition is that $0 = tc +
+  A^{T \grad F(Ax - b)}$. The dual optimality condition is that $0 \in
+  -tb + \grad F(y) + N_{z | A^{T}z = c}(y)$, which is
+  \begin{align}
+    \label{eq:82}
+    \iff 0 \in -tb + \grad F(y) +
+    \begin{cases}
+      \emptyset ^{} A^{T} y \neq c \\
+      \range A & A^{T} y = c
+    \end{cases} \\
+    &\iff 0 \in -tb + \grad F(y) + \range A, A^{T} y = c
+  \end{align}
+
+  Assume $x$ stafies the primal optimiality condition.  Then
+  \begin{align}
+    \label{eq:83}
+    tc + A^{T} \grad F(Ax - b) = 0 \\
+    \iff tc + A^{T}(-ty) = 0 \\
+    \iff A^{T}y = c
+  \end{align}
+  \todo{A few more steps...}
+\end{proof}
+
+\begin{proposition}
+  If $x, y$ feasible, then
+  \begin{align}
+    \label{eq:84}
+    \phi(x) - \psi(y) = \IP{y, Ax - b}
+  \end{align}
+
+  Moreover, for $(x(t), y(t))$ on the central path,
+  \begin{align}
+    \label{eq:85}
+    \phi(x(t)) - \psi(y(t)) = \frac{\Theta_{F}}{t}
+  \end{align}
+\end{proposition}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:86}
+    \phi(x) - \psi(y) = \IP{c, x} - \IP{b, y} \\
+    &= \IP{A^{T} y, x} - \IP{b, y} \\
+    &= \IP{Ax - b, y}
+  \end{align}
+
+  For the second part, we have
+  \begin{align}
+    \label{eq:87}
+    \phi(x(t)) - \psi(y(t)) = \IP{y(t), Ax(t) - b} \\
+    &= \IP{-\frac{1}{t} \grad F(Ax(t) - b), Ax(t) - b} \\
+    &= \frac{\Theta_{F}}{t}
+  \end{align}
+\end{proof}
+
+\begin{proposition}
+  Define
+  \begin{align}
+    \label{eq:88}
+  \end{align}
+\end{proposition}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

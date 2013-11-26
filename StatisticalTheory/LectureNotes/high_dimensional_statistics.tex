@@ -1,0 +1,632 @@
+
+\chapter{High-Dimensional Statistics}
+\label{cha:high-dimens-stat}
+
+
+Consider a functional form
+\begin{equation}
+  \label{eq:101}
+  Y_{i} = \sum_{j=1}^{p} X_{ij} \theta^{0}_{j} + \epsilon_{i}, i = 1,
+  \dots, n
+\end{equation}
+with $p \geq n$ or $p >> n$.  We believe that $\theta^{0}$ is
+\textbf{sparse} in the sense that most if it's $p$ coefficients are
+zero.  Formally, assume that
+\begin{align}
+  \label{eq:102}
+  \theta^{0} \in B_{0}(k) = \{ \theta \in \R^{p} | \text{at most $k$
+    non-zero entries} \}
+\end{align} with $k \leq n$, or $k << n$.
+
+We call $S_{0} = \S(\theta^{0}) = \{ j: \theta_{j}^{0} \neq 0 \}$  the
+\textbf{active set} of $\theta^{0}$, satisfying $|S_{0}| \leq k$. We
+would like to fit LS in the ``true'' submodel
+\begin{align}
+  \label{eq:103}
+  Y_{i} = \sum_{j \in S_{0}} X_{ij} \theta_{j}^{0} + \epsilon_{i}
+\end{align} with prediction risk
+\begin{align}
+  \label{eq:104}
+  \mathbb{E}_{\theta} \| \hat \theta(S^{0})- \theta \| \approx
+  \frac{1}{n} \mathbb{E}_{\theta} \| X(\hat \theta(S_{0}) - \theta)
+  \|_{2}^{2} \approx \frac{|S_{0}|}{n} \leq \frac{k}{n}
+\end{align}
+
+In practice both the position of $S_{0}$ and $k$ are unknown.
+
+\begin{question}
+  Can we minimize the oracle risk?
+\end{question}
+
+Consider first $p \leq n$, and a fixed submodel $M$ of $Y = X \theta +
+\epsilon$ given by $Y = X^{M} \theta^{M} + \epsilon$, $X = (X^{m},
+X^{\bar m}), \dim(M) = k$.
+
+In the full model, we use the LS estimates to obtain prediction risk
+
+\begin{align}
+  \label{eq:106}
+  \E{\|PY - X\Theta \|^{2}} = \sigma^{2}p
+\end{align} where $P$ projects onto $\IP{X}$.
+
+For the restricted model, the LS-fit for $P_{M}$, the projection onto
+$\IP{X^{M}}$, the prediction risk is
+\begin{align}
+  \label{eq:107}
+  \E{\| P_{M} Y - X \theta \|^{2}} &= \E{\| P_{M} Y - P_{M} X \Theta +
+    P_{M} X \theta - X \theta \|^{2}} \\
+  &= \E{\|P_{M}(Y - X \theta) \|^{2} + \| (I - P_{M}) X \theta \|^{2}} \\
+  &= \E{\| P_{M}\epsilon \|^{2}} + \theta^{T} X^{T} (I - P_{M}) X
+  \theta \\
+  &= \sigma^{2} k + \theta^{T} X^{T} (I - P_{M}) X \theta
+\end{align}
+
+If we estimate the second term by $\hat \theta^{T} X^{T} (I - P_{M}) X
+\hat \theta$, which has expectation $(\hat \theta = \hat
+\theta_{full})$
+\begin{align}
+  \label{eq:108}
+  \E{Y^{T} P(I - P_{M})PY} &= \E{(X\theta + \epsilon)^{T} (P - P_{M})
+    (X \theta + \epsilon)} \\
+  &= \theta^{T} X^{T} (I - P_{M}) X \theta + 2 \E{\epsilon^{T}(P -
+    P_{M}) X \theta} + \E{\epsilon^{T}(P - P_{M}) \epsilon} \\
+  &= \theta^{T} X^{T} (I - P_{M}) X \theta + 0 + \sigma^{2} ( p - k)
+\end{align} (as in the previous lecture).
+
+So if we take
+\begin{align}
+  \label{eq:109}
+  \hat{MSPE(M)} = \hat \theta^{T} X^{T}(I - P_{M}) X \hat \theta + 2
+  \sigma^{2} k - \sigma^{2} p
+\end{align} is an unbiased ``estimate'' of
+\begin{align}
+  \label{eq:110}
+  MSPE(M) = \E{\| P_{M}Y - X \theta \|^{2}}
+\end{align}
+
+Now replace $\sigma^{2}$ by it's unbaised estimate $\hat \sigma^{2} =
+\frac{1}{n-p} \| Y - PY \|^{2}$ to obtain the estimated predictive
+risk of model $M$,
+\begin{align}
+  \label{eq:111}
+  \crit_{C_{p}} (M) = \hat \theta^{T} X^{T} (I - P_{M})X \hat \theta +
+  2 \hat \sigma^{2} k - \hat \sigma^{2} p \\
+  &= \| Y - P_{M} Y \|^{2} + 2 \hat \sigma^{2} k - n \sigma^{2}
+\end{align}
+
+Comparing all submodels $M$ of $R^{p}$ by computing
+$\crit_{C_{p}}(M)$, we fit the LS estimator in the model $\hat M$ that
+minimizes $\crit_{C_{p}}(M)$.
+
+This is called Mallow's $C_{p}$.
+
+Severalsuch model selection criterion exist, all of the form
+\begin{align}
+  \label{eq:112}
+  \crit(M) = \| Y - P_{M} Y \|^{2} + \lambda \dim(M) + \text{const}
+\end{align}
+
+The ``derivation'' of each criterion suggests a choice of $\lambda$.
+
+For $p \geq n$ this approach cannot be used directly, since $\| Y - P_{M}
+Y \| = 0$ for $\dim(M) \geq n$, but we can adapt it by minimizing $\|
+Y - X \theta \|^{2} + \lambda \#\{\theta_{j} \neq 0 \}$ over $\R^{p}$.
+This is a combinatorially hard optimization problem (to find $k$, we
+need to compute $p \choose k$ solutions).
+
+Let us try to find a \textbf{convex relaxation} of this optimization
+problem, and note that the penalty can be ``written'' as
+\begin{align}
+  \label{eq:113}
+  \lambda \| \theta \|_{0} = \lambda \sum_{i=1}^{p} |\theta_{j}|^{0}
+\end{align}  Note further that the $l_{q}$ means
+\begin{align}
+  \label{eq:114}
+  \| \theta \|_{q}^{q} = \sum_{i=1}^{p} |\theta_{j}|^{q} \downarrow
+  \| \theta \|_{0}
+\end{align}  These ``norms'' are convex when $q \geq 1$, and the
+program
+\begin{align}
+  \label{eq:115}
+  \min_{\theta \in \Theta} \| Y - X \theta \|^{2} + \lambda \| \theta \|_{q}
+\end{align} is convex.  So $q = 1$ arises as a natural compromise and
+we define $\tilde \theta$ to be any solution of
+\begin{align}
+  \label{eq:116}
+  \min_{\theta \in \R^{p}} \frac{\| Y - X \theta \|^{2}}{n} + \lambda
+  \| \theta \|_{1}
+\end{align} known as the LASSO estimator.
+
+If we consider
+\begin{align}
+  \label{eq:117}
+  \sup_{\theta \in B_{0}(h)} \frac{\mathbb{E}_{\theta} \| X \tilde
+  \theta_{LASSO} - X \theta \|^{2}}{n} \leq \frac{k}{n} \log p
+\end{align} 
+
+
+Any solution to the minimization problem
+\begin{align}
+  \label{eq:105}
+  \min_{\theta \in \R^{p}} \frac{\| Y - X \Theta \|^{2}_{2}}{n} +
+  \lambda \| \theta \|_{1}
+\end{align} for $\lambda$ a tuning parameter, is called a LASSO
+solution, denoted by $\tilde \theta = \tilde \theta_{LASSO}$.  $\tilde
+\theta$ is generally not uniuqe, but $X \tilde \theta$ and also $\|
+\theta \|_{1}$ give the same numerical values for all LASSO
+solutions.\sidenote{Exercise sheet}
+
+\begin{thm}
+  \label{defn:high_dimensional_statistics:1}
+  Let $Y = X \theta^{0} + \epsilon$ with $\epsilon \sim N(0, I_{n})$
+  and $\theta^{0}$ is $k$-sparse with \textbf{active set} $S_{0}$. Let
+  $\tilde \theta$ be any LASSO solutoin, with
+  \begin{align}
+    \label{eq:118}
+    \lambda = 4 \overline \sigma \sqrt{\frac{t^{2} + \log p}{n}} \\
+    \overline \sigma^{2} = \max_{j = 1, \dots, p} \hat \sum_{jj} \\
+    \hat \sum = \frac{X^{T} X}{n}
+  \end{align} the Gram matrix.
+
+  Now, assume, for some $r_{0}$
+  \begin{align}
+    \label{eq:119}
+    \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1} \leq r_{0} k (\tilde
+    \theta_{S_{0}} - \theta^{0})^{T} \hat \sigma (\tilde
+    \theta_{S_{0}} - \theta^{0})
+  \end{align} with probability $\geq 1 - \beta$.  Then with
+  probability at least
+  \begin{equation}
+    \label{eq:120}
+    1 - \beta - e^{-\frac{t^{2}}{2}},
+  \end{equation} we have
+  \begin{align}
+    \label{eq:121}
+    \frac{1}{n} \| X (\tilde \theta - \theta^{0}) \|_{2}^{2} + \lambda
+    \| \tilde \theta - \theta^{0} \|_{1} \leq  4 k r_{0} \lambda^{2} 
+    \lesssim \frac{k}{n}\log p
+  \end{align}
+\end{thm}
+
+\begin{proof}
+  Note that $\theta_{S_{0}}^{0} = \theta^{0}$.  By definition of
+  $\tilde \theta$, we have
+  \begin{align}
+    \label{eq:122}
+    \frac{1}{n} \| Y - X \tilde \theta \|_{2}^{2} + \lambda \| \tilde
+    \theta \|_{1} \leq \frac{1}{n} \| Y - X \theta^{0} \|_{2} +
+    \lambda \| \theta^{0} \|_{1}
+  \end{align}
+
+  Inserting the model equation $Y = X \theta^{0} + \epsilon$, we get
+  \begin{align}
+    \label{eq:123}
+    \frac{1}{n} \| X(\theta^{0} - \tilde \theta) + \epsilon \|_{2}^{2}
+    + \lambda \| \tilde \theta \|_{1} \leq \frac{1}{n} \| \epsilon
+    \|_{2}^{2} + \lambda \| \theta^{0} \|_{1} \\
+    &= \| X (\theta^{0} - \tilde \theta) \|_{2}^{2} + \frac{2}{n}
+    \epsilon^{T} X (\theta^{0} - \tilde \theta) + \frac{1}{n} \|
+    \epsilon \|_{2}^{2}
+  \end{align} and so we obtain
+  \begin{align}
+    \label{eq:124}
+    \frac{1}{n} \| X(\theta^{0} - \tilde \theta)\|_{2}^{2} + \lambda
+    \| \tilde \theta \|_{1} \leq \frac{2}{n} \epsilon^{T} X (\tilde
+    \theta - \theta^{0}) + \lambda \| \theta^{0} \|_{1}
+  \end{align}
+
+  \begin{lem}
+    \begin{align}
+      \label{eq:125}
+      \Prob{\max_{j=1, \dots, p} \frac{2}{n} |(\epsilon^{T}X)_{j}|
+        \leq \frac{\lambda}{2}} \geq 1 - e^{-\frac{t^{2}}{2}}
+    \end{align}
+  \end{lem}
+  \begin{proof}
+    \begin{align}
+      \label{eq:126}
+      \frac{1}{n} \epsilon^{T}X \sim N(0, \frac{1}{n} X^{T} X) = N(0,
+      \hat \sigma)
+    \end{align} and so $\frac{1}{\sqrt{n}} (\epsilon^{T}X)_{j} \sim
+    N(0, \hat \sigma_{jj})$, and so
+    \begin{align}
+      \label{eq:127}
+      \Prob{\max_{j=1, \dots, p} \frac{2}{n} |(\epsilon^{T} X)_{j}| >
+        \frac{\lambda}{2}} \leq \sum_{j=1}^{p} \\
+    \end{align}
+    \todo{Fill in proof from lecture notes}
+  \end{proof}
+
+  Now, can conclude.  We have
+  \begin{align}
+    \label{eq:128}
+    \frac{1}{n} \| X(\theta^{0} - \tilde \theta) \|_{2}^{2} + \lambda
+    \| \tilde \theta \|_{1} \leq \frac{\lambda}{2} \| \tilde \theta -
+    \theta^{0} \|_{1} + \lambda \| \theta^{0} \|_{1} \\
+    \| \tilde \theta \|_{1 } = \sum_{i=1}^{p} |\tilde \theta_{i}| = \|
+    \tilde \theta_{S_{0}} \|_{1} + \| \theta_{S_{0}^{c}} \|_{1} \geq
+    \| \theta^{0} \|_{1} - \| \tilde \theta_{S_{0}} - \theta^{0} \| +
+    \| \tilde \theta_{S_{0}^{c}} \|_{1}
+  \end{align} which gives
+  \begin{align}
+    \label{eq:129}
+    \| \tilde \theta_{S_{0}^{c}} \|_{1} \leq \| \tilde \theta \|_{1} +
+    \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1}
+  \end{align} and so
+  \begin{align}
+    \label{eq:130}
+    \frac{2}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} + 2
+    \lambda \| \tilde \theta_{S_{0}^{c}} \|_{1} \\
+    \leq \frac{2}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} + 2
+    \lambda \| \tilde \theta \|_{1} - 2 \lambda \| \theta^{0} \|_{1} +
+    2 \lambda \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1} \\
+    \leq \lambda \| \tilde \theta - \theta_{S_{0}}^{0} \|_{1} + 2
+    \lambda \| \theta^{0} \|_{1} - 2 \lambda \| \theta^{0} \|_{1} + 2
+    \lambda \| \tilde \theta_{S_{0}} - \theta^{0}_{S_{0}} \|_{1} \\
+    = 3 \lambda \| \tilde \theta_{S_{0}} - \theta^{0}_{S_{0}} \|_{1} +
+    \lambda \| \tilde \theta_{S_{0}^{c}} \|_{1}
+  \end{align} and so we obtain
+  \begin{align}
+    \label{eq:131}
+    \frac{2}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} + \lambda
+    \| \tilde \theta_{S_{0}^{c}} \|_{1} \leq 3 \lambda \| \tilde
+    \theta_{S_{0}} - \theta^{0}_{S_{0}} \|_{1}
+  \end{align} and then
+  \begin{align}
+    \label{eq:132}
+    \frac{2}{n} \| X(\tilde \theta - \theta^{0})\|_{2}^{2} + \lambda
+    \| \tilde \theta - \theta_{S_{0}}^{0} \|_{1} = \frac{2}{n} \|
+    X(\tilde \theta - \theta^{0}) \|_{2}^{2} + \lambda \| \tilde
+    \theta_{S_{0}^{c}} \|_{1} + \lambda \| \tilde \theta_{S_{0}} -
+    \theta^{0}_{S_{0}} \|_{1} \\
+    \leq 4 \lambda \| \tilde \theta_{S_{0}} - \theta_{S_{0}}^{0}
+    \|_{1} \\
+    \leq 4 \lambda \sqrt{r_{0} k}(\tilde \theta_{S_{0}} -
+    \theta^{0})^{T} \hat \sigma (\tilde \theta_{S_{0}} - \theta^{0}) \\
+    = 4 \lambda \sqrt{r_{0} k } \frac{1}{n} \| X(\tilde \theta_{S_{0}}
+    - \theta^{0}) \\
+    &\leq 4 \lambda^{2} r_{0} k + \frac{1}{n} \| X(\tilde
+    \theta_{S_{0}} - \theta^{0}) \|_{2}^{2}
+  \end{align}
+
+  Thus
+  \begin{align}
+    \label{eq:133}
+    \frac{1}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} + \lambda
+    \| \tilde \theta - \theta^{0} \|_{1} \leq 4 \lambda^{2} r_{0} k
+  \end{align}
+\end{proof}
+
+\begin{remark}[Remarks on Theorem 6 in Lecture Notes]
+  \begin{enumerate}
+  \item Using $\E{X} = = \int_{0}^{\infty}P(X > u) du$ and if $\beta =
+    0$ the result of Theorem 6 be ``integrated'' to give a risk bound
+    \begin{align}
+      \label{eq:134}
+      \sup_{\theta \in B_{n}(k)} \mathbb{E}_{\theta} \frac{1}{n} \|
+      X(\tilde X - \theta^{0}) \|_{2}^{2} \lesssim \frac{k}{n} \log p
+    \end{align}
+  \item One can show (exercise sheet) that with high probability,
+    \begin{align}
+      \label{eq:135}
+      \| \tilde \theta - \theta^{0} \|_{2}^{2} \lesssim \frac{k}{n}
+      \log p
+    \end{align}
+  \item If th error variance is $\sigma^{2}$ is not known, we may
+    approximate it by $\hat \sigma^{2} = \frac{1}{n} Y^{T} Y$, and
+    multiplying $\lambda$ by $\hat \sigma$.
+  \end{enumerate}
+\end{remark}
+
+About condition~\eqref{eq:119}:
+\begin{align}
+  \label{eq:137}
+  \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1}^{2} \leq k r_{0}
+  (\tilde \theta - \theta^{0})^{T} \hat \Sigma (\tilde \theta -
+  \theta^{0}) \\
+  &= k r_{0} \frac{1}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} \\
+  \hat \Sigma = \frac{X^{T} X}{n}
+\end{align}
+
+It suffices to check~\eqref{eq:119} with $\tilde \theta$ replaced with
+$\forall \theta \in U$, with $P(\tilde \theta \in U) = 1$.
+
+In the proof of Theorem 6, we have shown
+\begin{equation}
+  \label{eq:138}
+  \| \tilde \theta_{S_{0}^{c}} \leq 3 \| \tilde \theta_{S_{0}} -
+  \theta^{0} \|_{1}
+\end{equation} holds with probability 1.
+
+\begin{corollary}
+  Theorem 6 still holds if~\eqref{eq:119} is replaced by the condition
+  \begin{align}
+    \label{eq:139}
+    \forall \theta \in U = \{ \theta \in R^{p}: \| \theta_{S_{0}^{c}}
+    \|_{1} \leq 3 \| \theta_{S_{0}} - \theta^{0} \|_{1} \}
+  \end{align} we have
+  \begin{align}
+    \label{eq:140}
+    \| \theta_{S_{0}} - \theta \|_{1}^{2} \leq k r_{0} (\theta -
+    \theta^{0})^{T} \hat \Sigma (\theta - \theta^{0})
+  \end{align}
+
+  Note that $\| \theta_{S_{0}} - \theta^{0} \|_{1}^{2} \leq k \|
+  \theta_{S_{0}} - \theta^{0} \|_{2}^{2}$ since there are at most $k$
+  non-zero entries of $\theta_{S_{0}} - \theta_{0}$.
+\end{corollary}
+
+So it remains to check that
+\begin{align}
+  \label{eq:141}
+  \| \theta_{S_{0}} - \theta^{0} \|_{2}^{2} \leq r_{0} (\theta -
+  \theta^{0}) \hat \Sigma (\theta - \theta^{0}) = r_{0} \frac{1}{n} \|
+  X(\theta - \theta^{0}) \|_{2}^{2}
+\end{align}
+
+\section{Compressed Sensing and the Restricted Isometry Property}
+\label{sec:compr-sens-restr}
+
+Consider a signal $Y \in \R^{n}$ and a ``sensing''/design matrix
+$X_{j} \in \R^{n}, j = 1, \dots, p$ such that $Y = X \theta =
+\sum_{i=1}^{p} X_{j} \theta_{j}$, without noise.
+
+If $p > n$, the representation is underdetermined, but we may aim to
+find the ``most sparse'' solution.  Formally, if $\| \theta_{0} \|_{0}
+= |\{ \theta_{j} \neq 0 \}|$, we want to find the solution
+\begin{align}
+  \label{eq:142}
+  \min_{\theta \in \R^{p}} \| \theta \|_{0}
+\end{align} such that $Y = X \theta$.
+
+If the sensing matrix satisfies the restricted isometry property (RIP)
+\begin{align}
+  \label{eq:143}
+  (1 - \epsilon) \| \theta \|_{2} \leq \frac{1}{n} \| X \theta
+  \|_{2}^{2} \leq (1 + \epsilon) \| \theta \|_{2}^{2} \quad \forall \theta
+  \in B_{0}(k)
+\end{align} for some/all $\epsilon (=\epsilon_{k})$, and if there
+exists a $k$-sparse solution $\theta^{0}$ such that $Y = X
+\theta^{0}$, and if $k < n$, then the solution of the convex relaxation
+of~\eqref{eq:142} ($\min_{\theta \in \R^{p}} \| \theta \|_{1}$ such
+that $Y = X \theta$) is exactly equal to the solution
+of~\eqref{eq:142}.
+
+We note that in a Gaussian random matrix, we have $\frac{X^{T} X}{n}$
+satisfies RIP with probability greater than $1 - e^{-k \log p}$.
+
+\begin{remark}
+  An intuition for Theorem 6 can thus be given as follows.
+  \begin{enumerate}
+  \item In the noise model $Y = X \theta + \epsilon$, with $p > n$, we
+    can detect sparse submodels from model selection criterion of the
+    form
+    \begin{align}
+      \label{eq:145}
+      \| Y - X \theta \|_{2}^{2} + \| \theta \|_{0}
+    \end{align} \todo{What was the second term}.
+  \item A convex relaxation of the $l_{0}$ penalty is also possible,
+    along the CRT-ideas, using condition~\eqref{eq:119}, which can be
+    shown to be implied by (RIP).
+  \item Candes and Tao (Annals of Statistics) showed further that a
+    ``dual'' estimator of the LASSO is obtained from
+    \begin{align}
+      \label{eq:146}
+      \min_{\theta \in \R^{p}} \| \theta \|_{1}
+    \end{align} such that
+    \begin{align}
+      \label{eq:147}
+      \frac{1}{n} \| Y - X \theta \|_{2}^{2} \leq t
+    \end{align} where $t$ is the analogue of $\lambda$ in the
+    definition of the LASSO.  This estimator is called the
+    \textbf{Dantzig selector} $\tilde \theta_{DANTZIG}$.  One then
+    shows that the ``exact recovery'' of the most sparse selector
+    $\theta^{0}$ still holds approximately, with large probability.
+  \end{enumerate}
+\end{remark}
+
+
+Recall the restricted isometry property,
+\begin{align}
+  \label{eq:150}
+  (1-\epsilon) \| \theta \|_{2}^{2} \leq \| \hat \Sigma \theta
+  \|_{2}^{2} \leq (1+\epsilon) \| \theta \|_{2}^{2} \, \forall \theta
+  \in B_{0}(k)
+\end{align}
+
+Recall that
+\begin{align}
+  \label{eq:144}
+  \hat \Sigma = \frac{X^{T} X}{n}
+\end{align} for $p > n$ is not invertible, so that difficult part
+\begin{align}
+  \label{eq:148}
+  \inf_{\theta \in \R^{p}, \| \theta \|_{2} \leq 1} \theta^{T} \hat
+  \Sigma \theta = |(\lambda_{min}(\Sigma))| = 0
+\end{align}
+
+
+Consider $(X_{ij}) \sim N(0, 1)$ giving rise to $X$.  Then
+\begin{align}
+  \label{eq:149}
+  (\hat \Sigma)_{jj} = \frac{1}{n} \sum_{i=1}^{n} X_{ij}^{2}
+  (\hat \Sigma)_{jk} = \frac{1}{n} \sum_{i=1}^{n} X_{ij} X_{ik}
+\end{align} and we see $\E{\hat \Sigma_{jj}} = 1$ and $\E{\hat
+  \Sigma_{jk}} = \frac{1}{n} \sum_{i=1}^{n} \E{X_{ij} X_{ik}} = 0$.
+Thus $\E{\hat \Sigma} = I_{p}$, the identity matrix.
+
+\begin{thm}
+  \label{defn:high_dimensional_statistics:2}
+  For $X_{ij}$ as above, and $\frac{n}{\log p} \rightarrow \infty$ (or
+  $\min(p, n) \rightarrow \infty$) is large enough.  Then for all $k
+  \in N$, there exists a constant $0 < c < \infty$ such that for all
+  $n$ large enough,
+  \begin{align}
+    \label{eq:151}
+    \Prob{\theta^{T} \hat \Sigma \theta \geq \frac{1}{2} \theta^{T}
+      \theta \, \forall \theta \in B_{0}(k)} \geq 1 - 2e^{-Ck \log p}
+  \end{align}
+\end{thm}
+
+\begin{proof}
+  It suffices to bound
+  \begin{align}
+    \label{eq:152}
+    \Prob{\frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} -1 \geq
+    -\frac{1}{2} \, \forall \theta \in B_{0}(k) \backslash \{ 0 \}} &=
+  \Prob{1- \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta}
+    \leq \frac{1}{2} \, \forall \theta \in B_{0}(k) \backslash \{ 0
+    \}} \\
+  &\geq \Prob{\sup_{\theta \in B_{0}(k), \theta \neq 0} \left|
+      \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} - 1 \right|
+    \leq \frac{1}{2}}
+  \end{align}
+
+  Let $S \subseteq  \{ 1, \dots, p \}$ of cardinality $|S| = k$, then
+  we can bound
+  \begin{align}
+    \label{eq:153}
+    \Prob{ \sup_{\theta \in B_{0}(k), \theta \neq 0} \left|
+        \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} - 1
+      \right| > \frac{1}{2}} = \Prob{\max_{S} \sup_{\theta \in
+        R^{p}_{S}} \left| \frac{\theta^{T} \hat \Sigma
+          \theta}{\theta^{T} \theta} - 1 \right| > \frac{1}{2}}
+  \end{align} where $R^{p}_{S}$ is the subspace of $\R^{p}$ with
+  $\theta_{j} = 0$ for $\theta \in S^{c}$.
+
+  This is bounded by
+  \begin{align}
+    \label{eq:154}
+    \leq \sum_{S \in \{ 1, \dots, p \}} \Prob{\sup_{\theta \in
+        R^{p}_{S}, \theta \neq 0} \left| \frac{\theta^{T} \hat \Sigma
+          \theta}{\theta^{T} \theta} - 1 \right| > \frac{1}{2}}
+  \end{align} where the sum extends over $p \choose k \leq p^{k}$
+  elements.  Thus the last sum is
+  \begin{align}
+    \label{eq:155}
+    \leq^{(\star)} \sum_{S \subseteq \{ 1, \dots, p \}} 2e^{-(c+1) k
+      \log p} \leq 2 e^{-C k \log p} \underbrace{p^{k} e^{-k \log
+        p}}_{\leq 1} = 2e^{-Ck\log p}
+  \end{align} where we used
+  \begin{align}
+    \label{eq:156}
+    \tag{$\star$}
+    \Prob{\sup_{\theta \in R^{p}_{s}, \theta \neq 0} \left|
+        \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} - 1
+      \right| > \frac{1}{2}} \leq 2 e^{-(C+1)k \log p}
+  \end{align}
+
+  \begin{lem}
+    \begin{align}
+      \label{eq:157}
+      \Prob{\left| \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T}
+            \theta} - 1 \right| > 18 (\sqrt{\frac{t + c_{0} k}{n}} +
+        \frac{t + c_{0} k}{n})} \leq 2e^{-t} \, \text{$\forall t > 0$
+        and some $c_{0} < \infty$}
+    \end{align}
+
+    This lemma implies $(\star)$ since for $t = (c+1) k \log p$ we
+    have
+    \begin{align}
+      \label{eq:158}
+      18(\sqrt{\frac{(c+1)k \log p + c_{0} k}{n}} + \frac{(c+1)k \log
+        p + c_{0} k}{n}) \rightarrow 0
+    \end{align} since we had assumed $\frac{n}{\log p} \rightarrow 0$.
+  \end{lem}
+  \begin{proof}[Proof of Lemma]
+    \begin{align}
+      \label{eq:159}
+      \sup_{\theta \in R^{p}_{S}, \theta \neq 0} \left|
+        \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} - 1
+      \right| &= \sup_{\dots} \left| \frac{\theta^{T} (\hat \Sigma - I)
+          \theta}{\theta^{T} \theta} \right| \\
+      &\leq \sup_{\underbrace{\theta \in \R^{p}_{S}, \| \theta \|_{2} \leq 1}_{B(S)}}
+      \left| \theta^{T} (\underbrace{\hat \Sigma - I}_{\Phi}) \theta
+      \right| \\
+      &= \sup_{\theta \in B(S)} | \theta^{T} \Phi \theta |
+    \end{align}
+
+    Since the unit ball $B(S)$ of $R^{p}_{S}$ is compact, we can find
+    (for all $\delta > 0$) a ``net'' of points $\theta^{l}, l = 1,
+    \dots, N(\delta)$ such that every $\theta \in B(S)$ is at distance
+    at most $\| \theta - \theta^{l} \| < \delta$ away from some
+    $\theta^{l}$.  We may take $\theta^{l} \in B(S)$.
+
+    Writing
+    \begin{align}
+      \label{eq:160}
+      \theta^{T} \Phi \theta &= (\theta - \theta^{l} + \theta^{l})^{T}
+      \Phi (\theta - \theta^{l} + \theta^{l}) \\
+      &= (\theta^{l})^{T} \Phi \theta^{l} + \underbrace{(\theta -
+        \theta^{l}) \Phi (\theta - \theta^{l})}_{(I)} +
+      \underbrace{2(\theta - \theta^{l}) \Phi \theta^{l}}_{(II)} \\
+      |(I)| &= \| \theta - \theta^{l} \|_{2}^{2} \frac{(\theta -
+        \theta^{l})^{T}}{\| \theta - \theta^{l} \|_{2}} \Phi
+      \frac{(\theta - \theta^{l})^{T}}{\| \theta - \theta^{l} \|_{2}}
+      \\
+      &\leq \delta^{2} \sup_{v \in B(S)} |v^{T} \Phi v| \\
+      |(II)| &= 2 \|
+      \theta - \theta^{l} \|_{2} \left| \frac{(\theta -
+          \theta^{l})^{T}}{\| \theta - \theta^{l}\|_{2}} \Phi
+        \theta^{l}
+      \right| \\
+      &\leq^{CS} 2 \delta \| \Phi \theta^{l} \|_{2} \\
+      &\leq 2 \delta \| \Phi \|_{op} \| \theta^{l} \|_{2} \\
+      &= 2 \delta \sup_{v \in B(S)} |v^{T} \Phi v|
+    \end{align}
+
+    So we proved
+    \begin{align}
+      \label{eq:161}
+      \sup_{\theta \in B(S)} | \theta^{T} \Phi \theta| \leq \max_{l =
+        1, \dots, N(\delta)} |\theta^{l} \Phi \theta^{l}| +
+      (\delta^{2} + 2 \delta) \sup_{v \in B(S)} |v^{T} \Phi v|
+    \end{align}
+    Set $\delta = \frac{1}{3}$.
+    \begin{align}
+      \label{eq:162}
+      (1 - \frac{7}{9}) \sup_{\theta \in B(S)} | \theta^{T} \Phi
+      \theta | \leq \max_{l = 1, \dots, N(\delta)} | \theta^{l} \Phi
+      \theta^{l} |
+    \end{align}
+    showing
+    \begin{align}
+      \label{eq:163}
+      \sup_{\theta \in B(S)} | \theta^{T} \Phi \theta | \leq
+      \frac{9}{2} \max_{l = 1, \dots, N(\delta)} | \theta^{l} \Phi
+      \theta^{l} |
+    \end{align}
+
+    \begin{align}
+      \label{eq:164}
+      \theta^{T} \Phi \theta = \theta^{T} (\hat \Sigma - I) \theta =
+      \frac{1}{n} \sum_{i=1}^{n} (X \theta)_{i}^{2} - \E{(X \theta)_{i}^{2}}
+    \end{align} since
+    \begin{align}
+      \label{eq:165}
+      \theta^{T} \hat \Sigma \theta = \frac{1}{n} (X \theta)^{T} X
+      \theta = \frac{1}{n} \sum_{i=1}^{n} (X \theta)_{i}^{2}
+    \end{align} and
+    \begin{align}
+      \label{eq:166}
+      \E{(X \theta)_{i}^{2}} &= \E{\left(\sum_{m=1}^{p} X_{im}
+          \theta_{m} \right)^{2}} \\
+      &= \E{\sum_{m=1}^{p} X_{im}^{2} \theta_{im}^{2}}  + \E{\sum_{m
+          \neq m'} X_{im} X_{im'} \theta_{m} \theta_{m'}} \\
+      &= \| \theta \|_{2}^{2} \\
+      &= \theta^{T} \theta
+    \end{align} and so it suffices to prove
+    \begin{align}
+      \label{eq:167}
+      \Prob{\max_{l=1, \dots, N(\frac{1}{3})} \left| \frac{1}{n}
+          \sum_{i=1}^{n} (X \theta)_{i}^{2} - \E{(X \theta)_{i}^{2}}
+        \right| > \frac{2}{9} \cdot 18  (\sqrt{\frac{t + c_{0} k}{n}}
+        + \frac{t + c_{0} k}{n})}
+    \end{align}
+  \end{proof}
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

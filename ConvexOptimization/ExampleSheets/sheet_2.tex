@@ -122,7 +122,56 @@
   \begin{enumerate}
   \item Recall that the affine
   \end{enumerate}
+\item 
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item We can show that $f(u)$ is convex, lower semicontinous, and
+  proper. Since $f(u) \geq \frac{1}{2} \| u - g \|_{2}^{2}$, we have
+  level boundedness.  Thus we are guaranteed the existence of a
+  solution.
 
+  Since $\| v \| = \sup_{x \neq 0} \frac{\IP{x, v}}{\| x \|}_{2}$.
+
+  We can then find a product of scaled unit balls $D$ such that $f(u) = \| u
+  - g \|_{2}^{2} + (\delta_{D})^{\star}(Lu)$.
+
+  If we form the peturbed function $f'$, we have
+  \begin{align}
+    \label{eq:36}
+    f'(u, w) = k(u) + h(Lu + w) \\
+    (f')^{\star}(v, y) = k^{\star}(-L^{T}y + v) +
+    \underbrace{h^{\star}}_{\delta_{D}(y)}(y) 
+  \end{align} with
+  \begin{align}
+    \label{eq:38}
+    k^{\star}(z) = \sup_{u} \IP{z, u} - \frac{1}{2}\| u - g \|_{2}^{2}
+    \\
+    &= \frac{1}{2} \| z - g \|_{2}^{2} - \frac{1}{2} \| g \|_{2}^{2}
+  \end{align} which is a special case of the dual of $\frac{1}{2} \| x
+  \|^{2}$ is $\frac{1}{2} \| u \|^{2}$.
+
+  Then
+  \begin{align}
+    \label{eq:39}
+    f^{\star}(v, y) = \| -L^{T} y + v - g \|_{2}^{2} + \frac{1}{2} \|
+    g \|_{2}^{2} + \delta_{D}(y) \\
+    \psi(y) = -f^{\star}(0, y) = - \frac{1}{2} \| - L^{T} y - g
+    \|_{2}^{2} + \frac{1}{2} \| g \|_{2}^{2} - \delta_{D}(y)
+  \end{align} and so we have transformed our problem into a quadratic.
+
+  \begin{align}
+    \label{eq:40}
+    p(w) = \inf_{u} f'(u, w) \\
+    q(v) = \inf_{y} f'^{\star}(v, y)
+  \end{align}
+  Then $(u, y)$ is a primal-dual solution if and only if $(0, y)
+  \in \partial f^{-1}(u, 0) \iff (0, y) \in (u - g + L^{T} \partial
+  (\delta_{D})^{\star}(Lu), \partial (\delta_{D})^{\star}())$
 \end{exercises}
 
 %%% Local Variables: 

@@ -1,0 +1,155 @@
+
+
+\chapter{Support Vector Machines}
+\label{cha:supp-vect-mach}
+
+\section{Machine Learning}
+\label{sec:machine-learning}
+
+Given $X = \{ x^{1}, \dots, x^{n} \}$ a sample set, $x^{i} \in
+\mathcal{F} \subseteq \R^{m}$, with $\mathcal{F}$ our feature space,
+and $C$ a set of classes.  We seek to find
+\begin{align}
+  \label{eq:89}
+  h_{\theta}: \mathcal{F} \rightarrow C, \theta \in \Theta
+\end{align} with $\Theta$ our parameter space.
+
+Our task is to find $\theta$ such that $h_{\theta}$ is the ``best''
+mapping from $X$ into $C$.
+
+\begin{enumerate}
+\item Upsupervised learning (only $X$ is known, usually $|C|$ not known)
+  \begin{itemize}
+  \item Clustering
+  \item Outlier detection
+  \item Mapping to lower dimensional subspace
+  \end{itemize}
+\item Supervised learning ($|C|$ known).  We have training date $T =
+  \{ (x^{1}, y^{1}), \dots, (x^{n}, y^{n}) \}$, with $y^{i} \in C$.
+
+  We seek to find
+  \begin{align}
+    \label{eq:90}
+    \theta = \argmin_{\theta \in \Theta} f(\theta, T) = \sum_{i=1}^{n}
+    g(y^{i}, h_{\theta}(x^{i})) + R(\theta)
+  \end{align}
+\end{enumerate}
+
+\section{Linear Classifiers}
+\label{sec:linear-classifiers}
+
+The idea is to consider
+\begin{align}
+  \label{eq:91}
+  h_{\theta}: \R^{m} \rightarrow \{ -1, 1 \}, \theta =
+  \begin{pmatrix}
+    w \\
+    b
+  \end{pmatrix} \\
+  h_{\theta}(x) = \sign (\IP{w, x} + b)
+\end{align}
+
+We want to consider maximum margin classifiers, satisfying
+\begin{align}
+  \label{eq:92}
+  \max_{w, b, w \neq 0} \min_{i} y^{i}(\IP{\frac{w}{\| w \|}, x} +
+  \frac{b}{\| w \|})
+\end{align}
+
+which can be rewritten as
+\begin{align}
+  \label{eq:93}
+  \max_{w, b} c
+\end{align} such that
+\begin{align}
+  \label{eq:94}
+  c \leq y^{i} ( \IP{\frac{w}{\| w \|}, x^{i}} + \frac{b}{\| w \|}) \\
+  \| w \| c \leq y^{i} (\I{w, x^{i}} + b) \\
+\end{align}
+
+or just
+\begin{align}
+  \label{eq:95}
+  \min_{w, b} \frac{1}{2} \| w \|^{2}
+\end{align} such that
+\begin{align}
+  \label{eq:96}
+  1 \leq y^{i} (\IP{w, x} + b)
+\end{align}
+
+\begin{defn}
+  \label{defn:support_vector_machines:2}
+  In standard form,
+  \begin{align}
+    \label{eq:97}
+    \inf_{w, b} k(w, b) + h(M
+    \begin{pmatrix}
+      w \\
+      b
+    \end{pmatrix}
+    - e)
+  \end{align}
+
+  The conjugeates are
+  \begin{align}
+    \label{eq:98}
+    k(w, b) = \frac{1}{2} \| w \|^{2} \\
+    k^{\star}(u, c) = \frac{1}{2} \| u \|^{2} + \delta_{\{ 0 \}}(c) \\
+    h(z) = \delta_{\geq 0}(z)
+    h^{\star}(v) = \delta_{\leq v}(v)
+  \end{align}
+
+  In saddle point form,
+  \begin{align}
+    \label{eq:99}
+    \inf_{w, b} \sup_{z} \frac{1}{2} \| w \|_{2}^{2} + \IP{M
+      \begin{pmatrix}
+        w \\
+        b
+      \end{pmatrix} - e, z} - \delta_{\leq 0}(z)
+  \end{align}
+
+  The dual problem is
+  \begin{align}
+    \label{eq:100}
+    \sup_{z} - \IP{e, z} - \delta_{\leq 0}(z) - \frac{1}{2} \| -
+    \sum_{i=1}^{n} y^{i} x^{i} z_{i} \|_{2}^{2} - \delta_{\{ 0
+      \}}(\IP{y, z})
+  \end{align}
+
+  and thus
+  \begin{align}
+    \label{eq:101}
+    \inf_{z} \frac{1}{2} \| \sum_{i} y^{i} x^{i} z_{i} \|_{2}^{2} +
+    \IP{e, z}
+  \end{align} such that $z \leq 0, \IP{y, z} = 0$.
+
+  The optimality conditions are
+  \begin{align}
+    \label{eq:102}
+  \end{align}
+  \todo{Fill in rest of optimality conditions}
+
+  We use the fact that if $k(x) + h(Ax + b)$ is our primal,
+  then the dual is $-\IP{b, y} - k^{\star}(-A^{T}y) - h^{\star}(z)$.
+\end{defn}
+
+\todo{Explanation of support vectors}
+
+\section{Kernel Trick}
+\label{sec:kernel-trick}
+
+The idea is to embed our features into a a higher dimensional space,
+mapping function $\phi$.  Then our decision function takes the form
+\begin{align}
+  \label{eq:103}
+  h_{\theta}(x) = \sign(\IP{\phi(x), w} + b)
+\end{align}
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -1,0 +1,55 @@
+
+\chapter{Non-Cooperative Games}
+\label{cha:non-coop-games}
+
+\begin{thm}[von Neumann, 1928]
+  \label{defn:non_cooperative_games:1}
+  Let $P \in \R^{m \times n}$.  Then
+  \begin{align}
+    \label{eq:28}
+    \max_{x \in X} \min_{y \in Y} p(x, y) = \min_{y \in Y} \max_{x \in
+    X} p(x, y)
+  \end{align}
+\end{thm}
+
+\chapter{Strategic Equilibrium}
+\label{cha:strat-equil}
+
+\begin{defn}
+  \label{defn:non_cooperative_games:2}
+  $x \in X$ is a best response to $y \in Y$ if $p(x, y) = \max_{x' \in
+    X} p(x', y)$.  $(x, y) \in X \times Y$ is a Nash equilibrium if
+  $x$ is a best response to $y$ and $y$ is a best response to $x$.
+\end{defn}
+
+\begin{thm}
+  \label{defn:non_cooperative_games:3}
+  $(x, y) \in X \times Y$ is an equilibrium of the matrix game $P$ if
+  and only if
+  \begin{align}
+    \label{eq:33}
+    \min_{y' \in Y} p(x, y') = \max_{x' \in X} \min_{y' \in Y} p(x',
+    y')
+  \end{align} and
+  \begin{align}
+    \label{eq:34}
+    \max_{x \in X'} p(x', y) = \min_{y' \in Y} \max_{x' \in X} p(x', y').
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{defn:non_cooperative_games:4}
+  Let $(x, y), (x', y') \in X \times Y$ be equilibria of the matrix
+  game with payoff matrix $P$.  Then $p(x, y) = p(x', y')$ and $(x,
+  y')$ and $(x', y)$ are equilibria as well.
+\end{thm}
+
+\begin{thm}[Nash, 1951]
+  \label{defn:non_cooperative_games:5}
+  Every bimatrix game has an equilibrium.
+\end{thm}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

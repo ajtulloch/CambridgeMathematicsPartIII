@@ -1,0 +1,501 @@
+\begin{exmp}
+  \label{defn:market_models:1}
+  A market model with no absolute arbitrage but with a
+  relative arbitrage.
+
+  Consider $P = (1, S)$, where $dS_{t} = S_{t} \sigma_{t} dW_{t}$, $n
+  = d = 1$, $\sigma_{t} > 0$ for all $t$. On the filtration generated
+  by $W$ and $S$ is a strictly local martingale, $\E{S_T} < S_0$
+  (recall that all positive local martingales are supermartingales)
+  which implies $\E{\max_{0 \leq t \leq T} S_t} = \infty$.
+\end{exmp}
+
+\begin{defn}
+  \label{defn:market_models:1}
+  Let $Y_t = 1$  for all $t$ be a state price density.  If $L$ is of
+  class $D$ locally, there exist $L$-admissible absolute arbitrages.
+\end{defn}
+
+\begin{defn}
+  \label{defn:market_models:1}
+  Let $\Q = \Prob$.  This is an EMM for the cash numeraire.  If $L$ is
+  of class $D$ locally, there are no relative arbitrages.
+\end{defn}
+
+\begin{defn}
+  \label{defn:market_models:2}
+  By existential replication theorem, there exists $H$ such that
+  $X_{T}(H) = S_{T}$.  Notice that $X_{0}(H) = \E{X_{T}} < S_{0}$ (!)
+\end{defn}
+
+Note that $\frac{X_{T}}{S_{T}} = 1$ a.s.\ but $\frac{X_{0}}{S_{0}} = p
+< 1$ (so we have a relative arbitrage).  Let $\tilde H = H - p
+\begin{pmatrix}
+  0  \\
+  1
+\end{pmatrix}
+$.  Then
+\begin{align}
+  \label{eq:86}
+  X_{0}(\tilde H) = \E{S_{T}} - pS_{0} = 0 \\
+  X_{T}(\tilde H) = S_{T} - p S_{T} > 0
+\end{align}
+
+$X_{t}(\tilde H)$ is \textbf{not} of class $D$.  So only admissible if
+$L$ is wild.
+
+\chapter{Black-Scholes}
+\label{cha:black-scholes-1}
+
+Consider the market model
+\begin{align}
+  \label{eq:87}
+  dB_{t} &= B_{t} r dt \\
+  dS_{t} &= S_{t}(\mu dt + \sigma dW_{t}) 
+\end{align}
+ 
+Then $B_t = B_{0} e^{rt}$, $S_{t} = S_{0} e^{(\mu -
+  \frac{\sigma^{2}}{2})t + \sigma W_{t}}$, and $Y_{t} = e^{-(r -
+  \lambda^{2}{2})t - \lambda W_{t}}$ is the unique state price density
+with $Y_{0} = 1$, where $\lambda = \frac{\mu - r}{\sigma}$.
+
+Our goal is to replicate a Europena claim with payout $\xi_{T} =
+g(S_{T})$ where $g \geq 0$ and suitably integrable.  By our
+replication theorem, there exists a 0-admissible strategy $H$ such
+that $X_{t}(H) = \frac{1}{Y_{t}} \E{Y_{T} g(S_{T}) |
+  \mathcal{F}_{t}}$.
+
+Let $\frac{d\Q}{d\Prob} = e^{-\frac{\lambda^{2}T}{2} - \lambda W_{T}}$
+be the unique EMM.  By the Cameron-Martin-Girsanov theorem, $\hat
+W_{t} = W_{t} + \lambda t$ is a $\Q$-Brownian motion.  Then
+\begin{align}
+  \label{eq:89}
+  S_{T} &= S_{t} e^{(\mu - \frac{\sigma^{2}}{2})(T-t) + \sigma(W_{T} -
+    W_{t})} \\
+  &= S_{t} e^{(-r - \sigma^{2}{2})(T-t) + \sigma(\hat W_{T} - \hat W_{t})}
+\end{align} and we have
+\begin{align}
+  \label{eq:88}
+  X_{t} &= e^{-r(T-t)} \mathbb{E}^{\Q}(g(S_{T}) | \mathcal{F}_{t}) \\
+  &= \int g(S_{t} e^{(r - \frac{\sigma^{2}}{2})(T-t) +
+    \sigma\sqrt{T-t} Z}) \frac{e^{-\frac{z^{2}}{2}}}{\sqrt{2 \pi}} dz
+\end{align}
+
+Substituting in $g(x) = (x - K)^{+}$ corresponding to a call option,
+we obtain the price
+\begin{align}
+  \label{eq:90}
+  C_{t}(T, K) = S_{t} \Phi(\frac{-\log \frac{K}{S_{t}}}{\sigma \sqrt{T
+      - t}} + (\frac{r}{\sigma} + \frac{\sigma}{2})\sqrt{T-t}) -
+  Ke^{-r(T-t)} \Phi(\frac{-\log \frac{K}{S_{t}}}{\sigma \sqrt{T-t}} +
+  (\frac{r}{\sigma} - \frac{\sigma}{2}) \sqrt{T-t})
+\end{align}
+
+\todo{Fill in missing lecture --- Black-Scholes price as a solution to
+  BS PDE}
+
+\section{Black-Scholes Volatility}
+\label{sec:black-schol-volat}
+
+Assume we obsreve $(S_{t})_{-T \leq t \leq 0}$ at some discrete intervals $(\frac{t}{n} -
+1)T$ for $i = 0, \dots, n$, with $Y_{i} = \log
+\frac{S_{t_{i}}}{S_{t_{i-1}}} = (\mu - \frac{\sigma^{2}}{2})(t_{i} -
+t_{i-1}) + \sigma(W_{t_{i}} - W_{t_{i-1}}) \sim N(a\frac{T}{n},
+\frac{\sigma^{2}T}{n})$.  The MLE is then
+\begin{align}
+  \label{eq:91}
+  \hat a = \frac{1}{T} \sum_{i=1}^{n} Y_{i} = \frac{1}{T} \log \frac{S_{0}}{S_{-T}} \\
+  \hat \sigma^{2} = \frac{1}{T} \sum_{i=1}^{n} (Y_{i} - \frac{\hat a
+    T}{n})
+\end{align} and $\Var{\hat \sigma^{2}} = \frac{2\sigma^{4}}{n}
+\rightarrow 0$ as $n \rightarrow \infty$.
+
+\section{Calibration}
+\label{sec:calibration}
+
+Black-Scholes model prediction, a call price 
+\begin{equation}
+  \label{eq:92}
+  C_{t}(T, K) = C^{BS}(t, T, K, S_{t}, r, \sigma).
+\end{equation}
+The Black-Scholes implied volatility for strike $K$, maturity $T$ at
+time $t$ is the unique $\sigma$ which solves~\eqref{eq:92}, denoted
+$\sum_{t}(T, K)$.
+
+Black-Scholes predicts there is a unique number $\sigma$ such that
+$\sum_{t}(T, K) = \sigma$ for all $t, T, K$.  This fails in most
+markets.
+
+\section{Robustness}
+\label{sec:robustness}
+
+Consider a payout of claim $g(S_{T})$.  Assume we believe in
+Black-Scholes, and so we believe the price
+\begin{align}
+  \label{eq:93}
+  V(0, S, \sigma)
+\end{align} where
+\begin{align}
+  \label{eq:94}
+  V(t, S, \sigma) = e^{-r(T-t)} \int
+  g(Se^{(r-\frac{\sigma^{2}}{2})(T-t) + \sigma \sqrt{T-t}z})
+  \frac{e^{-\frac{z^{2}}{2}}}{\sqrt{2 \pi}} dz
+\end{align} for some $\sigma$.  Pick $\hat \sigma$ to solve $V(0,
+S_{0}, \hat \sigma) = \xi_{0}$, the initial price of the claim.
+
+Now, try to replicate the claim with portfolio $(\phi, \pi)$ with
+\begin{align}
+  \label{eq:95}
+  \pi_{t} = \frac{\partial V}{\partial S}(t, S, \hat \sigma) \\
+  \phi_{t} = \frac{X_{t} - \pi_{t} S_{t}}{B_{t}}
+\end{align}  Notice the equation
+\begin{align}
+  \label{eq:96}
+  X_{0} = V(0, S_{0}, \hat \sigma) \\
+  dX_{t} = r(X_{t} - \pi_{t} S_{t}) dt + \pi_{t} ds
+\end{align} has a unique solution given by
+\begin{align}
+  \label{eq:97}
+  X_{t} = X_{0} e^{rt} + e^{rt} \int_{0}^{t} \pi_{s} d(e^{-rs} S_{s})
+\end{align} so given $\pi$, we can solve for $X$.
+
+In the real model,
+\begin{align}
+  \label{eq:98}
+  dB_{t} = r B_{t} dt \\
+  dS_{t} = S_{t} (\mu dt + \sigma_{t} dW_{t})
+\end{align} for $r, \mu$ constant but $\sigma_{t}$ a stochastic process.
+
+Then
+\begin{align}
+  \label{eq:99}
+  dV(t, S_{t}, \hat \sigma) = \frac{\partial V}{\partial t} dt +
+  \frac{\partial V}{\partial S} dS + \frac{1}{2} \frac{\partial^{2}
+    V}{\partial S^{2}} d \IP{S} \\
+  &= (\frac{\partial V}{\partial t} + \frac{1}{2} \frac{\partial^{2}
+    V}{\partial^{2} S} \sigma^{2}_{t} S_{t}^{2}) dt + \pi_{t} dS_{t}
+\\
+= (rV - rS \frac{\partial V}{\partial S} - \frac{1}{2}
+\frac{\partial^{2} V}{\partial S^{2}} S^{2} \hat \sigma^{2} +
+\frac{1}{2} \frac{\partial^{2} V}{\partial S^{2}} \sigma^{2}_{t}
+S^{2}_{t}) dt + \pi_{t} dS_{t}
+\end{align} and so
+\begin{align}
+  \label{eq:100}
+  d(X_{t} - V(t, S_{t}, \hat \sigma)) = r (X - V) dt + \frac{1}{2}
+  S^{2} (\hat \sigma^{2} - \sigma^{2}_{t}) \frac{\partial^{2}
+    V}{\partial S^{2}} dt
+\end{align} and so
+\begin{align}
+  \label{eq:101}
+  X_{T} - V(T, S_{T}, \hat \sigma) - X_{0} + V(0, S_{0}, \hat \sigma)
+  = X_{T} - g(S_{T}) = \frac{1}{2}\int_{0}^{T} e^{-r(T-s)} S^{2}_{s}
+  (\hat \sigma^{2} - \sigma_{s}^{2}) \frac{\partial^{2} V}{\partial
+    S^{2}} ds
+\end{align}
+and so we can estimate the difference between the option and the
+replicating portfolio by a weighted average of the gamma multiplied by
+the difference in implied and realized volatility over the time period.
+
+
+\chapter{Local Volatility Models}
+\label{cha:local-volat-models}
+
+Consider
+\begin{align}
+  \label{eq:102}
+  dB_{t} &= r B_{t} dt \\
+  dS_{t} &= S_{t} (\mu(t, S_{t}) dt + \sigma(t, S_{t}) dW_{t})  \\
+  &= S_{t}(r dt + \sigma(t, S_{t}) d \hat W_{t})
+\end{align} with $d \hat W_{t} = dW_{t} + \frac{\mu(t, S_{t}) -
+  r}{\sigma(t, S_{t})} dt$ is a Brownian motion under the equivalent
+martingale measure $\Q$.
+
+\begin{thm}[Dupire]
+  \label{defn:market_models:3}
+  Suppose $C_{0}(T, K) = \E{e^{-rT}(S_{T} - K)^{+}}{\Q}$.  Then
+  \begin{align}
+    \label{eq:103}
+    \frac{\partial C_{0}}{\partial T} + rK \frac{\partial
+      C_{0}}{\partial K} = \frac{\sigma(T, K)^{2}}{2} K^{2}
+    \frac{\partial^{2} C_{0}}{\partial K^{2}}
+  \end{align} with $C_{0}(0, K) = (S_{0} - K)^{+}$ with
+  \begin{align}
+    \label{eq:104}
+    \sigma(T, K) = \sqrt{\frac{2(\frac{\partial C_{0}}{\partial T} +
+        rK \frac{\partial C_{0}}{\partial K})}{K^{2}
+        \frac{\partial^{2} C}{\partial K^{2}}}}
+  \end{align}
+\end{thm}
+
+\begin{exer}
+  If
+  \begin{align}
+    \label{eq:105}
+    C_{0}(T, K) = C^{BS}(t = 0, \sigma, T, S_{0}, K, r, \sigma_{0})
+  \end{align}
+  show that
+  \begin{align}
+    \label{eq:106}
+    \sigma(T, K) = \sigma_{0} 
+  \end{align} for all $T, K$.
+\end{exer}
+
+
+
+\begin{lem}[Brreden-Litzenberger, 1978]
+  Suppose $S_{T}$ has density $f$ (under $\Q$). Then
+  \begin{align}
+    \label{eq:107}
+    C_{0}(T, K) &= e^{-rT} \int_{K}^{\infty} f_{S_{T}}(y)(y-K) dy \\
+    \frac{\partial C_{0}}{\partial K} &= -e^{-rT} \int_{K}^{\infty}
+    f_{S_{T}}(y) dy \\
+    \frac{\partial^{2} C_{0}}{\partial K^{2}} &= e^{-rT} f_{S_{T}}(K)
+  \end{align}
+\end{lem}
+
+\begin{proof}[Proof of Theorem~\ref{defn:market_models:3}]
+  By \ito's formula,
+  \begin{align}
+    \label{eq:108}
+    (S_{T} - K^{+}) &= (S_{0} - K)^{+} + \int_{0}^{T} \I{S_{t} \geq K}
+    dS_{t} + \frac{1}{2} \int_{0}^{T} \delta_{K} d \IP{S} \\
+    &= (S_{0} - K)^{+} + \int_{0}^{T} S_{t} r \I{S_{t} \geq K} +
+    \frac{1}{2} S_{t}^{2} \sigma(t, S_{t})^{2} \delta_{K}(S_{t}) dt +
+    \int_{0}^{T} S_{t} \sigma(t, S_{t}) \I{S_{t} \geq K} d\hat W_{t}.
+  \end{align}
+
+  Taking $\mathbb{E}^{\Q}$ on both sides, we obtain
+  \begin{align}
+    \label{eq:109}
+    e^{rT}C_{0}(T, K) = (S_{0} - K)^{+} + \int_{0}^{T}
+    (\int_{K}^{\infty} f_{S_{t}}(y) y r dy) dt + \frac{1}{2}
+    \int_{0}^{T} f_{S_{t}}(K) K^{2} \sigma(t, K)^{2} dt
+  \end{align} which gives
+  \begin{align}
+    \label{eq:110}
+    e^{rT} \frac{\partial C_{0}}{\partial T} + re^{rT}C_{0} =
+    \int_{K}^{\infty} f_{S_{T}}(y) y r dy + \frac{1}{2} f_{S_{T}}(K)
+    K^{2} \sigma(T, K)^{2}
+  \end{align}
+
+  Writing $y = (y - K) + K$ and applying the previous lemma, we obtain
+  the required result.
+\end{proof}
+
+\begin{remark}
+  Given a call surface $\{ C_{0}(T, K), T, K > 0 \}$ where $C_{0}(T,
+  \cdot)$ is smooth, we find the density of $S_{T}$ by
+  \begin{align}
+    \label{eq:111}
+    \frac{\partial^{2} C_{0}}{\partial K^{2}} = e^{-rT} f_{S_{T}}(K)
+  \end{align} and hence
+  \begin{align}
+    \label{eq:112}
+    \mathbb{E}^{\Q}(e^{-rT} g(S_{T})) = \int_{0}^{\infty} g(y)
+    \frac{\partial^{2} C_{0}}{\partial K^{2}}(T, y) dy
+  \end{align}
+
+  If $g$ is convex and smooth, then
+  \begin{align}
+    \label{eq:113}
+    g(S_{T}) &= g(a) + g'(a)(S-a) + \int_{0}^{a} g''(K) (K) (K -
+    S_{T})^{+} dK + \int_{a}^{\infty} g''(K) (S_{T} - K)^{+} dK \\
+    &= \sum_{K_{i} \leq a} g''(K_{i})(K_{i} - S_{T})^{+} \Delta K_{i}
+    + \sum_{K_{i} \geq a} g''(K_{i}) (S_{T} - K_{i}) \Delta K_{i}
+  \end{align}
+\end{remark}
+
+\section{Computing Moment Generating Functions}
+\label{sec:comp-moment-gener}
+
+Consider a model with $B_{t} = B_{0} e^{rT}$, $S$ positive such that
+$(e^{-rT}S_{t})_{t \geq 0}$ is a $\Q$-martingale.
+
+Consider
+\begin{align}
+  \label{eq:115}
+  \Theta = \{ p + qi | 0 \leq p \leq i, q \in \R \} \subseteq \mathbb{C}
+\end{align} with $i = \sqrt{-1}$.
+
+Let $M_{t}(\theta) = \mathbb{E}^{\Q} e^{\theta \log S_{t}}$ be the
+moment generating function of log $S_{t}$, with $\theta = p + iq$, $0
+\leq p \leq 1$, and so
+\begin{align}
+  \label{eq:116}
+  \mathbb{E}^{\Q}|e^{\theta \log S_{t}}| &= \mathbb{E}^{\Q}(S_{t}^{p})
+  \leq (\mathbb{E}^{\Q}S_{t})^{p} = (e^{rt} S_{0})^{p} < \infty
+\end{align} and so $M_{t}(\theta)$ is well defined for $\theta \in
+\Theta$.
+
+\begin{thm}
+  \label{defn:market_models:4}
+  \begin{align}
+    \label{eq:117}
+    \mathbb{E}^{\Q}(e^{-rT}(S_{T} - K)^{+}) = S_{0} - \frac{e^{-rT}
+      K^{1 - p}}{2 \pi} \int_{-\infty}^{\infty} \frac{M_{T}(p + ix)
+      e^{-ix \log K}}{(x - ip)(x + i(1-p))} dx
+  \end{align}
+  for all $0 < p < 1$.
+\end{thm}
+
+\begin{thm}
+  \label{defn:market_models:6}
+  \begin{align}
+    \label{eq:114}
+    C_{0}(T, K) = S_{0}\frac{e^{-rT}K^{1-p}}2 \pi
+  \int_{-\infty}^{\infty} \frac{M_{T}(p + ix) e^{-ix \log K}}{(x -
+    ip)(x + i(1-p))} dx
+  \end{align}
+\end{thm}
+
+\begin{lem}
+  \begin{align}
+    \label{eq:118}
+    \frac{1}{2\pi} \int_{-\infty}^{\infty} \frac{e^{-iax}}{x-ip}{x +
+      i(1-p)} =
+    \begin{cases}
+      e^{-ap} & a \geq 0 \\
+      a^{a(1-p)} & a < 0
+    \end{cases}
+  \end{align}
+  which can be shown via contour integration.
+
+  Let $\gamma_{R}$ be the semicircle of radius $R$ above the $x$-axis
+  in the complex plane. Then
+  \begin{align}
+    \label{eq:119}
+    \int_{\gamma_{R}} \frac{e^{iax}}{(x-ip)(x+i(1-p))} dx = 2\pi
+    \res_{x=ip} = 2\pi e^{-ap}.
+  \end{align}
+
+  and we have
+  \begin{align}
+    \label{eq:120}
+    \int_{-R}^{R} + \int_{\phi=0}^{\pi} \frac{e^{ia(R \cos \phi + i
+        \sin \phi)}}{(Re^{i \phi} - ip)(Re^{i \phi} + i(1-p))} d\phi
+    \leq \frac{e^{-aR\sin \phi}}{\frac{1}{2}R} \rightarrow 0
+  \end{align} and so we obtain our required result.
+\end{lem}
+
+\begin{proof}[Proof of \ref{defn:market_models:6}]
+  We have
+  \begin{align}
+    \label{eq:121}
+    e^{-rT}(S_{T} - K)^{+} = e^{-rT} S_{T} - \frac{K^{1-p}
+      e^{-rT}}{2\pi} \int_{-\infty}^{\infty} \frac{e^{p\log S_{T} +
+        ix\log S_{T} - ix \log K}}{(x - ip)(x + i(1-p))} dx 
+  \end{align}
+
+  Now computing $\mathbb{E}^{\Q}$, using Fubini's theorem to justify
+  the interchange as
+  \begin{align}
+    \label{eq:122}
+    \E{\int \left| \frac{e^{(p + ix) \log S_{T} - ix \log K}}{(x - ip)(x +
+        i(1-p))}\right| dx}  = M_{T}(p) \int \frac{1}{\sqrt{(x^{2} +
+        p^{2})(x^{2} + (1 - p)^{2})}} < \infty
+  \end{align}
+\end{proof}
+
+\begin{remark}
+  By Holder's inequality, $p \mapsto \log M_{T}(p) = \Lambda_{T}(p)$ is
+  convex.  $\Lambda_{T}(0) = 0, \Lambda_{T}(1) = \log S_{0} + rT$, and
+  $p \mapsto \Lambda_{T}(p)$ is smooth.  It has a minimal point $p =
+  p^{\star} \in (0, 1)$ at
+  \begin{align}
+    \label{eq:123}
+    \Lambda_{T}(p^{\star} + ix) \approx \Lambda_{T}(p^{\star}) +
+    \Lambda_{T}^{'}(p^{\star})(ix) + \frac{1}{2}
+    \underbrace{\Lambda^{''}}_{\text{$\geq 0$ by convexity}}(p^{\star})(ix)^{2} \\
+    &= ...
+  \end{align}  by Taylor's theorem.
+
+  Then
+  \begin{align}
+    \label{eq:124}
+    \int \frac{M_{T}(p^{\star} + ix) e^{-ix \log K}}{(x - ip)(x +
+      i(1-p))} \approx M_{T}(p^{\star}) \int
+    \frac{e^{-\Lambda_{T}^{''}(p^{\star}) x^{2}}}{p(1-p)} dx \\
+    &= \frac{M_{T}(p^{\star})}{p(1-p)} \sqrt{\frac{2\pi}{\Lambda_{T}^{''}(p^{\star})}}
+  \end{align}
+\end{remark}
+
+\section{The Heston Model}
+\label{sec:heston-model}
+
+
+
+\begin{align}
+  \label{eq:125}
+  dB_{t} &= B_{t} r dt \\
+  dS_{t} &= S_{t} (r dt + \sqrt{v_{t} dW_{t}^{S}}) \\
+  dv_{t} &= \lambda (\overline v - v_{t}) dt + c \sqrt{v_{t}}
+  dW^{V}_{t}
+\end{align}
+
+$W^{S}, W^{v}$ are Brownian motions under some EMM $\Q$, with
+correlation $\rho$.  For instance, $W_{t}^{v} = \rho W_{t}^{s} +
+\sqrt{1-\rho^{2}} d_{t}^{\perp}$ with $W^{s}, W^{\perp}$ independent.
+
+$\overline v > 0$ is the mean-reversion level.  $\lambda > 0$ is the
+mean reversion rate.  We have $v_{t} \geq 0$ almost surely (Feller
+1950, Cox-Ingersoll-Ross 1985).  \citet{cox1985theory}.
+
+Our goal is fix $T > 0, \theta \in \Theta$, want to compute
+$\E{e^{\theta \log S_{T}}}$. 
+
+Idea: Let $(V(t, S_{t}, v_{t}))_{0 \leq t \leq T}$ be chosen so that
+it is a martingale with $V(T, S_{T}, V_{T}) = e^{\theta \log S_{T}}$.
+The moment generating function is then $V(t=0, S_{0}, v_{0})$.
+
+By \ito,
+\begin{align}
+  \label{eq:126}
+  dV(t, S_{t, v_{t}}) = \frac{\partial V}{\partial t} dt +
+  \frac{\partial V}{\partial S} dS + \frac{1}{2} \frac{\partial^{2}
+    V}{\partial S^{2}} d \IP{S} + \frac{\partial V}{\partial v} dv +
+  \frac{1}{2} \frac{\partial^{2}}{\partial v^{2}} d \IP{v} +
+  \frac{\partial^{2} V}{\partial v \partial s} d \IP{S, v}.
+\end{align}
+
+We seek to make the $dt$ terms vanish.  Thus,
+\begin{align}
+  \label{eq:127}
+  \frac{\partial V}{\partial t} + \frac{\partial V}{\partial S} rS +
+  \frac{1}{2} \frac{\partial^{2} V}{\partial S^{2}} S^{2} v +
+  \frac{\partial V}{\partial v} \lambda (\overline v - v) +
+  \frac{1}{2} \frac{\partial^{2} V}{\partial v^{2}} c^{2} v +
+  \frac{\partial^{2} V}{\partial S \partial v} \rho S v c = 0.
+\end{align}
+
+The inspired idea is to look for solutions of the form
+\begin{align}
+  \label{eq:128}
+  V(t, S, v) = e^{\theta \log S + R(T-t)v + Q(T-t)}
+\end{align} with $R(0) = Q(0) = 0$.
+
+Substituting this functional form in, we obtain 
+\begin{align}
+  \label{eq:129}
+  R'v - Q' + r \theta + \frac{1}{2} \theta (\theta - 1) v + R \lambda
+  (\overline v - v) + \frac{1}{2} R^{2} c^{2} v + \theta R \rho v c =
+  0
+\end{align}  Collecting terms, we have
+\begin{align}
+  \label{eq:130}
+  \begin{cases}
+    R' = \frac{1}{2} \theta (\theta - 1) + \frac{1}{2} R^{2} c^{2} +
+    (\theta p c - \lambda) R \\
+    Q' = r \theta = R \lambda \overline v
+  \end{cases}
+\end{align} which are Riccati equations, which have an explicit solution.
+
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

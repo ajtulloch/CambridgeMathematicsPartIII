@@ -1,0 +1,44 @@
+\chapter{Relaxation}
+\label{cha:relaxation}
+
+\begin{exmp}[Segmentation]
+  \label{defn:relaxation:1}
+  Find $C \subseteq\ Omega$ that fits the given data and prior
+  knowledge about typical shapes.
+\end{exmp}
+
+\begin{thm}[Chan-Vese]
+  \label{defn:relaxation:2}
+  Given $g: \Omega \rightarrow \R, \Omega \subseteq \R^{d}$, consider
+  \begin{align}
+    \label{eq:110}
+    \inf_{C \subseteq \R, c_{1}, c_{2} \in \R} f_{CV}(C, c_{1}, c_{2})
+  \\
+  f(CV)(C, c_{1}, c_{2}) = \int_{C}(g - c_{1})^{2} dx + \int_{\Omega
+    \backslash C} (g -
+  c_{2})^{2} dx + \lambda P(C)
+  \end{align}
+  \todo{Confirm form of the regualarizer}.
+
+  Thus fit $c_{1}$ to shape, $c_{2}$ to outside of shape, and $C$ is
+  the region of the shape.
+\end{thm}
+
+\section{Mumford-Shah model}
+\label{sec:mumford-shah-model}
+
+\begin{align}
+  \label{eq:111}
+  \inf_{K \subseteq \Omega \text{closed}, u \in C^{\infty}(\Omega
+    \backslash K)} f(K, u) \\
+  f(K, u) = \int_{\Omega} (g - u)^{2} dx + \lambda \int_{\Omega
+    \backslash K} \| \grad u \|_{2}^{2} dx + \nu P(K)
+\end{align} with penalty function $P$ (\todo{verify this form}).
+
+Chan-Vese is a special case of this, with forcing $u = c_{1} \I{C} +
+c_{2}(1 - \I{C})$.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

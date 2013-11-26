@@ -1,0 +1,119 @@
+\chapter{Total Variation}
+\label{cha:total-variation}
+
+\section{Meyer's $G$-norm}
+\label{sec:meyers-g-norm}
+
+Idea - regularizer that favours \textbf{textured} regions
+\begin{align}
+  \| u \|_{G} = \{ \inf \| v \|_{\infty} | \div v = u, v \in
+  L^{\infty}(\R^{d}, \R^{d}) \}
+\end{align} 
+
+Discretized, we have
+\begin{align}
+  \| u \|_{G} &= \inf \{ \delta^{\star_{C}}(v) + \delta_{-G^{T} v = u}
+  \} \\
+  C = \{ v | \sum_{x} \| v(x) \|_{2} \leq 1 \} \\
+  &= \inf v \sup_{v} \sup_{w} \{ \delta^{\star}_{C}(v) - \IP{w, G^{T}
+    v + u} \} \\
+  &= \sup_{w} -\sup_{v} \{ \IP{v, -Gw} + \delta^{\star}_{C}(v) -
+  \IP{w, u} \} \\
+  &= \sup_{w} \{ \delta_{C}(-Gw) + \IP{w, u} \} \\
+  &= \sup_{w} \{ \IP{w, u} - \delta_{C}(-Gw) \} \\
+  &= \sup \{ \IP{w, u} | TV(w) \leq 1 \}
+\end{align} and so $\| \cdot \|_{G}$ is the \textbf{dual} to $TV$.
+
+\begin{align}
+  \| \cdot \|_{G} = \delta^{\star}_{B_{TV}}
+\end{align} where $B_{TV} = \{ u | TV(u) \leq 1 \}$.
+
+Similarly,
+\begin{align}
+  \sup \{ \IP{u, w} | \| w \|_{G} \leq 1 \} \\
+  &= \sup \{ \IP{u, w} | \exists v: w = -G^{T}v, \| v \|_{\infty} \leq
+  1 \} \\
+  &= \sup \{ \IP{u, -G^{T v}} | \| v \|_{\infty} \leq 1 \} \\
+  = TV(u)
+\end{align}
+
+Why is $\| \cdot \|$ good in separating noise?
+
+\begin{align}
+  \label{eq:104}
+  \argmin \frac{1}{2} \| u - g \|_{2}^{2} s.t. \| u \|_{G} \leq
+  \lambda \\
+  &= \prod_{\lambda B_{\| \cdot \|_{G}}}(g) = B_{\lambda B_{\| \cdot
+      \|_{G}}}(g) = g - B_{\lambda B_{\| \cdot \|_{G}}} = g -
+  B_{\lambda TV}(g)
+\end{align}
+
+\section{Non-local Regularization}
+\label{sec:non-local-regul}
+
+In real-world images, large $\| \grad u \|$ does not always mean
+noise.
+
+\begin{defn}
+  \label{defn:total_variation:1}
+  $\Omega = \{ 1, \dots, n \}$, given $u \in \R^{n}, x, y \in \Omega$,
+  $w \in \Omega^{2} \rightarrow R_{\geq 0}$, then 
+
+  \begin{align}
+    \label{eq:105}
+    \partial_{y} u(x) = (u(y) - u(x)) w(x, y) \\
+    \grad_{w} u(x = (\partial_{y} u(x)))_{y \in \Omega}
+  \end{align}
+
+  A suitable divergence $\div_{w} u(x) = \sum_{y \in \Omega} (w(x, y) -
+  v(y, x)) w(x, y)$ andjoint to $\grad_{w}$ with respect to Euclidean
+  inner products.
+  \begin{align}
+    \label{eq:106}
+    \IP{- \div_{w} v, u} = \IP{v, \grad_{w} u}
+  \end{align}
+
+  Non-local regularizers are
+  \begin{align}
+    \label{eq:107}
+    J(u) = \sum_{x \in \Omega} g(\grad_{w} u(x))
+  \end{align} with
+  \begin{align}
+    \label{eq:108}
+    TV_{NL}^{g}(u) = \sum_{x \in \Omega} \| \grad_{w} u(x) \|_{2} \\
+    TV_{NL}^{d}(u) = \sum_{x \in \Omega} \sum_{y \in \Omega}
+    | \partial_{y} u(x)
+  \end{align}
+\end{defn}
+
+This reduces to classical $TV$ if the weights are chosen as constant
+($w(x, y) = \frac{1}{h}$).
+
+\subsection{How to choose $w(x, y)?$}
+\label{sec:how-choose-wx}
+
+\begin{enumerate}
+\item Large if neighbourhoods of $x, y$ are similar with respect to a
+  distance metric.
+\item Sparse, otherwise we have $n^{2}$ terms in the regularized ($n$
+  is number of pixels).
+\end{enumerate}
+
+Possible choice
+\begin{align}
+  \label{eq:109}
+  d_{u}(x, y) = \int_{\Omega} K_{G}(t) (u(y + t) - u(x+t))^{2} dt  \\
+  A(x) = \argmin_{A} \{ \sum_{y \in A} d_{u}(x, y) | A \subseteq S(x),
+  |A| = k \} \\
+  w(x, y) =
+  \begin{cases}
+    1 & y \in A(x), x \in A(y) \\
+    0 & \text{otherwise}
+  \end{cases}
+\end{align} with $K_{G}$ a Gaussian kernel of variance $G^{2}$.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

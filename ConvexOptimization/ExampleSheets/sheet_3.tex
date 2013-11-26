@@ -1,0 +1,130 @@
+
+\chapter{Example Sheet 3}
+\label{cha:example-sheet-3}
+
+\begin{exercises}
+\item
+\item
+  We first show $\con \{ \grad f_{i} | i \in I(x) \}
+  \subseteq \partial f(x)$.
+
+  First, note that we have for all $x, z$ and $k \in I(x)$,
+  \begin{align}
+    \label{eq:41}
+    f(z) \geq f_{k}(z) \geq f_{k}(x) + \IP{\grad f_{k}(x), z -x} =
+    f(x) + \IP{\grad f_{k}(x), z-x}
+  \end{align} 
+  and so $\grad f_{k}(x) \in \partial f(x)$. 
+
+  Now, let $g$ be a convex combination of $\grad f_{k}(x), k \in
+  I(x)$.  Then we have
+  \begin{align}
+    \label{eq:42}
+    f(x) + \IP{g, z-x} &= f(x) + \IP{\sum_{k} \lambda_{k} \grad f_{k},
+      z-x} \\
+    &= f(x) + \sum_{k} \IP{\lambda_{k} \grad f_{k}, z - x} \\
+    &\leq f(x) + \sum_{k} \lambda_{k} (f(z) - f(x)) \\
+    &= f(x) = f(z) - f(x) \\
+    &= f(z)
+  \end{align} as required.
+
+  We must now show $\partial f(x) \subseteq \con \{ \grad f_{i} | i \in I(x) \}$.
+\item
+  We have
+  \begin{align}
+    \label{eq:43}
+    y \in B_{\tau f^{\star}}(x^{\star}) \\
+    \iff y \in (I + \tau \partial f^{\star})^{-1}(x^{\star}) \\
+    \iff y \in (I + \tau (\partial f^{-1})^{-1})^{-1}(x^{\star}) \\
+    \iff x^{\star} \in (I + \tau (\partial f)^{-1})(y) \\
+    \iff 0 \in y - x^{\star} + \tau (\partial f)^{-1}(y) \\
+    \iff \frac{x^{\star} - y}{\tau} \in (\partial f)^{-1}(y) \\
+    \iff y \in \partial f (\frac{x^{\star} -y}{\tau}) \\
+    \iff 0 in y - \partial f(\frac{x^{\star}-y}{\tau}) \\
+    \iff 0 \in y + \frac{1}{\tau} \partial f(y - x^{star}) \\
+    \iff 0 \in (I + \frac{1}{\tau} \partial f(\cdot - x^{\star}))(y) \\
+    \iff y \in (I + \frac{1}{\tau} \partial f(\cdot - x^{\star}))^{-1}(0) \\
+    \iff y \in (I + \frac{1}{\tau} \partial f)^{-1}(-x^{\star})
+  \end{align}
+\item
+  Consider $f_{z}(x, u) = k(x) + h(z + u -x)$.  Then
+  \begin{align}
+    \label{eq:44}
+    p(u) = \inf_{x} f_{z}(x, u) \\
+    &= \inf_{y} k(y) + h(z + u - y) \\
+    &= F(z + u)
+  \end{align} as required.
+
+  Thus $p(0) = F(z)$. By properness of $h, z$, $F(z) = p(0) \in \R$,
+  and by lsc of $h, z$, $F(z) = p(0)$ is lsc.  Thus strong duality
+  holds.
+
+  Consider the dual objective.  First, we compute $f^{\star}(v, y)$.
+  We have
+  \begin{align}
+    \label{eq:45}
+    f^{\star}(v, y) = \IP{-z, y} + k^{\star}(y + v) + h^{\star}(y).  
+  \end{align}
+
+  Then $\psi(y) = - f^{\star}(0, y) = \IP{z, y} - k^{\star}(y) -
+  h^{\star}(y)$.
+
+  Thus, we have $\sup_{y} \psi(y) = \sup_{y} \IP{z, y} - h^{\star}(y)
+  - k^{\star}(y) = (h^{\star} + k^{\star})^{\star}(z)$.
+\item
+  Given an $LP$ of the form $\max \IP{c, x}$ s.t $Ax \leq b$, an
+  $SOCP$ of the form $\max {c, x}$ s.t $\| A_{i} x + b_{i}\|_{2} \leq
+  \IP{c_{i}, x} + d_{i}$, $Fx = g$, and an $SDP$ of the form $\inf
+  \IP{c, x}$ s.t. $Ax - b$ is positive semidefinite.
+
+  Note that by setting $A_{i}, b_{i} = 0$, we obtain that $LP \subseteq
+  SOCP$.  Now, note by setting 
+\item
+\item
+\item
+\item
+\item
+  Let our pre-Hilbert space $\mathcal{G}$ be given as the span of $\kappa_{x}$,
+  and let $f, g \in G$.  Thus $f = \sum_{i=1}^{n} a_{i} \kappa_{x_{i}}, g
+  = \sum_{j=1}^{m} b_{j} \kappa_{x'_{j}}$.  Then let our inner product
+  on $G$ be given as
+  \begin{align}
+    \label{eq:46}
+    \IP{f, g}_{\mathcal{G}} = \sum_{i=1}^{n} \sum_{j=1}^{m} a_{i}
+    \overline{b_{j}} \kappa(x_{i}, x'_{j})
+  \end{align}  This trivially satisfies the properties of the norm -
+  linearity, conjugate symmetric, and positive definite.
+
+  Now, let $\mathcal{H}$ be the metric space completion of
+  $\mathcal{G}$.  By Hilbert space theory, $\mathcal{G}$ is dense in
+  $\mathcal{H}$, and we can write every element of $\mathcal{H}$ in
+  the form
+  \begin{align}
+    \label{eq:47}
+    \sum_{i=1}^{\infty} a_{i} \kappa_{x_{i}}.
+  \end{align} with appropriate $L^{2}$ condition on $a_{i}$.
+
+  Let $f = \sum_{i=1}^{\infty} a_{i} \kappa_{x_{i}}$.  Then
+  \begin{align}
+    \label{eq:48}
+    \IP{k_{x}, f} = \sum_{i=1}^{\infty} a_{i} \kappa(x_{i}, x) = f(x).
+  \end{align} as required.
+
+  Let $\kappa$ be a Mercel kernel, and let $\mathcal{H}$ be the
+  Hilbert space constructed before.  Then
+  \begin{align}
+    \label{eq:49}
+    \nu : \mathcal{F} \rightarrow \mathcal{H} \\
+    \nu(x) \mapsto \kappa_{x}
+  \end{align} satisfies this requirement, with
+  \begin{align}
+    \label{eq:50}
+    \IP{\nu(x), \nu(x')} = \IP{\kappa_{x}, \kappa_{x'}} = \kappa(x, x')
+  \end{align}
+\end{exercises}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

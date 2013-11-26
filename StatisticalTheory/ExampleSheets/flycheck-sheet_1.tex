@@ -1,0 +1,81 @@
+
+\section{Question 2}
+\label{sec:question-2}
+
+Consider the sequennce $Q_{n}(\theta) = \cos(\theta + \frac{1}{n})$,
+$\Theta = [0, 2\pi)$, $Q(\theta) = \cos(\theta)$.
+
+Then $\sup_{\theta \in \Theta} |Q_{n}(\theta) - Q(\theta)| \leq
+\frac{1}{n} \rightarrow 0$.  Then $\hat \theta_{n} = 2 \pi -
+\frac{1}{n}$ which does not converge to $\theta_{0} = 0$.
+
+\section{Question 3}
+\label{sec:question-3}
+
+Consider $Z_{i} = g(X_{i}, \theta) + \mu_{i}, i = 1, \dots n$.
+
+\todo{What was this about?}
+
+\section{Question 4}
+\label{sec:question-4}
+
+Consider $Q_{n}(\theta) - Q_{n}(\theta_{0}) = n^{-1}\sum (Z_{i} -
+g(X_{i}, \theta))^{2} - n^{-1} \sum (Z_{i} - g(X, \theta_{0}))^{2}$
+which is equivalent to
+\begin{align}
+  \label{eq:1}
+  n^{-1} \sum ((Z_{i} - g(X_{i}, \theta)) - (g(X_{i}, \theta) -
+  g(X_{i}, \theta_{0})))^{2} - n^{-1} \sum(Z_{i} - g(X_{i},
+  \theta_{0}))^{2} \\
+  &= n^{-1} \sum ((g(X_{i}, \theta) - g(X_{i}, \theta_{0})))^{2} -
+  2n^{-1} \sum \mu_{i}(g(X_{i}, \theta) - g(X_{i}), \theta_{0}) \\
+  &\geq (n^{-1} \sum (g(X_{i}, \theta) - g(X_{i},
+  \theta_{0}))^{2})^{-\frac{1}{2}} [(n^{-1} \sum (g(X_{i}, \theta) -
+  g(X_{i}, \theta_{0}))^{2})^{-\frac{1}{2}} - 2 (n^{-1} \sum \mu_{i}^{2})^{-\frac{1}{2}}]
+\end{align}
+
+On $\Theta^{\star} = [\theta_{0} - M, \theta_{0} + M]$, consider $c(x)
+= \inf_{\Theta} (\frac{\partial g(x, \theta)}{\partial \theta})^{2}$,
+$C = \E{c(X)} > 0$, then
+\begin{align}
+  \label{eq:2}
+  \inf_{\theta \in \Theta} (g(x, \theta) - g(x, \theta_{0}))^{2} \geq
+  M^{2} c(x) 
+\end{align} and
+\begin{align}
+  \label{eq:3}
+  \liminf_{n \rightarrow \infty} \inf_{\theta \notin \Theta^{\star}}
+  Q_{n}(\theta) - Q_{n}(\theta_{0}) \geq \liminf_{n \rightarrow
+    \infty} M (...)  \\
+  &\geq M C^{\frac{1}{2}}(MC^{\frac{1}{2}} - 2\sigma^{2}) > 0
+\end{align}  for $M > \frac{2 \sigma^{2}}{C^{\frac{1}{2}}}$.
+
+
+Thus
+\begin{align}
+  \label{eq:4}
+  P(\inf_{\theta \notin \theta^{\star}} Q_{n}(\theta) -
+  Q_{n}(\theta_{0}) > \epsilon) \rightarrow 1
+\end{align} for $\epsilon > 0$ small enough.
+
+
+\section{Question 6}
+\label{sec:question-6}
+
+\begin{align}
+  \label{eq:6}
+  I =
+  \begin{Bmatrix}
+    \frac{n}{\sigma^{2}} & 0  \\
+    0 & \frac{n}{2\sigma^{4}}
+  \end{Bmatrix}
+\end{align}
+
+\section{Question 9}
+\label{sec:question-9}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
