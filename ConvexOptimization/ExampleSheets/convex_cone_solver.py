@@ -93,7 +93,7 @@ class Solver(object):
         """
         Yields the sequence of iterates and the primal-dual gap
         """
-        current_gap = 10 ** 100 # Random high number
+        current_gap = 10 ** 100  # Random high number
         current_state = initial_state
         while current_gap > tolerance:
             yield (current_state, current_gap)
@@ -104,7 +104,7 @@ class Solver(object):
     def _next(self, solution_state):
         delta_x, delta_y = self._delta(solution_state)
         (x_k, y_k, t_k) = solution_state
-        
+
         return Solver.SolutionState(
             x=x_k + self._time_stepper.next_tau() * delta_x,
             y=x_k + self._time_stepper.next_tau() * delta_y,
@@ -127,6 +127,7 @@ class Solver(object):
         delta_y = -1.0 / self._time_stepper.next_t(t_k) * K - y_k
         return (delta_x, delta_y)
 
+
 def example():
     g = Solver.solve(
         barrier_class=ConeBarrier,
@@ -135,7 +136,10 @@ def example():
         c=np.matrix('-1; -1'),
         rho=0.5 * 1.0 / 10,
         tau=1.0,
-        initial_state=Solver.SolutionState(x=np.matrix('1; 1'), y=np.matrix('0; 0'), t=1.0),
+        initial_state=Solver.SolutionState(
+            x=np.matrix('1; 1'),
+            y=np.matrix('0; 0'),
+            t=1.0),
         tolerance=1e-5)
     print list(g)
 

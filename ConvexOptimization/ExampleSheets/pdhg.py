@@ -5,8 +5,9 @@ from collections import namedtuple
 
 class PDHGSolver(object):
     Evaluators = namedtuple('Evaluators', ['A', 'g', 'h', 'g_conj', 'h_conj'])
-    SolutionState = namedtuple('SolutionState', ['x', 'y'])
     Parameters = namedtuple('Parameters', ['sigma', 'tau', 'theta'])
+
+    SolutionState = namedtuple('SolutionState', ['x', 'y'])
 
     def __init__(self, evaluators, parameters):
         self._evaluators = evaluators
@@ -18,6 +19,13 @@ class PDHGSolver(object):
 
         Solves \inf g(x) + h(Ax) using the modified PDHG with parameters
         (sigma, tau, theta) to tolerance with initial state (x_0, y_0)
+
+        A must be a NumPy matrix.
+        g, h, g_conj, h_conj must be Python one-parameter callables.
+
+        sigma, tau, theta, tolerance must by floating point numbers.
+
+        (x_0, y_0) must be NumPy arrays of appropriate dimensions.
         """
         solver = PDHGSolver(
             evaluators=PDHGSolver.Evaluators(
@@ -58,24 +66,29 @@ class PDHGSolver(object):
         return self._evaluators.g(x) - self._evaluators.h_conj(y) + \
             np.dot(self._evaluators.A * x, y)
 
-    def _backward_step(self, f, x, step_size):
+    @staticmethod
+    def _backward_step(f, x, step_size):
+        """Performs a backward step of size step_size on f at x.
+        """
         def objective(y):
             return 0.5 * np.linalg.norm(x - y) ** 2 + step_size * f(y)
         return sp.optimize.minimize(objective, x).x
 
     def _next(self, current_state):
         (x_current, y_current) = current_state
-        # Backward step WRT x_k.
-        y_next = self._backward_step(
+        # Backward step WRT x_current
+        y_next = PDHGSolver._backward_step(
             f=lambda y: -self.lagrangian(x_current, y),
             x=y_current,
             step_size=self._parameters.sigma)
 
-        x_next = self._backward_step(
+        # Backward step WRT y_next
+        x_next = PDHGSolver._backward_step(
             f=lambda x: self.lagrangian(x, y_next),
             x=x_current,
             step_size=self._parameters.tau)
 
+        # Overrelaxation of x_next
         x_next = x_next + self._parameters.theta * (x_next - x_current)
 
         return PDHGSolver.SolutionState(x=x_next, y=y_next)
