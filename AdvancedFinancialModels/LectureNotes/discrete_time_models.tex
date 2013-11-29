@@ -238,12 +238,11 @@ Useful properties of conditional expectation:
       - c_{t} - H_{t} \cdot P_{t-1}) \right)}$
   Note that $L(H, c, Y)$ is the objective when $(H, c)$ is feasible.
   Then
-  \begin{align*}
-    L(H, c, Y) &= \E{\sum_{t=1}^{T} \left(u(c_{t}) - c_{t}
-        Y_{t-1}\right)}
-    +  Y_{0} X - Y_{t-1} H_{t} P_{t-1} + \sum_{t=1}^{T-1} H_{t}(Y_{t}
-    P_{t} - Y_{t-1} P_{t-1})
-  \end{align*}
+  \begin{multline}
+    L(H, c, Y) = \E{\sum_{t=1}^{T} \left(u(c_{t}) - c_{t}
+        Y_{t-1}\right)} +  Y_{0} X - Y_{t-1} H_{t} P_{t-1} \\
+    + \sum_{t=1}^{T-1} H_{t}(Y_{t} P_{t} - Y_{t-1} P_{t-1})
+  \end{multline}
 
   First note that $u(c^{\star}_{t}) - Y^{\star}_{t-1} c^{\star}_{t}
   \geq u(c_{t}) - Y^{\star}_{t-1} c_{t}$ since $u'(c^{\star}_{t}) =
@@ -337,12 +336,12 @@ Useful properties of conditional expectation:
     \cdot P_{0}$.
   \end{enumerate}
 
-  Let $y \{ Y > 0: \E{Y \| P_{1} \|} \infty \}$.  Let $\mathcal{P} =
+  Let $y = \{ Y > 0: \E{Y \| P_{1} \|} \infty \}$.  Let $\mathcal{P} =
   \{ \E{YP_{1}} : Y \in \mathcal{Y} \} \subseteq \R^{n}$. Suppose
   $P_{0} \notin \mathcal{P}$.
 
-  \textbf{separating/supporting hyperplane theorem} there exists a
-  vector $H \in \R^{n}$ such that
+  By the \textbf{separating/supporting hyperplane theorem} there
+  exists a vector $H \in \R^{n}$ such that
   \begin{enumerate}
   \item For all $p \in \mathcal{P}$, $H \cdot (p - P_{0}) \geq 0$,
   \item There exists $p^{\star} \in \mathcal{P}$ such that $H \cdot
@@ -739,8 +738,11 @@ Two types of claims
   S_{T}$, thus $c_{t} \leq S_{t}$.
 
   If there exists a state price density $Y$ for $(B, S)$ such that
-  $c_{t} = \frac{1}{Y_{t}} \E{Y_{T}(S_{T} - K)^{+} |
-    \mathcal{F}_{t}}$.
+  \begin{align}
+    \label{eq:152}
+    c_{t} = \frac{1}{Y_{t}} \E{Y_{T}(S_{T} - K)^{+} |
+      \mathcal{F}_{t}}.
+  \end{align}
 \end{exmp}
 
 \begin{exmp}
@@ -886,9 +888,14 @@ the claim is executed at time $t$.
 
 \begin{proof}
   Note that $A_{\tau^{\star}} = 0$ but $A_{\tau^{\star} + 1} > 0$ .
+  We have
+  \begin{align}
+    \label{eq:153}
+    U_{t} &= U_{0} + M_{t} - A_{t} \\
+    &= \max \{ Z_{t}, \E{U_{t+1} | \mathcal{F}_{t}}  \} \\
+    &= \max \{ Z_{t}, U_{0} + M_{t} - A_{t+1} \}.
+  \end{align}
 
-  We have $U_{t} = U_{0} + M_{t} - A_{t} = \max \{ Z_{t}, \E{U_{t+1} |
-    \mathcal{F}_{t}}  \} = \max \{ Z_{t}, U_{0} + M_{t} - A_{t+1} \}$.
 
   So $U_{0} + M_{\tau^{\star}} = \max \{ Z_{\tau^{\star}}, U_{0} +
   M_{\tau^{\star}} - A_{\tau^{\star} - 1} \}$, which implies $U_{0} +
@@ -930,16 +937,16 @@ in general but by completeness all processes are bounded).  So
 \end{align} Thus $X_{t} \geq \xi_{t}$ for all $0 \leq t \leq T$.
 
 Also, at $\tau^{\star} = \inf \{ t \geq 0 | A_{t+1} > 0 \}$, we have
-$X_{\tau^{\star}} Y_{\tau^{\star}} = U_{0} + M_{\tau^{\star}} =
-U_{\tau^{\star}} = Y_{\tau^{\star}} \xi_{\tau^{\star}}$, and so
-$X_{\tau^{\star}} = \xi_{\tau^{\star}}$.
+
+\begin{equation}
+  \label{eq:154}
+  X_{\tau^{\star}} Y_{\tau^{\star}} = U_{0} + M_{\tau^{\star}} =
+  U_{\tau^{\star}} = Y_{\tau^{\star}} \xi_{\tau^{\star}},
+\end{equation} and so $X_{\tau^{\star}} = \xi_{\tau^{\star}}$.
 
 Note also that $X_{0} = \E{U_{0} + M_{T}} = U_{0} = \sup_{\tau \leq T}
 \E{\xi_{\tau} Y_{\tau}}$.
  
-\begin{remark}
-  
-\end{remark}
 
 %%% Local Variables: 
 %%% mode: latex

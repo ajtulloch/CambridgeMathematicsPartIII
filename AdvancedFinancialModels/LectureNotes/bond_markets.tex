@@ -1,0 +1,97 @@
+\chapter{Bond Markets and Interest Rates}
+\label{cha:bond-mark-inter}
+
+\begin{defn}
+  \label{defn:bond_markets:1}
+  A zero coupon bond is a contingent claim that pays exactly one unit
+  of money at maturity.
+
+  We assume that $\xi_{T}$, the payment of the bond, is 1 a.s. - that
+  is, there is no credit risk.
+\end{defn}
+
+\begin{defn}
+  \label{defn:bond_markets:3} $P(t, T)$is the price at time $t$ for a
+  bond maturing at time $T$.
+\end{defn}
+
+\begin{defn}
+  \label{defn:bond_markets:4}
+  The yield $y(t, T)$ is defined as
+  \begin{align}
+    \label{eq:145}
+    y(t, T) = - \frac{1}{T - t} \log P(t, T)
+  \end{align} or equivalently
+  \begin{align}
+    \label{eq:146}
+    P(t, T)= e^{-(T-t) y(t, T)}
+  \end{align}
+\end{defn}
+
+\begin{defn}
+  \label{defn:bond_markets:5}
+  We call $\lim_{T \downarrow t} y(t, T) = r_{t}$ the ``spot'' or
+  ``short'' rate.
+
+  We call $\lim_{T \uparrow \infty} y(t, T)$ if it exists.
+\end{defn}
+
+\begin{defn}
+  \label{defn:bond_markets:6}
+  The forward rate $f(t, T)$ is defined
+  \begin{align}
+    \label{eq:147}
+    f(t, T) = - \frac{\partial}{\partial T} \log P(t, T)
+  \end{align} or equivalently
+  \begin{align}
+    \label{eq:148}
+    P(t, T) = - \int_{t}^{T} f(t, u) du
+  \end{align}
+\end{defn}
+
+\begin{thm}
+  \label{defn:bond_markets:2}
+  There is no arbitrage in the market prices $(P(t, T_{1}), P(t,
+  T_{2}), \dots, P(t, T_{n}))$ if $Y_{t} P(t, T)_{t \in [0, T]}$ is a local
+  martingale  for all $T$, where $Y$ is a state price
+  density.\sidenote{Recall relative arbitrage, admissible class $D$,
+    etc.}
+
+  In particular, there is no arbitrage if $P(t, T) = \frac{1}{Y_{t}}
+  \E{Y_{T} | \mathcal{F}_{t}}$
+\end{thm}
+
+Introduce the bank account $dB_{t} = B_{t} r_{t} dt \iff B_{t} = B_{0}
+e^{\int_{0}^{t}r_{s} ds}$ where $r$ is the short rate.  Define an
+equivalent martingale measure with density $\frac{d\Q}{d\Prob} =
+\frac{B_{T} Y_{T}}{B_{0} Y_{0}}$.  Rewrite
+\begin{align}
+  \label{eq:149}
+  P(t, T) = B_{t} \E{\frac{1}{B_{T}} | \mathcal{F}_{t}}{\Q} =
+  \E{e^{-\int_{t}^{T} r_{s} ds} | \mathcal{F}_{t}}{\Q}
+\end{align}
+
+By the law of one price,
+\begin{align}
+  \label{eq:150}
+  f(t, T) &= - \frac{\partial}{\partial T} \log \E{ e^{-\int_{t}^{T}
+      r_{s} ds} | \mathcal{F}_{t}}{\Q} \\
+  &= \frac{\E{r_{T} e^{-\int_{t}^{T} r_{s} ds} |
+      \mathcal{F}_{t}}{\Q}}{\E{e^{-\int_{t}^{T} r_{s} ds} |
+      \Phi_{t}}{\Q}},
+\end{align} and so $f(t, T)$ can be seen as the ``market weighted
+conditional expectation of $r_{T}$ given at $\mathcal{F}_{t}$.''
+
+Alternatively, we have
+\begin{align}
+  \label{eq:151}
+  \E{(f(t, T) - r_{T}) e^{-\int_{t}^{T} r_{s} ds} |
+    \mathcal{F}_{t}}{\Q} = 0
+\end{align} and so the forward rate is such that the claim with payout
+$f(t, T) - r_{T}$ has price 0 at time $T$.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -83,13 +83,13 @@ W_{t} = W_{t} + \lambda t$ is a $\Q$-Brownian motion.  Then
 
 Substituting in $g(x) = (x - K)^{+}$ corresponding to a call option,
 we obtain the price
-\begin{align}
+\begin{multline}
   \label{eq:90}
   C_{t}(T, K) = S_{t} \Phi(\frac{-\log \frac{K}{S_{t}}}{\sigma \sqrt{T
-      - t}} + (\frac{r}{\sigma} + \frac{\sigma}{2})\sqrt{T-t}) -
+      - t}} + (\frac{r}{\sigma} + \frac{\sigma}{2})\sqrt{T-t}) \\ -
   Ke^{-r(T-t)} \Phi(\frac{-\log \frac{K}{S_{t}}}{\sigma \sqrt{T-t}} +
   (\frac{r}{\sigma} - \frac{\sigma}{2}) \sqrt{T-t})
-\end{align}
+\end{multline}
 
 \todo{Fill in missing lecture --- Black-Scholes price as a solution to
   BS PDE}
@@ -97,15 +97,20 @@ we obtain the price
 \section{Black-Scholes Volatility}
 \label{sec:black-schol-volat}
 
-Assume we obsreve $(S_{t})_{-T \leq t \leq 0}$ at some discrete intervals $(\frac{t}{n} -
-1)T$ for $i = 0, \dots, n$, with $Y_{i} = \log
-\frac{S_{t_{i}}}{S_{t_{i-1}}} = (\mu - \frac{\sigma^{2}}{2})(t_{i} -
-t_{i-1}) + \sigma(W_{t_{i}} - W_{t_{i-1}}) \sim N(a\frac{T}{n},
-\frac{\sigma^{2}T}{n})$.  The MLE is then
+Assume we observe $(S_{t})_{-T \leq t \leq 0}$ at some discrete intervals $(\frac{t}{n} -
+1)T$ for $i = 0, \dots, n$, with 
+\begin{align}
+  \label{eq:156}
+  Y_{i} &= \log \frac{S_{t_{i}}}{S_{t_{i-1}}} \\
+  &= (\mu - \frac{\sigma^{2}}{2})(t_{i} - t_{i-1}) + \sigma(W_{t_{i}}
+  - W_{t_{i-1}}) \\
+  &\sim N(a\frac{T}{n}, \frac{\sigma^{2}T}{n}).
+\end{align}
+ The MLE is then
 \begin{align}
   \label{eq:91}
-  \hat a = \frac{1}{T} \sum_{i=1}^{n} Y_{i} = \frac{1}{T} \log \frac{S_{0}}{S_{-T}} \\
-  \hat \sigma^{2} = \frac{1}{T} \sum_{i=1}^{n} (Y_{i} - \frac{\hat a
+  \hat a &= \frac{1}{T} \sum_{i=1}^{n} Y_{i} = \frac{1}{T} \log \frac{S_{0}}{S_{-T}} \\
+  \hat \sigma^{2} &= \frac{1}{T} \sum_{i=1}^{n} (Y_{i} - \frac{\hat a
     T}{n})
 \end{align} and $\Var{\hat \sigma^{2}} = \frac{2\sigma^{4}}{n}
 \rightarrow 0$ as $n \rightarrow \infty$.
@@ -146,13 +151,13 @@ S_{0}, \hat \sigma) = \xi_{0}$, the initial price of the claim.
 Now, try to replicate the claim with portfolio $(\phi, \pi)$ with
 \begin{align}
   \label{eq:95}
-  \pi_{t} = \frac{\partial V}{\partial S}(t, S, \hat \sigma) \\
-  \phi_{t} = \frac{X_{t} - \pi_{t} S_{t}}{B_{t}}
+  \pi_{t} &= \frac{\partial V}{\partial S}(t, S, \hat \sigma) \\
+  \phi_{t} &= \frac{X_{t} - \pi_{t} S_{t}}{B_{t}}
 \end{align}  Notice the equation
 \begin{align}
   \label{eq:96}
-  X_{0} = V(0, S_{0}, \hat \sigma) \\
-  dX_{t} = r(X_{t} - \pi_{t} S_{t}) dt + \pi_{t} ds
+  X_{0} &= V(0, S_{0}, \hat \sigma) \\
+  dX_{t} &= r(X_{t} - \pi_{t} S_{t}) dt + \pi_{t} ds
 \end{align} has a unique solution given by
 \begin{align}
   \label{eq:97}
@@ -162,20 +167,20 @@ Now, try to replicate the claim with portfolio $(\phi, \pi)$ with
 In the real model,
 \begin{align}
   \label{eq:98}
-  dB_{t} = r B_{t} dt \\
-  dS_{t} = S_{t} (\mu dt + \sigma_{t} dW_{t})
+  dB_{t} &= r B_{t} dt \\
+  dS_{t} &= S_{t} (\mu dt + \sigma_{t} dW_{t})
 \end{align} for $r, \mu$ constant but $\sigma_{t}$ a stochastic process.
 
 Then
 \begin{align}
   \label{eq:99}
-  dV(t, S_{t}, \hat \sigma) = \frac{\partial V}{\partial t} dt +
+  dV(t, S_{t}, \hat \sigma) &= \frac{\partial V}{\partial t} dt +
   \frac{\partial V}{\partial S} dS + \frac{1}{2} \frac{\partial^{2}
     V}{\partial S^{2}} d \IP{S} \\
   &= (\frac{\partial V}{\partial t} + \frac{1}{2} \frac{\partial^{2}
     V}{\partial^{2} S} \sigma^{2}_{t} S_{t}^{2}) dt + \pi_{t} dS_{t}
 \\
-= (rV - rS \frac{\partial V}{\partial S} - \frac{1}{2}
+&= (rV - rS \frac{\partial V}{\partial S} - \frac{1}{2}
 \frac{\partial^{2} V}{\partial S^{2}} S^{2} \hat \sigma^{2} +
 \frac{1}{2} \frac{\partial^{2} V}{\partial S^{2}} \sigma^{2}_{t}
 S^{2}_{t}) dt + \pi_{t} dS_{t}
@@ -189,14 +194,14 @@ S^{2}_{t}) dt + \pi_{t} dS_{t}
 \begin{align}
   \label{eq:101}
   X_{T} - V(T, S_{T}, \hat \sigma) - X_{0} + V(0, S_{0}, \hat \sigma)
-  = X_{T} - g(S_{T}) = \frac{1}{2}\int_{0}^{T} e^{-r(T-s)} S^{2}_{s}
+  &= X_{T} - g(S_{T}) \\
+  &= \frac{1}{2}\int_{0}^{T} e^{-r(T-s)} S^{2}_{s}
   (\hat \sigma^{2} - \sigma_{s}^{2}) \frac{\partial^{2} V}{\partial
     S^{2}} ds
 \end{align}
 and so we can estimate the difference between the option and the
 replicating portfolio by a weighted average of the gamma multiplied by
 the difference in implied and realized volatility over the time period.
-
 
 \chapter{Local Volatility Models}
 \label{cha:local-volat-models}
@@ -241,8 +246,6 @@ martingale measure $\Q$.
   \end{align} for all $T, K$.
 \end{exer}
 
-
-
 \begin{lem}[Brreden-Litzenberger, 1978]
   Suppose $S_{T}$ has density $f$ (under $\Q$). Then
   \begin{align}
@@ -261,17 +264,17 @@ martingale measure $\Q$.
     (S_{T} - K^{+}) &= (S_{0} - K)^{+} + \int_{0}^{T} \I{S_{t} \geq K}
     dS_{t} + \frac{1}{2} \int_{0}^{T} \delta_{K} d \IP{S} \\
     &= (S_{0} - K)^{+} + \int_{0}^{T} S_{t} r \I{S_{t} \geq K} +
-    \frac{1}{2} S_{t}^{2} \sigma(t, S_{t})^{2} \delta_{K}(S_{t}) dt +
+    \frac{1}{2} S_{t}^{2} \sigma(t, S_{t})^{2} \delta_{K}(S_{t}) dt + 
     \int_{0}^{T} S_{t} \sigma(t, S_{t}) \I{S_{t} \geq K} d\hat W_{t}.
   \end{align}
 
   Taking $\mathbb{E}^{\Q}$ on both sides, we obtain
-  \begin{align}
+  \begin{multline}
     \label{eq:109}
     e^{rT}C_{0}(T, K) = (S_{0} - K)^{+} + \int_{0}^{T}
-    (\int_{K}^{\infty} f_{S_{t}}(y) y r dy) dt + \frac{1}{2}
-    \int_{0}^{T} f_{S_{t}}(K) K^{2} \sigma(t, K)^{2} dt
-  \end{align} which gives
+    \left( \int_{K}^{\infty} f_{S_{t}}(y) y r dy \right) dt \\
+    + \frac{1}{2} \int_{0}^{T} f_{S_{t}}(K) K^{2} \sigma(t, K)^{2} dt
+  \end{multline} which gives
   \begin{align}
     \label{eq:110}
     e^{rT} \frac{\partial C_{0}}{\partial T} + re^{rT}C_{0} =
@@ -380,12 +383,12 @@ moment generating function of log $S_{t}$, with $\theta = p + iq$, $0
 
 \begin{proof}[Proof of \ref{defn:market_models:6}]
   We have
-  \begin{align}
+  \begin{multline}
     \label{eq:121}
-    e^{-rT}(S_{T} - K)^{+} = e^{-rT} S_{T} - \frac{K^{1-p}
+    e^{-rT}(S_{T} - K)^{+} = e^{-rT} S_{T} \\ - \frac{K^{1-p}
       e^{-rT}}{2\pi} \int_{-\infty}^{\infty} \frac{e^{p\log S_{T} +
         ix\log S_{T} - ix \log K}}{(x - ip)(x + i(1-p))} dx 
-  \end{align}
+  \end{multline}
 
   Now computing $\mathbb{E}^{\Q}$, using Fubini's theorem to justify
   the interchange as
@@ -414,7 +417,7 @@ moment generating function of log $S_{t}$, with $\theta = p + iq$, $0
   \begin{align}
     \label{eq:124}
     \int \frac{M_{T}(p^{\star} + ix) e^{-ix \log K}}{(x - ip)(x +
-      i(1-p))} \approx M_{T}(p^{\star}) \int
+      i(1-p))} &\approx M_{T}(p^{\star}) \int
     \frac{e^{-\Lambda_{T}^{''}(p^{\star}) x^{2}}}{p(1-p)} dx \\
     &= \frac{M_{T}(p^{\star})}{p(1-p)} \sqrt{\frac{2\pi}{\Lambda_{T}^{''}(p^{\star})}}
   \end{align}
@@ -422,8 +425,6 @@ moment generating function of log $S_{t}$, with $\theta = p + iq$, $0
 
 \section{The Heston Model}
 \label{sec:heston-model}
-
-
 
 \begin{align}
   \label{eq:125}
@@ -438,8 +439,7 @@ correlation $\rho$.  For instance, $W_{t}^{v} = \rho W_{t}^{s} +
 \sqrt{1-\rho^{2}} d_{t}^{\perp}$ with $W^{s}, W^{\perp}$ independent.
 
 $\overline v > 0$ is the mean-reversion level.  $\lambda > 0$ is the
-mean reversion rate.  We have $v_{t} \geq 0$ almost surely (Feller
-1950, Cox-Ingersoll-Ross 1985).  \citet{cox1985theory}.
+mean reversion rate.  We have $v_{t} \geq 0$ almost surely \citep{cox1985theory}.
 
 Our goal is fix $T > 0, \theta \in \Theta$, want to compute
 $\E{e^{\theta \log S_{T}}}$. 
@@ -490,6 +490,147 @@ Substituting this functional form in, we obtain
   \end{cases}
 \end{align} which are Riccati equations, which have an explicit solution.
 
+
+\section{American Options (Guest Lecture)}
+\label{sec:amer-opti-guest}
+
+Suppose we have some assets $d$ and our bank account $B_{t}$.  The random
+assets evolve as
+\begin{align}
+  \label{eq:131}
+  dS^{i}_{t} S^{i}_{t}(\mu^{i}_{t} dt + \sum_{j=1}^{d} \sigma_{ij}(t,
+  S_{t}) dW_{t}^{j})
+\end{align}
+
+The option we want to price pays $g(S_{\tau})$ if
+exercised at time $\tau$. The exercise time $\tau$ must be a stopping
+time, with $\tau \leq T$, the expiration time.
+
+For technical reasons, suppose $g$ is bounded.  For examples sake, we
+assume we have one sock, and consider an American put $g(S) = (K -
+S)^{+}$.
+
+If there are $d$ assets, we might have a min-put, we have
+\begin{align}
+  \label{eq:132}
+  g(S) = (K - \min_{1 \leq i \leq d} S^{i})^{+} = \max_{1 \leq i \leq d} (K
+  - S^{i})^{+}
+\end{align}
+
+To solve this pricing problem, write
+\begin{align}
+  \label{eq:133}
+  \mathcal{L} f = \frac{1}{2} \sum_{i, j} S_{i} S_{j} a_{ij}(t, S)
+  \frac{\partial^{2} f}{\partial S_{i} \partial S_{j}} + \sum_{i} r
+  S_{i} \frac{\partial f}{\partial S_{i}} - rf + \frac{\partial
+    f}{\partial t}
+\end{align}  where $a = \sigma \sigma^{T}$, and suppose we can find
+some $V(t, S) \in C^{1, 2}$ such that
+\begin{align}
+  \label{eq:134}
+  \max \{ \mathcal{L} V, g - V \} = 0, V(T, \cdot) = g(\cdot).
+\end{align}
+
+Then
+\begin{align}
+  \label{eq:135}
+  V(0, S_{0}) = \sup_{\tau \leq T} \E{e^{-r\tau} g(S_{\tau}) | S_{0}}
+\end{align}
+
+Why is this true?  Consider
+\begin{align}
+  \label{eq:136}
+  d(V(t, S_{t}) e^{-rt}) = V_{s}(t, S_{t}) S_{t} \sigma_{t} dW_{t} + \mathcal{L} V(t,
+  S_{t}) dt
+\end{align}
+
+If we let $\tau$ be any stopping time $\leq T$, and we let $T_{}
+\uparrow \infty$ be a sequence of stopping times ``rediscovering'' the local
+martingale $V_{S}(t, S) S \sigma dW$, and we shall then have
+\begin{align}
+  \label{eq:137}
+  V(0, S_{0}) &= \E{e^{-r \tau_{n}} V(\tau_{n}, S_{\tau_{n}}) -
+    \int_{0}^{\tau_{n}} \mathcal{L} V(u, S_{u}) du} \\
+  &\geq \E{e^{-r \tau_{n}} V(\tau_{n}, S_{\tau_{n}})} \\
+  &\geq \E{e^{-r\tau_{n}} g(S_{\tau_{n}})}.
+\end{align} since $\mathcal{L} V \leq 0$.
+
+If we let $n \rightarrow \infty, \tau_{n} \uparrow \tau$, we must have that
+\begin{align}
+  \label{eq:138}
+  V(0, S_{0}) \geq \sup_{0 \leq \tau \leq T} \E{e^{-r \tau} g(S_{\tau})}.
+\end{align}
+
+To show that there is equality, consider
+\begin{align}
+  \label{eq:139}
+  \tau^{\star} = \inf \{ t | V(t, S_{t}) = g(S_{t}) \}
+\end{align}
+We know that $V(T, \cdot) = g(\cdot)$, and so $\tau^{\star} \leq T$.
+We also notice that in $[0, \tau)$, $\mathcal{L} V = 0$ because in
+$[0, \tau)$, $g - V < 0$, and $\max \{ \mathcal{L} V, g - V \} = 0$.
+Now going back to the first calculation, if we write $\tau^{\star}_{n}
+= \tau^{\star} \wedge T_{n}$.
+
+\begin{align}
+  \label{eq:137}
+  V(0, S_{0}) &= \E{e^{-r \tau^{\star}_{n}} V(\tau^{\star}_{n}, S_{\tau^{\star}_{n}}) -
+    \int_{0}^{\tau^{\star}_{n}} \mathcal{L} V(u, S_{u}) du} \\
+  &= \E{e^{-r \tau_{n}} V(\tau_{n}, S_{\tau_{n}})} \\
+  &= \E{e^{-r\tau^{\star}} V(\tau^{\star}, S_{\tau^{\star}}) :
+    \tau^{\star} \leq T_{n}} + \E{e^{-r T_{n}} V(T_{n}, S_{T_{n}}):
+    \tau^{\star} > T_{n}} \\
+  &= \E{e^{-r \tau^{\star}} g(S_{\tau^{\star}}) | \tau^{\star} \leq
+    T_{n} } + \E{e^{-r T_{n}} V(T_{n}, S_{T_{n}}): \tau^{\star} >
+    T_{n}} \\
+  &\rightarrow \E{e^{-r \tau^{\star}} g(S_{\tau^{\star}})}.
+\end{align} 
+n
+We need to show that the $V$ we found is bounded.
+
+\begin{exmp}
+  \label{defn:market_models:5}
+  American puts in one dimension.
+
+  We have an envelope $V$.
+
+  We find $V$ by solving
+  \begin{align}
+    \label{eq:140}
+    0 = -rV = \frac{1}{2} \sigma^{2} S^{2} V_{SS} + rSV_{s}
+  \end{align} for $S = q$ with boundary condition
+  \begin{align}
+    \label{eq:141}
+    V(q) = (K-q)^{+}
+  \end{align}
+
+  This we can write as
+  \begin{align}
+    \label{eq:142}
+    V(S) = AS + BS^{-2r/\sigma^{2}}
+  \end{align} with the bounardy condition $V(q) = (K - q)^{+}$.
+
+  Suppose we let $q$ be a parameter of the stopping rule, work out the
+  value and optimize over $q$. The value is
+  \begin{align}
+    \label{eq:143}
+    V(S) = (K - q) (\frac{S}{q})^{-\frac{2r}{\sigma^{2}}} =
+    S^{-\frac{2r}{\sigma^{2}}} q^{\frac{2r}{\sigma^{2}}}(K - q)
+  \end{align}
+
+  Optimizing over $q$, we have
+  \begin{align}
+    \label{eq:144}
+    \frac{2r}{\sigma^{2} q} = \frac{1}{K-q} \Rightarrow q =
+    \frac{2rk}{\sigma^{2} + 2r}.
+  \end{align}
+
+  We can check, if we use this value of $q$, then $V'(q) = -1 =
+  \frac{\partial}{\partial S}(K - S)|_{s=q}$.
+
+  It can be shown that $\sup_{0 \leq \tau \leq T} \E{e^{-r \tau}
+    g(S_{\tau})} \leq \min_{M \in \mathcal{M}_{0}} \E{\sup_{...}}$ \todo{WTF?}
+\end{exmp}
 
 
 
