@@ -4,7 +4,7 @@ from collections import namedtuple
 
 
 class PDHGSolver(object):
-    Evaluators = namedtuple('Evaluators', ['A', 'g', 'h', 'g_conj', 'h_conj'])
+    Evaluators = namedtuple('Evaluators', ['A', 'backward_g', 'backward_h', 'g_conj'])
     Parameters = namedtuple('Parameters', ['sigma', 'tau', 'theta'])
 
     SolutionState = namedtuple('SolutionState', ['x', 'y'])

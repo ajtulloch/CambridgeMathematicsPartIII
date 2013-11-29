@@ -16,7 +16,7 @@
   \\
   f(CV)(C, c_{1}, c_{2}) = \int_{C}(g - c_{1})^{2} dx + \int_{\Omega
     \backslash C} (g -
-  c_{2})^{2} dx + \lambda P(C)
+  c_{2})^{2} dx + \lambda \mathcal{H}^{d-1}(\partial C)
   \end{align}
   \todo{Confirm form of the regualarizer}.
 
@@ -32,11 +32,161 @@
   \inf_{K \subseteq \Omega \text{closed}, u \in C^{\infty}(\Omega
     \backslash K)} f(K, u) \\
   f(K, u) = \int_{\Omega} (g - u)^{2} dx + \lambda \int_{\Omega
-    \backslash K} \| \grad u \|_{2}^{2} dx + \nu P(K)
-\end{align} with penalty function $P$ (\todo{verify this form}).
+    \backslash K} \| \grad u \|_{2}^{2} dx + \nu
+  \mathcal{H}^{d-1}(\partial K).
+\end{align} 
 
 Chan-Vese is a special case of this, with forcing $u = c_{1} \I{C} +
 c_{2}(1 - \I{C})$.
+
+
+\begin{align}
+  \label{eq:112}
+  \inf_{C \subseteq \Omega, c_{1}, c_{2} \in \R} \int_{C} (g -
+  c_{1})^{2} dx + \int_{\Omega \backslash C} (g - c_{2})^{2} dx +
+  \lambda \mathcal{H}^{d-1}(\partial C) \\
+  \inf_{u \in BV(D, \{ 0, 1 \}), c_{1}, c_{2} \in \R} \int_{\Omega} u
+  (g - c_{1})^{2} + (1-u) (g - c_{2})^{2} dx + \lambda TV(u)
+\end{align}  Fix $c_{1}, c_{2}$.  Then
+\begin{align}
+  \label{eq:113}
+  \tag{$(C)$}
+  \inf_{u \in BV(\Omega, \{ 0, 1 \})} \int_{\Omega} u \underbrace{((g - c_{1})^{2}
+  - (g - c_{2})^{2})}_{S(\cdot)} dx + \lambda TV(u)
+\end{align}
+
+Replacing $\{ 0, 1 \}$ by it's convex hull, we obtain
+\begin{align}
+  \label{eq:114}
+  \tag{$(R)$}
+  \inf_{u \in BV(\Omega, [0, 1])} \int_{\Omega}  u \cdot S dx +
+  \lambda TV(u)
+\end{align}
+
+This is a ``convex relaxation'' -
+\begin{enumerate}
+\item Replace non-convex energy by convex approximation
+\item Replace non-convex $f$ by $\con f$.
+\end{enumerate}
+
+Can the minima of $(R)$ have values $\notin \{ 0, 1 \}$. Assume
+$u_{1}, u_{2} \in BV(\Omega, \{ 0, 1 \})$ that $u_{2}$ minimized $(R)$
+and $(C)$, and $u_{1} \neq u_{2}$. Then
+\begin{align}
+  \label{eq:115}
+  \frac{1}{2} u_{1} + \frac{1}{2} u_{2} \notin BV(\Omega, \{ 0, 1 \})
+\end{align} is a minimizer of $(R)$.
+
+\begin{proposition}
+  Let $c_{1}, c_{2}$ be fixed. If $u$ minimizes $(R)$ and $u \in
+  BV(\Omega, \{ 0, 1 \})$, then $u$ minimizes $(C)$ and ($u = 1_{C}$)
+  $C$ minimizes $f_{CV}(\cdot, c_{1}, c_{2})$.
+\end{proposition}
+
+\begin{proof}
+  Let $C' \subseteq \Omega$.  Then $1_{C'} \in BV(\Omega, [0, 1])$.
+  Then 
+  \begin{align}
+    \label{eq:116}
+    f(1_{C'}) \geq f(1_{C}) \forall C' \subseteq \Omega
+  \end{align}
+\end{proof}
+
+\begin{defn}
+  \label{defn:relaxation:3}
+  $\mathcal{L} = BV(\Omega, [0, 1])$.  For $u \in \mathcal{L}$,
+  $\alpha \in [0, 1]$,
+  \begin{align}
+    \label{eq:117}
+    \overline u_{\alpha}(x) = \I{\{ u > \alpha \}}(x) =
+    \begin{cases}
+      1 & u(x) > \alpha \\
+      0 & u(x) \leq \alpha
+    \end{cases}
+  \end{align}
+
+  Then $f: \mathcal{L} \rightarrow \R$ satisfies general coarea
+  condition (GCC) if and only if
+  \begin{align}
+    \label{eq:118}
+    f(u) = \int_{0}^{1} f(\overline u_{\alpha}) d\alpha
+  \end{align} \todo{Upper bound?}
+\end{defn}
+
+\begin{proposition}
+  Let $s \in L^{\infty}(\Omega)$, $\Omega$ bounded.  Then $f$ as in
+  $(R)$ satisfies GCC.
+\end{proposition}
+
+\begin{proof}
+  If $f_{1}, f_{2}$ safisfy GCC, then $f_{1} + f_{2}$ satisfy GCC
+  $\lambda TV$ satisfies GCC (coarea formula for $TV$).
+
+  \begin{align}
+    \label{eq:119}
+    \int_{\Omega} u(x) S(x) dx = \int_{\Omega} (\int_{0}^{1} \I{\{
+      u(x) > \alpha \}} S(x) d\alpha) dx \\
+    &= \int_{0}^{1} \int_{\Omega} \I{\{ u(x) > \alpha \}} dx d \alpha.
+  \end{align}
+\end{proof}
+
+\begin{thm}
+  \label{defn:relaxation:4}
+  Assume $f: BV(\Omega, [0, 1]) \rightarrow \R$ satisfies GCC and
+  $u^{\star} \in \argmin_{u \in BV(\Omega, [0, 1])} f(u)$.
+
+  Then for almost any $\alpha \in [0, 1]$, $\overline
+  u^{\star}_{\alpha}$ is a minimizer of $f$ over $BV(\Omega, \{ 0, 1
+  \})$, with $\overline u^{\star}_{\alpha} \in \argmin_{u \in
+    BV(\Omega, \{ 0, 1 \})} f(u)$.
+\end{thm}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:120}
+    S = \{ \alpha | f(\overline u^{\star}_{\alpha}) \neq f(u^{\star}) \}
+  \end{align}  If $\mathcal{L}(S) = \emptyset$, then for a.e.
+  $\alpha$,
+  \begin{align}
+    \label{eq:121}
+    f(u^{\star}_{a}) = f(u^{\star}) = \inf_{u \in BV(\Omega, [0, 1])} f(u)
+  \end{align}
+
+  If $\mathcal{L}(S) > 0$, then there exists $\epsilon > 0$ such that
+  \begin{align}
+    \label{eq:122}
+    L(S_{\epsilon}) > 0, S_{\epsilon} = \{ \alpha | \overline
+    u_{\alpha}^{\star} \geq f(u^{\star}) + \epsilon \}
+  \end{align} which implies
+  \begin{align}
+    \label{eq:123}
+    f(u^{\star}) = \int_{[0, 1] \backslash S_{\epsilon}} f(u^{\star})
+    d\alpha + \int_{S_{\epsilon}} f(u^{\star}) d\alpha  \\
+    &\leq \int_{0}^{1} f(\overline u^{\star}_{\alpha}) d\alpha -
+    \epsilon L(S_{\epsilon}) \\
+    &< \int_{0}^{1} f(\overline u_{\alpha}^{\star}) d \alpha
+  \end{align} which contradicts GCC.
+\end{proof}
+
+\begin{remark}
+  Discreization problem, consider
+  \begin{align}
+    \label{eq:124}
+    \min_{u \in \R^{n}} f(u), f(u) = \IP{s, u} + \lambda \sum_{i} \| G
+    u \|_{2} s.t. 0 \leq u \leq 1
+  \end{align} vs
+  \begin{align}
+    \label{eq:125}
+    ... s.t. u \in \{ 0, 1 \}^{n}.
+  \end{align}
+
+  If $u^{\star}$ solves the relaxation, does $\overline
+  u^{\star}_{\alpha}$ solve the combinatorial problem?  Only if the
+  \textbf{discretized energy} $f$ satisfies GCC.
+
+
+\end{remark}
+
 
 %%% Local Variables: 
 %%% mode: latex

@@ -623,8 +623,145 @@ Thus $\E{\hat \Sigma} = I_{p}$, the identity matrix.
         \right| > \frac{2}{9} \cdot 18  (\sqrt{\frac{t + c_{0} k}{n}}
         + \frac{t + c_{0} k}{n})}
     \end{align}
+
+
+    We have that \eqref{eq:167} is bounded by
+    \begin{align}
+      \label{eq:136}
+      \leq \sum_{l=1}^{N(\frac{1}{3})} \Prob{\left| \sum_{i=1}^{n}
+          (g_{i}^{2}  - 1) \right| > 4 (\sqrt{n(t + c_{0} k)} + (t + c_{0}k))}
+    \end{align} with $g_{i} = \frac{(X \theta)_{i}}{\| \theta \|_{2}}
+    \sim N(0, 1)$.
+
+    Recall that $\Prob{|X|^{2} > u^{2}} \leq e^{-\frac{u}{2}}$ for $X
+    \sim N(0, 1)$.
+
+    \begin{lem}
+      Let $X = \sum_{i=1}^{n} (g_{i}^{2} - 1)$ where $g_{i} \sim N(0,
+      1)$.  Then for all $t > 0, n \in N$,
+      \begin{align}
+        \label{eq:168}
+        \Prob{|X| > t} \leq 2 e^{-\frac{t^{2}}{4n + 4t}}, 
+      \end{align} and for all $z > 0$,
+      \begin{align}
+        \label{eq:169}
+        \Prob{|X| > 4 (\sqrt{nz} + z)} \leq 2e^{-z}.
+      \end{align}
+    \end{lem}
+    \begin{proof}
+      Consider, for $g \sim N(0, 1)$ and $\lambda$ such that
+      $|\lambda| < \frac{1}{2}$,
+      \begin{align}
+        \label{eq:170}
+        \E{e^{\lambda(g^{2} - 1)}} = \frac{1}{\sqrt{2 \pi}} \int_{\R}
+        e^{\lambda(x^{2} - 1)} e^{-\frac{x^{2}}{2}} dx =
+        \frac{e^{-\lambda}}{\sqrt{2 \pi}} \int_{\R} e^{-(1- 2
+          \lambda)\frac{x^{2}}{2}} dx = \frac{e^{-\lambda}}{\sqrt{1 -
+            2 \lambda}} = e^{-\frac{1}{2}[-\log (1 - 2 \lambda) - 2 \lambda]}
+      \end{align}
+
+      Using a Taylor expansion of $\log (1 - 2 \lambda)$, we have
+      \begin{align}
+        \label{eq:171}
+        \log (1 - 2 \lambda) = \log 1 - 2 \lambda \cdot 1 -
+        \frac{1}{2}(2 \lambda)^{2} - \frac{2}{3!}(2 \lambda)^{3} - \dots
+        = -\sum_{k=1}^{\infty} \frac{(k+1)!}{(k+2)!}(2 \lambda)^{k+2}
+      \end{align} and
+      \begin{align}
+        \label{eq:172}
+        \frac{1}{2}[-\log (1 - 2 \lambda) - 2 \lambda] &= \lambda^{2}[1
+        + \dots + \frac{2}{k+2}(2 \lambda)^{k} + \dots] \\
+        &\leq \frac{\lambda^{2}}{1 - 2 \lambda}
+      \end{align} for $|\lambda| < \frac{1}{2}$.
+
+      So in total, we have
+      \begin{align}
+        \label{eq:173}
+        \E{e^{\lambda(g^{2} - 1)}} \leq e^{\frac{\lambda^{2}}{1 - 2 \lambda}}
+      \end{align}
+
+      We can also use independence of the $g_{i}$ to obtain
+      \begin{align}
+        \label{eq:174}
+        \E{e^{\lambda X}} &= \E{e^{\lambda(\sum_{i=}^{n} (g_{i}^{2} -
+            1))}} = \E{\prod_{i=1}^{n} e^{\lambda (g_{i}^{2} - 1)}} \\
+        &= \E{e^{\lambda (g^{2}_{i} - 1)}}^{n} \leq e^{\frac{n
+            \lambda^{2}}{1 - 2 \lambda}}
+      \end{align}
+
+      For $\lambda, t > 0$, we have
+      \begin{align}
+        \label{eq:175}
+        \Prob{X > t} &= \Prob{\lambda X > \lambda t} = \Prob{e^{\lambda
+            X} > e^{\lambda t}} \\
+        &\leq e^{-\lambda t} E^{e^{\lambda X}} \leq e^{-\lambda t}
+        e^{\frac{n \lambda^{2}}{1 - 2 \lambda}}
+      \end{align} by Markov's inequality.
+
+      We can optimize in $\lambda$, and choose
+      \begin{align}
+        \label{eq:176}
+        \lambda = \frac{t}{2n + 2t},
+      \end{align} in which we obtain the bound
+      \begin{align}
+        \label{eq:177}
+        e^{-\frac{t^{2}}{2n + 2t}} \exp \left\{ \frac{\frac{nt^{2}}{(2n +
+            2t)^{2}}}{1 - \frac{2t}{2n + 2t}} \right\} = e^{-\frac{t^{2}}{2n +
+            2t}} e^{\frac{t^{2}}{2(2n + 2t)}} = e^{-\frac{t^{2}}{2(2n
+            + 2t)}}
+      \end{align}
+
+      For the lower deviations, we repeat the above proof with
+      $\lambda \mapsto - \lambda$, and bound $\Prob{X > -t} \leq
+      e^{-\frac{t^{2}}{2(2n + 2t)}}$ and so
+      \begin{align}
+        \label{eq:178}
+        \Prob{|X| > t} \leq \Prob{X > t} + \Prob{X < -t} \leq 2
+        e^{-\frac{t^{2}}{2(2n + 2t)}}.
+      \end{align}
+
+      For the second inequality, substitute $t = 4 (\sqrt{nz} + z)$
+      into the first inequality to get
+      \begin{align}
+        \label{eq:179}
+        \Prob{|X| > 4 (\sqrt{nz} + z)} \leq 2 \exp \left\{
+          -\frac{16(\sqrt{nz} + z)^{2}}{4n + 16 \sqrt{nz} + 16z}
+        \right\} \leq^{?} 2e^{-z}
+      \end{align} which follows since
+      \begin{align}
+        \label{eq:180}
+        16nz + 32 \sqrt{n} z^{\frac{3}{2}} + 16 z^{2} \geq 4nz + 16
+        \sqrt{n} z^{\frac{3}{2}} + 16 z^{2}.
+      \end{align}
+    \end{proof}
+
+    In \eqref{eq:167} we get (with $z = t+ c_{0} k$)
+    \begin{align}
+      \label{eq:181}
+      2 N(\frac{1}{3}) e^{-t} e^{c_{0} k} \leq 2e^{-t} (3A)^{k}
+      e^{-c_{0} k} \leq 1
+    \end{align} for $c_{0}$ large enough. \sidenote{ One shows that
+      for all $\delta > 0$,
+      \begin{align}
+        \label{eq:182}
+        N(\delta) \leq (\frac{A}{\delta})^{k}.
+      \end{align} So for $\delta = \frac{1}{3}$, we have
+      \begin{align}
+        \label{eq:183}
+        N(\frac{1}{3}) \leq (3A)^{k} \leq e^{c_{0} k}
+      \end{align} for $c_{0}$ large enough.}
   \end{proof}
 \end{proof}
+
+\begin{remark}
+  We have show that $\theta^{T} \hat \Sigma \theta$ concentrates
+  around its expectation $\theta^{T} \theta$ uniformly in all $\theta
+  \in B_{0}(k)$, as long as $\frac{k \log p}{n} \rightarrow 0$. This
+  corresponds to the ``true'' sparse model being of dimension $\leq
+  n$.
+
+  
+\end{remark}
 
 %%% Local Variables: 
 %%% mode: latex

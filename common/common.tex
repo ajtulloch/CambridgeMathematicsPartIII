@@ -1,5 +1,9 @@
-\documentclass{tufte-book}
+\documentclass[10pt, reqno, oneside]{amsbook}
+
 % Utility packages
+\usepackage{etoolbox}
+\newtoggle{tufte}
+\togglefalse{tufte}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -20,8 +24,19 @@
 \usepackage{booktabs}
 \usepackage{colortbl, xcolor}
 \usepackage{longtable}
+\usepackage{natbib}
 
 \hypersetup{colorlinks=true}
+
+% Custom logic for Tufte-LaTeX vs AMSBook
+\iftoggle{tufte}{
+  % TUFTE
+  \publisher{Trinity College\\The University of Cambridge}
+}{
+  % AMSBOOK
+  \newcommand{\sidenote}{\footnote}
+  \numberwithin{equation}{chapter}
+}
 
 \declaretheorem[numberwithin=chapter,name=Theorem]{thm}
 \declaretheorem[name=Lemma,sibling=thm]{lem}
@@ -67,7 +82,8 @@
 \onehalfspacing
 
 \author{Andrew Tulloch}
-\publisher{Trinity College\\The University of Cambridge}
+
+
 % Shortcuts
 % convergence in probability
 \newcommand{\cd}{\overset{d}{\rightarrow}}    
@@ -98,7 +114,7 @@
     }%
 }
 
-% Probability
+% Probability with measure P
 \NewDocumentCommand{\Prob}{g}{%
   \IfNoValueTF{#1}
     {%
@@ -109,7 +125,7 @@
     }%
 }
 
-% Probability
+% Probability with measure Q
 \NewDocumentCommand{\Q}{g}{%
   \IfNoValueTF{#1}
     {%
@@ -132,7 +148,7 @@
     }%
 }
 
-% Expectation
+
 \NewDocumentCommand{\Var}{g}{%
   \IfNoValueTF{#1}
     {%
@@ -143,7 +159,7 @@
     }%
 }
 
-% Expectation
+
 \NewDocumentCommand{\Cov}{gg}{%
   \IfNoValueTF{#1}
     {%
@@ -154,7 +170,7 @@
     }%
 }
 
-% Expectation
+% Inner product
 \NewDocumentCommand{\IP}{g}{%
     {%
       \left \langle #1 \right \rangle
