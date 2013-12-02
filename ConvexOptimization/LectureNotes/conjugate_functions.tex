@@ -179,8 +179,8 @@
   \end{align}
   with $g(x) \leq \langle v, x \rangle - \beta$, $(v, \beta) \in \epi (\cl \con f)^{\star} \iff (v, \beta) \in \epi f^{\star}$.
 
-  To show $f^{\star}$ is proper, lower semicontinous, and convex, we
-  have $\epi f^{\star}$ is the intersecton of closed convex sets, and
+  To show $f^{\star}$ is proper, lower semicontinuous, and convex, we
+  have $\epi f^{\star}$ is the intersection of closed convex sets, and
   therefore closed and convex, and hence $f^{\star}$ is lower
   semicontinuous and convex.
 
@@ -275,12 +275,12 @@
 \begin{defn}
   \label{defn:conjugate_functions:9}
   A function $h: \R^{n} \rightarrow \bar \R$ is \textbf{positively
-    homogenous} if $0 \in \dom h$ and $h(\lambda x) = \lambda h(x)$
+    homogeneous} if $0 \in \dom h$ and $h(\lambda x) = \lambda h(x)$
   for all $\lambda > 0, x \in \R^{n}$.
 \end{defn}
 
 \begin{proposition}
-  The set of positive homogenous proper lowersemicontinuous convex
+  The set of positive homogeneous proper lower semicontinuous convex
   functions and the set of closed convex nonempty sets are in
   one-to-one correspondence through the Legendre-Fenchel transform.
   \begin{equation}
@@ -320,7 +320,7 @@
 \begin{defn}
   \label{defn:conjugate_functions:10}
   For $f: \R^{n} \times \R^{m} \rightarrow \bar \R$ proper,
-  lowersemicontinuous, convex, we define the primal and dual problems
+  lower semicontinuous, convex, we define the primal and dual problems
   \begin{align}
     \label{eq:68}
     \inf_{x \in \R^{n}} \phi(x), \phi(x) = f(x, 0) \\
@@ -333,7 +333,7 @@
     q(v) = \inf_{y \in \R^{m}} f^{\star}(v, y)
   \end{align}
 
-  $f$ is the peturbation function for $\phi$, $p$ is the associated
+  $f$ is the perturbation function for $\phi$, $p$ is the associated
   projection function.
 
   Consider the problem
@@ -350,7 +350,7 @@
 \end{defn}
 
 \begin{proposition}
-  Assume $f$ statisfying the assumptions in Definition
+  Assume $f$ satisfying the assumptions in Definition
   \ref{defn:conjugate_functions:10}.  Then
   \begin{enumerate}
   \item $\phi, -psi$ are convex and lower semicontinuous
@@ -365,8 +365,8 @@
 \begin{proof}
   \begin{enumerate}
   \item $\phi$ is clearly convex.  For $\psi$, $f^{\star}$ is
-    lowersemicontinuous and convex, which implies $-\psi$ is
-    lowersemicontinuous and convex.
+    lower semicontinuous and convex, which implies $-\psi$ is
+    lower semicontinuous and convex.
   \item Look at the strict epigraph of $p$:
     \begin{align}
       \label{eq:73}
@@ -425,7 +425,7 @@
   ($\Leftarrow$) $p^{\star \star} \leq \cl p \leq p \Rightarrow \cl
   p(0) = p(0)$.
   
-  ($\Rightarrow$) $\cl p$ is lowersemicontinuous, convex $\Rightarrow
+  ($\Rightarrow$) $\cl p$ is lower semicontinuous, convex $\Rightarrow
   \cl p(x)$  is proper, $\sup \psi = (p^{\star})^{\star}(0) = (\cl p)^{\star
     \star}(0) = \cl p(0) = p(0) = \inf \phi$
 \end{proof}

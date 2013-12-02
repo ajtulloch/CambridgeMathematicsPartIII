@@ -295,7 +295,7 @@ $\theta_{0}$ is unique.
   So $| \overline q(X, \theta, \eta) - \underline q(X, \theta, \eta)|
   \rightarrow 0$ as $\eta \rightarrow 0$.
 
-  By the dominated convergence theorem we can integrat this limit with
+  By the dominated convergence theorem we can integrate this limit with
   respect to $\E$, (using the dominance condition).  So,
   \begin{equation}
     \label{eq:57}
@@ -314,7 +314,7 @@ $\theta_{0}$ is unique.
   The balls $\{ B(\theta, \eta(\epsilon, \theta)) : \theta \in \Theta
   \}$ form an open covering of $\Theta$, so by compactness
   (Heine-Borel theorem in $\R^{p}$), there exists a finite subcover of
-  $\theta$, say with centres $\theta_{1}, \dots,
+  $\theta$, say with centers $\theta_{1}, \dots,
   \theta_{N(\epsilon)}$.  Then the corresponding brackets
   \begin{equation}
     \label{eq:59}
@@ -339,7 +339,7 @@ $\theta_{0}$ is unique.
 \begin{defn}
   \label{defn:parametric_statistical_models:6}
   A consistent estimator $\tilde \theta$ in a model $\{ f(\cdot,
-  \theta) | \theta \in \Theta \}$ is called \textbf{asymtotically
+  \theta) | \theta \in \Theta \}$ is called \textbf{asymptotically
     efficient} if $\lim_{n} n \Var{\tilde \theta} = I(\theta)^{-1}$
   for all $\theta \in \interior (\Theta)$ where $I(\theta)$ is the Fisher information.
 \end{defn}
@@ -365,7 +365,7 @@ $\theta_{0}$ is unique.
     \Prob{E_{n}^{c}} \rightarrow 0
   \end{equation} as $n \rightarrow \infty$.  Since $\hat \theta_{n}
   \cp \theta_{0}$ as $n \rightarrow \infty$, we can restrict to $E_{n}
-  = \{ \hat \theta_{n} \}$ where $K$ is a closed ball centred at
+  = \{ \hat \theta_{n} \}$ where $K$ is a closed ball centered at
   $\theta_{0}$.  By the assumptions, $\ln$ is $C^{2}$ on $U$, and
   $\hat \theta_{n}$ is a maximizer on the open set $U$, so necessarily,
   \begin{equation}
@@ -384,7 +384,7 @@ $\theta_{0}$ is unique.
     \label{eq:63}
     tu + (1-t)v
   \end{equation} for $0 < t < 1$ connection $u, v$ does lie in the
-  ball $K$ by convexity, and the mean value theorm gives (for $h \in
+  ball $K$ by convexity, and the mean value theorem gives (for $h \in
   C^{1}(U)$),
   \begin{equation}
     \label{eq:64}
@@ -420,7 +420,7 @@ o
   \begin{enumerate}
   \item One can weaken the conditions to $\theta \mapsto f(\cdot,
     \theta)$ being ``weakly $C1$'', to model the Laplace family. For
-    non-differentiable parameterisations, the asymptotics of the MLE
+    non-differentiable parameterizations, the asymptotics of the MLE
     may be non-normal. For example, consider $U[0, \theta]$ with
     $\theta \in \Theta = (0, \infty)$.
   \item When the ``true'' $\theta_{0}$ is at the boundary of the
@@ -429,7 +429,7 @@ o
     \theta_{MLE} = \max(\overline{X_{n}}, 0)$
   \item Asymptotic efficiency is an optimality criterion that is
     meaningful only for ``regular'' estimators, that rules out the
-    following superefficient estimator e.g.
+    following super-efficient estimator e.g.
     \begin{equation}
       \label{eq:67}
       \tilde \theta =
@@ -449,7 +449,7 @@ o
 \end{remark}
 
 
-\section{Asmptotic Inference based on the MLE}
+\section{Asymptotic Inference based on the MLE}
 \label{sec:asmpt-infer-based}
 
 Suppose we want a confidence interval for $\theta_{j}$, $j = 1, \dots,
@@ -469,7 +469,7 @@ Suggesting that
   C_{n} = \{ v \in \R : | \hat \theta_{n, j}  - v | \leq
   \frac{(I(\theta)^{-1})^{\frac{1}{2}}_{jj} Z_{\alpha}}{\sqrt{n}} \}
 \end{align} where $Z_{\alpha}$ are such that $\Prob(|Z| \leq
-Z_{\alpha}) = 1 - \alpha$ is a confidence intervale for $\theta_{j}$,
+Z_{\alpha}) = 1 - \alpha$ is a confidence interval for $\theta_{j}$,
 since
 \begin{align}
   \label{eq:70}
@@ -524,7 +524,7 @@ have the $\chi^{2}_{p}$ distribution. Thus
   C_{n} = \{ \theta \in \R^{p} | W_{n}(t) \leq \xi_{\alpha} \}
 \end{equation} where $\xi_{\alpha}$ are the $1-\alpha$ quartiles of
 the $\chi^{2}_{p}$ distribution, is a confidence ellipsoid for
-$\theta$ of asymptotic converage probability $1-\alpha$.
+$\theta$ of asymptotic coverage probability $1-\alpha$.
 
 To test $H_{0}: \theta = \theta_{0}$ against $H_{1}: \Theta \in \theta
 \backslash \{ \theta_{0} \}$, we can refer $W_{n}(\theta_{0})$ to the
@@ -630,7 +630,7 @@ The log-likelihood ratio
 \begin{defn}
   \label{defn:parametric_statistical_models:10}
   A model $\{ f(\cdot, \theta), \theta \in \Theta \}$ is called
-  \textbf{locally asmptotically normal (LAN)} at $\theta_{0} \in \int
+  \textbf{locally asymptotically normal (LAN)} at $\theta_{0} \in \int
   \Theta$ if for all $h \in \R^{p}$ (small enough),
   \begin{align}
     \label{eq:88}
@@ -705,7 +705,7 @@ The log-likelihood ratio
 \end{lem}
 
 \begin{remark}
-  For two probability measures $P, Q$ that are absolutely continouus with
+  For two probability measures $P, Q$ that are absolutely continuous with
   respect to each other, the likelihood ratio is the random variable
   $\frac{dP}{dQ}(X), X \sim Q$.
 \end{remark}
@@ -746,7 +746,7 @@ are mutually contiguous.
   \begin{equation}
     \label{eq:94}
     \tilde \theta_{n} = \hat \theta_{n} \I{|\hat \theta_{n}| \geq n^{-\frac{1}{4}}}
-  \end{equation} in a regular parameteric model, $\Theta = \R$, and
+  \end{equation} in a regular parametric model, $\Theta = \R$, and
   where $\hat \theta_{n}$ is the MLE.  One shows under $P_{\theta},
   \theta \neq 0$, we have
   \begin{equation}

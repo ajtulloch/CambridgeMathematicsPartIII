@@ -4,7 +4,7 @@
 \section{Meyer's $G$-norm}
 \label{sec:meyers-g-norm}
 
-Idea - regularizer that favours \textbf{textured} regions
+Idea - regulariser that favors \textbf{textured} regions
 \begin{align}
   \| u \|_{G} = \{ \inf \| v \|_{\infty} | \div v = u, v \in
   L^{\infty}(\R^{d}, \R^{d}) \}
@@ -66,7 +66,7 @@ noise.
   \end{align}
 
   A suitable divergence $\div_{w} u(x) = \sum_{y \in \Omega} (w(x, y) -
-  v(y, x)) w(x, y)$ andjoint to $\grad_{w}$ with respect to Euclidean
+  v(y, x)) w(x, y)$ adjoint to $\grad_{w}$ with respect to Euclidean
   inner products.
   \begin{align}
     \label{eq:106}
@@ -93,7 +93,7 @@ This reduces to classical $TV$ if the weights are chosen as constant
 \label{sec:how-choose-wx}
 
 \begin{enumerate}
-\item Large if neighbourhoods of $x, y$ are similar with respect to a
+\item Large if neighborhoods of $x, y$ are similar with respect to a
   distance metric.
 \item Sparse, otherwise we have $n^{2}$ terms in the regularized ($n$
   is number of pixels).

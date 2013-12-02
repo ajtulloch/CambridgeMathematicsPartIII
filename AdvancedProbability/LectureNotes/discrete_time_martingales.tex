@@ -2,7 +2,7 @@
 \chapter{Discrete Time Martingales}
 \label{cha:discr-time-mart}
 
-Let $(\Omega, \mathcal{F}, \Prob)$ be a probabilty space and $(E,
+Let $(\Omega, \mathcal{F}, \Prob)$ be a probability space and $(E,
 \xi)$ a measurable space.  Usually $E = \R, \R^{d}, \mathbb{C}$.  For
 us, $E = \R$.  A sequence $X = (X_{n})_{n \geq 0}$ of random variables
 taking values in $E$ is called a \textbf{stochastic process}.
@@ -12,7 +12,7 @@ A \textbf{filtration} is an increasing family $(\mathcal{F}_{n})_{n
 $\mathcal{F}_{n} \subseteq \mathcal{F}_{n+1}$.
 
 Intuitively, $\mathcal{F}_{n}$ is the information available to us at
-time $n$.  To every stochsatic process $X$ we assoicate a filtration
+time $n$.  To every stochastic process $X$ we associate a filtration
 called the natural filtration
 \begin{equation}
   \label{eq:24}
@@ -242,7 +242,7 @@ Remains to check $\E{T} < \infty$.  We have $\Prob{\xi_{1} = 1,
   $X_{n}$ converges as $n \rightarrow \infty$ almost surely towards an
   a.s. finite limit $X \in L^{1}(\mathcal{F}_{\infty})$ with
   $\mathcal{F}_{\infty} = \sigma(\mathcal{F}_{n}, n \geq 0)$.  To
-  prove it we will use Doob's trick which counts upcrossings of
+  prove it we will use Doob's trick which counts up-crossings of
   intervals with rational endpoints. 
 \end{thm}
 
@@ -270,13 +270,13 @@ Remains to check $\E{T} < \infty$.  We have $\Prob{\xi_{1} = 1,
   \infty$.
 
   Define $N_{n}([a, b], x) = \sup \{ k \geq 0 : T_{k}(x) \leq n \}$ -
-  the number of upcrossings of the interval $[a, b]$ by the sequence
+  the number of up-crossings of the interval $[a, b]$ by the sequence
   $x$ by the time $n$. As $n \rightarrow \infty$, we have
   \begin{equation}
     \label{eq:38}
     N_{n}([a,b], x) \uparrow N([a, b], x) = \sup \{ k \geq 0 :
     T_{k}(x) < \infty \}, 
-  \end{equation} the total number of upcrossings of the interval $[a, b]$.
+  \end{equation} the total number of up-crossings of the interval $[a, b]$.
 \end{proof}
 
 \begin{lem}
@@ -295,7 +295,7 @@ Remains to check $\E{T} < \infty$.  We have $\Prob{\xi_{1} = 1,
   numbers gives that $N([a,b], x) = \infty$ as required.
 \end{proof}
 
-\begin{thm}[Doob's upcrossing inequality]
+\begin{thm}[Doob's up-crossing inequality]
   \label{defn:discrete_time_martingales:10}
   Let $X$ be a supermartingale and $a < b$ be two real numbers. Then
   for all $n \geq 0$,
@@ -488,9 +488,9 @@ be a sequence of $...$.
 \section{Applications of Martingales}
 \label{sec:appl-mart}
 
-\begin{thm}[Kolmogorov's $0-1$ law]
+\begin{thm}[Kolmogrov's $0-1$ law]
   \label{defn:discrete_time_martingales:17}
-  Let $(X_{i})_{i \geq 1}$ be a sequence of IID random varables.  Let
+  Let $(X_{i})_{i \geq 1}$ be a sequence of IID random variables.  Let
   $\mathcal{F}_{n} = \sigma(X_{k}, k \geq n)$ and
   $\mathcal{F}_{\infty} = \cap_{n \geq 0} \mathcal{F}_{n}$.  Then
   $\mathcal{F}_{\infty}$ is trivial - that is, every $A \in
@@ -500,7 +500,7 @@ be a sequence of $...$.
 \begin{proof}
   Let $G_{n} = \sigma(X_{k}, k \leq n)$ and $A \in
   \mathcal{F}_{\infty}$.  Since $\mathcal{G}_{n}$ is independent of
-  $\mathcal{F}_{n+1}$, we havethat
+  $\mathcal{F}_{n+1}$, we have that
   \begin{equation}
     \label{eq:47}
     \E{\I{A} | \mathcal{G}_{n}} = \Prob{A}

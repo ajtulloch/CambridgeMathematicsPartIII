@@ -50,12 +50,12 @@ and $\mathbb{P}$ is a probability measure on ($\Omega, \mathcal{F}$).
 \begin{defn}
   \label{defn:5}
   $X$ is a random variable on $(\Omega, \mathcal{F})$  if $X: \Omega
-  -> \mathbb{R}$ is a function with the proerty that $X^{-1}(V) \in
+  -> \mathbb{R}$ is a function with the property that $X^{-1}(V) \in
   \mathcal{F}$ for all $V$ open sets in $\mathbb{R}$.
 \end{defn}
 
 \begin{exer}
-  If $X$ is a random varaible then $\{ B \subseteq \mathbb{R}, X^{-1}(B)
+  If $X$ is a random variable then $\{ B \subseteq \mathbb{R}, X^{-1}(B)
   \in \mathcal{F} \}$ is a $\sigma$-algebra and contains
   $\mathbb{B}(\mathbb{R})$.
 \end{exer}
@@ -161,7 +161,7 @@ Let $X$ be an integrable random variable.  Then
 
 \begin{defn}
   \label{defn:9}
-  For $p \in [1, \infty)$, $f$ measruable functions, then
+  For $p \in [1, \infty)$, $f$ measurable functions, then
   \begin{align}
     \| f \|_{p} = E[|f|^{p}]^{\frac{1}{p}} \\
     \| f \|_{\infty} = \inf \{ \lambda : |f| \leq \lambda a.e. \}
@@ -209,7 +209,7 @@ Let $X$ be an integrable random variable.  Then
   Moreover, if $Y'$ also satisfies the above properties, then $Y = Y'$ a.s.
 \end{thm}
 \begin{remark}
-  $Y$ is called a version of the conditioanl expectiation of $X$ given
+  $Y$ is called a version of the conditional expectation of $X$ given
   $\mathcal{G}$ and we write $\mathcal{G} = \sigma(Z)$ as $Y = \E{X |
     \mathcal{G}}$.
 \end{remark}
@@ -292,7 +292,7 @@ Let $X$ be an integrable random variable.  Then
 
 \begin{defn}
   \label{defn:general:1}
-  Let $\mathcal{G}_{0}, \mathcal{G}_{1}, \dots$ be sub $\sigma$-algebas of
+  Let $\mathcal{G}_{0}, \mathcal{G}_{1}, \dots$ be sub $\sigma$-algebras of
   $\mathcal{F}$.  Then they are called independent if for all $i, j
   \in \mathbb{N}$,
   \begin{equation}
@@ -310,7 +310,7 @@ Let $X$ be an integrable random variable.  Then
   \end{enumerate}
 \end{thm}
 
-\begin{thm}[Fatou's lemma] $X_{n} \geq 0$, then for all $n$,
+\begin{thm}[Fatau's lemma] $X_{n} \geq 0$, then for all $n$,
   \begin{equation}
     \label{exmp:general:6}
     \E{\liminf X_{n}} \leq \liminf \E{X_{n}}
@@ -331,7 +331,7 @@ Let $X$ be an integrable random variable.  Then
     $\mathcal{G}$-measurable.  
 \end{proof}
 
-\begin{thm}[Conditional Fatou's Lemma]  $X_{n} \geq 0$, then
+\begin{thm}[Conditional Fatau's Lemma]  $X_{n} \geq 0$, then
   \begin{equation}
     \label{exmp:general:8}
     \E{\liminf X_{n} | \mathcal{G}} \leq \liminf \E{X_{n} |
@@ -357,7 +357,7 @@ Let $X$ be an integrable random variable.  Then
 
   because the countable union of the exceptional sets of probability
   zero is again a null set. Using the definition of X, its
-  representation as pointwise limit of the Yk, the monotone convergence
+  representation as pointwise limit of the $Y_k$, the monotone convergence
   theorem for conditional expectations, the last inequality, and the
   definition of the limit inferior, it follows that almost surely
 

@@ -84,7 +84,7 @@ So if we take
   MSPE(M) = \E{\| P_{M}Y - X \theta \|^{2}}
 \end{align}
 
-Now replace $\sigma^{2}$ by it's unbaised estimate $\hat \sigma^{2} =
+Now replace $\sigma^{2}$ by it's unbiased estimate $\hat \sigma^{2} =
 \frac{1}{n-p} \| Y - PY \|^{2}$ to obtain the estimated predictive
 risk of model $M$,
 \begin{align}
@@ -100,7 +100,7 @@ minimizes $\crit_{C_{p}}(M)$.
 
 This is called Mallow's $C_{p}$.
 
-Severalsuch model selection criterion exist, all of the form
+Several such model selection criterion exist, all of the form
 \begin{align}
   \label{eq:112}
   \crit(M) = \| Y - P_{M} Y \|^{2} + \lambda \dim(M) + \text{const}
@@ -152,7 +152,7 @@ Any solution to the minimization problem
   \lambda \| \theta \|_{1}
 \end{align} for $\lambda$ a tuning parameter, is called a LASSO
 solution, denoted by $\tilde \theta = \tilde \theta_{LASSO}$.  $\tilde
-\theta$ is generally not uniuqe, but $X \tilde \theta$ and also $\|
+\theta$ is generally not unique, but $X \tilde \theta$ and also $\|
 \theta \|_{1}$ give the same numerical values for all LASSO
 solutions.\sidenote{Exercise sheet}
 
@@ -160,7 +160,7 @@ solutions.\sidenote{Exercise sheet}
   \label{defn:high_dimensional_statistics:1}
   Let $Y = X \theta^{0} + \epsilon$ with $\epsilon \sim N(0, I_{n})$
   and $\theta^{0}$ is $k$-sparse with \textbf{active set} $S_{0}$. Let
-  $\tilde \theta$ be any LASSO solutoin, with
+  $\tilde \theta$ be any LASSO solution, with
   \begin{align}
     \label{eq:118}
     \lambda = 4 \overline \sigma \sqrt{\frac{t^{2} + \log p}{n}} \\
@@ -371,7 +371,7 @@ Consider a signal $Y \in \R^{n}$ and a ``sensing''/design matrix
 $X_{j} \in \R^{n}, j = 1, \dots, p$ such that $Y = X \theta =
 \sum_{i=1}^{p} X_{j} \theta_{j}$, without noise.
 
-If $p > n$, the representation is underdetermined, but we may aim to
+If $p > n$, the representation is under-determined, but we may aim to
 find the ``most sparse'' solution.  Formally, if $\| \theta_{0} \|_{0}
 = |\{ \theta_{j} \neq 0 \}|$, we want to find the solution
 \begin{align}
@@ -419,7 +419,7 @@ satisfies RIP with probability greater than $1 - e^{-k \log p}$.
       \frac{1}{n} \| Y - X \theta \|_{2}^{2} \leq t
     \end{align} where $t$ is the analogue of $\lambda$ in the
     definition of the LASSO.  This estimator is called the
-    \textbf{Dantzig selector} $\tilde \theta_{DANTZIG}$.  One then
+    \textbf{Danzig selector} $\tilde \theta_{DANTZIG}$.  One then
     shows that the ``exact recovery'' of the most sparse selector
     $\theta^{0}$ still holds approximately, with large probability.
   \end{enumerate}
