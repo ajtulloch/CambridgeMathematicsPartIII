@@ -54,9 +54,9 @@ self-dual cone, we have
   For $t > 0$, define
   \begin{align}
     \label{eq:80}
-    x(t) = \argmin \{ t \IP{c, x} + F(Ax - b) \} \\
-    y(t) = \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T} y = c} \} \\
-    z(t) = (x(t), y(t))
+    x(t) &= \argmin \{ t \IP{c, x} + F(Ax - b) \} \\
+    y(t) &= \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T} y = c} \} \\
+    z(t) &= (x(t), y(t))
   \end{align}
   These paths exist, are unique, and
   \begin{align}
@@ -72,7 +72,7 @@ self-dual cone, we have
 \begin{proof}
   The first part follows by definition.
 
-  For~\eqref{eq:81},the primal optimality condition is that $0 = tc +
+  For~\eqref{eq:81}, the primal optimality condition is that $0 = tc +
   A^{T \grad F(Ax - b)}$. The dual optimality condition is that $0 \in
   -tb + \grad F(y) + N_{z | A^{T}z = c}(y)$, which is
   \begin{align}
@@ -85,12 +85,11 @@ self-dual cone, we have
     &\iff 0 \in -tb + \grad F(y) + \range A, A^{T} y = c
   \end{align}
 
-  Assume $x$ stafies the primal optimiality condition.  Then
+  Assume $x$ satisfies the primal optimiality condition. Then
   \begin{align}
     \label{eq:83}
-    tc + A^{T} \grad F(Ax - b) = 0 \\
-    \iff tc + A^{T}(-ty) = 0 \\
-    \iff A^{T}y = c
+    tc + A^{T} \grad F(Ax - b) = 0 &\iff tc + A^{T}(-ty) = 0 \\
+    &\iff A^{T}y = c
   \end{align}
   \todo{A few more steps...}
 \end{proof}
@@ -112,7 +111,7 @@ self-dual cone, we have
 \begin{proof}
   \begin{align}
     \label{eq:86}
-    \phi(x) - \psi(y) = \IP{c, x} - \IP{b, y} \\
+    \phi(x) - \psi(y) &= \IP{c, x} - \IP{b, y} \\
     &= \IP{A^{T} y, x} - \IP{b, y} \\
     &= \IP{Ax - b, y}
   \end{align}
@@ -120,20 +119,13 @@ self-dual cone, we have
   For the second part, we have
   \begin{align}
     \label{eq:87}
-    \phi(x(t)) - \psi(y(t)) = \IP{y(t), Ax(t) - b} \\
+    \phi(x(t)) - \psi(y(t)) &= \IP{y(t), Ax(t) - b} \\
     &= \IP{-\frac{1}{t} \grad F(Ax(t) - b), Ax(t) - b} \\
     &= \frac{\Theta_{F}}{t}
   \end{align}
 \end{proof}
 
-\begin{proposition}
-  Define
-  \begin{align}
-    \label{eq:88}
-  \end{align}
-\end{proposition}
-
-
+\todo{Fill in from lecture notes}
 
 %%% Local Variables: 
 %%% mode: latex

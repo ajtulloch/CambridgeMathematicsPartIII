@@ -45,7 +45,7 @@
   $\R^{n} \rightarrow \bar \R$ is convex if and only if
   \begin{equation}
     \label{eq:13}
-    f(\sum_{i=1}^{n} \lambda_{i} x_{i}) \leq \sum_{i=1}^{n}
+    f \left(\sum_{i=1}^{n} \lambda_{i} x_{i} \right) \leq \sum_{i=1}^{n}
     \lambda_{i} f(x_{i})
   \end{equation}
 
@@ -54,8 +54,8 @@
 \end{thm}
 \begin{proof}
   \begin{align}
-    \sum_{i=1}^{n} \lambda_{i} x_{i} = \lambda_{m} x_{m} +
-    (1-\lambda_{m} \frac{\lambda_{i}}{1 - \lambda_{m}} x_{i})
+    \sum_{i=1}^{n} \lambda_{i} x_{i} = \lambda_{m} x_{m} + \left(
+      1-\lambda_{m} \frac{\lambda_{i}}{1 - \lambda_{m}} x_{i} \right)
   \end{align} which is a convex combination of two points, and proceed
   by induction on $m$.
 
@@ -67,41 +67,33 @@
   $f$ is convex.
 \end{proposition}
 
-% Expectation
-\NewDocumentCommand{\Epi}{g}{%
-  \IfNoValueTF{#1}
-    {%
-      \text{epi}\xspace
-    }   
-    {%
-      \text{epi}\xspace #1
-    }%
-}
-
 
 \begin{proposition}
-  \begin{enumerate}
-  \item $f: \R^{n} \rightarrow \bar \R$ is convex if and only if
-    $\Epi{f}$ is convex in $\R^{n} \times \R$ if and only if
-    \begin{equation}
-      \label{eq:14}
-      \{ (x, \alpha) \in \R^{n} \times \R | f(x) < \alpha \}
-    \end{equation} is convex in $\R^{n} \times \R$.
-  \end{enumerate}
+  $f: \R^{n} \rightarrow \bar \R$ is convex if and only if $\epi f$ is
+  convex in $\R^{n} \times \R$ if and only if
+  \begin{equation}
+    \label{eq:14}
+    \{ (x, \alpha) \in \R^{n} \times \R | f(x) < \alpha \}
+  \end{equation} is convex in $\R^{n} \times \R$.
 \end{proposition}
 
-
 \begin{proof}
-  $\Epi{f}$ is convex if and only if for all $\tau \in (0, 1), \forall
+  $\epi f$ is convex if and only if for all $\tau \in (0, 1), \forall
   x, y, \alpha \geq f(x), \beta > f(y)$, $(x, \alpha), (y, \beta) \in
-  \Epi{f}$, we have  $f((1-\tau)x + \tau y) \leq (1-\tau)\alpha + \tau
-  \beta \iff \forall \tau \in (0,1), \forall x, y, f((1-\tau)x + \tau
-  y) \leq (1-\tau) f(x) + \tau f(y) \iff f$ is convex. 
+  \epi f$, we have
+  \begin{align}
+    \label{eq:127}
+     &f((1-\tau)x + \tau y) \leq (1-\tau)\alpha + \tau
+     \beta \\
+     \iff &\forall \tau \in (0,1), \forall x, y, f((1-\tau)x + \tau
+     y) \leq (1-\tau) f(x) + \tau f(y) \\
+     \iff &\text{$f$ is convex}.
+  \end{align}
 \end{proof}
 
 \begin{proposition}
   $f: R^{n} \rightarrow \bar \R$ is convex implies $lev_{\leq \alpha}
-  f$ is convex for all $\alpha \in \bar R$.
+  f$ is convex for all $\alpha \in \overline \R$.
 \end{proposition}
 
 \begin{proof}
@@ -216,7 +208,7 @@
   example $f(x) = x^{4}$.
 \end{remark}
 
-\begin{proposition}
+\begin{proposition} We have the following results hold for convex functions.
   \begin{enumerate}
   \item $f_{i}, \dots, f_{m}: \R^{n} \rightarrow \bar \R$ is convex,
     $\lambda_{i}, \dots, \lambda_{m} \geq 0$, the n
@@ -292,13 +284,13 @@
   Let $S \subseteq \R^{n}$ is arbitrary. Then
   \begin{equation}
     \label{eq:21}
-  con S = \cap_{\text{$C$ convex, $C \supseteq S$}} C  
+  \con S = \cap_{\text{$C$ convex, $C \supseteq S$}} C  
   \end{equation}
   is the convex ball of $S$.
 \end{defn}
 
 \begin{remark}
-  $con S$ is the \textbf{smallest} convex set that contains $S$.
+  $\con S$ is the \textbf{smallest} convex set that contains $S$.
 \end{remark}
 
 \begin{thm}
@@ -306,48 +298,48 @@
   Let $S \subseteq \R^{n}$, then
   \begin{equation}
     \label{eq:22}
-    con S = \{ \sum_{i=0}^{n} \lambda_{i} x_{i} | x_{i} \in S,
-    \lambda_{i} \geq 0, \sum_{i=0}^{n} \lambda_{i} = 1 \}
+    \con S = \left\{ \sum_{i=0}^{n} \lambda_{i} x_{i} | x_{i} \in S,
+    \lambda_{i} \geq 0, \sum_{i=0}^{n} \lambda_{i} = 1 \right\}
   \end{equation}
 \end{thm}
 
 \begin{proof}
   $D$ is convex and contains $S$ - if $x, y \in D$, then $(1-\tau)x +
-  (\tau)y \in D$.  Thus $con S \subseteq D$.
+  (\tau)y \in D$.  Thus $\con S \subseteq D$.
 
-  From a previous theorem, $con S$ convex implies $con S$ contains all
-  convex combinations of points in $S$.  Thus $con S \supseteq D$
+  From a previous theorem, $\con S$ convex implies $\con S$ contains all
+  convex combinations of points in $S$.  Thus $\con S \supseteq D$
 
-  Thus $con S = D$.
+  Thus $\con S = D$.
 \end{proof}
 
 \begin{defn}
   \label{defn:convexity:10}
-  For a set $C \subseteq \R^{n}$, define $cl C$ as
+  For a set $C \subseteq \R^{n}$, define $\cl C$ as
   \begin{equation}
     \label{eq:23}
-    cl C = \{ x \in \R^{n} | \text{for all open neighbourhoods $N$ of
+    \cl C = \{ x \in \R^{n} | \text{for all open neighbourhoods $N$ of
       $x$, $N \cap C \neq \emptyset$} \}
   \end{equation}
 
-  $int C$ as
+  $\interior C$ as
   \begin{equation}
     \label{eq:24}
-    int C = \{ x \in \R^{n} | \text{there exists an open neigbourhood $N$ of
+    \interior C = \{ x \in \R^{n} | \text{there exists an open neigbourhood $N$ of
       $x$ with $N \subseteq C$} \}
   \end{equation}
 
-  $bound C$ as
+  $\partial C$ (the boundary) as
   \begin{equation}
     \label{eq:25}
-    bound C = cl C \backslash int C
+    \partial C = \cl C \backslash \interior C
   \end{equation}
 \end{defn}
 
 \begin{remark}
   \begin{equation}
     \label{eq:26}
-    cl G = \cap_{\text{$S$ closed, $S \supseteq G$}} S
+    \cl G = \bigcap_{\text{$S$ closed, $S \supseteq G$}} S
   \end{equation}
 \end{remark}
 

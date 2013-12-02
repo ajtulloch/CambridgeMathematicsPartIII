@@ -13,30 +13,32 @@
   \label{defn:new_convex:1}
   $f: R^{n} \rightarrow \bar \R$.  Then the following are equivalent
   \begin{enumerate}
-  \item $f$ is lower semi continuous,
-  \item $epi(f)$ is closed $C$ in $\R^{n} \times \R$
-  \item $loevi(f) = \{ x \in \R^{n} | f(x) \leq \alpha \}$ are closed
+  \item \label{item:7} $f$ is lower semi continuous,
+  \item \label{item:8} $\epi f$ is closed $C$ in $\R^{n} \times \R$
+  \item \label{item:9} $\lev_{\alpha} f = \{ x \in \R^{n} | f(x) \leq \alpha \}$ are closed
     for all $\alpha \in \bar \R$
   \end{enumerate}
 \end{thm}
 
 \begin{proof}
-  1 => 2 take $(x^{k}, \alpha^{k}) \in epi(f) \rightarrow (x, \alpha)
-  \in \R^{n} \times \R$.  Then By 2.8 $f(x) \leq \liminf_{k
-    \rightarrow \infty} f(x^{k}) \leq liminf_{k \rightarrow \infty}
-  x^{k} = \alpha$ as $(x, \alpha) \in epi(f)$.
+  $(\ref{item:7} \rightarrow \ref{item:8})$ Take $(x^{k}, \alpha^{k})
+  \in \epi f \rightarrow (x, \alpha) \in \R^{n} \times \R$. Then By
+  2.8 $f(x) \leq \liminf_{k \rightarrow \infty} f(x^{k}) \leq
+  liminf_{k \rightarrow \infty} x^{k} = \alpha$ as $(x, \alpha) \in
+  \epi f$.
 
-  2 => 3 $epi(f)$ closed implies $epi(f) \cap (\R^{n} \times \{ a'
-  \})$ closed for all $\alpha' \in \R$, if and only if
+  $(\ref{item:8} \rightarrow \ref{item:9})$ $\epi f$ closed implies
+  $\epi f \cap (\R^{n} \times \{ a' \})$ closed for all $\alpha' \in
+  \R$, if and only if
   \begin{equation}
     \label{eq:7}
     \{ x \in \R^{n} | f(x) \leq \alpha' \}
   \end{equation} is closed for all $\alpha' \in \R$
-  If $\alpha' = \infty$, $lev_{\leq +\infty}f = \R^{n}$.
-  If $\alpha' = -\infty$, $lev_{\leq -\infty} f = \cap_{k \in \N}
-    lev_{\leq -k} f$ which is the intersection of closed sets.
+  If $\alpha' = \infty$, $\lev_{\leq +\infty}f = \R^{n}$.
+  If $\alpha' = -\infty$, $\lev_{\leq -\infty} f = \cap_{k \in \N}
+    \lev_{\leq -k} f$ which is the intersection of closed sets.
   
-  3 => 2 for $x^{j} \rightarrow x'$, take the subsequence $x^{k}
+  $(\ref{item:9} \rightarrow \ref{item:7})$ For $x^{j} \rightarrow x'$, take the subsequence $x^{k}
   \rightarrow x'$, with
   \begin{equation}
     \label{eq:8}
@@ -46,10 +48,10 @@
   if $c \in \R$, for all $K(\epsilon) = K'$ such that $f(x^{k}) \leq C
   + \epsilon$ for all $k > K'$. Then
 
-  $\Rightarrow x^{k} \in lev_{\leq C + \epsilon} f \Rightarrow x' \in
-  lev_{\leq C + \epsilon}$.
+  $\Rightarrow x^{k} \in \lev_{\leq C + \epsilon} f \Rightarrow x' \in
+  \lev_{\leq C + \epsilon}$.
 
-  Equivalently, $x' \in lev_{\leq C} f \Rightarrow f(x') \leq C =
+  Equivalently, $x' \in \lev_{\leq C} f \Rightarrow f(x') \leq C =
   \liminf{x \rightarrow x'} f(x)$.
 
   If $c = +\infty$, done - $f(x') \leq +\infty = \liminf$.
@@ -57,20 +59,24 @@
 \end{proof}
 
 
-$f(x) = x$ is lower semi-continuous, but does not have a minimizer.
+
+
+\begin{exmp}
+  \label{defn:new_convex:7}
+  $f(x) = x$ is lower semi-continuous, but does not have a minimizer.    
+\end{exmp}
+
 \begin{defn}
   \label{defn:new_convex:3}
   $f: R^{n} \rightarrow \bar \R$ is \textbf{level-bounded} if and only
-  if $lev_{\leq \alpha} f$ is bounded for all $\alpha \in \R$.
+  if $\lev_{\leq \alpha} f$ is bounded for all $\alpha \in \R$.
 
   This is also known as \textbf{coercivity}.
 \end{defn}
 
 \begin{exmp}
   \label{defn:new_convex:4}
-  $f(x) = x^{2}$ is level-bounded.
-
-  $f(x) = \frac{1}{|x|}$ is not level bounded.
+  $f(x) = x^{2}$ is level-bounded.  $f(x) = \frac{1}{|x|}$ is not level bounded.
 \end{exmp}
 
 \begin{thm}
@@ -86,7 +92,7 @@ $f(x) = x$ is lower semi-continuous, but does not have a minimizer.
 
 \begin{thm}
   \label{defn:new_convex:6}
-  $f: \R^{n} \rightarrow \bar \R$ is lower semincontiuous,
+  $f: \R^{n} \rightarrow \bar \R$ is lower-semicontinuous,
   level-bounded, and proper. Then $\inf_{x} f(x) \in (-\infty,
   +\infty)$ and $argmin f = \{ x | f(x) \leq inf f(x) \}$ is nonempty and compact.
 \end{thm}
@@ -94,17 +100,17 @@ $f(x) = x$ is lower semi-continuous, but does not have a minimizer.
 \begin{proof}
   \begin{align}
     \label{eq:9}
-    arg min f &= \{ x | f(x) \leq \inf_{x} f(x) \} \\
+    \argmin f &= \{ x | f(x) \leq \inf_{x} f(x) \} \\
     &= \{ x | f(x) \leq \inf f(x)  + \frac{1}{k}, \forall k \in \N \}
   \\
-  &= \cap_{k \in \N} lev_{\inf f + \frac{1}{k}} f
+  &= \cap_{k \in \N} \lev_{\inf f + \frac{1}{k}} f
 \end{align}
 
  If $\inf f$ is $-\infty$, just replace $\inf f + \frac{1}{k}$ by
  $\alpha$ with $\alpha > \infty$, and set $\alpha_{k} = -k, k \in \N$.
  
  These are bounded (by level-boundedness), closed (by f
- being lower semicontinous), and non-empty (since $\frac{1}{k} \geq
+ being lower semicontinuous), and non-empty (since $\frac{1}{k} \geq
  0$.).  Then these limit sets are compact, we can just take the limit
  of the left boundaries of the level sets, and construct the
  convergent subsequence that is contained in every level set.
@@ -115,17 +121,17 @@ $f(x) = x$ is lower semi-continuous, but does not have a minimizer.
 \end{proof}
 
 \begin{remark}
-  For Theorem \ref{defn:new_convex:6}, it suffices to have $lev_{\leq
+  For Theorem \ref{defn:new_convex:6}, it suffices to have $\lev_{\leq
     \alpha} f$ bounded and non-empty for at least one $\alpha \in \R$. 
 \end{remark}
 
-\begin{proposition}
+\begin{proposition} We have the following properties for lower semi continuity.
   \begin{enumerate}
-  \item If $f,g $ is lower semicontinous, then $f + g$ is lower semicontinous
-  \item IF $f$ is lower semicontinous, $\lambda \geq 0$, then
+  \item If $f,g $ is lower semicontinuous, then $f + g$ is lower semicontinuous
+  \item IF $f$ is lower semicontinuous, $\lambda \geq 0$, then
     $\lambda f$ is lower semicontinuous
   \item $f: \R^{n} \rightarrow \bar \R$ is lower semicontinuous, $g:
-    \R^{m} \rightarrow \R^{n}$ is continous, then $f \circ g$ is lower semicontinous.
+    \R^{m} \rightarrow \R^{n}$ is continuous, then $f \circ g$ is lower semicontinuous.
   \end{enumerate}
 \end{proposition}
 

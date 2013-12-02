@@ -58,7 +58,7 @@
   Let $C \subseteq \R^{n}$ be closed and convex.  Then
   \begin{equation}
     \label{eq:50}
-    C = \cap_{(b, \beta) s.t. c \subseteq H_{b, \beta}} H_{b, \beta}
+    C = \bigcap_{(b, \beta) s.t. c \subseteq H_{b, \beta}} H_{b, \beta}
   \end{equation} where
   \begin{equation}
     \label{eq:51}
@@ -98,10 +98,15 @@
 \end{defn}
 
 \begin{remark}
-  For $v \in \R^{n}$, $f^{\star}(v) = \sup \{ x \in \R^{n} \{ \langle
-  v, x \rangle - f(x) \} \Rightarrow f^{\star}(v) \geq \langle v, x
-  \rangle - f(x) \forall x \in \R^{n} \iff f(x) \geq \langle v, x
-  \rangle - f^{\star}(x) \forall x \in \R^n$.
+  For $v \in \R^{n}$, 
+  \begin{align}
+    \label{eq:126}
+    f^{\star}(v) &= \sup \{ x \in \R^{n} \{ \langle v, x \rangle - f(x)
+    \} \\
+    \Rightarrow f^{\star}(v) &\geq \langle v, x \rangle - f(x)
+    \forall x \in \R^{n} \iff f(x) \geq \langle v, x \rangle -
+    f^{\star}(x) \forall x \in \R^n.
+  \end{align}
 
   Thus $f^{\star}$ is the largest affine function with gradient $v$
   majorized by $f$.
@@ -162,7 +167,7 @@
   Applying the previous theorem,
   \begin{align}
     \label{eq:57}
-    \cl \con f(x) = \sup_{g \in \cl \con f, \text{$g$ affine}} g(x) \\
+    \cl \con f(x) &= \sup_{g \in \cl \con f, \text{$g$ affine}} g(x) \\
     &= \sup_{(v, \beta) \in \epi f^{\star}} \{ \langle v, x \rangle - \beta \}
   \\
     &= \sup_{(v, \beta) \in \epi f^{\star}} \{ \langle v, x \rangle -
@@ -294,15 +299,19 @@
   \end{equation}
 
   The set of closed convex cones is in one-to-one correspondence with
-  itself -
+  itself:
   \begin{align}
     \label{eq:67}
-    \delta_{K} \leftrightarrow \delta_{K^{\star}} \\
-    k^{\star} = \{ v \in \R^{n} | \langle v, x \rangle \leq 0 \forall
+    \delta_{K} &\leftrightarrow \delta_{K^{\star}} \\
+    K^{\star} &= \{ v \in \R^{n} | \IP{v, x} \leq 0 \forall
     x \in K \}
   \end{align}
-  and $x \in N_{K^{\star}}(v) \iff x \in K, v \in K^{\star}, \langle
-  x, v \rangle = 0 \iff v \in N_{K}(x)$.
+  and
+  \begin{align}
+    \label{eq:128}
+    x \in N_{K^{\star}}(v) &\iff x \in K, v \in K^{\star}, \\
+    \IP{x, v} = 0 &\iff v \in N_{K}(x)
+  \end{align}
 \end{proposition}
 
 \chapter{Duality in Optimization}

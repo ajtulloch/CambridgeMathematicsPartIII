@@ -1,5 +1,3 @@
-
-
 \chapter{Support Vector Machines}
 \label{cha:supp-vect-mach}
 
@@ -63,10 +61,10 @@ which can be rewritten as
 \end{align} such that
 \begin{align}
   \label{eq:94}
-  c \leq y^{i} ( \IP{\frac{w}{\| w \|}, x^{i}} + \frac{b}{\| w \|}) \\
-  \| w \| c \leq y^{i} (\I{w, x^{i}} + b) \\
+  c &\leq y^{i} \left( \IP{\frac{w}{\| w \|}, x^{i}} + \frac{b}{\| w
+      \|} \right) \\
+  \| w \| c &\leq y^{i} \left(\IP{w, x^{i}} + b \right) \\
 \end{align}
-
 or just
 \begin{align}
   \label{eq:95}
@@ -90,7 +88,7 @@ or just
     - e)
   \end{align}
 
-  The conjugeates are
+  The conjugates are
   \begin{align}
     \label{eq:98}
     k(w, b) = \frac{1}{2} \| w \|^{2} \\
@@ -145,8 +143,6 @@ mapping function $\phi$.  Then our decision function takes the form
   \label{eq:103}
   h_{\theta}(x) = \sign(\IP{\phi(x), w} + b)
 \end{align}
-
-
 
 
 %%% Local Variables: 

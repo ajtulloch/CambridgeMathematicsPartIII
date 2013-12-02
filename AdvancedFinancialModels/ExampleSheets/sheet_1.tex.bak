@@ -1,0 +1,197 @@
+
+\chapter{Example Sheet 1}
+\label{cha:example-sheet-1}
+
+\begin{enumerate}
+\item \label{item:1} Let $Y_{t}$ be a candidate state price density. Then $Y_{1}(t) =
+  [\alpha_{1}, \alpha_{2}, \alpha_{3}]$ must satisfy the requirement
+  that $Y_{t} P_{t}$ is a martingale, and $\alpha_{i} > 0$. Thus we
+  have the linear equations
+  \begin{align}
+    \label{eq:2}
+    4 = \frac{1}{4} \cdot \alpha_{1} \cdot 3 + \frac{1}{4} \cdot
+    \alpha_{2} \cdot 6 + \frac{1}{2} \cdot \alpha_{3} \cdot 6 \\
+    6 = \frac{1}{4} \cdot \alpha_{1} \cdot 9 + \frac{1}{4} \cdot
+    \alpha_{2} \cdot 8 + \frac{1}{2} \cdot \alpha_{3} \cdot 4
+  \end{align}
+  Solving these set of equations, we have the augmented matrix
+  \begin{equation}
+    \label{eq:4}
+    \begin{bmatrix}
+      3 & 6 & 12 & 16 \\
+      9 & 8 & 8  & 24 
+    \end{bmatrix}
+  \end{equation}
+  which has the set of solutions
+  \begin{align}
+    \label{eq:5}
+    z = t \\
+    y = \frac{12 - 14t}{5} \\
+    x = \frac{8 + 24t}{15}
+  \end{align} for $0 < t < \frac{5}{6}$.
+\item \label{item:2} Similar to above, we have the discount factor is unity, and so
+  we have to solve the augmented matrix
+  \begin{equation}
+    \label{eq:6}
+    \begin{bmatrix}
+      9 & 8 & 18 \\
+      6 & 10 & 21 \\
+      1 & 1 & 1 
+    \end{bmatrix}
+  \end{equation}
+
+  This has no solution, and thus there are no state price densities,
+  thus there are arbitrage opportunities in this market.
+\item \label{item:3} Following Girsanov's theorem, consider the process
+  \begin{equation}
+    \label{eq:7}
+    \tilde W_{t} = W_{t} - \int_{0}^{t} \alpha ds
+  \end{equation}
+  with $W_{t}$ a standard $\Prob$-Brownian motion. Then, under the measure
+  $\mathbb{Q}$ equivalent to $\Prob $ defined by
+  \begin{align}
+    \label{eq:9}
+    \frac{d \mathbb{Q}}{d \Prob} &= \exp \left( \int_{0}^{t} \alpha dW_{s} - \int_{0}^{t} \alpha^{2} ds \right) \\
+    &= \exp \left( t W_{s} - \frac{1}{2} t \alpha^{2} \right)
+  \end{align}, $\tilde W_{t}$ is a $\mathbb{Q}$-Brownian motion.
+
+  Thus, for $t = 1$, we have $W_{1}$ is a random vector with $N_{d}(0,
+  I)$ distribution, and under the change of measure given in the
+  question, $\tilde W_{1} = W_{1} - \alpha$ has a $N_{d}(0, I)$ under
+  $\mathbb{Q}$ as required.
+\item \label{item:4}
+\item \label{item:5}
+  \begin{enumerate}
+  \item Let $a$ be a trading strategy, and let $X$ represent the
+    discounted gains from the first period, and $Z$ be a state price
+    density Then the theorem gives that if no arbitrage trading
+    strategies exist, then a state price density exists.\sidenote{What
+    does the numeraire requirement imply?}
+  \item Assuming for a linearly independent set of vectors is
+    sufficient, as each condition is invariant when a linearly
+    independent set of random variables $X$ is replaced by the
+    transformation $Y = M X$ for arbitrary $M \in R^{m \times d}$.
+
+    If there exists a random variable $Z > 0$ a.s. such that $\E{Z
+      |X_{i}|} < \infty$ and $\E{Z X_{i}} = 0$, then $Y_{i} = \sum_{i}
+    \lambda_{i} X_{i}$ satisfies these conditions by linearity and the
+    trivial bound.
+
+    The precondition is more involved.  If $a \cdot Y = a \cdot (M X) \geq 0$ for
+    some $a$, then $(M^{T} a) \cdot X \geq 0$, and so $M^{T} a = 0$
+    a.s, and so $(M^{T} a) \cdot X = a \cdot Y = 0$ a.s.
+  \item 
+  \end{enumerate}
+  
+\item \label{item:6} First, some terminology. Consider a $n$-state,
+  $m$-asset single period market model.Let $S = (S_{ij}) \in \R^{m
+    \times n}$ be the discounted difference in value of the $i$-th
+  asset in the $j$-th state between the initial and first period.
+
+  Let $P = (P_{j}) \in \R^{n}$ be the market probability of the $j$-th
+  state.
+
+  Let $Y = (Y_{j}) \in \R^{n}$ be a candidate state price density for
+  our market model.
+
+  Let $H = (H_{i}) \in \R^{m}$ be a candidate arbitrage for our market
+  model.
+
+  By the first fundamental theorem of arbitrage pricing, we have
+  exactly one of two alternatives are true.
+  \begin{enumerate}
+  \item There exists a state price density - that is, there exists $Y' \in \R^{n}$
+    with $Y' > 0$ and $\E{Y'S} = 0$.
+
+  \item There exists an arbitrage - that is, there exists $H' \in \R^{m}$ with 
+    $(S^{T} H')_{i} \geq 0$ for all $1 \leq i \leq n$, and $(S^{T} H')_{i} > 0$ for
+    at least one $i$ with $P_{i} > 0$.
+  \end{enumerate}
+
+  Now, let $B = (B_{ij}) \in \R^{m \times n}$ be defined by
+  \begin{equation}
+    \label{eq:8}
+    B_{ij} = B_{ij} \times P_{j}
+  \end{equation}
+
+  The condition for existence of a state price density becomes
+  \begin{equation}
+    \label{eq:10}
+    \sum_{j=1}^{n} Y_{j} P_{j} S_{ij} = \sum_{j=1}^{n} B_{ij} Y_{j}
+  \end{equation}  for all $1 \leq i \leq m$.
+
+  The condition for the existence of an arbitrage becomes
+  \begin{equation}
+    \label{eq:11}
+    \sum_{i=1}^{m} H_{i} S_{ij} P_{j} = \sum_{i=1}^{m} H_{i} B_{ij}
+  \end{equation} for all $1 \leq j \leq n$.
+
+  Thus, we can restate the FTAP as
+  \begin{enumerate}
+  \item  There exists $Y \in \R^{n}$ with $Y_{i} > 0$ such that $BY
+    = 0$.
+  \item There exists $H \in \R^{m}$ with $(B^{T}H)_{i} \geq 0$ and
+    with $B^{T} H \neq 0$. 
+  \end{enumerate}
+  which is the required result.
+\item \label{item:7}
+\item \label{item:8}
+\item \label{item:9}
+\item \label{item:10}
+\item \label{item:11} Note that $Z_{t} = X_{t} - Y_{t}$ is a
+  martingale, and thus $|Z_{t}|$ is a submartingale (as it is
+  trivially bounded above by two integrable functions, and a convex
+  function of a martingale is a submartingale by Jensen's inequality).
+  Then for any $0 \leq t \leq T$, we have
+  \begin{align}
+    \label{eq:1}
+    0 &= \E{|X_{T} - Y_{T}| | \mathcal{F}_{t}} \\
+    &= \E{|Z_{T}| | \mathcal{F}_{t}} \\
+    &\geq |Z_{s}| \\
+    &\geq 0
+  \end{align} where the first line follows from $Z_{T} = 0$ almost
+  surely and the second follows from the submartingale property. Thus
+  the equalities are strict, and we have $Z_{t} = 0$ almost surely,
+  and so
+  \begin{equation}
+    \label{eq:3}
+    X_{t} = Y_{t}
+  \end{equation} almost surely.
+\item \label{item:12}  Note that on the sub-$\sigma$-algebra
+  $\mathcal{G}$, the Radon-Nikodym derivative of $\Q$ with respect to
+  $\Prob$ is the conditional expectation $\E{Z|\mathcal{G}}$.  This is
+  because, for arbitrary $A \in \mathcal{G}$,
+  \begin{align}
+    \label{eq:13}
+    \E{\E{Z | \mathcal{G}} \I{A}} &= \E{\E{Z\I{A} | \mathcal{G}}} \\
+    &= \E{Z\I{A}} \\
+    &= \mathbb{Q}(A)
+  \end{align} as required.
+
+  Now, we treat the problem in the question.  Let $A \in \mathcal{G}$.
+  Let $Y = \E{Z | \mathcal{G}}{\Prob}$.
+  Then 
+  \begin{align}
+    \label{eq:14}
+    \E{\I_{A} \E{ZX | \mathcal{G}}{\Prob}}{\Q} &= \E{\I_{A}Y \E{ZX |
+        \mathcal{G}}{\Prob}}{\Prob} \\
+    &= \E{\E{Y \I{A} ZX | \mathcal{G}}{\Prob}}{\Prob} \\
+    &= \E{Y \I{A} ZX}{\Prob} \\
+    &= \E{Y \I{A} X}{\Q} \\
+    &= \E{\I{A}\E{YX | \mathcal{G}}{\Q}}{\Q}
+  \end{align}
+  and as $A$ was arbitrary, we have that
+  \begin{align}
+    \label{eq:15}
+    \E{ZX | \mathcal{G}}{\Prob} &= \E{YX | \mathcal{G}}{\Q} \\
+    &= Y \E{X | \mathcal{G}}{\Q} \\
+    &= \E{X | \mathcal{G}}{\Q} \E{Z | \mathcal{G}}{\Prob}
+  \end{align}
+  which is sufficient to prove our required result.
+\item \label{item:13}
+\item \label{item:14}
+\end{enumerate}
+
+%%% Local Variables: 
+%%% TeX-master: "master""
+%%% End: 

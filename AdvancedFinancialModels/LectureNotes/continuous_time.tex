@@ -37,7 +37,6 @@ This can make a pricing theory quite boring!
   The Brownian motion exists (Weiner, 1923).
 \end{thm}
 
-
 Consider a filtration $(\mathcal{F}_{t})$ with the property that
 $W_{t} - W_{s}$ is independent of $\mathcal{F}_{s}$, $0 \leq s \leq
 t$. Our technical assumptions are usual conditions - $\mathcal{F}_{t}
@@ -233,7 +232,7 @@ dW_{s}$.  Note that $\E{X_{t}} = 0$ and $\E{X_{t}^{2}} = \int_{0}^{t}
 \begin{notation}
   \begin{equation}
     \label{eq:41}
-    \langle X \rangle_{t} = \int_{0}^{t} \alpha_{s} ds
+    \IP{ X }_{t} = \int_{0}^{t} \alpha_{s} ds
   \end{equation} is called the quadratic variation of $X$.
 \end{notation}
 
@@ -243,13 +242,13 @@ dW_{s}$.  Note that $\E{X_{t}} = 0$ and $\E{X_{t}^{2}} = \int_{0}^{t}
   \begin{equation}
     \label{eq:42}
     f(X_{t}) = f(X_{0}) + \int_{0}^{t} f'(X_{s}) dX_{s} + \frac{1}{2}
-    \int_{0}^{t} f''(X_{s}) d \langle X \rangle_{s}
+    \int_{0}^{t} f''(X_{s}) d \IP{ X }_{s}
   \end{equation}
 
   In differential form,
   \begin{equation}
     \label{eq:43}
-    df(X_{t}) = f'(X_{t}) dX_{t} + \frac{1}{2} f''(X_{t}) d\langle X \rangle_{t}
+    df(X_{t}) = f'(X_{t}) dX_{t} + \frac{1}{2} f''(X_{t}) d\IP{ X }_{t}
   \end{equation}
 \end{thm}
 
@@ -260,32 +259,33 @@ Morally, the idea is to take Taylor expansion around $f(X_{t})$.
   let $X, Y$ be \ito processes. Then the quadratic covariation
   \begin{align}
     \label{eq:44}
-    \langle X, Y \rangle_{t} &= \lim_{n \rightarrow \infty}
+    \IP{ X, Y }_{t} &= \lim_{n \rightarrow \infty}
     \sum_{k=1}^{n} (X_{\frac{tk}{n}} -
     X_{\frac{t(k-1)}{n}})(Y_{\frac{tk}{n}} -
     Y_{\frac{t(k-1)}{n}}) \\
-    &= \frac{1}{2} \langle X + Y \rangle_{t} - \langle X \rangle_{t} -
-    \langle Y \rangle_{t}
+    &= \frac{1}{2} \IP{ X + Y }_{t} - \IP{ X }_{t} -
+    \IP{ Y }_{t}
   \end{align}
 \end{thm}
 
 \begin{proposition}
+  The quadratic covariance satisfies the following properties:
   \begin{enumerate}
-  \item Bilinear, symmetric -
+  \item (Bilinear, symmetric)
     \begin{equation}
       \label{eq:45}
-      \langle aX + bY, Z \rangle = a \langle X, Z \rangle + b \langle
-      Y, Z \rangle = \langle Z, aX + bY \rangle
+      \IP{ aX + bY, Z } = a \IP{ X, Z } + b \IP {Y, Z} = \IP{ Z, aX + bY }
     \end{equation}
-  \item If $X_{t} = X_{0} + \int_{0}^{t} \beta_{s} ds$ then $\langle
-    X, Y \rangle_{t} = 0$ for any \ito process $Y$.
+  \item If $X_{t} = X_{0} + \int_{0}^{t} \beta_{s} ds$ then $\IP{X,
+      Y}_{t} = 0$ for any \ito process $Y$.
   \item Let $W^{1}, W^{2}$ be two independent Brownian motions.  Then
-    $\langle W^{1}, W^{2} \rangle_{t} = 0$.
+    $\IP{ W^{1}, W^{2} }_{t} = 0$.
   \item
     \begin{equation}
       \label{eq:46}
-      \langle \int_{0}^{t} \alpha_{s} dW_{s}, \int_{0}^{t} \beta_{s}
-      dW_{s} \rangle = \int_{0}^{t} \alpha_{s} \beta_{s} ds
+      \IP{\int_{0}^{t} \alpha_{s} dW_{s}, \int_{0}^{t} \beta_{s}
+        dW_{s}} = 
+      \int_{0}^{t} \alpha_{s} \beta_{s} ds
     \end{equation}
   \end{enumerate}
 \end{proposition}
@@ -314,6 +314,7 @@ be an $n$-dimensional predictable process and $\int_{0}^{t} \| a_{s}
 \end{equation}
 
 \begin{proposition}
+  $Z$ satisfies the following properties:
   \begin{enumerate}
   \item $Z$ is a local martinagle.
   \item $Z$ is a supermartingale.
@@ -328,15 +329,13 @@ be an $n$-dimensional predictable process and $\int_{0}^{t} \| a_{s}
   \begin{align}
     \label{eq:49}
     dZ_{t} = df(X_{t}) = f'(X_{t}) dX_{t} + \frac{1}{2} f''(X_{t})
-    d\langle X \rangle_{t}
+    d\IP{ X }_{t}
   \end{align}
   Note that
   \begin{align}
     \label{eq:50}
-    d \langle X \rangle_{t} &= d \langle \sum_{i=1}^{m} \int_{0}^{t}
-    \alpha_{s}^{2} dW_{s}^{2} \rangle_{t} \\
-    &= d \sum_{i, j} \langle \int \alpha_{s}^{i} dW^{i}_{s}, \int \alpha_{s}^{j}
-    dW^{j} \rangle_{t} \\
+    d \IP{ X }_{t} &= d \IP{\sum_{i=1}^{m} \int_{0}^{t} \alpha_{s}^{2} dW_{s}^{2}}_{t} \\
+    &= d \sum_{i, j} \IP{\int \alpha_{s}^{i} dW^{i}_{s}, \int \alpha_{s}^{j} dW^{j}}_{t} \\
     &= \sum (\alpha_{t}^{i})^{2} dt \\
     &= \| \alpha_{t} \|^{2} dt
   \end{align}
@@ -398,7 +397,7 @@ be an $n$-dimensional predictable process and $\int_{0}^{t} \| a_{s}
   \label{defn:continuous_time:17}
   Let $X$ be a continuous local martingale (in any filtration
   satisfying the usual conditions) such that its quadratic variation
-  $\langle X \rangle_{t} = t$.  Then $X$ is a Brownian motion.
+  $\IP{ X }_{t} = t$.  Then $X$ is a Brownian motion.
 \end{thm}
 
 
@@ -422,7 +421,7 @@ The setup is as follows:
   \label{defn:continuous_time:18}
   A self-financing investment/consumption strategy $(H, c)$ is a pair
   of predictable processes such that $c_{t} \geq 0$ for all $t$ ,
-  $\int_{0}^{t} \sum (H_{s}^{i})^{2} d \langle P^{i} \rangle>_{s} <
+  $\int_{0}^{t} \sum (H_{s}^{i})^{2} d \IP{ P^{i} }>_{s} <
   \infty$ for all $t$, and
   \begin{equation}
     \label{eq:56}
@@ -460,7 +459,7 @@ Consider
 Then
 \begin{align}
   \label{eq:58}
-  \langle Z \rangle_{u} = \int_{0}^{f^{-1}(u)} f'(s) ds = u
+  \IP{ Z }_{u} = \int_{0}^{f^{-1}(u)} f'(s) ds = u
 \end{align} which implies $Z$ is a Brownian motion by Levy's
 characterization.  Let $\tau = \in \{ u \geq 0 : Z_{u} > K \}$ where
 $K > 0$ is a constant.  Let $\pi_{t} = \sqrt{f'(t)} \I{t \leq
@@ -532,17 +531,16 @@ integral, but $\E{X_{1}} - K \neq X_{0} = 0$.
   Since $dX = H \cdot dP - c dt$, then
   \begin{align}
     \label{eq:61}
-    d \langle X, Y \rangle = \sum_{i=1}^{n} h^{i} d \langle P^{i},
-    Y^{i} \rangle
+    d \IP{ X, Y } = \sum_{i=1}^{n} h^{i} d \IP{P^{i}, Y^{i}}
   \end{align}
 
   By \ito's formula,
   \begin{align}
     \label{eq:62}
     d(XY) &= XdY + YdX + d<X, Y>  \\
-    &= H \cdot P dY + Y(H \cdot dP - c dt) + \sum H^{i} d \langle
-    P^{i}, Y^{i} \rangle \\
-    &= \sum H^{i}(P^{i} dY + Y dP^{i} + d \langle P^{i}, Y \rangle) -
+    &= H \cdot P dY + Y(H \cdot dP - c dt) + \sum H^{i} d \IP{P^{i},
+      Y^{i}} \\
+    &= \sum H^{i}(P^{i} dY + Y dP^{i} + d \IP{ P^{i}, Y }) -
     Y c dt \\
     &= \sum H^{i} d(P^{i} Y) - Yc dt
   \end{align}
@@ -577,7 +575,7 @@ integral, but $\E{X_{1}} - K \neq X_{0} = 0$.
 \begin{proof}
   \begin{align}
     \label{eq:63}
-    \int_{0}^{t} H_{s} \cdot d(X_{s} P_{s}) = Y_{t} X_{t} - Y_{0}
+    \int_{0}^{t} H_{s} \cdot d(X_{s} P_{s}) &= Y_{t} X_{t} - Y_{0}
     X_{0} + \int_{0}^{t} Y_{s} c_{s} ds \\
     &\geq -Y_{t} L_{t} - Y_{0} X_{0}
   \end{align}  if $(H, c)$ is $L$-admissible. and from the lemma.
@@ -712,17 +710,15 @@ S_{i}(\mu^{i}_{t} dt + \sum_{j=1}^{m} \sigma^{ij}_{t} dW^{j}_{t})$.
     \label{eq:75}
     d(Y_{t} B_{t}) = -Y_{t} B_{t} \lambda_{t} \cdot dW_{t}
   \end{align} is a local martingale,
-  \begin{multline}
-    \label{eq:76}
-    d(Y_{t} S_{t}^{i}) = Y_{t}S_{t}^{i}(\mu^{i}_{t} + \sum \sigma^{ij}
-    dW^{j}) + YS^{i}(-r dt - \sum \lambda^{j} dW^{j}) \\
-    - Y S^{i} \sum \sigma^{ij} \lambda^{j} dt
-  \end{multline}
-  \begin{multline}
+
+  \begin{align}
     \label{eq:155}
-    d(YS^{i}) = YS^{i}((\sigma^{ij} - \lambda) dW + (\mu^{i} - r -
+    d(Y_{t} S_{t}^{i}) &= Y_{t}S_{t}^{i}(\mu^{i}_{t} + \sum \sigma^{ij}
+    dW^{j}) + YS^{i}(-r dt - \sum \lambda^{j} dW^{j}) - Y S^{i} \sum
+    \sigma^{ij} \lambda^{j} dt \\
+    d(YS^{i}) &= YS^{i}((\sigma^{ij} - \lambda) dW + (\mu^{i} - r -
     (\sigma \lambda)^{i} dt))
-  \end{multline}
+  \end{align}
 
   Now, if the filtration is generated by $W$, then all positive local
   martingales $M$ are of the form (by the martingale representation
@@ -837,8 +833,6 @@ an equivalent martingale measure.
     \E{Y_{T}\xi_{T}} = \E{Y_{T} \tilde X_{T}} \leq Y_{0} \tilde X_{0}
   \end{align}
 \end{proof}
-
-
 
 %%% Local Variables:
 %%% mode: latex
