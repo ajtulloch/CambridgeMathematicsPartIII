@@ -59,7 +59,7 @@ Then $B_t = B_{0} e^{rt}$, $S_{t} = S_{0} e^{(\mu -
   \lambda^{2}{2})t - \lambda W_{t}}$ is the unique state price density
 with $Y_{0} = 1$, where $\lambda = \frac{\mu - r}{\sigma}$.
 
-Our goal is to replicate a Europena claim with payout $\xi_{T} =
+Our goal is to replicate a European claim with payout $\xi_{T} =
 g(S_{T})$ where $g \geq 0$ and suitably integrable.  By our
 replication theorem, there exists a 0-admissible strategy $H$ such
 that $X_{t}(H) = \frac{1}{Y_{t}} \E{Y_{T} g(S_{T}) |
@@ -364,7 +364,7 @@ moment generating function of log $S_{t}$, with $\theta = p + iq$, $0
   \end{align}
   which can be shown via contour integration.
 
-  Let $\gamma_{R}$ be the semicircle of radius $R$ above the $x$-axis
+  Let $\gamma_{R}$ be the semi-circle of radius $R$ above the $x$-axis
   in the complex plane. Then
   \begin{align}
     \label{eq:119}
@@ -608,7 +608,7 @@ We need to show that the $V$ we found is bounded.
   \begin{align}
     \label{eq:142}
     V(S) = AS + BS^{-2r/\sigma^{2}}
-  \end{align} with the bounardy condition $V(q) = (K - q)^{+}$.
+  \end{align} with the boundary condition $V(q) = (K - q)^{+}$.
 
   Suppose we let $q$ be a parameter of the stopping rule, work out the
   value and optimize over $q$. The value is
@@ -629,7 +629,7 @@ We need to show that the $V$ we found is bounded.
   \frac{\partial}{\partial S}(K - S)|_{s=q}$.
 
   It can be shown that $\sup_{0 \leq \tau \leq T} \E{e^{-r \tau}
-    g(S_{\tau})} \leq \min_{M \in \mathcal{M}_{0}} \E{\sup_{...}}$ \todo{WTF?}
+    g(S_{\tau})} \leq \min_{M \in \mathcal{M}_{0}} \E{\sup_{...}}$ \todo{Fill in from lecture notes.?}
 \end{exmp}
 
 

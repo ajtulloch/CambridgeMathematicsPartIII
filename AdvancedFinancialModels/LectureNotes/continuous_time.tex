@@ -316,7 +316,7 @@ be an $n$-dimensional predictable process and $\int_{0}^{t} \| a_{s}
 \begin{proposition}
   $Z$ satisfies the following properties:
   \begin{enumerate}
-  \item $Z$ is a local martinagle.
+  \item $Z$ is a local martingale.
   \item $Z$ is a supermartingale.
   \item If $\E{Z_{T}} = 1$ for some $T > 0$ (non-random), then
     $(Z_{t})_{0 \leq t \leq T}$ is a true martingale.
@@ -358,7 +358,7 @@ be an $n$-dimensional predictable process and $\int_{0}^{t} \| a_{s}
   $Z_{t} > 0$ almost surely, so non-negative local martingales are
   supermartingales by Fatou's lemma.
 
-  $Z$ is a supermartinagle and $\E{Z_{T}} = Z_{0}$, and so $(Z_{t})_{0
+  $Z$ is a supermartingale and $\E{Z_{T}} = Z_{0}$, and so $(Z_{t})_{0
   \leq t \leq T}$ is a martingale (pigeonhole principle).
 \end{proof}
 
@@ -379,7 +379,7 @@ be an $n$-dimensional predictable process and $\int_{0}^{t} \| a_{s}
   Let $W$ be an $m$-dimensional Brownian motion generating the
   filtration $(\mathcal{F}_{t})_{t \geq 0}$.
   Let $X$ be a continuous local martingale.  Then there exists a
-  predictiable $\alpha$ with $\int_{0}^{t} \| \alpha_{s} \|^{2} ds <
+  predictable $\alpha$ with $\int_{0}^{t} \| \alpha_{s} \|^{2} ds <
   \infty$ almost surely for all $t$ such that $X_{t} = X_{0} +
   \int_{0}^{t} \alpha_{s} dW_{s}$.
 
@@ -566,7 +566,7 @@ integral, but $\E{X_{1}} - K \neq X_{0} = 0$.
 \begin{thm}
   \label{defn:continuous_time:26}
   If there exists a state price density $Y$ such that $YL$ is of class
-  $D$ locally, then there are no $L$-admissible arbitrages.
+  $D$ locally, then there are no $L$-admissible .
 
   Class $D$ locally means $\{ \text{$Z_{\tau \wedge t}$ - $\tau$ a
     stopping time is $UI \forall t \geq 0$} \}$.
@@ -654,7 +654,7 @@ surely - e.g. the price of a numeraire.
 
 \begin{lem}
   If $X_{t}= \phi_{t} N_{t} + \pi_{t} \cdot S_{t}$ (i.e $(\psi, \pi)$
-  is a self-financing pure investment stratey), then
+  is a self-financing pure investment strategy), then
   \begin{equation}
     \label{eq:71}
     d\frac{X_{t}}{N_{t}} = \pi_{t} d \frac{S_{t}}{N_{t}}.
@@ -667,10 +667,10 @@ surely - e.g. the price of a numeraire.
 \end{proof}
 
 \begin{proof}[Proof of theorem]
-  If $\Q$ is an EMM, $X$ is a $\Q$-local martinagle, since it is the
+  If $\Q$ is an EMM, $X$ is a $\Q$-local martingale, since it is the
   stochastic integral with respect to the $Q$-local martingale
   $\frac{S}{N}$.  As $\frac{X_{t} + L_{t}}{N_{t}} \geq 0$, we can
-  apply Fatao's lemma as before, obtaining
+  apply Fatau's lemma as before, obtaining
   \begin{align}
     \label{eq:72}
     \E{\frac{X_{T}}{N_{T}}}{Q} \leq \frac{X_{0}}{N_{0}}.
@@ -776,7 +776,7 @@ an equivalent martingale measure.
 
 \begin{proof}
   Let $M_{t} = \E{Y_{T} \xi_{T} | \mathcal{F}_{t}}$.  This is a
-  martingale.  We show that there eixsts $H$ such that $X_{t}^{H} =
+  martingale.  We show that there exists $H$ such that $X_{t}^{H} =
   \frac{M_{t}}{Y_{t}}$for all $0 \leq t \leq T$.  By the martingale
   representation theorem, there exists a $d$-dimensional predictable
   process $\alpha$ such that
@@ -827,7 +827,7 @@ an equivalent martingale measure.
     \E{Y_{T \wedge \tau_{n}} L_{T \wedge L_{n}}} \rightarrow \E{Y_{T}
       L_{T}}
   \end{align} by uniform integrability assumption. Therefore $Y \tilde
-  X$ is a supermartinagle by Fatau's lemma, and thus
+  X$ is a supermartingale by Fatau's lemma, and thus
   \begin{align}
     \label{eq:85}
     \E{Y_{T}\xi_{T}} = \E{Y_{T} \tilde X_{T}} \leq Y_{0} \tilde X_{0}
