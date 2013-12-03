@@ -1,7 +1,5 @@
-
 \chapter{High-Dimensional Statistics}
 \label{cha:high-dimens-stat}
-
 
 Consider a functional form
 \begin{equation}
@@ -735,7 +733,7 @@ Thus $\E{\hat \Sigma} = I_{p}$, the identity matrix.
       \end{align}
     \end{proof}
 
-    In \eqref{eq:167} we get (with $z = t+ c_{0} k$)
+    In \eqref{eq:167} we get (with $z = t + c_{0} k$)
     \begin{align}
       \label{eq:181}
       2 N(\frac{1}{3}) e^{-t} e^{c_{0} k} \leq 2e^{-t} (3A)^{k}
@@ -759,9 +757,112 @@ Thus $\E{\hat \Sigma} = I_{p}$, the identity matrix.
   \in B_{0}(k)$, as long as $\frac{k \log p}{n} \rightarrow 0$. This
   corresponds to the ``true'' sparse model being of dimension $\leq
   n$.
-
-  
 \end{remark}
+
+\begin{remark}
+  Theorem 6 (in the lecture notes) holds as well if the $(X_{ij})$'s
+  are \textbf{sub}-Gaussian in that they satisfy the tail estimate
+  \begin{align}
+    \label{eq:184}
+    \Prob{|X_{ij}| > u} \leq Ce^{-\frac{u^{2}}{2 \sigma^{2}}},
+  \end{align} for some constants $C, \sigma^{2} > 0$.  To prove this,
+  one replaces the concentration inequality for squared Gaussians by
+  the Bernstein's inequality for sub-exponential random variables (see
+  B\"uhlmann and van der Vaart for the inequality).
+\end{remark}
+
+\begin{remark}
+  We see the above proof generalizes to correlated designs such that
+  \begin{align}
+    \label{eq:185}
+    \frac{\E{X^{T} X}{n}} = \Sigma
+  \end{align} whee $\Sigma$ is any $\ \times p$ matrix with
+  $\lambda_{\text{min}}(\Sigma)$ bounded away from zero.
+\end{remark}
+
+
+\section{Inference with the LASSO}
+\label{sec:inference-with-lasso}
+
+The construction of a confidence set for $\theta$ is an obvious task
+One construction that can be used is based on \textbf{unbiased risk
+  estimation} (and sample splitting).
+
+Split the sample index set $I$ into two subsets $I_{1}, I_{2}$ of
+approximately equal size, compute $\tilde \theta^{(1)}_{LASSO}$ based
+on $I_{1}$, and let $Y^{(2)}, X^{(2)}$ be the observations from
+$I_{2}$. Then compute
+\begin{align}
+  \label{eq:186}
+  (Y^{(2)} - X^{(2)} \tilde \theta^{(1)}_{LASSO})^{T} (Y^{(2)} -
+  X^{(2)} \tilde \theta^{(1)}_{LASSO}) - 1 + \frac{2 Z_{\alpha}}{\sqrt{n}} \equiv \hat R_{n}
+\end{align}
+
+
+where $Z_{\alpha}$ are the $1-\alpha$ quantiles of a $N(0,
+1)$-distribution.
+
+Our confidence set is then
+\begin{align}
+  \label{eq:187}
+  C = \{ \theta \in \R^{p} | \| \theta - \tilde \theta_{LASSO}^{(1)}
+  \|_{2} \leq \hat R_{n} \}
+\end{align} which satisfies
+\begin{align}
+  \label{eq:188}
+  \lim_{n, p \rightarrow \infty} \inf_{\theta \in B_{0}(h)}
+  \Prob_{\theta}(\theta \in C_{n}) \geq 1 - \alpha
+\end{align} for all $k$ such that $\frac{k \log p}{n} \rightarrow 0$.
+
+One would want
+\begin{align}
+  \label{eq:189}
+  \sup_{\theta \in B_{0}(k)} \mathbb{E}_{\theta}
+  |\underbrace{C_{n}}_{\text{$l^{2}$ diameter of $C_{n}$}}|_{2}^{2}
+  \lesssim \frac{k}{n} \log p
+\end{align} so that the confidence interval reflects the accuracy of
+estimation of $\tilde \theta_{LASSO}$.
+
+One can show
+\begin{align}
+  \label{eq:190}
+  \mathbb{E}_{\theta} | C_{n} |^{2} \lesssim \frac{k}{n} \log p +
+  \frac{1}{\sqrt{n}},
+\end{align} which gives the result that
+\begin{align}
+  \label{eq:191}
+  \frac{k}{n} \log p \gg \frac{1}{\sqrt{n}} \iff k \log p \gg \sqrt{n}.
+\end{align}
+
+Uniformly in $B_{0}(k)$, no further improvement is
+possible.\footnote{An information theoretic bound.}
+
+\chapter{Conclusion}
+\label{cha:conclusion}
+
+\section{Outlook on Nonparameterics}
+\label{sec:outl-nonp}
+
+What if we relax our parametric assumption on $p$?
+
+\begin{enumerate}
+\item We have $X_{1}, \dots, X_{n} \sim^{iid} p$, where we can
+  parameterize $p$ by cumulative distribution functions or probability
+  densities.
+\item We have $Y_{i} = f(X_{i}) + \epsilon_{i}$, with $\epsilon_{i}
+  \sim N(0, I)$, with nothing known about $f$.
+\end{enumerate}
+
+\section{Relevant previous Tripos questions}
+\label{sec:relev-prev-trip}
+
+\begin{enumerate}
+\item 2013 - 1, 2
+\item 2012 - 1, 2
+\item 2011 - 1, 3, 4
+\item 2010 - 1, 2
+\item 2009 - 1, 2
+\end{enumerate}
 
 %%% Local Variables: 
 %%% mode: latex
