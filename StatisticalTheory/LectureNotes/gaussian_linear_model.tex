@@ -31,13 +31,13 @@ compute the maximum likelihood estimate.
   \end{align} so the log likelihood is
   \begin{align}
     \label{eq:100}
-    l_{n}(\theta, \sigma^{2}) = -\frac{n}{2} \log 2 \pi \sigma^{2} -
+    l_{n}(\theta, \sigma^{2}) &= -\frac{n}{2} \log 2 \pi \sigma^{2} -
     \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n}(Y_{i}  - \sum_{i=1}^{p}
     \theta_{j} X_{ij})^{2} \\
-    \frac{\partial}{\partial \theta_{j}} l_{n}(\theta, \sigma^{2}) = -
+    \frac{\partial}{\partial \theta_{j}} l_{n}(\theta, \sigma^{2}) &= -
     \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n} 2(Y_{i} - \sum_{j=1}^{p}
     \theta_{j} X_{ij})(-X_{ij}) \\
-    \frac{\partial}{\partial (\sigma^{2})} l_{n}(\theta, \sigma^{2}) =
+    \frac{\partial}{\partial (\sigma^{2})} l_{n}(\theta, \sigma^{2}) &=
     - \frac{n}{2} \frac{1}{\sigma^{2}} + \frac{1}{\sigma^{4}}
     \sum_{i=1}^{n} \sum_{i=1}^{n} (Y_{i} - \sum_{i=1}^{p} \theta_{j} X_{ij})^{2}
   \end{align}
@@ -116,7 +116,7 @@ the model $p$, since
   &= \E{\tr(\epsilon^{T}P\epsilon)} \\
   &= \E{\tr(P \epsilon \epsilon^{T})} \\
   &= \tr(P \E{\epsilon \epsilon^{T}}) \\
-  &= \sigma^{2} \tr(P)
+  &= \sigma^{2} \tr(P) \\
   &= \sigma^{2} \tr(X (X^{T} X)^{-1} X^{T}) \\
   &= \sigma^{2} p
 \end{align} since $PY = PX\theta + P \epsilon = X \theta + P\epsilon$,

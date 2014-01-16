@@ -273,15 +273,15 @@ solutions.\sidenote{Exercise sheet}
   \begin{align}
     \label{eq:132}
     \frac{2}{n} \| X(\tilde \theta - \theta^{0})\|_{2}^{2} + \lambda
-    \| \tilde \theta - \theta_{S_{0}}^{0} \|_{1} = \frac{2}{n} \|
+    \| \tilde \theta - \theta_{S_{0}}^{0} \|_{1} &= \frac{2}{n} \|
     X(\tilde \theta - \theta^{0}) \|_{2}^{2} + \lambda \| \tilde
     \theta_{S_{0}^{c}} \|_{1} + \lambda \| \tilde \theta_{S_{0}} -
     \theta^{0}_{S_{0}} \|_{1} \\
-    \leq 4 \lambda \| \tilde \theta_{S_{0}} - \theta_{S_{0}}^{0}
+    &\leq 4 \lambda \| \tilde \theta_{S_{0}} - \theta_{S_{0}}^{0}
     \|_{1} \\
-    \leq 4 \lambda \sqrt{r_{0} k}(\tilde \theta_{S_{0}} -
+    &\leq 4 \lambda \sqrt{r_{0} k}(\tilde \theta_{S_{0}} -
     \theta^{0})^{T} \hat \sigma (\tilde \theta_{S_{0}} - \theta^{0}) \\
-    = 4 \lambda \sqrt{r_{0} k } \frac{1}{n} \| X(\tilde \theta_{S_{0}}
+    &= 4 \lambda \sqrt{r_{0} k } \frac{1}{n} \| X(\tilde \theta_{S_{0}}
     - \theta^{0}) \\
     &\leq 4 \lambda^{2} r_{0} k + \frac{1}{n} \| X(\tilde
     \theta_{S_{0}} - \theta^{0}) \|_{2}^{2}
@@ -297,7 +297,7 @@ solutions.\sidenote{Exercise sheet}
 
 \begin{remark}[Remarks on Theorem 6 in Lecture Notes]
   \begin{enumerate}
-  \item Using $\E{X} = = \int_{0}^{\infty}P(X > u) du$ and if $\beta =
+  \item Using $\E{X} = \int_{0}^{\infty}P(X > u) du$ and if $\beta =
     0$ the result of Theorem 6 be ``integrated'' to give a risk bound
     \begin{align}
       \label{eq:134}
@@ -319,11 +319,11 @@ solutions.\sidenote{Exercise sheet}
 About condition~\eqref{eq:119}:
 \begin{align}
   \label{eq:137}
-  \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1}^{2} \leq k r_{0}
+  \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1}^{2} &\leq k r_{0}
   (\tilde \theta - \theta^{0})^{T} \hat \Sigma (\tilde \theta -
   \theta^{0}) \\
   &= k r_{0} \frac{1}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} \\
-  \hat \Sigma = \frac{X^{T} X}{n}
+  \hat \Sigma &= \frac{X^{T} X}{n}
 \end{align}
 
 It suffices to check~\eqref{eq:119} with $\tilde \theta$ replaced with

@@ -90,6 +90,159 @@ Alternatively, we have
 \end{align} and so the forward rate is such that the claim with payout
 $f(t, T) - r_{T}$ has price 0 at time $T$.
 
+\todo{Fill in missing lecture from Monday 2 December}
+
+There are two approaches to bond market pricing:
+
+\begin{enumerate}
+\item Let $(r_{t})_{t \geq 0}$ be fundamental, derive everything else:
+  $f(t, T)$, etc.
+\item Model $(f(t, T))_{0 \leq t \leq T}$ directly - the
+  \citet{heath1992bond} approach.
+\end{enumerate}
+
+\section{The \citet{heath1992bond} Model}
+\label{sec:citetheath1992bond}
+
+\begin{thm}
+  \label{defn:bond_markets:7}
+  Suppose $df(t, T) = a(t, T) dt + \sigma(t, T) \cdot d\hat W_{t}$ for
+  a $d$-dimensional Brownian motion $\hat W$ where $\sigma(t, T)$ is
+  suitably measurable and integrable, and
+  \begin{align}
+    \label{eq:76}
+    a(t, T) = \sigma(t, T) \cdot \int_{t}^{T} \sigma(t, u) du
+  \end{align}
+
+  Define $r_{t} = f(t, t)$ and $P(t, T) = e^{-\int_{t}^{T} f(t, u)
+    du}$. Then
+  \begin{align}
+    \label{eq:157}
+    \left( e^{-\int_{0}^{t} r_{s} ds} P(t, T) \right)_{0 \leq t \leq T}
+  \end{align} is a local martingale.
+\end{thm}
+
+
+\begin{remark}
+  \begin{align}
+    \label{eq:158}
+    f(t, T) = f(0, T) + \int_{0}^{t} a(s, T) ds + \int_{0}^{t}
+    \sigma(s, T) \cdot d\hat W_{s}.
+  \end{align}
+\end{remark}
+
+\begin{proof}
+  Recall that if $d \log M_{t} = -\frac{|b_{t}|^{2}}{2} dt + b_{t}
+  \cdot d \hat W_{t}$, then $M$ is a local martingale if and only if
+  $M_{t} = M_{0} e^{-\frac{1}[2] \int_{0}^{t} |b_{s}|^{2} ds +
+    \int_{0}^{t} b_{s} \cdot d \hat W_{s}}$.
+
+  By differentiation, we have
+  \begin{align}
+    \label{eq:159}
+    d \left( - \int_{0}^{t} r_{s} ds - \int_{t}^{T} f(t, u) du \right)
+    &=
+    -r_{t} dt + f(t, t) dt - \int_{t}^{T} df(t, u) du \\
+    &= - (\int_{t}^{T} a(t, u) du) dt - (\int_{t}^{T} \sigma(t, u) du)
+    \cdot d \hat W_{t}.
+  \end{align}
+  noting that
+  \begin{align}
+    \label{eq:160}
+    \int_{t}^{T} a(t, u) du = \frac{1}{2} \| \int_{t}^{T} \sigma(t, u)
+    du \|^{2} 
+  \end{align} gives the required result.
+\end{proof}
+
+\begin{exmp}[\citet{ho1986term}]
+  \label{defn:bond_markets:8}
+  Assume $d = 1$, $\sigma(t, T) = \sigma_{0}$ constant. Then
+  \begin{align}
+    \label{eq:161}
+    df(t, T) &= ((T - t) \sigma_{0}^{2}) dt + \sigma_{0} d \hat W_{t}
+    \\
+    f(t, T) &= f(0, T) + \int_{0}^{t} (T - s) \sigma_{0}^{2} ds +
+    \sigma_{0} d \hat W_{t} \\
+    r_{t} &= f(0, t) + \frac{1}{2} \sigma_{0}^{2} t^{2} + \sigma_{0}
+    \hat W_{t}
+  \end{align}
+\end{exmp}
+
+\begin{exmp}[\citet{hull1990pricing}]
+  \label{defn:bond_markets:9}
+  Again, assume $d = 1$, $\sigma(t, T) = \sigma_{0} e^{- \lambda(T - t)}$.
+  \begin{align}
+    \label{eq:162}
+    df(t, T) &= \sigma_{0}^{2} e^{-\lambda(T - t)} (1 - e^{- \lambda(T
+      - t)}) dt + \sigma_{0} e^{- \lambda (T - t)} d \hat W_{t} \\
+    dr_{t} &= \lambda \left( \frac{f'_{0}(t)}{\lambda} + f_{0}(t) +
+      \frac{\sigma_{0}^{2}}{2 \lambda^{2}}(1 - e^{-\lambda t}) - r_{t}
+    \right) + \sigma_{0} d \hat W_{t}.
+  \end{align}
+\end{exmp}
+
+\begin{exmp}[\citet{kennedy1997characterizing}]
+  \label{defn:bond_markets:10}
+  This is a Gaussian random field model.  Suppose $\sigma(t, T)$ is
+  not random, so
+  \begin{align}
+    \label{eq:163}
+    f(t, T) = f(0, T) + \int_{0}^{T} a(s, T) ds + \int_{0}^{t}
+    \sigma(s, T) d \hat W_{s}
+  \end{align} is Gaussian.  Then
+  \begin{align}
+    \label{eq:164}
+    \E{f(t, T)}{\Q} = f(0, T) + \int_{0}^{t} a(s, T) ds \\
+    \Cov{f(s, S)}{f(t, T)} = \int_{0}^{s \wedge t} \sigma(u, S) \cdot
+    \sigma(u, T) du
+  \end{align}
+
+  Turning this around, we can model 
+
+  \begin{align}
+    \label{eq:167}
+    (f(t, T))_{0 \leq t \leq T}
+  \end{align}
+  as a Gaussian random field with
+  \begin{align}
+    \label{eq:165}
+    \Cov{f(s, S)}{f(t, T)} &= c_{s \wedge t}(S, T) \\
+    \E{f(t, T)} &= f(0, T) + \int_{0}^{T} c_{s \wedge t}(s, T) ds,
+  \end{align} and thus there is no need to introduce a Brownian
+  motion.  For instance,
+  \begin{align}
+    \label{eq:168}
+    d \IP{f(t, S), f(t, T)} &= \sigma(t, S) \cdot \sigma(t, T) dt \\
+    &= \sigma_{0} e^{-\beta|T - S|}
+  \end{align} and so we have an exponentially decaying correlation
+  between forward rates of different maturities.
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:bond_markets:11}
+  The HJM equation
+  \begin{align}
+    \label{eq:169}
+    df(t, T) &= a(t, T) dt + \sigma(t, T) d W_{t} \\
+    T = t + x, f_{t}(x) = f(t, t + x) \\
+    df_{t}(x) = (\frac{\partial f}{\partial x} + a_{t}(x)) dt +
+    \sigma_{t}(x) dW_{t} 
+  \end{align}
+
+  Fix a separable Hilbert space $F = \{ f: \mathbb{R}_{+} \rightarrow
+  \R \}$.  Then (dropping the $x$),
+  \begin{align}
+    \label{eq:170}
+    df_{t} = \left(A f_{t} + \alpha_{t} \right) dt + \sigma_{t} dW_{t}
+  \end{align}
+  can be interpreted as an evolution equation in this function space.
+  In the simplest case, $\sigma_{t}$ is a constant vector $F \otimes
+  \R^{d}$, $\alpha_{t}$ is a constant vector in $F$, then $(f_{t})_{t
+    \geq 0}$ is an $F$-valued Ornstein-Uhlenbeck process.
+
+  We can apply techniques from statistics (e.g. PCA) if this model has
+  an invariant measure --- shown in early 2000's.
+\end{exmp}
 
 %%% Local Variables: 
 %%% mode: latex
