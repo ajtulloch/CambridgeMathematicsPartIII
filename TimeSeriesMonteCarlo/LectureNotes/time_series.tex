@@ -4,8 +4,8 @@
 
 References: 
 \begin{enumerate}
-\item Brockwell \& Davis --- Time Series Theory and Methods
-\item Brockwell \& Davis --- Introduction to Time Series and Forecasting
+\item \citet{brockwell2009time}
+\item \citet{brockwell2002introduction}
 \end{enumerate}
 
 \begin{defn}[Time Series]
@@ -16,6 +16,149 @@ References:
   In a continuous time series, $T_{0}$ is continuous.  In a discrete
   time series, $T_{0}$ is discrete.
 \end{defn}
+
+\begin{defn}[Time Series Model]
+  \label{defn:time_series:2}
+  Specification of joint distribution (or only means and covariances)
+  of a sequence of random variables of which $X_{t}$ is a realization.
+\end{defn}
+
+\begin{remark}
+  A complete probability model specifies the joint distribution of all
+  the random variables $X_{t}$, $t \in T$.
+
+  This often requires too many estimators, so we only specify the
+  first and second order moments.
+\end{remark}
+
+\begin{exmp}
+  \label{defn:time_series:3}
+  When $X_{t}$ is multivariate IID -
+  \begin{equation}
+    \label{eq:1}
+    \Prob{X_{1} = x_{1}, \dots, X_{n} = x_{n}} = \prod_{i=1}^{n} F(x_{i})
+  \end{equation}
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:time_series:4}
+  First order moving average model
+\end{exmp}
+
+\begin{exmp}
+  \label{defn:time_series:5}
+  Trend and seasonal component.
+\end{exmp}
+
+\section{Stationary Processes}
+\label{sec:stationary-processes}
+
+Intuitively, a stationary time series is one where the joint
+distribution is invariant to time shifts.
+
+\begin{defn}[Mean, Covariance function]
+  \label{defn:time_series:7}
+  Define the mean function $\mu_{X}(t) = \E{X_{t}}$.
+
+  Define the covariance function $\gamma_{X}(t, s) = \Cov{X_{t}}{X_{s}}
+    = \E{(X_{t} - \mu_{X}(t))(X_{s} - \mu_{X}(s))}$.
+\end{defn}
+
+\begin{defn}[Weak Stationarity]
+  \label{defn:time_series:6}
+  A time series $X_{t}$ is stationary if
+  \begin{enumerate}
+  \item $\E{|X_t|^2} < \infty$ for all $t \in \Z$
+  \item $\E{X_{t}} = c$ for all $t \in \Z$
+  \item $\gamma_{X}(t, s) = \gamma_{X}(t+h, s+h))$ for all $t, s, h
+    \in \Z$
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Strict Stationarity]
+  \label{defn:time_series:8}
+  A time series $X_{t}$ is said to be strict stationary if the joint
+  distributions of $X_{t_{1}, \dots, X_{t_{k}}}$ and $X_{t_{1} + h},
+  \dots, X_{t_{k} + h}$ are identical for all $k$ and for all $t_{1},
+  \dots, t_{k}, h \in Z$.
+\end{defn}
+
+\begin{defn}[Autocovariance function]
+  \label{defn:time_series:9}
+  For a stationary time series $X_{t}$, define the autocovariance
+  function
+  \begin{equation}
+    \label{eq:2}
+    \gamma_{X}(t) = \Cov{X_{t+h}}{X_{t}}.
+  \end{equation}
+  and the autocorrelation function
+  \begin{align}
+    \label{eq:3}
+    \rho_{X}(h) = \frac{\gamma_{X}(h)}{\gamma_{X}(0)}.
+  \end{align}
+\end{defn}
+
+\begin{exmp}
+  \label{defn:time_series:10}
+  Consider a white noise, with $X_{t}$ a time series with $X_{t}$
+  uncorrelated with mean zero and variance $\sigma^{2}$.
+
+  Then
+  \begin{align}
+    \label{eq:4}
+    \gamma_{X}(h) &= \sigma^{2} \I{h=0} \\
+    \rho_{X}(h) &= \I{h=0}
+  \end{align}
+\end{exmp}
+
+\begin{exmp}[First order moving average MA(1)]
+  \label{defn:time_series:11}
+  \begin{equation}
+    \label{eq:5}
+    X_{t} = Z_{t} + \theta Z_{t-1}
+  \end{equation}
+  with $Z_{t} \sim WN(0, \sigma^{2})$.  Then
+  \begin{align}
+    \label{eq:6}
+    \gamma_{X}(h) &=
+    \begin{cases}
+      \sigma^{2}(1 + \theta^{2}) & h = 0 \\
+      \sigma^{2} \theta & |h| = 1 \\
+      0 & \text{otherwise}
+    \end{cases} \\
+    \rho_{X}(h) &=
+    \begin{cases}
+      1 & h = 0 \\
+      \frac{\theta}{1 + \theta} & |h| = 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{align}
+\end{exmp}
+
+\begin{defn}[Sample Autocovariance]
+  \label{defn:time_series:12}
+  The sample autocovariance function of $\{ x_{1}, \dots, x_{n} \}$ is
+  defined by
+  \begin{equation}
+    \label{eq:7}
+    \hat \gamma(h) = \frac{1}{n} \sum_{j=1}^{n-h} (x_{j+h} - \bar
+    x)(x_{j} - \bar x), 0 \leq h < n
+  \end{equation} and $\hat \gamma(h) = \hat \gamma(-h)$, $-n < h \leq
+  0$.
+
+  Note that the divisor is $n$ rather than $n-h$ since this ensures
+  that the sample autocovariance matrix
+  \begin{equation}
+    \label{eq:8}
+    \hat \Gamma_{n} = (\hat \gamma(i - j))_{i, j}
+  \end{equation} is positive semidefinite.
+\end{defn}
+
+Consider the general problem of decomposing
+\begin{equation}
+  \label{eq:9}
+  X_{t} = m_{t} + s_{t} + Y_{t}.
+\end{equation}
 
 %%% Local Variables: 
 %%% mode: latex

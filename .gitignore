@@ -4,3 +4,4 @@ _region_.tex
 *.fls
 *.pdf
 *.dropbox
+.Rproj.user
