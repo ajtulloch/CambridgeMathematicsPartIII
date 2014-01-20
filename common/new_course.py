@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+import re
 from string import Template
 
 MASTER = Template(
@@ -25,14 +26,19 @@ r"""\input{../../common/common.tex}
 """)
 
 BASE = "/Users/tulloch/Mathematics/Cambridge"
+
+
 def main():
     course_name, chapter_name = sys.argv[1:]
-    course_dir = BASE + "/" + course_name
-    os.mkdir(course_dir)
+    course_dir = BASE + "/" + course_name + "/LectureNotes"
+    os.makedirs(course_dir)
+
+    pretty_course_name = re.sub(r"(\w)([A-Z])", r"\1 \2", course_name)
+
     with open(course_dir + "/" + "master.tex", "w+") as f:
         f.write(MASTER.substitute(
             chapter=chapter_name + ".tex",
-            course_name=course_name))
+            course_name=pretty_course_name))
 
     with open(course_dir + "/" + chapter_name + ".tex", "w+") as f:
         f.write("\n")
@@ -42,8 +48,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-
-    
-    
-    
