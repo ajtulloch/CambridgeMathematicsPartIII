@@ -1,0 +1,61 @@
+
+\chapter{Introduction}
+\label{cha:introduction}
+
+We'll look at a few problems in contest design:
+
+\begin{itemize}
+\item Standard all-pay contest
+\item Rank-order allocation of prizes
+\item Smooth allocation of prizes
+\item Simultaneous contest
+\item Sequential contests
+\item Credits for contributions and production
+\end{itemize}
+
+\begin{defn}
+  \label{defn:fundamentals:1}
+  \begin{enumerate}
+  \item $N = \{ 1, \dots, n \}$, $n \geq 2$ set of players.
+  \item $b_{i}$ is the effort invested by player $i \in N$.
+  \item $b = (b_{1}, b_{2}, \dots, b_{n})$.
+  \item $X = (X_{1}(b), \dots, X_{n}(b))$.
+  \item $X_{i}(b) \geq 0$.
+  \item $\sum_{i=1}^{n} X_{i}(b) = 1$.
+  \item $N(b) = \{ i \in N: b_{i} \geq b_{j} \forall j \in N \}$.
+  \item \begin{equation}
+      \label{eq:1}
+      X_{i}(b) =
+      \begin{cases}
+        \frac{1}{|N(b)|} & i \in N(b) \\
+        0 & \text{otherwise}
+      \end{cases}
+    \end{equation}
+  \item Payoff for player $i$ is $s_{i}(b) = v_{i} X_{i}(b) - b_{i}$.
+  \end{enumerate}
+\end{defn}
+
+Any pure Nash equilibrium $b$ satisfies
+\begin{equation}
+  \label{eq:2}
+  \forall i \in N, s_{i}(b) \geq s_{i}((b_{i'}, b_{-i})), \forall
+  b_{i'} \in R
+\end{equation}
+
+A mixed Nash equilibrium $b$ satisfies
+\begin{equation}
+  \label{eq:3}
+  \forall i \in N, \E{s_{i}(b)} \geq \E{s_{i}((b_{i'}, b_{-i}))}, \forall b_{i'} \in R
+\end{equation}
+
+Consider the two player case, with $v_{1} \geq v_{2} > 0$.  There
+exists a unique mixed Nash equilibrium such that $B_{1}(b) =
+\frac{b}{v_{2}}$, $B_{2}(b) = 1 - \frac{v_{2}}{v_{1}} +
+\frac{b}{v_{1}}$.
+
+\todo{Fill in rest of notes from lecture material}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -1,0 +1,81 @@
+
+\chapter{Significance of Quantum Computation}
+\label{cha:signf-quant-comp}
+
+\begin{enumerate}
+\item Fundamentally:
+  \begin{enumerate}
+  \item Can view physics as information processing --- physical
+    evolution is equivalent to updating parameters describing states
+    - thus computation.
+  \item Can view computation as physics - classical bit 0/1 are two
+    distinguishable states of a physical system.
+  \end{enumerate}
+\item Technological
+  \begin{enumerate}
+  \item Moore's law
+  \item Nano-technology - coherent controlled manipulation of quantum systems
+  \item Further issues - information security (quantum cryptography)
+  \end{enumerate}
+\item Theoretical
+  \begin{enumerate}
+  \item New modes of computation, allowed by quantum vs classical
+    effects - implications for computational complexity.
+  \end{enumerate}
+\end{enumerate}
+
+\section{Computability vs non-computability}
+\label{sec:computability-vs-non}
+
+\begin{enumerate}
+\item Given $N$ (integer), is it prime? \textbf{computable}.
+\item Given a polynomial with integer coefficients - e.g. $2x^{2}y -
+  17zw^{19} + x^{3}$, does it have a root in the integers?  \textbf{non-computable}.
+\end{enumerate}
+
+Quantum computing - all laws of quantum mechanical evolution are
+computable on a classical computer, so QC cannot compute any
+classically non-computable problem.  But computability is not
+equivalent to computational complexity.
+
+\section{Computational Tasks}
+\label{sec:computational-tasks}
+
+Given an input bit string $x = i_{1} \dots i_{n} \in B_{n}$, $B =
+\cup_{n=1}^{\infty} B_{n}$ (all finite length bit strings).  A
+language $L \subseteq B$.
+
+\begin{defn}[Decision problem]
+  \label{defn:fundamentals:1}
+  Given $x \in B$ is $x \in L$?  Output is 1 bit 0/1, yes/no, accept/reject.
+\end{defn}
+
+\begin{question}
+  How hard is it to solve the problem as a function of $n$, the size
+  of the input in bits?
+\end{question}
+A computational model is a classic circuit model - for each $n$, we
+have a circuit $C_{n}$ of \textsc{and}/\textsc{or}/\textsc{not} gates.
+The computational steps are this gate. Note this is a universal set -
+can make any Boolean function $f: B_{n} \rightarrow B_{n}$ as a
+function of \textsc{and}/\textsc{or}/\textsc{not} gates.  Full
+computation is a circuit family ($C_{1}, C_{2}, \dots$).
+
+In a random model of classical computation, we allow further random
+bits of input into the gate.
+
+Complexity/hardness of the computation is measured by the consumption
+of resources - time (number of computational steps as a function of
+$n$), and space (number of bits needed/work space needed).
+
+Polynomial time complexity classes.  Let $T(n)$ be the maximum number
+of steps for any input of size $n$ - (in a circuit model, equivalent
+to the number of gates, and so circuit size).  The main question is -
+does $T(n)$ grow polynomially 
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

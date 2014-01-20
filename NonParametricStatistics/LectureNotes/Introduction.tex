@@ -1,0 +1,151 @@
+\chapter{Introduction}
+\label{cha:introduction}
+
+\begin{itemize}
+\item Sixteen lectures
+\item Three example sheets, three example classes.
+\item A closed book exame in term three.
+\end{itemize}
+
+Old lectures
+\begin{itemize}
+\item Tue 21 Jan => Mon 20 Jan 4PM
+\item Thu 23 Jan => Fri 24 Jan 2PM
+\item  Tu 11 Feb => Fri 7 Feb 12pm
+\end{itemize}
+
+References
+
+\begin{itemize}
+\item Serftag, (1980) Approximation Theorems of Mathematical Statistics
+\item Van der Vaart, (1995) Asymptotic Statistics
+\item Wood and Jones, (1996) Kernel Smoothing
+\item Fan and Gijlets (1996) Local Polynomial Modelling and it's Applications
+\item Duroye, Gryorf and Lagos, (1996) A probabilistic theory of pattern recognition
+
+\end{itemize}
+
+\section{Basic Concepts}
+\label{sec:basic-concepts}
+
+\subsection{Parameteric vs Nonparametric models}
+\label{sec:param-vs-nonp}
+
+A statistical model postulates a family of possible data generating
+mechanisms.  Examples include:
+\begin{enumerate}
+\item Let $X_{1}, \dots, X_{n} \sim T(m, \theta)$ \iid, with $m$ known
+  and $\theta \in (0, \infty) = \Theta$ an unknown parameter.
+\item Let $Y_{i} = \alpha + \beta x_{i}+ \epsilon_{i}, i = 1, \dots,
+  n$ where $x_{i}$ are known and $\epsilon_{i}$ are \iid with
+  $\E{e_{i}} = 0, \Var{\epsilon_{i}} = \sigma^{2}$.  Here, the unknown
+  parameter is $\theta =
+  \begin{pmatrix}
+    \alpha \\
+    \beta \\
+    \sigma^{2}
+  \end{pmatrix} \in \R \times \R \times (0, \infty) = \Theta$.
+\end{enumerate}
+
+If the parameter space $\Theta$ is finite dimensional, we speak of a
+\textbf{parametric model}.  In such situations, typically we can
+estimate $\theta$ using the MLE $\hat \theta_{n}$, and have $\hat
+\theta_{n} - \theta = O_{p}(n^{-\frac{1}{2}})$.\footnote{Definition of
+  $O_{p}$ - TODO}
+
+This assumes the model contains the true data generating process, if
+not, inference can be misleading.
+
+Examples of nonparametric models include:
+\begin{enumerate}
+\item \label{item:1} Let $X_{1}, \dots, X_{n}, i = 1, \dots, n$ be \iid with arbitrary distribution
+  function $F$.
+\item \label{item:2} Let $X_{1}, \dots, X_{n}, i = 1, \dots, n$ be \iid with twice continuously differentiable
+  density $f$.
+\item \label{item:3} Let $Y_{i} = m(x_{i}) + v(x_{i})^{\frac{1}{2}}, i = 1, \dots,
+  n$ where $m$ is twice continuously differentiable and $\epsilon_{1},
+  \dots, \epsilon_{n}$ are \iid with $\E{\epsilon_{i}} = 0,
+  \Var{\epsilon_{i}} = 1$.
+\end{enumerate}
+
+Such infinite-dimensional models are much less vulnerable to model
+misspecification, typically, however we pay a price for our generality
+in terms of a slower convergence rate - e.g. $O_{p}(n^{-\frac{2}{3}})$
+in problems \ref{item:2} and \ref{item:3} above.
+
+\subsection{Estimating an arbitrary distribution function}
+\label{sec:estim-an-arbitr}
+
+Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
+\mathcal{F}, \Prob)$ with distribution function $F$.  The
+\textbf{empirical distribution function} $\hat F_{n}$ is defined by
+\begin{equation}
+  \label{eq:1}
+  \hat F_{n}(x) = \frac{1}{n} \sum_{i=1}^{n} \I{X_{i} \leq x}.
+\end{equation}
+
+
+\begin{thm}[Glivenko-Cantelli (1933) - The Fundamental THeorem of Statistics]
+  \label{defn:Introduction:2}
+  \begin{equation}
+    \label{eq:2}
+    \sup_{x \in \R} \left| \hat F_{n}(x) - F(x) \right| \cas 0.
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Given $\epsilon > 0$, choose a partition $-\infty = x_{0} < x_{1} <
+  \dots < s_{k} = \infty$ such that, for each $i = 1, \dots, k$, we
+  have $F(x_{i}-) - F(x_{i-1}) \leq \epsilon$, where $F(x-) = \lim_{y
+    \uparrow x} F(y)$.
+
+  Note that any point at which $F$ jumps by more than $\epsilon$ must
+  be in the partition.  By the strong law of large numbers, there
+  exists an event $\Omega_{\epsilon}$ with $\Prob{\Omega_{\epsilon}} =
+  1$ such that for all $\omega \in \Omega_{\epsilon}$, there exists
+  $n_{0} = n_{0}(\omega, \epsilon)$ with
+  \begin{align}
+    \label{eq:3}
+    \left| \hat F_{n}(x_{i}) - F(x_{i}) \right| \leq \epsilon, i = 1,
+    \dots, k - 1, n \geq n_{0}, \\
+    \left| \hat F_{n}(x_{i}-) - F(x_{i}-) \right| \leq \epsilon, 1 =
+    i, \dots, k-1, n \geq n_{0}.
+  \end{align}
+
+  Now, fix $x \in \R$, and find $i \in \{ 1, \dots, k \}$ with $x \in
+  [x_{i-1}, \dots, x_{i})$.  Then for $\omega \in \Omega_{\epsilon}$
+  and $n \geq n_{0}$,
+  \begin{align}
+    \label{eq:4}
+    \hat F_{n}(x) - F(x) \leq \hat F_{n}(x_{i}-) - F(x_{i-1}) = \hat
+    F_{n}(x_{i}-) - F(x_{i}-) + F(x_{i}-) - F(x_{i-1}) \leq \epsilon +
+    \epsilon = 2\epsilon
+  \end{align}
+
+  Similarly, we have
+  \begin{align}
+    \label{eq:5}
+    F(x) - \hat F_{n}(x) \leq F(x_{i}-) - \hat F_{n}(x_{i-1}) =
+    F(x_{i}-) - F(x_{i-1}) + F(x_{i-1}) - \hat F_{n}(x_{i-1}) \leq
+    \epsilon + \epsilon = 2 \epsilon
+  \end{align}
+
+  We deduce that
+  \begin{align}
+    \label{eq:6}
+    \Prob{\sup_{x \in \R} \left| \hat F_{n}(x) - F(x) \right|
+    \rightarrow 0} &= \Prob{\cap_{m=1}^{\infty} \cup_{n_{0} =
+      1}^{\infty} \cap_{n=n_{0}}^{\infty} \{ \sup_{x \in \R} \left|
+      \hat F_{n}(x) - F(x) \right| \leq \frac{1}{m} \}} \\
+  &= \lim_{m \rightarrow \infty} \Prob{\Omega_{\frac{1}{2m}}} = 1
+  \end{align}
+
+
+
+\end{proof}
+
+
+
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

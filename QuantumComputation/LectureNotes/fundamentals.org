@@ -1,0 +1,25 @@
+
+
+
+* Theoretical
+* Computability vs non-computability
+** Quantum computing
+   All laws of qunatum mechanical evolution are *computable* on a
+   classical computer.
+
+   
+
+** Complexity/hardness of the computation
+   Measured by the comsumption of resource.
+   
+***  
+    
+
+
+     
+
+     
+    
+     
+
+
