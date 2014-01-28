@@ -53,6 +53,94 @@ For $p = 1$, $C_{x} = Z_{d}$.  For $p = 0$, $C_{x} = \{ x \}$.
   For $d \geq 2$, $0 < p_{c} < 1$.
 \end{thm}
 
+\todo{Fill in lecture notes from Chapter 3 of Probability on Graphs}
+
+Consider $\Z^{d}$, with $\kappa_{n} = \mu^{n(1 + o(1))}$ as $n
+\rightarrow \infty$, $\mu = \mu(\Z^{d})$
+
+We have $\kappa_{n} \sim A n^{c} \mu^{n}$ for some $A = A(d), c =
+c(d)$ where $a_{n} \sim b_{n}$ means $\frac{a_{n}}{b_{n}} \rightarrow
+1$.
+
+$c_{n}$ is called the \textbf{critical exponent}.  People are hoping
+to show that for $d=2$, $c=\frac{11}{32}$.  $c$ is expected to be
+\textbf{universal} in that it depends on $d$ but not each
+$d$-dimensional graph.
+
+
+\section{Coupling}
+\label{sec:coupling}
+
+Let $L^{d} = (\Z^{d}, E^{d})$ consider $P_{p}$ on $\Omega = \{ 0,
+1\}^{E^d}$.
+
+Let $(U_{e}, e \in E)$ be independent uniform random variables $U(0,
+1)$.
+
+Let $p \in (0, 1)$.  Then
+\begin{equation}
+  \label{eq:1}
+  \mu_{p}(e) =
+  \begin{cases}
+    0 & U_{e} \geq p \\
+    1 & U_{e} < p
+  \end{cases}  
+\end{equation}
+if $p_{1} \leq p_{2}$ then $\mu_{p_{1}}(e) \leq \mu_{p_{2}}(e)$.
+
+$\mu_{p}: 0 < p < 1$ is a coupling of percolations, containing all
+interesting, ``universal'' in $p$.
+
+\begin{thm}
+  \label{defn:random_walks_on_graphs:4}
+  For any increasing function $f: \Omega \rightarrow \R$,
+  \begin{equation}
+    \label{eq:2}
+    \E{f}{p_{1}} \leq \E{f}{p_{2}}
+  \end{equation} for $p_{1} \leq p_{2}$.
+\end{thm}
+
+\begin{exmp}
+  \label{defn:random_walks_on_graphs:5}
+  For example, $u, v \in \Z^{d}$, $f(u) = \I{u \leftrightarrow v}$.
+  Then $\Prob{u \leftrightarrow v}{p_{1}} \leq \Prob{u \leftrightarrow
+  v}{p_{2}}$.
+\end{exmp}
+
+\section{Oriented/Directed Percolations}
+\label{sec:orient-perc}
+
+Consider th standard percolation, and define
+$\overrightarrow{\theta}(p) = \Prob(\text{there exists an infinite
+  directed path through the origin}){p}$ . Then
+$\overrightarrow{p_{c}} = \sup \{ p: \overrightarrow{\theta}(p) = 0
+\}$.  As $\overrightarrow{\theta}(p) \leq \theta(p)$, we have
+$\overrightarrow{p_{c}} \geq p_{c}$.
+
+
+\section{Correlation Inequalities}
+\label{sec:corr-ineq}
+
+Consider a set $E$ be nonempty and finite, and $\Omega = \{ 0, 1
+\}^{E}$.  The sample space $\Omega$ is partially ordered by
+$\omega_{1} \leq \omega_{2}$ if $\omega_{1}(e) \leq \omega_{2}(e)$ for
+all $e \in E$.
+
+Event $A \subseteq \Omega$ is called \textbf{increasing} if $w \in A$,
+$w \leq w' \Rightarrow w' \in A$ and decreasing if $\overline A =
+\Omega \backslash A$ is increasing.
+
+\begin{defn}
+  \label{defn:random_walks_on_graphs:6}
+  With two probability measures $\mu_{1}, \mu_{2}$, we write $\mu_{1}
+  \leq_{st} \mu_{2}$ if $\mu_{1}(A) \leq \mu_{2}(A)$ for all
+  increasing events $A$.
+
+  Equivalently, $\mu_{1} \leq_{st} \mu_{2}$ if and only if $\mu_{1}(f)
+  = \sum_{\Omega} f(\omega) \mu_{1}(\omega) \leq \mu_{2}(f)$ for all
+  increasing functions $f: \Omega \rightarrow \R$.
+\end{defn}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

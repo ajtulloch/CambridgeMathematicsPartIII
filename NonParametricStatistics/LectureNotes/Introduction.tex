@@ -58,14 +58,14 @@ not, inference can be misleading.
 
 Examples of nonparametric models include:
 \begin{enumerate}
-\item \label{item:1} Let $X_{1}, \dots, X_{n}, i = 1, \dots, n$ be \iid with arbitrary distribution
-  function $F$.
-\item \label{item:2} Let $X_{1}, \dots, X_{n}, i = 1, \dots, n$ be \iid with twice continuously differentiable
-  density $f$.
-\item \label{item:3} Let $Y_{i} = m(x_{i}) + v(x_{i})^{\frac{1}{2}}, i = 1, \dots,
-  n$ where $m$ is twice continuously differentiable and $\epsilon_{1},
-  \dots, \epsilon_{n}$ are \iid with $\E{\epsilon_{i}} = 0,
-  \Var{\epsilon_{i}} = 1$.
+\item \label{item:1} Let $X_{1}, \dots, X_{n}, i = 1, \dots, n$ be
+  \iid with arbitrary distribution function $F$.
+\item \label{item:2} Let $X_{1}, \dots, X_{n}, i = 1, \dots, n$ be
+  \iid with twice continuously differentiable density $f$.
+\item \label{item:3} Let $Y_{i} = m(x_{i}) + v(x_{i})^{\frac{1}{2}}, i
+  = 1, \dots, n$ where $m$ is twice continuously differentiable and
+  $\epsilon_{1}, \dots, \epsilon_{n}$ are \iid with $\E{\epsilon_{i}}
+  = 0, \Var{\epsilon_{i}} = 1$.
 \end{enumerate}
 
 Such infinite-dimensional models are much less vulnerable to model
@@ -85,7 +85,7 @@ Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
 \end{equation}
 
 
-\begin{thm}[Glivenko-Cantelli (1933) - The Fundamental THeorem of Statistics]
+\begin{thm}[Glivenko-Cantelli (1933) - The Fundamental Theorem of Statistics]
   \label{defn:Introduction:2}
   \begin{equation}
     \label{eq:2}
@@ -138,14 +138,83 @@ Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
       1}^{\infty} \cap_{n=n_{0}}^{\infty} \{ \sup_{x \in \R} \left|
       \hat F_{n}(x) - F(x) \right| \leq \frac{1}{m} \}} \\
   &= \lim_{m \rightarrow \infty} \Prob{\Omega_{\frac{1}{2m}}} = 1
-  \end{align}
-
-
+\end{align}
 
 \end{proof}
 
 
+\begin{thm}
+  \label{defn:Introduction:1}
+  Let $X_{1}, \dots, X_{n} \sim F$ \iid.  Then for every $\epsilon >
+  0$,
+  \begin{align}
+    \label{eq:7}
+    \Prob{\sup_{x \in \R}|\hat F_{n}(x) - F(x)| \geq \epsilon} \leq 2 e^{-2n\epsilon^{2}}.
+  \end{align}
+\end{thm}
 
+An application is to consider the problem of finding a confidence band
+for $F$ at $1-\alpha$. Given $\alpha \in (0, 1)$, set $\epsilon_{n}
+=(-\frac{1}{2n} \log \frac{\alpha}{2})^{\frac{1}{2}}$.  Then by
+\ref{defn:Introduction:1},
+\begin{align}
+  \label{eq:8}
+  (\max(\hat F_{n}(x) - \epsilon_{n}, 0), \min(\hat F_{n}(x), 1))
+\end{align} is a $1-\alpha$ confidence interval for $F$.
+
+In fact, let $U_{1}, \dots, U_{n} \sim U(0, 1)$ \iid, and let $\hat
+G_{n}$ denote their empirical distribution function.  Then
+\begin{align}
+  \label{eq:9}
+  \hat G_{n}(F(x)) = \frac{1}{n} \sum_{i=1}^{n} \I{U_{i} \leq F(x)} =
+  \frac{1}{n} \sum_{i=1}^{n} \I{F^{-1}(u_{i}) \leq x} = \frac{1}{n}
+  \sum_{i=1}^{n} \I{X_{i} \leq x} = \hat F_{n}(x)
+\end{align}
+
+It follows that
+\begin{align}
+  \label{eq:10}
+  \sup_{x \in \R} |\hat F_{n}(x)- F(x)| = \sup_{x \in R} |\hat
+  G_{n}(F(x)) - F(x)| \leq \sup_{t \in (0, 1)} |\hat G_{n}(t) - t |
+\end{align} with equality if $F$ is continuous.  We deduce that, if
+$F$ is continuous, the distribution of $\sup_{x \in \R} | \hat
+F_{n}(x) - F(x)|$ does not depend on $F$.
+
+Other examples include Uniform Laws of Large Numbers (ULLN).  Let
+$X, X_{1}, X_{2}, \dots$ be \iid taking values in a measurable space
+$(\mathcal{X}, \mathcal{A})$, and let $\mathcal{G}$ denote a class of
+measurable functions on $\mathcal{X}$.  We say that $\mathcal{G}$
+satisfies a ULLN if
+\begin{equation}
+  \label{eq:11}
+  \sup_{g \in \mathcal{G}} | \frac{1}{n} \sum_{i=1}^{n} g(X_{i}) -
+  \E{g(X)}| \cas 0.
+\end{equation}
+Thus Theorem 1 shows that the class $\mathcal{G} = \{ \I{\cdot \leq
+  x}: x \in \R \}$ satisfies a ULLN.  In general, proving a ULLN
+amounts to controlling the \textbf{size} of $\mathcal{G}$, which can
+be done by using the idea of entropy (c.f. Statistical Theory).
+
+Further results start with the observation that
+\begin{align}
+  \label{eq:12}
+  n^{\frac{1}{2}} (\hat F_{n} - F(x)) \cd N(0, F(x)(1-F(x)))
+\end{align} by the central limit theory.  This result can be
+strengthened by studying $\{ n^{\frac{1}{2}}(\hat F_{n}(x) - F(x)), x
+\in \R \}$ as a stochastic process.
+
+\begin{proposition}
+  Let $U_{1}, \dots, U_{n} \sim U(0, 1)$ \iid.  Let $Y_{1}, \dots,
+  Y_{n+1} \sim \textsc{Exp}(1)$ \iid and let $S_{j} = \sum_{i=1}^{j}
+  Y_{i}$ for $j = 1, \dots, n+1$.  Then
+  \begin{align}
+    \label{eq:13}
+    U_{j} =^{d} \frac{S_{j}}{S_{n+1}} \sim \textsc{Beta}(j, n-j+1).
+  \end{align}
+  
+\end{proposition}
+
+%%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
 %%% End: 

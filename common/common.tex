@@ -117,13 +117,19 @@
 }
 
 % Probability with measure P
-\NewDocumentCommand{\Prob}{g}{%
+\NewDocumentCommand{\Prob}{gg}{%
   \IfNoValueTF{#1}
     {%
       \mathbb{P}
     }    
     {%
-      \mathbb{P}\!\left(#1\right)
+      \IfNoValueTF{#2}
+      {%
+        \mathbb{P}\!\left(#1\right)
+      }
+      {%
+        \mathbb{P}_{#2}\!\left(#1\right)
+      }
     }%
 }
 
