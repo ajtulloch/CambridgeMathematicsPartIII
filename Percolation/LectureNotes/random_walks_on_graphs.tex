@@ -141,6 +141,270 @@ $w \leq w' \Rightarrow w' \in A$ and decreasing if $\overline A =
   increasing functions $f: \Omega \rightarrow \R$.
 \end{defn}
 
+Let $S \subseteq \Omega^{2}$ given by $S = \{ (\pi, \omega) \in
+\Omega^{2}: \pi \leq \omega \}$.
+
+\begin{thm}[Strassen]
+  \label{defn:random_walks_on_graphs:7}
+  The following are equivalent:
+  \begin{enumerate}
+  \item $\mu_{1} \leq \mu_{2}$
+  \item There exists a probability measure $\kappa$ on $\Omega^{2}$ such
+    that
+    \begin{enumerate}
+    \item $\kappa(S) = 1$
+    \item Marginals of $\kappa$ are $\mu_{1}$ and $\mu_{2}$.
+    \end{enumerate}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  From reference in the back.
+\end{proof}
+
+\begin{thm}[Holley's inequality]
+  \label{defn:random_walks_on_graphs:8}
+  Let $\mu_{1}, \mu_{2}$ be probability measures which are positive
+  (in that $\mu_{i}(\omega) > 0$ for all $i$ and $\omega \in \Omega$).
+  If
+  \begin{align}
+    \label{eq:3}
+    \mu_{2}(\omega_{1} \vee \omega_{2}) \mu_{1}(\omega_{1} \wedge
+    \omega_{2}) \geq \mu_{1}(\omega_{1})\mu_{2}(\omega_{2})
+  \end{align} for all $\omega_{1}, \omega_{2} \in \Omega$, then
+  $\mu_{1} \leq \mu_{2}$.
+
+  The notation is
+  \begin{align}
+    \label{eq:4}
+    (\omega_{1} \vee \omega_{2})(e) &= \max{\omega_{1}(e),
+      \omega_{2}(e)} \\
+    (\omega_{1} \wedge \omega_{2})(e) &= \min{\omega_{1}(e), \omega_{2}(e)}
+  \end{align} 
+\end{thm}
+
+\begin{proof}
+  See Probability and Random Processes (Stirzaker), the section on
+  Markov chains in continuous time for the necessary background.
+
+  \begin{defn}[Markov Chains]
+    \label{defn:random_walks_on_graphs:9}
+    $(X_{t}, t \geq 0)$ taking values in a state space $S$, which is
+    finite satisfying the Markov property 
+  \end{defn}
+
+  \begin{defn}[Markov Property]
+    \label{defn:random_walks_on_graphs:10}
+    For all $x, y \in S, x \neq y$,
+    \begin{align}
+      \label{eq:5}
+      \Prob{X_{t + h} = y | X_{t} = x} = h G(x, y) + o(h)
+    \end{align} as $h \downarrow 0$
+
+    The matrix $G = (G(x, y))_{x, y \in S}$ is the \textbf{generator}
+    of the Markov chain.  The diagonal elements $G(x, x)$ are chosen
+    such that the row sums are all zero,
+    \begin{align}
+      \label{eq:6}
+      \sum_{y \in S} G(x, y) = 0
+    \end{align} for all $x \in S$.
+  \end{defn}
+
+  \begin{defn}[Invariant distribution]
+    \label{defn:random_walks_on_graphs:11}
+    $\pi$ on $S$ is an invariant distribution if it satisfies if
+    $X_{0}$ has distribution $\pi$, then $X_{t}$ has distribution
+    $\pi$ for all $t \geq 0$.
+  \end{defn}
+
+  \begin{lem}
+    $\pi$ is invariant if and only if $\pi G = 0$.
+  \end{lem}
+
+  \begin{defn}
+    \label{defn:random_walks_on_graphs:12}
+    $X$ is \textbf{time reversible} if $\pi(x) G(x, y) = \pi(y) G(y,
+    x)$ for all $x, y \in S$ where $\pi$ is (say) invariant.
+
+    If detailed balance holds for some $\pi$ then $\pi$ is invariant.
+  \end{defn}
+
+  Let $\mu$ be a positive probability measure on $\Omega$.
+
+  For $\omega \in \Omega$ and $e \in E$, define the configurations
+  $\omega^{e}, \omega_{e}$ by
+  \begin{align}
+    \label{eq:7}
+    \omega^{e}(f) = \begin{cases}
+      w(f) & f \neq e \\
+      1 & f = e
+    \end{cases} \\
+    \omega^{e}(f) = \begin{cases}
+      w(f) & f \neq e \\
+      0 & f = e
+    \end{cases}
+  \end{align}
+
+  Let $G: \Omega^{2} \rightarrow \R$ be given by $G(\omega_{e},
+  \omega^{e}) = 1$, $G(\omega^{e}, \omega_{e}) =
+  \frac{\mu(\omega_{e})}{\mu(\omega^{e})}$, for all $\omega \in
+  \Omega$ and $e \in E$.  Set $G(w, w') = 0$ for all other elements
+  (coordinate distance greater than 2), and $G(w, w) = - \sum_{\omega'
+    \neq \omega} G(\omega, \omega')$.
+
+  $G$ is the generator for a Markov chain $X$ on $\Omega$.
+  We then have
+  \begin{align}
+    \label{eq:8}
+    \mu(\omega) G(\omega, \omega') = \mu(\omega') G(\omega', w)
+  \end{align} (trivial from the construction of $G$).
+
+  Thus, $\mu$ is invariant for $X$.
+
+  Now, construct a Markov chain $((X_{t}, Y_{t}) t \geq 0)$ taking
+  values in $S = \Omega^{2}$.  Let $\mu_{1}, \mu_{2}$ be positive
+  probability measures on $\Omega$, assumed positive.
+
+  Let $G$ be given by
+  \begin{align}
+    \label{eq:9}
+    G((\pi_{e}, \omega), (\pi^{e}, \omega^{e})) &= 1 \\
+    G((\pi, \omega^{e}), (\pi_{e}, \omega_{e}))
+    &= \frac{\mu_{2}(\omega_{e})}{\mu_{2}(\omega^{e})} \\
+    G((\pi^{e}, \omega^{e}), (\pi_{e}, \omega^{e}))
+    &= \frac{\mu_{1}(\pi_{e})}{\mu_{1}(\pi_{e})} -
+    \frac{\mu_{2}(\omega_{e})}{\mu_{2}(\omega^{e})} \geq 0
+  \end{align} from the conditions of the theorem.
+
+  Defining $G(x, y) = 0$ otherwise and $G(x, x)$ to satisfy the zero
+  row-sum condition, we have that $G$ is a Markov chain.  Thus it has
+  an invariant measure $\mu$.  Then $X$ is a Markov chain, having
+  measure $\mu_{1}$.  $Y$ is a Markov chain, having invariant measure
+  $\mu_{2}$.
+
+  Then by Strassen's theorem (~\ref{defn:random_walks_on_graphs:7}),
+  $\mu_{1} \leq \mu_{2}$.
+
+  Choose $\mu_{1}, \mu_{2}$ satisfying the condition.  Let $Z = (X,
+  Y)$ a Markov chain on $\Omega^{2}$, in fact on $S = \{ (\pi,
+  \omega): \pi \leq \omega \}$.
+
+  $X$ is a Markov chain with invarnaitn measure $\mu_{1}$.  $Y$ is a
+  Markov chain with invariant distirbuiton $\mu_{2}$.
+  
+  Then $Z$ has an invariant measure $\kappa$ on $S$.  Let $f: \Omega
+  \rightarrow \R$ be increasing.  Then $\mu_{1}(f) = \kappa(f(\pi))
+  \leq \kappa(f(\omega)) = \mu_{2}(f)$.
+
+  This completes the proof.
+\end{proof}
+
+\begin{thm}[FKG inequality]
+  \label{defn:random_walks_on_graphs:13}
+  Let $\mu$ be a probability measure on $\Omega = \{ 0, 1 \}^{E}$ with
+  $|E| < \infty$ such that $\mu$  is positive and
+  \begin{align}
+    \label{eq:10}
+    \mu(\omega_{1} \vee \omega_{2}) \mu(\omega_{1} \wedge \omega_{2})
+    \geq \mu(\omega_{1}) \mu(\omega_{2}),
+  \end{align} known as the \textbf{FKG lattice condition}.
+
+  Then $\mu$ is \textbf{positively associated} in that
+  \begin{align}
+    \label{eq:11}
+    \mu(fg) \geq \mu(f) \mu(g)
+  \end{align} for all increasing random variables $f, g: \Omega
+  \rightarrow \R$ or equivalently,
+  \begin{align}
+    \label{eq:12}
+    \mu(A \cap B) \geq \mu(A) \mu(B)
+  \end{align} for all increasing events $A, B$.
+\end{thm}
+
+\begin{exmp}
+  \label{defn:random_walks_on_graphs:14}
+  Consider a percolation, with $A = \{ x \leftrightarrow \}$, $B = \{
+  u \leftrightarrow v \}$. Then we have
+
+  \begin{align}
+    \label{eq:13}
+    \Prob{x \leftrightarrow | u \leftrightarrow v}{p} \geq \Prob{x
+      \leftrightarrow y}{p}.
+  \end{align}
+\end{exmp}
+
+\begin{history}
+  When $\mu$ is a product measure, this was first proven by Harris
+  (1961) by induction on $|E|$.  
+\end{history}
+
+\begin{proof}
+  Let $\mu_{1} = \mu$. Note that \eqref{eq:11} is invariant under $g
+  \mapsto g + c$, for $c \in \R$.  Thus we may assume that $g$ is
+  strictly positive.  Then
+  \begin{align}
+    \label{eq:14}
+    \mu_{2}(\omega) = \frac{\mu(\omega) g(\omega)}{\sum_{w'}
+      g(\omega') \mu(\omega')}  
+  \end{align}
+
+  Since $g$ is increasing, $\mu_{1} \leq \mu_{2}$ follows by the FKG
+  lattice condition. By the Holley inequality, $\mu_{1}(f) \leq
+  \mu_{2}(f)$ for $f$ increasing. Therefore, $\mu(f) \leq
+  \frac{\mu(fg)}{\mu(g)}$ as required.
+\end{proof}
+
+\subsection{The BK Inequality}
+\label{sec:bk-inequality}
+
+Consider $\Omega = \{ 0, 1 \}^{E}, |E| < \infty$.  Let $\omega \in
+\Omega, F \subseteq E$.  The consider
+\begin{align}
+  \label{eq:15}
+  C(\omega, F) = \{ w' \in \Omega: \omega'(e) = \omega(e) \forall e
+  \in F \} = (w(e): e \in F) \times \{ 0, 1 \}^{E \backslash F}
+\end{align}
+
+Let $A, B \subseteq \Omega$.  Then define
+\begin{align}
+  \label{eq:16}
+  A \square B = \{ \omega \in \Omega: \exists F \subseteq E, C(\omega, F)
+  \subseteq A, C(\omega, \overline F) \subseteq B \} \subseteq A \cap B.
+\end{align}
+
+If $A, B$ are increasing, then $C(\omega, F) \subseteq A$ if and only
+if $\omega_{F} \in A$, where
+\begin{align}
+  \label{eq:17}
+  \omega_{F}(e) =
+  \begin{cases}
+    w(e) & e \in F \\
+    0 & e \notin F
+  \end{cases}
+\end{align}
+In this case $A \square B = \{ \omega : \exists F \subseteq E s.t. \omega_{F}
+\in A, \omega_{E \backslash F} \in B\}$.
+
+\begin{thm}[BK inequality]
+  \label{defn:random_walks_on_graphs:15}
+  For increasing subsets For product measure $\Prob$ (say $\Prob{w(e)
+    = 1}{p_{e}}$ for some given $(p_{e}, e \in E)$),
+
+  \begin{align}
+    \label{eq:18}
+    \Prob{A \square B} \leq \Prob{A} \Prob{B}
+  \end{align} for all increasing events $A, B$.
+\end{thm}
+
+\begin{thm}[Reimer's inequality]
+  \label{defn:random_walks_on_graphs:16}
+  \begin{align}
+    \label{eq:19}
+    \Prob{A \square B} \leq \Prob{A} \Prob{B}
+  \end{align} for all $A, B \subseteq \Omega$ and product measures $\Prob$.
+\end{thm}
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

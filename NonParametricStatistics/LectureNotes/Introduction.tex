@@ -1,3 +1,4 @@
+
 \chapter{Introduction}
 \label{cha:introduction}
 
@@ -211,10 +212,373 @@ strengthened by studying $\{ n^{\frac{1}{2}}(\hat F_{n}(x) - F(x)), x
     \label{eq:13}
     U_{j} =^{d} \frac{S_{j}}{S_{n+1}} \sim \textsc{Beta}(j, n-j+1).
   \end{align}
-  
 \end{proposition}
+
+\todo{Fill in lecture from Friday on KDE (variance and bias)}
+
+\section{Density Estimators}
+\label{sec:density-estimators}
+
+Usually, we prefer to choose $h$ to minimize some expression measuring
+how well $\hat f_{h}$ estimates $f$ as a function.  We therefore
+define the Mean Integrated Squared Error ($MSIE$) as
+\begin{align}
+  \label{eq:14}
+  MSIE(\hat f_{h}) &= \E{\int_{-\infty}^{\infty} \{ \hat f_{h}(x) -
+    f(x) \}^{2} dx} \\
+  &= \int_{-\infty}^{\infty} MSE(\hat f_{h}(x)) dx \\
+  &= \int_{\infty}^{\infty} ((K_{h} \star f)(x) - f(x))^{2} +
+  \frac[1]{h} ((K^{2}_{n} \star f)(x) - (K_{h} \star f)^{2}(x)) dx
+\end{align} which is justified by Fubini's theorem as the integrand
+is non-negative.
+JAlthough exact, this expression depends on $h$ in a complicated way.
+We therefore seek asymptotic approximation to calify this dependnence
+and faciliate an asymptotically optimal choice of $h$.
+
+\section{Asynptotic MSE and MSIE approximation}
+\label{sec:asynptotic-mse-msie}
+
+We need the following conditions:
+\begin{enumerate}
+\item \label{item:4} $f$ is twice differentiable, $f'$is bounded, and $R(f) =
+  \int_{-\infty}^{\infty} f''(x)^{2} dx < \infty$.
+\item \label{item:5} $h = h_{n}$ is a non-random sequecne with $h \rightarrow 0$ and
+  $nh \rightarrow \infty$ as $n \rightarrow \infty$.
+\item \label{item:6} $K$ is non-negative, $\int_{-\infty}^{\infty} K(x) dx = 1$,
+  $\int_{-\infty}^{\infty} x K(x) dx = 0$, $\mu_{2}(K) =
+  \int_{-\infty}^{\infty} x^{2} K(x) dx < \infty$, and $R(x) < \infty$.
+\end{enumerate}
+
+\begin{thm}
+  \label{defn:Introduction:3}
+  Assume that the previous conditions hod. Then, for all $x \in \R$,
+  \begin{align}
+    \label{eq:15}
+    MSE(\hat f_{n}(x)) = \frac{R(K) f(x)}{nh} + \frac{1}{4} h^{4}
+    \mu_{2}^{2}(K) f''(x)^{2} + o(\frac{1}{nh} + h^{4})
+  \end{align} as $n \rightarrow \infty$.
+\end{thm}
+
+\begin{proof}
+  We first claim that $f$ is bounded. Otherwise, there would exists
+  $(x_{n})$ such that $f(x_{n}) \geq n$.  Since $f$ is a density, the
+  exists $x_{n, l} \in [x_{n} - \frac{2}{n}, x_{n}]$ such that
+  $f(x_{n, l}) \leq \frac{n}{2}$  and theere exists $x_{n, m} \in
+  [x_{n}, x_{n} + \frac{2}{n}]$ such that $f(x_{n, m}) \leq
+  \frac{n}{2}$.  y the mean value theorem, there exists $x^{\star}_{n,
+  l} \in [x_{n, l}, x_{n}]$ such that $f'(x^{\star}_{n, l}) \geq
+\frac{n^{2}}{4}$ and there exists $x^{\star}_{n, m} \in [x_{n}, x_{n,
+  m}]$ such that $f'(x^{\star}_{n, m}) \leq -\frac{n^{2}}{4}$.  By the
+mean value theorem again, we have that there exists $x_{n}^{\star
+  \star} \in [x_{n, l}^{\star}, x_{n, m}^{\star}]$ such that
+$f''(x_{n}^{\star \star}) \leq -\frac{n^{3}}{8}$, contradicting
+boundedness of $f''$.
+
+We can therefore define $C_{0} = \sup_{x \in \R} f(x)$ and $C_{2} =
+\sup_{x \in \R} |f''(x)|$.
+
+Now,
+\begin{align}
+  \label{eq:16}
+  \E{\hat f_{h}(x)} &= \int_{-\infty}^{\infty} \frac{1}{h}
+  K(\frac{x-y}{h}) f(y) dy \\
+  &= \int_{-\infty}^{\infty}  K(z) f(x - hz) dz \\
+  &= \int_{-\infty}^{\infty} K(z)(f(x) - hz f'(x) + \frac{1}{2} h^{2}
+  z^{2} f''(x)) dz + REM_{1} \\
+  &= f(x) + \frac{1}{2} h^{2} \mu_{2}(K) f''(x) + REM_{1}.
+\end{align}
+
+To control the remainder, given $\epsilon > 0$, choose $\delta > 0$
+such that
+\begin{align}
+  \label{eq:17}
+  |f(x - hz) - (f(x) - hz f'(x) + \frac{1}{2} h^{2} z^{2} f''(x))|
+  \leq \epsilon h^{2} z^{2}
+\end{align} for all $|hz| \leq \delta$.
+
+Then
+\begin{align}
+  \label{eq:18}
+  |REM_{1}| &= | \int_{-\infty}^{\infty} K(z) f(x - hz) dz -
+  \int_{-\infty}^{\infty} K(x)(f(x) + \frac{1}{2} h^{2} z^{2} f''(x))
+  dz | \\
+  &\leq | \int_{|z| > \frac{\delta}{h}} K(z) f(x - hz) dz| +
+  \int_{|z| \leq \frac{\delta}{h}} K(z)|f(x-hz) - (f(z) +
+  \frac{1}{2}h^{2} z^{2} f''x)| dz + | \int_{|z| > \frac{\delta}{h}}
+  K(z) (f(x) + \frac{1}{2} h^{2} z^{2} f''(x)) dz| \\
+  &\leq C_{0} \frac{h^{2}}{\delta^{2}} \int_{|z| > \frac{\delta}{h}}
+  z^{2} K(x) dz + \epsilon h^{2} \int_{|z| \leq \frac{\delta}{h}}
+  z^{2} K(z) dz + C_{0} \frac{h^{2}}{\delta^{2}} \int_{|z| >
+    \frac{\delta}{h}} z^{2} K(z) dz + \frac{1}{2} h^{2} C_{2}
+  \int_{|z| > \frac{\delta}{h}} z^{2} K(z) dz \\
+  &\leq \epsilon h^{2}{1 + \mu_{2}(K)}
+\end{align}
+since $\int_{-\infty}^{\infty} z K(z) dx = 0$, Markov's inequality, etc.
+Thus,
+\begin{equation}
+  \label{eq:19}
+  BIAS(\hat f_{h}(x)) = \frac{1}{2} h^{2} \mu_{2}(K) f''(x) + o(h^{4}).
+\end{equation}
+
+For the variance,
+\begin{align}
+  \label{eq:20}
+  \Var{\hat f_{h}(x)} &= \frac{1}{nh^{2}} \int_{-\infty}^{\infty}
+  K^{2}(\frac{x-y}{h}) f(y) dy - \frac{1}{n} \{\E{\hat f_{h}(x)}
+  \}^{2} \\
+  &= \frac{1}{nh} \int_{-\infty}^{\infty} K^{2}(z) f(x - hz) dz -
+  \frac{1}{n} (f(x) + o(1))^{2} \\
+  &= \frac{1}{nh} \int_{-\infty}^{\infty} K^{2}(z) f(x) dz + REM_{2} +
+  O(\frac{1}{n}) \\
+  &= \frac{R(K) f(x)}{nh} + REM_{2} + O(\frac{1}{n})
+\end{align}
+
+To control $REM_{2}$, given $\epsilon > 0$, choose $y > 0$ such that
+$|f(x - hz) - f(x)| \leq \epsilon$ for $|hz| \leq y$.  Then
+\begin{align}
+  \label{eq:21}
+  nh | REM_{2} | = | \int_{-\infty}^{\infty} K^{2}(z) (f(x - hz) -
+  f(x)) dz | \\
+  &\leq \epsilon \int_{|z| \leq \frac{y}{h}} K^{2}(z) + 2 C_{0}
+  \int_{|z| > \frac{y}{h}} K^{2}(z) dz \\
+  &\leq \epsilon(R(K) + 1)
+\end{align}
+for large $n$.
+
+We deduce that $\Var{\hat f_{h}(x)} = \frac{R(K) f(x)}{nh} +
+o(\frac{1}{nh})$ and
+\begin{align}
+  \label{eq:22}
+  MSE( \hat f_{h}(x)) = \frac{R(K) f(x)}{nh} + \frac{1}{4} h^{4}
+  \mu_{2}^{2}(K) f''(x)^{2} + o(\frac{1}{nh} + h^{2})
+\end{align}
+
+The hope is that to compute the MSIE, we can just integrate the MSE
+over range of the RV.  We need to be careful - in general we cannot
+integrate asymptotic pointwise estimates - need to understand
+dependency on $x$.
+
+With mild additional conditions and further work (see the example
+sheet), it can be shown that
+\begin{align}
+  \label{eq:23}
+  MISE(\hat f_{h})= \frac{R(K)}{nh} + \frac{1}{4} h^{4}
+  \mu_{2}^{2}(K)R(f'') + o(\frac{1}{nh} + h^{4})
+\end{align}
+
+We see that asymptotically the integrated variance term decreases with
+$h$ while the integrated squared bias term increases with $h$.  This
+is the \textbf{bias-variance tradeoff}.
+
+This \textbf{bias-variance tradeoff} summarizes the critical role of
+the bandwidth.
+
+\end{proof}
+
+Consider now minimizing the asymptotic MISE (AMISE) $\frac{R(K)}{nh} +
+\frac{1}{4} h^{4} \mu_{2}^{2}(K) R(f'')$ with respect to $h$, yielding
+the asymptotically optimal bandwidth
+\begin{align}
+  \label{eq:24}
+  h_{AMISE} = (\frac{R(K)}{\mu_{2}^{2}(K) R(f'') n})^{\frac{1}{5}}
+\end{align}
+
+Substituting back, we obtain
+\begin{align}
+  \label{eq:25}
+  AMISE(\hat f_{AMISE}) = \frac{5}{4} R(K)^{\frac{4}{5}}
+  \mu_{2}(K)^{\frac{2}{5}} R(f'')^{\frac{1}{5}} n^{-\frac{4}{5}}.
+\end{align}
+
+Notice the slower rate than the typical $O(n^{-1})$
+parametric rate.  Notice that for the ``rough'' densities, with larger
+$R(f'')$, we should use a smaller bandwidth, and these densities are
+harder to estimate.
+
+
+\section{Pointwise asymptotic distribution}
+\label{sec:pointw-asympt-distr}
+
+\begin{thm}
+  \label{defn:Introduction:4}
+  Assume the previous assumptions \ref{item:4}, \ref{item:5},
+  \ref{item:6} and that $K$ is bounded.  Then, for all $x \in \R$,
+  \begin{equation}
+    \label{eq:26}
+    n^{\frac{2}{5}}(\hat f_{h_{AMISE}}(x) - f(x)) \cd
+    N(\frac{1}{2}\mu_{2}(K) f''(x), R(K) f(x))
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  First, observe that from the proof of the previous theorem,
+  \begin{align}
+    \label{eq:27}
+    n^{\frac{2}{5}} (\E{\hat f_{h_{AMISE}}(x) - f(x)}) \rightarrow
+    \frac{1}{2} \mu_{2} K f''(x)
+  \end{align}
+
+  For the stochastic term, let $Y_{ni} = \frac{1}{h^{\frac{1}{2}}}
+  K(\frac{x - X_{i}}{h})$.  We have
+  \begin{align}
+    \label{eq:28}
+    \Var{Y_{ni}} = \frac{1}{h} \int_{-\infty}^{\infty}
+    K^{2}(\frac{x-y}{n}) f(y) - h(\E{\hat f_{h}(x)})^{2} \\
+    &= \int_{-\infty}^{\infty} K^{2}(z) f(x - hz) dz - h(f(x) +
+    o(1))^{2} \\
+    &\rightarrow R(K) f(x)
+  \end{align} as $n \rightarrow \infty$.
+
+  Moreover,
+  \begin{align}
+    \label{eq:29}
+    \E{Y^{2}_{ni} \I{|Y_{ni} \geq \epsilon n^{\frac{1}{2}}}} =
+    \int_{-\infty}^{\infty} \frac{1}{n} K^{2}(\frac{x - y}{h}) f(y)
+    \I{K(\frac{x - y}{h}) \geq \epsilon (nh)^{\frac{1}{2}}} dy \\
+    &= 0
+  \end{align} for $n$ large enough such that $\sup_{z \in R} K(z) < e
+  (nh)^\frac{1}{2}$.
+
+  Thus by the Linderberg-Feller central limit theorem, we have our
+  required result.
+\end{proof}
+
+\section{Bandwidth Selection}
+\label{sec:bandwidth-selection}
+
+Since $h_{AMISE}$ depends on $f$ through $R(f'')$, we still require
+practical bandwidth selection algorithms.
+
+\subsection{Normal Scale rules}
+\label{sec:normal-scale-rules-1}
+
+If $f$ is the $N(0, \sigma^{2})$ density, then $R(f'') = \frac{3}{8
+  \sqrt{\pi}} \sigma^{-5}$.    The normal scale rate $\hat h_{NS}$
+consists of replacing $R(f'')$ in $h_{AMISE}$ with $\frac{3}{8
+  \sqrt{\pi}} \hat \sigma^{-5}$, where $\hat \sigma$ is an estimate of
+$\sigma$.  This tends to oversmooth.
+
+\subsection{Least-squares Cross-Validation}
+\label{sec:least-squares-cross}
+
+Recall that
+\begin{equation}
+  \label{eq:30}
+  MISE(\hat f_{h}) = \E{\int_{-\infty}^{\infty} \hat f(x)^{2} dx} - 2
+  \E{\int_{-\infty}^{\infty} \hat f_{h}(x) f(x)} +
+  \int_{-\infty}^{\infty} f(x)^{2} dx.
+\end{equation}
+
+Observe that it suffices to minimize the sum of the first two terms.
+This depend on the unknown $f$, but an unbiased estimate is given by
+$LSCV(h)$, with
+\begin{align}
+  \label{eq:31}
+  LSCV(h) = \int_{-\infty}^{\infty} \hat f_{h}(x)^{2} dx - \frac{2}{n}
+  \sum_{i=1}^{n} f_{-i, h}(x_{i})
+\end{align} with
+\begin{align}
+  \label{eq:32}
+  \hat f_{-i, h}(x) = \frac{1}{(n-1)h} \sum_{j \neq i} K(\frac{x - x_{j}}{h})
+\end{align}
+
+Minimization of $LSCV(h)$ yields $\hat h_{LSCV}$.
+
+\subsection{Biased Cross-Validation}
+\label{sec:bias-cross-valid}
+
+Under regularity conditions,
+\begin{align}
+  \label{eq:34}
+  \E{R(\hat f_{h})} = R(f'') + \frac{R(K'')}{n h^{5}} + O(h^{2}).
+\end{align}
+
+We can therefore define
+\begin{align}
+  \label{eq:36}
+  BCV(h) = \frac{R(K)}{nh} + \frac{1}{4} \mu_{2}^{2}(K) \widetilde{R(f'')}
+\end{align}
+
+where
+\begin{align}
+  \label{eq:35}
+  \widetilde{R(f'')} = R(\hat f_{h_{1}}) - \frac{R(K'')}{nh_{1}^{5}}
+\end{align} with $h_{1}$ a ``pilot'' bandwidth (c.f Ward and Jones,
+1995).  Minimization of $BCV(h)$ yields $\hat h_{BCV}$.
+
+\subsection{Solve-the-equation Rules}
+\label{sec:solve-equation-rules}
+
+Under smoothness assumptions, we can integrate by parts to obtain
+\begin{align}
+  \label{eq:37}
+  R(f'') = \int_{-\infty}^{\infty} f''''(x) f(x) dx = \E{f''''(X)}
+\end{align}
+
+We can therefore estimate $R(f'')$ by using
+\begin{align}
+  \label{eq:38}
+  \hat R_{h_{2}} = \frac{1}{n} \sum_{i=1}^{n} \hat
+  f_{h_{2}}''''(x_{i})
+\end{align} where again $h_{2}$ is a pilot bandwidth.  By exploiting
+the relationship between $h_{AMISE}$ and the $AMISE$-optimal bandwidth
+for estimating $R(f'')$ in this way, we obtain an equation which can
+be solved numerically to yield $\hat h_{SJE}$.
+
+
+\section{Other Topics}
+\label{sec:other-topics}
+
+\subsection{Choice of Kernel}
+\label{sec:choice-kernel}
+
+The choice of kernel is coupled with the choice of bandwidth, because
+if we replace $K(x)$ by $\frac{1}{2} K(\frac{1}{2})$ and we halve the
+bandwidth, the estimate is unchanged.  We therefore fix the scale by
+setting $\mu_{2}(K) = 1$.  Minimizing $AMISE(\hat f_{h})$ over $K$ the
+amounts to minimizing $R(K)$ subject to
+\begin{align}
+  \label{eq:40}
+  \int_{-\infty}^{\infty} K(x) dx = 1 \\
+  \int_{-\infty}^{\infty} x K(x) dx = 0 \\
+  \mu_{2}(K) = 1 \\
+  K(x) \geq 0
+\end{align}
+
+The solution is given by the Epanechnikov kernel (1969).
+\begin{align}
+  \label{eq:41}
+  K_{E}(x) = \frac{3}{4 \sqrt{5}}(1 - \frac{x^{2}}{5}) \I{|x| \leq \sqrt{5}}
+\end{align}
+
+The ratio $\frac{R(K_{E})}{R(K)}$ is called the \textbf{efficiency} of
+a kernel $K$, because it represents the ratio of the sample sizes
+needed to obtain the same $AMISE$ when using $K_{E}$ compared with $K$.
+
+
+% BEGIN RECEIVE ORGTBL testtbl
+\begin{tabular}{lr}
+Kernel & Efficiency \\
+\hline
+Epachnikov & 1.0 \\
+Normal & 0.951 \\
+Triangular & 0.986 \\
+Uniform & 0.930 \\
+\end{tabular}
+% END RECEIVE ORGTBL testtbl
+
 
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
 %%% End: 
+
+\iffalse
+#+ORGTBL: SEND testtbl orgtbl-to-latex :splice nil :skip 0
+| Kernel     | Efficiency |
+|------------+------------|
+| Epachnikov |        1.0 |
+| Normal     |      0.951 |
+| Triangular |      0.986 |
+| Uniform    |      0.930 |
+\fi
