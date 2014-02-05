@@ -12,7 +12,7 @@
 ** Complexity/hardness of the computation
    Measured by the comsumption of resource.
    
-***  
+***
     
 
 

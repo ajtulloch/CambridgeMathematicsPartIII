@@ -1,0 +1,92 @@
+% Created 2014-02-04 Tue 12:55
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Andrew Tulloch}
+\date{\today}
+\title{shor}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.5f)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Step 1}
+\label{sec-1}
+
+Choose $1 < a < N$ at random.
+
+Use the Euclidian algorithm to compute hfc(a, N).  If $a \neq 1$,
+finished!
+
+
+If $a = 1$, then \$a, N are coprime.
+
+Euler's theorem gives that if a, N are coprime, then there is a
+least power $1 < r < N$ such that $a^r \equiv 1 \mod N$.  $r$ is
+called the "order of $a \mod N$".  So $f: \Z \rightarrow \Z_n$ with
+$f(k) = a^k \mod N$ has period $r$.  $f$ is $1-1$ in each period\$.
+
+$f$ is efficiently computable, since by repeated squaring we can
+find \$f(k) in time poly log k.
+
+It is classically hard to find $r$ in poly n time.
+
+Suppose we can find \$r, and suppose $r$ is even.  Then by Legendre, we
+have the result that
+
+(a$^{\text{r}}$ - 1) = (a$^{\text{r}}$/2 + 1) (a$^{\text{r}}$/2 - 1) $\equiv$ 0 mod N
+
+We can then find factors of \$N with gcd(N, a$^{\text{r}}$/2 \textpm{} 1).
+
+Theorem if \$N is odd and not a prime power, and $a < N$ is chosend
+uniformly at random with gcd(a, N) = 1\$, then $Prob(r even, a^r/2
+  \neq -1 \mod N) \geq \frac{1}{2}$
+
+So repeating the a choices say k times, the probability we fail to
+fnid a given factor is bounded above by 1/2$^{\text{k}}$.
+
+\section{How to find $r$}
+\label{sec-2}
+Use a period finding algorithm.  $f(k) = a^k \mod N$ has period \$r
+on $Z$, for $r < N$.  Work on a finite domain \$D = \{0, 1, 2, \dots{},
+2$^{\text{m}}$-1\} = Z$_{\text{2}^{\text{m}}}$.  For 2$^{\text{m}}$ being the least power of 2 greater than
+$N^2$.
+
+We have $2^m = Br = b$, 1 < b < r, so \$B > N full periods and one
+corrupt period of length $b$.
+
+Now apply a qunatum period finding algorithm, makin.
+
+Make |f> = 1/sqrt\{2$^{\text{m}}$\} $\sum$ |x>|f(x)>, measure value.
+
+Obtain |per> = 1/sqrt\{A\} $\sum$$_{\text{k}}$=1$^{\text{A-1}}$ |x$_{\text{0}}$ + kr>, apply the QFT to
+obtain
+
+1/sqrt\{2$^{\text{m}}$\} $\sum$$_{\text{c}}$=0$^{\text{2}}$$^{\text{m}}$-1 e$^{\text{2}\pi\ \text{i / 2}^{\text{m}}}$(x$_{\text{0}}$ + kr c) | c >
+
+when $A = B$ or \$B + 1 depending on random x$_{\text{0}}$ vs $b$ value.
+
+Then QFT$_{\text{2}}^{\text{m}}$ |per> = $\sum$$_{\text{c=0}}^{\text{2}^{\text{m}} \ \text{- 1}}$ \textasciitilde{} f(c) | c >
+
+\section{}
+\label{sec-3}
+% Emacs 24.3.1 (Org mode 8.2.5f)
+\end{document}

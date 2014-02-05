@@ -110,12 +110,14 @@ interesting, ``universal'' in $p$.
 \section{Oriented/Directed Percolations}
 \label{sec:orient-perc}
 
-Consider th standard percolation, and define
-$\overrightarrow{\theta}(p) = \Prob(\text{there exists an infinite
-  directed path through the origin}){p}$ . Then
-$\overrightarrow{p_{c}} = \sup \{ p: \overrightarrow{\theta}(p) = 0
-\}$.  As $\overrightarrow{\theta}(p) \leq \theta(p)$, we have
-$\overrightarrow{p_{c}} \geq p_{c}$.
+Consider the standard percolation, and define
+\begin{align}
+  \label{eq:20}
+  \overrightarrow{\theta}(p) = \Prob{\text{there exists an infinite
+  directed path through the origin to $p$}}.
+\end{align} Then $\overrightarrow{p_{c}} = \sup \{ p:
+\overrightarrow{\theta}(p) = 0 \}$. As $\overrightarrow{\theta}(p)
+\leq \theta(p)$, we have $\overrightarrow{p_{c}} \geq p_{c}$.
 
 
 \section{Correlation Inequalities}
@@ -404,6 +406,159 @@ In this case $A \square B = \{ \omega : \exists F \subseteq E s.t. \omega_{F}
   \end{align} for all $A, B \subseteq \Omega$ and product measures $\Prob$.
 \end{thm}
 
+\section{Influence}
+\label{sec:influence}
+
+\begin{question}
+  What is the influence of an individual in an election?
+\end{question}
+
+\begin{question}
+  An increasing event $A$, a sequence of measures $\Prob_{p}$, and
+  consider $g(p) = \Prob_{p}(A)$.
+\end{question}
+
+For example, consider a problem from reliability theory - an
+electrical network has every link cut with probability $1 - p$, and
+what is the probability that the network is still connected? This
+class of theorems are called ``$S$-shaped theorems''.
+
+$\Omega = \{ 0, 1 \}^{E}$, $|E| < \infty$, $|E| = N$, $A \subseteq
+\Omega$.
+
+Let $e \in E$.
+
+\begin{defn}
+  \label{defn:random_walks_on_graphs:17}
+  The influence of $e$ on $A$  is
+  \begin{align}
+    \label{eq:21}
+    I_{A}(e) = \Prob_{p}(\I{A}(\omega^{e}) \neq \I_{A}(\omega_{e})).
+  \end{align}
+
+  If $A$ is increasing, then
+  \begin{align}
+    \label{eq:22}
+    I_{A}(e) = \Prob_{p}(A^{e}) - \Prob_{p}(A_{e}).
+  \end{align} where
+  \begin{align}
+    \label{eq:23}
+    A^{e} = \{ \omega : \omega^{e} \in A \} \\
+    A_{e} = \{ \omega : \omega_{e} \in A \} \\
+  \end{align}
+\end{defn}
+
+\begin{thm}[Kahn-Kalani-Limial, Talagrand]
+  \label{defn:random_walks_on_graphs:18}
+  There exists $c > 0$ such that for all $\epsilon, A$ and $0 < p <
+  1$.  Then
+  \begin{align}
+    \label{eq:24}
+    \sum_{e \in E} I_{A}(e) \geq c[\Prob_{p}(A)\Prob_{p}(\overline A)] \log
+    \frac{1}{\max_{e \in E} I_{A}(e)}.
+  \end{align}
+\end{thm}
+
+\begin{proof}
+  One uses discrete Fourier analysis (but non-examinable).
+\end{proof}
+
+\begin{thm}
+  \label{defn:random_walks_on_graphs:20}
+  It is interesting if we have  uniform upper bound $M_{p}$ for the
+  $I_{A}(e)$.
+
+  Let $m = \max_{e \in E} I_{A}(e)$.  Then we can write
+  \begin{align}
+    \label{eq:25}
+    mN \geq  [\cdots] \log \frac{1}{m} \\
+    m \geq \frac{[\cdots]}{N} \log \frac{1}{m} \geq [\cdots]'
+    \frac{\log N}{N}.
+  \end{align}
+\end{thm}
+
+\begin{thm}[Restatement of KKL]
+  \label{defn:random_walks_on_graphs:21}
+  The maximum influence $M$ satisfies
+  \begin{align}
+    \label{eq:26}
+    m \geq c' \Prob_{p}(A) \Prob_{p}(\overline A) \frac{\log N}{N}
+  \end{align}
+  for some universal $c' > 0$.
+
+  The $\frac{\log N}{N}$ is optimal.
+\end{thm}
+
+\begin{exmp}[Tribes]
+  \label{defn:random_walks_on_graphs:22}
+ Consider $N$ people partitioned into $t$ tribes, each of size $s =
+ \log N - \log \log N + \alpha$, and let $p = \frac{1}{2}$.
+
+ Then let
+ \begin{equation}
+   \label{eq:27}
+   A = \{ \text{There exists a tribe all of whose elements are
+     1} \}   
+ \end{equation}
+
+ Then
+ \begin{align}
+   \label{eq:28}
+   I_{A}(e) \sim c \Prob{A} \Prob{\overline A} \frac{\log N}{N}
+ \end{align} for all $e$.
+\end{exmp}
+
+\begin{thm}[Symmetric Case]
+  \label{defn:random_walks_on_graphs:23}
+  If $I_{A}(e)$ is a constant for $e \in E$,
+  \begin{align}
+    \label{eq:29}
+    \sum_{e \in E} I_{A}(e) \geq c[\Prob_{p}(A) \Prob_{p}(\overline
+    A)] \log N.
+  \end{align}
+\end{thm}
+
+\section{Sharp Threshold}
+\label{sec:sharp-threshold}
+
+Let $\Omega$ as before, $A \subseteq \Omega$.  Then
+\begin{thm}[Rousseau, Margoulis]
+  \label{defn:random_walks_on_graphs:24}
+  \begin{align}
+    \label{eq:31}
+    \frac{d}{dp} \Prob_{p}(A) = \sum_{e \in E} \Prob_{p}(A^{e}) - \Prob_{p}(A^{e}).
+  \end{align}
+  Note this is equal to $\sum_{e \in E} I_{A}(e)$ if $A$ is increasing.
+\end{thm}
+
+\begin{proof}
+  Need to only consider
+  \begin{align}
+    \label{eq:32}
+    \Prob_{p}(A) = \sum_{\omega} \I{A}(\omega) p^{|\eta|}(1-p)^{N - |\eta|}
+  \end{align} where $N = |E|$, $\eta = \{ e: \omega(e)= 1 \}$.
+
+  Then
+  \begin{align}
+    \label{eq:33}
+    \frac{d}{dp}\Prob_{p}(A) = \sum_{\omega} \I{A}(\omega)
+    (\frac{|\eta|}{p} - \frac{N - |\eta|}{1 - p}) p^{|\eta|}(1-p)^{|N
+      - |\eta|}
+  \end{align}
+  and so
+  \begin{align}
+    \label{eq:34}
+    p(1-p) \frac{d}{dp}\Prob_{p}(A) = \sum_{\omega}
+    \I{A}(\omega)(|\eta| - Np) p^{|\eta|}(1-p)^{N - |\eta|} \\
+    = \Prob_{p}(\I{A}(|\eta| - Np)) \\
+    = \sum_{e} \Prob_{p}(\I{A}(\I{e} - p)) \\
+    = \sum_{e} \Prob_{p}(\I{A}\I{e}) - p \Prob_{p}(A) \\
+    = \sum_{e} p \Prob_{p}(A^{e}) - p(p \Prob_{p}(A^{e}) + (1-p) \Prob_{p}(A_{e}))
+  \end{align} where $\I{e} = \I{\text{$e$ open}} = \omega(e)$, so
+  $|\eta| = \sum_{e} \I{e}$.
+
+  This completes the proof.
+\end{proof}
 
 %%% Local Variables: 
 %%% mode: latex
