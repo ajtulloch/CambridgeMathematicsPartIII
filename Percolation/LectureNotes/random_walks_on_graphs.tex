@@ -560,6 +560,133 @@ Let $\Omega$ as before, $A \subseteq \Omega$.  Then
   This completes the proof.
 \end{proof}
 
+\section{Back to Percolation}
+\label{sec:back-percolation}
+
+Let $L^{d} = (\Z^{d}, \E^{d}), 0 < p < 1$, and measure $\Prob_{p}$.
+Let $N$ be the number of open clusters.  Then
+\begin{align}
+  \label{eq:30}
+  \Prob_{p}(N \geq 1) =
+  \begin{cases}
+    \label{eq:38}
+    0 & p < p_{c} \\
+    \label{eq:39}
+    1 & p > p_{c}
+  \end{cases}
+\end{align}
+
+Then $\theta(p) = \Prob_{p}(0 \in \text{infinite open cluster})$. So
+\begin{align}
+  \label{eq:35}
+  \theta =
+  \begin{cases}
+    \label{eq:36}
+    0 & p  < p_{c} \\
+    \label{eq:37}
+    > 0 & p > p_{c}
+  \end{cases}
+\end{align}
+
+To show \eqref{eq:36} implies \eqref{eq:38}, we have $\Prob_{p}(N \geq
+1) \leq \sum_{x \in \Z^{d}}\Prob_{p}(x \in \text{infinite open
+  cluster}) = \sum_{x} 0 = 0$.
+
+To show \eqref{eq:37} implies \eqref{eq:39}, by Kolmogrov's zero-one law, we have $\Prob_{p}(N \geq 1) \in \{ 0, 1
+\}$, but $\Prob_{p}(N \geq 1) \geq \theta(p) > 0$ for $p > p_{c}$.
+
+\begin{thm}[Uniqueness of infinite cluster]
+  \label{defn:random_walks_on_graphs:19}
+  For all $0 < p < 1$, either
+  \begin{align}
+    \label{eq:41}
+    \Prob_{p}(N = 0) = 1
+  \end{align} or
+  \begin{align}
+    \label{eq:42}
+    \Prob_{p}(N = 1) = 1
+  \end{align}
+\end{thm}
+
+\begin{proof}
+  Fix $p \in (0, 1)$.
+
+  \begin{lem}[Part A]
+    There exists $k = k_{p} \in \{ 0, 1, ,2, \dots, \} \cup \{ \infty
+    \}$ with $\Prob_{p}(N = k) = 1$.
+  \end{lem}
+
+  \begin{proof}
+    $\L^{d}$ comes equipped with a shift translation, and the measure
+    is invariant under this shift.  Thus $N = N(\omega)$ is invariant
+    under the shift.
+  \end{proof}
+
+  This proof requires this lemma.
+  \begin{lem}
+    Any shift-invariant random variable on $(\Omega, \mathcal{F},
+    \Prob_{p})$ is almost surely constant.
+  \end{lem}
+
+  \begin{proof}
+    Elementary application of measure theory. 
+  \end{proof}
+
+  \begin{lem}[Part B]
+    $k_{p} \in \{ 0, 1, \infty \}$ - the ``finite-energy property''.
+  \end{lem}
+
+  \begin{proof}
+    Suppose $2 \leq k_{p} < \infty$.
+
+    Find $n$ such that $\Prob_{p}(\Lambda_{n} \text{intersections
+      $\geq 2$ infinite open clusters}) > \frac{1}{2}$.
+    \todo{Follow this argument? p93 in Probability on Graphs}
+  \end{proof}
+
+  \begin{lem}[Part C]
+    $k_{p} \neq \infty$.
+  \end{lem}
+
+  \begin{proof}
+    Say $x$ is a trifurcation if
+    \begin{enumerate}
+    \item $|C_x| = \infty$.
+    \item The removal of $x$ breaks $C_{x}$ into three disjoint
+      infinite clusters.
+    \end{enumerate}
+
+    Then $\tau = \Prob_{p}(\text{$x$ is a trifurcation})$ is
+    independent of $x$.
+
+    We claim $\tau > 0$.  To show this, take a large diamond box that
+    intersects with at least three open clusters.  Then there exists
+    $n$ such that $\Prob_{p}(\text{$S_{n}$ intersects $\geq 3$
+      infinite open clusters}) > \frac{1}{2}$.
+
+    Thus $\tau > 0$.
+
+    The argument is then that we use the ration beween boundary and
+    volume to bound the number of trifuricatinos in $A_n$, and show
+    that this leads to a contradiction for large $n$.
+  \end{proof}
+  
+
+  \todo{Fill in rest of proof.  Required to understand high-level
+    ideas and key steps around the graphs}
+\end{proof}
+
+\section{Percolation in Two Dimensions}
+\label{sec:perc-two-dimens}
+
+There are two models, bond percolation on $L^{2}$, and site
+percolation on $\Pi$, the triangular lattice.
+
+The triangular lattice is ``self-matching'', in that the dual
+construction is  on the same lattice as the primal (c.f. the dual of
+the square lattice).
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"

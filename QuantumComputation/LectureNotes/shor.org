@@ -52,5 +52,4 @@
   when $A = B$ or $B + 1 depending on random x_0 vs $b$ value.
 
   Then QFT_2^m |per> = \sum_{c=0}^{2^m - 1} \tilde f(c) | c >
-  *
    

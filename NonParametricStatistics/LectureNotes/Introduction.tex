@@ -556,6 +556,7 @@ a kernel $K$, because it represents the ratio of the sample sizes
 needed to obtain the same $AMISE$ when using $K_{E}$ compared with $K$.
 
 
+\begin{center}
 % BEGIN RECEIVE ORGTBL testtbl
 \begin{tabular}{lr}
 Kernel & Efficiency \\
@@ -566,7 +567,129 @@ Triangular & 0.986 \\
 Uniform & 0.930 \\
 \end{tabular}
 % END RECEIVE ORGTBL testtbl
+\end{center}
 
+\subsection{Derivative Estimation}
+\label{sec:deriv-estim-1}
+
+
+A natural estimator of the $r$-th derivative $f^{(r)}$ of $f$ is given
+by
+\begin{align}
+  \label{eq:33}
+  \hat f^{(r)}_{h}(x) = \frac{1}{n h^{r+1}} \sum_{i=1}^{n} K(\frac{x -
+  x_{i}}{h})
+\end{align}
+obtained from differentiating the standard KDE for $\hat f$.
+
+Under regularity conditions,
+\begin{align}
+  \label{eq:39}
+  MSE(\hat f^{(r)}_{h}(x)) = \frac{R(K^{(r)})}{nh^{2r+1}}f(x) +
+  \frac{1}{4} h^{4} \mu_{2}^{2} f^{(r-2)}(x)^{2} + o(\frac{1}{nh} + h^{4}).
+\end{align}
+
+This leads to an optimal bandwidth of order $n^{-\frac{1}{2r + 5}}$
+and a rate of converge of $n^{-\frac{4}{2r+5}}$.
+
+\begin{boxthm}
+  Estimating derivatives of densities is harder than estimating
+  densities themselves.
+\end{boxthm}
+
+\subsection{Higher Order Kernels}
+\label{sec:higher-order-kernels}
+
+It is possible to make the dominant integrated squared bias term of
+$MISE(\hat f_{h})$ vanish by choosing $\mu_{2}(K) = 0$.  This means
+we have to allow the Kernel to take negative values, so the resulting
+estimate need not be a density.
+
+We can set $\hat f_{h}(x) = \max (\hat f_{h}(x), 0)$ and then
+renormalize, but then we lose smoothness.  Nevertheless, we define $K$
+to be a $k$-th order kernel if writing $\mu_{j}(K) =
+\int_{-\infty}^{\infty} x^{j} K(x) dx$, we have
+\begin{align}
+  \label{eq:42}
+  \mu_{0}(K) = 1
+\end{align} and $\mu_{j}(K) = 0$ for $j = 1, \dots, k - 1$,
+$\mu_{k}(K) \neq 0$, and
+\begin{align}
+  \label{eq:43}
+  \int_{-\infty}^{\infty} |x|^{k} |K(x)| dx < \infty
+\end{align} If $f$ has $k$ continuous bounded derivatives with
+$R(f^{(k)}) < \infty$, then it is shown (example sheet) that
+$h_{AMISE} = c n^{-\frac{1}{2k+1}}$ and
+\begin{align}
+  \label{eq:44}
+  AMISE(\hat f_{h_{AMISE}}) = O(n^{-\frac{2k}{2k+1}})
+\end{align}
+
+Thus, under increasingly strong smoothness assumptions, convergence
+rates arbitrarily close to the parametric rate of $O(n^{-1})$ can be
+obtained.
+
+The practical benefit of higher order kernels is not always apparent,
+and the negativity/smoothness/bandwidth selection problems mean that
+they are rarely used in practice.
+
+\subsection{Local Bandwidths}
+\label{sec:local-bandwidths}
+
+Choosing $h = h(x)$  is problematic, because the resulting estimate
+need not be a density.  However, we can define
+\begin{align}
+  \label{eq:45}
+  \hat f(x) = \frac{1}{n} \sum_{i=1}^{n} K_{h(x)}(x - X_{i})
+\end{align}
+
+Theory suggests that we should choose $h(X_{i}) = h_{0}
+f^{-\frac{1}{2}}(X_{i})$, and, with four derivatives and a second
+order kerrenel, one can attan a ``fourth-order kernel'' rate of
+$O(n^{-\frac{8}{9}})$.  There is no negativity problem, but we do
+require pilot bandwidth selection.  Difficult to tune well and rarely
+used in practice.
+
+\subsection{Transformation Methods}
+\label{sec:transf-meth}
+
+It may be that $f$ is difficult to estimat,e, but it may be that we
+can construct a strictly increasing, continuously differentiable
+function $t$ on the support of $f$, such that, setting $Y_{i} =
+t(X_{i})$, the desntiy of $Y_{1}, \dots, Y_{n}$ is easier to estimate.
+We ``back transform'' the estimate to obtain
+\begin{align}
+  \label{eq:46}
+  \bar f_{h}(x) = \frac{1}{n} \sum_{i=1}^{n} K_{h}(t(x) - t(X_{i})) t'(x)
+\end{align}
+
+\subsection{Multi-Dimensional Density Estimation}
+\label{sec:multi-dimens-dens}
+
+The general $d$-dimensional kernel estimator is of the form
+\begin{align}
+  \label{eq:47}
+  \hat f_{H}(x) = \frac{1}{n} (\det H)^{\frac{1}{2}} \sum_{i=1}^{n}
+  K(H^{-\frac{1}{2}}(x - X_{i}))
+\end{align} where $H$ is positive definite symmetric bandwidth matrix.
+The difficulties of choosing the $\frac{1}{2} d(d+1)$ independent
+entries mean that we often restrict attention to the diagonal $H$, or
+even $H = h^{2} I$.  In this latter case,
+\begin{align}
+  \label{eq:48}
+  AMISE(\hat f_{h^{2}I}) = \frac{R(K)}{n h^{d}} + \frac{1}{4} h^{4}
+  \mu_{2}^{2}(K) \int_{\R^{d}} \{ \Delta_{f}(x) \}^{2} dx
+\end{align} where $\Delta_{f}(x) = \sum_{j=1}^{d} \frac{\partial^{2}
+  f}{\partial x_{j}^{2}}(x)$ is the Laplacian of $f$ at $x$.  This leads
+to an
+\begin{align}
+  \label{eq:49}
+  AMISE(\hat f_{h^{2}_{AMISE}I}) = O(n^{-\frac{4}{d + 4}})
+\end{align}
+
+Thus the ``curse of dimensionality'', together with bandwidth
+selection problems, means that this is only really feasible for $d
+\leq 4$.
 
 %%% Local Variables: 
 %%% mode: latex
