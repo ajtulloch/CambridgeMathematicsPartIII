@@ -2,6 +2,11 @@
 \chapter{Time Series Analysis}
 \label{cha:time-series-analysis}
 
+\section{Introduction}
+\label{sec:introduction}
+
+
+
 References: 
 \begin{enumerate}
 \item \citet{brockwell2009time}
@@ -98,6 +103,25 @@ distribution is invariant to time shifts.
   \end{align}
 \end{defn}
 
+\begin{lem}[Properties of the autocovariance function]
+  \begin{align}
+    \label{eq:13}
+    \gamma(0) \geq 0 \\
+    |\gamma(h)| \leq \gamma(0) \\
+    \gamma(h) = \gamma(-h)
+  \end{align} for all $h$.
+
+  Note that these all hold for the autocorrelation function $\rho$,
+  with the additional condition that $\rho(0) = 1$.
+\end{lem}
+
+\begin{thm}
+  \label{defn:time_series:16}
+  A real-valued function defined on the integers is the autocovariance
+  function of a stationary time series if and only if it is even and
+  nonnegative definite.
+\end{thm}
+
 \begin{exmp}
   \label{defn:time_series:10}
   Consider a white noise, with $X_{t}$ a time series with $X_{t}$
@@ -154,11 +178,60 @@ distribution is invariant to time shifts.
   \end{equation} is positive semidefinite.
 \end{defn}
 
-Consider the general problem of decomposing
-\begin{equation}
-  \label{eq:9}
-  X_{t} = m_{t} + s_{t} + Y_{t}.
-\end{equation}
+
+
+
+
+
+
+
+\section{State Space Modesl}
+\label{sec:state-space-modesl}
+
+
+
+\begin{defn}
+  \label{defn:time_series:13}
+  The observation equation is
+  \begin{equation}
+    \label{eq:10}
+    Y_{t} = G_{t} X_{t} + W_{t}.
+  \end{equation}
+
+  The state equation is
+  \begin{equation}
+    \label{eq:11}
+    X_{t+1} = F_{t} X_{t} + V_{t}
+  \end{equation}
+  
+  $\{ Y_{t} \}$ has a state-space representation if there exists a
+  state-space model for $\{ Y_{t} \}$ as specified by the previous
+  equations.
+\end{defn}
+
+\begin{thm}[De Finitte]
+  \label{defn:time_series:14}
+  If $\{ X_{1}, V_{1}, V_{2}, \dots \} $ are independent, then
+  $\{X_{t} \}$ has the Markov property - that is, $X_{t+1} | X_{t},
+  X_{t-1}, \dots = X_{t+1} | X_{t}$.
+\end{thm}
+
+
+\footnote{All of Section 8.1 in Introduction to Time Series and
+  Forecasting}
+
+In the stable case, there is a unique stationary solution, given by
+\begin{align}
+  \label{eq:12}
+  X_{t} = \sum_{j=0}^{\infty} F^{j} V_{t - j - 1}
+\end{align}
+
+
+\begin{defn}
+  \label{defn:time_series:15}
+  The state equation is said to be ``stable'' if the matrix $F$ has
+  all it's eigenvalues in the interior of the unit circle .  
+\end{defn}
 
 %%% Local Variables: 
 %%% mode: latex

@@ -1,0 +1,197 @@
+
+\section{Stationary Processes}
+\label{sec:stationary-processes-1}
+
+\subsection{Linear Processes}
+\label{sec:linear-processes}
+
+\begin{defn}[Wold Decomposition]
+  \label{defn:stationary_processes:1}
+  If $X_{t}$ is a nondeterministic stationary time series, then
+  \begin{equation}
+    \label{eq:9}
+    X_{t} = \sum_{j=0}^{\infty} \psi_{j} Z_{t-j} + V_{t}
+  \end{equation} where
+  \begin{enumerate}
+  \item $\psi{_0} = 1$ and $\sum_{j=0}^{\infty} \psi_{j}^{2} <
+    \infty$,
+  \item $Z_{t} \sim WN(0, \sigma^{2})$,
+  \item $\Cov{Z_{s}}{V_{t}} = 0$ for all $s, t$,
+  \item $Z_{t} = \tilde P_{t} Z_{t}$ for all $t$,
+  \item $V_{t} = \tilde P_{s} V_{t}$ for all $s, t$,
+  \item $V_{t}$ is deterministic.
+  \end{enumerate}
+  The sequences $Z_{t}, \psi_{j}, V_{t}$ are unique and can be written
+  explicitly as
+  \begin{align}
+    \label{eq:9}
+    Z_{t} = X_{t} - \tilde P_{t-1} X_{t} \\
+    \psi_{j} = \frac{\E{X_{t} Z_{t-j}}}{\E{Z_{t}}^{2}} \\
+    V_{t} = X_{t} - \sum_{j=0}^{\infty} \psi_{j} Z_{t-j}.
+  \end{align}
+\end{defn}
+
+\begin{defn}
+  \label{defn:stationary_processes:1}
+  A times series $\{ X_{t} \}$ is a \textbf{linear process} if it has
+  the representation
+  \begin{equation}
+    \label{eq:9}
+    X_{t} = \sum_{j=-\infty}^{\infty} \psi_{j} Z_{t-j}
+  \end{equation}
+  where $Z_{t} \sim WN(0, \sigma^{2})$ and $\{ \psi_{j} \}$ is a
+  sequence of constants with $\sum_{j=-\infty}^{\infty} |\psi_{j}| <
+  \infty$.
+\end{defn}
+
+A linear process is called a \textbf{moving average} or MA($\infty$)
+if $\psi_{j} = 0$ for all $j < 0$, so
+\begin{equation}
+  \label{eq:9}
+  X_{t} = \sum_{j=0}^{\infty} \psi_{j} Z_{t-j}.
+\end{equation}
+
+\begin{proposition}
+  Let $Y_{t}$ be a stationary time series with mean zero and
+  coavariance function $\gamma_{Y}$.  If $\sum_{j=-\infty}^{\infty}
+  |\psi_{j}| < \infty$, then the time series
+  \begin{equation}
+    \label{eq:9}
+    X_{t} = \sum_{j=-\infty}^{\infty} \psi_{j} Y_{t-j} = \psi(B) Y_{t}
+  \end{equation}
+  is stationary with mean zero and autocovariance function
+  \begin{equation}
+    \gamma_{X}(h) = \sum_{j=-\infty}^{\infty}
+    \sum_{k=-\infty}^{\infty} \psi_{j}\psi_{k} \gamma_{Y}(h + k - j).
+  \end{equation}
+
+  In the special case where $X_{t}$ is a linear process,
+  \begin{equation}
+    \gamma_{X}(h) = \sum_{j=-\infty}^{\infty} \psi_{j} \psi_{j + h} \sigma^{2}.
+  \end{equation}
+\end{proposition}
+
+\subsection{Forecasting Stationary Time Series}
+\label{sec:forec-stat-time}
+
+Our goal is to find the linear combination of $1, X_{n}, X_{n-1},
+\dots, X_{1}$ that forecasts $X_{n+h}$ with minimum mean squared
+error.  The best linear predictor in terms of $1, X_{n}, \dots, X_{1}$
+will be deonted by $P_{n} X_{n+h}$ and clearly has the form
+\begin{equation}
+  P_{n}X_{n+h} = a_{0} + a_{1} X_{n} + \cdots + a_{n} X_{1}.
+\end{equation}
+
+To find these equations, we solve the convex problem by setting
+derivatives to zero, and obtain the result given below.
+
+\begin{thm}[Properties of $h$-step best linear predictor $P_{n} X_{n+h}$]
+  \label{defn:stationary_processes:1}
+  \begin{enumerate}
+  \item
+    \begin{equation}
+      P_{n}X_{n+h} = \mu + \sum_{i=1}^{n} a_{i} (X_{n+1-i} - \mu)
+    \end{equation} where $\mathbf{a}_{n} = (a_{1}, \dots, a_{n})$ satisfies
+    \begin{align}
+      \Gamma_{n} \mathbf{a}_{n} = \gamma_{n}(h) \\
+      \Gamma_{n} = [\gamma(i - j)]^{n}_{i,j = 1} \\
+      \gamma_{n}(h) = (\gamma(h), \gamma(h+1), \dots, \gamma(h + n - 1))
+    \end{align}
+  \item
+    \begin{equation}
+      \E{(X_{n+h} - P_{n} X_{n+h})^{2}} = \gamma(0) -
+      \IP{\mathbf{a}_{n}, \gamma_{n}(h)}
+    \end{equation}
+  \item
+    \begin{equation}
+      \E{X_{n+h} - P_{n} X_{n+h}} = 0
+    \end{equation}
+  \item
+    \begin{equation}
+      \E{(X_{n+h} - P_{n} X_{n+h}) X_{j}} = 0
+    \end{equation} for $j = 1, \dots, n$.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}[Prediction Operator $P(\cdot | \mathbf{W})$]
+  \label{defn:stationary_processes:1}
+  Suppose that $\E{U^{2}} < \infty$, $\E{V^{2}} < \infty$, $\Gamma =
+  \Cov{\mathbf{W}}{\mathbf{W}}$, and $\beta, \alpha_{1}, \dots,
+  \alpha_{n}$ are constants.
+
+  \begin{enumerate}
+  \item
+    \begin{equation}
+      P(U | \mathbf{W}) = \E{U} = \mathbf{a}'(\mathbf{W} - \E{\mathbf{W}})
+    \end{equation}
+    where $\Gamma \mathbf{a} = \Cov{U}{\mathbf{W}}$.
+  \item
+    \begin{equation}
+      \E{(U - P(U | \mathbf{W})) \mathbf{W}} = 0
+    \end{equation} and
+    \begin{equation}
+      \E{U - P(U | \mathbf{W})} = 0
+    \end{equation}
+  \item
+    \begin{equation}
+      \E{(U - P(U | \mathbf{W}))^{2}} = \Var{U} - \mathbf{a}' \Cov{U}{\mathbf{W}}
+    \end{equation}
+  \item
+    \begin{equation}
+      P{\alpha_{1} + \alpha_{2} V + \beta | \mathbf{W}} = \alpha_{1}
+      P(U| \mathbf{W}) + \alpha_{2} P(V | \mathbf{W}) + \beta
+    \end{equation}
+  \item
+    \begin{equation}
+      P(\sum_{i=1}^{n} \alpha_{i} W_{i} + \beta | \mathbf{W}) =
+      \sum_{i=1}^{n} \alpha_{i} W_{i} + \beta
+    \end{equation}
+  \item
+    \begin{equation}
+      \label{eq:15}
+      P(U | \mathbf{W}) = E{U}
+    \end{equation} if $\Cov{U}{\mathbf{W}} = 0$.
+  \end{enumerate}
+\end{defn}
+
+\subsection{Innovation Algorithm}
+\label{sec:innovation-algorithm}
+
+\begin{thm}
+  \label{defn:stationary_processes:2}
+  Suppose $X_{t}$ is a zero-mean series with $\E{|X_{t}|^{2}} <
+  \infty$ for each $t$ and $\E{X_{i} X_{j}} = \kappa(i, j)$.
+  Let $\hat X_{n} = 0$ if $n = 1$, and $P_{n-1} X_{n}$ if $n = 2, 3,
+  \dots$, and let $v_{n} = \E{(X_{n+1} - P_{n} X_{n+1})^{2}}$.
+
+  Define the innovations, or one-step prediction errors, as $U_{n} =
+  X_{n} - \hat X_{n}$.
+
+  Then we can write
+  \begin{align}
+    \label{eq:16}
+    \hat X_{n+1} =
+    \begin{cases}
+      0 & n = 0 \\
+      \sum_{j=1}^{n} \theta_{nj}(X_{n+1-j} - \hat X_{n+1 - j})
+    \end{cases}
+  \end{align}
+  where the coefficients $\theta_{n1}, \dots, \theta{nn}$ can be
+  computed recursively from the equations
+  \begin{align}
+    \label{eq:17}
+    v_{0} = \kappa(1, 1) \\
+    \theta_{n, n-k} = \frac{1}{v_{k}}(\kappa(n+1, k+1) -
+    \sum_{j=0}^{k-1} \theta_{k, k-j} \theta_{n, n-j} v_{j})
+  \end{align}  for $0 \leq k < n$, and
+  \begin{equation}
+    \label{eq:18}
+    v_{n} = \kappa(n+1, n+1) - \sum_{j=0}^{n-1} \theta^{2}_{n, n-j} v_{j}.
+  \end{equation}
+\end{thm}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

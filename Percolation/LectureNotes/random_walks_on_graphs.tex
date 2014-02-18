@@ -674,6 +674,9 @@ To show \eqref{eq:37} implies \eqref{eq:39}, by Kolmogrov's zero-one law, we hav
 
   \todo{Fill in rest of proof.  Required to understand high-level
     ideas and key steps around the graphs}
+
+  N.B. - consider the corresponding proof for site percolation.  For
+  $x, y, z \in \partial S$, does there exist open paths to zero?
 \end{proof}
 
 \section{Percolation in Two Dimensions}
@@ -686,6 +689,101 @@ The triangular lattice is ``self-matching'', in that the dual
 construction is  on the same lattice as the primal (c.f. the dual of
 the square lattice).
 
+\subsection{Bond percolation on $\Z^2$, Site Percolation on $\mathbb{T}$}
+\label{sec:bond-percolation-z2}
+
+\begin{thm}
+  \label{defn:random_walks_on_graphs:26}
+  For bond percolation on $\Z^{2}$, $\Theta(\frac{1}{2}) = 0$.
+\end{thm}
+
+\begin{proof}[Proof of Zhang]
+  Let $p = \frac{1}{2}$ and suppose $\Theta(\frac{1}{2}) > 0$.  Since
+  $\Theta(\frac{1}{2}) > 0$, then the probability there exists an
+  infinite open cluster is one.
+
+  Let $T_{n} = [0, n]^{2}$.  As $n$ goes to infinity, then the
+  probability that $T_{n}$ intersects with the infinite open cluster
+  tends to one. Thus, find $N$ such that for all $n > N$,
+  $\Prob{\text{$T_n$ intersects the infinite open cluster}}$ is
+  greater than $1 - \frac{1}{8}^4$.
+
+  Consider $A^{t}$ be the event that the \textbf{top} of $T_{n}$ is joined to
+  the infinite open cluster.  Define $A^{b}, A^{l}, A^{r}$ to be the
+  \textbf{bottom}, \textbf{left}, and \textbf{right} analogues.  Then
+  $\Prob{\text{$T_{n}$ does not intersects the infinite cluster}}$ is
+  $\Prob{\overline{A^{t}} \cap \overline{A^{b}} \cap \overline{A^{l}} \cap
+    \overline{A^{r}}} \geq \Prob{\overline{A^{u}}}^{4}$ for $u = t, b,
+  l, r$.
+
+  Then we have $\Prob{A^{u}} \geq \frac{7}{8}$ by the given result.
+
+  Let $n = N + 1$.  Pass to the dual percolation, ...
+
+  \todo{Fill this in from the Probability on Graphs book.  Doesn't
+    look _too_ difficult.}
+\end{proof}
+
+\subsection{Site percolation on $\Pi$}
+\label{sec:site-percolation-pi}
+
+$\Pi$ has the vertex set $\{ m \tilde i + n \tilde j: m, n \in \Z\}$,
+$\tilde i = (1, 0)$, $\tilde j = \frac{1}{2}(1, \sqrt{3})$ when
+embedded into $\R^{2}$.
+
+Now, consider a box in $\R^{2}$, with vertices $(0, 0)$ and $(a, b)$
+with $a \in \N, b \in \sqrt{3}{2} \N$.
+
+Each site is black with probability $\frac{1}{2}$, and white
+otherwise.  Let $H_{a, b} = \{ L \leftrightarrow^{black} R \in R_{a,
+  b}$ where $L$ is the left edge and $R$ is the right edge.  That is,
+$H_{a, b}$ is the event that there exitss a black path that traverses
+$R_{a, b}$ from $L(R_{a, b})$ to $R(R_{a, b})$.
+
+Then we have the lemma as follows:
+
+\begin{lem}[RSW Lemma]
+  \begin{align}
+    \label{eq:40}
+    \Prob{H_{2a, b}} \geq \frac{1}{4} \Prob{H_{a, b}}^{2}.
+  \end{align}
+\end{lem}
+
+\todo{Proof on p100-105 in book}
+
+\begin{thm}
+  \label{defn:random_walks_on_graphs:25}
+  $p_{c}(\text{bond}, \mathbb{T}) = \frac{1}{2}$
+\end{thm}
+
+\begin{thm}
+  \label{defn:random_walks_on_graphs:27}
+  $p_{c} \geq \frac{1}{2}$, and in fact $\Theta(\frac{1}{2}) = 0$ for
+  the bond model on $\Z^{2}$.
+\end{thm}
+
+\newmathcommand{\rad}{Rad}
+
+\begin{proof}
+  Following p 122 of the book.
+  
+  We need to prove that $p_{c} \leq \frac{1}{2}$ - that is $\Theta(p)
+  > 0$ for $p > \frac{1}{2}$.
+
+
+  Let $H_{n} = H_{16 n, n \sqrt{3}}$ be the event that a black
+  crossing of $R_{16n, n \sqrt{3}}$ exists. By the previous lemma,s
+  there exists $\tau > 0$ such that $\Prob_{\frac{1}{2}}(H_{n}) \geq
+  \tau$ for some $\tau > 0$. Let $\frac{1}{2} \leq p \leq
+  \frac{3}{4}$.
+
+  Then
+  \begin{equation}
+    \label{eq:43}
+    (1-p) I_{n, p}(x) \leq \Prob_{1-p}(\rad(C_{x}) \geq n)
+  \end{equation}
+  where $\rad(C_{x}) = \max \{ |y-x| : x \leftrightarrow y \}$.
+\end{proof}
 
 %%% Local Variables: 
 %%% mode: latex

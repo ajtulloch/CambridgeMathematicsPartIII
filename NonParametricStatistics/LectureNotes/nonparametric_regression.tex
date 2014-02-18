@@ -1,0 +1,242 @@
+
+\chapter{Nonparametric Regression}
+\label{cha:nonp-regr}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Nonparametric regression is a regression which doesn't assume a
+paramateric relation between a design matrix $X$ and the response
+variable $Y$.
+
+In the univariate fixed design setting, the design $X$ consists of
+ordered real numbers $x_{1} < x_{2} < \cdots < x_{n}$, and the
+response variable $Y$ we have
+\begin{align}
+  \label{eq:50}
+  Y_{i} = m(x_{i}) + v(x_{i})^{\frac{1}{2}} \epsilon_{i}
+\end{align} where the $\epsilon_{i}$ are \iid, $\E{\epsilon_{i}} = 0$,
+$\Var{\epsilon_{i}} = 1$.
+
+In the random design setting, we have
+\begin{align}
+  \label{eq:51}
+  Y_{i} = m(X_{i}) + v(X_{i})^{\frac{1}{2}} \epsilon_{i}
+\end{align} where $\epsilon_{i}$ are \iid, $\E{\epsilon_{i} | X_{i}} =
+0$, and $\Var{E_{i} | X_{i}} = 1$. $m_{i}$ is the regression function
+that is our interest to estimate. When $v(x_{i}) = v$ (constant), we
+call it homoscedastic. If it is not, we call it heteroscedastic.
+
+\section{Local polynomial estimator}
+\label{sec:local-polyn-estim}
+
+Assume a fixed design.  The local polynomial estimator $\hat m_{h}(x;
+p)$ of degree $p$ with kernel $K$ with a bandwidth $h$ is constructed
+by fitting a polynomial of degree $p$ using weighted least squares.
+The weight $K_{h}(x_{i} - x)$ is associated with the weight $(x_{i},
+Y_{i})$.
+
+More precisely, $\hat m_{h}(x; p) = \hat \beta_{0}$ where $\hat \beta =
+(\hat \beta_{0}, \hat \beta_{1}, \dots, \hat \beta_{p})$ whicch is
+minimizing
+\begin{align}
+  \label{eq:52}
+  \sum_{i=1}^{n} (Y_{i} - \beta_{0} - \beta_{1}(x_{i} - x) + \dots +
+  \beta_{p}(x_{i} - x)^{p})^{2} K_{h}(x_{i} - x)
+\end{align} where $\beta \in \R^{p+1}$
+
+The theory of weighted least squares gives
+\begin{align}
+  \label{eq:53}
+  ...
+\end{align}
+
+For $p = 0$, then a simple expression (Nodorya-Watson, local constant)
+exists:
+\begin{align}
+  \label{eq:54}
+  \hat m_{h}(x; 0) = \frac{\sum_{i=1}^{n} K_{h}(x_{i} -
+    x)Y_{i}}{\sum_{i=1}^{n} k_{h}(x_{i} - x)}
+\end{align}
+
+
+\todo{This doesn't correspond to the book?}
+
+For $p= 1$, we call this a local linear estimator, and we have the
+explicit result
+\begin{align}
+  \label{eq:55}
+  \hat m_{h}(x; 1) = \frac{1}{n} \sum_{i=1}^{n} \frac{S_{0, h}(x) -
+    S_{1, h}(x)(x_{i} - x)}{S_{2, h}(x) S_{0, h}(x) - S_{1, h}(x)^{2}}
+  K_{h}(x_{i} - x) Y_{i}
+\end{align}
+with
+\begin{align}
+  \label{eq:56}
+  S_{r, h}(x) = \frac{1}{2} \sum_{i=1}^{n} (x_{i} - x)^{r} K_{h}(x_{i}
+  - x)
+\end{align}
+
+All local polynomial estimators of the form
+\begin{align}
+  \label{eq:57}
+  \sum_{i=1}^{n} W(x_{i}, x) Y_{i}
+\end{align}
+This type of estimator is called a linear estimator.   This set of
+weights $\{ W(x_{i}, x) \}$ is called the \textbf{effective kernel}.
+
+\section{MSE approxmiations}
+\label{sec:mse-approxmiations}
+
+For convenience, let $x_{i} = \frac{i}{n}$.  We consider the following
+conditions:
+
+\begin{enumerate}
+\item $m$ is twice continuosuly differentiable on $[0, 1]$ and is bounded, $v$ is continuous.
+\item $h = h_{n}, h_{n} \rightarrow 0$, $nh \rightarrow \infty$.
+\item $K$ is a nonnegative probability density, symmetric, has zeros
+  outside of $[-1, 1]$. $R(K) = \int K^{2}(x) dx < \infty$, and
+  $\mu_{2}(K) = \int x K^{2}(x) < \infty$.
+\end{enumerate}
+
+\begin{thm}
+  \label{defn:nonparametric_regression:1}
+  Under the conditions previously, for $x \in (0, 1)$, we have
+  \begin{align}
+    \label{eq:58}
+    MSE(\hat m_{h}(x; 1)) = \frac{1}{nh} R(K) v(x) + \frac{1}{4} h^{4}
+    (m''(x))^{2} \mu_{2}^{2}(K) + o(\frac{1}{nh} + h^{4})
+  \end{align}
+\end{thm}
+
+\begin{proof}[Sketch of proof]
+  As usual, we use a $\textsc{bias}^{2} + \textsc{variance}$
+  calculation.
+
+  \begin{align}
+    \label{eq:60}
+    \textsc{bias} = \E{\hat m_{h}, x; 1} - m(x) \\
+    &= \E{\frac{1}{n} \sum_{i=1}^{n} \frac{S_{0, h}(x) - S_{1,
+          h}(x)(x_{i} - x)}{DEN} K_{h}(x_{i} - x) Y_{i}} - m(x) \\
+    &= \frac{1}{n} \sum_{i=1}^{n} \frac{S_{2, h}(x) - S_{1,
+        h}(x)(x_{i} - x)}{DEN} K_{h}(x_{i} - x)
+    \underbrace{m(x_{i})}_{m(x) + (x_{i} - x) m'(x) + \frac{1}{2}
+      (x_{i} - x)^{2} m''(x)} - m(x) \\
+    &= \frac{m(x)}{DEN} \{ \frac{S_{2, h}(x) S_{0, h}(x) - S_{1,
+        h}^{2}(x)}{...} \} + \frac{m'(x)}{DEN} \{ \frac{S_{2, h}(x)
+      S_{1, h}(x) - S_{1, h}(x) S_{2, h}(x)}{DEN} \} + \frac{1}{2}
+    m''(x) \{ \frac{S_{2, h}^{2}(x) - S_{1, h}(x) S_{3, h}(x)}{S_{2,
+        h}(x) S_{0, h}(x) - S_{1, h}^{2}(x)} \} - m(x) \\
+    &= m(x) + 0 + \frac{1}{2} m''(x) \{ \frac{(h^{2} \mu_{2}(K) +
+      o(h^{2}))^{2} - o(h) o(h^{3})}{h^{2} \mu_{2}(K)(1 + o(1)) -
+      o(h^{2})} \} - m(x) \\
+    &= m(x) + \frac{1}{2} m''(x) \frac{h^{4} \mu_{2}^{2}(K) +
+      o(h^{4})}{h^{2} \mu_{2}(K) + o(h^{2})} - m(x)
+    &= m(x) + \frac{1}{2} m''(x) h^{2} \mu_{2}(K) + o(h^{2}) + REM -
+    m(x) \\
+    &= \frac{1}{2} m''(x) h^{2} \mu_{2}(K) + o(h^{2})
+  \end{align} since $|REM| = o(h^{2})$.
+  Note that we  have
+  \begin{align}
+    \label{eq:61}
+    S_{r, h}(x) &= \frac{1}{n} \sum_{i=1}^{n} (x_{i} - x)^{r}
+    K_{h}(x_{i} - x) \\
+    &= \frac{1}{n} \sum_{i=1}^{n}  (x_{i} - x)^{r} \frac{1}{h}
+    K(\frac{x_{i} - x}{h}) \\
+    &= \frac{1}{nh} h^{r} \sum_{i=1}^{n} (\frac{x_{i} - x}{h})^{r}
+    K(\frac{x_{i} - x}{h})  \\
+    &= h^{r} \{ \int_{-1}^{1} u^{r} K(u) du + o(1) \} \\
+    &= h^{r} \mu_{r}(K) + o(h^{r})
+  \end{align} from bounded support of $K$, with $\frac{|x_{i} - x|}{h}
+  \leq 1$.
+
+
+  For the variance, we need the preliminary calculations that
+  \begin{align}
+    \label{eq:62}
+    t_{r, h}(x) &= \frac{1}{n} \sum_{i=1}^{n} (x_{i} - x)^{r}
+    K_{h}^{2}(x_{i} - x) \\
+    &= h^{r-1} \mu_{r}(K^{2}) + o(h^{r-1})
+  \end{align}
+
+  \begin{align}
+    \label{eq:63}
+    \Var{\hat m_{h}(x; 1)} = \frac{1}{n^{2}} \sum_{i=1}^{n}
+    (\frac{S_{2, h}(x) - S_{1, h}(x)(x_{i} - x)}{DEN})^{2}
+    K_{h}^{2}(x_{i} - x) v(x_{i}) \\
+    &= \frac{1}{n} \frac{1}{n} \sum_{i=1}^{n} \frac{S_{2, h}^{2}(x) -
+      2(x_{i} - x) S_{1, h}(x) S_{2, h}(x) + (x_{i} - x)^{2} S_{1,
+        h}^{2}(x)}{DEN^{2}}  K^{2}_{h}(x_{i} - x) v(x) + REM_{2} \\
+    &= \frac{1}{n} \frac{S_{2, h}^{2}(x) t_{0, h}(x) - 2 S_{1, h}(x)
+      S_{2, h}(x) t_{1, h}(x) + S_{1, h}^{2}(x) t_{2, h}(x)}{DEN} v(x)
+    + REM_{2} \\
+    &= \frac{v(x)}{n} \frac{(h^{2} \mu_{2} (K) + o(h^{2}))^{2} (h^{-1}
+      \mu_{0}(K^{2}) +o(h^{-1})) - 2 o(h) (h^{2} \mu_{2}(K) +
+      o(h^{2}))(\mu_{1}(K^{2}) + o(1)) + o(h^{2}) (h \mu_{2} (K^{2}) +
+      o(h))}{(h^{2} \mu_{2}(K)(1 + o(1)) + o(h^{2}))^{2}} \\
+    &= \frac{v(x)}{n} \frac{h^{3} \mu_{2}^{2}(K) \mu_{0}(K^{2}) +
+      o(h^{3})}{h^{4} \mu_{2}^{2}(K) + o(h^{4})} + REM_{2} \\
+      &= \frac{v(x)}{n}  \frac{1}{h}  R(K) + o(\frac{1}{nh})
+    \end{align} where $|REM_{2}| = o(\frac{1}{nh})$
+
+    With some further work, we can integrate term by term the
+    asymptotic expansion to obtain $MISE(\hat m(\cdot; 1))$.
+\end{proof}
+
+For $p$ even, the bias is more complicated.  Moreover, for $p$ even,
+the bias at boundary point $x = \alpha h$, $\alpha \in [0, 1)$ has
+larger order than the bias at the interior point.
+
+
+\footnote{In the demonstration, asymmetry of $\textsc{Beta}(2, 4)$ distributions
+combined with the negative slope fo the true regression function, we
+see that local constant estimators has an upward bias.  In contrast,
+local linear estimators adapts fto this}
+
+\section{Splines}
+\label{sec:splines}
+
+\subsection{Motivation}
+\label{sec:motivation}
+
+Let $n \geq 3$, and consider for a fixed homoscedastic design
+\begin{align}
+  \label{eq:64}
+  Y_{i} = m(x_{i}) + \sigma \epsilon_{i}
+\end{align} where $\epsilon_{i}$ are \iid with $\E{\epsilon_{i}} = 0$,
+$\Var{\epsilon_{i}} = 1$.
+
+Another natural idea to estimate the regression curve $m$ is to
+balance the fidelity of the fit to the data and the roughness of the
+resulting curve.  This can be done by minimizing
+\begin{align}
+  \label{eq:65}
+  \sum_{i=1}^{n} (Y_{i} - \tilde g(x_{i}))^{2} + \lambda \int \tilde
+  g''(x)^{2} dx
+\end{align} over $\tilde g \in S_{2}[a, b]$, the set of twice
+continuously differentiable functions on $[a, b]$.  $\lambda$ is a
+regularization parameter.  As $\lambda \rightarrow \infty$, the curve
+is very close to the linear regression line.  As $\lambda \rightarrow
+0$, the resulting curve closely fits the observations.
+
+\subsection{Cubic Spline}
+\label{sec:cubic-spline}
+
+\begin{defn}
+  \label{defn:nonparametric_regression:2}
+  A cubic spline is a function $g: [a, b] \rightarrow \R$ satisfies
+  \begin{enumerate}
+  \item $g$ is a cubic polynomial on $[(a, x_{1}), (x_{1}, x_{2}),
+    \dots, (x_{n}, b)]$.
+  \item $g$ is twice continuously differentiable on $[a, b]$.
+  \end{enumerate}
+  
+\end{defn}
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

@@ -1,0 +1,253 @@
+
+\section{ARMA Processes}
+\label{sec:arma-processes}
+
+\begin{defn}
+  \label{defn:arma_processes:1}
+  $X_{t}$ is an ARMA($p, q$) process if $X_{t}$ is stationary and if
+  for every $t$,
+  \begin{equation}
+    \label{eq:14}
+    X_{t} - \phi_{1} X_{t-1} - \cdots - \phi_{p} X_{t-p} = Z_{t} +
+    \theta_{1} Z_{t-1} + \cdots + \theta_{q} Z_{t-q}
+  \end{equation} where $Z_{t} \sim WN(0, \sigma^{2})$  and the
+  polynomials $(1 - \phi_{1}z - \cdots - \phi_{p} z^{p})$ and $(1 +
+  \theta_{1} z + \cdots + \theta_{q} z^{q})$ have no common factors.
+
+  It can be more convenient to write this in the form
+  \begin{equation}
+    \label{eq:19}
+    \phi(B) X_{t} = \theta(B) Z_{t}
+  \end{equation}
+  with $B$ the back-shift operator.
+
+  ARMA($0, q$) is a moving average process of order $q$ (MA($q$)).
+  ARMA($p, 0$) is an autoregressive process of order $p$ (AR($p$)).
+\end{defn}
+
+\begin{thm}
+  \label{defn:arma_processes:2}
+  A stationary solution of \eqref{eq:14} exists (and is the unique
+  stationary solution) if and only if
+  \begin{equation}
+    \label{eq:20}
+    \phi(z) = 1 - \phi_{1} z - \cdots - \phi_{p} z^{p} \neq 0
+  \end{equation} for all $|z| = 1$
+\end{thm}
+
+\begin{defn}
+  \label{defn:arma_processes:3}
+  An ARMA($p, q$) process $X_{t}$ is causal (or a causal function of
+  $Z_{t}$) if there exists constants $\psi_{j}$ such that
+  $\sum_{j=0}^{\infty} |\psi_{j}| < \infty$ and
+  \begin{equation}
+    \label{eq:21}
+    X_{t} = \sum_{j=0}^{\infty} \psi_{j} Z_{t-j}
+  \end{equation} for all $t$.
+\end{defn}
+
+\begin{thm}
+  \label{defn:arma_processes:4}
+  An ARMA($p, q$) process is causal if and only if
+  \begin{equation}
+    \label{eq:22}
+    \phi(z) = 1 - \phi_{1} z - \cdots - \phi_{p} z^{p} \neq 0
+  \end{equation} for all $|z| \leq 1$.
+
+  Note that the coefficients $\psi_{j}$ are determined by
+  \begin{equation}
+    \label{eq:25}
+    \psi_{j} - \sum_{k=1}^{p} \theta_{k} \psi_{j-k} = \theta_{j}
+  \end{equation} for $j = 0, 1, \dots$.
+  and $\theta_{0} = 1$, $\theta_{j} = 0$ for $j > q$, and $\psi_{j} =
+  0$ for $j < 0$.
+\end{thm}
+
+\begin{defn}
+  \label{defn:arma_processes:5}
+  An ARMA($p, q$) is invertible if there exist constants $\pi_{j}$
+  such that $\sum_{j=0}^{\infty} |\pi_{j}| < \infty$ and
+  \begin{equation}
+    \label{eq:23}
+    Z_{t} = \sum_{j=0}^{\infty} \pi_{j} X_{t-j}
+  \end{equation} for all $t$.
+
+  The coefficients $\pi_{j}$ are determined by the equations
+  \begin{equation}
+    \label{eq:26}
+    \pi_{j} + \sum_{k=1}^{q} \theta_{k} \pi_{j-k} = -\phi_{j}
+  \end{equation}
+  where $\phi_{0} = -1$, $\theta_{j} = 0$ for $j > p$, and $\pi_{j} =
+  0$ for $j < 0$.
+\end{defn}
+
+\begin{thm}
+  \label{defn:arma_processes:6}
+  Invertibility is equivalent to the condition
+  \begin{equation}
+    \label{eq:24}
+    \theta(z) = 1 + \theta_{1}z + \cdots + \theta_{q} z^{q} \neq 0
+  \end{equation} for all $|z| \leq 1$.
+\end{thm}
+
+\subsection{ACF and PACF of an ARMA($p, q$) Process}
+\label{sec:acf-pacf-an}
+
+\begin{thm}
+  \label{defn:arma_processes:7}
+  For a causal ARMA($p, q$) process defined by
+  \begin{equation}
+    \label{eq:28}
+    \phi(B) X_{t} = \theta(B) Z_{t}
+  \end{equation} we know we can write
+  \begin{equation}
+    \label{eq:29}
+    X_{t} = \sum_{j=0}^{\infty} \psi_{j} Z_{t-j}
+  \end{equation} where $\sum_{j=0}^{\infty} \psi_{j} z^{j} = \theta(z)
+  / \phi(z)$ for $|z| \leq 1$.
+
+  Thus, the ACVF $\gamma$ is given as
+  \begin{equation}
+    \label{eq:30}
+    \gamma(h) = \E{X_{t+h} X_{t}} = \sigma^{2} \sum_{j=0}^{\infty}
+    \psi_{j} \psi_{j+|h|}
+  \end{equation}
+
+  A second approach is to multiple each side by $X_{t_k}$ and take
+  expectations, and obtain a sequence of $m$ homogenous linear
+  difference equations with constant coefficients.  These can be
+  solved to obtain the $\gamma(h)$ values. 
+\end{thm}
+
+\begin{defn}[PACF]
+  \label{defn:arma_processes:8}
+  The partial autocorrelation function (PACF) of an AMRA process $X$
+  is the function $\alpha(\cdot)$ defined by
+  \begin{align}
+    \label{eq:31}
+    \alpha(0) = 1 \\
+    \alpha(h) = \phi_{hh}, h \geq 1
+  \end{align} where $\phi_{hh}$ is the last component of
+  $\mathbf{\phi}_{h} = \Gamma_{h}^{-1} \gamma_{h}$, where $\Gamma_{h}
+  = [\gamma(i - j)]^{h}_{i,j = 1}$, and $\gamma_{h} = [\gamma(1),
+  \gamma(2), \dots, \gamma(h)]$.
+\end{defn}
+
+\begin{thm}
+  \label{defn:arma_processes:9}
+  For an AR($p$) process, the sample PACF values at lags greater than
+  $p$ are approximately independent $N(0, \frac{1}{n})$ random
+  variables.  Thus, if we have a sample PACF satisfying
+  \begin{equation}
+    \label{eq:32}
+    |\hat \alpha(h)| > \frac{1.96}{\sqrt{n}}
+  \end{equation} for $0 \leq h \leq p$ and
+  \begin{equation}
+    \label{eq:33}
+    |\hat \alpha(h)| < \frac{1.96}{\sqrt{n}}
+  \end{equation} for $h > p$, this suggests an AR($p$) model for the data.
+\end{thm}
+
+\begin{thm}[PACF summary]
+  \label{defn:arma_processes:10}
+  For an AR($p$) process $X_{t}$, the PACF $\alpha(\cdot)$ has the
+  properties that $\alpha(p) = \phi_{p}$, and $\alpha(h) = 0$ for $h >
+  p$.  For $h < p$ we can compute numerically from the expression that
+  $\mathbf{\phi}_{h} = \Gamma^{-1}_{h} \mathbf{\gamma}_{h}$.
+\end{thm}
+
+\subsection{Forecasting ARMA Processes}
+\label{sec:forec-arma-proc}
+
+For the causal ARMA($p, q$) process
+\begin{equation}
+  \label{eq:35}
+  \phi(B) X_{t} = \theta(B) Z_{t}, Z_{t} \sim WN(0, \sigma^{2})
+\end{equation} we can avoid using the full innovations algorithm.
+
+If we apply the algorithm to the transformed process $W_{t}$ given by
+\begin{equation}
+  \label{eq:36}
+  W_{t} =
+  \begin{cases}
+    \frac{1}{\sigma} X_{t} & t = 1, \dots, m \\
+    \frac{1}{\sigma} \phi(B) X_{t} & t > m
+  \end{cases}
+\end{equation} where $m = \max(p, q)$.
+
+For notational convenience, take $\theta_{0} = 1$, $\theta_{j} = 0 $
+for $j > q$.
+
+\begin{lem}
+  The autocovariances $\kappa(i, j) = \E{W_{i} W_{j}}$ are found from
+  \begin{equation}
+    \label{eq:37}
+    \kappa(i, j) =
+    \begin{cases}
+      \sigma^{2} \gamma_{X}(i - j) & 1 \leq i, j \leq m \\
+      \sigma^{2} (\gamma_{X}(i - j) - \sum_{r=1}^{p} \phi_{r}
+      \gamma_{X}(r - |i-j|)) & \min(i, j) \leq m < \max(i, j) \leq 2m
+    \\
+    \sum_{r=0}^{q}\theta_{r} \theta_{r + |i-j|} & \min(i, j) > m \\
+    0 & \text{otherwise}
+    \end{cases}
+  \end{equation}
+
+  Applying the innovations algorithm to the process $W_{t}$, we obtain
+  \begin{equation}
+    \label{eq:38}
+    \hat W_{n+1} =
+    \begin{cases}
+      \sum_{j=1}^{n} \theta_{nj} (W_{n+1-j} - \hat W_{n+1-j}) & 1
+      \leq n < m \\
+      \sum_{j=1}^{q} \theta_{nj} (W_{n+1-j} - \hat W_{n+1-j}) & n \geq m
+    \end{cases}
+  \end{equation} where the coefficients $\theta_{nj}$ and MSE $r_{n} =
+  \E{(W_{n+1} - \hat W_{n+1})^{2}}$ are found recursively using the
+  innovations algorithm.
+
+  Since the equations~\eqref{eq:36} allow us to write $X_{n}$ as a
+  linear combination of $W_{j}, 1 \leq j \leq n$, and conversely, each
+  $W_{n}, n \geq 1$ to be written as a linear combination of $X_{j}, 1
+  \leq j \leq n$.  Thus the best linear predictor of the random
+  variable $Y$  in terms of $\{ 1, X_{1}, \dots, X_{n} \}$ is the same
+  as the best linear predictor of $Y$ in terms of $\{ 1, W_{1}, \dots,
+  W_{n}$.  Thus, by linearity of $\hat P_{n}$, we have
+  \begin{align}
+    \label{eq:39}
+    \hat W_{t} =
+    \begin{cases}
+      \frac{1}{\sigma} \hat X_{t} & t = 1, \dots, m \\
+      \frac{1}{\sigma}(\hat X_{t} - \phi_{1} X_{t-1} - \cdots -
+      \phi_{p} X_{t-p}) & t > m
+    \end{cases}
+  \end{align}
+  which shows that
+  \begin{equation}
+    \label{eq:40}
+    X_{t} - \hat X_{t} = \sigma(W_{t} - \hat W_{t})
+  \end{equation}
+
+  Substituting into \eqref{eq:37} and \eqref{eq:38}, we obtain
+  \begin{equation}
+    \label{eq:41}
+    \hat X_{n+1} =
+    \begin{cases}
+      \sum_{j=1}^{n} \theta_{nj}(X_{n+1-j} - \hat X_{n+1-j}) & 1 \leq n < m \\
+      \phi_{1} X_{n} + \cdots + \phi_{p} X_{n+1-p} + \sum_{j=1}^{q}
+      \theta_{nj}(X_{n+1-j} - \hat X_{n+1-j}) & n \geq m
+    \end{cases}
+  \end{equation}
+  and
+  \begin{equation}
+    \label{eq:42}
+    \E{(X_{n+1} - \hat X_{n+1})^{2}} = \sigma^{2} \E{(W_{n+1} - \hat
+      W_{n+1})^{2}} = \sigma^{2} r_{n}
+  \end{equation}
+  where $\theta_{nj}$ and $r_{n}$ are found using the innovation algorithm.
+\end{lem}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

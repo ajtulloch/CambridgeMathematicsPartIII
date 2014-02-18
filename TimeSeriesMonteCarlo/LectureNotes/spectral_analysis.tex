@@ -1,0 +1,105 @@
+\section{Spectral Analysis}
+\label{sec:spectral-analysis}
+
+Let $X_{t}$ be a zero-mean stationary time series with autocovariance
+function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
+|\gamma(h)| < \infty$.
+
+\begin{defn}
+  \label{defn:spectral_analysis:1}
+  The spectral density of $X_{t}$ is the function $f(\cdot)$ defined
+  by
+  \begin{align}
+    \label{eq:47}
+    f(\lambda) = \frac{1}{2 \pi} \sum_{h=-\infty}^{\infty}
+    e^{-ih\lambda} y(h)
+  \end{align}  The summability implies that the series converges
+  absolutely.
+\end{defn}
+
+\begin{thm}
+  \label{defn:spectral_analysis:2}
+  \begin{enumerate}
+  \item $f$ is even
+  \item $f(\lambda) \geq 0$ for all $\lambda \in (-\pi, \pi]$.
+  \item $\gamma(k) = \int_{-\pi}^{\pi} e^{-k\lambda} f(\lambda) d
+    \lambda = \int_{-\pi}^{\pi} \cos (k \lambda) f(\lambda) d\lambda$.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{defn:spectral_analysis:3}
+  A function $f$ is the \textbf{spectral density} of a stationary time
+  series $X_{t}$ with autocovariance function $\gamma(\cdot)$ if
+  \begin{enumerate}
+  \item $f(\lambda) \geq 0$ for all $\lambda \in (0, \pi]$,
+  \item $\gamma(h) = \int_{-\pi}^{\pi} e^{ih\lambda} f(\lambda)
+    d\lambda$ for all integers $h$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}
+  If $f$ and $g$ are two spectral density corresponding to the
+  autocovariance function $\gamma$, then $f$ and $g$ have the same
+  Fourier coefficients and hence are equal.
+\end{lem}
+
+\begin{thm}
+  \label{defn:spectral_analysis:4}
+  A real-valued function $f$ defined on $(-\pi, \pi]$ is the spectral
+  density of a stationary process if and only if
+  \begin{enumerate}
+  \item $f(\lambda) = f(-\lambda)$,
+  \item $f(\lambda) \geq 0$
+  \item $\int_{-\pi}^{\pi} f(\lambda) d\lambda < \infty$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{defn:spectral_analysis:5}
+  An absolutely summable function $\gamma(\cdot)$ is the
+  autocovariance function of a stationary time series if and only if
+  it is even and
+  \begin{equation}
+    \label{eq:70}
+    f(\lambda) = \frac{1}{2 \pi} \sum_{h=-\infty}^{\infty}
+    e^{-ih\lambda} \gamma(h) \geq 0
+  \end{equation} for all $\lambda \in (-\pi, \pi]$, in which case
+  $f(\cdot)$ is the spectral density of $\gamma(\cdot)$.
+\end{thm}
+
+\begin{thm}[Spectral Representation of the ACVF]
+  \label{defn:spectral_analysis:6}
+  A function $\gamma(\cdot)$ defined on the integers is the ACVF of a
+  stationary time series if and only if there exists a
+  right-continuous, nondecreasing, bounded function $F$ on $[-\pi,
+  \pi]$ with $F(-\pi) = 0$ such that
+  \begin{equation}
+    \label{eq:72}
+    \gamma(h) = \int_{-\pi}^{\pi} e^{ih\lambda} dF(\lambda)
+  \end{equation} for all integers $h$.
+\end{thm}
+
+\begin{remark}
+  The function $F$ is a \textbf{genrealized distribution function} on
+  $[-\pi, \pi]$ in the sense that $G(\lambda) =
+  \frac{F(\lambda)}{F(\pi)}$ is a probability distribution function on
+  $[-\pi, \pi]$. Note that since $F(\pi) = \gamma(0) = \Var{X_{1}}$,
+  the ACF of $X_{t}$ has the spectral representation function
+  \begin{equation}
+    \label{eq:73}
+    \rho(h) = \int_{-\pi}^{\pi} e^{ih \lambda} dG(\lambda)
+  \end{equation}
+
+  The function $F$ is called the spectral distribution function of
+  $\gamma(\cdot)$. If $F(\lambda)$ can be expressed as $F(\lambda) =
+  \int_{-\pi}^{\lambda} f(y) dy$ for all $\lambda \in [-\pi, \pi]$,
+  then $f$ is the spectral density function and the time series is
+  said to have a continuous spectrum. If $F$ is a discrete function,
+  then the time series is said to have a discrete spectrum.
+\end{remark}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
