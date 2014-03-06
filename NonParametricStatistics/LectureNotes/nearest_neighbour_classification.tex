@@ -1,0 +1,147 @@
+
+\chapter{Nearest Neighbour Classification}
+\label{cha:near-neighb-class}
+
+We have $(X_{1}, Y_{1}), \dots, (X_{n}, Y_{n})$ where $Y_{i} \in \{ 0,
+1 \}$.  The regression function $\E{Y | X = x}$ is denoted by
+$\nu(x)$, and we let $\mu$ be the distribution of $X$ - so $\Prob{X
+  \in A} = \mu(A)$.
+
+A function $g: \R^{d} \rightarrow \{ 0, 1 \}$ is called a classifier.
+If the distribution of $(X, Y)$ are known, we can minimize the risk
+$\Prob{g(X) \neq Y} = L(g)$ over $g: \R^{d} \rightarrow \{ 0, 1 \}$.
+The minimizer $g^{\star}$ is called a Bayes classifier, and $L(g^{d})$
+is called the Bayes risk.
+
+\begin{lem}
+  For a classifier $\tilde g$ whcih has the form
+  \begin{equation}
+    \label{eq:90}
+    \tilde g(x) =
+    \begin{cases}
+      1 & \hat \nu(x) > \frac{1}{2} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation} we have
+  \begin{equation}
+    \label{eq:93}
+    \Prob{\tilde g(X) \neq Y} - L^{\star} \leq 2 \E{\| \hat \nu(X) - \nu(X)}
+  \end{equation}
+\end{lem}
+
+When we have data $\{ (X_{1}, Y_{1}), \dots, (X_{n}, Y_{n}) \}$, we
+want to construct a seqeunce of classifiers $\{ g_{n} \}$ such that
+the risk using $g_{n}$ is close to the Bayes risk with high
+probability.
+
+\begin{defn}[$k$-nearest neighbour classification]
+  \label{defn:nearest_neighbour_classification:1}
+  A \knn classifier $g_{n}$ is defined by
+  \begin{align}
+    \label{eq:94}
+    g_{n}(x) =
+    \begin{cases}
+      1 & \sum_{i=1}^{n} W_{ni}(X) \I{Y_{i} = 1} > \sum_{i=1}^{n}
+      W_{ni}(X) \I{Y_{i} = 0} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{align}
+  which is equivalent to
+  \begin{align}
+    \label{eq:96}
+    \sum_{i=1}^{n} W_{ni}(X) \I{Y_{i} = 1} > \frac{1}{2} \iff
+    \sum_{i=1}^{n} W_{ni}(X) Y_{i} > \frac{1}{2}
+  \end{align}
+  
+  where
+  \begin{align}
+    \label{eq:95}
+    W_{ni}(X) = \frac{1}{k} 
+  \end{align} if $X_{i}$ is a $k$-nearest neighbour of $X$, and zero otherwise.
+\end{defn}
+
+\begin{defn}
+  \label{defn:nearest_neighbour_classification:2}
+  For a certain distirbution of $(X, Y)$, we say $g_{n}$ is consistent
+  if $\Prob{g_{n}(X) \neq Y} - L^{\star} \rightarrow 0$ .
+
+  We say $g_{n}$ is strongly consistent if
+  \begin{equation}
+    \label{eq:97}
+    \Prob{\lim_{n \rightarrow \infty} L(g_{n}) = L(g^{\star})} = 1
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{defn:nearest_neighbour_classification:3}
+  If $k \rightarrow \infty$, $\frac{k}{n} \rightarrow 0$, then for all
+  distributions of $(X, Y)$, the \knn estimates $g_{n}$ are consistent.
+\end{thm}
+
+\begin{proof}
+  Preliminaries:
+  \begin{enumerate}
+  \item By a corollary of Lemma 1,
+    \begin{equation}
+      \label{eq:98}
+      \Prob{g_{n}(X) \neq Y | D_{n}} - L^{\star}\leq 2
+      \sqrt{\int_{\R^{d}} (\nu_{n}(x) - \nu(x))^{2} d \mu(x)}
+    \end{equation}
+  \item If $k \rightarrow \infty$, $\frac{k}{n} \rightarrow 0$, then
+    \begin{equation}
+      \label{eq:99}
+      \| X_{(k)}(X) - X \| \cas 0
+    \end{equation} (examples class)
+  \item Stones Lemma -
+    \begin{equation}
+      \label{eq:100}
+      \frac{1}{k} \sum_{i=1}^{n} \E{|f(X_{i}(X))|} \leq \E{|f(X)|}
+    \end{equation}
+  \end{enumerate}
+
+  We can now complete the proof.  By the first result, it suffices to
+  prove
+  \begin{equation}
+    \label{eq:101}
+    \E{(\nu_{n}(X) - \nu(X))^{2}} \rightarrow 0
+  \end{equation} with $\nu_{n}(X) = \sum_{i=1}^{n} W_{ni}(X) Y_{i}$.
+
+  Consider $\hat \nu(X) = \E{\nu_{n}(X) | X_{1}, \dots, X_{n}} =
+  \sum_{i=1}^{n} W_{ni}(X) \nu(X_{i}) = \sum_{i=1}^{n} W_{ni}(X)
+  \E{Y_{i} | X_{1}, \dots, X_{n}}$ and the last summand is
+  $\nu(X_{i})$.
+
+  So we have the bias variance decomposition
+  \begin{align}
+    \label{eq:102}
+    \E{(\nu_{n}(X) - \nu(X))^{2}} \leq 2 \E{(\nu_{n}(X) - \tilde
+      \nu(X))^{2}} + 2 \E{(\tilde \nu(X) - \nu(X))^{2}} 
+  \end{align}
+
+  For the second term, we have
+  \begin{align}
+    \label{eq:103}
+    \E{(\tilde \nu(X) - \nu(X))^{2}} = \E{(\sum_{i=1}^{n} W_{ni}(X)
+      \nu(X_{i}) - \sum_{i=1}^{n} W_{ni}(X) \nu(X))^{2}} \\
+    &= \E{(\sum_{i=1}^{n} W_{ni}(X)(\nu(X_{i} - \nu(X))))^{2}} \\
+    &\leq \E{\sum_{i=1}^{n} W_{ni}(X) (\nu(X_{i}) - \nu(X))^{2}}
+  \end{align} by Cauchy swatch on the inner sum ($W_{ni}$ are a
+  probability). For $0 \leq \nu^{\star} \leq 1$, continuous with
+  bounded supporty, implies uniformly continuous. Thus $\nu^{\star}$
+  can be chosen such for any $\epsilon > 0$ that $\E{\nu^{\star}(X) -
+    \nu(X))^{2}} \leq \epsilon$,  by continuous functions being densie
+  in $L_{2}(\mu)$.
+
+  Then
+  \begin{equation}
+    \label{eq:104}
+    ...
+  \end{equation}
+  \todo{Fill in rest of proof}
+  
+\end{proof} 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

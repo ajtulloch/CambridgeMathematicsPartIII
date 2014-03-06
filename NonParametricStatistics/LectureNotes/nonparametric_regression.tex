@@ -1,4 +1,3 @@
-
 \chapter{Nonparametric Regression}
 \label{cha:nonp-regr}
 
@@ -214,9 +213,9 @@ resulting curve.  This can be done by minimizing
   \sum_{i=1}^{n} (Y_{i} - \tilde g(x_{i}))^{2} + \lambda \int \tilde
   g''(x)^{2} dx
 \end{align} over $\tilde g \in S_{2}[a, b]$, the set of twice
-continuously differentiable functions on $[a, b]$.  $\lambda$ is a
-regularization parameter.  As $\lambda \rightarrow \infty$, the curve
-is very close to the linear regression line.  As $\lambda \rightarrow
+continuously differentiable functions on $[a, b]$. $\lambda$ is a
+regularization parameter. As $\lambda \rightarrow \infty$, the curve
+is very close to the linear regression line. As $\lambda \rightarrow
 0$, the resulting curve closely fits the observations.
 
 \subsection{Cubic Spline}
@@ -230,10 +229,346 @@ is very close to the linear regression line.  As $\lambda \rightarrow
     \dots, (x_{n}, b)]$.
   \item $g$ is twice continuously differentiable on $[a, b]$.
   \end{enumerate}
-  
 \end{defn}
 
+\begin{proposition}
+  For a given $\mathbf{g} = (g_{1}, \dots, g_{n}^{T})$, there exists a unique
+  natural cubic spline $g$ with knots $x_{1}, \dots, x_{n}$ - so
+  $g(x_{i}) = g_{i}$ for $i = 1, \dots , n$.  Moreover, there exists a
+  nonnegative definite matrix $K$ such that
+  \begin{equation}
+    \label{eq:59}
+    \int_{a}^{b} g''(x)^{2}dx = g^{T}K g
+  \end{equation}
+  We call $g$ the \textbf{natural cubic spline} interploant to $g$ at
+  $x_{1}, \dots, x_{n}$.
+\end{proposition}
 
+\begin{thm}
+  \label{defn:nonparametric_regression:3}
+  For any $\tilde g \in S_{2}[a, b]$ satisfying $\tilde g(x_{i})=
+  g_{i}, i=1, \dots, n$, the cubic spline interpolant to $g$ at
+  $\mathbf{g} = g_{1}, \dots, g_{n}$ uniquely minimizes
+  \begin{align}
+    \label{eq:66}
+    \int_{a}^{b} \tilde g''(x)^{2} dx
+  \end{align} over $\tilde g \in S_{2}[a, b]$.
+\end{thm}
+
+\begin{proof}
+  Let $\tilde g \in S_{2}[a,b]$ satisfy $\tilde g(x_{i}) = g_{i}$, $i
+  = 1, \dots, n$.  Let $h = \tilde g  - g$ such that $h(x_{i}) = 0$.
+
+  Then
+  \begin{align}
+    \label{eq:67}
+    R(\tilde g'') = \int_{a}^{b} (h'' + g'')^{2} dx = R(h'')+ R(g'') +
+    2 \int_{a}^{b} h''(x) g''(x) dx
+  \end{align}
+
+  Then
+  \begin{align}
+    \label{eq:68}
+    \int_{a}^{b} h''(x) g''(x) = -\int_{a}^{b} g'''(x) h'(x) dx +
+    g''h'(x)|_{a}^{b} \\
+    &= -\int_{x_{1}}^{x_{n}} g'''(x) h'(x) dx \\
+    &= -\sum_{i=1}^{n-1} \int_{x_{i}}^{x_{i+1}} g'''(x) h'(x) dx \\
+    &= -\sum_{i=1}^{n-1} g'''(x_{i}) \int_{x_{i}}^{x_{i+1}} h'(x) dx  \\
+    &= -\sum_{i=1}^{n} g'''(x_{i+1}) (h(x_{i+1})- h(x_{i})) \\
+    &= 0
+  \end{align} since $g''(x) = 0$ at $a$ and $b$.
+
+  Thus,
+  \begin{align}
+    \label{eq:69}
+    R(\tilde g'') = R(g'') + R(h'') \geq R(g'')
+  \end{align}
+  with equality when $R(h) = 0 \iff h$ is linear on $(x_{i},
+  x_{i+1})$, with $h(x_{i+1}) = h(x_{i}) = 0$.  Thus, $h \equiv 0$.
+\end{proof}
+
+\subsection{Natural Cubic Smoothing Spline}
+\label{sec:natur-cubic-smooth}
+
+Recall that $Y_{i} = m(x_{i}) + \sigma \epsilon_{i}$, $m \in
+S_{2}[a,b]$, $0 < x_{1} < \dots < x_{n} < b$.  We seek to minimize
+\begin{align}
+  \label{eq:70}
+  \mathcal{G}_{\lambda}(\tilde g) = \sum_{i=1}^{n} (Y_{i} - \tilde
+  g(x_{i}))^{2} + \lambda \int_{a}^{b}  \tilde g''(x)^{2} dx 
+\end{align} over $\tilde g \in S_{2}[a, b]$.
+
+\begin{thm}
+  \label{defn:nonparametric_regression:4}
+  For each $\lambda > 0$, there is a unique solution $\hat g$ minimizing
+  $\mathcal{G}(\tilde g)$over $\tilde g \in S_{2}[a, b]$.  This is the
+  natural cubic spline
+  \begin{equation}
+    \label{eq:71}
+    \hat g = (I + \lambda K)^{-1} Y
+  \end{equation}  
+\end{thm}
+
+\begin{proof}
+  Suppose $\tilde g$ is not a natural cubic spline.  Then, there
+  exists a unique natural cubic spline interpolant $g$ to $\tilde
+  g(x_{1}, \dots, \tilde g(x_{n}))$.  Then, by the previous theorem,
+  we know
+  \begin{align}
+    \label{eq:72}
+    \int_{a}^{b} g''(x)^{2} dx < \int_{a}^{b} \tilde g''(x)^{2} dx
+    \Rightarrow \mathcal{G} (g) > \mathcal{G}_{\lambda}(g)
+  \end{align}
+  We may therefore suppose $g$ as a natural cubic spline.
+
+  Let $\mathbf{g} = (g(x_{1}), \dots, g(x_{n}))$.  Then
+  \begin{align}
+    \label{eq:73}
+    \mathcal{G}_{\lambda}(g) &= (Y - \mathbf{g})^{T}(Y - \mathbf{g}) +
+    \lambda g^{T} K g \\
+    &= Y^{T} Y - 2 \mathbf{g}^{T} Y + \mathbf{g}^{T} \mathbf{g} +
+    \lambda \mathbf{g}^{T} K \mathbf{g} \\
+    &= \mathbf{g}^{T}(I + \lambda K) \mathbf{g} + Y^{T} Y - 2
+    \mathbf{g}^{T} Y \\
+    &= (\mathbf{g} - (I + \lambda K)^{-1} Y)^{T} (I + \lambda K)(g -
+    (I + \lambda K)^{-1} Y) + Y^{T} Y - Y^{T}(1 + \lambda K)^{-1} Y
+  \end{align}
+
+  We know $K$ is nonnegative definite and $\lambda > 0$, so $I +
+  \lambda K$ is positive definite.
+
+  Thus $\mathcal{G}_{\lambda}(g)$ is uniquely minimized by $\hat g =
+  (I + \lambda K)^{-1} Y$.
+
+\end{proof}
+
+We call $\hat g$ that \textbf{natural cubic smoothing spline with
+  data} $(x_{i}, Y_{i})$.
+
+\subsection{Choice of $\lambda$}
+\label{sec:choice-lambda}
+
+Cross validation method validates the estimated curve without the
+$i$-th observation by comparing the $i$-th value
+\begin{align}
+  \label{eq:74}
+  CV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} (Y_{i} - \hat g_{-i, \lambda}(x_{i}))^{2}
+\end{align}
+
+where $\hat g_{-i, \lambda}$ is chosen by minimizing
+$\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
+
+\begin{align}
+  \label{eq:76}
+  \sum_{j \neq i}^{n} (Y_{j} - \tilde g(x_{j}))^{2} + \lambda
+  \int_{a}^{b} \tilde g''(x)^{2} dx
+\end{align} (*)
+
+\begin{thm}
+  \label{defn:nonparametric_regression:5}
+  \begin{align}
+    \label{eq:75}
+    CV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} (\frac{Y_{i} - \hat
+      g_{\lambda}(x_{i})}{1 - A_{ii}})^{2}
+  \end{align}
+  where $A = (I + \lambda K)^{-1}$ and
+  \begin{equation}
+    \label{eq:80}
+    \int_{-\infty}^{\infty}  \hat g_{\lambda}''(x)^{2} dx = \hat
+    g_{\lambda}(\mathbf{x})^{T} K \hat g_{\lambda}(\mathbf{x})
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Note that $\hat g_{-i, \lambda}$ also minimizes $(\star \star) =
+  \hat g_{-i, \lambda}(x_{i}) - \tilde g(x_{i})^{2} + (\star)$   over
+  $\tilde g \in S_{2}[a, b]$
+
+  Then
+  \begin{align}
+    \label{eq:77}
+    (**) \geq (*) \geq \sum_{j \neq i}^{n} (Y_{j} - \hat g_{-i,
+      \lambda} (x_{j}))^{2} + \int_{a}^{b} \hat g_{-i,
+      \lambda}(x)^{2} dx \\
+    &= (\hat g_{-i, \lambda}(x_{i}) - \mathbf{ \hat g_{-i,
+        \lambda}})^{2} + \sum_{j \neq i}^{n} (Y_{i} - \mathbf{\hat
+      g_{-i, \lambda}}(x_{j})) + \int_{a}^{b} \mathbf{g_{i,
+        \lambda}}(x)^{2} dx
+  \end{align}
+
+  Note that $(\star \star) = \sum_{j = 1}^{n} (Y^{[i]}_{j} - \tilde
+  g(x_{i}))^{2} + \lambda \tilde g''(x)^{2} dx$ where
+  \begin{align}
+    \label{eq:78}
+    Y_{j}^{[i]} =
+    \begin{cases}
+      Y_{j} & i \neq j \\
+      \hat g_{-i, \lambda}(x_{i}) & i = j
+    \end{cases}
+  \end{align}
+
+  Then, we can see that $(\star \star)$ has the same form as the
+  original problem, so
+  \begin{align}
+    \label{eq:79}
+    ...
+  \end{align}
+\end{proof}
+
+By replacing $A_{ii}$ with the average of diagonal elements of $A$, we
+have a generalized cross-validation
+\begin{equation}
+  \label{eq:81}
+  GCV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} (\frac{Y_{i} - \hat
+    g_{\lambda}(x_{i})}{1 - \frac{1}{n} \Tr{A}} )^{2}
+\end{equation}
+
+$A_{ii}$ is analogous to the leverage of the $i$-th observation in the
+linear regression.  Modified (GCV) CV downweights observations with
+high leverage.
+
+Consider the model $Y_{i} = m(x_{i}) + \sigma \epsilon_{i}$, with
+fixed design.  $m$ is twice contiuously differntiable on $[a, b]$, so
+\begin{equation}
+  \label{eq:82}
+  \sum_{i=1}^{n} (Y_{i} - \tilde g(x_{i}))^{2} + \lambda \int \tilde
+  g''(x)^{2} dx
+\end{equation} with $\tilde g \in S_{2}[a, b]$.
+
+Cubic spline can be expanded with truncated power series basis
+functions: $1, x, x^{2}, x^{3}, (x - x_{1})^{3}_{+}, \dots (x -
+x_{n})^{3}_{+}$, ($n$ number of basis functions can be obtained ---
+see example sheet).
+
+\subsection{Regression Spline and Penalized Spline}
+\label{sec:regr-spline-penal}
+
+One possible issue with cubic spline is that we need to estimate
+parameters of dimension $n$.  One possible solution is to use a
+smaller number of knots --- say $N$ --- and locate them at $\xi_{1},
+\dots, \xi_{N}$. Then, we fit the curve using standard least squares,
+and so minimize
+\begin{align}
+  \label{eq:83}
+  \sum_{i=1}^{n} (Y_{i} - \sum_{j=0}^{p} \beta_{j} x_{i}^{j} -
+  \sum_{j=1}^{N} \beta_{pj} (x_{i} - \xi_{j})_{+}^{p})^{2}
+\end{align} over $\beta = (\beta_{0}, \beta_{1}, \dots, \beta_{p},
+\beta_{p1}, \dots, \beta_{pN})^{T} \in \R^{p + 1 + N}$
+
+Using a matrix form, this is equivalent to $\| Y - X \beta
+\|_{2}^{2}$, where
+\begin{align}
+  \label{eq:84}
+  X =
+  \begin{Bmatrix}
+    1 & x_{1} & x_{1}^{2} & ... & x_{1}^{p} & (x_{1} -
+    \xi_{1})_{+}^{p} & ... & (x_{1} - \xi_{N})_{+}^{p} \\
+    1 & x_{2} & x_{2}^{2} & ... & x_{2}^{p} & (x_{2} -
+    \xi_{1})_{+}^{p} & ... & (x_{2} - \xi_{N})_{+}^{p} 
+  \end{Bmatrix}
+\end{align}
+
+The solution $\hat \beta = (X^{T} X)^{-1} X^{T} Y$ gives the estimated
+curve at the observations $\mathbf{x} = (x_{1}, \dots, x_{n})$.  The
+points
+\begin{equation}
+  \label{eq:85}
+  ((x_{1}, (X \hat \beta)_{1}), \dots, (x_{n}, (X \hat \beta)_{n}))
+\end{equation} give the fitted curve.  The curve corresponding to
+$\hat \beta$ is called the \textbf{regression spline} of order $p$
+with knots at $(\xi_{1}, \dots, \xi_{N})$.
+
+It is recommended to use $N = \min(\frac{n}{4}, 35)$ and locate the
+$k$-th knot at $(\frac{k}{N+1})$-th sample quantile of design points.
+
+Computationally, it is better to use the equivalent $\beta$-splines
+(de Boor, 1978).
+
+Note that $N$ is playing the role of a smoothing parameter that
+controls the bias-variance tradeoff. Higher $N$ reduces the bias but
+increases the variance.
+
+An alternative to choosing $N$ is to use large $N$ but penalize large
+estimated coefficients.  That is, we add a penalty term $\lambda B^{T}
+D B$ where $D$ is a ($p+1 + N \times p+1+N)$ matrix with all elements
+zero except the bottom-right $N \times N$ block, which is the $I_{N}$,
+the $N$-dimensional identity matrix.
+
+We have that this then has the solution $\hat \beta_{\lambda} = (X^{T}
+Y + \lambda D)^{-1} X^{T} Y$.
+
+The fitted curve corresponding to $\hat \beta_{\lambda}$ is called the
+\textbf{penalized spline} of order $p$ with knots $(\xi_{1}, \dots,
+\xi_{N})$.
+
+
+\subsection{Equivalent Kernel}
+\label{sec:equivalent-kernel}
+
+From the soltuion $\hat g_{\lambda}(\mathbf{x}) = (I + \lambda K)^{-1}
+Y$, we have
+\begin{equation}
+  \label{eq:86}
+  \hat g_{\lambda}(x) = \sum_{i=1}^{n} W_{ni}(x) Y_{i}
+\end{equation} where the $W_{ni}(x)$ does not depend on $Y_{i}$.
+
+Connections between smoothing splines and kernel regression estimators
+is established by Silverman (1984).  He proved that under some
+regularity conditions, and random design,
+\begin{equation}
+  \label{eq:87}
+  W_{ni}(x) \approx \frac{1}{nf(x_{i})}  \mathcal{K}_{h(x_{i})}(X_{i}
+  - x)
+\end{equation} where $f$ is a density of distribution of $X$,
+$h(X_{i}) = (\frac{n}{f(X_{i})})^{\frac{1}{4}}$, and
+\begin{align}
+  \label{eq:88}
+  \mathcal{K}(t) = \frac{1}{2}  \exp(-\frac{|t|}{\sqrt{2}}) \sin
+  (\frac{|t|}{\sqrt{2}} + \frac{\pi}{4})
+\end{align}
+
+This provides intuition to help understand how smoothing splints
+assign weights to $x$ near the observations.
+
+We have $\hat m_{h}(x; 1) = \sum_{i=1}^{n} W(x_{i}, x) Y_{i}$ where
+$W(x_{i}, x) = \frac{1}{nf(X_{i})} K_{h}(x_{i} - x)$.
+
+\section{Multivariate Regression and Additive Models}
+\label{sec:mult-regr-addit}
+
+A $d$-dimensional nonparametric regression suffers the same curse of
+dimensionality as we saw in kernel density estimation.
+
+However, if $m$ is smooth around $x_{0} \in \R^{d}$, so $m(x) \approx
+m(x_{0}) + \sum_{i=1}^{d} (x_{j} - x_{0j}) \frac{partial}{partial
+  x_{j}} m(x_{0})$.
+
+This motivates us to use
+\begin{equation}
+  \label{eq:89}
+  Y_{i} = \alpha + \sum_{j=1}^{d} g_{j} x_{ij} + \epsilon_{i}, i = 1,
+  \dots, n
+\end{equation} and we minimize
+\begin{align}
+  \label{eq:91}
+  \sum_{i=1}^{n} (Y_{i} - \alpha - \sum_{j=1}^{d} g_{j}(x_{ij}))^{2} +
+  \sum_{j=1}^{d} \lambda_{j} int g''_{j}(x)^{2} dx
+\end{align}
+
+Note that $g_{j}(x_{ij}) = Y_i - \alpha - \sum_{k \neq j}^{}
+g_{k}(x_{ik})$.
+
+We have then a backfitting algorithm that solves the minimization problem
+\begin{enumerate}
+\item $\hat \alpha = 0, \hat g_{j} = 0, j = 1, \dots, d$.
+\item For $j = 1, \dots, d$,
+  \begin{equation}
+    \label{eq:92}
+    \hat g_{j} = Smmoth ((x_{i}, Y_{i} - \hat \alpha  - \sum_{k \neq
+      j}^{} \hat g_{k}(x_{ik})) \forall i
+  \end{equation}
+  and $\hat g_{j} = \hat g_{j} - \frac{1}{n} \sum_{i=1}^{n} \hat g_{j}(x_{ij})$
+\end{enumerate}
 
 
 %%% Local Variables: 

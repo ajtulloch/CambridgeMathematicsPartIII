@@ -1,0 +1,85 @@
+
+\chapter{Monte Carlo Inference}
+\label{cha:monte-carlo-infer}
+
+\begin{exer}
+  What are the expected number of samples obtained from running the
+rejection sampling algorithm $N$ times?
+\end{exer}
+
+
+\todo{Bunch of content, straight from the lecture notes}
+
+\section{Quantile Approximation by Monte Carlo Methods}
+\label{sec:quant-appr-monte}
+
+
+\begin{thm}
+  \label{defn:monte_carlo:1}
+  If $F$ is continuous and strictly increasing, then $\hat c_{\alpha}
+  \cas c_{\alpha}$
+\end{thm}
+
+\begin{proof}
+  Let $\epsilon > 0$.
+
+  Then $\hat F_{B}(c_{\alpha - \epsilon}) = \frac{1}{B}
+  \sum_{i=1}^{B} \I{X_{i} \leq c_{\alpha - \epsilon}}$.
+
+  Thus, by the strong law of lare numbers, $\hat F_{B}(c_{\alpha -
+    \epsilon}) \cas \alpha - \epsilon$.
+
+  In the same way, $\hat F_{B}(c_{\alpha + \epsilon}) \cas \alpha +
+  \epsilon$.
+
+  Thus, for all $\delta > 0$, there exists $\Omega_{1}$ with $P(\Omega)
+  \geq 1 - \epsilon$, such that there exists $N_{1}$ with $\forall B > N_{1}$,
+  on $\Omega_{1}$,
+  \begin{equation}
+    |\hat F_{B}(c_{\alpha - \epsilon}) - (\alpha - \epsilon)| \leq \frac{\epsilon}{4} 
+  \end{equation}
+  and similarly on $\Omega_{2}$,
+  \begin{equation}
+    |\hat F_{B}(c_{\alpha + \epsilon}) - (\alpha + \epsilon)| \leq \frac{\epsilon}{4} 
+  \end{equation}
+
+  On $\Omega_{1} \cap \Omega_{2}$, and for $B > \max \{N_{1}, N_{2}
+  \}$,
+  \begin{align}
+    \label{eq:71}
+    \hat F_{B}(c_{\alpha - \epsilon}) \leq \alpha -
+    \frac{3\epsilon}{4}
+    \hat F_{B}(c_{\alpha + \epsilon}) \geq \alpha + \frac{3\epsilon}{4}
+  \end{align}
+
+  We now that by definition, $\hat F_{B}(\hat c_{\alpha}) = \alpha$.
+
+  On $\Omega_{1} \cap \Omega_{2}$,
+  \begin{equation}
+    \label{eq:71}
+    \hat F_{B}(c_{\alpha - \epsilon}) \leq \hat F_{B}(\hat c_{\alpha})
+  \end{equation}
+
+  Since $\hat F$ is increasing, $c_{\alpha - \epsilon} \leq \hat
+  c_{\alpha} \leq c_{\alpha + \epsilon}$.  Since $F$ is continuous,
+  for $\epsilon$ small enough, $|c_{\alpha - \epsilon} - c_{\alpha +
+    \epsilon}|$ can be made arbitrarily small.
+
+  Also, $P(\Omega_{1} \cap \Omega_{2}) \geq 1 - 2 \delta$.  So we
+  proved that for any $\epsilon_{1} > 0$, there exists $\Omega_{3} =
+  \Omega_{1} \cap \Omega_{2}$ such that $P(\Omega_{3}) \geq 1 - 2
+  \delta$, and there exists $N_{3} = \max \{ \Omega_{1}, \Omega_{2}
+  \}$ such that for all $B \geq n_{3}$,
+  \begin{equation}
+    \label{eq:71}
+    |\hat c_{\alpha} - c_{\alpha}| \leq \epsilon_{1}.
+  \end{equation}
+  Thus $\hat c_{\alpha} \cas c_{\alpha}$.
+\end{proof}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

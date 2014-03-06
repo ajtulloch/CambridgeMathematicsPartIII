@@ -780,10 +780,127 @@ Then we have the lemma as follows:
   Then
   \begin{equation}
     \label{eq:43}
-    (1-p) I_{n, p}(x) \leq \Prob_{1-p}(\rad(C_{x}) \geq n)
+    (1-p) I_{n, p}(x) \leq \Prob_{1-p}(\rad(C_{x}) \geq n) \leq
+    \Prob_{\frac{1}{2}} (\rad(C_{0}) \geq n) = \nu_{n} \rightarrow 0
   \end{equation}
   where $\rad(C_{x}) = \max \{ |y-x| : x \leftrightarrow y \}$.
+
+  So we have
+  \begin{align}
+    \label{eq:44}
+    \frac{d}{dp} \Prob_{p}(H_{n}) \geq c \tau(1 - \Prob_{p}(H_{n}))
+    \log \frac{1}{8 \nu_{n}}
+  \end{align}
+  and integrating gives
+  \begin{align}
+    \label{eq:45}
+    \int_{\frac{1}{2}}^{p} \frac{g'(p)}{1-g(p)} dp \geq c \tau \log
+    \frac{1}{8 \nu_{n}} (p - \frac{1}{2})
+  \end{align}
+  and so $\Prob_{p}(H_{n}) \geq 1 - (1-\tau)(8 \nu_{n})^{c \tau(p -
+    \frac{1}{2})} \rightarrow 1$ as $n \rightarrow \infty$ if $p >
+  \frac{1}{2}$.
+
+  ... \todo{Fill in rest of proof (block argument)}
 \end{proof}
+
+\section{Cardy's Formula}
+\label{sec:cardys-formula}
+
+Given a Jordan curve on $R^{2}$, there exists a conformal map from $D$
+to the interior of the equilateral traangle $T$ of $\C$ with vertices
+$A=0, B=1, C= e^{\frac{\pi i}{3}}$ and such that $\phi$ can be
+extended to the boundary $\partial D$ in such a way that it becomes a
+homeomorphism from $D \cup \partial D$ to the closed triangle $T$.
+
+\begin{thm}[Cardy's Formula]
+  \label{defn:random_walks_on_graphs:28}
+  \begin{align}
+    \label{eq:46}
+    \Prob_{\delta}(\text{$ac \leftrightarrow bx$ in $D$}) \rightarrow
+    |BX| 
+  \end{align} as $\delta \rightarrow 0$.
+\end{thm}
+
+\todo{Fill in the rest of the proof of Cardy's formula.}
+
+\chapter{Self Avoiding Walks}
+\label{cha:self-avoiding-walks}
+
+Consider $G$ a graph, with $\gamma$ is a self avoiding walk which
+visits each vertex of $G$ at most once.
+
+$G_{n}(v)$ is the number of self avoiding walks with length $n$.  We
+assume $G$ is transitive.  Then $G_n$ is submultiplicative, and we
+defined
+\begin{equation}
+  \label{eq:47}
+  K(G) = \lim_{n \rightarrow \infty} \sqrt{G_{n}}{n}
+\end{equation}
+
+For examples $K(d-ary-tree) = d - 1$, and $K(G) \leq \Delta - 1$
+(exercise).
+
+\begin{thm}
+  \label{defn:random_walks_on_graphs:29}
+  $K(H1) = \sqrt{2 + \sqrt{2}}$.
+\end{thm}
+
+\section{Generating Functions}
+\label{sec:generating-functions}
+
+\begin{equation}
+  \label{eq:48}
+  Z(z) = \sum_{\gamma SAW}^{z^{|\gamma|}}  \sum_{n=1}^{\infty} G_{n} \cdot z^{n}
+\end{equation}
+
+Cauchy-Hadarmad gives the radius of convergence is $\frac{1}{\lim_{n
+    \rightarrow \infty} \sqrt{G_{n}}{n}} = \frac{1}{K(G)}
+}$
+
+\todo{Fill in proof of $\sqrt{2 + \sqrt{2}}$}
+
+\section{Random Clusters Model/FK (Fortun-Kostelyn) Percolation}
+\label{sec:rand-clust-modelfk}
+
+\begin{defn}
+  \label{defn:random_walks_on_graphs:30}
+  $G = (V, E)$, $\Omega = \{ 0, 1 \}^{E}$, for $\omega \in \Omega$,
+  $k(\omega)$ is the  number of open clusters.
+
+  The RC measure $p \in [0, 1]$, $q \in (0, \infty)$,
+  \begin{equation}
+    \label{eq:49}
+    \phi_{p, q}(w) = \frac{1}{Z_{p, q}} \prod_{e \in E} p(\omega(e)) (1-p)^{1 -
+      \omega(e)})  q^{k(w)}
+  \end{equation}
+\end{defn}
+
+\begin{enumerate}
+\item $q = 1$ is standard percolation,
+\item $p, q \rightarrow 0$ with $\frac{q}{p} \rightarrow 0$ is
+  electrical networks.
+\item For $q = 2$, we have the FK Isiing model, where for $\omega \in
+  \{ 0, 1 \}^{E}$, for each open cluster of $\omega$, we set the
+  spins/states of the vertices of it to $\pm 1$ iwht equal
+  probability, so $G \in \{ \pm 1 \}^{V}$, with
+  \begin{equation}
+    \label{eq:50}
+    \mu_{\beta}(G) = \frac{1}{Z_{\beta}} \exp(\beta \sum_{x \sim y}
+    G_{x} G_{y})
+  \end{equation} and $p = 1 - e^{-\beta}$.
+\end{enumerate}
+
+Our aim is to define the random cluser measure on $(Z^{d}, E^{d})$.
+Let $\Lambda$ be a a finite box in $\Z^{d}$.  Let $E_{n} = \{ (u, v)
+\in E^{d | u, v \in \Lambda}$.  Let $b = 0, 1$, and
+$\Omega_{\Lambda}^{b} = \{ \omega \in \Omega = \{ 0, 1 \}^{E^{d}} |
+\omega(e) = b \forall e \notin \Lambda \}$. 
+
+Let $\phi_{\Lambda, p, q}^{b}(\omega) = \frac{1}{Z_{\lambda, p, q}}
+(\prod_{e \in E_{n}} p^{\omega(e)} (1-p)^{1 - \omega(e)}) q^{k(\omega,
+  \Lambda)}$.
+
 
 %%% Local Variables: 
 %%% mode: latex

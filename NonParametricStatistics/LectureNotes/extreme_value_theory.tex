@@ -1,0 +1,152 @@
+
+\chapter{Extreme Value Theory}
+\label{cha:extreme-value-theory}
+
+Let $X_{n}$ be an IID sample from a distribution function $F$, and
+denote $X_{(n)} = \max \{ X_{1}, \dots, X_{n} \}$ as the maximum order
+statistic.
+
+Without any normalization, $X_{(n)} \rightarrow x_{\star} = \inf \{ x:
+F(x) = 1 \}$.
+
+This is not overly interesting, since the limit distribution is
+degenerate (we call $F$ non-degenerate if there does not exists $a \in
+\R$ such that $F(x) = \I{x \geq a}$)
+
+We may ask if there exists $\{ a_{n} \} > 0$, $\{ b_{n} \} > 0$, and a
+nondegenerate $G$ such that
+\begin{equation}
+  \label{eq:118}
+  \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} \rightarrow G(x)  
+\end{equation} for all continuity points $x$ of $G$
+
+Classical extreme value theory starts by asking:
+\begin{enumerate}
+\item What kind of $G$ appears in the limit of \eqref{eq:118}?
+\item Cna we characterize $F$ such that \eqref{eq:118} holds for a
+  specific limit distribution $G$?
+\end{enumerate}
+
+For the first question, we have the Extremal Types theorem. For the
+second question, we have the ``domain of attraction'' problem.
+
+
+\section{Prelimiaries}
+\label{sec:prelimiaries}
+
+Recall that $\Prob{X_{(n)} \leq x} = F(x)^{n}$.  We say that $F$ is in
+the domain of attraction of $G$ ($F \in D(G)$) if there exists $\{ a_{n} \} > 0$, $\{
+b_{n} \} $ and a non-degenerate $G$ such that
+\begin{equation}
+  \label{eq:119}
+  \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} = [\text{$F(a_{n} x +
+    b_{n})^{n} \rightarrow G(x)$ for all continuity points $x$ of $G$}].
+\end{equation} and write $F(a_{n} x + b_{n})^{n} \hookrightarrow G(x)$.
+
+We say that $G_{1}$ and $G_{2}$ are of same type if $G_{1}(ax + b) =
+G_{2}(x)$ for some $a > 0, b$.
+
+The next lemma shows that if $F \in D(G_{1})$ and $F \in D(G_{2})$,
+then $G_{1}$ and $G_{2}$ are of the same type.
+
+\begin{lem}
+  Suppose $X_{n}$ is an IID sample from $F$ and there exists $\{ a_{n}
+  \} > 0, \{ b_{n} \}$ and non-degenerate $G$ such that $F(a_{n} x
+  +b_{n})^{n} \hookrightarrow G(x)$ .  Then there exists $\{ \alpha_{n} \} > 0,
+, \{ \beta_{n} \}$ and non-degenerate $G_{\star}$ such that
+$F(\alpha_{n} x _{ \beta_{n}})^{n} \hookrightarrow G_{\star}(x)$. if and
+only if $\frac{\alpha_{n}}{a_{n}} \rightarrow a$ for some $a > 0$, and
+$\frac{\beta_{n} - \beta}{a_{n}} \rightarrow b$ for some $b$.
+
+Then we can let $G_{\star}(x) = G(ax + b)$.
+\end{lem}
+
+\begin{proof}
+  See Galambos (1978), Lemma 2.2.3
+\end{proof}
+
+\begin{defn}
+  \label{defn:extreme_value_theory:1}
+  $G$ is \textbf{max-stable} if for every $n \in \N$, there exists
+  $\{ a_{n} \} > 0, \{ b_{n} \} $ such that $G^{n}(a_{n}x + b_{n}) = G(x)$
+\end{defn}
+
+\begin{thm}
+  \label{defn:extreme_value_theory:2}
+  $D(g)$ is non-empty if and only if $G$ is max-stable.
+\end{thm}
+
+\begin{proof}
+  (<=) If $G$ is max-stable, $G^{n}(a_{n} x + b_{n}) \hookrightarrow
+  G(x)$.  Thus, by definitino, $G \in D(G)$.
+
+  (=>) Let $F \in D(G)$. Then, there exists $\{ a_{n} \} > 0, \{ b_{n}
+  \}$ such that $F^{n}(a_{n} x + b_{n}) \hookrightarrow G(x)$.  For
+  each $k \in \N$, we replace $n$ by $nk$, and then
+  \begin{align}
+    \label{eq:121}
+    F^{nk}(a_{nk} x + b_{nk}) \hookrightarrow G(x) 
+  \end{align}
+  Thus $F^{n}(a_{nk} x + b_{nk}) \hookrightarrow G^{\frac{1}{k}}(x)$.
+  Since $G^{\frac{1}{k}}$ is also non-degenerate, $G^{\frac{1}{k}}(x)
+  = G(a_{k} x + b_{k})$, which implies $G(x) = G^{k}(a_{k} x + b_{k})$
+  as they are of the same type.
+\end{proof}
+
+\begin{thm}
+  \label{defn:extreme_value_theory:3}
+  If $F \in D(G)$, then $G$ must belong to the following distributions
+  (within type):
+
+  \begin{enumerate}
+  \item Frechet - $G_{1, \alpha}(x) = \exp(-x^{-\alpha})$, $x > 0$,
+    $\alpha > 0$
+  \item Negative Weibull - $G_{2, \alpha} = \exp(- (-x)^{\alpha})$, $x
+    < 0$, $\alpha > 0$
+  \item Gumbel - $G_{3}(x) = \exp(-\exp(-x))$, $x \in \R$.
+  \end{enumerate}
+
+  Conversely, these distributions can appear as such limits in \eqref{eq:118}.
+\end{thm}
+
+\begin{remark}
+  \begin{enumerate}
+  \item Using $X_{(1)} = -\max \{ -X_{1}, \dots, -x_{n} \} $, we have
+    equivalent theorems in terms of normalized minima.
+  \item Sometimes, we cannot have nondegenreate $G$ of normalized
+    maxima  - for example $X_{1}, \dots, X_{n} \sim
+    Bern(\frac{1}{2})$, $X_{(n)}$.
+  \item We can combine these three types into Generalized Extreme
+    Value Distribution (GEV) -
+    \begin{equation}
+      \label{eq:122}
+      G(x; \mu, \sigma, \gamma) = \exp(- (1 + \gamma(\frac{x-\mu}{\sigma}))^{-\frac{1}{\gamma}})
+    \end{equation} with $1 + \gamma(\frac{x - \mu}{\sigma}) > 0$, $\mu
+    \in \R, \gamma \in \R, \sigma > 0$.
+  \end{enumerate}
+
+  We have Frechet corresponds to $\gamma > 0$, $\alpha =
+  \frac{1}{\gamma} $, NW is $\gamma < 0$, $\alpha =
+  -\frac{1}{\gamma}$, and gumbel correpsonds to the case where $\gamma
+  \rightarrow 0$.
+\end{remark}
+
+\begin{proof}[Proof (non-examinable)]
+  We show $Y_{n} = \frac{X_{(n)} - b_{n}}{a_{n}} \cd Y$, with
+  $G_{\gamma}(x) = \exp(- (1 + rx)^{-\frac{1}{r}})$
+
+  Then, using Helly's theorem, we have $\E{z(Y_{n})} \rightarrow
+  \E{z(Y)}$ for all continuous bounded $z$.  Then the LHS is given by 
+  \begin{align}
+    \label{eq:123}
+    \int_{}^{} z \frac{x - b_{n}}{a_{n}} d F_{X_{(n)}}(x) = n
+    \int_{}^{} z(\frac{x - b_{n}}{a_{n}}) F(x)^{n-1} dF(x)
+  \end{align} and changinge variables so $F(x) = 1 - \frac{v}{n}, x = ..$
+  
+\end{proof}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

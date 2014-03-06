@@ -1,0 +1,191 @@
+
+\chapter{Minimax Lower Bounds}
+\label{cha:minimax-lower-bounds}
+
+As a first attempt to understand a nonparametric estimation problem,
+we consider a minimax risk,
+\begin{equation}
+  \label{eq:105}
+  R(\Theta) = \int_{\tilde \theta} \sup_{\theta \in \Theta}
+  \E_{\theta} L(\tilde j, \theta).
+\end{equation}
+
+If we can find our $\hat \theta^{\star}$, which minimizes
+$\sup_{\theta \in \Theta} \E_{\theta} L(\tilde \theta, \theta)$ we
+call $\hat \theta^{\star}$ our minimax estimator.
+
+However, it is very difficult to find $\hat \theta^{\star}$.
+
+Let $c \gamma_{n} \leq R(\Theta) \leq C \gamma_{n}$, we call
+$\gamma_{n}$ is minimax rate of convergence.
+
+For instance, for $\Theta = \{ \text{$m$, $m$ is twice continuously
+  differentiable on $[0, 1]$, $m''(x) < \infty$} \}$, then
+\begin{equation}
+  \label{eq:106}
+  \sup_{m \in \Theta} \E{(\hat m_{h}(x; 1) - m(x))^{2}} \leq C n^{-\frac{4}{5}}
+\end{equation}
+
+Question - can we also calculate
+\begin{equation}
+  \label{eq:107}
+  \int_{\tilde m} \sup_{m \in \Theta} \E{(\tilde m(x_{0}) - m(x_{0}))^{2}} \geq cn^{-\frac{4}{5}}
+\end{equation}
+
+\begin{lem}[Le Cam's two points lemma]
+  Let $\mathcal{P}$ be probability measures on $(\mathcal{X}, \mathcal{A})$,
+  and let $(\Theta, d)$ be the pseudo-metric space, with
+  \begin{equation}
+    \label{eq:108}
+    d: \Theta \times \Theta \rightarrow [0, \infty)
+  \end{equation} given by
+  \begin{equation}
+    \label{eq:109}
+    d(\theta_{1}, \theta_{2}) = d(\theta_{2}, \theta_{1}),
+    d(\theta_{1}, \theta_{2}) + d(\theta_{2}, \theta_{3}) \geq A
+    d(\theta_{1}, \theta_{3})
+  \end{equation}
+
+  Let $\theta: \mathcal{P} \rightarrow \Theta$, $\theta(P)$ is the
+  parameter of interest ($P \in \mathcal{P}$).  With $\theta_{0} =
+  \theta(P_{0})$ , $\theta_{1} = \theta(P_{1})$, under two conditions,
+  \begin{enumerate}
+  \item $d(\theta_{0}, \theta_{1} ) \geq \delta > 0$,
+  \item $h^{2}(P_{0}, P_{1}) \leq C < 1$
+  \end{enumerate}
+  where $h^{2}(P_{0}, P1)$ is the Hellinger distance $\int (\sqrt
+  {dP_{0}} - \sqrt{dP_{1}})^{2}$,
+  the we have for all estimators $\tilde \theta$,
+  \begin{equation}
+    \label{eq:110}
+    \sup_{P \in \mathcal{P}} \E_{P} d(\tilde \theta, \theta(P)) \geq
+    \frac{A \delta}{2}(1 - \sqrt{C})
+  \end{equation}
+\end{lem}
+
+\begin{proof}
+  \begin{align}
+    \label{eq:111}
+    \sup_{P \in \mathcal{P}} \E_{P} d(\tilde \theta, \theta(P)) \geq
+    \max_{P \in \{ P_{0}, P_{1} \}} \E_{P} d(\tilde \theta, \theta(P))
+    \\
+    &\geq \frac{1}{2} (\E_{P_{0}} d(\tilde \theta, \theta(P_{0})) +
+    \E_{P_{1}} d(\tilde \theta, \theta(P_{1}))) \\
+  \end{align}
+
+Let $d(\tilde \theta, \theta(P_{0})) + d(\tilde \theta, \theta(P_{1}))
+= DEN$, and $\frac{d(\tilde \theta, \theta(P_{0}))}{DEN} = f_{0}$,
+$\frac{d(\tilde \theta, \theta(P_{1}))}{DEN} = f_{1}$ .
+
+Note that $DEN \geq Ad(\theta(P_{0}), \theta(P_{1})) \geq A \delta$,
+by our assumptions.
+
+Then our RHS is given as
+\begin{align}
+  \label{eq:112}
+  \frac{1}{2} (\E_{P_{0}}(f_{0} \cdot DEN) + \E_{P_{1}} (f_{1} \cdot
+  DEN)) \\
+  &\geq \frac{1}{2} A \delta (\E_{P_{0}} f_{0} + \E_{P_{1}} f_{1})
+\end{align}
+
+By the Neyman-Pearson lemma, we have
+\begin{align}
+  \label{eq:113}
+  \geq \frac{1}{2} A \delta \int \min(P_{0}, P_{1}) = \frac{1}{2} A
+  \delta (1 - TV(P_{0}, P_{1}))
+\end{align}
+
+From the third example sheet, we can show that $(TV(P_{0}, P_{1}))^{2}
+\leq h^{2}(P_{0}, P_{1})$.  By assumption, this is bounded above by
+$C$.  Using this result, we have
+\begin{align}
+  \label{eq:114}
+  \geq \frac{1}{2} \delta (1 - \sqrt{C})
+\end{align}
+
+\end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+  \item Sample size $n$ does not seem to appear in the lemma.
+    However, $P$ is usually the joint distribution of $n$ samples.
+
+    Thus, the condition on the Hellinger distance gives some
+    conditions on $n$.
+  \item THe two conditions work also in the opposite direction.
+  \item We can extend the two points lemma to the multiple testing case.
+  \end{enumerate}
+\end{remark}
+
+See Tsybakov (2008), Yu (1997)
+\url{http://www.stat.berkeley.edu/~binyu/ps/LeCam.pdf}, Festshrif for
+Lucrem Le Cam.
+
+
+\begin{thm}[Nonparametric regression]
+  \label{defn:minimax_lower_bounds:1}
+  Let $Y_{i} = m(x_{i}) + \epsilon_{i}$, $\epsilon_{i} \sim N(0, 1)$,
+  $x_{i} = \frac{i}{n}$, $m \in \Theta$ with $\Theta$ the set of all
+  twice continuously differentiable functions on $[0, 1]$, $m''(x) <
+  \infty$.
+  Then for any estimator $\tilde m$ and any $x_{0} \in [0, 1]$,
+  \begin{equation}
+    \label{eq:115}
+    sup_{m \in \Theta} \E{(\tilde m(x) - m(x_{0}))^{2}} \geq C n^{-\frac{4}{5}}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Let $\mathcal{P}$ be the set of distributions of $Y_{1}, \dots,
+  Y_{n}$ with $Y_{i} = m(x_{i}) + \epsilon_{i}$ and $\epsilon_{i} \sim
+  N(0, 1)$, $m \in \Theta$. Let $\Theta$ be as given before.
+
+  Then Using $(x - y)^{2} + (y - z)^{2} \geq \frac{1}{4} (x - z)^{2}$,
+  we have
+  \begin{equation}
+    \label{eq:116}
+    d(m_{0}, m_{1}) =  (m_{0}(x_{0}) - m_{1}(x_{0}))^{2}
+  \end{equation} with $A = \frac{1}{4}$.
+
+  Let $m_{0} = 0$ on $x \in [0, 1]$.  Let $m_{1}$ be bounded away from
+  zero at some point $x_{0} > 0$.  Thus $m_{1}(x) = h^{2} K(\frac{x -
+    x_{0}}{h})$ , where $K(t) = a \exp(- \frac{1}{1 - t^{2}})$ for $t
+  \leq 1$ and $a$ a normalizing constant so $K(t)$ is a kernel.
+
+  With $h = \tilde c n^{-\frac{1}{5}}$.
+
+  Let $P_{0}$ be the distribution of $Y_{1}, \dots, Y_{n}$, with
+  $Y_{i} = m_{0}(x_{i}) + \epsilon_{i} = \epsilon_{i}$, and $P_{1}$ be
+  the equivalent with $Y_{i} = m_{1}(x_{i}) + \epsilon_{i}$.
+
+  Checking the first condition, we have $(d(m_{0}, m_{1})) = (h^{2}
+  K(0))^{2} = h^{2} a^{2} \exp(-2) = \delta$.
+  Checking the second condition, we have
+  \begin{align}
+    \label{eq:117}
+    h^{2}(P_{0}, P_{1}) \leq KL(P_{0}, P_{1})  \\
+    &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \log
+    \frac{\prod_{i=1}^{n} \phi(i_{i})}{\prod_{i=1}^{n} \phi(u_{i} -
+      m_{1}(x_{i}))} d u_{1} \dots d u_{n} \\
+    &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \sum_{i=1}^{n} \log
+    \exp(- u_{i} m_{1}(x_{i}) + \frac{1}{2} m_{1}(x_{i})^{2}) \\
+    &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \sum_{i=}^{n}  ( -
+    u_{i} m_{1}(x_{i}) + \frac{1}{2} m_{1}(x_{i})^{2}) d u_{1} \dots
+    du_{n} \\
+    &= \frac{1}{2} \sum_{i=1}^{n} m_{1}(x_{i})^{2} \\
+    &= \frac{1}{2} \sum_{i=1}^{n} h^{4} a^{2} \exp^{2}(-\frac{1}{1 -
+      (\frac{x_{i} - x_{0}}{h})^{2}}) \I{|x_{i} - x_{0}| \leq h} \\
+    &\leq \frac{1}{2} h^{4} a^{2} \sum_{i=1}^{n} \I{x_{0} - h \leq
+      x_{i} \leq x_{0} + h} \\
+    &\leq \frac{1}{2} h^{4} a^{2} 2nh \\
+    &= a^{2} nh^{5}
+  \end{align}
+  and as $h \sim n^{-\frac{1}{5}}$, we have our result.
+  with the conclusion that this is bounded by $\frac{1}{8} \delta(1 -
+  \frac{1}{\sqrt{2}})$.
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 
