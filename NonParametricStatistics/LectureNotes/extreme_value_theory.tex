@@ -127,11 +127,11 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
 
   We have Frechet corresponds to $\gamma > 0$, $\alpha =
   \frac{1}{\gamma} $, NW is $\gamma < 0$, $\alpha =
-  -\frac{1}{\gamma}$, and gumbel correpsonds to the case where $\gamma
+  -\frac{1}{\gamma}$, and Gumbel corresponds to the case where $\gamma
   \rightarrow 0$.
 \end{remark}
 
-\begin{proof}[Proof (non-examinable)]
+\begin{proof}[non-examinable]
   We show $Y_{n} = \frac{X_{(n)} - b_{n}}{a_{n}} \cd Y$, with
   $G_{\gamma}(x) = \exp(- (1 + rx)^{-\frac{1}{r}})$
 
@@ -141,10 +141,150 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
     \label{eq:123}
     \int_{}^{} z \frac{x - b_{n}}{a_{n}} d F_{X_{(n)}}(x) = n
     \int_{}^{} z(\frac{x - b_{n}}{a_{n}}) F(x)^{n-1} dF(x)
-  \end{align} and changinge variables so $F(x) = 1 - \frac{v}{n}, x = ..$
-  
+  \end{align} and changinge variables so $F(x) = 1 - \frac{v}{n}, x = \dots$
 \end{proof}
 
+\section{Necessary and Sufficient Conditions for Convergence}
+\label{sec:necess-suff-cond}
+
+We say a function $l: [C, \infty] \rightarrow (0, \infty)$ is ``slowly
+varying'' if $\lim_{x \rightarrow \infty} \frac{l(tx)}{l(x)} = 1$ for
+all $t > 0$.  For example, $l (x) = \log x, \log \log x, (\log
+x)^{\alpha}$.  
+
+We say a function $r_{\alpha}: [C, \infty) \rightarrow (0, \infty)$ is
+``regularly varying'' with an index $a \in \R$ if $r_{\alpha}(x) =
+x^{-\alpha}l(x)$ where $l$ is slowly varying - so $r_{2}(x) = x^{-2}
+\log x$.
+
+We define an \textbf{expected residual lifetime} as
+\begin{align}
+  \label{eq:120}
+  R(x) = \E{X - x | X > x} = \frac{1}{1 - F(x)} \int_{x}^{x_{\star}}
+  (1 - F(y)) dy
+\end{align} where $x_{\star} = \inf \{ x : F(x) = 1 \}$, and
+$\overline F(x) = 1 - F(x)$
+
+\begin{thm}
+  \label{defn:extreme_value_theory:4}
+  $F \in D(G_{1, \alpha})$ if and only if $x_{\star} = \infty$,
+  $\overline F(x) = x^{-\alpha} l(x)$ where $l$ is slowly varying.  We
+  can choose $b_{n} = 0$, $a_{n} = F^{-1}(1 - \frac{1}{n})$ for which
+  $F^{n}(a_{n} x + b_{n}) \hookrightarrow G_{1, \alpha}(x)$ is
+  satisfied.
+
+  $F \in D(G_{2, \alpha})$ if and only if $x_{\star} < \infty$,
+  $\overline F(x_{\star} - \frac{1}{x} ) = x^{-\alpha} l(x)$, with $l$
+  slowly varying for $x > 0$.  We can choose $b_{n} = x_{\star}$,
+  $a_{n} = x_{\star} - F^{-1}(1 - \frac{1}{n})$ for convergence.
+
+  $F \in D(G_{3})$ if and only if
+  \begin{align}
+    \label{eq:124}
+    \frac{\overline F(x + t R(x))}{\overline F(x)}  \rightarrow e^{-t}
+  \end{align} We can choose $b_{n} = F^{-1}(1 - \frac{1}{n})$, $a_{n}
+  = R(b_{n})$.
+\end{thm}
+
+\begin{proof}
+  See Galambos (1978), Ch 2.1, 2.4, 2.5, De Haan (2006), Theorem 1.2.1
+
+  For the proof, we need a statement.
+
+  \begin{lem}[$\star$]
+    Suppose there exists $a_{n} > 0$, $b_{n}$ such that $n(1 - F(a_{n}
+    x + b_{n})) \rightarrow{ u(x)}$.  Then
+    \begin{align}
+      \label{eq:125}
+      F^{n}(a_{n} x + b_{n}) \hookrightarrow \exp(-u(x))
+    \end{align}
+  \end{lem}
+
+  \begin{proof}
+    Taking the log of the left hand side, we have
+    \begin{align}
+      \label{eq:126}
+      n \log F(a_{n} x + b_{n}) &= n \log (1 - (1 - F(a_{n} x +
+      b_{n}))) \\
+      &= n (-(1 - F(a_{n} x + b_{n})) - \frac{1}{2} (1 - F(a_{n}x +
+      b_{n}))^{2} + \dots) \\
+      &= -u(x)
+    \end{align}
+    Thus the left hand side converges to $\exp(-u(x))$.
+  \end{proof}
+\end{proof}
+
+\begin{proof}[Proof of sufficient part of first part of theorem]
+  Proof of (1) - the sufficient part.  Supopse $x_{\star} = \infty$,
+  $\overline F(x) = x^{-\alpha} l(x)$.  Use $a_{n}$ and $b_{n}$ as in
+  the theorem.  Then we want to prove $F^{n}(a_{n} x + b_{n})
+  \hookrightarrow G_{1, \alpha}(x) = \exp(-x^{-\alpha} \I{x > 0})$.  
+
+  Using $\star$, we instead prove
+  \begin{align}
+    \label{eq:127}
+    n(1 - F(a_{n} x)) \rightarrow x^{-\alpha} \I{x > 0} + \infty \I{x
+      < 0}.
+  \end{align}
+
+  Let $x < 0$.  Note that $a_{n} = F^{-1}(1 - \frac{1}{n}) \rightarrow
+  x_{\star} = \infty$.  Thus $a_{n} x \rightarrow - \infty$, and $n(1
+  - F(a_{n} x)) \rightarrow \infty$.
+
+  Let $x > 0$. Note that $F(a_{n}) = F(F^{-1}(1 - \frac{1}{n})) \geq 1
+  - \frac{1}{n}$, and $F(a_{n} - \delta) \leq 1 - \frac{1}{n}$.
+  Rearranging, this gives $n \geq \frac{1}{1 - F(a_{n} - \delta)}$
+
+  Note also we have
+  \begin{align}
+    \label{eq:128}
+    n \frac{(1-F(a_{n} x))}{(1 - F(a_{n} x))} (1 - F(a_{n}))
+  \end{align}
+  which converges to $x^{-\alpha}$, as $\overline F = x^{-\alpha} l(x)$.
+
+  Thus, it suffices to show that $n(1 - F(a_{n})) \rightarrow 1$.
+  Note that
+  \begin{align}
+    \label{eq:129}
+    1 \geq n(1 - F(a_{n})) \\
+    &\geq \frac{1-F(a_{n})}{1 - F(a_{n} - \delta)} \\
+    &\geq \frac{1 - F(a_{n})}{1 - F(a_{n}(1 - \epsilon))}  \\
+    &= \frac{a_{n}^{-\alpha} l(a_{n})}{a_{n}^{-\alpha}
+      (1-\epsilon)^{-\alpha}l(a_{n}(1 - \epsilon))} \\
+    &= (1 - \epsilon)^{\alpha}
+  \end{align}
+  and as $\epsilon$ can be made arbitrarily close to zero, we obtain
+  our result.
+\end{proof}
+
+\begin{proof}[Proof of sufficient part of third part of theorem]
+  Suppose
+  \begin{align}
+    \label{eq:130}
+    \frac{\overline F(x + t R(x))}{\overline F(x)} \rightarrow e^{-t}
+  \end{align} and we use $a_{n}$, $b_{n}$ as in the theorem.  As in
+  $\star$, we seek to prove
+  \begin{align}
+    \label{eq:131}
+    n(1 - F(a_{n} x + b_{n})) = n(1 - F(R(b_{n}) x_{n} + b_{n})) \rightarrow e^{-x}.
+  \end{align}
+
+  To use the condition, note that the left hand side is given as
+  \begin{align}
+    \label{eq:132}
+    \frac{n(1 - F(b_{n} + x R(b_{n})))}{1 - F(b_{n})} (1 - F(b_{n}))
+  \end{align} and the inner term converges to $e^{-x}$ by assumption.
+
+  Thus, it suffices to prove $n(1 - F(b_{n})) \rightarrow 1$.
+  \begin{align}
+    \label{eq:133}
+    1 &\geq n(1 - F(b_{n})) \\
+    &\geq \frac{1 - F(b_{n})}{1 - F(b_{n} - \delta)} \\
+  &\geq \frac{1 - F(b_{n})}{1 - F(b_{n} - \epsilon R(b_{n}))} \\
+  &\rightarrow \frac{1}{e^{-(-\epsilon)}}  = e^{-\epsilon} \rightarrow 1
+  \end{align} Choose $\epsilon$ such that $1 - F(b_{n} - \delta \leq 1
+  - F(b_{n} - \epsilon R(b_{n}))$.
+\end{proof}
 
 %%% Local Variables: 
 %%% mode: latex

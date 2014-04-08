@@ -77,6 +77,77 @@ rejection sampling algorithm $N$ times?
   Thus $\hat c_{\alpha} \cas c_{\alpha}$.
 \end{proof}
 
+\section{Markov Chain Monte Carlo and Bayesian Inference}
+\label{sec:markov-chain-monte}
+
+Given $X_{1}, \dots, X_{n} \iid f$, we want tof find $f$.  Choose a
+model class $\mathcal{M} = \{ f_{\theta} \}$.  Assume that there
+exists $\theta$ with $f = f_{\theta}$, and seek to find $\theta$.
+
+In a frequentist approach, we have $L(X_{1}, \dots, X_{n}, \theta) =
+\prod_{i=1}^{n} f_{\theta}(X_{i})$.
+
+In a Bayesian framework, we have $\theta \tilde p$,
+$P(X_{1}, \dots, X_{n}, \theta) = p(\theta) L(X_{1}, \dots, X_{n})$,
+
+\begin{align}
+  \label{eq:71}
+  \pi(\theta | X_{1}, \dots, X_{n}) = \frac{p(\theta) L(X_{1}, \dots,
+    X_{n}, \theta)}{\int p(\theta') L(X_{1}, \dots, X_{n} \theta') d\theta'}
+\end{align}
+
+A Bayesian is interested in $\pi$ - in practice, $\pi$ can be
+difficult to study, so MC mehtods to approximate quantity related to
+$\pi$.
+
+
+\subsection{Probit Model}
+\label{sec:probit-model}
+
+Consider $(X, Y) \in R^{d \times m} \times \R^{m}$, with $y_{i} \in \{
+0, 1 \}$.So $Z = X^{T} \theta + \epsilon$, with $\epsilon \sim N(0,
+I_{m})$,$Y = \I{Z \geq 0}$.  Alterantively, we can write $Y =
+B(F(X_{i}^{T} \theta))$, where $B$ is the Bernouli distribution and
+$F$ is the distribution function of the normal distribution.  
+
+Note that we have $L((X, Y), \theta) = \prod_{i=1}^{n} (1-F(X_{i}^{T}
+\theta))^{1-Y_{i}} F(X_{i}^{T} \theta)^{Y_{i}}$
+
+The prior placed on $\theta$ is $N(0, I_{d})$.  Thus
+\begin{align}
+  \label{eq:71}
+  \pi(\theta) \propto e^{-\frac{1}{2} \theta^{T} \theta}
+  \prod_{i=1}^{n} (1-F(X_{i}^{T} \theta))^{1-Y_{i}} F(X_{i}^{T}
+  \theta)^{Y_{i}}
+\end{align}
+
+\subsection{Markov Chains}
+\label{sec:markov-chains}
+
+Consider the case of a stationary Markov chain - $X_{1}, \dots,
+X_{n}$is a chain of data, and the Markov property is that $X_{m+1} |
+X_{m}= x_{m} \perp X_{1}, \dots, X_{m-1}$, and $X_{m+1} | X_{m} =
+x_{m}$ has distribution $F$, and so is stationary.
+
+Assume $X_{n} \in \{ 1, \dots, n \}$.  Then you can model the chain by
+a graph, with transition probabilities $\pi_{ij}$.  Then letting $K =
+(\pi_{ij})$, we have that a stationary distribution $\pi$ satisfies
+$\pi = K \pi$, and the distribution at time $\pi_{t}$ given $\pi_{0}$
+is $K^{t} \pi_{0}$.
+
+ANOTHER CASE...
+
+On this chain, when $m \rightarrow \infty$, $p_{m} \cid p^{\star}$,
+statinoary distribution.  In this case, $p^{star}$ is the unique
+solution of $Kp = p$.
+
+Note that MCMC techniques allow you to simulate samples which are a
+Markov chain and whose stationary distribution is $\pi$.
+
+
+Let $Y_{1}, \dots, Y_{n}$ be a Markov chain whose stationray
+distribution is $\pi$.  Then $\frac{1}{m} \sum_{i=1}^{m} Y_{i} \cas
+\E{\theta} \pi$.
 
 
 %%% Local Variables: 

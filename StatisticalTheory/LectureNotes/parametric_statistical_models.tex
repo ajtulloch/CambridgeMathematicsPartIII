@@ -102,14 +102,14 @@ to converge to the minimizers of $Q$.
   \begin{align*}
     \inf_{\theta \in \Theta_{\epsilon}} Q_{n}(\theta) & = \inf_{\theta
       \in \Theta_{\epsilon}} [Q_{n}(\theta) - Q(\theta) + Q(\theta)]
-                                                                                              \\
-                                                      & \geq \inf_{\theta \in \Theta_{\epsilon}} Q(\theta) - \sup_{\theta
+    \\
+    & \geq \inf_{\theta \in \Theta_{\epsilon}} Q(\theta) - \sup_{\theta
       \in \Theta} |Q_{n}(\theta) - Q(\theta)|                                                 \\
-                                                      & \geq C(\epsilon) - \delta(\epsilon)   \\
-                                                      & \geq Q(\theta_{0}) + \delta(\epsilon) \\
-                                                      & \geq Q(\theta_{0}) + \delta(\epsilon) - |Q_{n}(\theta_{0}) -
+    & \geq C(\epsilon) - \delta(\epsilon)   \\
+    & \geq Q(\theta_{0}) + \delta(\epsilon) \\
+    & \geq Q(\theta_{0}) + \delta(\epsilon) - |Q_{n}(\theta_{0}) -
     Q(\theta_{0})|                                                                            \\
-                                                      & \geq Q_{n}(\theta_{0})
+    & \geq Q_{n}(\theta_{0})
   \end{align*} since on $A_{n}(\epsilon)$, in particular
   $|Q_{n}(\theta_{0}) - Q(\theta_{0})| < \delta(\epsilon)$.
 
@@ -401,7 +401,7 @@ $\theta_{0}$ is unique.
       \frac{\partial}{\partial \theta_{1}} \ell_{n}(\hat \theta_{n})  \\
       \vdots \\
       \frac{\partial}{\partial \theta_{p}} \ell_{n}(\hat \theta_{n})  \\
-    \end{bmatrix} 
+    \end{bmatrix}
   \end{align} \todo{Fill this in}
 o
   We have
@@ -740,6 +740,7 @@ IN a LAN model, the product measures $\P^{n}_{\Theta} =
 \otimes_{i=1}^{n} \P_{\Theta}$ and $P_{\theta + \frac{h}{\sqrt{n}}}$
 are mutually contiguous.
 
+
 \begin{exmp}
   \label{defn:parametric_statistical_models:12}
   Recall the Hodges' estimator
@@ -787,7 +788,7 @@ are mutually contiguous.
     \label{eq:98}
     \lim_{n \rightarrow \infty} \sup_{\theta \in \Theta}
     \mathbb{E}_{\Theta}^{h}(\sqrt{n}(\tilde \theta - \theta))^{2}
-    \rightarrow \infty 
+    \rightarrow \infty
   \end{align} whereas
   \begin{align}
     \label{eq:99}
@@ -797,7 +798,7 @@ are mutually contiguous.
   \end{align}
 \end{exmp}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "master"
-%%% End: 
+%%% End:

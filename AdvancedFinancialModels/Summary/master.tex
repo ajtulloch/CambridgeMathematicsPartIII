@@ -1,0 +1,745 @@
+\input{../../common/summary.tex}
+
+\title{Advanced Financial Models Summary}
+
+\begin{document}
+
+\maketitle
+
+\section{Arbitrage Theory}
+\label{sec:arbitrage-theory}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-1}
+  An investment/consumption strategy is an $n$-dimensional process
+  predictable $H$ satisfying the \textbf{self-financing} condition
+  \begin{equation}
+    \label{eq:1}
+    H_{t-1} \cdot P_{t-1} \geq H_{t} \cdot P_{t-1}
+  \end{equation}
+  The corresponding consumption process $c_{t}$ is given as
+  \begin{equation}
+    \label{eq:2}
+    c_{t} = H_{t-1} \cdot P_{t-1} - H_{t} \cdot P_{t-1}
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-2}
+  $X_{t}$ is \textbf{predictable} if $X_{t}$ is
+  $\mathcal{F}_{t-1}$-measurable for all $t \geq 1$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-3}
+  A state price density is a strictly positive adapted process $Y$
+  such that the process $Y_{t} P_{t}$ is a martingale.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-4}
+  An \textbf{absolute arbitrage} is a strategy $H$ such that there
+  exists a non-random time $T > 0$ with the properties
+  \begin{enumerate}
+  \item $X_{0}(H) = 0 = X_{T}(H)$ almost surely, and
+  \item $\Prob{\sum_{t=1}^{T} c_{t} > 0} > 0$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-5}
+  An asset is a \textnormal{numeraire} if its price is strictly
+  positive for all time, almost surely.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-6}
+  If an investment/consumption strategy is an arbitrage for the
+  market model, there exists a pure investment strategy $H'$ and a
+  non-random time horizon $T'$ such that
+  \begin{enumerate}
+  \item $X_{0}(H') = 0$,
+  \item $X_{T'}(H') \geq 0$almost surely,
+  \item $\Prob{X_{T'}(H') > 0} > 0$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-7}
+  A market model has no arbitrage if and only if there exists a state
+  price density.
+\end{thm}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-14}
+  A supermartingale is an adapted integrable process such that
+  \begin{equation}
+    \label{eq:3}
+    \E{X_{t} | \mathcal{F}_{s}} \leq X_{s}
+  \end{equation} for all $0 \leq s \leq t$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-8}
+  A stopping time for a filtration $\mathcal{F}_{t}$ is a random
+  variable $\tau$  such that the event $\{ \tau \leq t \}$ is
+  $\mathcal{F}_{t}$ measurable for all $t$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-9}
+  For an adapted process $X_{t}$ and a stopping time $\tau$, the
+  stopped process $X^{\tau}$ is given by $X_{t \wedge \tau}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-10}
+  Let $X$ be a martingale and let $\tau$ be a stopping time, then
+  $X^{\tau}$ is a martingale.
+\end{thm}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-11}
+  A local martingale is an adapted process $X_{t}$ such that there
+  exists an increasing sequence of stopping times $\tau_{n}$ with
+  $\tau_{n} \uparrow \infty$ such that the stopped process
+  $X^{\tau_{n}}$ is a martingale for each $N$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-12}
+  Martingales are local martingales..
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-13}
+  Let $X$ be a local martingale, with $|X_{s}| < Y_{t}$ a.s for all $0
+  \leq s \leq t$.  If $\E{Y_{t}} < \infty$ for all $t \geq 0$, then
+  $X$ is a true martingale.
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-15}
+  Let $X$ be a local martingale, with $X_{t} \geq 0$ for all $t \geq
+  0$.  Then $X$ is a supermartingale.
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-16}
+  If $X$ is a discrete-time local marginale with $X_{t} \geq 0$ for
+  all $t \geq 0$. Then $X$ is a martingale.
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitrage-theory-18}
+  The probability measure $\Q$ is equivalent to the measure $\P$ if
+  and only if there exists a positive random variable $\xi$ such that
+  $\Q{A} = \E^{P}(\xi \I{A})$.
+
+  The random variable $\xi$ is call the density, or Radon-Nikodym
+  derivative of $\Q$ with respect to $\P$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-19}
+  A numeraire is an asset with a strictly positive price at all times.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-20}
+  An equivalent martingale measure is any probability measure $\Q$
+  equivalent ot $\P$ such that the discounted price process
+  $\frac{S_{t}}{N_{t}}$ is a martingale under $\Q$, where $N_{t}$ is
+  the numeraire price process.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-21}
+  Let $Y$ be a state price density, and fix a time horizon $T > 0$.
+  Then
+  \begin{equation}
+    \label{eq:4}
+    \frac{d\Q}{d\P} = \frac{Y_{T} N_{T}}{Y_{0} N_{0}}
+  \end{equation}
+  is an equivalent martingale measure relative to $N$ for the model.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitrage-theory-22}
+  Suppose $\Q$ is an equivalent martingale measure for the market
+  $P_{t}$. Then
+  \begin{equation}
+    \label{eq:5}
+    Y_{t} = \frac{N_{0}}{N_{T}}  \E^{\P}(\frac{d\Q}{d\P} | \mathcal{F}_{t})
+  \end{equation} is a state price density.
+\end{defn}
+
+\section{Pricing and Hedging Contingent Claims}
+\label{sec:pric-hedg-cont}
+
+\begin{defn}
+  \label{sec:pric-hedg-cont-1}
+  A European claim with payout $\xi_{T}$ is \textbf{replicable} (or
+  \textbf{attainable}) if there exists a pure investment strategy $H$
+  such that $X_{T}(H) = \xi_{T}$ almost surely.
+\end{defn}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-3}
+  Suppose that our market has no arbitrage.  Let $\xi_{T}$ be the
+  payout of a Euorpena option, and let $H$ be the replicating strategy.
+  Suppose that the option is priced at $\xi_{t}$ for $0 \leq t \leq
+  T$.  Then if the autogment market with the option has no arbitrage,
+  \begin{equation}
+    \label{eq:7}
+    \xi_{t} = X_{t}(H)
+  \end{equation} for all $0 \leq t \leq T$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-4}
+  Suppose that the market model has no arbitrage, and let $Y$ be a
+  state price density process. Let $\xi_{T}$ be the payout of an
+  attainable European contingent claim with maturity date $T > 0$.
+  Suppose the claim has price $\epsilon_{t}$ for $0 \leq t \leq T$ and
+  that the augmented market with the option has no arbitrage.  If
+  either $Y_{T} \xi_{T}$ is integrable of $\xi_{T} \geq 0$ almost
+  surely, then
+  \begin{align}
+    \label{eq:8}
+    \xi_{t} = \frac{1}{Y_{t}} \E{\xi_{T} Y_{T} | \mathcal{F}_{t}}
+  \end{align} or (if a numeraire exists),
+  \begin{align}
+    \label{eq:9}
+    \frac{d\Q}{d\P} = \frac{N_{T} Y_{T}}{N_{0} Y_{0}}
+  \end{align}
+\end{thm}
+
+\begin{defn}
+  \label{sec:pric-hedg-cont-5}
+  A market is \textbf{complete} if every European contingent claim is
+  attainable, and \textbf{incomplete} otherwise.
+\end{defn}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-6}
+  An arbitrage-free market model is complete if and only if there
+  exists a unique state price density $Y$ such that $Y_{0} = 1$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-7}
+  Suppose the adapted process $\xi_{t}$ specifies the payout of an
+  American claim maturing at $T > 0$. Then there exists a trading
+  strategy $H$ such that
+  \begin{enumerate}
+  \item $X_{t}(H) \geq \xi_{t}$ for all $0 \le qt \leq T$,
+  \item $X_\tau{^\star} = \xi_{\tau^{\star}}$ for some stopping time
+    $\tau^{\star}$, and
+  \item $X_{0}(H) = \sup_{\tau \leq T} \E{Y_{\tau} \xi_{\tau}}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-8}
+  Let $U$ be a discrete-time supermartingale.  Then there is a unique
+  decomposition
+  \begin{equation}
+    \label{eq:10}
+    U_{t}= U_{0}+ M_{t} - A_{t}
+  \end{equation} where $M$is a martingale and $A$is a predictable
+  non-decreasing process with $M_{0} = A_{0} = 0$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:pric-hedg-cont-9}
+  Let $Z_{t}$ be an integrable adapted discrete-time process. Let
+  $U_{t}$ be given by the recursion
+  \begin{align}
+    \label{eq:11}
+    U_{T} = Z_{T} \\
+    U_{t} = \max (Z_{t}, \E{U_{t+1} | \mathcal{F}_{t}})
+  \end{align}
+  $U_{t}$ is called the Snell envelope of $Z_{t}$.  It is the smallest
+  supermartingale that dominates the process $Z_{t}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-11}
+  Let $Z_{t}$ be an integrable adapted process, with $U_{t}$ its Snell
+  envelope with Doob decomposition $U_{t} = U_{0} + M_{t} - A_{t}$.
+  Let $\tau^{\star} = \min \{ t \in \{0, \dots, T\}: A_{t+1} > 0 \}$
+  with the convention $\tau^{\star} = T$ on $\{ A_{t} = 0 \forall t
+  \}$.  Then $\tau^{\star}$ is a stopping time, with
+  \begin{align}
+    \label{eq:12}
+    U_{\tau^{\star}} = U_{0} + M_{\tau^{\star}} = Z_{\tau^{\star}}.
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:pric-hedg-cont-12}
+  Let $Z$ be an adapted integrable process and let $U$ be its Snell
+  envelope.  Then
+  \begin{align}
+    \label{eq:13}
+    U_{0} = \sup_{\tau \leq T} \E{Z_{\tau}}.
+  \end{align}
+\end{thm}
+
+\section{Brownian Motion and Stochastic Calculus}
+\label{sec:brown-moti-stoch}
+
+\begin{defn}
+  \label{sec:brown-moti-stoch-1}
+  A Brownian motion is a collection of random variables such that
+  \begin{enumerate}
+  \item $W_{0}(\omega) = 0$ for all $\omega \in \Omega$,
+  \item For all $0 \leq t_{0} < t_{1} \dots < t_{n}$, $W_{t_{i+1}} -
+    W_{t_{i}}$ are independent with distribution $N(0, |t_{i+1} - t_{i}|)$,
+  \item The sample path $t \mapsto W_{t}(\omega)$ is continuous for
+    all $\omega \in \Omega$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  \label{sec:brown-moti-stoch-2}
+  A simple predictable process is an adapted process $\alpha$ of the
+  form $\alpha_{t}(\omega) = \sum_{n=1}^{N} \I{(t_{n-1}, t_{n}]}(t)
+  a_{n}(\omega)$ where $a_{n}$ are bounded and
+  $\mathcal{F}_{t_{n-1}}$-measurable for $0 \leq t_{0} < \cdots < t_{n}
+  < \infty$.
+
+  Define the stochastic integral by the formula
+  \begin{align}
+    \label{eq:14}
+    \int_{0}^{\infty} \alpha_{s} dW_{s} = \sum_{n=1}^{N}  a_{n}
+    (W_{t_{n} - W_{t_{n-1}}})
+  \end{align}
+\end{defn}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-3}
+  For a simple predictable integrand $\alpha$, we have
+  \begin{align}
+    \label{eq:15}
+    \E{(\int_{0}^{\infty} \alpha_{s} dW_{s})^{2}} =
+    \E{\int_{0}^{\infty} \alpha_{s}^{2} ds}
+  \end{align}
+\end{thm}
+
+\begin{defn}
+  \label{sec:brown-moti-stoch-4}
+  If $\alpha$ is predictable with $\E{\int_{0}^{\infty} \alpha_{s}^{2}
+    ds} < \infty$, then $\int_{0}^{\infty} \alpha_{s} dW_{s} = \lim_{k}
+  \int_{0}^{\infty} \alpha_{s}^{(k) dW_{s}}$ where the limit is in
+  $L^{2}(\Omega)$ where $\alpha^{(k)}$ is a sequence of simple
+  predictable processes converging to $\alpha$ in $L^{2}(R_{+} \times \Omega)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-5}
+  For every predictable $\alpha$ such that $\E{\int_{0}^{t}
+    \alpha_{s}^{2} ds} < \infty$ for all $t \geq 0$, there exists a
+  continuous martingale $X$ such that $X_{t} = \int_{0}^{\infty}
+  \alpha_{s} \I{s \leq t} dW_{s}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-6}
+  If $\alpha$ is an adapted continuous process then $X_{t} =
+  \int_{0}^{t} \alpha_{s} dW_{s}$ is a continuous local martingale. If
+  we have $\E{\int_{0}^{t} \alpha_{s}^{2} ds} < \infty$ for all $t
+  \geq 0$, then $X$ is a true martingale.
+\end{thm}
+
+\newcommand{\ito}{Ito\xspace}
+
+\begin{defn}
+  \label{sec:brown-moti-stoch-7}
+  An \ito process $X$ is an adapted process of the form
+  \begin{align}
+    \label{eq:16}
+    X_{t} = X_{0} + \int_{0}^{t} \alpha_{s} dW_{s} + \int_{0}^{t}
+    \beta_{s} ds
+  \end{align} where $X_{0}$ is a fixed real number and $\alpha_{t}$,
+  $\beta_{t}$ are predictable real-valued processes such that
+  $\int_{0}^{t} \alpha_{s}^{2} ds < \infty$ and $\int_{0}^{t}
+  |\beta_{s}| ds < \infty$ almost surely for all $t \geq 0$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-8}
+  Let $X$ be an \ito process and $f: \R \rightarrow \R$ twice
+  continuously differentiable.  Then
+  \begin{align}
+    \label{eq:17}
+    f(X_{t}) = f(X_{0}) + \int_{0}^{t} f'(X_{s}) \alpha_{s} dW_{s} +
+    \int_{0}^{t} [f'(X_{s}) \beta_{s} + \frac{1}{2} f''(X_{s})
+    \alpha_{s}^{2}] ds
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-9}
+  Let $X$ be an \ito process. There exists a continuous non-decreasing
+  process $\IP{X}$ called the quadratic variation of $X$, such that
+  \begin{align}
+    \label{eq:18}
+    \IP{X}_{t} = \lim_{N} \sum_{n=1}^{N} (X_{\frac{nt}{N}} - X_{\frac{(n-1)t}{N}})^{2}
+  \end{align} for each $t \geq 0$, where the limit is in probability.
+  If
+  \begin{align}
+    \label{eq:19}
+    dX_{t} = \alpha_{t} dW_{t} + \beta_{t} dt,
+  \end{align} then
+  \begin{align}
+    \label{eq:20}
+    d \IP{X}_{t} = \alpha_{t}^{2} dt
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-10}
+  Let $f : \R_{+} \times \R^{n} \rightarrow \R$ where $(t, x) \mapsto
+  f(t, x)$ is continuously differentiable in $t$ and
+  twice-continuously differentiable in $x$.  Then
+  \begin{align}
+    \label{eq:21}
+    df(t, X_{t}) = \frac{\partial f}{\partial t} (t, X_{t}) dt +
+    \sum_{i=1}^{n} \frac{\partial f}{\partial x_{i}} (t, X_{t})
+    dX_{t}^{(i)} + \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n}
+    \frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}(t, X_{t}) d
+    \IP{X^{(i)}, X^{(j)}}
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-11}
+  Let $W_{t}$ be an $m$-dimensional Browniam motion, with
+  \begin{align}
+    \label{eq:22}
+    Z_{t} = \exp(-\frac{1}{2} \int_{0}^{t} \| \alpha_{s} \|^{2} ds +
+    \int_{-}^{t} \alpha_{s} \cdot dW_{s})
+  \end{align} and $Z_{t}$be a martingale.  Let $\Q$ be the equivalent
+  measure with density $\frac{d\Q}{d\P} = Z_{T}$.  Then the
+  $m$-dimensional process $(\hat W_{t})$ defined by $\hat W_{t} =
+  W_{t} - \int_{0}^{t} \alpha_{s} ds$ is a Brownian motion on
+  $(\Omega, \mathcal{F}_{T}, \Q)$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-12}
+  If $\E{\exp(\frac{1}{2} \int_{0}^{T} \| \alpha_{s} \|^{2} ds)} <
+  \infty$, then $\E{\exp(-\frac{1}{2} \int_{0}^{T} \|\alpha_{s}\|^{2}
+    ds + \int_{0}^{T} \alpha_{s} \cdot dW_{s})} = 1$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:brown-moti-stoch-13}
+  Let $(\Omega, \mathcal{F}, \Pi)$ be a probability space with an
+  $m$-dimensional Brownian motion $W$ and filtration $\mathcal{F}_{t}$
+  generated by $W$.  Let $X$ be a continuous local martingale. Then
+  there exists a unique predictable $m$-dimensional process
+  $\alpha_{t}$ such that $\int_{0}^{t} \|\alpha_{s}\|^{2} ds < \infty$
+  almost surely for all $t \geq 0$ and $X_{t} = X_{0} + \int_{0}^{t}
+  \alpha_{s} \cdot dW_{s}$. Furthermore, if $X_{t} > 0$ for all $t
+  \geq 0$ then there exists a predictable $\beta$ such that
+  $\int_{0}^{t} \| \beta_{s}\|^{2} < \infty$ and
+  \begin{align}
+    \label{eq:23}
+    X_{t} = X_{0} \exp(-\frac{1}{2} \int_{0}^{T} \| \beta_{s}\|^{2} ds
+    + \int_{0}^{T} \beta_{s} \cdot dW_{s}).
+  \end{align}
+\end{thm}
+
+\section{Arbitrage Theory for Continuous-Time Models}
+\label{sec:arbitr-theory-cont}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-2}
+  An $(n+1)$-dimensional predictable process $(H, c)$ such that $H$ is
+  $P$-integrable is a self-financing investment/consumption strategy
+  if and only if $d(H_{t} \cdot P_{t}) = H_{t} \cdot dP_{t} - c_{t}
+  dt$.  The wealth associated with a self-financing strategy $H$ is
+  $X_{t} = H_{t} \cdot P_{t} = X_{0}(H) + \int_{0}^{t} H_{s} \cdot
+  dP_{s} - \int_{0}^{t} c_{s} ds$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-3}
+  A trading strategy $H$ is $L$-admissible if and only if the
+  associated wealth process $X(H)$ is such that $X_{t}(H) \geq -L_{t}$
+  for all $t \geq 0$ a.s. where $L$ is a given continuous non-negative
+  adapted process.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-4}
+  An admissible investment/consumption strategy $(H, c)$ is called an
+  absolute arbitrage if and onyl if there is a non-random time $T$
+  such that $X_{0}(H) = 0 = X_{T}(H)$ a.s. and $\Prob{\int_{0}^{T}
+    c_{s} ds > 0} > 0$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-5}
+  A state price density is a positive \ito process $Y$ such that $YP$
+  is an $n$-dimensional local martingale.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-6}
+  If there exists a state price density $Y$ such that $YL$ is locally
+  of class $D$, then there are no $L$-admissible absolute arbitrages.
+\end{thm}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-7}
+  A family of random variables $\mathcal{Z}$ is called uniformly
+  integrable if and only if $\lim_{k \rightarrow \infty} \sup_{Z \in
+    \mathcal{Z}} \E{|Z| \I{|Z| > k}} = 0$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-8}
+  Let $Z_{1}, \dots, Z_{n}$ be a faimly of integrable random
+  variables. The following statments are equivalent:
+  \begin{enumerate}
+  \item $Z_{n} \rightarrow Z_{\infty}$ in $L^{1}$, and
+  \item $(Z_{n})$is uniformly integrable and $Z_{n} \rightarrow
+    Z_{\infty}$ in probability.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-9}
+  A continuous adapted process $Z$ is of class $D$ if the family of
+  random variables $\{ Z_{\tau} \}$ with $\tau$ a finite stopping time
+  is uniformly integrable.  A process is locally of class $D$ if $\{
+  Z_{\tau \wedge t} \} $ for $\tau$ a stopping time is uniformly
+  integrable for each $t \geq 0$.
+
+  If $\E{\sup_{0 \leq s \leq t}|Z_{s}|} < \infty$ for each $t \geq 0$,
+  then $Z$ is locally of class $D$.  If $Z$ is a martingale, then $Z$
+  is locally of class $D$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-1}
+  Suppose $(H, c)$ is a self-financing investment/consumption strategy
+  and let $X_{t} = H_{t} \cdot P_{t} = X_{0} + \int_{0}^{t} H_{s}
+  \cdot dP_{s} - \int_{0}^{t} c_{s} ds$.  Then $d(X_{t} Y_{t}) = H_{t}
+  \cdot d(Y_{t} P_{t}) - Y_{t} c_{t} dt$ for any \ito process $Y$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-10}
+  A relative arbitrage is a pure investment strategy with wealth
+  process $X$ suc that there is a non-random time $T > 0$ satisfying
+  $\frac{X_{T}}{N_{T}} \geq \frac{X_{0}}{N_{0}}$ a.s and
+  $\Prob{\frac{X_{T}}{N_{T}} > \frac{X_{0}}{N_{0}}} > 0$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:arbitr-theory-cont-11}
+  An equivalent (local) martingale measure relative to the numeraire
+  with price $N$ is a probabilty measure $\Q$ equivalent to $\P$ such
+  that $\frac{S}{N}$ is a local martnigale.
+\end{defn}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-12}
+  Let $\Q$ be an equivalent local martinagle measure.  Suppose
+  $\frac{L}{N}$ is locally in $\Q$-class $D$.  Then there are no
+  $L$-admissible relative arbitrages.
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-13}
+  There exist continuous time markets that have relative arbitrage but
+  no absolute arbitrage.
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-14}
+  Let $\lambda$ be a predictable $m$-dimensional process such that
+  $\int_{0}^{t} \| \lambda_{s} \|^{2}ds < \infty$ a.s. for all $t \geq
+  0$ and that $\sigma_{t} \lambda_{t} = \mu_{t} - r_{t} \mathbf{1}$.
+  Let $Y_{t} = Y_{0} \exp(-\int_{0}^{t} (r_{s} + \frac{\|
+    \lambda_{s}\|^{2}}{2}) ds - \int_{0}^{t} \lambda_{s} \cdot
+  dW_{s})$ for a constant $Y_{0} > 0$ - or equivalently, $dY_{t} =
+  Y_{t}(-r_{t} dt - \lambda_{t} \cdot dW_{t})$.  Then $Y$ is a
+  state-price density.  Furthermore, if the fitlration is generated by
+  the $m$-dimensional Brownian motion $W$, all state price densities
+  have this form.
+\end{thm}
+
+\begin{thm}
+  \label{sec:arbitr-theory-cont-15}
+  Suppose $\lambda$ is a predictable process with $\sigma_{t}
+  \lambda_{t} = \mu_{t} - r_{t} \mathbf{1}$.  If $M_{t} =
+  e^{-\frac{1}{2} \int_{-}^{t} \| \lambda_{s} \|^{2}ds - \int_{0}^{t}
+    \lambda_{s} \cdot dW_{s}}$ is a true martingale, then the measure
+  $\Q$ defined by $\frac{d\Q}{d\P} = M_{T}$ is an equivalent
+  martingale measure.  In particular, the stock price dynamics
+  aregiven by
+  \begin{align}
+    \label{eq:6}
+    dS^{i}_{t} = S^{i}_{t}(r_{t} dt + \sum_{j} \sigma^{ij}_{t} d\hat W_{t}^{j})
+  \end{align} where $\hat W_{t} = W_{t} + \int_{0}^{t} \lambda_{s} ds$
+  is a $\Q$ Brownian motion.
+\end{thm}
+
+\section{Hedging Contingent Claims in Continuous Time Models}
+\label{sec:hedg-cont-claims}
+
+\begin{thm}
+  \label{sec:hedg-cont-claims-1}
+  Suppose $m=d$ and the $d \times d$ matrix $\sigma_{t}$ is invertible
+  for all $t, \omega$ so that in particular, there is a unique (up to
+  scaling) state price density $Y$ of the form $dY_{t} = Y_{t}(-r_{t}
+  dt - \lambda_{t} \cdot dW_{t})$ where $\lambda_{t} =
+  \sigma_{t}^{-1}(\mu_{t} - r_{t} \mathbf{1})$.
+
+  Let $\xi_{T}$ be non-negative, $\mathcal{F}_{T}$-measurable, and
+  such that $\xi_{T} Y_{T}$ is integrable.  Then there exists a
+  $0$-admissible strategy $H$ with initial cost $X_{0}(H) = \E{Y_{T}
+    \xi_{T}}{Y_{0}}$ which replicates the European claim with payout
+  $\xi_{T}$.
+
+  Furthermore, if $LY$ is locally of class $D$and $\tilde H$ is an
+  $L$-admissible strategy replicating the claim, then $X_{0}(\tilde H)
+  \geq X_{0}(H)$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:hedg-cont-claims-2}
+  The Black-scholes model is given by the pair of equations
+  \begin{align}
+    \label{eq:24}
+    dB_{t} = B_{t} r dt \\
+    dS_{t} = S_{t}(\mu dt + \sigma dW_{t})
+  \end{align}
+
+  Consider pricing a European option with payoff $\xi_{T} = g(S_{T})$.
+  The unique state price desnity with $Y_{0} = 1$ is given by $Y_{t} =
+  \exp((r - \frac{\lambda^{2}}{2})t - \lambda W_{t}$ with $\lambda =
+  \frac{\mu - r}{\sigma}$.
+
+
+  Thus, the is a trading strategy $H$ which replicates the payout with
+  \begin{align}
+    \label{eq:25}
+    X_{t}(H) = \frac{1}{Y_{t}} \E{Y_{T} g(S_{T}) | \mathcal{F}_{t}}.
+  \end{align}
+
+  The EMM $\Q$ is given by the density $\frac{d\Q}{d\P} =
+  \exp(-\frac{\lambda^{2} T}{2} - \lambda W_{T})$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:hedg-cont-claims-3}
+  Suppose that the function $V: [0, T] \times \R^{d} \rightarrow [0,
+  \infty)$ satisfies the PDE
+  \begin{align}
+    \label{eq:26}
+    \frac{\partial V}{\partial t} + \sum_{i=1}^{d} r S^{i}
+    \frac{\partial V}{\partial S^{i}} + \frac{1}{2} \sum_{i=1}^{d}
+    \sum_{j=1}^{d} a_{i, j} S^{i} S^{j} \frac{\partial^{2} V}{\partial
+      S^{i} \partial S^{j}} = rV
+  \end{align} and $V(T, S) = g(S)$.
+
+  Then there exists a $0$-admissible strategy $H$ such that $X_{t}(H)
+  = V(t, S_{t})$. In particular, this strategy replicates the
+  contingent claim with payout $g(S_{T})$.
+
+  Furthermore, if $H = (\phi, \pi)$, then the strategy can be
+  calculated as
+  \begin{align}
+    \label{eq:27}
+    \pi_{t} = \grad V(t, S_{t}) = (\frac{\partial V}{\partial
+      S_{1}}(t, S_{t}), \dots, \frac{\partial V}{\partial S^{d}}(t,
+    S_{t}))
+  \end{align} and $\phi_{t} = \frac{V(t, S_{t}) - \pi_{t} \cdot
+    S_{t}}{B_{t}}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:hedg-cont-claims-4}
+  Suppose that $C_{0}(T, K) = \E{\Q}{e^{-rT}(S_{T} - K)^{+}}$.  Then
+  $\frac{\partial C_{0}}{\partial T}(T, K) + rK \frac{\partial
+    C_{0}}{\partial K}(T, K) = \frac{\sigma(T, K)^{2}}{2} K^{2}
+  \frac{\partial^{2} C_{0}}{\partial K^{2}}(T, K)$.
+\end{thm}
+
+TODO - put in more on local volatility models?
+
+\section{Interest Rate Models}
+\label{sec:interest-rate-models}
+\begin{defn}
+  \label{sec:interest-rate-models-1}
+  A zero-coupon bond with maturity $T$ is a European contingent claim
+  that pays one unit of currency at time $T$.  $P(t, T)$ is the price
+  at time $t \in [0, T]$ of the bond.
+
+  The yield $y(t, T)$ is defined by $y(t, T) = - \frac{1}{T- t} \log
+  P(t, T)$.
+
+  The forward rate $f(t, T)$ is defined by $f(t, T) = -
+  \frac{\partial}{\partial T} \log P(t, T)$.
+
+  Note that $P(t, T) = e^{-(T-t) y(t, T)} = e^{-\int_{t}^{T} f(t, s)
+    ds}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:interest-rate-models-3}
+  Let $dB_{t} = B_{t} r_{t} dt$ where $r_{t}$ is the sport interest
+  rate.  Then there is no arbitrage realtive to the numeraire if there
+  exists an equivalent measure $\Q$ such that the discounted bond
+  price process $\frac{P(t, T)}{B_{t}}_{t \in 0, T}$ is a local
+  martingale for all $T > 0$.  IN particular, there is no arbitrage if
+  $P(t, T) = \E{\Q}{\exp(-\int_{t}^{T} r_{s} ds) | \mathcal{F}_{t}}$
+  for all $0 \leq t \leq T$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:interest-rate-models-4}
+  The Vasicek model is $dr_{t} = \lambda(\overline r - r_{t}) dt +
+  \sigma d\hat W_{t}$.
+
+  We have $\E{\Q}(r_{t}) = e^{-\lambda t} r_{0} + (1 - e^{-\lambda t})
+  \overline r$, $\Var^{\Q}(r_{t}) = \int_{0}^{t} e^{-2\lambda(t-s)}
+  \sigma^{2} ds = \frac{\sigma^{2}}{2\lambda} (1 - e^{-2\lambda t})$.
+
+  Indeed, we can deduce that
+  \begin{align}
+    \label{eq:28}
+    f(t, t + x) = r_{t} e^{-\lambda x} + \overline r(1 - e^{-\lambda
+      x}) - \frac{\sigma^{2}}{2 \lambda^{2}} (1 - e^{-\lambda x})^{2}
+  \end{align}
+\end{defn}
+
+\begin{thm}
+  \label{sec:interest-rate-models-5}
+  Consider now where the short rate is Markovian, and so $dr_{t} =
+  \alpha(t, r_{t}) dt + \beta(t, r_{t}) d \hat W_{t}$ for non-random
+  function $\alpha, \beta$.
+
+  If we fix $T > 0$ and let $V: [0, T] \times \R \rightarrow \R$
+  satisfy the PDE
+  \begin{align}
+    \label{eq:29}
+    \frac{\partial V}{\partial t}(t, r) + \alpha(t, r) \frac{\partial
+      V}{\partial r}(t, r) + \frac{1}{2} \beta(t, r)^{2}
+    \frac{\partial^{2} V}{\partial r^{2}}(t, r) = rV(t, r)
+  \end{align} with $V(T, r) = 1$.  Assume $P(t, T) = V(t, r_{t})$.
+  Then the discounted price process $\exp(-\int_{-}^{t} r_{s} ds) P(t,
+  T)$ is a $\Q$-local martingale.
+\end{thm}
+
+
+\bibliographystyle{plainnat}
+\bibliography{../../common/bibliography}
+\end{document}

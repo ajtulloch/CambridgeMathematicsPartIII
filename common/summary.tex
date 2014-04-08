@@ -1,0 +1,186 @@
+\documentclass[8pt, reqno, oneside, twocolumn]{amsart} 
+
+% Utility packages
+\usepackage{etoolbox}
+\newtoggle{tufte}
+\togglefalse{tufte}
+\newtoggle{summary}
+\togglefalse{summary}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{thmtools}
+\usepackage{xparse}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{todonotes}
+\usepackage{dcolumn}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl, xcolor}
+\usepackage{longtable}
+\usepackage{natbib}
+\usepackage{python}
+\usepackage[cm]{fullpage}
+
+\hypersetup{colorlinks=true}
+\numberwithin{equation}{section}
+
+\declaretheorem[numberwithin=section,name=Theorem,style=definition]{thm}
+\declaretheorem[name=Lemma,sibling=thm]{lem}
+\declaretheorem[name=Corollary,sibling=thm]{corollary}
+\declaretheorem[name=Definition,sibling=thm,style=definition]{defn}
+\declaretheorem[name=Proposition,sibling=thm]{proposition}
+\declaretheorem[name=Example,sibling=thm]{exmp}
+\declaretheorem[name=Exercise,sibling=thm]{exer}
+\declaretheorem[name=History,sibling=thm]{history}
+\declaretheorem[name=Question,sibling=thm]{question}
+\declaretheorem[name=Remark,sibling=thm]{remark}
+\declaretheorem[name=Notation,numbered=no]{notation}
+\declaretheorem[name=Theorem,sibling=thm,thmbox=L]{boxthm}
+
+\let\proof\relax
+\declaretheorem[style=remark,numbered=no,qed=\qedsymbol]{proof}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\aff}{aff}
+\DeclareMathOperator*{\rint}{rint}
+\DeclareMathOperator*{\lev}{lev}
+\DeclareMathOperator*{\tr}{tr}
+\DeclareMathOperator*{\interior}{int}
+\DeclareMathOperator*{\epi}{epi}
+\DeclareMathOperator*{\dom}{dom}
+\DeclareMathOperator*{\vecspan}{span}
+\DeclareMathOperator*{\con}{con}
+\DeclareMathOperator*{\cl}{cl}
+\DeclareMathOperator*{\grad}{\nabla}
+\DeclareMathOperator*{\crit}{crit}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator*{\res}{Res}
+\DeclareMathOperator*{\boundary}{boundary}
+\DeclareMathOperator*{\range}{range}
+\DeclareMathOperator*{\Tr}{Tr}
+\DeclareMathOperator*{\sign}{sign}
+\setlist[enumerate]{label=(\roman*)}
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{label=Ex. \arabic*}
+
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+% \onehalfspacing
+
+\author{Andrew Tulloch}
+
+
+% Shortcuts
+% convergence in probability
+\newcommand{\cd}{\overset{d}{\rightarrow}}    
+% convergence in distribution
+\newcommand{\cp}{\overset{p}{\rightarrow}}
+% convergence almost surely
+\newcommand{\cas}{\overset{as}{\rightarrow}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\np}{\textsc{np}\xspace}
+\newcommand{\iid}{\textsc{iid}\xspace}
+\newcommand{\knn}{$k$-\textsc{nn}\xspace}
+
+% Expectation
+\NewDocumentCommand{\E}{gg}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{E}
+    }    
+    {%
+      \IfNoValueTF{#2}
+      {%
+        \mathbb{E}\!\left(#1\right)
+      }
+      {%
+        \mathbb{E}_{#2}\!\left(#1\right)
+      }
+    }%
+}
+
+% Probability with measure P
+\NewDocumentCommand{\Prob}{gg}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{P}
+    }    
+    {%
+      \IfNoValueTF{#2}
+      {%
+        \mathbb{P}\!\left(#1\right)
+      }
+      {%
+        \mathbb{P}_{#2}\!\left(#1\right)
+      }
+    }%
+}
+
+% Probability with measure Q
+\NewDocumentCommand{\Q}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{Q}
+    }    
+    {%
+      \mathbb{Q}\!\left(#1\right)
+    }%
+}
+
+
+% Indicator
+\NewDocumentCommand{\I}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{I}
+    }    
+    {%
+      \mathbb{I}\!\left(#1\right)
+    }%
+}
+
+
+\NewDocumentCommand{\Var}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \mathbb{V}
+    }    
+    {%
+      \mathbb{V}\!\left(#1\right)
+    }%
+}
+
+
+\NewDocumentCommand{\Cov}{gg}{%
+  \IfNoValueTF{#1}
+    {%
+      \text{Cov}
+    }   
+    {%
+      \text{Cov}\!\left(#1, #2\right)
+    }%
+}
+
+% Inner product
+\NewDocumentCommand{\IP}{g}{%
+    {%
+      \left \langle #1 \right \rangle
+    }%
+}
+%%% Local Variables: 
+%%% mode: latex
+%%% End: 
