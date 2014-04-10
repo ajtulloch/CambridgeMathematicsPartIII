@@ -501,6 +501,447 @@
   $\con f$ is the greatest convex function majorized by $f$.
 \end{defn}
 
+\begin{defn}
+  \label{sec:conjugate-functions-2}
+  For $f: \R^{n} \rightarrow \overline \R$, the \textbf{lower closure}
+  $\cl f$ is defined as $(\cl f)(x) = \liminf_{y \rightarrow x} f(y)$.
+  Alternatively, $(\cl f)(x) = \sup_{\text{$g \leq f$, $g$ lsc}} g(x)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:conjugate-functions-3}
+  For $f: \R^{n} \rightarrow \overline \R$, we have $\epi (\cl f) =
+  \cl (\epi f)$.  Moreover, if $f$ is convex then $\cl f$ is convex.
+\end{thm}
+
+\begin{thm}
+  \label{sec:conjugate-functions-4}
+  Assume $C \subseteq \R^{n}$ is closed and convex.  Then $C =
+  \bigcap_{(b, \beta), C \subseteq H_{b, \beta}} H_{b, \beta}$ where
+  $B_{b, \beta} = \{ x \in \R^{n} | \IP{x, b} - \beta \leq 0 \} $
+\end{thm}
+
+\begin{thm}
+  \label{sec:conjugate-functions-5}
+  Assume $f: \R^{n} \rightarrow \overline \R$ is proper, lsc, and
+  convex.  Then $f(x) = \sup_{\text{$g$ affine, $f \leq f$}} g(x)$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:conjugate-functions-6}
+  Let $f: \R^{n} \rightarrow \overline \R$, then
+  \begin{align}
+    \label{eq:8}
+    f^{\star}: \R^{n} \rightarrow \overline \R \\
+    f^{\star}(v) = \sup_{x \in \R^{n}} \IP{v, x} - f(x)
+  \end{align} is the \textbf{conjugate to $f$}.  The mapping $f
+  \mapsto f^{\star}$ is the Legendre-Fenchel transform.
+\end{defn}
+
+\begin{thm}
+  \label{sec:conjugate-functions-7}
+  Assume $f: \R^{n} \rightarrow \overline \R$.  Then $f^{\star} =
+  (\con f)^{\star} = (\cl f)^{\star} = (\cl \con f)^{\star}$ and
+  $f^{\star \star} = (f^{\star})^{\star} \leq f$ .  If $\con f$ is
+  proper, then $f^{\star}$ and $f^{\star \star}$ are proper, lsc, and
+  convex, and $f^{\star \star} = \cl \con f$.  If $f: \R^{n}
+  \rightarrow \overline \R$ is proper, lsc, and convex, then $f^{\star
+  \star} = f$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:conjugate-functions-8}
+  Assume $f: \R^{n} \rightarrow \overline \R$.  Then
+  \begin{enumerate}
+  \item $\con f$ is not proper implies $f^{\star} \equiv +\infty$ or
+    $f^{\star} \equiv -\infty$.
+  \item In particular, $f^{\star}$ proper implies $\con f$ is proper.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:conjugate-functions-9}
+  Assume $f: \R^{n} \rightarrow \overline \R$ is proper, lsc, and
+  convex.  Then $\partial f^{\star} = (\partial f)^{-1}$,
+  specifically,
+  \begin{equation}
+    \label{eq:20}
+    v \in \partial f(x) \iff f(x) + f^{\star}(v) = \IP{v, x} \iff x
+    \in \partial f^{\star}(v).
+  \end{equation}
+  Moreover,
+  \begin{align}
+    \label{eq:22}
+    \partial f(x) = \argmax_{v'} \IP{v', x} - f^{\star}(v')
+    \partial f^{\star}(x) = \argmax_{x'} \IP{v, x'} - f(x)
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:conjugate-functions-10}
+  For a proper, lsc, convex $f: \R^{n} \rightarrow \overline \R$, we
+  have
+  \begin{align}
+    \label{eq:23}
+    (f(\cdot) - \IP{a, \cdot})^{\star} = f^{\star}(\cdot + a) \\
+    \label{eq:24}
+    (f(\cdot + b))^{\star} = f^{\star}(\cdot) - \IP{\cdot, b}, \\
+    \label{eq:25}
+    (f(\cdot) + c)^{\star} = f^{\star}(\cdot) - c \\
+    \label{eq:26}
+    (\lambda f(\cdot))^{\star} = \lambda
+    f^{star}(\frac{\cdot}{\lambda}), \lambda > 0 \\
+    \label{eq:27}
+    (\lambda f(\frac{\cdot}{\lambda} ))^{\star} = \lambda
+    f^{\star}(\cdot), \lambda > 0
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:conjugate-functions-11}
+  Let $f_{i}: \R^{n_{i}} \rightarrow \overline \R$, $i = 0, \dots, m$
+  be proper and $f(x_{0}, \dots, x_{m}) = \sum_{i=0}^{m}
+  f_{i}(x_{i})$.  Then $f^{\star}(v_{1}, \dots, v_{m}) = \sum_{i=0}^{m} f^{\star}_{i}(v_{i})$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:conjugate-functions-12}
+  For any set $S \subseteq \R^{n}$ define the \textbf{support
+    function} $\supp_{S}(v) = \sup_{x \in S} \IP{v, x} = (\delta^{\star}_{S})(v)$
+\end{defn}
+
+\begin{defn}
+  \label{sec:conjugate-functions-13}
+  A function $f: \R^{n} \rightarrow \overline \R$ is said to be
+  positively homogenous if and only if $0 \in \dom f$ and $f(\lambda
+  x) = \lambda f(x)$ for all $x \in \R^{n}$ and $\lambda > 0$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:conjugate-functions-14}
+  The set of positively homogenous proper lsc convex functions and the
+  set of closed convex nonempty sets are in one-to-one correspondence
+  through the Legendre-Fenchel transform:
+  \begin{align}
+    \label{eq:28}
+    \delta_{C} \leftrightarrow_{\star} \supp_{C} \\
+    \label{eq:29}
+    x \in \partial \supp_{C}(v) \iff x \in C \\
+    \label{eq:30}
+    \supp_{C}(v) = \IP{v, x} \iff v \in N_{C}(x).
+  \end{align}
+
+  In particular, the set of closed convex cones is in one-to-one
+  correspondence with itself - for any cone $K$ define the
+  \textbf{polar cone} or \textbf{dual cone} as $K^{\star} = \{ v \in
+  \R^{d} | \IP{v, x} \leq 0 \forall x \in K \} $.  Then
+  \begin{align}
+    \label{eq:31}
+    \delta_{K} \leftrightarrow_{\star} \delta_{K^{\star}} \\
+    \label{eq:32}
+    x \in N_{K^{\star}}(v) \iff v \in N_{K}(x) % \iff x \in K, v \in
+    % K^{\star}, \IP{x, v} = 0 \iff 0 \leq_{K} x \perp v
+    % \geq_{K^{\star}} 0
+  \end{align}
+  TODO: fill next condition/implication in.
+\end{thm}
+
+\section{Duality in Optimization}
+\label{sec:duality-optimization}
+
+\begin{defn}
+  \label{sec:duality-optimization-1}
+  Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
+  lsc, and convex.  Define the \textbf{primal problem} as
+  \begin{equation}
+    \label{eq:33}
+    \inf_{x \in \R^{n}} \phi(x), \phi(x) = f(x, 0),
+  \end{equation} the \textbf{dual problem} as
+  \begin{equation}
+    \label{eq:34}
+    \sup_{y \in \R^{n}} \psi(y), \psi(y) = -f^{\star}(0, y)
+  \end{equation}
+  and the \textbf{inf-projections}
+  \begin{align}
+    \label{eq:35}
+    p(u) = \inf_{x} f(x, u) \\
+    \label{eq:36}
+    q(v) = \inf_{y} f^{\star}(v, y) = -\sup_{y} (-f^{\star}(v, y))
+  \end{align}
+  $f$ is sometimes called a \textbf{peturbation function} for $\psi$,
+  and $p$ the associated \textbf{marginal function}.
+\end{defn}
+
+\begin{thm}
+  \label{sec:duality-optimization-2}
+  Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
+  lsc, and convex.  Then
+  \begin{enumerate}
+  \item $\phi$ and $-\psi$ are lsc and convex.
+  \item $p, q$ are convex.
+  \item $p(0)$ and $p^{\star \star}(0)$ are the optimal values of the
+    primal and dual problems -
+    \begin{align}
+      \label{eq:37}
+      p(0)  = \inf_{x} \phi(x), p^{\star \star}(0) = \sup_{y} \psi(y).
+    \end{align}
+  \item The primal and dual problems are feasible if and only if their
+    associated marginal function contains 0:
+    \begin{align}
+      \label{eq:38}
+      \inf_{x} \phi(x) < \infty \iff 0 \in \dom p \\
+      \label{eq:39}
+      \sup_{y} \psi(y) > -\infty \iff 0 \in \dom q
+    \end{align}
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:duality-optimization-4}
+  Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
+  lsc, and convex. Then \textbf{weak duality} always holds,
+  \begin{equation}
+    \label{eq:40}
+    \inf_{x} \phi(x) \geq \sup_{y} \psi(y),
+  \end{equation} and under certain conditions the infimum and supremum
+  are equal and finite - \textbf{strong duality}
+  \begin{equation}
+    \label{eq:41}
+    p(0) \in \R, \text{$p$ lsc in $0$} \iff \inf_{x} \phi(x) =
+    \sup_{y} \psi(y) \in \R.
+  \end{equation}
+  The difference $\inf \phi - \sup \psi$ is the \textbf{duality gap}.
+\end{thm}
+
+\begin{thm}
+  \label{sec:duality-optimization-5}
+  Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
+  lsc, and convex.  Then we have the \textbf{primal-dual optimality
+    conditions},
+  \begin{align}
+    \label{eq:42}
+    (0, y') \in \partial f(x', 0) \iff \{ x' \in \argmin_{x} \phi(x),
+    y' \in \argmax_{y} \psi(y), \inf_{x} \psi(x) = \sup_{y} \psi(y) \}
+    \iff (x', 0) \in \partial f^{\star}(0, y').
+  \end{align}
+
+  The set of \textbf{primal-dual optimal points} $(x', y')$ satisfying
+  this equation is either empty or equal to $(\argmin \phi) \times
+  (\argmax \psi)$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:duality-optimization-6}
+  Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
+  lsc, and convex. Then
+  \begin{enumerate}
+  \item\label{item:1} $0 \in \interior \dom p$ or $0 \in \interior \dom q$ implies
+    $\inf_{x} \phi(x) = \sup_{y} \psi(y)$.
+  \item\label{item:2} $0 \in \interior \dom p$ and $0 \int \interior \dom q$ implies
+    $\inf_{x} \phi(x) = \sup_{y} \psi(y) \in \R$.
+  \item\label{item:3} $0 \in \int \dom p$ and $\inf_{x} \phi(x) \in \R$ if and only
+    if $\argmax_{y} \psi(y)$ is nonempty and bounded.
+  \item\label{item:4} $0 \in \int \dom q$ and $\sup_{y} \psi(y) \in \R$ if and only
+    if $\argmin_{x} \phi(x)$ is nonempty and bounded.
+  \end{enumerate}
+  In particular, if any of \ref{item:2}, \ref{item:3}, \ref{item:4}
+  hold, then strong duality holds - $\inf \phi = \sup \psi \in \R$.
+  If \ref{item:2}, or (\ref{item:3} and \ref{item:4} hold), then there
+  exists $x', y'$ satisfying the primal-dual optimality conditions.
+  Also, \ref{item:3} implies $\partial p(0) = \argmax_{y} \psi(y)$,
+  and \ref{item:4} implies $\partial q(0) = \argmin_{x} \phi(x)$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:duality-optimization-7}
+  Assume $k: \R^{n} \rightarrow \overline \R$ and $h: \R^{m}
+  \rightarrow \overline \R$ are both proper, lsc, convex, and $A \in
+  \R^{m \times n}, b \in \R^{m}, c \in \R^{n}$.  For $f(x, u) = \IP{c,
+  x} + k(x) + h(Ax - b + u)$, the primal and dual problems are of the
+form
+\begin{align}
+  \label{eq:43}
+  \inf \phi(x), \phi(x) = \IP{c, x} + k(x) + h(Ax - b) \\
+  \label{eq:44}
+  \sup_{y} \psi(y), \psi(y) = -\IP{b, y} - h^{\star}(y) -
+  k^{\star}(-A^{T}y - c)
+\end{align} with
+\begin{align}
+  \label{eq:45}
+  \int \dom p = \int (\dom h - A \dom k) + b \\
+  \label{eq:46}
+  \int \dom q = \int(\dom k^{\star} - (-A^{T}) \dom h^{\star}) + c
+\end{align}
+and optimality conditoins
+\begin{align}
+  \label{eq:47}
+  \{ -A^{T} y' - c \in \partial k(x'), y' \in \partial h(Ax' - b) \}
+  \iff \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
+  \inf_{x} \phi(x) = \sup_{y} \psi(y) \} \iff \{ Ax' - b \in \partial
+  h^{\star}(y'), x' \in \partial k^{\star}(-A^{T} y' - c) \} 
+\end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:duality-optimization-8}
+  Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
+  lsc, convex.  Define the associated \textbf{Lagrangian} as $l(x, y)
+  = -f(x, \cdot)^{\star}(y)$, so $l(x, y) = \inf_{u}(f(x, u) - \IP{y,
+    u})$.  Then $l(\cdot, y)$ is convex for every $y$, $-l(x, \cdot)$
+  is lsc and convex for every $x, y$ and $f(x, \cdot) = (-l(x,
+  \cdot))^{\star}$, and $(v, y) \in \partial f(x, u) \iff v
+  \in \partial_{x} l(x, y) \text{ and } u \in \partial_{y}(-l)(x, y)$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:duality-optimization-9}
+  For any function $l: \R^{n} \times \R^{m} \rightarrow \overline \R$
+  we say that $(x', y')$ is a \textbf{saddle point} of $l$ if $l(x,
+  y') \geq l(x', y') \geq l(x', y)$ for all $x, y$. The set of all
+  saddle points is denoted by $\sp l$.  
+
+  Evquivalently, $(x', y') \in \sp l$ if $\inf_{x} l(x, y') = l(x',
+  y') = \sup_{y} l(x', y)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:duality-optimization-10}
+  Assume $f$is proper, lsc, and convex with associated Lagrangian $l$.
+  Then $\phi(x) = \sup_{y} l(x, y)$, and $\psi(y) = \inf_{x} l(x, y)$,
+  and the primal problem is $\inf_{x} \phi(x) = \inf_{x} \sup_{y} l(x,
+  y)$, and the dual problem is $\sup_{y} \psi(y) = \sup_{y} \inf_{x}
+  l(x, y)$.  Moreove, the optimality condition
+  \begin{align}
+    \label{eq:49}
+    \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
+    \inf_{x} \phi(x) = \sup_{y} \psi(y) \}  \iff (x', y') \in \sp l
+    \iff \{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \} 
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:duality-optimization-11}
+  Assume $X \subseteq \R^{n}$, $Y \subseteq \R^{m}$ are nonempty,
+  closed, convex, and $L: X \times Y \rightarrow \R$ is a continuous
+  function with $L(\cdot, y)$ is convex for every $y$ and $-L(x,
+  \cdot)$ convex for every $x$.  Then $l(x, y) = L(x, y) +
+  \delta_{X}(x) - \delta_{Y}(y)$ with the convention $+\infty - \infty
+  = +\infty$ on the right, is the Lagrangian to $f(x, u) = \sup_{y}
+  l(x, y) + \IP{u, y} = (-l(x, \cdot))^{\star}(u)$.
+
+  $f$ is proper, lsc, and convex, so the previous result applies with
+  promal and dual problems $\phi(x) = \delta_{X}(x) + \sup_{y \in Y}
+  L(x, y)$, $\psi(y) = -\delta_{Y}(y) + \int_{x \in X} L(x, y)$.
+  Moreover, if $X$ and $Y$ are bounded, then $\sp l$ is nonempty and bounded.
+\end{thm}
+
+\section{Numerical Optimality}
+\label{sec:numerical-optimality}
+
+\begin{defn}
+  \label{sec:numerical-optimality-1}
+  For $\phi: \R^{n} \rightarrow \overline \R$, a point $x$ is an
+  $\epsilon$-optimal solution if $\phi(x) - \inf \phi \leq \epsilon$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:numerical-optimality-2}
+  Assume $(x^{k}, y^{k})$ is a primal-dual feasible pair - so $x^{k}
+  \in \dom \phi$ and $y^{k} \in \dom \psi$.  Then $\phi(x^{k}) \geq
+  \psi(y^{k})$, and $0 \leq \phi(x^{k}) - \inf \phi \leq \phi(x^{k}) -
+  \psi^{y^{k}} = \gamma(x^{k}, y^{k}) := \gamma$.  $\gamma$ is the
+  \textbf{numerical primal-dual gap}.  If $\gamma < \epsilon$ then
+  $x^{k}$ is an $\epsilon$-optimal solution with \textbf{optimality
+    certificate} $y^{k}$.
+
+  The normalized gap is $\overline \gamma = \overline \gamma(x^{k},
+  y^{k}) = \frac{\phi(x^{k}) - \psi(y^{k})}{\psi(y^{k})}$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:numerical-optimality-3}
+  Assume $\phi(x) = \phi_{0}(x) = \sum_{i=1}^{n_{p}} \delta_{g_{i}(x)
+    \leq 0}$, $\psi(y) = \psi_{0}(y) - \sum_{i=1}^{n_{d}}
+  \delta_{h_{i}(x) \leq 0}$ where $\dom \phi_{0} = \dom \psi_{0} =
+  \R^{n}$ and $g_{i}: \R^{n} \rightarrow \R$, $h_{i}: \R^{m}
+  \rightarrow \R$ are suitable continuous real-valued convex
+  functions, so the primal and dual constraints are of the form
+  $g_{i}(x) \leq 0, h_{i}(y) \leq 0$. Then the primal and dual
+  infeasibilities are defined as $\eta_{p} = \max \{ 0, g_{1}(x^{k}),
+  \dots, g_{n_{p}}(x^{k}) \} $ and $\eta_{d} = \max \{ 0,
+  h_{1}(y^{k}), \dots, h_{n_{d}}(y^{k}) \} $.
+\end{defn}
+
+\section{First-Order Methods}
+\label{sec:first-order-methods}
+
+\begin{defn}
+  \label{sec:first-order-methods-1}
+  For $f: \R^{n} \rightarrow \overline \R$, we define
+  \begin{enumerate}
+  \item The \textbf{forward step}, $F_{\tau_{k} f}(x^{k}) = (I -
+    \tau_{k} \partial f) x^{k}$
+  \item The \textbf{backward step}, $B_{\tau_{k}f}(x^{k}) = (I +
+    \tau_{k} \partial f)^{-1} x^{k}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  \label{sec:first-order-methods-2}
+  If $f: \R^{n} \rightarrow \overline \R$ is proper lsc convex with
+  $\tau > 0$, then the backward step is $B_{\tau f}(x) = \argmin_{y}
+  \{ \frac{1}{2} \| y - x \|_{2}^{2} + \tau f(y) \} $ and is therefore unique.
+\end{thm}
+
+\begin{thm}
+  \label{sec:first-order-methods-3}
+  Assume $f$ is proper lsc convex and $\argmin f \neq \emptyset$. The
+  \textbf{forward step} is $x^{k+1} \in F_{\tau_{k} f}(x^{k})$. The
+  sequence is not unique, can get stuck if $x^{k}$ is infeasible.
+
+  The \textbf{backward step} is $x^{k+1} = B_{\tau_{k} f}(x^{k})$ -
+  which is a \textbf{unique} sequence, and cannot get stuck.  Substeps
+  are as hard as the original problem (but strictly convex).
+\end{thm}
+
+TODO - primal-dual methods, etc?
+
+\section{Interior-Point Methods}
+\label{sec:inter-point-meth}
+
+\begin{defn}
+  \label{sec:inter-point-meth-1}
+  For a cone $K$ we define the \textbf{canonical barriers} $F = F_{K}$
+  and associated parameters $\theta_{F}$.
+  \begin{enumerate}
+  \item $K = K^{LP}_{n} = \{ x \in \R^{n} | x_{1}, \dots, x_{n} \geq 0
+    \} $, $F(x) = \sum_{i=1}^{n} -\log x_{i}$, $\theta_{F} = n$.
+  \item $K = K_{n}^{SOCP} = \{ x \in \R^{n} | x_{n} \geq
+    \sqrt{x_{1}^{2} + \cdots + x_{n-1}^{2}}\}$, $F(x) =
+    -\log(x_{n}^{2} - x_{1}^{2} - \dots - x_{n-1}^{2})$, $\theta_{F} =
+    2$.
+  \item $K = K_{n}^{SDP} = \{ X \in \R^{n \times n} | \text{$X$
+      symmetric positive semidefinite} \}$, $F(x) = - \log \det X$,
+    $\theta_{F} = n$.
+  \item $K = K^{1} \times K^{2}$, then $F_{K}(x^{1}, x^{2}) =
+    F_{K^{1}}(x^{1}) + F_{K^{2}}(x^{2})$, with $\theta_{F} =
+    \theta_{F^{1}} + \theta_{F^{2}}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  \label{sec:inter-point-meth-2}
+  If $F$ is a canonical barrier for $K$, then $F$ is smooth on $\dom F
+  = \int K$ and strictly convex, $F(tx) = F(x) - \theta_{F} \lot t$
+  for all  $x \in \dom F$, and for $x \in \dom F$, we have
+  \begin{enumerate}
+  \item $- \grad F(x) \in \dom F$
+  \item $\IP{\grad F(x), x} = - \theta_{F}$,
+  \item $-\grad F(-\grad F(x)) = x$,
+  \item $-\grad F(tx) = -\frac{1}{t} \grad F(x) $ 
+  \end{enumerate}
+
+\end{thm}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
