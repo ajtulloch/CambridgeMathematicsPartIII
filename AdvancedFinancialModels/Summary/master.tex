@@ -132,12 +132,12 @@
 
 \begin{thm}
   \label{sec:arbitrage-theory-18}
-  The probability measure $\Q$ is equivalent to the measure $\P$ if
+  The probability measure $\Q$ is equivalent to the measure $\Prob$ if
   and only if there exists a positive random variable $\xi$ such that
   $\Q{A} = \E^{P}(\xi \I{A})$.
 
   The random variable $\xi$ is call the density, or Radon-Nikodym
-  derivative of $\Q$ with respect to $\P$.
+  derivative of $\Q$ with respect to $\Prob$.
 \end{thm}
 
 \begin{defn}
@@ -148,7 +148,7 @@
 \begin{defn}
   \label{sec:arbitrage-theory-20}
   An equivalent martingale measure is any probability measure $\Q$
-  equivalent ot $\P$ such that the discounted price process
+  equivalent ot $\Prob$ such that the discounted price process
   $\frac{S_{t}}{N_{t}}$ is a martingale under $\Q$, where $N_{t}$ is
   the numeraire price process.
 \end{defn}
@@ -159,7 +159,7 @@
   Then
   \begin{equation}
     \label{eq:4}
-    \frac{d\Q}{d\P} = \frac{Y_{T} N_{T}}{Y_{0} N_{0}}
+    \frac{d\Q}{d\Prob} = \frac{Y_{T} N_{T}}{Y_{0} N_{0}}
   \end{equation}
   is an equivalent martingale measure relative to $N$ for the model.
 \end{defn}
@@ -170,7 +170,7 @@
   $P_{t}$. Then
   \begin{equation}
     \label{eq:5}
-    Y_{t} = \frac{N_{0}}{N_{T}}  \E^{\P}(\frac{d\Q}{d\P} | \mathcal{F}_{t})
+    Y_{t} = \frac{N_{0}}{N_{T}}  \E^{\Prob}(\frac{d\Q}{d\Prob} | \mathcal{F}_{t})
   \end{equation} is a state price density.
 \end{defn}
 
@@ -211,7 +211,7 @@
   \end{align} or (if a numeraire exists),
   \begin{align}
     \label{eq:9}
-    \frac{d\Q}{d\P} = \frac{N_{T} Y_{T}}{N_{0} Y_{0}}
+    \frac{d\Q}{d\Prob} = \frac{N_{T} Y_{T}}{N_{0} Y_{0}}
   \end{align}
 \end{thm}
 
@@ -422,7 +422,7 @@
     Z_{t} = \exp(-\frac{1}{2} \int_{0}^{t} \| \alpha_{s} \|^{2} ds +
     \int_{-}^{t} \alpha_{s} \cdot dW_{s})
   \end{align} and $Z_{t}$be a martingale.  Let $\Q$ be the equivalent
-  measure with density $\frac{d\Q}{d\P} = Z_{T}$.  Then the
+  measure with density $\frac{d\Q}{d\Prob} = Z_{T}$.  Then the
   $m$-dimensional process $(\hat W_{t})$ defined by $\hat W_{t} =
   W_{t} - \int_{0}^{t} \alpha_{s} ds$ is a Brownian motion on
   $(\Omega, \mathcal{F}_{T}, \Q)$.
@@ -544,7 +544,7 @@
 \begin{defn}
   \label{sec:arbitr-theory-cont-11}
   An equivalent (local) martingale measure relative to the numeraire
-  with price $N$ is a probabilty measure $\Q$ equivalent to $\P$ such
+  with price $N$ is a probabilty measure $\Q$ equivalent to $\Prob$ such
   that $\frac{S}{N}$ is a local martnigale.
 \end{defn}
 
@@ -581,7 +581,7 @@
   \lambda_{t} = \mu_{t} - r_{t} \mathbf{1}$.  If $M_{t} =
   e^{-\frac{1}{2} \int_{-}^{t} \| \lambda_{s} \|^{2}ds - \int_{0}^{t}
     \lambda_{s} \cdot dW_{s}}$ is a true martingale, then the measure
-  $\Q$ defined by $\frac{d\Q}{d\P} = M_{T}$ is an equivalent
+  $\Q$ defined by $\frac{d\Q}{d\Prob} = M_{T}$ is an equivalent
   martingale measure.  In particular, the stock price dynamics
   aregiven by
   \begin{align}
@@ -615,7 +615,7 @@
 
 \begin{defn}
   \label{sec:hedg-cont-claims-2}
-  The Black-scholes model is given by the pair of equations
+  The Black-Scholes model is given by the pair of equations
   \begin{align}
     \label{eq:24}
     dB_{t} = B_{t} r dt \\
@@ -634,7 +634,7 @@
     X_{t}(H) = \frac{1}{Y_{t}} \E{Y_{T} g(S_{T}) | \mathcal{F}_{t}}.
   \end{align}
 
-  The EMM $\Q$ is given by the density $\frac{d\Q}{d\P} =
+  The EMM $\Q$ is given by the density $\frac{d\Q}{d\Prob} =
   \exp(-\frac{\lambda^{2} T}{2} - \lambda W_{T})$.
 \end{defn}
 

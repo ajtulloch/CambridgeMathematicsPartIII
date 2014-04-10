@@ -1,0 +1,507 @@
+\input{../../common/summary.tex}
+
+\title{Convex Optimization Summary}
+
+\begin{document}
+
+\maketitle
+
+\section{Existence}
+\label{sec:existence}
+
+\begin{defn}
+  \label{sec:existence-1}
+  For $C \subseteq \R^{n}$, define $\delta_{C}$ as
+  \begin{equation}
+    \label{eq:1} \delta_{C}(x) = 
+    \begin{cases}
+      0 & x \in C \\
+      \infty & x \notin C
+    \end{cases}
+  \end{equation}
+
+  Note $x'$ minimizes $f$ over $C$ if and only if $x'$ minimizes $f +
+  \delta_{C}$ over $\R^{n}$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:existence-2}
+  \begin{enumerate}
+  \item $\dom f = \{ x \in \R^{n} | f(x) < \infty \}$,
+  \item \begin{equation}
+      \argmin f =
+      \begin{cases}
+        \emptyset & f \equiv \infty \\
+        \{ x \in \R^{n} | f(x) = \inf f \} & f < \infty 
+      \end{cases}
+    \end{equation}
+  \item $f$ is \textbf{proper} if and only if $\dom f \neq \emptyset$
+    and $f(x) > -\infty$ for all $x \in \R^{n}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  \label{sec:existence-3}
+  For $f: \R^{n} \rightarrow \overline \R$, denote
+  \begin{equation}
+    \label{eq:2}
+    \epi f = \{ (x, \alpha) \in \R^{n} \times \R | f(x) \leq \alpha \} 
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{sec:existence-4}
+  A set $C$ is an epigraph if and only if for every $x$ there is an
+  $\alpha \in \overline \R$ such that $C \cap (x \times \R) = [\alpha,
+  \infty]$ - so all vertical one-dimensional sections must be closed
+  upper half-lines. If $f$ is proper then $\epi f $ is not empty and
+  does not include a complete vertical line.
+\end{thm}
+
+\begin{defn}
+  \label{sec:existence-5}
+  For $f: \R^{n} \rightarrow \overline \R$, define
+  \begin{equation}
+    \label{eq:3}
+    \liminf_{x \rightarrow x'} f(x) = \lim_{\delta \downarrow 0}
+    \inf_{\| x - x'\|_{2} \leq \delta} f(x) = \lim_{k \rightarrow
+      \infty} \inf_{\| x - x'\|_{2} \leq \frac{1}{k}} f(x)
+  \end{equation}
+  $f$ is \textbf{lower semicontinuous} at $x'$ if and only if $f(x')
+  \leq \liminf_{x \rightarrow x'} f(x)$.
+  $f$ is \textbf{lower semicontinous} if $f$ is lower semicontinous at
+  every $x' \in \R^{n}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:existence-7}
+  \begin{equation}
+    \label{eq:4}
+    \liminf_{x \rightarrow x'} f(x) = \min \{ \alpha \in \overline \R
+    | \exists (x^{k}) \rightarrow x' : f(x^{k}) \rightarrow \alpha \}
+  \end{equation}
+  In particular, $f$ is lower semi-continuous at $x'$ if and only if
+  $f(x') \leq \liminf_{k \rightarrow \infty} f(x^{k})$ for all
+  convergence sequences $x^{k} \rightarrow x'$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:existence-8}
+  Let $f: \R^{n} \rightarrow \overline \R$.  Then the following are
+  equivalent:
+  \begin{enumerate}
+  \item $f$ is lsc on $\R^{n}$
+  \item $\epi f$ is closed in $\R^{n} \times \R$
+  \item The sub level sets $\lev_{\leq \alpha} f = \{ x \in \R^{n} |
+    f(x) \leq \alpha \} $ are closed in $\R^{n}$ for all $\alpha \in
+    \overline \R$.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:existence-9}
+  $f: \R^{n} \rightarrow \overline \R$ is level bounded if and only if
+  $\lev_{\leq \alpha} f$ is bounded for all $\alpha \in \R$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:existence-10}
+  $f: \R^{n} \rightarrow \overline \R$ is level-bounded if and only if
+  $f(x^{k}) \rightarrow \infty$ for all sequences $(x^{k})$ satisfying
+  $\| x^{k} \|_{2} \rightarrow \infty$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:existence-11}
+  Assume $f: \R^{n} \rightarrow \overline \R$ is lsc, level-bounded,
+  and proper.  Then $\inf f(x) \in (-\infty, +\infty)$ and $\argmin f$
+  is nonempty and compact.
+\end{thm}
+
+\begin{thm}
+  \label{sec:existence-12}
+  \begin{enumerate}
+  \item $f, g$ lsc, proper implies $f + g$ is lsc.
+  \item $f$ lsc, $\lambda \geq 0$ implies $\lambda f$ is lsc
+  \item $f: \R^{n} \rightarrow \overline \R$ is lsc and $g: \R^{m}
+    \rightarrow \R^{n}$ is continuous implies $f \circ g$ is lsc.
+  \end{enumerate}
+\end{thm}
+
+\section{Convexity}
+\label{sec:convexity}
+
+\begin{defn}
+  \label{sec:convexity-1}
+  $f: \R^{n} \rightarrow \overline \R$ is convex if and only if
+  \begin{equation}
+    \label{eq:5}
+    f((1 - \tau)x + \tau y) \leq (1 - \tau) f(x) + \tau f(y)
+  \end{equation} for all $x, y \in \R^{n}, \tau \in (0, 1)$.
+
+  A set $C \subseteq \R^{n}$ is convex if and only if $\delta_{C}$ is
+  convex if and only if $(1 - \tau) x + \tau y \in C$ for all $x, y
+  \in C, \tau \in (0, 1)$.
+
+  $f: \R^{n} \rightarrow \overline \R$ is strictly convex if and only
+  if $f$ is convex and the inequality is strict for all $x \neq y$ and
+  $\tau \in (0, 1)$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:convexity-2}
+  Let $x_{0}, \dots, x_{m} \in \R^{n}$  and $\lambda_{0}, \dots,
+  \lambda_{m} \geq 0$, $\sum_{i=0}^{m} \lambda_{i} = 1$.  The linear
+  combination $\sum_{i=0}^{m} \lambda_{i} x_{i}$ is a \textbf{convex
+  combination} of the points $x_{0}, \dots, x_{m}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:convexity-3}
+  \begin{enumerate}
+  \item $f: \R^{n} \rightarrow \overline \R$ is convex if and only if
+    \begin{equation}
+      \label{eq:6}
+      f(\sum_{i=0}^{m} \lambda_{i} x_{i}) \leq \sum_{i=0}^{m}
+      \lambda_{i} f(x_{i})
+    \end{equation} for all $m \geq 0, x_{i} \in \R^{n}, \lambda_{i}
+    \geq 0, \sum_{i=0}^{m} \lambda_{i} = 1$.
+  \item $C \subseteq \R^{n}$ is convex if and only if $C$ contains all
+    convex combinations of its elements.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-4}
+  $f: \R^{n} \rightarrow \overline \R$ is convex implies $\dom f$ is convex.
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-5}
+  \begin{enumerate}
+  \item $f: \R^{n} \rightarrow \overline \R$ is convex if and only if
+    $\epi f$ is convex in $\R^{n} \times \R$.
+  \item $f: \R^{n} \rightarrow \overline \R$ is strictly convex if and only if
+    $\{ (x, \alpha) \in \R^{n} \times \R | f(x) < \alpha \} $ is
+    convex in $\R^{n} \times \R$.
+  \item $f: \R^{n} \rightarrow \overline \R$ is convex implies
+    $\lev_{\leq \alpha} f$ is convex for all $\alpha \in \overline \R$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-7}
+  Assume $f: \R^{n} \rightarrow \overline \R$ is convex. Then
+  \begin{enumerate}
+  \item $\argmin f$ is convex.
+  \item $x$ is a local minimizer of $f$ implies $x$ is a global
+    minimize of $f$.
+  \item $f$ is strictly convex and proper impiles $f$ has at most one
+    global minimizer.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-8}
+  Let $I$ be an arbitrary index set. Then
+  \begin{enumerate}
+  \item $f_{i}, i \in I$ convex implies $\sup_{i \in I} f_{i}(x)$ is
+    convex.
+  \item $f_{i}, i \in I$ strictly convex, $I$ finite implies $\sup_{i
+      \in I} f_{i}(x)$ is strictly convex.
+  \item $C_{i}, i \in I$ is convex implies $\cap_{i \in I} C_{i}$ is convex.
+  \item $f_{k}, k \in N$ is convex implies $\limsup_{k \rightarrow
+      \infty} f_{k}(x)$ is convex.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-9}
+  Assume $C \subseteq \R^{n}$ is open and convex, and $f: C
+  \rightarrow \R$ is differentiable. Then the following are
+  equivalent:
+  \begin{enumerate}
+  \item $f$ is [strictly] convex
+  \item $\IP{y-x, \grad f(y) - \grad f(x)} \geq 0$ for all $x, y \in
+    C$ [and $> 0$ if $x \neq y$]
+  \item $f(x) + \IP{y- x, \grad f(x)} \leq f(y)$ for all $x, y \in C$
+    [and $< f(y)$ if $x \neq y$]
+  \item If $f$ is additionally twice differentiable, then $\grad^{2}
+    f(x)$ is positive semidefinite for all $x \in C$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-10}
+  \begin{enumerate}
+  \item Assume $f_{1}, \dots, f_{m}: \R^{n} \rightarrow \overline \R$
+    are convex, $\lambda_{1}, \dots, \lambda_{m} \geq 0$.  Then $f =
+    \sum_{i=1}^{m} \lambda_{i} f_{i}$ is convex.  If at least one of
+    the $f_{i}$ with $\lambda_{i} > 0$ is strictly convex, then $f$ is
+    strictly convex.
+  \item Asssume $f_{i}: \R^{n_{i}} \rightarrow \overline \R$ are
+    convex.  Then
+    \begin{align}
+      \label{eq:7}
+      f: \R^{n_{1}} \times \dots R^{n_{m}} \rightarrow \overline \R
+      f(x_{1}, \dots, x_{m}) = \sum_{i=1}^{m} f_{i}(x_{i})
+    \end{align} is convex. If all $f_{i}$ are strictly convex, then
+    $f$ is strictly convex.
+  \item If $f: \R^{m} \rightarrow \overline \R$ is convex, $A \in
+    \R^{m \times n}, b \in \R^{m}$.  Then $g(x) = f(Ax + b)$ is convex.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-11}
+  \begin{enumerate}
+  \item $C_{1}, \dots, C_{m}$ convex implies $C_{1} \times \dots
+    \times C_{m}$ is convex.
+  \item $C \subseteq \R^{n}$ convex, $A \in \R^{m \times n}$, $b \in
+    \R^{m}$, $L(x) = Ax + b$ implies $L(C)$ is convex.
+  \item $C \subseteq \R^{m}$ convex, $A \in \R^{m \times n}$, $b \in
+    \R^{m}$, $L(x) = Ax + b$ implies $L^{-1}(C)$ is convex.
+  \item $C_{1}, C_{2}$ is convex implies $C_{1} + C_{2}$ is convex.
+  \item $C$ convex, $\lambda \in \R$ implies $\lambda C$ is convex.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:convexity-12}
+  For a set $S \subseteq \R^{n}$ and $x \in \R^{n}$, define the
+  projection of $x$ onto $S$ as
+  \begin{equation}
+    \label{eq:9}
+    \proj_{S}(y) = \argmin_{x \in S} \|x - y\|_{2}.
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{sec:convexity-13}
+  Assume $C \subseteq \R^{n}$ is convex, closed, and $C \neq
+  \emptyset$.  Then $\proj_{C}$ is single-valued - that is, the
+  projection of $x$ onto $C$ is unique for every $x \in \R^{n}$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:convexity-14}
+  For an arbitary set $S \subseteq \R^{n}$,
+  \begin{equation}
+    \label{eq:10}
+    \con S = \bigcap_{\text{$C$ convex, $S \subseteq C$}} C
+  \end{equation}
+  is the convex hull of $S$.  It is the smallest convex set that
+  contains $S$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:convexity-15}
+  $\con S = \{ \sum_{i=0}^{p} \lambda_{i} x_{i} | x_{i} \in S,
+  \lambda_{i} \geq 0, \sum_{i=0}^{p} \lambda_{i} = 1, p \geq 0  \}$
+\end{thm}
+
+
+\begin{thm}
+  \label{sec:convexity-16}
+  \begin{enumerate}
+  \item $\cl C = \{ x \in \R^{n} | \text{for all open neighbourhoods
+      $N$ of $x$, $N \cap C \neq \emptyset$} \}$
+  \item $\int C = \{ x \in \R^{n} | \text{there exists an open
+      neighbourhood $N$ of $x$ such that $N \subseteq C$} \} $
+  \item $\bnd C = \cl C \backslash \int C$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:convexity-17}
+  $\cl C = \bigcap_{\text{$S$ closed, $C \subseteq S$}} S$.
+\end{thm}
+
+\section{Cones and Generalized Inequalities}
+\label{sec:cones-gener-ineq}
+
+\begin{defn}
+  \label{sec:cones-gener-ineq-1}
+  $K \subseteq \R^{n}$ is a cone if and only if $0 \in K$ and $\lambda
+  x \in K$ for all $x \in K, \lambda \geq 0$.
+
+  A cone $K$is pointed if and only if $\sum_{0=1}^{m} x_{i} = 0$,
+  $x_{i} \in K$ implies $x_{i} = 0$ for all $i$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:cones-gener-ineq-2}
+  Let $K \subseteq \R^{n}$ be arbitrary. Then the following are equivalent:
+  \begin{enumerate}
+  \item $K$ is a convex cone.
+  \item $K$ is a cone and $K + K \subseteq K$.
+  \item $K \neq \emptyset$ and $\sum_{i=0}^{m} \alpha_{i} x_{i} \in K$
+    for all $x_{i} \in K$ and $\alpha_{i} \geq 0$ (not necessarily
+    summing to 1).
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:cones-gener-ineq-4}
+  Assume $K$ is a convex cone.  Then $K$ is pointed if and only if $K
+  \cap -K = \{ 0 \} $.
+\end{thm}
+
+\begin{thm}
+  \label{sec:cones-gener-ineq-5}
+  For a closed convex cone $K \subseteq \R^{n}$ we define the
+  generalized inequality
+  \begin{equation}
+    \label{eq:11}
+    x \leq_{K} y \iff x - y \in K
+  \end{equation}
+
+  Then
+  \begin{enumerate}
+  \item $x \leq_{K} x$
+  \item $x \leq_{K} y, y \leq_{K} z \Rightarrow x \leq_{K} z$
+  \item $x \leq_{K} y \Rightarrow -y \leq_{K} -x$
+  \item $x \leq_{K} y, \lambda \geq 0 \Rightarrow \lambda x \geq_{K}
+    \lambda y$
+  \item $x \geq_{K} y, x' \geq_{K} y' \Rightarrow x + x' \geq_{K} y + y'$
+  \item $x^{k} \rightarrow x$, $y^{k} \rightarrow y$ with $x^{k}
+    \geq_{K} y^{K}$ for all $k \in \N$, then $x \geq_{K} y$.
+  \item $x \geq_{K} y, y \geq_{K} \Rightarrow x = y$ (antisymmetry)
+    holds if and only if $K$ is pointed.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:cones-gener-ineq-6}
+  For any pointed, closed, convex cone $K \subseteq \R^{m}$, a matrix
+  $A \in \R^{m \times n}$, and vectors $c \in \R^{n}, b \in \R^{m}$,
+  define the conic problem $\inf_{x} c^{T} x s.t. Ax \geq_{K} b$.
+\end{defn}
+
+\section{Subgradients}
+\label{sec:subgradients}
+
+\begin{defn}
+  \label{sec:subgradients-1}
+  For any $f: \R^{n} \rightarrow \overline \R$ and $x \in \R^{n}$,
+  \begin{equation}
+    \label{eq:12}
+    \partial f(x) = \{ v \in \R^{n} | f(x) + \IP{v, y -x} \leq f(y)
+    \forall y \in \R^{n} \} 
+  \end{equation} is the set of subgradients of $f$ at $x$. 
+\end{defn}
+
+\begin{thm}
+  \label{sec:subgradients-3}
+  Assume $f, g: \R^{n} \rightarrow \overline \R$ are convex.  Then
+  \begin{enumerate}
+  \item If $f$ is differentiable at $x$, then $\partial f(x) = \{
+    \grad f(x) \} $
+  \item If $f$ is differentiable at $x$ and $g(x) \in \R$, then
+    $\partial (f +g)(x) = \partial g(x) + \grad f(x)$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:subgradients-4}
+  Assume $f: \R^{n} \rightarrow \overline \R$ is proper.  Then $x \in
+  \argmin f \iff 0 \in \partial f(x)$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:subgradients-5}
+  For a convex set $C \subseteq \R^{n}$ and $x \in C$, the normal cone
+  $N_{C}(x)$ at $x$ is
+  \begin{equation}
+    \label{eq:13}
+    N_{C}(x = \{ v \in \R^{n} | \IP{v, y -x } \leq 0 \forall y \in C \} )
+  \end{equation}  $N_{C}(x) = \emptyset$ for $x \notin C$.
+
+  Note that $N_{C}(x)$ is a cone if $x \in C$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:subgradients-6}
+  Assume $C \subseteq \R^{n}$ is convex with $C \neq \emptyset$.  Then
+  $\partial \delta_{C}(x) = N_{C}(x)$.
+\end{thm}
+\begin{thm}
+  \label{sec:subgradients-7}
+  Assume $C \subseteq \R^{n}$ is closed and convex with $C \neq
+  \emptyset$ and $x \in \R^{n}$.  Then $y \in \proj_{C}(x) \iff x - y
+  \in N_{C}(y)$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:subgradients-8}
+  Assume $f: \R^{n} \rightarrow \overline \R$ is proper and convex.
+  Then
+  \begin{equation}
+    \label{eq:14}
+    \partial f(x) =
+    \begin{cases}
+      \emptyset & x \notin \dom f \\
+      \{ v \in \R^{n} | (v, -1) \in N_{\epi f}(x, f(x)) \} & x \in
+      \dom f
+    \end{cases}
+  \end{equation}
+
+  If $x \in \dom f$ then $N_{\dom f}(x) = \{ v \in \R^{n} | (v, 0) \in
+  N_{\epi f}(x, f(x)) \} $.
+\end{thm}
+
+\begin{defn}
+  \label{sec:subgradients-10}
+  For any set $C \subseteq \R^{n}$, define the affine hll and relative
+  interior by
+  \begin{align}
+    \label{eq:15}
+    \aff C = \cap_{\text{$A$ affine, $C \subseteq A$}} A \\
+    \rint C = \{ x \in \R^{n} | \text{there exists an open
+      neighbourhood $N$ of $x$ with $N \cap \aff C \subseteq C$} \}.
+    \label{eq:16}
+  \end{align}
+\end{defn}
+
+\begin{thm}
+  \label{sec:subgradients-11}
+  \begin{enumerate}
+  \item Assume $f: \R^{n} \rightarrow \overline \R$  is convex. Then
+    \begin{align}
+      \label{eq:17}
+      g(x) = f(x+y) \Rightarrow \partial g(x) = \partial f(x+y) \\
+      g(x) = f(\lambda x) \Rightarrow \partial g(x) = \lambda \partial
+      f(\lambda x), \lambda \neq 0 \\
+      \label{eq:19}
+      g(x) = \lambda f(x) \Rightarrow \partial g(x) = \lambda \partial
+      f(x), \lambda > 0 \\
+    \end{align}
+  \item Assume $f: \R^{n} \rightarrow \overline \R$ is proper and
+    convex, and $A \in \R^{n \times m}$ is such that
+    \begin{equation}
+      \label{eq:21}
+      \{ Ay | y \in \R^{m} \}  \cap \rint \dom f
+    \end{equation}
+    If $x \in \dom (f \circ A) = \{ y \in \R^{m} | Ay \in \dom f \} $,
+    then $\partial (f \circ A)(x) = A^{T} \partial f(Ax)$.
+  \item Assume $f_{0}, \dots, f_{m}: \R^{n} \rightarrow \overline \R$
+    are proper and convex, and $\rint \dom f_{0} \cap \dots \cap \rint
+    \dom f_{m} \neq \emptyset$.  If $x \in \dom f$, then
+    $\partial(\sum_{i=0}^{m} f_{i})(x) = \sum_{i=0}^{m} \partial f_{i}(x)$.
+  \end{enumerate}
+\end{thm}
+
+\section{Conjugate Functions}
+\label{sec:conjugate-functions}
+
+\begin{defn}
+  \label{sec:conjugate-functions-1}
+  For $f: \R^{n} \rightarrow \overline \R$, $\con f(x) =\sup_{\text{$g
+      \leq f$, $g$ convex}}$ is the convex hull of $f$.
+  $\con f$ is the greatest convex function majorized by $f$.
+\end{defn}
+
+
+\bibliographystyle{plainnat}
+\bibliography{../../common/bibliography}
+\end{document}
