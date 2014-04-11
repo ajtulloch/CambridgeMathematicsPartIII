@@ -932,16 +932,138 @@ TODO - primal-dual methods, etc?
 \begin{thm}
   \label{sec:inter-point-meth-2}
   If $F$ is a canonical barrier for $K$, then $F$ is smooth on $\dom F
-  = \int K$ and strictly convex, $F(tx) = F(x) - \theta_{F} \lot t$
+  = \int K$ and strictly convex, $F(tx) = F(x) - \theta_{F} \log t$
   for all  $x \in \dom F$, and for $x \in \dom F$, we have
   \begin{enumerate}
   \item $- \grad F(x) \in \dom F$
   \item $\IP{\grad F(x), x} = - \theta_{F}$,
   \item $-\grad F(-\grad F(x)) = x$,
-  \item $-\grad F(tx) = -\frac{1}{t} \grad F(x) $ 
+  \item $-\grad F(tx) = -\frac{1}{t} \grad F(x)$
   \end{enumerate}
-
 \end{thm}
+
+\begin{thm}
+  \label{sec:inter-point-meth-3}
+  The \textbf{primal central path} is the mapping $t \mapsto x(t) =
+  \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T}y = c} \} $
+
+  The \textbf{dual central path} is the mapping $t \mapsto y(t) =
+  \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T}y = c} \} $
+
+  The \textbf{primal-dual central path} is the mapping $t \mapsto z(t)
+  = (x(t), y(t))$ for some $t > 0$, if and only if
+  \begin{align}
+    \label{eq:52}
+    Ax - b \in \dom F \\
+    \label{eq:53}
+    A^{T} y = c \\
+    \label{eq:54}
+    ty + \grad F(Ax - b) = 0
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:inter-point-meth-4}
+  For feasible $x, y$ (so $Ax - b \in K$, $A^{T}y = c$, $y \in K$),
+  the duality gap is $\phi(x) - \psi(y) = \IP{y, Ax - b}$.  Moreover,
+  for points $(x(t), y(t))$ on the central path, the duality gap is
+  $\phi(x(t)) - \psi(y(t)) = \frac{\theta_{F}}{t}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:inter-point-meth-5}
+  We define $\| v \|_{x}^{\star} = (v^{T} \grad^{2} F(Ax - b)^{-1}
+  v)^{\frac{1}{2}}$, $z = (x, y)$, so $z(t)$ is the primal-dual
+  central path, and $\dist(z, z(t)) = \| ty + \grad F(Ax -
+  b)\|_{x}^{\star}$.
+  Then for $Ax - b \in \dom F$, $y \in \dom F$, $A^{T}y = c$, we have
+  $\dist(z, z(t)) \leq 1$ implies $\phi(x) - \psi(y) \leq 2(\phi(x(t))
+  - \psi(y(t))) = 2 \frac{\theta_{F}}{t}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:inter-point-meth-6}
+  Assume $0 < \rho \leq \kappa < \frac{1}{10}$, $t^{k} > 0$ fixed, and
+  $z^{k} = (x^{k}, y^{k})$ stirctly feasible, so $Ax^{k} - b \in \dom
+  F$, $y^{k} \in \dom f$, such that $\dist(z^{k}, z(t^{k})) < \kappa$.
+
+  If we apply a full Netwton step with $\tau_{k} = 1$ and $t^{k+1} = (1
+  + \frac{\rho}{\sqrt{\theta_{F}}}) t^{k}$ to generate $z^{k+1}$, then
+  $x^{k+1}, y^{k+1}$ are strictly primal and dual feasible, and
+  $\dist(z^{k+1}, z(t^{k+1})) > \kappa$ as well.
+\end{thm}
+
+\section{Support Vector Machines}
+\label{sec:supp-vect-mach}
+
+\begin{defn}
+  \label{sec:supp-vect-mach-1}
+  The primal formulation of an SVM is
+  \begin{align}
+    \label{eq:18}
+    \inf_{w, b} \frac{1}{2} \| w \|_{2}^{2}
+  \end{align} such that $1 \leq y^{i} (\IP{w, x^{i}} + b)$ for all $1
+  \leq i \leq n$.
+
+  The dual formulation is
+  \begin{align}
+    \label{eq:48}
+    \inf_{z \in \R^{n}} \frac{1}{2} \| \sum_{i=1}^{n} y^{i} x^{i}
+    z_{i} \|_{2}^{2} + e^{T} z
+  \end{align} such that $z_{i} \leq 0$, $\sum_{i=1}^{n} y^{i} z_{i} = 0$.
+\end{defn}
+
+\section{Total Variation and Applications}
+\label{sec:total-vari-appl}
+
+\begin{defn}
+  \label{sec:total-vari-appl-1}
+  For $u \in L^{1}(\Omega, \R^{m})$, the \textbf{total variation} of
+  $u$ is defined as
+  \begin{equation}
+    \label{eq:50}
+    TV(u)= \sup_{v \in C_{c}^{1}(\Omega, \R^{m \times n}), \| v
+      \|_{\infty} \leq 1} \int_{\Omega} \IP{u, \divergence v} dx
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{sec:total-vari-appl-2}
+  Assume $A \subseteq \Omega$ is a set so that its boundary is $C^{1}$
+  and satisfies $\mathcal{H}^{n-1}(\Omega \cap \partial A) < \infty$.
+  Define
+  \begin{equation}
+    \label{eq:51}
+    \I{A}(x) =
+    \begin{cases}
+      1 & x \in A \\
+      0 & x \notin A
+    \end{cases}
+  \end{equation}
+  then $TV(\I{A}) = \mathcal{H}^{n-1}(\Omega \cap \partial A)$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:total-vari-appl-3}
+  If $u \in BV(\Omega)$, then $TV(\I{x|u(x) > t}) < \infty$ for
+  $\mathcal{L}^{1}$-a.e. $t \in \R$, and $TV(u) = \int_{\R} TV(\I{u >
+    t}) dt$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:total-vari-appl-4}
+  For $\Omega \subseteq \R^{d}$ and $k \geq 1$, define the space
+  $BV^{k}(\Omega)$ as $BV^{k} = \{ u \in W^{k-1, 1} | \grad^{k-1}u \in
+BV(\Omega, R^{d^{k-1}}) \}$ and the higer-ordre total variation as
+\begin{align}
+  \label{eq:56}
+  TV^{k}(u) = \sup_{v \in C_{c}^{k}(\Omega, \sym^{k}(\R^{d})), \| v
+    \|_{\infty} \leq 1} \int_{\Omega} u \divergence^{k} v dx = TV(\grad^{k-1}
+  u)
+\end{align}
+\end{defn}
+
+\todo{Fill in all the total variation stuff?}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
