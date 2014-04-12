@@ -1,0 +1,1178 @@
+\input{../../common/summary.tex}
+
+\title{Mathematics of Operations Research Summary}
+
+\begin{document}
+
+\maketitle
+
+\section{Optimization}
+\label{sec:optimization}
+
+
+\begin{defn}
+  \label{sec:optimization-2}
+  An optimization problem has the standard form, $\min f(x)$ s.t.
+  $h(x) = b, x \in X$.  The set $X(b) = \{ x \in X : h(x) = b \} $ is
+  called the feasible set, and a problem is feasible if $X(b)$ is
+  non-empty and is bounded if $f(x)$ is bounded from below no $X(b)$.
+  A vector $ x^{\star}$ is optimal if it is in the feasible set and
+  minimizes $f$ among all vectors in the feasible set.
+\end{defn}
+
+\begin{defn}
+  \label{sec:optimization-3}
+  The \textbf{Lagrangian} associated with \ref{sec:optimization-2} is
+  \begin{equation}
+    \label{eq:1}
+    L(x, \lambda) = f(x) - \lambda^{T} (h(x) - b)
+  \end{equation}
+
+\end{defn}
+
+\begin{thm}
+  \label{sec:optimization-1}
+  Let $x \in X$ and $\lambda \in \R^{m}$ such that $L(x, \lambda) =
+  \inf_{x' \in x} L(x', \lambda)$ and $h(x) = b$.  Then $x$ is an
+  optimal solution 
+\end{thm}
+
+\begin{thm}
+  \label{sec:optimization-4}
+  To minimize $f(x)$ subject to $h(x) \leq b, x \in X$,
+  \begin{enumerate}
+  \item Introduce a vector $z$ of slack variables to obtain the
+    equivalent problem $\min f(x)$ s.t. $h(x) + z = b, x \in X, z \geq
+    0$.
+  \item Compute $L(x, z, \lambda) = f(x) - \lambda^{T}(h(x) + z - b)$
+  \item Define $Y = \{ \lambda \in \R^{m} | \inf_{x \in X, z \geq 0}
+    L(x, z, \lambda) > -\infty \} $
+  \item For each $\lambda \in Y$, minimize $L(x, z, \lambda)$ subject
+    only to regional constraints - so finding $x^{\star}(\lambda),
+    z^{\star}(\lambda)$ satisfying $L(x^{\star}(\lambda),
+    z^{\star}(\lambda), \lambda) = \inf_{x \in X, z \geq 0} L(x, z,
+    \lambda)$.
+  \item Find $\lambda^{\star} \in Y$ such that $(x^{\star}(\lambda),
+    z^{\star}(\lambda^{\star}))$ is feasible - so
+    $x^{\star}(\lambda^{\star}) \in X$, $z^{\star}(\lambda^{\star})
+    \geq 0$, and $h(x^{\star}(\lambda^{\star})) +
+    z^{\star}(\lambda^{\star}) = b$.  By \ref{sec:optimization-3},
+    $x^{\star}(\lambda^{\star})$ is optimal.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:optimization-5}
+  Denote $\phi(b) = \inf_{x \in X(b)}f(x)$ the solution of our
+  optimization problem, and define the \textbf{Lagrange dual function}
+  $G: \R^{m} \rightarrow \R$ as the minimum value of the Lagrangian
+  over $X$, so $g(\lambda) = \inf_{x \in X} L(x, \lambda)$. For all
+  $\lambda \in \R^{m}$,
+  \begin{equation}
+    \label{eq:2}
+    \inf_{x \in X(b)} f(x) = \inf_{x \in X(b)} L(x, \lambda) \geq
+    \inf_{x \in X} L(x, \lambda) = g(\lambda)
+  \end{equation}
+  so we have a lower bound on the optimal value of our problem.  Thus,
+  the dual problem is to \textbf{maximize the lower bound}, thus $\max
+  g(\lambda)$ s.t. $\lambda \in Y$, where $Y = \{ \lambda \in \R^{m} |
+g(\lambda) > -\infty \} $.
+\end{defn}
+
+\begin{thm}
+  \label{sec:optimization-6}
+  We have the \textbf{weak duality theorem}, 
+  $\inf_{x \in X(b)} \geq \max_{\lambda \in Y} g(\lambda)$.
+
+  The primal problem satisfies \textbf{strong duality} if this holds
+  with equality --- so there exists $\lambda$ such that $\phi(b) = g(\lambda)$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:optimization-8}
+  Call a hyperplane $\alpha: \R^{m} \rightarrow \R$ a
+  \textbf{supporting hyperplane} to $\phi$ at $b$ if $\alpha(c) =
+  \phi(b) - \lambda^{T}(b-c)$ and $\phi(c) \geq \phi(b) -
+  \lambda^{T}(b-c)$ for all $c \in \R^{m}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:optimization-10}
+  There exists a (no-vertical) supporting hyperplane to $\phi$ at $b$
+  if and only if the problem satisfies strong duality.
+\end{thm}
+
+\section{Linear Programming}
+\label{sec:linear-programming}
+
+\begin{thm}
+  \label{sec:linear-programming-1}
+  Suppose that $\phi$ is convex and $b \in \R$ lies in the interior of
+  the set of points where $\phi$ is finite.  Then there exists a
+  (non-vertical) supporting hyperplane to $\phi$ at $b$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:linear-programming-2}
+  Consider the optimization problem, $\min f(x)$ s.t. $h(x) \leq b, x
+  \in X$, and let $\phi$ be given by $\phi(b) = \inf_{x \in X(b)}
+  f(x)$.  Then $\phi$ is convex when $X, f$ and $h$ are convex.
+\end{thm}
+
+\begin{defn}
+  \label{sec:linear-programming-3}
+  A linear program is in \textbf{general form} when written as $\min
+  \{ c^{T} x | Ax \geq x, x \geq 0 \}$.
+
+  A linear program of the form $\min \{ c^{T}x | Ax = b, x \geq 0 \} $
+  is said to be in \textbf{standard form}.
+\end{defn}
+
+\begin{thm}
+  \label{sec:linear-programming-4}
+  A linear program in general form can be written with slack variables
+  as $\min \{ c^{T} x | Ax - z = b, x, z \geq 0 \} $.  Then $X = \{
+(x, z) : x \geq 0, z \geq 0 \} $, and the Lagrangian is $L((x, z),
+\lambda) = c^{T} x - \lambda^{T}(Ax - z - b) = (c^{T} - \lambda^{T}
+A)x + \lambda^{T} z + \lambda^{T}b$ with finite minimum over $X$ if
+and only if $\lambda \in Y = \{ \mu \in \R^{m} | c^{T}- \mu^{T} A \geq
+0, \mu \geq 0 \} $.  Thus $g(\lambda) = \inf_{(x, z) \in X} L((x, z),
+\lambda) = \lambda^{T} b$.  The dual problem is thus $\max \{ b^{T}
+\lambda | A^{T} \lambda \leq c, \lambda \geq 0 \}$.  
+
+Analogously, the dual of the \textbf{standard form} is $\max b^{T}
+\lambda | A^{T} \lambda \leq c$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:linear-programming-5}
+  Let $x, \lambda$ be feasible solutions for the primal in general
+  form and dual of general form, respectively.  Then $x, \lambda$ are
+  optimal if and only if they satisfy complementary slackness - so
+  $(c^{T} - \lambda^{T} A) x = 0$ and $\lambda^{T}(Ax - b) = 0$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:linear-programming-6}
+  Suppose $f, h$ are continuously differentiable on $\R^{n}$, and
+  there exists unique function $x^{\star}: \R^{m} \rightarrow \R^{n}$
+  and $\lambda^{\star}: \R^{m} \rightarrow \R^{m}$ such that for each
+  $b \in \R^{m}$, $h(x^{\star}(b)) = b$, $\lambda^{\star}(b) \leq 0$
+  and $f(x^{\star}(b)) = \phi(b) = \inf \{ f(x) -
+  \lambda^{\star}(b)^{T}(h(x) - b) | x \in \R^{n}\} $.  If $x^{\star}$
+  and $\lambda^{\star}$ are continuously differentiable, then
+  \begin{equation}
+    \label{eq:3}
+    \frac{\partial \phi}{\partial b_{i}} (b) = \lambda^{\star}_{i}(b).
+  \end{equation}
+\end{thm}
+
+\section{The Simplex Method}
+\label{sec:simplex-method}
+
+\begin{defn}
+  \label{sec:simplex-method-2}
+  Consider the problem $\max c^{T} x$ s.t. $Ax = b, x \geq 0$, where
+  $A \in R^{m \times n}$ and $b \in R^{m}$.  Call a solution $x \in
+  \R^{n}$ of the equation $Ax = b$ \textbf{basic} if at most $m$ of
+  its entries are non-zero - so there exists a set $B \subseteq \{ 1,
+  \dots, n \}$ with $|B| = m$ such that $x_{i} = 0$ if $i \notin B$.
+  The set $B$ is called the \textbf{basis}, and $x_{i}$ is
+  \textbf{basic} if $i \in B$ and \textbf{non-basic} if $i \notin B$.
+  A basic solution $x$ that also satisfies $x \geq 0$ is called a
+  \textbf{basic feasible solution}.
+\end{defn}
+
+\begin{thm}
+  \label{sec:simplex-method-3}
+  $x$ is a basic feasible solution of $Ax = b$ if and only if it is an
+  extreme point of the set $X(b) = \{ x : Ax = b, x \geq 0 \} $.
+\end{thm}
+
+\begin{thm}
+  \label{sec:simplex-method-4}
+  If the linear program $\max c^{T} x$ s.t. $Ax = b, x \geq 0$ is
+  feasible and bounded, then it has an optimal solution that is also a
+  basic feasible solution.
+\end{thm}
+
+
+
+\begin{defn}
+  \label{sec:simplex-method-1}
+  The simplex method consists of the following steps.
+
+  \begin{equation}
+    \label{eq:4}
+    \begin{Bmatrix}
+      (a_{ij}) & a_{i0} \\
+      a_{0j} & a_{00}
+    \end{Bmatrix}
+  \end{equation}
+
+  \begin{enumerate}
+  \item\label{item:2} Find an initial BFS with basis $B$.
+  \item\label{item:3} Check whether $a_{0j} \leq 0$ for every $j$.  If yes, the
+    current solution is optimal, so stop.
+  \item\label{item:4} Choose $j$ such that $a_{0j} > 0$, and choose $i \in \{ i' |
+    a_{i'j} > 0 \} $ to minimize $a_{i0} / a_{ij}$.  If $a_{ij} \leq
+    0$ for all $i$, the problem is unbounded, so stop.  If multiple
+    rows minimize $\frac{a_{i0}}{a_{ij}}$, the problem has a
+    degenerate BFS.
+  \item\label{item:5} Update the tableau by multiplying row $i$ by
+    $\frac{1}{a_{ij}}$ and adding $-\frac{a_{ij}}{a_{ij}}$ multiples
+    of row $i$ to each row $k \neq i$. Then return to step \ref{item:3}.
+  \end{enumerate}
+\end{defn}
+
+
+
+\section{Advanced Simplex Procedures}
+\label{sec:advanc-simpl-proc}
+
+\begin{defn}
+  \label{sec:advanc-simpl-proc-1}
+  Two phase simplex method can be used where it is difficult to find
+  an initial BFS.  We proceed as follows:
+
+  \begin{enumerate}
+  \item Bring the constraints into equality form.  For each constraint
+    in which the slack variable and the right hand side have opposite
+    signs, or in which there is no slack variable, add a new
+    artificial variable that has the same sign as the right hand side.
+  \item Minimize the sum of the artificial variables, starting from
+    the BFS where the absolute value of the artificial variable for
+    each constraint, or the slack variable in the case there is no
+    artificial variable, is equal to that of the right hand side.
+  \item If some artificial variable has a positive value in the
+    optimal solution, the original problem is infeasible --- stop.
+  \item Now solve the original problem, starting from the BFS in Phase I.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  \label{sec:advanc-simpl-proc-2}
+  We first find a dual-feasible solution, and proceed by selecting a
+  row $i$ such that $a_{i0} < 0$ and a column $j \in \{ j' | a_{ij'} <
+0 \} $ that minimized $-\frac{a_{0j}}{a_{ij}}$.  We can then pivot
+just like in the primal algorithm.
+\end{defn}
+
+\todo{Cutting plane method?}
+
+\section{Complexity of Problems and Algorithms}
+\label{sec:compl-probl-algor}
+
+\begin{defn}
+  \label{sec:compl-probl-algor-1}
+  A problem is in $P$ if there exists a Turing machine $M$ and $k \in
+  \N$ with the following property - for every $x \in \{ 0, 1
+  \}^{\star}$, if $M$ is started with input $x$, then after
+  $\mathcal{O}(|x|^{k})$ steps it halts with output $f(x)$.
+
+  $L \subseteq \{ 0, 1 \}^{\star} $ is in $NP$ if there exists a
+  Turing machine $M$ and $k \in \N$ with the property that for every
+  $x \in \{ 0, 1 \}^{\star} $, $x \in L$ if and only if there exists a
+  certificate $y \in \{ 0, 1 \}^{\star} $ with $|y| =
+  \mathcal{O}(|x|^{k})$ such that $M$ accepts $(x, y)$ after
+  $\mathcal{O}(|x|^{k})$ steps.
+\end{defn}
+
+\section{The Complexity of Linear Programming}
+\label{sec:compl-line-progr}
+
+\begin{thm}
+  \label{sec:compl-line-progr-1}
+  Consider the linear problem of minimizing $-x_{n}$ subject to
+  $\epsilon \leq x_{1} \leq 1$, $\epsilon x_{i-1} \leq x_{i} \leq 1 -
+  \epsilon x_{i-1}$ for $i = 2, \dots, n$. Then there exists a
+  pivoting rule and an initial BFS such the simplex methods requires
+  $2^{n} - 1$ iterations before terminating.
+\end{thm}
+
+\begin{defn}
+  \label{sec:compl-line-progr-2}
+  Given a symmetric positive definite matrix $D \in R^{n \times n}$
+  and $z \in \R^{n}$, the set of points
+  \begin{align}
+    \label{eq:5}
+    E = E(z, D) = \{ x \in \R^{n} | (x - z)^{T} D^{-1}(x - z) \leq 1 \} 
+  \end{align} is called an ellipsoid with center $z$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:compl-line-progr-3}
+  Let $E = E(z, D)$ be an ellipsoid in $\R^{n}$ and $a \in \R^{n}$
+  non-zero.  Consider the half-space $H = \{ x \in \R^{n} | a^{T} x
+  \geq a^{T}z \} $, and let $z' = z + \frac{1}{n+1}
+  \frac{Da}{sqrt{a^{T}Da}}$, $D' = \frac{n^{2}}{n^{2} - 1}(D -
+  \frac{2}{n+1}\frac{Daa^{T}D}{a^{T}Da})$.  Then $D'$ is symmetric and
+  positive definite, and so $E' = E(z', D')$ is an ellipsoid.
+  Moreover, $E \cap H \subseteq E'$ and $\vol E' <
+  \exp(-\frac{1}{2(n+1)}) \vol E$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:compl-line-progr-4}
+  Let $S: \R^{n} \rightarrow \R^{n}$ be an affine transformation given
+  by $S(x) = Dx + b$, and let $L \subseteq \R^{n}$.  Then $\vol S(L) =
+  |\det D| \vol L$.
+\end{thm}
+
+\section{The Ellipsoid Method}
+\label{sec:ellipsoid-method}
+
+\begin{defn}
+  \label{sec:ellipsoid-method-1}
+  Consider a polytope $P = \{ x \in \R^{n} | Ax \geq b \} $, with $A \in
+  Z^{m \times n}$ and $b \in Z^{m}$.  Assume that $P$ is bounded and
+  either empty or full-dimensional ($\vol P > 0$).  The ellipsoid
+  method proceeds as follows to decide whether $P$ is non-empty.
+
+  
+  \begin{enumerate}
+  \item Let $U$ be the largest absolute value among the entries of $A$
+    and $b$, and define $x_{0} = 0$, $D_{0} = n(nU)^{2n}I$, $E_{0} =
+    E(x_{0}, D_{0})$, $V = (2n)^{n}(nU)^{n^{2}}$, $v =
+    n^{-n}(nU)^{-n^{2}(n+1)}$, $t^{\star} = \lceil 2(n+1) \log
+    \frac{V}{v} \rceil$.\todo{Notify lecturer about $x_{0}$ not
+      specified in notes}
+  \item For $t = 0, \dots, t^{\star}$, do
+    \begin{enumerate}
+    \item If $t = t^{\star}$, stop ($P$is empty)
+    \item If $x_{t} \in P$, then stop ($P$ is non-empty)
+    \item Find a violated constraint (a row $j$ such that $a_{j}^{T}
+      x_{t} < b_{j}$).
+    \item Let $E_{t+1} = E(x_{t+1}, D_{t+1})$, with $x_{t+1} = x_{t} =
+      \frac{1}{n+1} \frac{D_{t} a_{j}}{\sqrt{a_{j}^{T} D_{t} a_{j}}}$,
+      $D_{t+1} = \frac{n^{2}}{n^{2} - 1}(D_{t} - \frac{2}{n+1}
+      \frac{D_{t} a_{j} a_{j}^{T} D_{t}}{a_{j}^{T} D_{t} a_{j}})$.
+    \end{enumerate}
+  \end{enumerate}
+\end{defn}
+
+\todo{Proof of correctness?}
+
+\section{Graphs and Flows}
+\label{sec:graphs-flows}
+
+\begin{defn}
+  \label{sec:graphs-flows-1}
+  $x \in \R^{n \times n}$ is a \textbf{minimum cost flow} of $G$ if it
+  is an optimal solution of the following optimization problem: $\min
+  \sum_{(i, j) \in E}^{} c_{ij} x_{ij}$ s.t. $b_{i} + \sum_{j: (j, i)
+    \in E} x_{ji} = \sum_{j: (i, j) \in E}^{} x_{ij}$ for all $i \in
+  V$ (source/sink balance), and $\underline m_{ij} \leq x_{ij}
+  \overline m_{ij}$ for all $(i, j) \in E$ (capacity constraint).
+
+  Note that $\sum_{i \in V}^{} b_{i} = 0$ is required for any feasible
+  flows to exist.
+
+  The minimum cost flow is an LP, with constraints of the form $Ax =
+  b$, where
+  \begin{equation}
+    \label{eq:7}
+    a_{ik} =
+    \begin{cases}
+      1 & \text{$k$-th edge starts at vertex $i$} \\
+      -1 & \text{$k$-th edge ends at vertex $i$} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{sec:graphs-flows-3}
+  As solution $x$ to the minimum cost flow problem for a connected
+  network $G = (V, E)$ is a \textbf{spanning tree solution} if there
+  exists a spanning tree $(V, T)$ of $G$ and two sets $L, U \subseteq
+  E$ with $L \cap U = \emptyset$ and $L \cup U = E \backslash T$ such
+  that $x_{ij} = \underline m_{ij}$ if $(i, j) \in L$, and $x_{ij} =
+  \overline m_{ij}$ if $(i, j) \in U$. These constraints determine the
+  values for $x_{ij}$ for $(i, j) \in T$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:graphs-flows-2}
+  A flow vector is a basic solution of a minimum cost flow problem if
+  and only if it is a spanning tree solution.
+\end{thm}
+
+\begin{defn}
+  \label{sec:graphs-flows-4}
+  The \textbf{Lagrangian} of the minimum cost flow problem is
+  \begin{align}
+    \label{eq:6}
+    L(x, \lambda) &= \sum_{(i, j) \in E}^{} c_{ij} x_{ij} - \sum_{i \in
+    V}^{} \lambda_{i} (\sum_{j: (i, j) \in E}^{} x_{ij} - \sum_{j: (j,
+    i) \in E}^{} x_{ji} - b_{i}) \\
+  &= \sum_{(i, j) \in E}^{} (c_{ij} - \lambda_{i} + \lambda_{j})
+  x_{ij} + \sum_{i \in V}^{\lambda_{i}}  b_{i}.
+\end{align}
+
+Let $\overline c_{ij} = c_{ij} - \lambda_{i} + \lambda_{j}$ be the
+\textbf{reduced cost} of edge $(i, j) \in E$. We have the
+complementary slackness conditions $\overline c_{ij} > 0$ implies
+$x_{ij} = \underline m_{ij}$, $\overline c_{ij} < 0$ implies $x_{ij} =
+\overline m_{ij}$, and $\underline m_{ij} < x_{ij} < \overline m_{ij}$
+implies $\overline c_{ij} = 0$.
+
+Assume that $x$ is a BFS associated with sets $T$, $U$, and $L$.  Then
+the system of equations $\lambda_{|V|} = 0$, $\lambda_{i} -
+\lambda_{j} = c_{ij}$ for all $(i, j) \in T$ has a unique solution,
+which allows us to compute $\overline c_{ij}$ for all edges $(i, j)
+\in E$.  Note that by construction, $\overline c_{ij} = 0$ for all $(i,
+j) \in T$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:graphs-flows-6}
+  If $\overline c_{ij} \geq 0$  for all $(i, j) \in L$, and $\overline
+  c_{ij} \leq 0$ for all $(i, j)\in U$, then $(x, \lambda)$ is
+  dual-feasible and therefore optimal. Otherwise, find and edge $(i,
+  j)$ that violates these conditions, and observe this edge with the
+  edges in $T$ forms a unique cycle $C$.  Since $(i, j)$ is the only
+  edge in $C$ with non-zero reduced cost, we can decrease the
+  objective by pushing flow along $C$ to increase $x_{ij}$ if
+  $\overline c_{ij}$ is negative and decrease $x_{ij}$ if $\overline
+  c_{ij}$ is positive.  
+
+Let $\underline B \subseteq C$ denote the set of edges whose flow is
+to decrease, and $\overline B \subseteq C$ the set of edges whose flow
+is to increase.  If the problem is uncapacitated and $\underline B =
+\emptyset$ or $\overline B = \emptyset$, the problem is unbounded.
+Otherwise, changing the flow by $\min \{ \min_{(k, l) \in \underline
+  B} \{ x_{kl} - \underline m_{kl} \}, \min_{(k, l) \in \overline B}
+\{ \overline m_{kl} - x_{kl} \}  \} $ decreases this object as much as
+possible while maintaining prime feasibility.  After this change,
+there will be an edge $(k, l) \in C$  whose flow is either $\underline
+m_{k,l}$ or $\overline m_{k,l}$.  If $(k, l) \in T$, we obtain a new
+BFS with spanning tree $(T \backslash \{ (k, l) \}) \cup \{ (i, j)
+\}$.  If instead $(k, l) = (i, j)$, we obtain a new BFS where $(i, j)$
+has moved from $U$ to $L$, or vice versa.
+
+To find an initial BFS, set all $\underline m_{ij} = 0$ (by
+introducing flows of forced capacity $\overline m'_{ij} = \underline
+m'_{ij} = \underline m_{ij}$)  Introduce a dummy vertex $d \notin V$
+and uncapacitated dummy edges $E' = \{ (i, d) | i \in V, b_{i} \geq 0
+\} \cup \{ (d, i) | i \in V, b_{i} < 0\}  $ with cost equal to
+$\sum_{(i, j) \in E}^{} c_{ij}$.  A dummy edge has positive flow in an
+optimal solution of the new problem if and only if the original
+problem is infeasible. A feasible spanning tree solution is obtained
+by setting $T = E'$, $x_{id} = b_{i}$ for all $i \in V$ with $b_{i} >
+0$, $d_{di} = -b_{i}$ for all $i \in V$ with $b_{i} < 0$, and $x_{ij}
+= 0$ otherwise.
+\end{thm}
+
+\begin{thm}
+  \label{sec:graphs-flows-5}
+  Consider a minimum cost flow problem that is feasible and bounded.
+  If $b_{i}$is integral for all $i \in V$ and $\underline m_{ij}$ and
+  $\overline m_{ij}$are integral for all $(i, j) \in E$, then there
+  exists an integral optimal solution.  If $c_{ij}$is integral for all
+  $(i, j)\in E$, then there exists an integral optimal solution to the dual.
+\end{thm}
+
+\section{Transportation and Assignment Problems}
+\label{sec:transp-assignm-probl}
+
+\begin{defn}
+  \label{sec:transp-assignm-probl-1}
+  We are given a set of supplies producing $s_{i}$ units of a good and
+  a set of consumers with demands $d_{j}$, with $\sum_{i=1}^{n} s_{i}
+  = \sum_{j=1}^{m} d_{j}$.  The cost of transporting  from supplier
+  $i$ to $j$is $c_{ij}$.  We formulate the problem of a minimum cost
+  flow on the bipartite network as $\min \sum_{i=1}^{} \sum_{j=1}^{m}
+  c_{ij} x_{ij}$ s.t. $\sum_{i=1}^{n} x_{ij} = d_{j}$, $\sum_{j=1}^{m}
+  x_{ij} = s_{i}$, and $x_{ij} \geq 0$ for all $i, j$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:transp-assignm-probl-2}
+  Every minimum cost flow problem with finite capacities or
+  non-negative costs has an equivalent transportation problem.
+\end{thm}
+
+\todo{Fill in network simplex tableau description?}
+
+\begin{thm}
+  \label{sec:transp-assignm-probl-3}
+  In the assignment problem, we have to assign exactly one agent to
+  one job - so the problem is $\min \sum_{i=1}^{n} \sum_{j=1}^{n}
+  c_{ij} x_{ij}$ subject to $x_{ij} \in \{ 0, 1 \}$, $\sum_{j=1}^{n}
+  x_{ij} = 1$, $\sum_{i=1}^{n} x_{ij} = 1$ - since all solutions to
+  the LP relation are spanning tree solutions (and thus integral), the
+  network simplex method yields an optimal solution of the original
+  problem when applied to the LP relaxation.
+\end{thm}
+
+\section{Maximum Flows and Perfect Matchings}
+\label{sec:maxim-flows-perf}
+
+\begin{defn}
+  \label{sec:maxim-flows-perf-1}
+  In a flow network $(V, E)$ with a single source $1$, a single sink
+  $n$, and finite capacities $\underline m_{ij} = 0, \overline m_{ij} = C_{ij}$ for all $(i,
+  j) \in E$.    The maximum flow problem seeks to maximum $\delta$
+  such that
+  \begin{align}
+    \label{eq:8}
+    \sum_{j: (i, j) \in E}^{} x_{ij} - \sum_{j: (j, i) \in E}^{}
+    x_{ji} =
+    \begin{cases}
+      \delta & i = 1 \\
+      -\delta & i = n \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{align} and $0 \leq x_{ij} \leq C_{ij}$ for all $(i, j) \in E$.
+\end{defn}
+
+\begin{defn}
+  The capacity of a cut $S \subseteq V$ is given by
+  \begin{align}
+    \label{eq:10}
+    C(S) = \sum_{(i, j) \in E \cap (S \times (V \backslash S))}^{} C_{ij}.
+  \end{align}
+\end{defn}
+
+\begin{thm}
+  \label{sec:maxim-flows-perf-2}
+  Let $\delta$ be the optimal solution of
+  \ref{sec:maxim-flows-perf-1} for a network $(V, E)$ with capacities
+  $C_{ij}$.  Then
+  \begin{align}
+    \label{eq:9}
+    \delta = \min \{ C(S) | S \subseteq V, 1 \in S, n \in V \backslash
+S \} 
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:maxim-flows-perf-3}
+  The \textbf{Ford-Fulkerson algorithm} proceeds to find a maximum
+  flow by pushing along an augmenting path, until such a path cannot
+  be found.
+
+  \begin{enumerate}
+  \item Start with a feasible flow $x$.
+  \item\label{item:8} If there is no augmenting path from $1$ to $n$, stop.
+  \item\label{item:6} Else, pick some augmenting path from $1$ to $n$, push a
+    maximum amount of flow along this path without violating any
+    constraints.  Then go to step \ref{item:8}.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:maxim-flows-perf-5}
+  Consider an alternative formulation of maximum flow as a minimum
+  cost flow, $\min -x_{n1}$ subject to $\sum_{j:(i, j) \in E'}^{}
+  x_{ij} - \sum_{j: (j, i) \in E'}^{} x_{ji} = 0$ for all $i \in V$,
+  $0 \leq x_{ij} \leq C_{ij}$ for all $(i, j) \in E$, $x_{n1} \geq 0$,
+  where $E' = E \cup \{ (n, 1) \}$.  The Lagrangian is
+  \begin{equation}
+    \label{eq:12}
+    L(x, \lambda) = (-1 - \lambda_{n} + \lambda_{1}) x_{n1} -
+    \sum_{(i, j) \in E}^{} (\lambda_{i} - \lambda_{j}) x_{ij}.
+  \end{equation} with bounded minimum when $x_{n1} > 0$ only if
+  $\lambda_{1} - \lambda_{n} = 1$.  
+
+  \todo{Follow on with this explanation?}
+\end{defn}
+
+\begin{defn}
+  \label{sec:maxim-flows-perf-6}
+  A matching of a graph is a set of edges that do not share any
+  vertices.  A matching is perfect if it covers every vertex - $|M| =
+  \frac{|V|}{2}$.  A graph is $k$-regular if every vertex has degree $k$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:maxim-flows-perf-7}
+  A bipartite graph $G = (L \biguplus R, E)$ with $|L| = |R|$ has a
+  perfect matching if and only if $|N(X)| \geq |X|$ for every $X
+  \subseteq L$, where $N(X) = \{ j \in R | i \in X, (i, j) \in E \}$.
+\end{thm}
+
+\section{Shortest Paths and Minimum Spanning Trees}
+\label{sec:short-paths-minim}
+
+\begin{thm}
+  \label{sec:short-paths-minim-1}
+  Let $\lambda_{i}(k)$ be the length of a shortest path from $i$ to
+  $t$that uses at most $k$ edges.  Then $\lambda_{t}(k) = 0$ for all
+  $k \geq 0$, and $\lambda_{i}(0) = \infty$, $\lambda_{i}(k) =
+  \min_{j: (i, j) \in E}(c_{ij} + \lambda_{j}(k-1))$ for all $i \in V
+  \backslash \{ t \}$ and $k \geq 1$.  This is the
+  \textbf{Bellman-Ford} algorithm.
+\end{thm}
+
+\begin{thm}
+  \label{sec:short-paths-minim-2}
+  Consider a graph with vertices $V$ and edge lengths $c_{ij} \geq 0$
+  for all $i, j \in V$ . Fix $t \in V$ and let $\lambda_{i}$ denote
+  the length of a shortest path from $i \in V$ to $t$.  Let $j \in V
+  \backslash \{ t \} $such that $c_{jt} = \min_{i \in V \backslash \{
+    t \}} c_{it}$. Then $\lambda_{j} = c_{jt}$ and $\lambda_{j} = \min
+  c_{jt} = \min_{i \in V \backslash \{ t \}} \lambda_{i}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:short-paths-minim-3}
+  Let $(V, E)$ be a graph with edge costs $c_{ij}$ for all $(i, j) \in
+  E$. Let $U \subseteq V$ and $(u, v) \in U \times (V \backslash U)$
+  such that $c_{uv} = \min_{(i, j) \in U \times (V \backslash U)}
+  c_{ij}$. Then there exists a spanning tree of minimum cost that
+  contains $(u, v)$.
+\end{thm}
+
+\section{Semidefinite Programming}
+\label{sec:semid-progr}
+
+\begin{defn}
+  \label{sec:semid-progr-1}
+  Let $\IP{C, X} = \tr CX = \sum_{i=1}^{n} \sum_{j=1}^{n} c_{ij}
+  x_{ij}$ for some $C, X \in \S^{n}$, the set of symmetric matrices.
+  A semidefinite program takes the form $\min \IP{C, X}$ subject to
+  $\IP{A_{i}, X} = b_{i}$ for all $i \in \{ 1, \dots, m \} $, and $X
+  \succeq 0$ (positive semidefinite) where $C, A_{1}, \dots, A_{m} \in
+  \S^{n}$ and $b \in \R^{m}$.
+  
+Equivalently, $\min c^{T} x$ subject to $B_{0} + \sum_{i=1}^{k} x_{i}
+B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:semid-progr-2}
+  The Lagrangian of \ref{sec:semid-progr-1} can be written as
+  \begin{equation}
+    \label{eq:13}
+    L(X, \lambda, Z) = \IP{C, X} - \sum_{i=1}^{m} \lambda_{i}
+    (\IP{A_{i}, X} - b_{i}) - \IP{Z, X},
+  \end{equation} where the last term takes into account the constraint
+  $X \succeq 0$. Then $g(\lambda, Z) = \inf_{X \in S^{n}} L(X,
+  \lambda, Z) = \lambda^{T} b$ if $C - \sum_{i=1}^{m} \lambda_{i}
+  A_{i} - Z = 0$ , and $-\infty$ otherwise.  Eliminating $Z$, we
+  obtain the dual of \ref{sec:semid-progr-1} (another semidefinite
+  program), $\max \lambda^{T} b$ subject to $C - \sum_{i=1}^{m}
+  \lambda_{i} A_{i} \succeq 0$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:semid-progr-3}
+  Consider the primal/dual linear programs $\min \{ c^{T} x | Ax = b,
+  x \geq 0 \} $ and $\max \{ b^{T} \lambda | A^{T} \lambda +z = c, z
+  \geq 0 \} $  If we use \textbf{primal-dual interior point methods},
+  we can augment the objective with a barrier function and solve with
+  Newton's method.  We augment with $\min c^{T} x - \mu \sum_{i=1}^{n}
+  \log x_{i} | Ax = b$ and $\max \{ b^{T} \lambda + \mu \sum_{j=1}^{m}
+  \log z_{j} | A^{T} \lambda + z = c \} $ for a parameter $\mu > 0$.
+
+  Then $(x, \lambda, z)$ is optimal for the modified primal/dual
+  problems if $Ax = b, x \geq 0$, $A^{T} \lambda + z = c$, $z \geq 0$,
+  $x_{i} z_{i} = \mu$, for all $i = 1, \dots, n$.
+\end{thm}
+
+\section{Branch and Bound}
+\label{sec:branch-bound}
+
+\begin{defn}
+  \label{sec:branch-bound-1}
+  Assume we wish to solve $\min f(x)$ s.t. $x \in X$ for some feasible
+  region $X$., we use divide and conquer on $X_{i}$ with
+  $\cup_{i=1}^{k} X_{i} = X$, and solve $\min_{x \in X} f(x) =
+  \min_{i=1}^{k} \min_{x \in X_{i}} f(x)$.
+
+  If we have a lower and upper bound on the optimal solution -
+  functions $l$ and $u$ such that for all $X' \subseteq X$, $l(X')
+  \leq \min_{x \in X'} f(x) \leq u(X')$ , then we can efficiently
+  prune our search space.
+
+  The algorithm proceeds as follows:
+  \begin{enumerate}
+  \item Set $U = \infty, L = \{ X \} $.
+  \item\label{item:1} Pick $Y \in L$, remove from $L$, and split into $k \geq 2$
+    sets $Y_{1}, \dots, Y_{k}$.
+  \item For $i \in \{ 1, \dots, k \} $, compute $l(Y_{i})$.  If this
+    yields $x \in X$ with $l(Y_{i}) = f(x) < U$ , set $U$ to $f(x)$.
+    If $l(Y_{i}) < U$ but no $x \in X$ is found, add $y_{i}$ to $L$.
+    If $L = \emptyset$, stop, the optimum value is $U$.  Otherwise, go
+    back to \ref{item:!}.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  \label{sec:branch-bound-2}
+  Applied to an integer program, we can obtain a lower bound by
+  solving the LP relaxation, and so eliminate large chunks of the
+  search tree.
+\end{thm}
+
+\begin{defn}
+  \label{sec:branch-bound-3}
+  The traveling salesman problem is the problem of finding a cycle in
+  $G$ that visits each vertex exactly once, of minimum overall cost.
+
+  TO proceed, we can encode it as an integer program by introducing
+  $x_{ij} \in \{ 0, 1 \} $, whether the tour traverses edge $i$, and
+  variables $t_{i} \in \{ 0, \dots, n-1 \} $ indicating the position
+  of the vertex $i$ in the tour. If $x_{ij} = 1$, then $t_{j} = t_{i}
+  + 1$. If $x_{ij} = 0$, then $t_{j} \geq t_{i} - (n-1)$. We need to
+  constrain that there is exactly one edge entering and one edge
+  leaving - $\sum_{i=1}^{n} x_{ij} = 1$ for $j = 1, \dots, n$, and
+  $\sum_{j=1}^{n} x_{ij} = 1$ for $i = 1, \dots, n$.
+\end{defn}
+
+\section{Heuristic Algorithms}
+\label{sec:heuristic-algorithms}
+
+\begin{defn}
+  \label{sec:heuristic-algorithms-1}
+  Assume we want solve the problem $\min c(x)$ s.t. $x \in X$, and
+  that for any feasible solution $x \in X$, the cost $c(x)$ and a
+  \textbf{neighborhood} $N(x) \subseteq X$ can be computed
+  efficiently.  Then \textbf{local search} proceeds as follows:
+  \begin{enumerate}
+  \item Find an initial feasible solution $x \in X$.
+  \item\label{item:7} Find a solution $y \in N(x)$ such that $c(y) < c(x)$.
+  \item If there is no solution - stop and return $x$, otherwise set
+    the current solution $x$ to $y$ and return to \ref{item:7}.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  \label{sec:heuristic-algorithms-2}
+  Simulated annealing considers a neighbor $y$ of the current
+  solution $x$ and moves to the new solution with probability $p_{xy}
+  = \min(1, \exp(-\frac{c(y) - c(x)}{T}))$ where $T \geq 0$ is a
+  parameter (the \textbf{temperature}) that can vary over the time.
+
+  It can be shown that with detailed balance, we have
+  \begin{align}
+    \label{eq:14}
+    \pi_{x} = \frac{e^{-\frac{c(x)}{T}}}{\sum_{z \in X}^{} e^{-\frac{c(z)}{T}}} 
+  \end{align} for every $x \in X$ is a distribution and satisfies
+  detailed balance, and so must be the stationary distribution.
+  We have $\frac{\pi_{Y}}{1 - \pi_{Y}} \rightarrow \infty$ as $T
+  \rightarrow 0$, where $Y \subseteq X$ is the set of solutions with
+  the minimum cost. We then decrease $T$ for the Markov chain to reach
+  the stationary distribution -e.g. $T = \frac{c}{\log t}$.
+\end{defn}
+
+\section{Approximation Algorithms}
+\label{sec:appr-algor}
+
+\begin{defn}
+  A function $g: \{ 0. 1 \}^{\star} \rightarrow \{ 0, 1 \}^{\star}$ is
+  an $\alpha$ approximation for $o$ if for some $\alpha \geq 1$, if
+  for all $x \in P$, $o(x, g(x)) \leq \alpha o(x, f(x))$. In what
+  follows we will be interested in algorithms that compute the
+  function $g$ in polynomial time, and refer to such an algorithm as a
+  polynomial-time $\alpha$-approximation
+  algorithm.\label{sec:appr-algor-1}
+
+  The class $APX$ are the class of problems where the exists an
+  $\alpha$ approximation for some $\alpha$.  The class $PTAS \subseteq
+  APX$ are problems that possess an $(1 + \epsilon)$ approximation
+  algorithm for any $\epsilon > 0$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:appr-algor-2}
+  The max-cut problem asks for a cut on an undirected graph that
+  maximizes the number of edges crossing from one side to the other.
+  There exists a $\frac{1}{2}$ approximation with a simple greedy
+  algorithm.
+
+  Use a universal hash function to obtain $n^{2}$ pairwise-independent
+  samples, we can apply this to randomly cut a variable with
+  probability $\frac{1}{2}$, and so obtain a cut with cost $\E{Q} =
+  \E{\sum_{(i, j) \in E}^{} \Prob{Q_{i} \neq Q_{j}}} = \sum_{(i, j)
+    \in E}^{} \E{\Prob{Q_{i} \neq Q_{j}}} = \frac{|E|}{2}$.
+\end{thm}
+
+\section{Non-Cooperative Games}
+\label{sec:non-coop-games}
+
+\begin{defn}
+  \label{sec:non-coop-games-1}
+  A normal-form game is a tuple $\Gamma = (N, (A_{i})_{i \in N},
+  (p_{i})_{i \in N})$, where $N$ is a finite set of players, and
+  $A_{i}$ is a non-empty  and finite set of actions available to $i$,
+  and $p_{i}: (\times_{i \in N} A_{i}) \rightarrow \R$ is a function
+  mapping each combination of actions to a payoff for $i$.
+
+  A two-player game can be represented by $P, Q \in \R^{m \times n}$,
+  where $p_{ij}, q_{ij}$ are the payoffs of players $1, 2$ when player
+  $1$ plays action $i$ and player $2$ plays action $j$.
+
+  The set of possible \textbf{strategies} of the two players are given
+  as $X = \{ x \in \R^{m}_{\geq 0} | \sum_{i=1}^{m} x_{i} = 1 \} $, $Y
+  = \{ y \in \R^{n}_{\geq 0} | \sum_{i=1}^{n} y_{i} = 1 \}$. A
+  \textbf{pure strategy} is a strategy that chooses an action with
+  probability one. The expected payoffs from playing $(x, y) \in (X,
+  Y)$ are given as $p(x, y) = x^{T} P y, q(x, y) = x^{T} Q y$.
+
+  For two strategies $x, x' \in X$, $x$ is said to dominate $x'$ if
+  for every strategy $y \in Y$ of the column player, $p(x, y) > p(x',
+  y)$.
+
+  A strategy that maximizes the payoff in the worst case, taken over
+  all the other players strategies, is a \textbf{maximin strategy}, and
+  the payoff is the player's \textbf{security level}.  It is
+  sufficient to maximize the minimum payoff over all pure strategies
+  of the other player (convex combinations), so choosing $x$ such that
+  $\min_{j \in 1, \dots, n} \sum_{i=1}^{m} x_{i} p_{ij}$ is as large
+  as possible.  Thus, this is a linear program $\max v$ subject to
+  $\sum_{i=1}^{m} x_{i} p_{ij} \geq v$ for $j = 1, \dots, n$,
+  $\sum_{i=1}^{m} x_{i} = 1$, $x \geq 0$.
+
+  Strategy $x \in X$ of the row player is a \textbf{best response} to
+  strategy $y \in Y$ of the column player if for all $x' \in X$, $p(x,
+  y) \geq p(x', y)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:non-coop-games-3}
+  For the zero-sum game, where $q_{ij} = -p_{ij}$, we have \textbf{von
+    Neumann's theorem}.
+
+  $\max_{x \in X} \min_{y \in Y} p(x, y) = \min_{y \in Y} \max_{x \in
+    X} p(x, y)$.
+
+  This can be shown by adding a slack variable $z \in \R^{n}$ with $z
+  \geq 0$ and obtaining the Lagrangian
+  \begin{align}
+    \label{eq:15}
+    L(v, x, z, w, y) = v + \sum_{j=1}^{n} y_{j}(\sum_{i=1}^{m} x_{ij}
+    - p_{ij} - z_{j} - v) - w(\sum_{i=1}^{m} x_{i} - 1) \\
+    &= (1 - \sum_{j=1}^{n} y_{j}) v + \sum_{i=1}^{m} (\sum_{j=1}^{n}
+    p_{ij} y_{j} - w)x_{i} - \sum_{j=1}^{n} y_{j} z_{j} + w
+  \end{align} which has finite maximum  with $x \geq 0$ if and only if
+  $\sum_{j=1}^{n} y_{j} = 1$, $\sum_{j=1}^{n} p_{ij} y_{j} \leq w$ for
+  $ i = 1, \dots, m$, and $y \geq 0$. So the dual is $\min w$ such
+  that $\\sum_{j=1}^{n} p_{ij} y_{j} \leq w$ for $i = 1, \dots, m$,
+  $\sum_{j=1}^{n} y_{j} = 1$, and $y \geq 0$.  This has solution
+  $\min_{y \in Y} \max_{x \in X} p(x, y)$ as required.  This solution
+  is called the \textbf{value} of a matrix game with payoff matrix $P$.
+\end{thm}
+
+
+\section{Strategic Equilibrium}
+\label{sec:strat-equil}
+
+\begin{defn}
+  \label{sec:strat-equil-1}
+  A pair of strategies $(x, y) \in X \times Y$ with $x$ a best
+  response to $y$ and $y$ a best response to $x$ is called an
+  \textbf{equilibrium}.
+\end{defn}
+
+\begin{thm}
+  \label{sec:strat-equil-2}
+  A pair of strategies $(x, y) \in X \times Y$ is an equilibrium of
+  the matrix game with payoff matrix $P$ if and only if $\min_{y \in
+    Y} p(x, y') = \max_{x \in X} \min_{y' \in Y} p(x', y')$, and
+  $\max_{x' \in X} p(x', y) = \min_{y' \in Y} \max_{x' \in X} p(x', y')$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:strat-equil-3}
+  Let $(x, y), (x', y') \in X \times Y$ be equilibria of the matrix
+  game with payoff matrix $P$.  Then $p(x, y) = p(x', y')$, and $(x,
+  y')$ and $(x', y)$ are equilibria as well.
+\end{thm}
+
+\begin{thm}
+  \label{sec:strat-equil-5}
+  Let $f: S \rightarrow S$ be a continuous function, where $S
+  \subseteq \R^{n}$ is closed, bounded, and convex. Then $f$ has a
+  fixed point.
+\end{thm}
+
+\begin{thm}[Nash's Theorem]
+  \label{sec:strat-equil-4}
+  We show bimatrix game has an equilibrium.   
+
+  To show this, define $X, Y$ as before, and $X \times Y$ is closed,
+  bounded, and convex.  Then for $x \in X$, $y \in Y$, define
+  $s_{i}(x, y)$ and $t_{i} (x, y)$ by the additionally payoff the two
+  players could obtain by playing the $i$-th or $j$-th pure strategy
+  instead of $x$ or $y$ - so $s_{i}(x, y) = \max \{ 0, p(e_{i}^{m}, y)
+- p(x, y) \} $, and $t_{j}(x, y) = \max \{ 0, q(x, e_{j}^{n} - q(x,
+y)) \}$, and define $f: X \times Y \rightarrow X \times Y$ by $f(x, y)
+= (x', y')$, where
+\begin{align}
+  \label{eq:18}
+  x_{i}' = \frac{x_{i} + s_{i}(x, y)}{1 = \sum_{k=1}^{m} s_{k}(x, y)}
+\\
+y'_{j} = \frac{y_{j} + t_{j}(x, y)}{1 + \sum_{k=1}^{n} t_{k}(x, y)}
+\end{align}
+Note also there must exist $i \in \{ 1, \dots, m \} $ with $x_{i} > 0$
+and $s_{i}(x, y) = 0$, as otherwise $p(x, y) = \sum_{k=1}^{m} x_{k}
+p(e_{k}^{m}, y) > \sum_{k=1}^{m} x_{k} p(x, y) = p(x, y)$.  Thus, and
+as $(x, y)$ is a fixed point,
+\begin{equation}
+  \label{eq:19}
+  x_{i} = \frac{x_{i} + s_{i}(x, y)}{1 + \sum_{k=1}^{m} s_{k}(x, y)}
+\end{equation}
+and so $\sum_{k=1}^{m} s_{k}(x, y) = 0$, so for $k = 1, \dots, m$,
+$s_{k}(x, y) = 0$, and so $p(x, y) \geq p(e_{k}^{m}, y)$. So $p(x, y)
+\geq p(x', y)$ for all $x' \in X$.  Analogously, $q(x, y) \geq q(x,
+y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
+\end{thm}
+
+\begin{thm}
+  \label{sec:strat-equil-6}
+  Given a bimatrix game, it is $NP$-complete to decide whether
+  \begin{enumerate}
+  \item it has at least two equilibria
+  \item an equilibrium in which the expected payoff of the row player
+    is at least a given amount,
+  \item an equilibrium in which the expected sum of the payoff of the
+    two players is at least a given amount
+  \item an equilibrium with supports of a given minimum size,
+  \item an equilibrium whose support includes a given pure strategy,
+  \item or an equilibrium whose support does not include a given pure
+    strategy.
+  \end{enumerate}
+\end{thm}
+
+\section{Equilibrium Computation}
+\label{sec:equil-comp}
+
+\begin{defn}
+  \label{sec:equil-comp-1}
+  Consider a bimatrix game with payoffs $P, Q \in \R^{m \times n}$,
+  and assume WLOG that $P, Q > 0$. Then $M = \{ 1, \dots, m \}$ and $N
+  = m+1, \dots, m+n$, and define the sets $X, Y$ of strategies
+  accordingly.
+  
+  A pair $(x, y) \in X \times Y$ is an equilibrium if and only if all
+  pure strategies in $S(x)$ are best responses to $y$ and all pure
+  strategies in $S(y)$ are best responses to $x$ - so if for all $i
+  \in M$, $x_{i} > 0$implies $(Py)_{i} = \max_{k \in M}(Py)_{k}$, and
+  for all $j \in N$, $y_{j} > 0$ implies $(Q^{T} x)_{j} = \max_{k \in
+    N} (Q^{T}x)_{k}$.
+\end{defn}
+
+\todo{Fill in Lemke-Howson?}
+
+\section{Cooperative Games}
+\label{sec:cooperative-games}
+
+\begin{defn}
+  \label{sec:cooperative-games-1}
+  A coalitional game is given by a set $N = \{ 1, \dots, n \} $ of
+  players, a characteristic function $\nu: 2^{N} \rightarrow \R$ that
+  maps each coalition to is value - the payoff the coalition can obtain
+  by working together.  An \textbf{imputation} of a game $(N, \nu)$ is a
+  vector $x \in \R^{n}$ such that $x_{i} \geq \nu(\{ i \} )$ for all $i
+  \in N$, and $\sum_{i=1}^{n} x_{i} = \nu(N)$.  The first condition
+  \textbf{individual rationality}, requires each player obtains the
+  same payoff it would be able to obtain on it's own.  The second is
+  \textbf{economic efficiency} - no payoff is wasted.
+\end{defn} 
+
+
+\begin{defn}
+  \label{sec:cooperative-games-4}
+  An imputation $x$ is in the core of game $(N, \nu)$ if $\sum_{i \in
+    S}^{} x_{i} \geq v(S)$ for all $S \subseteq N$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:cooperative-games-2}
+  A function $\lambda: 2^{N} \rightarrow [0, 1]$ is \textbf{balanced}
+  if for every player the weights of all coalitions containing that
+  player sum to $1$ - so, for all $i \in N$, $\sum_{S \subseteq N
+    \backslash \{ i \} }^{} \lambda(S \cup \{ i \}) = 1$.  A game $(N,
+  \nu)$ is balanced if for every balanced function $\lambda$, $\sum_{S
+    \subseteq N}^{} \lambda(S) \nu(S) \leq \nu(N)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:cooperative-games-3}
+  A game has a non-empty core if and only if it is balanced.
+\end{thm}
+
+
+
+\begin{defn}
+  \label{sec:cooperative-games-5}
+  The \textbf{excess} $e(S, x)$ of coalition $S \subseteq N$ for
+  imputation $x$ is the gain from leaving the grand coalition - $e(S,
+  x) = \nu(S) - \sum_{i \in S}^{} x_{i}$.
+
+  For a given imputation $x$, let $S_{1}^{x}, \dots, S_{2^{n}-1}^{x}$
+  be an ordering of the coalitions such that $e(S^{x}_{k}, x) \geq
+  e(S_{k+1}^{x}, x)$ for $k = 1, \dots, 2^{n} - 2$, and let $E(x) \in
+  R^{2^{n} - 1}$ be the vector given by $E_{k}(x) = e(S_{k}^{x}, x)$.
+  We say that $E(x)$ is lexicographically smaller than $E(y)$ if there
+  exists $i \in \{ 1, \dots, 2^{n} - 1 \} $ such that $E_{k}(x) =
+  E_{k}(y)$ for $k = 1, \dots, i=1$ and $E_{i} (x) < E_{i}(y)$. The
+  nucleolus is then defined as the set of imputations $x$ for which
+  $E(x)$ is lexicographically minimal.
+\end{defn}
+
+\begin{thm}
+  \label{sec:cooperative-games-6}
+  The nucleolus of any coalitional game is a singleton.
+\end{thm}
+
+\begin{defn}
+  \label{sec:cooperative-games-7}
+  Call player $i \in N$ a \textbf{dummy} if its contribution to every
+  coalition is exactly its value - if $\nu(S \cup \{ i \} ) = \nu(S) +
+  \nu(\{ i \} )$ for all $S \subseteq N \backslash \{ i \} $. Call two
+  players $i, j$ interchangable if they contribute the same to every
+  coalition - so $\nu(S \cup \{ i \} ) = \nu(S \cup \{ j \} )$ for all
+  $S \subseteq N \backslash \{ i, j \} $. Let a \textbf{solution} be a
+  function $\phi: \R^{2^{n}} \rightarrow \R^{n}$ that maps every
+  characteristic function $\nu$ to an imputatoin $\phi(\nu)$.
+  Solutoins $\phi$ is said to satisfy
+  \begin{enumerate}
+  \item \textbf{dummies} if $\phi_{i}(v) = v(\{ i \} )$ whenever $i$
+    is a dummy,
+  \item \textbf{symmetry} if $\phi_{i}(v) = \phi_{j}(v)$ whenever $i,
+    j$ are interchangable, and \textbf{additivity} if $\phi(v + w) =
+    \phi(v) + \phi(w)$.
+  \end{enumerate}
+\end{defn}
+\begin{thm}
+  \label{sec:cooperative-games-8}
+  The \textbf{Shapley value}, given by
+  \begin{equation}
+    \label{eq:21}
+    \phi_{i}(v) = \sum_{S \subseteq N \backslash \{ i \} }^{}
+    \frac{|S|!(|N| - |S| - 1)!}{|N|!} (\nu(S \cup \{ i \} ) - \nu(S))
+  \end{equation} is the unique solution that satisfies dummies,
+  symmetry, and additivity.
+\end{thm}
+
+\section{Bargaining}
+\label{sec:bargaining}
+
+\begin{defn}
+  \label{sec:bargaining-1}
+  A two-player bargaining problem is a pair $F, d$ where $F \subseteq
+  \R^{n}$ is a convex set of feasible outcomes, and $d \in F$ is a
+  disagreement point that results if players fail to agree on an
+  outcome.  A \textbf{bargaining solution} is a function that assings
+  to every bargaining problem $(F, d)$ a unique element of $F$.
+
+  A two-player normal-form game with payoff matrices $P, Q \in \R^{m
+    \times n}$ can be interpreteed as a bargaining problem where $F =
+  \con \{ (p_{ij}, q_{ij}) | i \in M, j \in N \} $, $d_{1} = \max_{x
+    \in X} \min_{y \in Y} p(x, y)$, and $d_{2} = \max_{y \in Y}
+  \min_{x \in X} q(x, y)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:bargaining-2}
+  For a given bargaining problem, Nash proposes $\max (v_{1} -
+  d_{1})(v_{2} - d_{2})$ such that $v \in F$, $v \geq de$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:bargaining-3}
+  A bargaining solution $f$ is
+  \begin{enumerate}
+  \item \textbf{Pareto efficient} if $f(F, d)$ is not Pareto dominated
+    in $F$ for any bargaining problem $(F, d)$
+  \item \textbf{symmetric} if $(f(F, d))_{1} = (f(F, d))_{2}$ for
+    every bargaining problem $(F, d)$ such that $(y, x) \in F$
+    whenever $(x, y) \in F$ and $d_{1} = d_{2}$.
+  \item \textbf{Invariant under positive affine transforms} if $f(F, d) =
+    \alpha \circ f(F, d) + \beta$ for $\alpha, \beta \in \R^{2}$ with
+    $\alpha > 0$ and any two bargaining problems $(F, d)$ and $(F',
+    d')$ with $F' = \alpha F + \beta$, $d' = \alpha d + \beta$,
+  \item \textbf{independence or irrelevant alternatives} if $f(F, d) =
+    f(F', d)$ for any two bargaiining problems $(F, d)$ and $(F', d)$
+    such that $F' \subseteq F$ with $d \in F'$ and $f(F, d) \in F'$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  \label{sec:bargaining-4}
+  Nash's bargaining solution is the unique bargaining solution that is
+  Pareto efficient, symmetric, invariant under positive affine
+  transformations, and independent or irrelevant alternatives.
+\end{thm}
+
+\section{Stable Matchings}
+\label{sec:stable-matchings}
+
+\begin{defn}
+  \label{sec:stable-matchings-1}
+  Consider a set $S$ of students and a set $A$ of potential advisors.
+  Each studnet $i \in S$ has a strict linear order $\succgeq_{i}
+  \subseteq A \times a$, each advisor $j \in A$ has a strict linear
+  order $\succgeq_{j} \subseteq S \times S$.  A matching is a function
+  $\mu: S \cup A \rightarrow S \cup A$ such that $\mu(\mu(i)) = i$,
+  $\mu(i) \in A$ for all $i \in S$, and $\mu(j) \in S$ for all $j \in
+  A$.  
+
+  A pair $(i, j) \in S \times A$  is a \textbf{blocking pair} for
+  matching $\mu$ if $i, j$ would rather be matched to each other than
+  respective partners in $\mu$ - so $j \succgeq_{i} \mu(i)$ and $i
+  \succgeq_{j} \mu(j)$.  A matching is called \textbf{stable} if it
+  doesn ot have any blocking pairs.
+\end{defn}
+
+\begin{thm}
+  \label{sec:stable-matchings-2}
+  Consider the \textbf{deferred acceptance procedure},
+  \begin{enumerate}
+  \item Let each student $i \in S$ propse to the advisor it ranks highest.
+  \item\label{item:9} Match advisor $j \in A$ tentatively to the highest-ranked
+    amongst the students that have propsed to it, if any, and reject
+    the others for good.
+  \item Let each studnet that has been rejected but has not been
+    rejected by all advisors propse to the next advisor. IF there are
+    no such students, stop and return the matched pairs.  Otherwise,
+    return to \ref{item:9}.
+  \end{enumerate}
+
+  This procedure always terminates, and yields a stable matching when
+  it does.
+\end{thm}
+
+\begin{thm}
+  \label{sec:stable-matchings-3}
+  Call $j \in A$ achievable for $i \in S$ if there exists a stable
+  matching $\mu$ such that $\mu(i) = j$.  A stable matching $\mu$
+  is called  \textbf{student-optimal} if for all $i \in S$, $\mu(i)$
+  is most preferred among the advisors achievalbe for $i$.
+
+  Students-propse deferred acceptance yields a student-optimal stable matching.
+\end{thm}
+
+\begin{thm}
+  \label{sec:stable-matchings-4}
+  A matching $\mu$ is advisor pessimal if for all $j \in A$, $\mu(j)$
+  is least preferred among the students achievable for $j$.
+  
+  Every student-optimal stable matching is advisor-pessimal.
+\end{thm}
+
+\begin{thm}
+  \label{sec:stable-matchings-5}
+  Fix a stable matching $\mu$ and let $x_{ij} = 1$ for $i \in S$ and
+  $j \in A$ if $\mu(i) = j$, and $x_{ij} = 0$ otherwise.  Then the
+  constraints $\sum_{j \in A}^{} x_{ij} = 1$ for all $i \in S$,
+  $\sum_{i \in S}^{} x_{ij} = 1$ for all $j \in A$, $x_{ij} + \sum_{k:
+  j \succgeq_{i} k}^{} x_{ik} + \sum_{k: i \succgeq_{j} k}^{} x_{kj}
+\leq 1$ for all $i \in S$, $j \in A$, $x_{ij} \geq 0$ for all $i \in
+S$, $j \in A$.
+
+Then $P$ is the polytope descriebed by the above constraints, and $P
+\neq \emptyset$.  Moreover, a vector is an extreme point of $P$ if and
+only if it is a stable matching.
+\end{thm}
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{../../common/bibliography}
+\end{document}
