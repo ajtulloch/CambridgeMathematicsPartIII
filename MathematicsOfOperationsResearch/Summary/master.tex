@@ -696,7 +696,7 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
     yields $x \in X$ with $l(Y_{i}) = f(x) < U$ , set $U$ to $f(x)$.
     If $l(Y_{i}) < U$ but no $x \in X$ is found, add $y_{i}$ to $L$.
     If $L = \emptyset$, stop, the optimum value is $U$.  Otherwise, go
-    back to \ref{item:!}.
+    back to \ref{item:1}.
   \end{enumerate}
 \end{defn}
 
@@ -1024,17 +1024,17 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   Call player $i \in N$ a \textbf{dummy} if its contribution to every
   coalition is exactly its value - if $\nu(S \cup \{ i \} ) = \nu(S) +
   \nu(\{ i \} )$ for all $S \subseteq N \backslash \{ i \} $. Call two
-  players $i, j$ interchangable if they contribute the same to every
+  players $i, j$ interchangeable if they contribute the same to every
   coalition - so $\nu(S \cup \{ i \} ) = \nu(S \cup \{ j \} )$ for all
   $S \subseteq N \backslash \{ i, j \} $. Let a \textbf{solution} be a
   function $\phi: \R^{2^{n}} \rightarrow \R^{n}$ that maps every
-  characteristic function $\nu$ to an imputatoin $\phi(\nu)$.
-  Solutoins $\phi$ is said to satisfy
+  characteristic function $\nu$ to an imputation $\phi(\nu)$.
+  Solutions $\phi$ is said to satisfy
   \begin{enumerate}
   \item \textbf{dummies} if $\phi_{i}(v) = v(\{ i \} )$ whenever $i$
     is a dummy,
   \item \textbf{symmetry} if $\phi_{i}(v) = \phi_{j}(v)$ whenever $i,
-    j$ are interchangable, and \textbf{additivity} if $\phi(v + w) =
+    j$ are interchangeable, and \textbf{additivity} if $\phi(v + w) =
     \phi(v) + \phi(w)$.
   \end{enumerate}
 \end{defn}
@@ -1057,11 +1057,11 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   A two-player bargaining problem is a pair $F, d$ where $F \subseteq
   \R^{n}$ is a convex set of feasible outcomes, and $d \in F$ is a
   disagreement point that results if players fail to agree on an
-  outcome.  A \textbf{bargaining solution} is a function that assings
+  outcome.  A \textbf{bargaining solution} is a function that assigns
   to every bargaining problem $(F, d)$ a unique element of $F$.
 
   A two-player normal-form game with payoff matrices $P, Q \in \R^{m
-    \times n}$ can be interpreteed as a bargaining problem where $F =
+    \times n}$ can be interpreted as a bargaining problem where $F =
   \con \{ (p_{ij}, q_{ij}) | i \in M, j \in N \} $, $d_{1} = \max_{x
     \in X} \min_{y \in Y} p(x, y)$, and $d_{2} = \max_{y \in Y}
   \min_{x \in X} q(x, y)$.
@@ -1087,7 +1087,7 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
     $\alpha > 0$ and any two bargaining problems $(F, d)$ and $(F',
     d')$ with $F' = \alpha F + \beta$, $d' = \alpha d + \beta$,
   \item \textbf{independence or irrelevant alternatives} if $f(F, d) =
-    f(F', d)$ for any two bargaiining problems $(F, d)$ and $(F', d)$
+    f(F', d)$ for any two bargaining problems $(F, d)$ and $(F', d)$
     such that $F' \subseteq F$ with $d \in F'$ and $f(F, d) \in F'$.
   \end{enumerate}
 \end{defn}
@@ -1105,30 +1105,30 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
 \begin{defn}
   \label{sec:stable-matchings-1}
   Consider a set $S$ of students and a set $A$ of potential advisors.
-  Each studnet $i \in S$ has a strict linear order $\succgeq_{i}
+  Each student $i \in S$ has a strict linear order $\succ_{i}
   \subseteq A \times a$, each advisor $j \in A$ has a strict linear
-  order $\succgeq_{j} \subseteq S \times S$.  A matching is a function
+  order $\succ_{j} \subseteq S \times S$.  A matching is a function
   $\mu: S \cup A \rightarrow S \cup A$ such that $\mu(\mu(i)) = i$,
   $\mu(i) \in A$ for all $i \in S$, and $\mu(j) \in S$ for all $j \in
   A$.  
 
   A pair $(i, j) \in S \times A$  is a \textbf{blocking pair} for
   matching $\mu$ if $i, j$ would rather be matched to each other than
-  respective partners in $\mu$ - so $j \succgeq_{i} \mu(i)$ and $i
-  \succgeq_{j} \mu(j)$.  A matching is called \textbf{stable} if it
-  doesn ot have any blocking pairs.
+  respective partners in $\mu$ - so $j \succ_{i} \mu(i)$ and $i
+  \succ_{j} \mu(j)$.  A matching is called \textbf{stable} if it
+  does not have any blocking pairs.
 \end{defn}
 
 \begin{thm}
   \label{sec:stable-matchings-2}
   Consider the \textbf{deferred acceptance procedure},
   \begin{enumerate}
-  \item Let each student $i \in S$ propse to the advisor it ranks highest.
+  \item Let each student $i \in S$ propose to the advisor it ranks highest.
   \item\label{item:9} Match advisor $j \in A$ tentatively to the highest-ranked
-    amongst the students that have propsed to it, if any, and reject
+    amongst the students that have proposed to it, if any, and reject
     the others for good.
-  \item Let each studnet that has been rejected but has not been
-    rejected by all advisors propse to the next advisor. IF there are
+  \item Let each student that has been rejected but has not been
+    rejected by all advisors propose to the next advisor. IF there are
     no such students, stop and return the matched pairs.  Otherwise,
     return to \ref{item:9}.
   \end{enumerate}
@@ -1142,9 +1142,9 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   Call $j \in A$ achievable for $i \in S$ if there exists a stable
   matching $\mu$ such that $\mu(i) = j$.  A stable matching $\mu$
   is called  \textbf{student-optimal} if for all $i \in S$, $\mu(i)$
-  is most preferred among the advisors achievalbe for $i$.
+  is most preferred among the advisors achievable for $i$.
 
-  Students-propse deferred acceptance yields a student-optimal stable matching.
+  Students-propose deferred acceptance yields a student-optimal stable matching.
 \end{thm}
 
 \begin{thm}
@@ -1161,17 +1161,283 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   $j \in A$ if $\mu(i) = j$, and $x_{ij} = 0$ otherwise.  Then the
   constraints $\sum_{j \in A}^{} x_{ij} = 1$ for all $i \in S$,
   $\sum_{i \in S}^{} x_{ij} = 1$ for all $j \in A$, $x_{ij} + \sum_{k:
-  j \succgeq_{i} k}^{} x_{ik} + \sum_{k: i \succgeq_{j} k}^{} x_{kj}
+  j \succ_{i} k}^{} x_{ik} + \sum_{k: i \succ_{j} k}^{} x_{kj}
 \leq 1$ for all $i \in S$, $j \in A$, $x_{ij} \geq 0$ for all $i \in
 S$, $j \in A$.
 
-Then $P$ is the polytope descriebed by the above constraints, and $P
+Then $P$ is the polytope described by the above constraints, and $P
 \neq \emptyset$.  Moreover, a vector is an extreme point of $P$ if and
 only if it is a stable matching.
 \end{thm}
 
 
+\section{Social Choice}
+\label{sec:social-choice}
 
+\begin{defn}
+  \label{sec:social-choice-1}
+  Let $N = \{ 1, \dots, n \} $ be a set of agents, or \textbf{voters},
+  and $A = \{ 1, \dots, m \} $ a set of alternatives. Assume $n, m
+  \geq 2$ and finite. Assume each voter $i \in N$ has a strict linear
+  order $\succ_{i} \in L(A)$, and the goal is to map the profile of
+  individual preference orders to a social preference order. This is
+  achieved by means of a social welfare function $f: L(A)^{n}
+  \rightarrow L(A)$.
+
+  A social welfare function is
+  \begin{enumerate}
+  \item \textbf{anonymous} if for every permutation $\pi \in S_{n}$ of
+    the voters and preference profiles $\succ, \succ' \in L(A)^{n}$
+    such that $a \succ_{i} b$ if and only if $a \succ_{\pi(i)}' b$ for
+    all $a, b \in A$, it holds that $f(\succ) = f(\succ')$.
+    all
+  \item \textbf{neutral} if for every permutation $\pi \in S_{m}$of
+    the alternatives and all preference profiles $\succ, \succ' \in
+    L(A)^{n}$ such that $a \succ_{i} b $ if and only if
+    $\pi(a)\succ_{i}' \pi(b)$ for all $a, b \in A$, it holds that $a
+    f(\pi)$ b if and only if $\pi(a) f(\pi') \pi(b)$ for all $a, b \in
+    A$,
+  \item \textbf{monotone} if for all $\pi, \pi' \in L(A)^{n}$ and $a,
+    b \in A$, $a f(\pi) b $ and $\{ i \in N | a \succ_{i} b \}
+    \subseteq \{ i \in N | a \succ_{i}' b \}$ implies $a f(\succ_{i}) b$.
+  \end{enumerate}
+\end{defn}
+
+  Anonymity requires that voters are treated equally, symmetry
+requires that alternatives are treaded equally, and monotonicity
+requires that an alternative cannot become less preferred socially
+when it becomes more preferred by individuals. When the number of
+voters are odd, these intuitive fairness and welfare properties
+precisely characterize the majority rule.
+
+\begin{thm}
+  \label{sec:social-choice-3}
+  Consider an SWF $f: L(A)^{n} \rightarrow L(A)$, where $|A| = 2$ and
+  $n$ is odd.  Then $f$ is the majority rule if and only if it is
+  anonymous, neutral, and monotone.
+\end{thm}
+
+\begin{defn}
+  \label{sec:social-choice-4}
+  A SWF $f: L(A)^{|N|} \rightarrow L(A)$ is
+  \begin{enumerate}
+  \item \textbf{Pareto optimal} if for all $a, b \in A$ and every
+    $\succ \in L(A)^{n}$ such that $a \succ_{i} b$ for all $i \in N$,
+    it holds that $a \succ' b$, where $\succ' = f(\succ)$.
+  \item \textbf{independence of irrelevant alternatives} if for all
+    $a, b \in A$ and all $\succ, \succ' \in L(A)^{n}$ such that
+    $\succ_{i} \cap (\{ a, b \} \times \{ a, b \} ) = \pi' \cap (\{ a,
+    b \} \times \{ a, b \}   )$ for all $i \in N$, it holds that
+    $f(\succ) \cap ( \{ a, b \} \times \{ a, b \} ) = f(\succ') \cap (
+    \{ a, b \}  \times \{ a, b \} )$.
+  \item \textbf{dictatorial} if there exists $i \in N$ such that for
+    all $\succ \in L(A)^{n}$, $f(\succ) = \succ_{i}$.
+  \end{enumerate}
+
+  Pareto optimality requires that alternative $a$ is socially
+  preferred over alternative $b$ when every voter prefers $a$ over
+  $b$.  Independence of irrelevant alternatives requires that the
+  social preference with respect to $a$ and $b$ only depends on
+  individual preferences with respect to $a$ and $b$, but not on those
+  with respect to other alternative.s  Finally, an SWF is dictatorial
+  if the social preference order is determined by a single voter.
+
+
+\end{defn}
+
+It turns out that dictatorships at the only SWFs for three or more
+alternatives that are Pareto optimal and IIA.
+
+\begin{thm}
+  \label{sec:social-choice-5}
+  Consider an SWF $f: L(A)^{n} \rightarrow L(A)$, where $|A| \geq 3$.
+  If $f$ is Pareto optimal and IIA, then $f$ is dictatorial.
+\end{thm}
+
+\section{Mechanism Design}
+\label{sec:mecahnism-design}
+
+\begin{defn}
+  \label{sec:mecahnism-design-1}
+  An SCF $f$ is \textbf{manipulable} if there exist $i \in N$, $\succ
+  \in L(A)^{n}$, and $\succ_{i}' \in L(A)$ such that $f((\succ_{-i},
+  \succ_{i}') \succ_{i} f(\succ)$. 
+  SCF $f$ is called
+  \textbf{strategy-proof} if it is not manipulable.
+
+-  An $SCF$ is \textbf{dictatorial} if there exists $i \in N$ such
+  that for all $\succ \in L(A)^{n}$ and $a \in A \backslash \{
+  f(\succ) \}, f(\succ) \succ_{i} a$.  AN SCF $f$ is
+  \textbf{surjective} if for all $a \in A$, there exists $\succ \in
+  L(A)^{n}$ such that $f(\succ) = a$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:mecahnism-design-2}
+  Consider an SCF $f: L(A)^{n} \rightarrow L(A)$, where $|A| \geq 3$.
+  If $f$ is surjective and strategy-proof, then it is dictatorial.
+\end{thm}
+
+\todo{Proof.}
+
+\begin{defn}
+  \label{sec:mecahnism-design-4}
+  A mechanism design problem is a set $A$ of alternatives and a set $N
+  = \{ 1, \dots, n \} $ of agents, each with a set $\Theta_{i}$ of
+  possible types and a utility function $u_{i}: A \times \Theta_{i}
+  \rightarrow \R$.  A mechanism is a message space $\Sigma_{i}$ for
+  agent $i$ and an outcome function $g: \times_{i \in N} \Sigma_{i}
+  \rightarrow A$.  A mechanism is called \textbf{direct} if the agents
+  directly report their type to the mechanism - $so \Sigma_{i} =
+  \Theta_{i}$ for all $i \in N$.
+
+  Mechanism $M =((\Sigma_{i})_{i \in N}, g)$ is said to
+  \textbf{implement} SCF $f: \times_{i \in N} \Theta_{i} \rightarrow
+  A$ (in weakly dominant strategies) if there exist functions $s_{i}:
+  \Theta_{i} \rightarrow \Sigma_{i}$ for all $i \in N$ such that for
+  every $\theta \in \Theta$, $g(s_{1}(\theta_{1}), \dots,
+  s_{n}(\theta_{n})) = f(\theta)$, and for all $i \in N$, $\theta_{i}
+  \in \Theta_{i}$ and for $\sigma \in \Sigma$,
+  $u_{i}(g(s_{i}(\theta_{i}), \sigma_{-i}), \theta_{i}) \geq
+  u_{i}(g(\sigma), \theta_{i})$.
+
+  An SCF is called \textbf{implementable} if it is implemented by some
+  mechanism.
+
+  A direct mechanism $M$ is called \textbf{strategy-proof}, or
+  \textbf{dominant strategy incentive compatible}, if for all $i \in
+  N$, $\theta \in \Theta$, and $\theta_{i}' \in \Theta_{i}$,
+  $u_{i}(g(\theta), \theta_{i}) \geq u_{i}(g(\theta_{i}',
+  \theta_{-i}), \theta_{i})$.  
+\end{defn}
+
+\begin{thm}
+  \label{sec:mecahnism-design-3}
+  A social choice function is implementable if and only if it is
+  implemented in the truthful mechanism of a strategy-proof direct mechanism.
+\end{thm}
+
+\section{Mechanisms with Payments}
+\label{sec:mech-with-paym}
+
+\begin{defn}
+  \label{sec:mech-with-paym-1}
+  A mechanism is a pair $(f, p)$ of a social choice function $\Theta
+  \rightarrow A$ and a payment function $p: \Theta \rightarrow
+  \R^{n}$.  The utility of an agent $i$ is $u_{i}(\theta', \theta_{i})
+  = v(f(\theta'), \theta_{i}) - p(\theta')$, where $\theta'$ is a
+  profile of types revealed to the mechanism, $\theta_{i}$ is the true
+  type of agent $i$, $v_{i}: A \times \Theta_{i} \rightarrow \R$ is
+  valuation function over alternatives, and $p_{i}(\theta') =
+  (p(\theta'))_{i}$.
+
+  The \textbf{social welfare} of an alternative $A \in A$ is
+  $\sum_{i=1}^{n} v_{i}(a, \theta_{i})$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:mech-with-paym-2}
+  A mechanism $f, p$ is a \textbf{Vickrey-Clark-Groves} mechanism if
+  $f(\theta) \in \argmax_{a \in A} \sum_{i=1}^{n} v_{i}(a,
+  \theta_{i})$, and $p_{i}(\theta) = h_{i}(\theta_{-i}) - \sum_{j \in
+    N \backslash \{ i \} }^{} v_{j}(f(\theta), \theta_{j})$ for all $i
+  \in N$ where $h_{i}: \Theta_{-i} \rightarrow \R$ is a function that
+  depends on the types of all agents except for $i$.  The crucial
+  component is the second term in $p_{i}$, the social welfare for all
+  agents but $i$.
+  
+\end{defn}
+
+\begin{thm}
+  \label{sec:mech-with-paym-3}
+  VCG mechanisms are strategy-proof.
+\end{thm}
+
+\begin{defn}
+  \label{sec:mech-with-paym-4}
+  Mechanism $(f, p)$ makes \textbf{no positive transfers} if
+  $p_{i}(\theta) \geq 0$ for all $i \in N$ and $\theta \in \Theta$,
+  and is \textbf{ex-post individually rational} if it always yields
+  non-negative utilities for all agents - so $v_{i}(f(\theta)) -
+  p_{i}(\theta) \geq 0$ for all $i \in N$ and $\theta \in \Theta$.
+
+  The \textbf{Clark pivot rule} is setting $h_{i}(\theta_{-i}) =
+  \max_{a \in A} \sum_{j \in N \backslash \{ i \} }^{} v_{j}(a,
+  \theta_{j})$ such that the payment of agent $i$ becomes
+  $p_{i}(\theta) = \max_{a \in A} \sum_{j \in N \backslash \{ i \}
+  }^{} v_{j}(a, \theta_{j}) - \sum_{j \in N \backslash \{ i \}}
+  v_{j}(f(\theta))$.
+
+  Intuitively, the latter amount is equal to the externality $i$
+  imposes on the other agents - the difference between their social
+  welfare with and without $i$'s participation.  The payment makes the
+  agent internalize this externality.
+\end{defn}
+
+\begin{thm}
+  \label{sec:mech-with-paym-5}
+  A VCG mechanism with the Clarke pivot rule makes no positive
+  transfers.  If $v_{i}(a, \theta_{i}) \geq 0$ for all $i \in N$,
+  $\theta_{i} \in \Theta_{i}$, and $a \in A$, it is also individually rational.
+\end{thm}
+
+\begin{thm}
+  \label{sec:mech-with-paym-6}
+  A mechanism $(f, p)$ is strategy-proof if and only if for every $i
+  \in N$ and $\theta \in \Theta$, $p_{i}(\theta) = t_{i}(\theta_{-i},
+  f(\theta))$ and $f(\theta) = \argmax_{a \in A(\theta_{-i})} \{
+  v_{i}(\theta_{i}, a) - t_{i}(\theta_{-i}, a) \} $ where $t_{i}:
+  \Theta_{-i} \times A \rightarrow \R$ is a \textbf{price function}
+  and $A(\theta_{-i}) = \{ f(\theta_{i}, \theta_{-i}) | \theta_{i} \in
+  \Theta_{i}\} $ is the range of $f$ given that  the reported types
+  of all agents but $i$ are fixed to $\theta_{-i}$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:mech-with-paym-7}
+  An SCF $f$ satisfies \textbf{weak monotonicity} if for all $\theta
+  \in \Theta$, $i \in N$, and $\theta'_{i} \in \Theta_{i}$, $f(\theta)
+  = a \neq b = f(\theta_{i}, \theta_{-i})$ implies that $v_{i}(a,
+  \theta_{i}) - v_{i}(b, \theta_{i}) \geq v_{i}(a, \theta_{i}') -
+  v_{i}(b, \theta_{i}')$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:mech-with-paym-8}
+  If mechanism $(f, p)$ is strategy-proof, then $f$ satisfies weak
+  monotonicity.  If SCF $f$ satisfies weak monotonicity and for each
+  $i \in N$,$ \{ (v_i(a, \theta{_i}))_{a \in A} | \theta_{i} \in
+  \Theta_{i} \} \subseteq \R^{|A|}$  is a convex set, then there
+  exists a payment function $p: \Theta \rightarrow \R^{n}$ such that
+  $(f, p)$ is strategy-proof.
+\end{thm}
+
+\begin{defn}
+  \label{sec:mech-with-paym-9}
+  SCF $f$ is called an \textbf{affine maximizer} if there exist $A'
+  \subseteq A$, $w_{i} \in \R_{> 0}$ for $i \in N$, and $c_{a} \in \R$
+  for $a \in A'$ such that for every $\theta \in \Theta$, $f(\theta)
+  \in \argmax_{a \in A'}(c_{a} + \sum_{i=1}^{n} w_{i} v_{i}(a,
+  \theta_{i}))$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:mech-with-paym-10}
+  Let $f$ be an affine maximizer, and for each $i \in N$ and $\theta
+  \in \Theta$, let $p_{i}(\theta) = h_{i}(\theta_{-i}) - \sum_{j \in N
+  \backslash \{ i \} }^{} \frac{w_{j}}{w_{i}} v_{j}(f(\theta),
+\theta_{j}) - \frac{c_{f(\theta)}}{w_{i}}$ where $h_{i}: \Theta_{-i}
+\rightarrow \R$.  Then $(f, p)$ is strategy-proof.
+\end{thm}
+
+\begin{thm}
+  \label{sec:mech-with-paym-11}
+  Let $|A| \geq 3$  and $\{ (v_{i}(a, \theta_{i}))_{a \in A} | \theta
+  \in \Theta \} = \R^{|A|}$ for every $i \in N$. Let $f: \theta
+  \rightarrow A$ be a surjective SCF, and $p: \theta \rightarrow
+  \R^{n}$ a payment function.  If $(f, p)$ is strategy-proof, then $f$
+  is an affine maximizer.
+\end{thm}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
