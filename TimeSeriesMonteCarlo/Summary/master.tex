@@ -1,11 +1,346 @@
 \input{../../common/summary.tex}
 
-\title{Time Series and Monte Carlo Summary}
+\title{Time Series and Monte-Carlo Summary}
 
 \begin{document}
 
 \maketitle
 
+\section{Monte-Carlo}
+\label{sec:monte-carlo}
+
+\begin{thm}
+  \label{sec:monte-carlo-2}
+  Consider a discrete random variable $X$ with $M$ mass points $\{
+  m_{1}, \dots, m_{M} \}$ with probability $p_{1}, \dots, p_{M}$, such
+  that $p_{} \geq 0$, $\sum p_{i} = 1$.  Then the CDF of such a random
+  variable is $F(x) = \Prob{X \leq x} = \sum_{i=1}^{\lfloor x \rfloor
+    x} p_{i}$.  Write $F(m_{i}) = F_{i}$, and note that $p_{i} = F_{i}
+  - F_{i-1}$.  Then we have that to draw from $F$, we simulate $U \sim
+  \mathcal{U}_{[0, 1]}$, and set $X = m_{i}$ if $F_{i-1} \leq U \leq F_{i}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:monte-carlo-3}
+  Let $X \sim F$ be a scalar random variable on $X \subset \R$.
+  Assume $F$ is strictly increasing and continuous.  Then $U = F(X)
+  \sim \mathcal{U}_{[0, 1]}$.
+\end{thm}
+
+\begin{proof}
+  $\Prob{U \leq u} = \Prob{F(x) \leq u} = \Prob{X \leq F^{-1}(u)} =
+  F(F^{-1}(u)) = u$.
+
+  Thus $X = F^{-1}(U) \sim F$, as $\Prob{X \leq x} = \Prob{F^{-1}(U)
+    \leq x} = \Prob{U \leq F(x)} = F(x)$.
+\end{proof}
+
+\begin{defn}
+  \label{sec:monte-carlo-4}
+  Assume that we can generate a uniform random variable $U$ on some
+  domain $\mathcal{U}$.  Then let $\mu$ the density of this uniform
+  random variable.  Assume we now wish to simulate a random variable
+  $X$ uniformly on some domain $\mathcal{X} \subset \mathcal{U}$ ($\mu
+  (\cdot | \mathcal{X})$).  Then do to so, simply simulate $U$
+  uniformly on $\mathcal{U}$, and if $U \in \mathcal{X}$, set $X = U$,
+  otherwise reject $U$ and repeat.  Then if $\mu(X) = p > 0$, $X$ is
+  distributed uniformly on $\mathcal{X}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:monte-carlo-5}
+  Suppose we have two density's $f, g$ and $g$ defined on $X \subset
+  \R$. Suppose that we can samply according to $g$ and there exists $M
+  \in [1, \infty)$ such that $f(x) \leq M g(x)$ for all $x \in
+  \mathcal{X}$. Then $g$ is an envelope density that dominates $f$. If
+  we then simulate $Y \sim g$ , and some $U \sim \mathcal{U}_{[0,
+    1]}$, and if $U \leq \frac{f(Y)}{Mg(Y)}$, set $X = Y$, otherwise
+  re-sample.
+
+  Then the output $X$ has density $f$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:monte-carlo-6}
+  To generate a Gaussian random variable, we can use the
+  \textbf{Box-Muller} method.  This proceeds by generating $U \sim
+  \mathcal{U}_{[0, 1]}$, and setting $\theta = 2 \pi U$, and then
+  simulating $V \sim \mathcal{U}_{[0, 1]}$, and setting $R^{2} - 2
+  \log V$.  We can then set $X_{1}, X_{2} = R \sin \theta, R \cos
+  \theta$.
+
+  Alternatively, we can generate $U, V \in \mathcal{U}_{[0, 1]}$
+  uniformly on the unit disk, and set $W = U^{2} + V^{2}$ (by
+  rejecting sampling), and set $X_{1} = U \sqrt{-2 \frac{\log W}{W}
+  }$, $X_{2} = V \sqrt{-2 \frac{\log W}{W}}$.
+\end{thm}
+
+\section{Monte-Carlo Method and Non-Parametric Inference}
+\label{sec:monte-carlo-method}
+
+\begin{defn}
+  \label{sec:monte-carlo-method-1}
+  The plug-in estimator is defined as
+  \begin{equation}
+    \hat F_{n}(x) = \frac{1}{n} \sum_{i=1}^{n} \I{X_{i} \leq x}
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-2}
+  Consider estimating $\theta(F) = \E_{F} \phi(X) =
+  \int_{\mathcal{X}}^{} \phi(x) f(x) dx$, with plug-in estimator
+  $\theta(\hat F_{n}) = \E_{\hat F_{n}} \phi(X) = \frac{1}{n}
+  \sum_{i=1}^{n} f(X_{i})$.
+
+  Assume that $\int_{\mathcal{X}} \phi(x)^{2} f(x) dx < \infty$.  Then
+  $\theta(\hat F_{n})$ is such that
+  \begin{align}
+    \label{eq:1}
+    \E_{F^{n}}(\theta(\hat F_{n})) = \theta(F), \\
+    \label{eq:2}
+    \V_{F^{n}}(\theta(\hat F_{n})) = \frac{1}{n} (\int_{\mathcal{X}}
+    (\phi(x) - \theta(F))^{2} f(x) dx)
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-3}
+  Assume that $\int_{\mathcal{X}} \phi(x)^{2} f(x) dx < \infty$.  Then
+  the following statements hold:
+  \begin{enumerate}
+  \item $\theta(\hat F_{n})$ converges almost surely to $\theta(F)$
+  \item $\sqrt{n} (\theta(\hat F_{n}) - \theta(F))$ converges in
+    distribution to $Normal(0, \int_{\mathcal{X}} (\phi(x) -
+    \theta(F))^{2} f(x) dx)$
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-4}
+  Let $g$ be a density that is strictly positive whenever $f \phi$ is
+  non-zero.  Let $X_{1}, \dots, X_{n}$ be IID samples from $g$, and
+  define the following estimate of  $\theta(F)$ as $\hat \theta_{g} =
+  \frac{1}{n} \sum_{i=1}^{n} w_{i} \phi(X_{i})$ where $w_{i} =
+  \frac{f(X_{i})}{g(X_{i})}$.
+
+  Then $\hat \theta_{g}$ is such that
+  \begin{align}
+    \label{eq:3}
+    \E_{G^{n}}(\hat \theta_{g}) = \theta(F), \\
+    \label{eq:4}
+    \V_{G^{n}}(\hat \theta_{g}) = \frac{1}{n} (\int_{\mathcal{X}}
+    \frac{\phi(x)^{2} f(x)^{2}}{g(x)} dx - \theta(F)^{2})
+  \end{align}
+\end{thm}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-5}
+  Note that the variance of this estimate depends crucially on the
+  function $\psi(x) = \frac{\phi(x)^{2} f(x)^{2}}{g(x)}$, and the
+  density that minimizes the variance of $\hat \theta_{g}$ is
+  $g^{\star} = \frac{f |\phi|}{\int_{\mathcal{X}} f |\phi|}$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:monte-carlo-method-6}
+  If we sample randomly on our space $\mathcal{X}$ according to $f$,
+  we create a source of randomness and thus of error.  By using
+  \textbf{stratified sampling} we reduce the error by reducing the
+  amount of randomness in the picking of the points.
+
+  \begin{enumerate}
+  \item Divide the domain into $K$ strata $\Omega_{i}$ that are
+    measurable according-to $f$ and form a partition of the domain, and
+    we know exactly $w_{i} = \Prob_{f}(\Omega_{i})$.
+  \item Sample exactly $T_{i}$ in each stratum $\Omega_{i}$ according
+    to $f | \Omega_{i}$.  The numbers $T_{i}$ are deterministic with
+    $\sum_{}^{} T_{i}$.  Writing the conditional empirical mean in
+    stratum $\Omega_{i}$ as $\mu_{i} = \frac{1}{T_{i}} \sum_{j=1}^{n}
+    X_{j} \I{X_{j} \in \Omega_{i}}$, and return the weighted estimate
+    of the integral $\hat \mu = \sum_{i=1}^{K} w_{i} \hat \mu_{i}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-7}
+  $\E{\hat \mu} = \mu$, and $\V \hat \mu = \sum_{i=1}^{K}
+  \frac{w_{i}^{2} \sigma^{2}_{i}}{T_{i}} $ where $\mu_{i} =
+  \frac{1}{w_{i}} \int_{\Omega_{i}} \phi(x) f(x) dx$ is the
+  conditional mean, and $\sigma^{2}_{i} = \frac{1}{w_{i}}
+  \int_{\Omega_{i}}^{} (\phi(x) - \mu_{i})^{2} f(x) dx $ is the
+  conditional variance in stratum $\Omega_{i}$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:monte-carlo-method-8}
+  Uniform stratified sampling takes $T_{i}^{u} = w_{i} n$.  This
+  \textbf{consolidates} the random sampling while preserving the shape
+  of the density $f$.  With this choice of $T_{i}$, we have $\E{\hat
+    \mu_{u}} = \mu$, and $\V \hat \mu_{u} = \sum_{i=1}^{K} \frac{w_{i}
+  \sigma_{i}^{2}}{n}$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-9}
+  If we solve the minimization problem
+  \begin{align}
+    \label{eq:5}
+    \min_{(T_{i})_{i}} \V \hat \mu = \sum_{i=1}^{K} \frac{w_{i}^{2}
+      \sigma_{i}^{2}}{T_{i}}
+  \end{align} such that $T_{i} \geq 0$, $\sum_{i}^{} T_{i} = n$
+  we obtain the unique solution
+  \begin{align}
+    \label{eq:6}
+    T_{i}^{\star} = \frac{w_{i} \sigma_{i}}{\sum_{j}^{} w_{j}
+      \sigma_{j}} n, 
+  \end{align} known as \textbf{oracle stratified sampling}.  In this
+  case, $\E{\hat \mu^{\star}} = \mu$, and $\V \hat \mu^{\star}_{n} =
+  \frac{1}{n} (\sum_{i=1}^{K} w_{i} \sigma_{i})^{2}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-10}
+  If we have Lipschitz function $\phi$ that we are integrating uniformly
+  over $[0, 1]$, we have there exists $C > 0$ such that for any $u,
+  v$, $|\phi(u) - \phi(v)| \leq C |u - v$.  If we uniformly divide
+  $[0, 1]$ into $K$ sections, we have $\Omega_{i} = [\frac{i}{K},
+  \frac{i+1}{K}]$, with $w_{i} = \frac{1}{K}$.  Then we have $\V \hat
+  \mu_{u} \leq \sum_{i=1}^{n} \frac{1}{n} \int_{\Omega_{i}}^{}
+  \frac{C^{2}}{n^{2}} dx = \frac{C^{2}}{n^{3}}$, which is a significant
+  gain over the Monte-Carlo estimate of $\frac{1}{n}$.
+\end{thm}
+
+
+\begin{defn}
+  \label{sec:monte-carlo-method-11}
+  To estimate the $c_{\alpha}$ quantile with tail probability $\alpha$
+  of a distribution $F$, we can do this with Monte-Carlo by
+  \begin{enumerate}
+  \item Choose $B \in \N$.
+  \item Restrict $\alpha \in k = \{ 1, \dots, B \} $, with $\alpha =
+    \frac{k}{B+1} $.
+  \item Simulate $T_{1}, \dots, T_{B}$ according to $F$.
+  \item Let $\hat c_{\alpha} = T_{(k)}$ where $T_{(k)}$ is the $k$-th
+    order statistic of $T_{1}, \dots, T_{B}$. 
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  \label{sec:monte-carlo-method-12}
+  If $F$ corresponds to a density $f$, then $\E{F(\hat c_{\alpha})} = \alpha$.
+\end{thm}
+
+\begin{defn}
+  \label{sec:monte-carlo-method-13}
+  Suppose we are interested in the distribution $K_{n}(F)$ of a root
+  or pivot $R_{n}(X, F)$ where $X  = (X_{1}, \dots, X_{n})$ (e.g. the
+  distribution of the statistic $T(X_{1}, \dots, X_{n})$ in hypothesis
+  tests).  The boostrapboostrap estimator of $K_{n}(F)$is $K_{n}(\hat F)$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:monte-carlo-method-14}
+  To approximate the Boostrap estimator by Monte-Carlo, we compute the
+  following:
+  \begin{enumerate}
+  \item Draw $B$ independent boostrap samples $X^{\star}_{b} = (X_{b,
+      1}^{\star}, \dots, X_{b, n}^{\star})$ from $\hat F^{n}$.
+  \item Approximate $K_{n}(\hat F)$ by the empirical distribution
+    function of $(R_{n}(X^{\star}_{b}, \hat F))_{b}$.
+  \end{enumerate}
+\end{defn}
+
+\section{Bayesian Inference and Associated Methods}
+\label{sec:bayes-infer-assoc}
+
+\begin{defn}
+  \label{sec:bayes-infer-assoc-1}
+  Our objective is to generate samples according to the posterior
+  $\pi(\theta | \overline X) = L(X, \theta) p(\theta)$.
+
+  The solution is the generate a Markov chain $(\theta^{(1)},
+  \theta^{(2)}, \dots, \theta^{(t)}, \dots)$ such that $\pi$ is the
+  stationary distribution.
+\end{defn}
+
+\begin{defn}
+  \label{sec:bayes-infer-assoc-2}
+  The Gibbs sampler proceeds as follows. Let $\overline \theta =
+  (\theta_{1}, \dots, \theta_{p})$ be the parameter of interest and
+  $\pi(\theta_{i} | \overline \theta_{(-i)}) = \pi_{i}(\overline
+  \theta_{(-i)})$ be the conditional posterior distributions. The
+  Gibbs sampler works as follows:
+  \begin{enumerate}
+  \item Set the initial vector $\theta^{(0)}$,
+  \item At time $t+1$:
+    \begin{enumerate}
+    \item Set $\theta_{1}^{(t+1)} \sim \pi_{1}(\theta_{2}^{(t)},
+      \theta_{3}^{(t)}, \dots) = \pi_{1}(\overline \theta^{(t)}_{(-1)})$
+    \item Set $\theta_{2}(t+1) = \pi_{2}(\theta_{1}^{t+1},
+      \theta_{3}^{(t)}, \dots, \theta_{p}^{(t)}) =  \pi_{2}(\overline
+      \theta^{(t)}_{(-2)})$
+    \item \dots
+    \item Set $\theta_{p}^{(t+1)} \sim \pi_{p}(\theta^{(t+1)}_{(-p)})$
+    \end{enumerate}
+  \item Collect $T$ samples using this iteration.
+  \item Throw away the first $b$ samples and consider only the last samples.
+  \end{enumerate}
+
+  This method generates a Markov chain whose stationary distribution
+  is the posterior under not-too-strong assumptions.
+
+  Note that the samples $\overline \theta^{(t)}$ are \textbf{not independent}.
+\end{defn}
+
+
+\begin{defn}
+  \label{sec:bayes-infer-assoc-3}
+  The Metropolis Hastings algorithm is a sequential form of rejection
+  sampling.  It is an Markov Chain Monte-Carlo method to construct a
+  Markov chain whose stationary distribution is $\pi$.
+
+  Consider a distribution $\pi$ defined on a domain $\mathcal{X}$.
+  Assume that $\pi$ is such that for any atom $x \in \mathcal{X}$, $\{
+  x \} $ is measurable according to $\pi$.  For any $x \in
+  \mathcal{X}$, define a transition measure $\mu(\cdot | x)$ on
+  $\mathcal{X}$.  
+  The method proceeds as follows:
+  \begin{enumerate}
+  \item Set the initial vector $\theta^{(0)}$.
+  \item At time $t+1$,
+    \begin{enumerate}
+    \item Simulate $X \sim \mu(\cdot | \theta^{(t)})$ and $U \sim
+      \mathcal{U}_{[0, 1]}$
+    \item If $U \leq \frac{\pi(X) \mu(\theta^{(t)} |
+        X)}{\pi(\theta^{(t)}) \mu(X | \theta^{(t)})}$, then
+      $\theta^{(t+1)} = X$, otherwise $\theta^{(t+1)} = \theta^{(t)}$.
+    \end{enumerate}
+  \item Collect $T$ samples like that.
+  \item Throw away the first $b$ samples, consider the last samples
+    (and possibly sub-sample to reduce correlations.)
+  \end{enumerate}
+
+  Note that the initial state is important (particular for unbounded
+  distributions), the transition probability is important (for fast
+  convergence), and the number of samples discarded is
+  problem-dependent.
+\end{defn}
+
+\begin{defn}
+  \label{sec:bayes-infer-assoc-4}
+  Given MCMC methods produce a correlated chain of samples - so $t$
+  samples do not provide the sample information as $t$ IID samples.  A
+  common notion for measuring this is the \textbf{effective sample
+    size}.  For any $l \geq 0$, define $\gamma(l)$ as the correlation
+  between two samples of lag $l$.  Defining $\rho(l) =
+  \frac{\gamma(l)}{\gamma(1)}$, the effective sample size $\tilde T$of
+  a chain of length $t$ is
+  \begin{equation}
+    \label{eq:8}
+    \tilde T = \frac{t}{1 + 2 \sum_{l=1}^{T-1} \rho(l)}.
+  \end{equation}
+\end{defn}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
