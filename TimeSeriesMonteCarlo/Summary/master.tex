@@ -844,6 +844,341 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
   variance.
 \end{thm}
 
+\section{Spectral Analysis}
+\label{sec:spectral-analysis}
+
+Let $X_{t}$ be a zero-mean stationary time series with autocovariance
+function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
+|\gamma(h)| < \infty$.
+
+\begin{defn}
+  \label{defn:spectral_analysis:1}
+  The spectral density of $X_{t}$ is the function $f(\cdot)$ defined
+  by
+  \begin{align}
+    \label{eq:47}
+    f(\lambda) = \frac{1}{2 \pi} \sum_{h=-\infty}^{\infty}
+    e^{-ih\lambda} y(h)
+  \end{align}  The summability implies that the series converges
+  absolutely.
+\end{defn}
+
+\begin{thm}
+  \label{defn:spectral_analysis:2}
+  \begin{enumerate}
+  \item $f$ is even
+  \item $f(\lambda) \geq 0$ for all $\lambda \in (-\pi, \pi]$.
+  \item $\gamma(k) = \int_{-\pi}^{\pi} e^{-k\lambda} f(\lambda) d
+    \lambda = \int_{-\pi}^{\pi} \cos (k \lambda) f(\lambda) d\lambda$.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{defn:spectral_analysis:3}
+  A function $f$ is the \textbf{spectral density} of a stationary time
+  series $X_{t}$ with autocovariance function $\gamma(\cdot)$ if
+  \begin{enumerate}
+  \item $f(\lambda) \geq 0$ for all $\lambda \in (0, \pi]$,
+  \item $\gamma(h) = \int_{-\pi}^{\pi} e^{ih\lambda} f(\lambda)
+    d\lambda$ for all integers $h$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}
+  If $f$ and $g$ are two spectral density corresponding to the
+  autocovariance function $\gamma$, then $f$ and $g$ have the same
+  Fourier coefficients and hence are equal.
+\end{lem}
+
+\begin{thm}
+  \label{defn:spectral_analysis:4}
+  A real-valued function $f$ defined on $(-\pi, \pi]$ is the spectral
+  density of a stationary process if and only if
+  \begin{enumerate}
+  \item $f(\lambda) = f(-\lambda)$,
+  \item $f(\lambda) \geq 0$
+  \item $\int_{-\pi}^{\pi} f(\lambda) d\lambda < \infty$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{defn:spectral_analysis:5}
+  An absolutely summable function $\gamma(\cdot)$ is the
+  autocovariance function of a stationary time series if and only if
+  it is even and
+  \begin{equation}
+    \label{eq:70}
+    f(\lambda) = \frac{1}{2 \pi} \sum_{h=-\infty}^{\infty}
+    e^{-ih\lambda} \gamma(h) \geq 0
+  \end{equation} for all $\lambda \in (-\pi, \pi]$, in which case
+  $f(\cdot)$ is the spectral density of $\gamma(\cdot)$.
+\end{thm}
+
+\begin{thm}[Spectral Representation of the ACVF]
+  \label{defn:spectral_analysis:6}
+  A function $\gamma(\cdot)$ defined on the integers is the ACVF of a
+  stationary time series if and only if there exists a
+  right-continuous, nondecreasing, bounded function $F$ on $[-\pi,
+  \pi]$ with $F(-\pi) = 0$ such that
+  \begin{equation}
+    \label{eq:72}
+    \gamma(h) = \int_{-\pi}^{\pi} e^{ih\lambda} dF(\lambda)
+  \end{equation} for all integers $h$.
+\end{thm}
+
+\begin{remark}
+  The function $F$ is a \textbf{generalized distribution function} on
+  $[-\pi, \pi]$ in the sense that $G(\lambda) =
+  \frac{F(\lambda)}{F(\pi)}$ is a probability distribution function on
+  $[-\pi, \pi]$. Note that since $F(\pi) = \gamma(0) = \Var{X_{1}}$,
+  the ACF of $X_{t}$ has the spectral representation function
+  \begin{equation}
+    \label{eq:73}
+    \rho(h) = \int_{-\pi}^{\pi} e^{ih \lambda} dG(\lambda)
+  \end{equation}
+
+  The function $F$ is called the spectral distribution function of
+  $\gamma(\cdot)$. If $F(\lambda)$ can be expressed as $F(\lambda) =
+  \int_{-\pi}^{\lambda} f(y) dy$ for all $\lambda \in [-\pi, \pi]$,
+  then $f$ is the spectral density function and the time series is
+  said to have a continuous spectrum. If $F$ is a discrete function,
+  then the time series is said to have a discrete spectrum.
+\end{remark}
+
+\begin{thm}
+  \label{sec:spectral-analysis-1}
+  A complex valued function $\gamma(\cdot)$ is the autocovariance
+  function of a stationary process $X_{t}$ if and only if either
+  \begin{enumerate}
+  \item $\gamma(h) = \int_{-\pi}^{\pi} e^{-ihv} dF(v) $ for all $h =
+    0, \pm 1, \dots$ where $F$ is a right-continuous, non-decreasing,
+    bounded function on $[-\pi, \pi]$ with $F(-\pi) = 0$, or
+  \item $\sum_{i, j =1}^{n} a_{i} \gamma(i - j) \overline a_{j} \geq
+    0$ for all positive integers $n$ and all $a = (a_{1}, \dots, a_{n}
+    \in \mathbb{C}^{n})$.
+  \end{enumerate}
+\end{thm}
+
+\subsection{The Spectral Density of an ARMA Process}
+\label{sec:spectral-density-an}
+
+\begin{thm}
+  \label{sec:spectral-density-an-1}
+  If $Y_{t}$ is any zero-mean, possibly complex-valued stationary
+  process with spectral distribution function $F_{Y}(\cdot)$ and
+  $X_{t}$ is the process $X_{t} = \sum_{j = -\infty}^{\infty} \psi_{j}
+  Y_{t-j}$ where $\sum_{j=-\infty}^{\infty} |\psi_{j}| < \infty$, then
+  $X_{t}$ is stationary with spectral distribution function
+  $F_{X}(\lambda) = \int_{-\pi, \lambda} | \sum_{j=-\infty}^{\infty}
+  \psi_{j} e^{-ijv}|^{2} dF_{Y}(v)$ for $-\pi \leq \lambda \leq \pi$.
+
+  If $Y_{t}$ has a spectral density $f_{Y}(\cdot)$, then $X_{t}$ has a
+  spectral density $f_{X}(\cdot)$ given by $f_{X}(\lambda) =
+  |\Psi(e^{-i\lambda})|^{2} f_{Y}(\lambda)$ where $\Psi(e^{-i\lambda})
+  = \sum_{j=-\infty}^{\infty} \psi_{j} e^{-ij\lambda}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:spectral-density-an-3}
+  Let $X_{t}$ be an ARMA($p, q$) process, not necessarily causal or
+  invertible satisfying $\phi(B)X_{t} = \theta(B) Z_{t}$, $Z_{t} \sim
+  WN(0, \sigma^{2})$ where $\phi(z) = 1 - \phi_{1} z - \dots -
+  \phi_{p} z^{p}$ and $\theta(z) = 1 + \theta_{1} z + \dots +
+  \theta_{q} z^{q}$ have no common zeroes and $\phi(z)$ has no zeroes
+  on the unit circle.  Then $X_{t}$ has spectral density
+  \begin{equation}
+    \label{eq:71}
+    f_{X}(\lambda) = \frac{\sigma^{2}}{2 \pi} \frac{|\theta(e^{-i\lambda})|^{2}}{||\phi(e^{-i\lambda})|^{2}}
+  \end{equation} for $-\pi \leq \lambda \leq \pi$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:spectral-density-an-4}
+  The spectral density of the white noise process is constant,
+  $f(\lambda) = \frac{\sigma^{2}}{2 \pi}$.
+\end{thm}
+
+
+\subsection{The Periodogram}
+\label{sec:periodogram}
+
+\begin{defn}
+  \label{sec:periodogram-1}
+  The periodogram of $(x_{1}, \dots, x_{n})$ is the function
+  \begin{equation}
+    \label{eq:74}
+    I_{n}(\lambda) = \frac{1}{n} | \sum_{t=1}^{n} x_{t} e^{-it\lambda}|^{2}
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{sec:periodogram-2}
+  If $x_{1}, \dots, x_{n}$ are any real numbers and $\omega_{k}$ is
+  any of the nonzero Fourier Frequencies $\frac{2 \pi k}{n}$ in
+  $(-\pi, \pi]$, then $I_{n}(\omega_{k}) = \sum_{|h| < n}^{} \hat
+  \gamma(h) e^{-ih \omega_{k}}$ where $\hat \gamma(h)$ is the sample
+  ACVF of $x_{1}, \dots, x_{n}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:periodogram-4}
+  Let $X_{t}$ be the linear process $X_{t} = \sum_{j=-\infty}^{\infty}
+  \psi_{j} Z_{t-j}$, $Z_{t} \sim IID(0, \sigma^{2})$, with
+  $\sum_{j=-\infty}^{\infty} |\psi_{j}| < \infty$. Let
+  $I_{n}(\lambda)$ be the periodogram of $X_{1}, \dots, X_{n}$, and
+  let $f(\lambda)$ be the spectral density of $X_{t}$.
+  \begin{enumerate}
+  \item If $f(\lambda) > 0$for all $\lambda \in [-\pi, \pi]$ and if $0
+    < \lambda_{1} < \dots < \lambda_{m} < \pi$, then the random vector
+    $(I_{n}(\lambda_{1}), \dots, I_{n}(\lambda_{m}))$ converges in
+    distribution to a vector of independent and exponentially
+    distributed random variables, the $i$-th component which has mean
+    $2\pi f(\lambda_{i})$, $i = 1 \dots, m $.
+  \item If $\sum_{j=-\infty}^{\infty} |\psi_{j}| |j|^{\frac{1}{2}} <
+    \infty$, $\E{Z^{4}_{1}} = \nu \sigma^{4} < \infty$, $\omega_{j} =
+    \frac{2 \pi j}{n} \geq 0$, and $\omega_{k} = \frac{2 \pi k}{n}
+    \geq 0$, then
+    \begin{align}
+      \label{eq:75}
+      \Cov{I_{n}(\omega_{j}), I_{n}(\omega_{k})} =
+      \begin{cases}
+        2(2 \pi)^{2} f^{2}(\omega_{j}) + O(n^{-\frac{1}{2} }) &
+        \omega_{j} = \omega_{k} = \{ 0, \pi \} \\
+        (2 \pi)^{2} f^{2}(\omega_{j})+ O(n^{-\frac{1}{2} }) & 0 <
+        \omega_{j} = \omega_{k} < \pi \\
+        O(n^{-1}) & \omega_{j} \neq \omega_{k}
+      \end{cases}
+    \end{align}
+  \end{enumerate}
+
+\end{thm}
+
+\begin{defn}
+  \label{sec:periodogram-3}
+  The estimator $\hat f(\omega) = \hat f(g(n, \omega))$ with $\hat
+  f(\omega_{j})$ defined by $\frac{1}{2 \pi} \sum_{|k| \leq m_{n}}^{}
+  W_{n}(k) I_{n}(w_{j+k})$ with $m \rightarrow \infty$, $\frac{m}{n}
+  \rightarrow 0$, $W_{n}(k) = W_{n}(-k)$, $W_{n}(k) \geq 0$ for all
+  $k$, and $\sum_{|k| \leq m}^{} W_{n}(k) = 1$, and $\sum_{|k|}^{}
+  W_{n}^{2}(k) \rightarrow 0$ as $n \rightarrow \infty$ is called a
+  \textbf{discrete spectral average estimator} of $f(w)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:periodogram-5}
+  Let $X_{t}$ be the linear process $X_{t} = \sum_{j=-\infty}^{\infty}
+  \psi_{j} Z_{t-j}$, $Z_{t} \sim IID(0, \sigma^{2})$, with
+  $\sum_{j=-\infty}^{\infty} |\psi_{j}| |j|^{\frac{1}{2}} < \infty$
+  and $\E{Z_{1}^{4}} < \infty$.  If $\hat f$is a discrete spectral
+  average estimator of the spectral density $f$, then for $\lambda,
+  \omega \in [0, \pi]$,
+  \begin{enumerate}
+  \item $\lim_{n \rightarrow \infty} \E{\hat f(\omega)} = f(\omega)$
+  \item
+    \begin{align}
+      \label{eq:76}
+      \lim_{n \rightarrow \infty} \frac{1}{\sum_{|j| \leq m}^{}
+        W_{n}^{2}(j)} \Cov{\hat f(\omega), \hat f(\lambda)} =
+      \begin{cases}
+        2 f^{2}(\omega) & w = \lambda = \{ 0, \pi \} \\
+        f^{2}(\omega) & 0 < \omega = \lambda < \pi \\ \\
+        0 & \omega \neq \lambda.
+      \end{cases}
+    \end{align}
+  \end{enumerate}
+\end{thm}
+
+\section{ARIMA Processes}
+\label{sec:arima-processes}
+
+\begin{defn}
+  \label{sec:arima-processes-1}
+  If $d$ is a non-negative integer, $X_{t}$ is said to be an
+  ARIMA($p,d,q$) process if $Y_{t} = (1 - B)^{d} X_{t}$ is a causal
+  ARMA($p, q$) process
+\end{defn}
+
+\begin{thm}
+  \label{sec:arima-processes-2}
+  ARIMA models should be used when there is a slowly decaying positive
+  sample autocorrelation function.
+
+  If there is a slowly decaying oscillatory  sample ACF, applying
+  the operator $(1 - B + B^{2})$ can applied to produce a series with
+  a more rapidly autocorrelation function.
+\end{thm}
+
+\subsection{The Box-Cox Transformation}
+\label{sec:box-cox-transf}
+
+\begin{defn}
+  \label{sec:arima-processes-3}
+  The Box-Cox transformation is a\textbf{variance-stabilizing
+    transformation} - and should be used whenever the standard
+  deviation increases \textbf{linearly} with the mean. The equation is
+  \begin{equation}
+    \label{eq:77}
+    f_{\lambda}(U_{t}) =
+    \begin{cases}
+      \frac{(U_{t} - 1)}{\lambda}  & U_{t} \geq 0, \lambda > 0 \\
+      \ln U_{t} & U_{t} > 0, \lambda = 0.
+    \end{cases}
+  \end{equation}
+\end{defn}
+
+\subsection{Unit Roots Test}
+\label{sec:unit-roots-test}
+
+\begin{thm}
+  \label{sec:unit-roots-test}
+  Let $X_{1}, \dots, X_{n}$ be observations from the AR($1$) model
+  $X_{t} - \mu = \phi_{1}(X_{t -1} - \mu) + Z_{t}$ for $Z_{t} \sim
+  WN(0, \sigma^{2})$ where $|\phi_{1} < 1$ and $\E{X_{t}} = \mu$.  For
+  large $n$, the maximum likelihood estimator of $\hat \phi_{1}$ is
+  approximately $N(\phi_{1}, \frac{1 - \phi_{1}^{2}}{n} )$.  In the
+  unit root case, the normal approximation is no longer applicable,
+  which precludes its use for testing the unit root hypothesis $H_{0}:
+  \phi_{1} = 1$ vs $H_{1}: \phi_{1} < 1$.
+
+  To construct a test of $H_{0}$, write the model as $\Delta X_{t} =
+  X_{t} - X_{t-1} = \phi^{\star}_{0} + \phi^{\star}_{1} X_{t-1} + Z_{t}$,
+  $Z_{t} \sim WN(0, \sigma^{2})$ where $\phi^{\star}_{0} = \mu(1 -
+  \phi_{1})$ and $\phi^{\star}_{1} = \phi_{1} - 1$.  Now, let $\hat
+  \phi_{1}^{\star}$ be the OLS estimator of $\phi_{1}^{\star}$ found
+  by regression $\delta X_{t}$ on $1$ and $X_{t-1}$.  The estimated
+  standard error of $\phi_{1}^{\star}$ is
+  \begin{equation}
+    \label{eq:77}
+    \hat{SE} (\hat \phi_{1}^{\star}) = S(\sum_{t=1}^{n} (X_{t-1} -
+    \overline X)^{2})^{-\frac{1}{2}}
+  \end{equation} where $S^{2} = \sum_{t=2}^{n} (\delta X_{t} - \hat
+  \phi_{0}^{\star} - \hat \phi_{1}^{\star} X_{t-1})^{2} / (n - 3)$ and
+  $\overline X$ is the sample mean of $X_{1}, \dots, X_{n-1}$.
+
+  Then the limit distribution of the $t$-ration $\hat \tau_{\mu}=
+  \frac{\hat \phi_{1}^{\star}}{\hat{SE}(\hat \phi_{1}^{\star})}$ under
+  the unit root assumption can be derived.
+\end{thm}
+
+\begin{thm}
+  \label{sec:unit-roots-test}
+  Let $X_{t}$ be a causal and invertible ARMA($p, q$) process
+  satisfying $\phi(B)X_{t} = \theta(B) Z_{t}$, $Z_{t} \sim WN(0,
+  \sigma^{2})$.  Then the differenced series $Y_{t} = \Delta X_{t}$ is
+  a non-invertible ARMA($p, q+1$) process with moving average
+  polynomial $\theta(z)(1-z)$.  Thus, testing for a unit root in a MA
+  polynomial is equivalent to testing that the time series has not been
+  over-differenced.
+
+  Let $X_{1}, \dots, X_{n}$ be observations from the MA(1) model $X_{t}
+  = Z_{t} + \theta Z_{t-1}$, $Z_{t} \iid(0, \sigma^{2})$.  Then under
+  the assumption $\theta = -1$, $n(\hat \theta + 1)$ where $\hat
+  \theta$ is the MLE converges in distribution.  A test of $H_{0}:
+  \theta = -1$ vs $H_{1}: \theta > -1$ can be fashioned on this
+  limiting result by rejecting $H_{0}$ when $\hat \theta > -1 +
+  \frac{c_{\alpha}}{n}$ where $c_{\alpha}$ is the $(1 - \alpha)$
+  quantile of the limit distribution of $n(\hat \theta + 1)$.
+\end{thm}
 
 
 \section{Random Variate Generation}

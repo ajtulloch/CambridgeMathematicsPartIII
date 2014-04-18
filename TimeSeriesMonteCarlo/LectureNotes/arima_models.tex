@@ -1,0 +1,97 @@
+\section{ARIMA Processes}
+\label{sec:arima-processes}
+
+\begin{defn}
+  \label{sec:arima-processes-1}
+  If $d$ is a non-negative integer, $X_{t}$ is said to be an
+  ARIMA($p,d,q$) process if $Y_{t} = (1 - B)^{d} X_{t}$ is a causal
+  ARMA($p, q$) process
+\end{defn}
+
+\begin{thm}
+  \label{sec:arima-processes-2}
+  ARIMA models should be used when there is a slowly decaying positive
+  sample autocorrelation function.
+
+  If there is a slowly decaying oscillatory  sample ACF, applying
+  the operator $(1 - B + B^{2})$ can applied to produce a series with
+  a more rapidly autocorrelation function.
+\end{thm}
+
+\subsection{The Box-Cox Transformation}
+\label{sec:box-cox-transf}
+
+\begin{defn}
+  \label{sec:arima-processes-3}
+  The Box-Cox transformation is a\textbf{variance-stabilizing
+    transformation} - and should be used whenever the standard
+  deviation increases \textbf{linearly} with the mean. The equation is
+  \begin{equation}
+    \label{eq:77}
+    f_{\lambda}(U_{t}) =
+    \begin{cases}
+      \frac{(U_{t} - 1)}{\lambda}  & U_{t} \geq 0, \lambda > 0 \\
+      \ln U_{t} & U_{t} > 0, \lambda = 0.
+    \end{cases}
+  \end{equation}
+\end{defn}
+
+\subsection{Unit Roots Test}
+\label{sec:unit-roots-test}
+
+\begin{thm}
+  \label{sec:unit-roots-test}
+  Let $X_{1}, \dots, X_{n}$ be observations from the AR($1$) model
+  $X_{t} - \mu = \phi_{1}(X_{t -1} - \mu) + Z_{t}$ for $Z_{t} \sim
+  WN(0, \sigma^{2})$ where $|\phi_{1} < 1$ and $\E{X_{t}} = \mu$.  For
+  large $n$, the maximum likelihood estimator of $\hat \phi_{1}$ is
+  approximately $N(\phi_{1}, \frac{1 - \phi_{1}^{2}}{n} )$.  In the
+  unit root case, the normal approximation is no longer applicable,
+  which precludes its use for testing the unit root hypothesis $H_{0}:
+  \phi_{1} = 1$ vs $H_{1}: \phi_{1} < 1$.
+
+  To construct a test of $H_{0}$, write the model as $\deltaX_{t} =
+  X_{t} - X_{t-1} = \phi^{\star}_{0} + \phi^{\1} X_{t-1} + Z_{t}$,
+  $Z_{t} \sim WN(0, \sigma^{2})$ where $\phi^{\star}_{0} = \mu(1 -
+  \phi_{1})$ and $\phi^{\star}_{1} = \phi_{1} - 1$.  Now, let $\hat
+  \phi_{1}^{\star}$ be the OLS estimator of $\phi_{1}^{\star}$ found
+  by regression $\delta X_{t}$ on $1$ and $X_{t-1}$.  The estimated
+  standard error of $\phi_{1}^{\star}$ is
+  \begin{equation}
+    \label{eq:77}
+    \hat{SE} (\hat \phi_{1}^{\star}) = S(\sum_{t=1}^{n} (X_{t-1} -
+    \overline X)^{2})^{-\frac{1}{2}}
+  \end{equation} where $S^{2} = \sum_{t=2}^{n} (\delta X_{t} - \hat
+  \phi_{0}^{\star} - \hat \phi_{1}^{\star} X_{t-1})^{2} / (n - 3)$ and
+  $\overline X$ is the sample mean of $X_{1}, \dots, X_{n-1}$.
+
+  Then the limit distribution of the $t$-ration $\hat \tau_{\mu}=
+  \frac{\hat \phi_{1}^{\star}}{\hat{SE}(\hat \phi_{1}^{\star})}$ under
+  the unit root assumption can be derived.
+\end{thm}
+
+\begin{thm}
+  \label{sec:unit-roots-test}
+  Let $X_{t}$ be a causal and invertible ARMA($p, q$) process
+  satisfying $\phi(B)X_{t} = \theta(B) Z_{t}$, $Z_{t} \sim WN(0,
+  \sigma^{2})$.  Then the differenced series $Y_{t} = \Delta X_{t}$ is
+  a non-invertible ARMA($p, q+1$) process with moving average
+  polynomial $\theta(z)(1-z)$.  Thus, testing for a unit root in a MA
+  polynomial is equivalent to testing that the time series has not been
+  over-differenced.
+
+  Let $X_{1}, \dots, X_{n}$ be observations from the MA(1) model $X_{t}
+  = Z_{t} + \theta Z_{t-1}$, $Z_{t} \IID(0, \sigma^{2})$.  Then under
+  the assumption $\theta = -1$, $n(\hat \theta + 1)$ where $\hat
+  \theta$ is the MLE converges in distribution.  A test of $H_{0}:
+  \theta = -1$ vs $H_{1}: \theta > -1$ can be fashioned on this
+  limiting result by rejecting $H_{0}$ when $\hat \theta > -1 +
+  \frac{c_{\alpha}}{n}$ where $c_{\alpha}$ is the $(1 - \alpha)$
+  quantile of the limit distribution of $n(\hat \theta + 1)$.
+\end{thm}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End: 

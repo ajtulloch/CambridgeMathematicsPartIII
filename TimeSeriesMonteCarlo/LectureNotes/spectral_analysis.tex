@@ -81,7 +81,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
 \end{thm}
 
 \begin{remark}
-  The function $F$ is a \textbf{genrealized distribution function} on
+  The function $F$ is a \textbf{generalized distribution function} on
   $[-\pi, \pi]$ in the sense that $G(\lambda) =
   \frac{F(\lambda)}{F(\pi)}$ is a probability distribution function on
   $[-\pi, \pi]$. Note that since $F(\pi) = \gamma(0) = \Var{X_{1}}$,
@@ -101,7 +101,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
 
 \begin{thm}
   \label{sec:spectral-analysis-1}
-  A scomplex valued function $\gamma(\cdot)$ is the autocovariance
+  A complex valued function $\gamma(\cdot)$ is the autocovariance
   function of a stationary process $X_{t}$ if and only if either
   \begin{enumerate}
   \item $\gamma(h) = \int_{-\pi}^{\pi} e^{-ihv} dF(v) $ for all $h =
@@ -167,8 +167,8 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
 
 \begin{thm}
   \label{sec:periodogram-2}
-  If $x_{1}, \dots, x_{n}$ are any real enumbers and $\omega_{k}$ is
-  any of the nonzero fourier Frequencies $\frac{2 \pi k}{n}$ in
+  If $x_{1}, \dots, x_{n}$ are any real numbers and $\omega_{k}$ is
+  any of the nonzero Fourier Frequencies $\frac{2 \pi k}{n}$ in
   $(-\pi, \pi]$, then $I_{n}(\omega_{k}) = \sum_{|h| < n}^{} \hat
   \gamma(h) e^{-ih \omega_{k}}$ where $\hat \gamma(h)$ is the sample
   ACVF of $x_{1}, \dots, x_{n}$.
@@ -185,7 +185,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   \item If $f(\lambda) > 0$for all $\lambda \in [-\pi, \pi]$ and if $0
     < \lambda_{1} < \dots < \lambda_{m} < \pi$, then the random vector
     $(I_{n}(\lambda_{1}), \dots, I_{n}(\lambda_{m}))$ converges in
-    distribution ot a vector of independent and exponentially
+    distribution to a vector of independent and exponentially
     distributed random variables, the $i$-th component which has mean
     $2\pi f(\lambda_{i})$, $i = 1 \dots, m $.
   \item If $\sum_{j=-\infty}^{\infty} |\psi_{j}| |j|^{\frac{1}{2}} <
@@ -224,7 +224,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   \psi_{j} Z_{t-j}$, $Z_{t} \sim IID(0, \sigma^{2})$, with
   $\sum_{j=-\infty}^{\infty} |\psi_{j}| |j|^{\frac{1}{2}} < \infty$
   and $\E{Z_{1}^{4}} < \infty$.  If $\hat f$is a discrete spectral
-  average estimator of the spectral denity $f$, then for $\lambda,
+  average estimator of the spectral density $f$, then for $\lambda,
   \omega \in [0, \pi]$,
   \begin{enumerate}
   \item $\lim_{n \rightarrow \infty} \E{\hat f(\omega)} = f(\omega)$
@@ -241,45 +241,6 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
     \end{align}
   \end{enumerate}
 \end{thm}
-
-\section{ARIMA Processes}
-\label{sec:arima-processes}
-
-\begin{defn}
-  \label{sec:arima-processes-1}
-  If $d$ is a non-negative integer, $X_{t}$ is said to be an
-  ARMIA($p,d,q$) process if $Y_{t} = (1 - B)^{d} X_{t}$ is a causal
-  ARMA($p, q$) process
-\end{defn}
-
-\begin{thm}
-  \label{sec:arima-processes-2}
-  ARIMA models should be used when there is a slowly decaying positive
-  sample autocorrelation function.
-
-  If there is a slowly decaying osciallatory  sample ACF, applying
-  the operator $(1 - B + B^{2})$ can appleid to produce a aseries with
-  a more rapidly autocorrelation function.
-\end{thm}
-
-\begin{defn}
-  \label{sec:arima-processes-3}
-  The Box-Cox transfomration is  a\textbf{variance-stabilizing
-    transformation} - and should be used whenever the standard
-  devaition increases \textbf{lienarly} with the mean.  The equation
-  is
-  \begin{equation}
-    \label{eq:77}
-    f_{\lambda}(U_{t}) =
-    \begin{cases}
-      \frac{(U_{t} - 1)}{\lambda}  & U_{t} \geq 0, \lambda > 0 \\
-      \ln U_{t} & U_{t} > 0, \lambda = 0.
-    \end{cases}
-  \end{equation}
-
-\end{defn}
-
-
 
 %%% Local Variables: 
 %%% mode: latex
