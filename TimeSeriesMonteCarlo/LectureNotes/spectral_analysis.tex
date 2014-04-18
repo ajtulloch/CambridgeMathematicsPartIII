@@ -99,6 +99,188 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   then the time series is said to have a discrete spectrum.
 \end{remark}
 
+\begin{thm}
+  \label{sec:spectral-analysis-1}
+  A scomplex valued function $\gamma(\cdot)$ is the autocovariance
+  function of a stationary process $X_{t}$ if and only if either
+  \begin{enumerate}
+  \item $\gamma(h) = \int_{-\pi}^{\pi} e^{-ihv} dF(v) $ for all $h =
+    0, \pm 1, \dots$ where $F$ is a right-continuous, non-decreasing,
+    bounded function on $[-\pi, \pi]$ with $F(-\pi) = 0$, or
+  \item $\sum_{i, j =1}^{n} a_{i} \gamma(i - j) \overline a_{j} \geq
+    0$ for all positive integers $n$ and all $a = (a_{1}, \dots, a_{n}
+    \in \mathbb{C}^{n})$.
+  \end{enumerate}
+\end{thm}
+
+\subsection{The Spectral Density of an ARMA Process}
+\label{sec:spectral-density-an}
+
+\begin{thm}
+  \label{sec:spectral-density-an-1}
+  If $Y_{t}$ is any zero-mean, possibly complex-valued stationary
+  process with spectral distribution function $F_{Y}(\cdot)$ and
+  $X_{t}$ is the process $X_{t} = \sum_{j = -\infty}^{\infty} \psi_{j}
+  Y_{t-j}$ where $\sum_{j=-\infty}^{\infty} |\psi_{j}| < \infty$, then
+  $X_{t}$ is stationary with spectral distribution function
+  $F_{X}(\lambda) = \int_{-\pi, \lambda} | \sum_{j=-\infty}^{\infty}
+  \psi_{j} e^{-ijv}|^{2} dF_{Y}(v)$ for $-\pi \leq \lambda \leq \pi$.
+
+  If $Y_{t}$ has a spectral density $f_{Y}(\cdot)$, then $X_{t}$ has a
+  spectral density $f_{X}(\cdot)$ given by $f_{X}(\lambda) =
+  |\Psi(e^{-i\lambda})|^{2} f_{Y}(\lambda)$ where $\Psi(e^{-i\lambda})
+  = \sum_{j=-\infty}^{\infty} \psi_{j} e^{-ij\lambda}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:spectral-density-an-3}
+  Let $X_{t}$ be an ARMA($p, q$) process, not necessarily causal or
+  invertible satisfying $\phi(B)X_{t} = \theta(B) Z_{t}$, $Z_{t} \sim
+  WN(0, \sigma^{2})$ where $\phi(z) = 1 - \phi_{1} z - \dots -
+  \phi_{p} z^{p}$ and $\theta(z) = 1 + \theta_{1} z + \dots +
+  \theta_{q} z^{q}$ have no common zeroes and $\phi(z)$ has no zeroes
+  on the unit circle.  Then $X_{t}$ has spectral density
+  \begin{equation}
+    \label{eq:71}
+    f_{X}(\lambda) = \frac{\sigma^{2}}{2 \pi} \frac{|\theta(e^{-i\lambda})|^{2}}{||\phi(e^{-i\lambda})|^{2}}
+  \end{equation} for $-\pi \leq \lambda \leq \pi$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:spectral-density-an-4}
+  The spectral density of the white noise process is constant,
+  $f(\lambda) = \frac{\sigma^{2}}{2 \pi}$.
+\end{thm}
+
+
+\subsection{The Periodogram}
+\label{sec:periodogram}
+
+\begin{defn}
+  \label{sec:periodogram-1}
+  The periodogram of $(x_{1}, \dots, x_{n})$ is the function
+  \begin{equation}
+    \label{eq:74}
+    I_{n}(\lambda) = \frac{1}{n} | \sum_{t=1}^{n} x_{t} e^{-it\lambda}|^{2}
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{sec:periodogram-2}
+  If $x_{1}, \dots, x_{n}$ are any real enumbers and $\omega_{k}$ is
+  any of the nonzero fourier Frequencies $\frac{2 \pi k}{n}$ in
+  $(-\pi, \pi]$, then $I_{n}(\omega_{k}) = \sum_{|h| < n}^{} \hat
+  \gamma(h) e^{-ih \omega_{k}}$ where $\hat \gamma(h)$ is the sample
+  ACVF of $x_{1}, \dots, x_{n}$.
+\end{thm}
+
+\begin{thm}
+  \label{sec:periodogram-4}
+  Let $X_{t}$ be the linear process $X_{t} = \sum_{j=-\infty}^{\infty}
+  \psi_{j} Z_{t-j}$, $Z_{t} \sim IID(0, \sigma^{2})$, with
+  $\sum_{j=-\infty}^{\infty} |\psi_{j}| < \infty$. Let
+  $I_{n}(\lambda)$ be the periodogram of $X_{1}, \dots, X_{n}$, and
+  let $f(\lambda)$ be the spectral density of $X_{t}$.
+  \begin{enumerate}
+  \item If $f(\lambda) > 0$for all $\lambda \in [-\pi, \pi]$ and if $0
+    < \lambda_{1} < \dots < \lambda_{m} < \pi$, then the random vector
+    $(I_{n}(\lambda_{1}), \dots, I_{n}(\lambda_{m}))$ converges in
+    distribution ot a vector of independent and exponentially
+    distributed random variables, the $i$-th component which has mean
+    $2\pi f(\lambda_{i})$, $i = 1 \dots, m $.
+  \item If $\sum_{j=-\infty}^{\infty} |\psi_{j}| |j|^{\frac{1}{2}} <
+    \infty$, $\E{Z^{4}_{1}} = \nu \sigma^{4} < \infty$, $\omega_{j} =
+    \frac{2 \pi j}{n} \geq 0$, and $\omega_{k} = \frac{2 \pi k}{n}
+    \geq 0$, then
+    \begin{align}
+      \label{eq:75}
+      \Cov{I_{n}(\omega_{j}), I_{n}(\omega_{k})} =
+      \begin{cases}
+        2(2 \pi)^{2} f^{2}(\omega_{j}) + O(n^{-\frac{1}{2} }) &
+        \omega_{j} = \omega_{k} = \{ 0, \pi \} \\
+        (2 \pi)^{2} f^{2}(\omega_{j})+ O(n^{-\frac{1}{2} }) & 0 <
+        \omega_{j} = \omega_{k} < \pi \\
+        O(n^{-1}) & \omega_{j} \neq \omega_{k}
+      \end{cases}
+    \end{align}
+  \end{enumerate}
+
+\end{thm}
+
+\begin{defn}
+  \label{sec:periodogram-3}
+  The estimator $\hat f(\omega) = \hat f(g(n, \omega))$ with $\hat
+  f(\omega_{j})$ defined by $\frac{1}{2 \pi} \sum_{|k| \leq m_{n}}^{}
+  W_{n}(k) I_{n}(w_{j+k})$ with $m \rightarrow \infty$, $\frac{m}{n}
+  \rightarrow 0$, $W_{n}(k) = W_{n}(-k)$, $W_{n}(k) \geq 0$ for all
+  $k$, and $\sum_{|k| \leq m}^{} W_{n}(k) = 1$, and $\sum_{|k|}^{}
+  W_{n}^{2}(k) \rightarrow 0$ as $n \rightarrow \infty$ is called a
+  \textbf{discrete spectral average estimator} of $f(w)$.
+\end{defn}
+
+\begin{thm}
+  \label{sec:periodogram-5}
+  Let $X_{t}$ be the linear process $X_{t} = \sum_{j=-\infty}^{\infty}
+  \psi_{j} Z_{t-j}$, $Z_{t} \sim IID(0, \sigma^{2})$, with
+  $\sum_{j=-\infty}^{\infty} |\psi_{j}| |j|^{\frac{1}{2}} < \infty$
+  and $\E{Z_{1}^{4}} < \infty$.  If $\hat f$is a discrete spectral
+  average estimator of the spectral denity $f$, then for $\lambda,
+  \omega \in [0, \pi]$,
+  \begin{enumerate}
+  \item $\lim_{n \rightarrow \infty} \E{\hat f(\omega)} = f(\omega)$
+  \item
+    \begin{align}
+      \label{eq:76}
+      \lim_{n \rightarrow \infty} \frac{1}{\sum_{|j| \leq m}^{}
+        W_{n}^{2}(j)} \Cov{\hat f(\omega), \hat f(\lambda)} =
+      \begin{cases}
+        2 f^{2}(\omega) & w = \lambda = \{ 0, \pi \} \\
+        f^{2}(\omega) & 0 < \omega = \lambda < \pi \\ \\
+        0 & \omega \neq \lambda.
+      \end{cases}
+    \end{align}
+  \end{enumerate}
+\end{thm}
+
+\section{ARIMA Processes}
+\label{sec:arima-processes}
+
+\begin{defn}
+  \label{sec:arima-processes-1}
+  If $d$ is a non-negative integer, $X_{t}$ is said to be an
+  ARMIA($p,d,q$) process if $Y_{t} = (1 - B)^{d} X_{t}$ is a causal
+  ARMA($p, q$) process
+\end{defn}
+
+\begin{thm}
+  \label{sec:arima-processes-2}
+  ARIMA models should be used when there is a slowly decaying positive
+  sample autocorrelation function.
+
+  If there is a slowly decaying osciallatory  sample ACF, applying
+  the operator $(1 - B + B^{2})$ can appleid to produce a aseries with
+  a more rapidly autocorrelation function.
+\end{thm}
+
+\begin{defn}
+  \label{sec:arima-processes-3}
+  The Box-Cox transfomration is  a\textbf{variance-stabilizing
+    transformation} - and should be used whenever the standard
+  devaition increases \textbf{lienarly} with the mean.  The equation
+  is
+  \begin{equation}
+    \label{eq:77}
+    f_{\lambda}(U_{t}) =
+    \begin{cases}
+      \frac{(U_{t} - 1)}{\lambda}  & U_{t} \geq 0, \lambda > 0 \\
+      \ln U_{t} & U_{t} > 0, \lambda = 0.
+    \end{cases}
+  \end{equation}
+
+\end{defn}
+
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "master"
