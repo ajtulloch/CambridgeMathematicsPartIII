@@ -47,7 +47,7 @@ minimizing
 The theory of weighted least squares gives
 \begin{align}
   \label{eq:53}
-  ...
+  (X^{T} K X) \hat \beta = X^{T} K y
 \end{align}
 
 For $p = 0$, then a simple expression (Nodorya-Watson, local constant)
@@ -58,8 +58,6 @@ exists:
     x)Y_{i}}{\sum_{i=1}^{n} k_{h}(x_{i} - x)}
 \end{align}
 
-
-\todo{This doesn't correspond to the book?}
 
 For $p= 1$, we call this a local linear estimator, and we have the
 explicit result
@@ -160,7 +158,7 @@ conditions:
 
   \begin{align}
     \label{eq:63}
-    \Var{\hat m_{h}(x; 1)} = \frac{1}{n^{2}} \sum_{i=1}^{n}
+    \Var{\hat m_{h}(x; 1)} &= \frac{1}{n^{2}} \sum_{i=1}^{n}
     (\frac{S_{2, h}(x) - S_{1, h}(x)(x_{i} - x)}{DEN})^{2}
     K_{h}^{2}(x_{i} - x) v(x_{i}) \\
     &= \frac{1}{n} \frac{1}{n} \sum_{i=1}^{n} \frac{S_{2, h}^{2}(x) -
@@ -540,7 +538,7 @@ A $d$-dimensional nonparametric regression suffers the same curse of
 dimensionality as we saw in kernel density estimation.
 
 However, if $m$ is smooth around $x_{0} \in \R^{d}$, so $m(x) \approx
-m(x_{0}) + \sum_{i=1}^{d} (x_{j} - x_{0j}) \frac{partial}{partial
+m(x_{0}) + \sum_{i=1}^{d} (x_{j} - x_{0j}) \frac{\partial}{\partial
   x_{j}} m(x_{0})$.
 
 This motivates us to use
@@ -552,7 +550,7 @@ This motivates us to use
 \begin{align}
   \label{eq:91}
   \sum_{i=1}^{n} (Y_{i} - \alpha - \sum_{j=1}^{d} g_{j}(x_{ij}))^{2} +
-  \sum_{j=1}^{d} \lambda_{j} int g''_{j}(x)^{2} dx
+  \sum_{j=1}^{d} \lambda_{j} \int g''_{j}(x)^{2} dx
 \end{align}
 
 Note that $g_{j}(x_{ij}) = Y_i - \alpha - \sum_{k \neq j}^{}

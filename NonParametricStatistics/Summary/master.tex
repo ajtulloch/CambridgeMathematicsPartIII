@@ -1,0 +1,702 @@
+\input{../../common/summary.tex}
+
+\title{Nonparametric Statistics Summary}
+
+\begin{document}
+
+\maketitle
+
+Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
+\mathcal{F}, \Prob)$ with distribution function $F$.  The
+\textbf{empirical distribution function} $\hat F_{n}$ is defined by
+\begin{equation}
+  \label{eq:1}
+  \hat F_{n}(x) = \frac{1}{n} \sum_{i=1}^{n} \I{X_{i} \leq x}.
+\end{equation}
+
+\begin{thm}[Glivenko-Cantelli (1933) - The Fundamental Theorem of Statistics]
+  \label{defn:Introduction:2}
+  \begin{equation}
+    \label{eq:2}
+    \sup_{x \in \R} \left| \hat F_{n}(x) - F(x) \right| \cas 0.
+  \end{equation}
+\end{thm}
+
+\begin{thm}
+  \label{defn:Introduction:1}
+  Let $X_{1}, \dots, X_{n} \sim F$ \iid.  Then for every $\epsilon >
+  0$,
+  \begin{align}
+    \label{eq:7}
+    \Prob{\sup_{x \in \R}|\hat F_{n}(x) - F(x)| \geq \epsilon} \leq 2 e^{-2n\epsilon^{2}}.
+  \end{align}
+\end{thm}
+
+\begin{defn}
+  Usually, we prefer to choose $h$ to minimize some expression measuring
+how well $\hat f_{h}$ estimates $f$ as a function.  We therefore
+define the Mean Integrated Squared Error ($MSIE$) as
+\begin{align}
+  \label{eq:14}
+  MSIE(\hat f_{h}) &= \E{\int_{-\infty}^{\infty} \{ \hat f_{h}(x) -
+    f(x) \}^{2} dx} \\
+  &= \int_{-\infty}^{\infty} MSE(\hat f_{h}(x)) dx \\
+  &= \int_{\infty}^{\infty} ((K_{h} \star f)(x) - f(x))^{2} +
+  \frac[1]{h} ((K^{2}_{n} \star f)(x) - (K_{h} \star f)^{2}(x)) dx
+\end{align} which is justified by Fubini's theorem as the integrand
+is non-negative.
+JAlthough exact, this expression depends on $h$ in a complicated way.
+We therefore seek asymptotic approximation to calify this dependnence
+and faciliate an asymptotically optimal choice of $h$.
+\end{defn}
+
+We need the following conditions:
+\begin{enumerate}
+\item \label{item:4} $f$ is twice differentiable, $f'$is bounded, and $R(f) =
+  \int_{-\infty}^{\infty} f''(x)^{2} dx < \infty$.
+\item \label{item:5} $h = h_{n}$ is a non-random sequecne with $h \rightarrow 0$ and
+  $nh \rightarrow \infty$ as $n \rightarrow \infty$.
+\item \label{item:6} $K$ is non-negative, $\int_{-\infty}^{\infty} K(x) dx = 1$,
+  $\int_{-\infty}^{\infty} x K(x) dx = 0$, $\mu_{2}(K) =
+  \int_{-\infty}^{\infty} x^{2} K(x) dx < \infty$, and $R(x) < \infty$.
+\end{enumerate}
+
+\begin{thm}
+  \label{defn:Introduction:3}
+  Assume that the previous conditions hod. Then, for all $x \in \R$,
+  \begin{align}
+    \label{eq:15}
+    MSE(\hat f_{n}(x)) = \frac{R(K) f(x)}{nh} + \frac{1}{4} h^{4}
+    \mu_{2}^{2}(K) f''(x)^{2} + o(\frac{1}{nh} + h^{4})
+  \end{align} as $n \rightarrow \infty$.
+\end{thm}
+
+
+Consider now minimizing the asymptotic MISE (AMISE) $\frac{R(K)}{nh} +
+\frac{1}{4} h^{4} \mu_{2}^{2}(K) R(f'')$ with respect to $h$, yielding
+the asymptotically optimal bandwidth
+\begin{align}
+  \label{eq:24}
+  h_{AMISE} = (\frac{R(K)}{\mu_{2}^{2}(K) R(f'') n})^{\frac{1}{5}}
+\end{align}
+
+Substituting back, we obtain
+\begin{align}
+  \label{eq:25}
+  AMISE(\hat f_{AMISE}) = \frac{5}{4} R(K)^{\frac{4}{5}}
+  \mu_{2}(K)^{\frac{2}{5}} R(f'')^{\frac{1}{5}} n^{-\frac{4}{5}}.
+\end{align}
+
+Notice the slower rate than the typical $O(n^{-1})$
+parametric rate.  Notice that for the ``rough'' densities, with larger
+$R(f'')$, we should use a smaller bandwidth, and these densities are
+harder to estimate.
+
+\begin{thm}
+  \label{defn:Introduction:4}
+  Assume the previous assumptions \ref{item:4}, \ref{item:5},
+  \ref{item:6} and that $K$ is bounded.  Then, for all $x \in \R$,
+  \begin{equation}
+    \label{eq:26}
+    n^{\frac{2}{5}}(\hat f_{h_{AMISE}}(x) - f(x)) \cd
+    N(\frac{1}{2}\mu_{2}(K) f''(x), R(K) f(x))
+  \end{equation}
+\end{thm}
+
+\begin{thm}
+  If $f$ is the $N(0, \sigma^{2})$ density, then $R(f'') = \frac{3}{8
+    \sqrt{\pi}} \sigma^{-5}$. The normal scale rate $\hat h_{NS}$
+  consists of replacing $R(f'')$ in $h_{AMISE}$ with $\frac{3}{8
+    \sqrt{\pi}} \hat \sigma^{-5}$, where $\hat \sigma$ is an estimate
+  of $\sigma$. This tends to oversmooth.
+\end{thm}
+
+The choice of kernel is coupled with the choice of bandwidth, because
+if we replace $K(x)$ by $\frac{1}{2} K(\frac{1}{2})$ and we halve the
+bandwidth, the estimate is unchanged.  We therefore fix the scale by
+setting $\mu_{2}(K) = 1$.  Minimizing $AMISE(\hat f_{h})$ over $K$ the
+amounts to minimizing $R(K)$ subject to
+\begin{align}
+  \label{eq:40}
+  \int_{-\infty}^{\infty} K(x) dx = 1 \\
+  \int_{-\infty}^{\infty} x K(x) dx = 0 \\
+  \mu_{2}(K) = 1 \\
+  K(x) \geq 0
+\end{align}
+
+The solution is given by the Epanechnikov kernel (1969).
+\begin{align}
+  \label{eq:41}
+  K_{E}(x) = \frac{3}{4 \sqrt{5}}(1 - \frac{x^{2}}{5}) \I{|x| \leq \sqrt{5}}
+\end{align}
+
+The ratio $\frac{R(K_{E})}{R(K)}$ is called the \textbf{efficiency} of
+a kernel $K$, because it represents the ratio of the sample sizes
+needed to obtain the same $AMISE$ when using $K_{E}$ compared with $K$.
+
+
+\begin{center}
+% BEGIN RECEIVE ORGTBL testtbl
+\begin{tabular}{lr}
+Kernel & Efficiency \\
+\hline
+Epachnikov & 1.0 \\
+Normal & 0.951 \\
+Triangular & 0.986 \\
+Uniform & 0.930 \\
+\end{tabular}
+% END RECEIVE ORGTBL testtbl
+\end{center}
+
+\begin{thm}
+  A natural estimator of the $r$-th derivative $f^{(r)}$ of $f$ is given
+by
+\begin{align}
+  \label{eq:33}
+  \hat f^{(r)}_{h}(x) = \frac{1}{n h^{r+1}} \sum_{i=1}^{n} K(\frac{x -
+  x_{i}}{h})
+\end{align}
+obtained from differentiating the standard KDE for $\hat f$.
+
+Under regularity conditions,
+\begin{align}
+  \label{eq:39}
+  MSE(\hat f^{(r)}_{h}(x)) = \frac{R(K^{(r)})}{nh^{2r+1}}f(x) +
+  \frac{1}{4} h^{4} \mu_{2}^{2} f^{(r-2)}(x)^{2} + o(\frac{1}{nh} + h^{4}).
+\end{align}
+
+This leads to an optimal bandwidth of order $n^{-\frac{1}{2r + 5}}$
+and a rate of converge of $n^{-\frac{4}{2r+5}}$.
+
+\end{thm}
+
+\begin{thm}
+  It is possible to make the dominant integrated squared bias term of
+  $MISE(\hat f_{h})$ vanish by choosing $\mu_{2}(K) = 0$. This means
+  we have to allow the Kernel to take negative values, so the
+  resulting estimate need not be a density.
+
+  We can set $\hat f_{h}(x) = \max (\hat f_{h}(x), 0)$ and then
+  renormalize, but then we lose smoothness. Nevertheless, we define
+  $K$ to be a $k$-th order kernel if writing $\mu_{j}(K) =
+  \int_{-\infty}^{\infty} x^{j} K(x) dx$, we have
+  \begin{align}
+    \label{eq:42}
+    \mu_{0}(K) = 1
+  \end{align} and $\mu_{j}(K) = 0$ for $j = 1, \dots, k - 1$,
+  $\mu_{k}(K) \neq 0$, and
+  \begin{align}
+    \label{eq:43}
+    \int_{-\infty}^{\infty} |x|^{k} |K(x)| dx < \infty
+  \end{align} If $f$ has $k$ continuous bounded derivatives with
+  $R(f^{(k)}) < \infty$, then it is shown (example sheet) that
+  $h_{AMISE} = c n^{-\frac{1}{2k+1}}$ and
+  \begin{align}
+    \label{eq:44}
+    AMISE(\hat f_{h_{AMISE}}) = O(n^{-\frac{2k}{2k+1}})
+  \end{align}
+
+  Thus, under increasingly strong smoothness assumptions, convergence
+  rates arbitrarily close to the parametric rate of $O(n^{-1})$ can be
+  obtained.
+
+  The practical benefit of higher order kernels is not always
+  apparent, and the negativity/smoothness/bandwidth selection problems
+  mean that they are rarely used in practice.
+\end{thm}
+
+\section{Nonparameteric Regression}
+\label{sec:nonp-regr}
+
+Assume a fixed design.  The local polynomial estimator $\hat m_{h}(x;
+p)$ of degree $p$ with kernel $K$ with a bandwidth $h$ is constructed
+by fitting a polynomial of degree $p$ using weighted least squares.
+The weight $K_{h}(x_{i} - x)$ is associated with the weight $(x_{i},
+Y_{i})$.
+
+More precisely, $\hat m_{h}(x; p) = \hat \beta_{0}$ where $\hat \beta =
+(\hat \beta_{0}, \hat \beta_{1}, \dots, \hat \beta_{p})$ whicch is
+minimizing
+\begin{align}
+  \label{eq:52}
+  \sum_{i=1}^{n} (Y_{i} - \beta_{0} - \beta_{1}(x_{i} - x) + \dots +
+  \beta_{p}(x_{i} - x)^{p})^{2} K_{h}(x_{i} - x)
+\end{align} where $\beta \in \R^{p+1}$
+
+The theory of weighted least squares gives
+\begin{align}
+  \label{eq:53}
+  (X^{T} K X) \hat \beta = X^{T} K y
+\end{align}
+
+For $p = 0$, then a simple expression (Nodorya-Watson, local constant)
+exists:
+\begin{align}
+  \label{eq:54}
+  \hat m_{h}(x; 0) = \frac{\sum_{i=1}^{n} K_{h}(x_{i} -
+    x)Y_{i}}{\sum_{i=1}^{n} k_{h}(x_{i} - x)}
+\end{align}
+
+
+For $p= 1$, we call this a local linear estimator, and we have the
+explicit result
+\begin{align}
+  \label{eq:55}
+  \hat m_{h}(x; 1) = \frac{1}{n} \sum_{i=1}^{n} \frac{S_{0, h}(x) -
+    S_{1, h}(x)(x_{i} - x)}{S_{2, h}(x) S_{0, h}(x) - S_{1, h}(x)^{2}}
+  K_{h}(x_{i} - x) Y_{i}
+\end{align}
+with
+\begin{align}
+  \label{eq:56}
+  S_{r, h}(x) = \frac{1}{2} \sum_{i=1}^{n} (x_{i} - x)^{r} K_{h}(x_{i}
+  - x)
+\end{align}
+
+All local polynomial estimators of the form
+\begin{align}
+  \label{eq:57}
+  \sum_{i=1}^{n} W(x_{i}, x) Y_{i}
+\end{align}
+This type of estimator is called a linear estimator.   This set of
+weights $\{ W(x_{i}, x) \}$ is called the \textbf{effective kernel}.
+
+\subsection{Mean Squared Error Approximations}
+
+For convenience, let $x_{i} = \frac{i}{n}$.  We consider the following
+conditions:
+
+\begin{enumerate}
+\item $m$ is twice continuosuly differentiable on $[0, 1]$ and is bounded, $v$ is continuous.
+\item $h = h_{n}, h_{n} \rightarrow 0$, $nh \rightarrow \infty$.
+\item $K$ is a nonnegative probability density, symmetric, has zeros
+  outside of $[-1, 1]$. $R(K) = \int K^{2}(x) dx < \infty$, and
+  $\mu_{2}(K) = \int x K^{2}(x) < \infty$.
+\end{enumerate}
+
+\begin{thm}
+  \label{defn:nonparametric_regression:1}
+  Under the conditions previously, for $x \in (0, 1)$, we have
+  \begin{align}
+    \label{eq:58}
+    MSE(\hat m_{h}(x; 1)) = \frac{1}{nh} R(K) v(x) + \frac{1}{4} h^{4}
+    (m''(x))^{2} \mu_{2}^{2}(K) + o(\frac{1}{nh} + h^{4})
+  \end{align}
+\end{thm}
+
+\subsection{Splines}
+\label{sec:splines}
+
+
+Let $n \geq 3$, and consider for a fixed homoscedastic design
+\begin{align}
+  \label{eq:64}
+  Y_{i} = m(x_{i}) + \sigma \epsilon_{i}
+\end{align} where $\epsilon_{i}$ are \iid with $\E{\epsilon_{i}} = 0$,
+$\Var{\epsilon_{i}} = 1$.
+
+Another natural idea to estimate the regression curve $m$ is to
+balance the fidelity of the fit to the data and the roughness of the
+resulting curve.  This can be done by minimizing
+\begin{align}
+  \label{eq:65}
+  \sum_{i=1}^{n} (Y_{i} - \tilde g(x_{i}))^{2} + \lambda \int \tilde
+  g''(x)^{2} dx
+\end{align} over $\tilde g \in S_{2}[a, b]$, the set of twice
+continuously differentiable functions on $[a, b]$. $\lambda$ is a
+regularization parameter. As $\lambda \rightarrow \infty$, the curve
+is very close to the linear regression line. As $\lambda \rightarrow
+0$, the resulting curve closely fits the observations.
+
+\begin{defn}
+  \label{defn:nonparametric_regression:2}
+  A cubic spline is a function $g: [a, b] \rightarrow \R$ satisfies
+  \begin{enumerate}
+  \item $g$ is a cubic polynomial on $[(a, x_{1}), (x_{1}, x_{2}),
+    \dots, (x_{n}, b)]$.
+  \item $g$ is twice continuously differentiable on $[a, b]$.
+  \end{enumerate}
+\end{defn}
+
+\begin{proposition}
+  For a given $\mathbf{g} = (g_{1}, \dots, g_{n}^{T})$, there exists a unique
+  natural cubic spline $g$ with knots $x_{1}, \dots, x_{n}$ - so
+  $g(x_{i}) = g_{i}$ for $i = 1, \dots , n$.  Moreover, there exists a
+  nonnegative definite matrix $K$ such that
+  \begin{equation}
+    \label{eq:59}
+    \int_{a}^{b} g''(x)^{2}dx = g^{T}K g
+  \end{equation}
+  We call $g$ the \textbf{natural cubic spline} interploant to $g$ at
+  $x_{1}, \dots, x_{n}$.
+\end{proposition}
+
+\begin{thm}
+  \label{defn:nonparametric_regression:3}
+  For any $\tilde g \in S_{2}[a, b]$ satisfying $\tilde g(x_{i})=
+  g_{i}, i=1, \dots, n$, the cubic spline interpolant to $g$ at
+  $\mathbf{g} = g_{1}, \dots, g_{n}$ uniquely minimizes
+  \begin{align}
+    \label{eq:66}
+    \int_{a}^{b} \tilde g''(x)^{2} dx
+  \end{align} over $\tilde g \in S_{2}[a, b]$.
+\end{thm}
+
+Recall that $Y_{i} = m(x_{i}) + \sigma \epsilon_{i}$, $m \in
+S_{2}[a,b]$, $0 < x_{1} < \dots < x_{n} < b$.  We seek to minimize
+\begin{align}
+  \label{eq:70}
+  \mathcal{G}_{\lambda}(\tilde g) = \sum_{i=1}^{n} (Y_{i} - \tilde
+  g(x_{i}))^{2} + \lambda \int_{a}^{b}  \tilde g''(x)^{2} dx 
+\end{align} over $\tilde g \in S_{2}[a, b]$.
+
+\begin{thm}
+  \label{defn:nonparametric_regression:4}
+  For each $\lambda > 0$, there is a unique solution $\hat g$ minimizing
+  $\mathcal{G}(\tilde g)$over $\tilde g \in S_{2}[a, b]$.  This is the
+  natural cubic spline
+  \begin{equation}
+    \label{eq:71}
+    \hat g = (I + \lambda K)^{-1} Y
+  \end{equation}  
+\end{thm}
+
+Cross validation method validates the estimated curve without the
+$i$-th observation by comparing the $i$-th value
+\begin{align}
+  \label{eq:74}
+  CV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} (Y_{i} - \hat g_{-i, \lambda}(x_{i}))^{2}
+\end{align}
+
+where $\hat g_{-i, \lambda}$ is chosen by minimizing
+$\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
+
+\begin{align}
+  \label{eq:76}
+  \sum_{j \neq i}^{n} (Y_{j} - \tilde g(x_{j}))^{2} + \lambda
+  \int_{a}^{b} \tilde g''(x)^{2} dx
+\end{align} (*)
+
+\begin{thm}
+  \label{defn:nonparametric_regression:5}
+  \begin{align}
+    \label{eq:75}
+    CV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} (\frac{Y_{i} - \hat
+      g_{\lambda}(x_{i})}{1 - A_{ii}})^{2}
+  \end{align}
+  where $A = (I + \lambda K)^{-1}$ and
+  \begin{equation}
+    \label{eq:80}
+    \int_{-\infty}^{\infty}  \hat g_{\lambda}''(x)^{2} dx = \hat
+    g_{\lambda}(\mathbf{x})^{T} K \hat g_{\lambda}(\mathbf{x})
+  \end{equation}
+\end{thm}
+
+\section{Nearest Neighbour Classification}
+\label{sec:near-neighb-class}
+
+\begin{defn}
+  \label{sec:near-neighb-class-1}
+  A function $g: \R^{d} \rightarrow \{ 0, 1 \}$ is called a
+  classifier. If the distribution of $(X, Y)$ are known, we can
+  minimize the risk $\Prob{g(X) \neq Y} = L(g)$ over $g: \R^{d}
+  \rightarrow \{ 0, 1 \}$. The minimizer $g^{\star}$ is called a Bayes
+  classifier, and $L(g^{d})$ is called the Bayes risk.
+\end{defn}
+
+\begin{lem}
+  For a classifier $\tilde g$ whcih has the form
+  \begin{equation}
+    \label{eq:90}
+    \tilde g(x) =
+    \begin{cases}
+      1 & \hat \nu(x) > \frac{1}{2} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation} we have
+  \begin{equation}
+    \label{eq:93}
+    \Prob{\tilde g(X) \neq Y} - L^{\star} \leq 2 \E{\| \hat \nu(X) - \nu(X)}
+  \end{equation}
+\end{lem}
+
+\begin{defn}[$k$-nearest neighbour classification]
+  \label{defn:nearest_neighbour_classification:1}
+  A \knn classifier $g_{n}$ is defined by
+  \begin{align}
+    \label{eq:94}
+    g_{n}(x) =
+    \begin{cases}
+      1 & \sum_{i=1}^{n} W_{ni}(X) \I{Y_{i} = 1} > \sum_{i=1}^{n}
+      W_{ni}(X) \I{Y_{i} = 0} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{align}
+  which is equivalent to
+  \begin{align}
+    \label{eq:96}
+    \sum_{i=1}^{n} W_{ni}(X) \I{Y_{i} = 1} > \frac{1}{2} \iff
+    \sum_{i=1}^{n} W_{ni}(X) Y_{i} > \frac{1}{2}
+  \end{align}
+  
+  where
+  \begin{align}
+    \label{eq:95}
+    W_{ni}(X) = \frac{1}{k} 
+  \end{align} if $X_{i}$ is a $k$-nearest neighbour of $X$, and zero otherwise.
+\end{defn}
+
+\begin{defn}
+  \label{defn:nearest_neighbour_classification:2}
+  For a certain distirbution of $(X, Y)$, we say $g_{n}$ is consistent
+  if $\Prob{g_{n}(X) \neq Y} - L^{\star} \rightarrow 0$ .
+
+  We say $g_{n}$ is strongly consistent if
+  \begin{equation}
+    \label{eq:97}
+    \Prob{\lim_{n \rightarrow \infty} L(g_{n}) = L(g^{\star})} = 1
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{defn:nearest_neighbour_classification:3}
+  If $k \rightarrow \infty$, $\frac{k}{n} \rightarrow 0$, then for all
+  distributions of $(X, Y)$, the \knn estimates $g_{n}$ are consistent.
+\end{thm}
+
+\section{Minimax Lower Bounds}
+\label{sec:minimax-lower-bounds}
+
+
+\begin{defn}
+  \label{sec:minimax-lower-bounds-1}
+  As a first attempt to understand a nonparametric estimation problem,
+  we consider a minimax risk,
+  \begin{equation}
+    \label{eq:105}
+    R(\Theta) = \int_{\tilde \theta} \sup_{\theta \in \Theta}
+    \E_{\theta} L(\tilde j, \theta).
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{sec:minimax-lower-bounds-2}
+  If we can find our $\hat \theta^{\star}$, which minimizes
+  $\sup_{\theta \in \Theta} \E_{\theta} L(\tilde \theta, \theta)$ we
+  call $\hat \theta^{\star}$ our minimax estimator. However, it is
+  very difficult to find $\hat \theta^{\star}$. Let $c \gamma_{n} \leq
+  R(\Theta) \leq C \gamma_{n}$, we call $\gamma_{n}$ is minimax rate
+  of convergence.
+\end{defn}
+
+\begin{lem}[Le Cam's two points lemma]
+  Let $\mathcal{P}$ be probability measures on $(\mathcal{X}, \mathcal{A})$,
+  and let $(\Theta, d)$ be the pseudo-metric space, with
+  \begin{equation}
+    \label{eq:108}
+    d: \Theta \times \Theta \rightarrow [0, \infty)
+  \end{equation} given by
+  \begin{equation}
+    \label{eq:109}
+    d(\theta_{1}, \theta_{2}) = d(\theta_{2}, \theta_{1}),
+    d(\theta_{1}, \theta_{2}) + d(\theta_{2}, \theta_{3}) \geq A
+    d(\theta_{1}, \theta_{3})
+  \end{equation}
+
+  Let $\theta: \mathcal{P} \rightarrow \Theta$, $\theta(P)$ is the
+  parameter of interest ($P \in \mathcal{P}$).  With $\theta_{0} =
+  \theta(P_{0})$ , $\theta_{1} = \theta(P_{1})$, under two conditions,
+  \begin{enumerate}
+  \item $d(\theta_{0}, \theta_{1} ) \geq \delta > 0$,
+  \item $h^{2}(P_{0}, P_{1}) \leq C < 1$
+  \end{enumerate}
+  where $h^{2}(P_{0}, P1)$ is the Hellinger distance $\int (\sqrt
+  {dP_{0}} - \sqrt{dP_{1}})^{2}$,
+  the we have for all estimators $\tilde \theta$,
+  \begin{equation}
+    \label{eq:110}
+    \sup_{P \in \mathcal{P}} \E_{P} d(\tilde \theta, \theta(P)) \geq
+    \frac{A \delta}{2}(1 - \sqrt{C})
+  \end{equation}
+\end{lem}
+
+\begin{thm}[Nonparametric regression]
+  \label{defn:minimax_lower_bounds:1}
+  Let $Y_{i} = m(x_{i}) + \epsilon_{i}$, $\epsilon_{i} \sim N(0, 1)$,
+  $x_{i} = \frac{i}{n}$, $m \in \Theta$ with $\Theta$ the set of all
+  twice continuously differentiable functions on $[0, 1]$, $m''(x) <
+  \infty$.
+  Then for any estimator $\tilde m$ and any $x_{0} \in [0, 1]$,
+  \begin{equation}
+    \label{eq:115}
+    \sup_{m \in \Theta} \E{(\tilde m(x) - m(x_{0}))^{2}} \geq C n^{-\frac{4}{5}}
+  \end{equation}
+\end{thm}
+
+\section{Extreme Value Theory}
+\label{sec:extreme-value-theory}
+
+Let $X_{n}$ be an IID sample from a distribution function $F$, and
+denote $X_{(n)} = \max \{ X_{1}, \dots, X_{n} \}$ as the maximum order
+statistic.
+
+Without any normalization, $X_{(n)} \rightarrow x_{\star} = \inf \{ x:
+F(x) = 1 \}$.
+
+This is not overly interesting, since the limit distribution is
+degenerate (we call $F$ non-degenerate if there does not exists $a \in
+\R$ such that $F(x) = \I{x \geq a}$)
+
+We may ask if there exists $\{ a_{n} \} > 0$, $\{ b_{n} \} > 0$, and a
+nondegenerate $G$ such that
+\begin{equation}
+  \label{eq:118}
+  \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} \rightarrow G(x)  
+\end{equation} for all continuity points $x$ of $G$
+
+Classical extreme value theory starts by asking:
+\begin{enumerate}
+\item What kind of $G$ appears in the limit of \eqref{eq:118}?
+\item Cna we characterize $F$ such that \eqref{eq:118} holds for a
+  specific limit distribution $G$?
+\end{enumerate}
+
+For the first question, we have the Extremal Types theorem. For the
+second question, we have the ``domain of attraction'' problem.
+
+Recall that $\Prob{X_{(n)} \leq x} = F(x)^{n}$.  We say that $F$ is in
+the domain of attraction of $G$ ($F \in D(G)$) if there exists $\{ a_{n} \} > 0$, $\{
+b_{n} \} $ and a non-degenerate $G$ such that
+\begin{equation}
+  \label{eq:119}
+  \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} = [\text{$F(a_{n} x +
+    b_{n})^{n} \rightarrow G(x)$ for all continuity points $x$ of $G$}].
+\end{equation} and write $F(a_{n} x + b_{n})^{n} \hookrightarrow G(x)$.
+
+We say that $G_{1}$ and $G_{2}$ are of same type if $G_{1}(ax + b) =
+G_{2}(x)$ for some $a > 0, b$.
+
+The next lemma shows that if $F \in D(G_{1})$ and $F \in D(G_{2})$,
+then $G_{1}$ and $G_{2}$ are of the same type.
+
+\begin{lem}
+  Suppose $X_{n}$ is an IID sample from $F$ and there exists $\{ a_{n}
+  \} > 0, \{ b_{n} \}$ and non-degenerate $G$ such that $F(a_{n} x
+  +b_{n})^{n} \hookrightarrow G(x)$ .  Then there exists $\{ \alpha_{n} \} > 0,
+, \{ \beta_{n} \}$ and non-degenerate $G_{\star}$ such that
+$F(\alpha_{n} x _{ \beta_{n}})^{n} \hookrightarrow G_{\star}(x)$. if and
+only if $\frac{\alpha_{n}}{a_{n}} \rightarrow a$ for some $a > 0$, and
+$\frac{\beta_{n} - \beta}{a_{n}} \rightarrow b$ for some $b$.
+
+Then we can let $G_{\star}(x) = G(ax + b)$.
+\end{lem}
+
+
+\begin{defn}
+  \label{defn:extreme_value_theory:1}
+  $G$ is \textbf{max-stable} if for every $n \in \N$, there exists
+  $\{ a_{n} \} > 0, \{ b_{n} \} $ such that $G^{n}(a_{n}x + b_{n}) = G(x)$
+\end{defn}
+
+\begin{thm}
+  \label{defn:extreme_value_theory:2}
+  $D(g)$ is non-empty if and only if $G$ is max-stable.
+\end{thm}
+
+
+\begin{thm}
+  \label{defn:extreme_value_theory:3}
+  If $F \in D(G)$, then $G$ must belong to the following distributions
+  (within type):
+
+  \begin{enumerate}
+  \item Frechet - $G_{1, \alpha}(x) = \exp(-x^{-\alpha})$, $x > 0$,
+    $\alpha > 0$
+  \item Negative Weibull - $G_{2, \alpha} = \exp(- (-x)^{\alpha})$, $x
+    < 0$, $\alpha > 0$
+  \item Gumbel - $G_{3}(x) = \exp(-\exp(-x))$, $x \in \R$.
+  \end{enumerate}
+
+  Conversely, these distributions can appear as such limits in \eqref{eq:118}.
+\end{thm}
+
+\begin{remark}
+  \begin{enumerate}
+  \item Using $X_{(1)} = -\max \{ -X_{1}, \dots, -x_{n} \} $, we have
+    equivalent theorems in terms of normalized minima.
+  \item Sometimes, we cannot have nondegenreate $G$ of normalized
+    maxima  - for example $X_{1}, \dots, X_{n} \sim
+    Bern(\frac{1}{2})$, $X_{(n)}$.
+  \item We can combine these three types into Generalized Extreme
+    Value Distribution (GEV) -
+    \begin{equation}
+      \label{eq:122}
+      G(x; \mu, \sigma, \gamma) = \exp(- (1 + \gamma(\frac{x-\mu}{\sigma}))^{-\frac{1}{\gamma}})
+    \end{equation} with $1 + \gamma(\frac{x - \mu}{\sigma}) > 0$, $\mu
+    \in \R, \gamma \in \R, \sigma > 0$.
+  \end{enumerate}
+
+  We have Frechet corresponds to $\gamma > 0$, $\alpha =
+  \frac{1}{\gamma} $, NW is $\gamma < 0$, $\alpha =
+  -\frac{1}{\gamma}$, and Gumbel corresponds to the case where $\gamma
+  \rightarrow 0$.
+\end{remark}
+
+\subsection{Necessary and Sufficient Conditions for Convergence}
+\label{sec:necess-suff-cond}
+
+\begin{defn}
+  \label{sec:necess-suff-cond-1}
+  We say a function $l: [C, \infty] \rightarrow (0, \infty)$ is ``slowly
+varying'' if $\lim_{x \rightarrow \infty} \frac{l(tx)}{l(x)} = 1$ for
+all $t > 0$.  For example, $l (x) = \log x, \log \log x, (\log
+x)^{\alpha}$.  
+
+We say a function $r_{\alpha}: [C, \infty) \rightarrow (0, \infty)$ is
+``regularly varying'' with an index $a \in \R$ if $r_{\alpha}(x) =
+x^{-\alpha}l(x)$ where $l$ is slowly varying - so $r_{2}(x) = x^{-2}
+\log x$.
+
+We define an \textbf{expected residual lifetime} as
+\begin{align}
+  \label{eq:120}
+  R(x) = \E{X - x | X > x} = \frac{1}{1 - F(x)} \int_{x}^{x_{\star}}
+  (1 - F(y)) dy
+\end{align} where $x_{\star} = \inf \{ x : F(x) = 1 \}$, and
+$\overline F(x) = 1 - F(x)$
+\end{defn}
+
+\begin{thm}
+  \label{defn:extreme_value_theory:4}
+  $F \in D(G_{1, \alpha})$ if and only if $x_{\star} = \infty$,
+  $\overline F(x) = x^{-\alpha} l(x)$ where $l$ is slowly varying.  We
+  can choose $b_{n} = 0$, $a_{n} = F^{-1}(1 - \frac{1}{n})$ for which
+  $F^{n}(a_{n} x + b_{n}) \hookrightarrow G_{1, \alpha}(x)$ is
+  satisfied.
+
+  $F \in D(G_{2, \alpha})$ if and only if $x_{\star} < \infty$,
+  $\overline F(x_{\star} - \frac{1}{x} ) = x^{-\alpha} l(x)$, with $l$
+  slowly varying for $x > 0$.  We can choose $b_{n} = x_{\star}$,
+  $a_{n} = x_{\star} - F^{-1}(1 - \frac{1}{n})$ for convergence.
+
+  $F \in D(G_{3})$ if and only if
+  \begin{align}
+    \label{eq:124}
+    \frac{\overline F(x + t R(x))}{\overline F(x)}  \rightarrow e^{-t}
+  \end{align} We can choose $b_{n} = F^{-1}(1 - \frac{1}{n})$, $a_{n}
+  = R(b_{n})$.
+\end{thm}
+
+\begin{lem}[$\star$]
+  Suppose there exists $a_{n} > 0$, $b_{n}$ such that $n(1 - F(a_{n}
+  x + b_{n})) \rightarrow{ u(x)}$.  Then
+  \begin{align}
+    \label{eq:125}
+    F^{n}(a_{n} x + b_{n}) \hookrightarrow \exp(-u(x))
+  \end{align}
+\end{lem}
+
+
+\bibliographystyle{plainnat}
+\bibliography{../../common/bibliography}
+\end{document}

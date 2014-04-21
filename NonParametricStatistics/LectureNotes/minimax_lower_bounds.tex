@@ -131,7 +131,7 @@ Lucrem Le Cam.
   Then for any estimator $\tilde m$ and any $x_{0} \in [0, 1]$,
   \begin{equation}
     \label{eq:115}
-    sup_{m \in \Theta} \E{(\tilde m(x) - m(x_{0}))^{2}} \geq C n^{-\frac{4}{5}}
+    \sup_{m \in \Theta} \E{(\tilde m(x) - m(x_{0}))^{2}} \geq C n^{-\frac{4}{5}}
   \end{equation}
 \end{thm}
 
@@ -163,8 +163,7 @@ Lucrem Le Cam.
   Checking the second condition, we have
   \begin{align}
     \label{eq:117}
-    h^{2}(P_{0}, P_{1}) \leq KL(P_{0}, P_{1})  \\
-    &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \log
+    h^{2}(P_{0}, P_{1}) \leq KL(P_{0}, P_{1}) &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \log
     \frac{\prod_{i=1}^{n} \phi(i_{i})}{\prod_{i=1}^{n} \phi(u_{i} -
       m_{1}(x_{i}))} d u_{1} \dots d u_{n} \\
     &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \sum_{i=1}^{n} \log
