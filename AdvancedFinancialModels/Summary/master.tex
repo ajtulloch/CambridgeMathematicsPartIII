@@ -54,12 +54,13 @@
 
 \begin{thm}
   \label{sec:arbitrage-theory-6}
-  If an investment/consumption strategy is an arbitrage for the
-  market model, there exists a pure investment strategy $H'$ and a
-  non-random time horizon $T'$ such that
+  If a numeraire exists, then we have that if an
+  investment/consumption strategy is an arbitrage for the market
+  model, there exists a pure investment strategy $H'$ and a non-random
+  time horizon $T'$ such that
   \begin{enumerate}
   \item $X_{0}(H') = 0$,
-  \item $X_{T'}(H') \geq 0$almost surely,
+  \item $X_{T'}(H') \geq 0$ almost surely,
   \item $\Prob{X_{T'}(H') > 0} > 0$.
   \end{enumerate}
 \end{thm}
@@ -69,6 +70,20 @@
   A market model has no arbitrage if and only if there exists a state
   price density.
 \end{thm}
+
+\begin{proof}
+  $(\Rightarrow)$ $H_{0} = \E{Y P_{1}}$, so if $0 \leq \E{Y H \cdot P_{1}} = H
+  \cdot \E{Y P_{1}} = H \cdot P_{0}  = 0$, so by pigeonhole $H \cdot
+  P_{1} = 0$.
+  $(\Leftarrow)$ By separating hyperplane argument, we have $P = \{
+  \E{Y P_{1}} | Y > 0, \E{Y \| P_{1} \|} < \infty \} $, so either
+  $P_{0} \in P$ (and so state price density exists), or there exists
+  $H$ with for all $p \in P$, $H \cdot (p - P_{0}) \geq 0$ (with
+  $p^{\star} \in P$) with $H \cdot (p^{\star} - P_{0}) > 0$.
+
+  Then setting $Y = \epsilon Y_{0}$, we have a pigeonhole argument
+  showing that $P(X - H \cdot P_{0}) = 0$, with $X \geq 0$ a.s.
+\end{proof}
 
 \begin{defn}
   \label{sec:arbitrage-theory-14}
@@ -98,6 +113,11 @@
   $X^{\tau}$ is a martingale.
 \end{thm}
 
+\begin{proof}
+  The process $K_{t} = \I{t \leq \tau}$  is predictable, bounded, so
+  $X^{\tau}$ is a martingale transform and hence a martingale.
+\end{proof}
+
 \begin{defn}
   \label{sec:arbitrage-theory-11}
   A local martingale is an adapted process $X_{t}$ such that there
@@ -118,15 +138,24 @@
   $X$ is a true martingale.
 \end{thm}
 
+\begin{proof}
+  Conditional dominated convergence theorem, $X_{t \wedge \tau_{n}}$
+  is a martingale.
+\end{proof}
+
 \begin{thm}
   \label{sec:arbitrage-theory-15}
   Let $X$ be a local martingale, with $X_{t} \geq 0$ for all $t \geq
   0$.  Then $X$ is a supermartingale.
 \end{thm}
 
+\begin{proof}
+  Fatau's Lemma.
+\end{proof}
+
 \begin{thm}
   \label{sec:arbitrage-theory-16}
-  If $X$ is a discrete-time local marginale with $X_{t} \geq 0$ for
+  If $X$ is a discrete-time local martingale with $X_{t} \geq 0$ for
   all $t \geq 0$. Then $X$ is a martingale.
 \end{thm}
 
@@ -148,7 +177,7 @@
 \begin{defn}
   \label{sec:arbitrage-theory-20}
   An equivalent martingale measure is any probability measure $\Q$
-  equivalent ot $\Prob$ such that the discounted price process
+  equivalent opt $\Prob$ such that the discounted price process
   $\frac{S_{t}}{N_{t}}$ is a martingale under $\Q$, where $N_{t}$ is
   the numeraire price process.
 \end{defn}
@@ -187,14 +216,18 @@
 \begin{thm}
   \label{sec:pric-hedg-cont-3}
   Suppose that our market has no arbitrage.  Let $\xi_{T}$ be the
-  payout of a Euorpena option, and let $H$ be the replicating strategy.
+  payout of a European option, and let $H$ be the replicating strategy.
   Suppose that the option is priced at $\xi_{t}$ for $0 \leq t \leq
-  T$.  Then if the autogment market with the option has no arbitrage,
+  T$.  Then if the augmented market with the option has no arbitrage,
   \begin{equation}
     \label{eq:7}
     \xi_{t} = X_{t}(H)
   \end{equation} for all $0 \leq t \leq T$.
 \end{thm}
+
+\begin{proof}
+  First fundamental theorem applied to $(P, \xi)$.
+\end{proof}
 
 \begin{thm}
   \label{sec:pric-hedg-cont-4}
@@ -227,6 +260,11 @@
   exists a unique state price density $Y$ such that $Y_{0} = 1$.
 \end{thm}
 
+\begin{proof}
+  Uniqueness follows from $Y = Y'$, then considering $\xi = \I{Y_{T} >
+  Y'_{T}}$ and pigeonhole.
+\end{proof}
+
 \begin{thm}
   \label{sec:pric-hedg-cont-7}
   Suppose the adapted process $\xi_{t}$ specifies the payout of an
@@ -250,6 +288,16 @@
   \end{equation} where $M$is a martingale and $A$is a predictable
   non-decreasing process with $M_{0} = A_{0} = 0$.
 \end{thm}
+
+\begin{proof}
+  $M_{0} = 0 = A_{0}$,
+  \begin{align}
+    \label{eq:30}
+    M_{t+1} = M_{t} + U_{t+1} - \E{U_{t+1} | \mathcal{F}_{t}} \\
+    \label{eq:31}
+    A_{t+1} = A_{t} + U_{t} - \E{U_{t+1} | \mathcal{F}_{t}}.
+  \end{align} and telescope.
+\end{proof}
 
 \begin{defn}
   \label{sec:pric-hedg-cont-9}
@@ -416,7 +464,7 @@
 
 \begin{thm}
   \label{sec:brown-moti-stoch-11}
-  Let $W_{t}$ be an $m$-dimensional Browniam motion, with
+  Let $W_{t}$ be an $m$-dimensional Brownian motion, with
   \begin{align}
     \label{eq:22}
     Z_{t} = \exp(-\frac{1}{2} \int_{0}^{t} \| \alpha_{s} \|^{2} ds +
@@ -477,7 +525,7 @@
 \begin{defn}
   \label{sec:arbitr-theory-cont-4}
   An admissible investment/consumption strategy $(H, c)$ is called an
-  absolute arbitrage if and onyl if there is a non-random time $T$
+  absolute arbitrage if and only if there is a non-random time $T$
   such that $X_{0}(H) = 0 = X_{T}(H)$ a.s. and $\Prob{\int_{0}^{T}
     c_{s} ds > 0} > 0$.
 \end{defn}
@@ -494,6 +542,18 @@
   of class $D$, then there are no $L$-admissible absolute arbitrages.
 \end{thm}
 
+\begin{proof}
+  Using the self-financing condition $d X_{t} = d (H_{t} \cdot dP_{t})
+  = H_{t} \cdot dP_{t} - c_{t} dt$, we obtain $d(X_{t} Y_{t}) = H_{t}
+  \cdot d(Y_{t} P_{t}) - Y_{t} c_{t} dt$.
+
+  Then if $YL$ is of class $D$, we can show $\E{\int_{0}^{T} H_{s}
+    \cdot d(Y_{s} P_{s}) + L_{T} Y_{T}} = \E{L_{T} Y_{T}}$ be Fatau's,
+  stopped local martingales, and uniform integrability.  Then we show
+  $\E{\int_{0}^{T} Y_{s} c_{s} ds} = \E{\int_{0}^{T} H_{s} \cdot
+  (dY_{s} P_{s})} \leq 0$ and so $c_{t} = 0$ a.s.
+\end{proof}
+
 \begin{defn}
   \label{sec:arbitr-theory-cont-7}
   A family of random variables $\mathcal{Z}$ is called uniformly
@@ -503,8 +563,8 @@
 
 \begin{thm}
   \label{sec:arbitr-theory-cont-8}
-  Let $Z_{1}, \dots, Z_{n}$ be a faimly of integrable random
-  variables. The following statments are equivalent:
+  Let $Z_{1}, \dots, Z_{n}$ be a family of integrable random
+  variables. The following statements are equivalent:
   \begin{enumerate}
   \item $Z_{n} \rightarrow Z_{\infty}$ in $L^{1}$, and
   \item $(Z_{n})$is uniformly integrable and $Z_{n} \rightarrow
@@ -536,7 +596,7 @@
 \begin{defn}
   \label{sec:arbitr-theory-cont-10}
   A relative arbitrage is a pure investment strategy with wealth
-  process $X$ suc that there is a non-random time $T > 0$ satisfying
+  process $X$ such that there is a non-random time $T > 0$ satisfying
   $\frac{X_{T}}{N_{T}} \geq \frac{X_{0}}{N_{0}}$ a.s and
   $\Prob{\frac{X_{T}}{N_{T}} > \frac{X_{0}}{N_{0}}} > 0$.
 \end{defn}
@@ -544,13 +604,13 @@
 \begin{defn}
   \label{sec:arbitr-theory-cont-11}
   An equivalent (local) martingale measure relative to the numeraire
-  with price $N$ is a probabilty measure $\Q$ equivalent to $\Prob$ such
-  that $\frac{S}{N}$ is a local martnigale.
+  with price $N$ is a probability measure $\Q$ equivalent to $\Prob$ such
+  that $\frac{S}{N}$ is a local martingale.
 \end{defn}
 
 \begin{thm}
   \label{sec:arbitr-theory-cont-12}
-  Let $\Q$ be an equivalent local martinagle measure.  Suppose
+  Let $\Q$ be an equivalent local martingale measure.  Suppose
   $\frac{L}{N}$ is locally in $\Q$-class $D$.  Then there are no
   $L$-admissible relative arbitrages.
 \end{thm}
@@ -570,11 +630,18 @@
     \lambda_{s}\|^{2}}{2}) ds - \int_{0}^{t} \lambda_{s} \cdot
   dW_{s})$ for a constant $Y_{0} > 0$ - or equivalently, $dY_{t} =
   Y_{t}(-r_{t} dt - \lambda_{t} \cdot dW_{t})$.  Then $Y$ is a
-  state-price density.  Furthermore, if the fitlration is generated by
+  state-price density.  Furthermore, if the filtration is generated by
   the $m$-dimensional Brownian motion $W$, all state price densities
   have this form.
 \end{thm}
 
+\begin{proof}
+  Show $YB$ and $YS$ are local martingales. 
+  
+  Martingale representation theorem shows that all are of the form
+  $M_{t} = M_{0} \exp(-\frac{1}{2} \int_{0}^{t} \| \lambda_{s} \|^{2}
+  ds - \int_{0}^{t} \lambda_{s} \cdot dW_{s})$. 
+\end{proof}
 \begin{thm}
   \label{sec:arbitr-theory-cont-15}
   Suppose $\lambda$ is a predictable process with $\sigma_{t}
@@ -583,7 +650,7 @@
     \lambda_{s} \cdot dW_{s}}$ is a true martingale, then the measure
   $\Q$ defined by $\frac{d\Q}{d\Prob} = M_{T}$ is an equivalent
   martingale measure.  In particular, the stock price dynamics
-  aregiven by
+  are given by
   \begin{align}
     \label{eq:6}
     dS^{i}_{t} = S^{i}_{t}(r_{t} dt + \sum_{j} \sigma^{ij}_{t} d\hat W_{t}^{j})
@@ -593,7 +660,6 @@
 
 \section{Hedging Contingent Claims in Continuous Time Models}
 \label{sec:hedg-cont-claims}
-
 \begin{thm}
   \label{sec:hedg-cont-claims-1}
   Suppose $m=d$ and the $d \times d$ matrix $\sigma_{t}$ is invertible
@@ -613,6 +679,7 @@
   \geq X_{0}(H)$.
 \end{thm}
 
+
 \begin{defn}
   \label{sec:hedg-cont-claims-2}
   The Black-Scholes model is given by the pair of equations
@@ -623,7 +690,7 @@
   \end{align}
 
   Consider pricing a European option with payoff $\xi_{T} = g(S_{T})$.
-  The unique state price desnity with $Y_{0} = 1$ is given by $Y_{t} =
+  The unique state price density with $Y_{0} = 1$ is given by $Y_{t} =
   \exp((r - \frac{\lambda^{2}}{2})t - \lambda W_{t}$ with $\lambda =
   \frac{\mu - r}{\sigma}$.
 
@@ -665,6 +732,13 @@
     S_{t}}{B_{t}}$.
 \end{thm}
 
+\begin{proof}
+  Ito's formula on $dV(t, S_{t})$, and show $V(t, S_{t})= \phi_{t}
+  B_{t} + \pi_{t} S_{t}$, and $dV(t, S_{t}) = \phi_{t} dB_{t} =
+  \pi_{t} \cdot dS_{t}$, so $H = (\phi, \pi)$ is a self-financing
+  strategy that replicates $V(t, S_{t})$ as required.
+\end{proof}
+
 \begin{thm}
   \label{sec:hedg-cont-claims-4}
   Suppose that $C_{0}(T, K) = \E{\Q}{e^{-rT}(S_{T} - K)^{+}}$.  Then
@@ -696,7 +770,7 @@ TODO - put in more on local volatility models?
 \begin{thm}
   \label{sec:interest-rate-models-3}
   Let $dB_{t} = B_{t} r_{t} dt$ where $r_{t}$ is the sport interest
-  rate.  Then there is no arbitrage realtive to the numeraire if there
+  rate.  Then there is no arbitrage relative to the numeraire if there
   exists an equivalent measure $\Q$ such that the discounted bond
   price process $\frac{P(t, T)}{B_{t}}_{t \in 0, T}$ is a local
   martingale for all $T > 0$.  IN particular, there is no arbitrage if
