@@ -13,7 +13,7 @@
   \label{sec:existence-1}
   For $C \subseteq \R^{n}$, define $\delta_{C}$ as
   \begin{equation}
-    \label{eq:1} \delta_{C}(x) = 
+    \label{eq:1} \delta_{C}(x) =
     \begin{cases}
       0 & x \in C \\
       \infty & x \notin C
@@ -32,7 +32,7 @@
       \argmin f =
       \begin{cases}
         \emptyset & f \equiv \infty \\
-        \{ x \in \R^{n} | f(x) = \inf f \} & f < \infty 
+        \{ x \in \R^{n} | f(x) = \inf f \} & f < \infty
       \end{cases}
     \end{equation}
   \item $f$ is \textbf{proper} if and only if $\dom f \neq \emptyset$
@@ -45,7 +45,7 @@
   For $f: \R^{n} \rightarrow \overline \R$, denote
   \begin{equation}
     \label{eq:2}
-    \epi f = \{ (x, \alpha) \in \R^{n} \times \R | f(x) \leq \alpha \} 
+    \epi f = \{ (x, \alpha) \in \R^{n} \times \R | f(x) \leq \alpha \}
   \end{equation}
 \end{defn}
 
@@ -98,18 +98,29 @@
   \end{enumerate}
 \end{thm}
 
+\begin{proof}
+  $\epi f$ can only be not closed along vertical lines.
+\end{proof}
+
 \begin{defn}
   \label{sec:existence-9}
   $f: \R^{n} \rightarrow \overline \R$ is level bounded if and only if
   $\lev_{\leq \alpha} f$ is bounded for all $\alpha \in \R$.
 \end{defn}
 
-\begin{defn}
+\begin{thm}
   \label{sec:existence-10}
   $f: \R^{n} \rightarrow \overline \R$ is level-bounded if and only if
   $f(x^{k}) \rightarrow \infty$ for all sequences $(x^{k})$ satisfying
   $\| x^{k} \|_{2} \rightarrow \infty$.
-\end{defn}
+\end{thm}
+
+\begin{proof}
+  $K(\alpha)$ such that $x^{k} \notin \lev_{\leq \alpha} f$  for $k
+  \geq K(\alpha)$ by boundedness. In reverse, find $\alpha$ with $\lev
+ _{\leq \alpha} f $ unbounded and choose $x^{k}$ in this set with
+ $f(x^{k}) \leq \alpha$.
+\end{proof}
 
 \begin{thm}
   \label{sec:existence-11}
@@ -117,6 +128,15 @@
   and proper.  Then $\inf f(x) \in (-\infty, +\infty)$ and $\argmin f$
   is nonempty and compact.
 \end{thm}
+
+\begin{proof}
+  Consider $\cap_{\alpha \in \R, a > \in f} = \argmin f$, then this is
+  countable interesction of nonempty, compact sets, so intersection is
+  nonempty.
+
+  Finiteness of inf is shown as for any $x \in \argmin f \neq
+  \emptyset$, must have $f(x) = -\infty$ contradicting properness.
+\end{proof}
 
 \begin{thm}
   \label{sec:existence-12}
@@ -231,6 +251,15 @@
   \end{enumerate}
 \end{thm}
 
+\begin{proof}
+  Reduce to one-dimensional sections $g(t) = f(x + t(x-y))$.  Take
+  $g(x+h)$, use convexity to show $g'(x) \leq \frac{g(y) -
+    g(x)}{y-x}$.
+
+  Use $g(x) = \sup_{y \in \dom g} g(y) + (y-x) g'(y)$ to show the
+  supremum over convex functions is convex.
+\end{proof}
+
 \begin{thm}
   \label{sec:convexity-10}
   \begin{enumerate}
@@ -283,6 +312,11 @@
   projection of $x$ onto $C$ is unique for every $x \in \R^{n}$.
 \end{thm}
 
+\begin{proof}
+  $f$ is lsc, level-bounded, and proper, so $\argmin f \neq
+  \emptyset$.  $f$ is strictly convex so has at most one minimizer.
+\end{proof}
+
 \begin{defn}
   \label{sec:convexity-14}
   For an arbitary set $S \subseteq \R^{n}$,
@@ -297,9 +331,18 @@
 \begin{thm}
   \label{sec:convexity-15}
   $\con S = \{ \sum_{i=0}^{p} \lambda_{i} x_{i} | x_{i} \in S,
-  \lambda_{i} \geq 0, \sum_{i=0}^{p} \lambda_{i} = 1, p \geq 0  \}$
+  \lambda_{i} \geq 0, \sum_{i=0}^{p} \lambda_{i} = 1, p \geq 0  \} = D$
 \end{thm}
 
+\begin{proof}
+  $D \subseteq \con S$ as a convex set contains all convex
+  combinations of points in $S$, thus $D \subsetq \con S$.
+
+  $\con S \subseteq D$ as taking linear combination of $x, y \in D$,
+  we have a convex combination of elements in $D$, which is in $D$, so
+  $\con S \subsetq D$.
+
+\end{proof}
 
 \begin{thm}
   \label{sec:convexity-16}
@@ -325,7 +368,7 @@
   $K \subseteq \R^{n}$ is a cone if and only if $0 \in K$ and $\lambda
   x \in K$ for all $x \in K, \lambda \geq 0$.
 
-  A cone $K$is pointed if and only if $\sum_{0=1}^{m} x_{i} = 0$,
+  A cone $K$ is pointed if and only if $\sum_{0=1}^{m} x_{i} = 0$,
   $x_{i} \in K$ implies $x_{i} = 0$ for all $i$.
 \end{defn}
 
@@ -341,11 +384,23 @@
   \end{enumerate}
 \end{thm}
 
+\begin{proof}
+  $x = \sum_{i=0}^{m} \alpha_{i} x_{i} \in K$, $a_{i} \geq 0 \iff
+  \sum_{i=0}^{m} \frac{a_{i}}{\sum_{j}^{} \alpha_{j}} x \in K$, which
+  is a convex combination.
+\end{proof}
+
 \begin{thm}
   \label{sec:cones-gener-ineq-4}
   Assume $K$ is a convex cone.  Then $K$ is pointed if and only if $K
   \cap -K = \{ 0 \} $.
 \end{thm}
+
+\begin{proof}
+  $x_{1} + x_{2} + \dots + x_{m} \in K$, $x_{1} \neq 0$, $x_{2} +
+  \dots + x_{m} = -x_{1}$, $x_{2} + \dots + x_{m} \in K$, so $x_{1}
+  \in K \cap - K$.
+\end{proof}
 
 \begin{thm}
   \label{sec:cones-gener-ineq-5}
@@ -371,11 +426,19 @@
   \end{enumerate}
 \end{thm}
 
-\begin{defn}
+\begin{defn}[$K_{n}^{LP}$]
   \label{sec:cones-gener-ineq-6}
   For any pointed, closed, convex cone $K \subseteq \R^{m}$, a matrix
   $A \in \R^{m \times n}$, and vectors $c \in \R^{n}, b \in \R^{m}$,
   define the conic problem $\inf_{x} c^{T} x s.t. Ax \geq_{K} b$.
+\end{defn}
+
+\begin{defn}[$K_{n}^{SOCP}$]
+  \begin{equation}
+    \label{eq:55}
+    K_{n}^{SOCP} = \{ x \in \R^{n} \}  | x_{n} \geq \sqrt{x_{1}^{2} +
+      \dots + x_{n-1}^{2}}.
+  \end{equation}
 \end{defn}
 
 \section{Subgradients}
@@ -387,8 +450,8 @@
   \begin{equation}
     \label{eq:12}
     \partial f(x) = \{ v \in \R^{n} | f(x) + \IP{v, y -x} \leq f(y)
-    \forall y \in \R^{n} \} 
-  \end{equation} is the set of subgradients of $f$ at $x$. 
+    \forall y \in \R^{n} \}
+  \end{equation} is the set of subgradients of $f$ at $x$.
 \end{defn}
 
 \begin{thm}
@@ -408,6 +471,15 @@
   \argmin f \iff 0 \in \partial f(x)$.
 \end{thm}
 
+\begin{proof}
+  \begin{equation}
+    \label{eq:57}
+    0 \in \partial f(x) \iff f(x) \leq f(y)\forall y \iff x \in
+    \argmin f
+  \end{equation} where properness was required since $\argmin +\infty
+  = \emptyset$ by definition.
+\end{proof}
+
 \begin{defn}
   \label{sec:subgradients-5}
   For a convex set $C \subseteq \R^{n}$ and $x \in C$, the normal cone
@@ -425,12 +497,23 @@
   Assume $C \subseteq \R^{n}$ is convex with $C \neq \emptyset$.  Then
   $\partial \delta_{C}(x) = N_{C}(x)$.
 \end{thm}
+
+\begin{proof}
+  For $x \in C$, this follows easily, and for $x \notin C$, choosing
+  $y \in C$ shows that $\partial \delta_{C}(x) = \emptyset$.
+\end{proof}
+
 \begin{thm}
   \label{sec:subgradients-7}
   Assume $C \subseteq \R^{n}$ is closed and convex with $C \neq
   \emptyset$ and $x \in \R^{n}$.  Then $y \in \proj_{C}(x) \iff x - y
   \in N_{C}(y)$.
 \end{thm}
+
+\begin{proof}
+  Follows from $y$ being the unique minimizer of $f(y') = \frac{1}{2}
+  \| y' - x \|_{2}^{2} + \delta_{C}(y')$.
+\end{proof}
 
 \begin{thm}
   \label{sec:subgradients-8}
@@ -450,9 +533,17 @@
   N_{\epi f}(x, f(x)) \} $.
 \end{thm}
 
+\begin{proof}
+  $x \notin \dom f$: choose $f(y) < \infty$, then $\partial f(x) =
+  \emptyset$.
+
+  $x \in \dom f$: $v^{T}(y-x) + (-1)(- f(x)) \leq 0 \forall (y,
+  \alpha) \in \epi f \iff (v, -1) \in N_{\epi f}(x, f(x))$.
+\end{proof}
+
 \begin{defn}
   \label{sec:subgradients-10}
-  For any set $C \subseteq \R^{n}$, define the affine hll and relative
+  For any set $C \subseteq \R^{n}$, define the affine hull and relative
   interior by
   \begin{align}
     \label{eq:15}
@@ -514,6 +605,13 @@
   \cl (\epi f)$.  Moreover, if $f$ is convex then $\cl f$ is convex.
 \end{thm}
 
+\begin{proof}
+  $(x, \alpha) \in \cl(\epi f) \iff \exists x^{k} \rightarrow x,
+  \alpha^{k} \rightarrow \alpha, f(x^{k} \leq \alpha^{k}) \iff
+  \lininf_{y \rightarrow x} f(y) \leq \alpha \iff (x, \alpha) \in \epi
+  (\cl f)$.
+\end{proof}
+
 \begin{thm}
   \label{sec:conjugate-functions-4}
   Assume $C \subseteq \R^{n}$ is closed and convex.  Then $C =
@@ -521,11 +619,21 @@
   $B_{b, \beta} = \{ x \in \R^{n} | \IP{x, b} - \beta \leq 0 \} $
 \end{thm}
 
+\begin{proof}
+  Separating hyperplane theorem - $x \in C$ then $x$ is the
+  intersection. If $x \notin C$ consider the separating hyperplane of
+  $C$ and $\{ x \} $.
+\end{proof}
+
 \begin{thm}
   \label{sec:conjugate-functions-5}
   Assume $f: \R^{n} \rightarrow \overline \R$ is proper, lsc, and
   convex.  Then $f(x) = \sup_{\text{$g$ affine, $f \leq f$}} g(x)$.
 \end{thm}
+
+\begin{proof}
+  
+\end{proof}
 
 \begin{defn}
   \label{sec:conjugate-functions-6}
@@ -778,7 +886,7 @@ and optimality conditoins
   \{ -A^{T} y' - c \in \partial k(x'), y' \in \partial h(Ax' - b) \}
   \iff \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
   \inf_{x} \phi(x) = \sup_{y} \psi(y) \} \iff \{ Ax' - b \in \partial
-  h^{\star}(y'), x' \in \partial k^{\star}(-A^{T} y' - c) \} 
+  h^{\star}(y'), x' \in \partial k^{\star}(-A^{T} y' - c) \}
 \end{align}
 \end{thm}
 
@@ -798,7 +906,7 @@ and optimality conditoins
   For any function $l: \R^{n} \times \R^{m} \rightarrow \overline \R$
   we say that $(x', y')$ is a \textbf{saddle point} of $l$ if $l(x,
   y') \geq l(x', y') \geq l(x', y)$ for all $x, y$. The set of all
-  saddle points is denoted by $\sp l$.  
+  saddle points is denoted by $\sp l$.
 
   Evquivalently, $(x', y') \in \sp l$ if $\inf_{x} l(x, y') = l(x',
   y') = \sup_{y} l(x', y)$.
@@ -815,7 +923,7 @@ and optimality conditoins
     \label{eq:49}
     \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
     \inf_{x} \phi(x) = \sup_{y} \psi(y) \}  \iff (x', y') \in \sp l
-    \iff \{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \} 
+    \iff \{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \}
   \end{align}
 \end{thm}
 
