@@ -33,8 +33,13 @@
   \label{sec:optimization-1}
   Let $x \in X$ and $\lambda \in \R^{m}$ such that $L(x, \lambda) =
   \inf_{x' \in x} L(x', \lambda)$ and $h(x) = b$.  Then $x$ is an
-  optimal solution 
+  optimal solution
 \end{thm}
+
+\begin{proof}
+  $\min_{x' \in X(b)} f(x') \geq \min_{x' \in X} (f(x') -
+  \lambda^{T}(h(x')) - b) = f(x) - \lambda^{T}(h(x) - b) = f(x)$
+\end{proof}
 
 \begin{thm}
   \label{sec:optimization-4}
@@ -80,12 +85,17 @@ g(\lambda) > -\infty \} $.
 
 \begin{thm}
   \label{sec:optimization-6}
-  We have the \textbf{weak duality theorem}, 
+  We have the \textbf{weak duality theorem},
   $\inf_{x \in X(b)} \geq \max_{\lambda \in Y} g(\lambda)$.
 
   The primal problem satisfies \textbf{strong duality} if this holds
   with equality --- so there exists $\lambda$ such that $\phi(b) = g(\lambda)$.
 \end{thm}
+
+\begin{proof}
+  $\inf_{x \in X(b)} f(x) = \inf_{x \in X(b)} L(x, \lambda) \geq
+  \inf_{x \in X} L(x, \lambda) = g(\lambda)$.
+\end{proof}
 
 \begin{defn}
   \label{sec:optimization-8}
@@ -100,6 +110,18 @@ g(\lambda) > -\infty \} $.
   There exists a (no-vertical) supporting hyperplane to $\phi$ at $b$
   if and only if the problem satisfies strong duality.
 \end{thm}
+
+\begin{proof}
+  $(\Rightarrow)$ is to note that $\phi(b) \leq \inf_{c \in \R^{m}} \phi(c) -
+  \lambda^{T}(c - b) = \inf_{c \in \R^{m}} \inf_{x \in X(c)} f(x) -
+    \lambda^{T} (h(x) - b) = \inf_{x \in X} L(x, \lambda) =
+    g(\lambda)$.
+
+    $(Leftarrow)$ is to choose the maximizing $\lambda$ that achieves
+    equality, so $\phi(b) \leq f(x) - \lambda^{T}(h(x) - b)$ and
+    minimize over $x \in X(c)$ obtains $\phi(b) - \lambda^{T}(b-c)
+    \leq \phi(c)$.
+\end{proof}
 
 \section{Linear Programming}
 \label{sec:linear-programming}
@@ -130,17 +152,17 @@ g(\lambda) > -\infty \} $.
 \begin{thm}
   \label{sec:linear-programming-4}
   A linear program in general form can be written with slack variables
-  as $\min \{ c^{T} x | Ax - z = b, x, z \geq 0 \} $.  Then $X = \{
-(x, z) : x \geq 0, z \geq 0 \} $, and the Lagrangian is $L((x, z),
-\lambda) = c^{T} x - \lambda^{T}(Ax - z - b) = (c^{T} - \lambda^{T}
-A)x + \lambda^{T} z + \lambda^{T}b$ with finite minimum over $X$ if
-and only if $\lambda \in Y = \{ \mu \in \R^{m} | c^{T}- \mu^{T} A \geq
-0, \mu \geq 0 \} $.  Thus $g(\lambda) = \inf_{(x, z) \in X} L((x, z),
-\lambda) = \lambda^{T} b$.  The dual problem is thus $\max \{ b^{T}
-\lambda | A^{T} \lambda \leq c, \lambda \geq 0 \}$.  
+  as $\min \{ c^{T} x | Ax - z = b, x, z \geq 0 \} $. Then $X = \{ (x,
+  z) : x \geq 0, z \geq 0 \} $, and the Lagrangian is $L((x, z),
+  \lambda) = c^{T} x - \lambda^{T}(Ax - z - b) = (c^{T} - \lambda^{T}
+  A)x + \lambda^{T} z + \lambda^{T}b$ with finite minimum over $X$ if
+  and only if $\lambda \in Y = \{ \mu \in \R^{m} | c^{T}- \mu^{T} A
+  \geq 0, \mu \geq 0 \} $. Thus $g(\lambda) = \inf_{(x, z) \in X}
+  L((x, z), \lambda) = \lambda^{T} b$. The dual problem is thus $\max
+  \{ b^{T} \lambda | A^{T} \lambda \leq c, \lambda \geq 0 \}$.
 
-Analogously, the dual of the \textbf{standard form} is $\max b^{T}
-\lambda | A^{T} \lambda \leq c$.
+  Analogously, the dual of the \textbf{standard form} is $\max b^{T}
+  \lambda | A^{T} \lambda \leq c$.
 \end{thm}
 
 \begin{thm}
@@ -150,6 +172,11 @@ Analogously, the dual of the \textbf{standard form} is $\max b^{T}
   optimal if and only if they satisfy complementary slackness - so
   $(c^{T} - \lambda^{T} A) x = 0$ and $\lambda^{T}(Ax - b) = 0$.
 \end{thm}
+
+\begin{proof}
+  For $x, \lambda$ optimal, we have $c^{T} x = \lambda^{T} b \leq
+  c^{T}x - \lambda^{T}(Ax - b) \leq c^{T} x$, so holds with equality.
+\end{proof}
 
 \begin{thm}
   \label{sec:linear-programming-6}
@@ -165,6 +192,11 @@ Analogously, the dual of the \textbf{standard form} is $\max b^{T}
     \frac{\partial \phi}{\partial b_{i}} (b) = \lambda^{\star}_{i}(b).
   \end{equation}
 \end{thm}
+
+\begin{proof}
+  Take derivatives of $\phi(b) = f(x^{\star}(b)) -
+  \lambda^{\star}(b)^{T}(h(x^{\star}(b)) - b)$.
+\end{proof}
 
 \section{The Simplex Method}
 \label{sec:simplex-method}
@@ -188,6 +220,14 @@ Analogously, the dual of the \textbf{standard form} is $\max b^{T}
   extreme point of the set $X(b) = \{ x : Ax = b, x \geq 0 \} $.
 \end{thm}
 
+\begin{proof}
+  Take convex combinations of points in the set $X(b) = \{ x: Ax = b,
+  x \geq 0 \} $.  Then we can show that any convex combination of $x,
+  y \in X(b)$ with $x = \delta y + (1 - \delta) z$ must have $y = z$.
+
+  Alternatively, we can perturb a non BFS feasible solution.
+\end{proof}
+
 \begin{thm}
   \label{sec:simplex-method-4}
   If the linear program $\max c^{T} x$ s.t. $Ax = b, x \geq 0$ is
@@ -195,7 +235,11 @@ Analogously, the dual of the \textbf{standard form} is $\max b^{T}
   basic feasible solution.
 \end{thm}
 
-
+\begin{proof}
+  Proceed by induction on the number of non-zero entries - finding $x,
+  y, z$ as before and choosing $\delta$ to reduce the number of
+  non-zero entries in $x$.
+\end{proof}
 
 \begin{defn}
   \label{sec:simplex-method-1}
@@ -289,13 +333,19 @@ just like in the primal algorithm.
   $2^{n} - 1$ iterations before terminating.
 \end{thm}
 
+\begin{proof}
+  Use the problem $\min -x_{n}$ such that $\epsilon \leq x_{1} \leq 1$,
+  $\epsilon x_{i-1} \leq x_{i} \leq 1 - \epsilon x_{i-1}$ for $i = 2,
+  \dots, n$ which traverses each vertex of the $\{ 0, 1 \}^{n}$ cube.
+\end{proof}
+
 \begin{defn}
   \label{sec:compl-line-progr-2}
   Given a symmetric positive definite matrix $D \in R^{n \times n}$
   and $z \in \R^{n}$, the set of points
   \begin{align}
     \label{eq:5}
-    E = E(z, D) = \{ x \in \R^{n} | (x - z)^{T} D^{-1}(x - z) \leq 1 \} 
+    E = E(z, D) = \{ x \in \R^{n} | (x - z)^{T} D^{-1}(x - z) \leq 1 \}
   \end{align} is called an ellipsoid with center $z$.
 \end{defn}
 
@@ -328,7 +378,6 @@ just like in the primal algorithm.
   either empty or full-dimensional ($\vol P > 0$).  The ellipsoid
   method proceeds as follows to decide whether $P$ is non-empty.
 
-  
   \begin{enumerate}
   \item Let $U$ be the largest absolute value among the entries of $A$
     and $b$, and define $x_{0} = 0$, $D_{0} = n(nU)^{2n}I$, $E_{0} =
@@ -434,43 +483,47 @@ j) \in T$.
   edge in $C$ with non-zero reduced cost, we can decrease the
   objective by pushing flow along $C$ to increase $x_{ij}$ if
   $\overline c_{ij}$ is negative and decrease $x_{ij}$ if $\overline
-  c_{ij}$ is positive.  
+  c_{ij}$ is positive.
 
-Let $\underline B \subseteq C$ denote the set of edges whose flow is
-to decrease, and $\overline B \subseteq C$ the set of edges whose flow
-is to increase.  If the problem is uncapacitated and $\underline B =
-\emptyset$ or $\overline B = \emptyset$, the problem is unbounded.
-Otherwise, changing the flow by $\min \{ \min_{(k, l) \in \underline
-  B} \{ x_{kl} - \underline m_{kl} \}, \min_{(k, l) \in \overline B}
-\{ \overline m_{kl} - x_{kl} \}  \} $ decreases this object as much as
-possible while maintaining prime feasibility.  After this change,
-there will be an edge $(k, l) \in C$  whose flow is either $\underline
-m_{k,l}$ or $\overline m_{k,l}$.  If $(k, l) \in T$, we obtain a new
-BFS with spanning tree $(T \backslash \{ (k, l) \}) \cup \{ (i, j)
-\}$.  If instead $(k, l) = (i, j)$, we obtain a new BFS where $(i, j)$
-has moved from $U$ to $L$, or vice versa.
+  Let $\underline B \subseteq C$ denote the set of edges whose flow is
+  to decrease, and $\overline B \subseteq C$ the set of edges whose
+  flow is to increase. If the problem is uncapacitated and $\underline
+  B = \emptyset$ or $\overline B = \emptyset$, the problem is
+  unbounded. Otherwise, changing the flow by $\min \{ \min_{(k, l) \in
+    \underline B} \{ x_{kl} - \underline m_{kl} \}, \min_{(k, l) \in
+    \overline B} \{ \overline m_{kl} - x_{kl} \} \} $ decreases this
+  object as much as possible while maintaining prime feasibility.
+  After this change, there will be an edge $(k, l) \in C$ whose flow
+  is either $\underline m_{k,l}$ or $\overline m_{k,l}$. If $(k, l)
+  \in T$, we obtain a new BFS with spanning tree $(T \backslash \{ (k,
+  l) \}) \cup \{ (i, j) \}$. If instead $(k, l) = (i, j)$, we obtain a
+  new BFS where $(i, j)$ has moved from $U$ to $L$, or vice versa.
 
-To find an initial BFS, set all $\underline m_{ij} = 0$ (by
-introducing flows of forced capacity $\overline m'_{ij} = \underline
-m'_{ij} = \underline m_{ij}$)  Introduce a dummy vertex $d \notin V$
-and uncapacitated dummy edges $E' = \{ (i, d) | i \in V, b_{i} \geq 0
-\} \cup \{ (d, i) | i \in V, b_{i} < 0\}  $ with cost equal to
-$\sum_{(i, j) \in E}^{} c_{ij}$.  A dummy edge has positive flow in an
-optimal solution of the new problem if and only if the original
-problem is infeasible. A feasible spanning tree solution is obtained
-by setting $T = E'$, $x_{id} = b_{i}$ for all $i \in V$ with $b_{i} >
-0$, $d_{di} = -b_{i}$ for all $i \in V$ with $b_{i} < 0$, and $x_{ij}
-= 0$ otherwise.
+  To find an initial BFS, set all $\underline m_{ij} = 0$ (by
+  introducing flows of forced capacity $\overline m'_{ij} = \underline
+  m'_{ij} = \underline m_{ij}$) Introduce a dummy vertex $d \notin V$
+  and uncapacitated dummy edges $E' = \{ (i, d) | i \in V, b_{i} \geq
+  0 \} \cup \{ (d, i) | i \in V, b_{i} < 0\} $ with cost equal to
+  $\sum_{(i, j) \in E}^{} c_{ij}$. A dummy edge has positive flow in
+  an optimal solution of the new problem if and only if the original
+  problem is infeasible. A feasible spanning tree solution is obtained
+  by setting $T = E'$, $x_{id} = b_{i}$ for all $i \in V$ with $b_{i}
+  > 0$, $d_{di} = -b_{i}$ for all $i \in V$ with $b_{i} < 0$, and
+  $x_{ij} = 0$ otherwise.
 \end{thm}
 
 \begin{thm}
   \label{sec:graphs-flows-5}
   Consider a minimum cost flow problem that is feasible and bounded.
   If $b_{i}$is integral for all $i \in V$ and $\underline m_{ij}$ and
-  $\overline m_{ij}$are integral for all $(i, j) \in E$, then there
+  $\overline m_{ij}$ are integral for all $(i, j) \in E$, then there
   exists an integral optimal solution.  If $c_{ij}$is integral for all
   $(i, j)\in E$, then there exists an integral optimal solution to the dual.
 \end{thm}
+
+\begin{proof}
+  We use no divisions, so integrality is preserved throughout iterations.
+\end{proof}
 
 \section{Transportation and Assignment Problems}
 \label{sec:transp-assignm-probl}
@@ -492,7 +545,30 @@ by setting $T = E'$, $x_{id} = b_{i}$ for all $i \in V$ with $b_{i} >
   non-negative costs has an equivalent transportation problem.
 \end{thm}
 
-\todo{Fill in network simplex tableau description?}
+\begin{proof}
+  For every vertex $i \in V$, add a sink vertex with demand $\sum_{k}
+  \overline m_{ik} - b_{i}$.  For every edge $(i, j) \in E$, add a
+  source vertex with supply $\overline m_{ij}$, an edge to vertex $i$
+  with cost $c_{ij, i} = 0$, and an edge to vertex $j$ with cost
+  $c_{ij, j} = c_{ij}$.
+
+  Then take a feasible flow for the new graph with flows on $(ij, i),
+  (ij, j)$ as $\overline m_{ij} - x_{ij}, x_{ij}$.  Then the total
+  flow constraint into vertex $i$ is $\sum_{k: (i, j) \in E}^{}
+  \overline m_{ik} - b_{i}$ which is true if and only if $b_{i} +
+  \sum_{k: (k, i) \in E}^{} x_{ki} - \sum_{k: (i, k \in E)}^{} x_{ik}
+  = 0$ which is the flow conservation constraint in the original problem.
+\end{proof}
+
+\begin{thm}
+  For the transportation tableau, form the matrix with squares, $\lambda_{i}$
+  on right, $\mu_{j}$ on the top, with $\lambda_{i} = \mu_{j} =
+  c_{ij}$ satisfied for all $(i, j) \in T$, and infer the rest of
+  $\lambda_{i}, \mu_{j}$.  Then if all $c_{ij} \geq \lambda_{i} -
+  \mu_{j}$, then the flow is optimal.  Otherwise, find violating
+  edges, join to spanning tree, and push flow as much as possible
+  along the cycle.
+\end{thm}
 
 \begin{thm}
   \label{sec:transp-assignm-probl-3}
@@ -542,9 +618,17 @@ by setting $T = E'$, $x_{id} = b_{i}$ for all $i \in V$ with $b_{i} >
   \begin{align}
     \label{eq:9}
     \delta = \min \{ C(S) | S \subseteq V, 1 \in S, n \in V \backslash
-S \} 
+    S \}
   \end{align}
 \end{thm}
+
+\begin{proof}
+  Show that there exists a cut with capacity $\delta$.  Then taking
+  $S$ as $1$ and the vertices where there exists an augmenting path to
+  $v$ from $1$.  Then $n \in V \backslash S$ by optimality (otherwise
+  push flow along to $n$).  Also, $\delta = f(S, V \backslash S) - f(V
+  \backslash S, S) = f(S, V \backslash S) = C(S)$.
+\end{proof}
 
 \begin{thm}
   \label{sec:maxim-flows-perf-3}
@@ -573,9 +657,17 @@ S \}
     L(x, \lambda) = (-1 - \lambda_{n} + \lambda_{1}) x_{n1} -
     \sum_{(i, j) \in E}^{} (\lambda_{i} - \lambda_{j}) x_{ij}.
   \end{equation} with bounded minimum when $x_{n1} > 0$ only if
-  $\lambda_{1} - \lambda_{n} = 1$.  
+  $\lambda_{1} - \lambda_{n} = 1$.
 
-  \todo{Follow on with this explanation?}
+  Set $\lambda_{1} = 1, \lambda_{n} = 0$.  Then $g(\lambda) = \inf_{x}
+  L(x, \lambda) = -\sum_{(i, j) \in E}^{} \max(\lambda_{i} -
+  \lambda_{j}, 0) C_{ij}$.  Introducing $d_{ij} \geq \max(\lambda_{i}
+  - \lambda_{j}, 0)$, we maximize $g(\lambda)$ by minimizing
+  $\sum_{}^{} d_{ij} C_{ij}$ with $d_{ij} \geq \lambda_{i} -
+  \lambda_{j}, d_{ij} \geq 0$, and obtain the dual with an optimal
+  solution where $\lambda_{i} = \{ 0, 1 \} $ for all $i \in V$, then
+  the set $S = \{ i \in V  | \lambda_{i} = 1\} $ is a minimum cut, and
+  the max-flow min-cut follows from strong duality.
 \end{defn}
 
 \begin{defn}
@@ -591,6 +683,18 @@ S \}
   perfect matching if and only if $|N(X)| \geq |X|$ for every $X
   \subseteq L$, where $N(X) = \{ j \in R | i \in X, (i, j) \in E \}$.
 \end{thm}
+
+\begin{proof}
+  $(\Rightarrow)$ is obvious. $(\Leftarrow)$ follows by assuming that
+  $G$ has no perfrect matching (so the max flow is less than $|L|$),
+  and so choose the cut $S \subseteq L \biguplus R \cup \{ s \}$ with
+  $C(S) < |L|$ and set $L_{S} = L \cap S, R_{S} = R \cap S$, and
+  $L_{T} = L \backslash S$.  Then by finiteness of the min-cut, all
+  neighbours of $x \in L_{S}$ are in the cut, so $N(L_{S}) \subseteq
+  R_{S}$.  However, the capacity of the cut comes from $\{ s \}
+  \times L_{T}$, $R_{S} \times \{ t \} $.  So $oN(L_{S})| \leq |R_{s}|
+  = C(S) - |L_{T}| < |L| - L_{T}| = |L_{S}|$.
+\end{proof}
 
 \section{Shortest Paths and Minimum Spanning Trees}
 \label{sec:short-paths-minim}
@@ -635,7 +739,7 @@ S \}
   $\IP{A_{i}, X} = b_{i}$ for all $i \in \{ 1, \dots, m \} $, and $X
   \succeq 0$ (positive semidefinite) where $C, A_{1}, \dots, A_{m} \in
   \S^{n}$ and $b \in \R^{m}$.
-  
+
 Equivalently, $\min c^{T} x$ subject to $B_{0} + \sum_{i=1}^{k} x_{i}
 B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
 \end{defn}
@@ -748,7 +852,7 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
   It can be shown that with detailed balance, we have
   \begin{align}
     \label{eq:14}
-    \pi_{x} = \frac{e^{-\frac{c(x)}{T}}}{\sum_{z \in X}^{} e^{-\frac{c(z)}{T}}} 
+    \pi_{x} = \frac{e^{-\frac{c(x)}{T}}}{\sum_{z \in X}^{} e^{-\frac{c(z)}{T}}}
   \end{align} for every $x \in X$ is a distribution and satisfies
   detailed balance, and so must be the stationary distribution.
   We have $\frac{\pi_{Y}}{1 - \pi_{Y}} \rightarrow \infty$ as $T
@@ -833,11 +937,11 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
 \begin{thm}
   \label{sec:non-coop-games-3}
   For the zero-sum game, where $q_{ij} = -p_{ij}$, we have \textbf{von
-    Neumann's theorem}.
+    Neumann's theorem}: $\max_{x \in X} \min_{y \in Y} p(x, y) =
+  \min_{y \in Y} \max_{x \in X} p(x, y)$.
+\end{thm}
 
-  $\max_{x \in X} \min_{y \in Y} p(x, y) = \min_{y \in Y} \max_{x \in
-    X} p(x, y)$.
-
+\begin{proof}
   This can be shown by adding a slack variable $z \in \R^{n}$ with $z
   \geq 0$ and obtaining the Lagrangian
   \begin{align}
@@ -846,14 +950,15 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
     - p_{ij} - z_{j} - v) - w(\sum_{i=1}^{m} x_{i} - 1) \\
     &= (1 - \sum_{j=1}^{n} y_{j}) v + \sum_{i=1}^{m} (\sum_{j=1}^{n}
     p_{ij} y_{j} - w)x_{i} - \sum_{j=1}^{n} y_{j} z_{j} + w
-  \end{align} which has finite maximum  with $x \geq 0$ if and only if
+  \end{align} which has finite maximum with $x \geq 0$ if and only if
   $\sum_{j=1}^{n} y_{j} = 1$, $\sum_{j=1}^{n} p_{ij} y_{j} \leq w$ for
   $ i = 1, \dots, m$, and $y \geq 0$. So the dual is $\min w$ such
   that $\\sum_{j=1}^{n} p_{ij} y_{j} \leq w$ for $i = 1, \dots, m$,
-  $\sum_{j=1}^{n} y_{j} = 1$, and $y \geq 0$.  This has solution
-  $\min_{y \in Y} \max_{x \in X} p(x, y)$ as required.  This solution
-  is called the \textbf{value} of a matrix game with payoff matrix $P$.
-\end{thm}
+  $\sum_{j=1}^{n} y_{j} = 1$, and $y \geq 0$. This has solution
+  $\min_{y \in Y} \max_{x \in X} p(x, y)$ as required. This solution
+  is called the \textbf{value} of a matrix game with payoff matrix
+  $P$.
+\end{proof}
 
 
 \section{Strategic Equilibrium}
@@ -874,6 +979,13 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
   $\max_{x' \in X} p(x', y) = \min_{y' \in Y} \max_{x' \in X} p(x', y')$.
 \end{thm}
 
+\begin{proof}
+  $\min_{y' \in Y} \max_{x' \in X} p(x', y') \leq \max_{x' \in X}
+  p(x', y) \geq p(x, y) \geq \min_{y' \in Y} p(x, y') \leq \max_{x'
+    \in X} \min_{y' \in Y} p(x', y')$, and first and last terms are
+  equal from Von Neumann's theorem.
+\end{proof}
+
 \begin{thm}
   \label{sec:strat-equil-3}
   Let $(x, y), (x', y') \in X \times Y$ be equilibria of the matrix
@@ -890,35 +1002,39 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
 
 \begin{thm}[Nash's Theorem]
   \label{sec:strat-equil-4}
-  We show bimatrix game has an equilibrium.   
-
-  To show this, define $X, Y$ as before, and $X \times Y$ is closed,
-  bounded, and convex.  Then for $x \in X$, $y \in Y$, define
-  $s_{i}(x, y)$ and $t_{i} (x, y)$ by the additionally payoff the two
-  players could obtain by playing the $i$-th or $j$-th pure strategy
-  instead of $x$ or $y$ - so $s_{i}(x, y) = \max \{ 0, p(e_{i}^{m}, y)
-- p(x, y) \} $, and $t_{j}(x, y) = \max \{ 0, q(x, e_{j}^{n} - q(x,
-y)) \}$, and define $f: X \times Y \rightarrow X \times Y$ by $f(x, y)
-= (x', y')$, where
-\begin{align}
-  \label{eq:18}
-  x_{i}' = \frac{x_{i} + s_{i}(x, y)}{1 = \sum_{k=1}^{m} s_{k}(x, y)}
-\\
-y'_{j} = \frac{y_{j} + t_{j}(x, y)}{1 + \sum_{k=1}^{n} t_{k}(x, y)}
-\end{align}
-Note also there must exist $i \in \{ 1, \dots, m \} $ with $x_{i} > 0$
-and $s_{i}(x, y) = 0$, as otherwise $p(x, y) = \sum_{k=1}^{m} x_{k}
-p(e_{k}^{m}, y) > \sum_{k=1}^{m} x_{k} p(x, y) = p(x, y)$.  Thus, and
-as $(x, y)$ is a fixed point,
-\begin{equation}
-  \label{eq:19}
-  x_{i} = \frac{x_{i} + s_{i}(x, y)}{1 + \sum_{k=1}^{m} s_{k}(x, y)}
-\end{equation}
-and so $\sum_{k=1}^{m} s_{k}(x, y) = 0$, so for $k = 1, \dots, m$,
-$s_{k}(x, y) = 0$, and so $p(x, y) \geq p(e_{k}^{m}, y)$. So $p(x, y)
-\geq p(x', y)$ for all $x' \in X$.  Analogously, $q(x, y) \geq q(x,
-y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
+  Every bimatrix game has an equilibrium.
 \end{thm}
+
+\begin{proof}
+  To show this, define $X, Y$ as before, and $X \times Y$ is closed,
+  bounded, and convex. Then for $x \in X$, $y \in Y$, define $s_{i}(x,
+  y)$ and $t_{i} (x, y)$ by the additionally payoff the two players
+  could obtain by playing the $i$-th or $j$-th pure strategy instead
+  of $x$ or $y$ - so $s_{i}(x, y) = \max \{ 0, p(e_{i}^{m}, y) - p(x,
+  y) \} $, and $t_{j}(x, y) = \max \{ 0, q(x, e_{j}^{n} - q(x, y))
+  \}$, and define $f: X \times Y \rightarrow X \times Y$ by $f(x, y) =
+  (x', y')$, where
+  \begin{align}
+    \label{eq:18}
+    x_{i}' = \frac{x_{i} + s_{i}(x, y)}{1 = \sum_{k=1}^{m} s_{k}(x,
+      y)}
+    \\
+    y'_{j} = \frac{y_{j} + t_{j}(x, y)}{1 + \sum_{k=1}^{n} t_{k}(x,
+      y)}
+  \end{align}
+  Note also there must exist $i \in \{ 1, \dots, m \} $ with $x_{i} >
+  0$ and $s_{i}(x, y) = 0$, as otherwise $p(x, y) = \sum_{k=1}^{m}
+  x_{k} p(e_{k}^{m}, y) > \sum_{k=1}^{m} x_{k} p(x, y) = p(x, y)$.
+  Thus, and as $(x, y)$ is a fixed point,
+  \begin{equation}
+    \label{eq:19}
+    x_{i} = \frac{x_{i} + s_{i}(x, y)}{1 + \sum_{k=1}^{m} s_{k}(x, y)}
+  \end{equation}
+  and so $\sum_{k=1}^{m} s_{k}(x, y) = 0$, so for $k = 1, \dots, m$,
+  $s_{k}(x, y) = 0$, and so $p(x, y) \geq p(e_{k}^{m}, y)$. So $p(x,
+  y) \geq p(x', y)$ for all $x' \in X$. Analogously, $q(x, y) \geq
+  q(x, y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
+\end{proof}
 
 \begin{thm}
   \label{sec:strat-equil-6}
@@ -945,7 +1061,7 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   and assume WLOG that $P, Q > 0$. Then $M = \{ 1, \dots, m \}$ and $N
   = m+1, \dots, m+n$, and define the sets $X, Y$ of strategies
   accordingly.
-  
+
   A pair $(x, y) \in X \times Y$ is an equilibrium if and only if all
   pure strategies in $S(x)$ are best responses to $y$ and all pure
   strategies in $S(y)$ are best responses to $x$ - so if for all $i
@@ -954,7 +1070,15 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
     N} (Q^{T}x)_{k}$.
 \end{defn}
 
-\todo{Fill in Lemke-Howson?}
+\begin{thm}
+  \begin{enumerate}
+  \item Construct the tableau $Py + r = 1$, $Q^{T}x + s = 1$.
+  \item Choose a label $l$ to drop.
+  \item Pivot as in simplex algorithm, following the chain of elements
+    to drop.
+  \item When $l$ enters the basis again, we have an equilibrium.
+  \end{enumerate}
+\end{thm}
 
 \section{Cooperative Games}
 \label{sec:cooperative-games}
@@ -970,7 +1094,7 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   \textbf{individual rationality}, requires each player obtains the
   same payoff it would be able to obtain on it's own.  The second is
   \textbf{economic efficiency} - no payoff is wasted.
-\end{defn} 
+\end{defn}
 
 
 \begin{defn}
@@ -994,6 +1118,16 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   A game has a non-empty core if and only if it is balanced.
 \end{thm}
 
+\begin{proof}
+  The core is non-empty if and only if $\min_{i \in N} x_{i}$ such
+  that $\sum_{i \in S} x_{i} \geq v(S)$ for all $S \subseteq N$ has an
+  optimal solution with value $v(N)$. The dual is $\max_{S \subseteq N}
+  \lambda(S) v(S)$ such that $\sum_{S \subseteq N, i \in S} \lambda(S)
+  = 1$ for all $i \in N$, $\lambda(S) \geq 0$ for all $S \subseteq N$.
+  Note that $\lambda$ is dual-feasible if and only if it is balanced.
+  As primal and dual are both feasible, by strong duality the optimal
+  objectives are the same.
+\end{proof}
 
 
 \begin{defn}
@@ -1017,6 +1151,10 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   \label{sec:cooperative-games-6}
   The nucleolus of any coalitional game is a singleton.
 \end{thm}
+
+\begin{proof}
+  \todo{Learn this?}
+\end{proof}
 
 \begin{defn}
   \label{sec:cooperative-games-7}
@@ -1072,6 +1210,16 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   d_{1})(v_{2} - d_{2})$ such that $v \in F$, $v \geq de$.
 \end{thm}
 
+\begin{proof}
+  To solve for a $2 \times 2$ bimatrix game,
+  \begin{enumerate}
+  \item Find $d_{1}, d_{2}$, the minimax values for each player.
+  \item Plot the outcomes for each strategy pair on $\R^{2}$.
+  \item Find the line where the optimal solution must exist, and solve
+    the one-dimensional optimization.
+  \end{enumerate}
+\end{proof}
+
 \begin{defn}
   \label{sec:bargaining-3}
   A bargaining solution $f$ is
@@ -1098,6 +1246,20 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   transformations, and independent or irrelevant alternatives.
 \end{thm}
 
+\begin{proof}
+  $(\Rightarrow)$ is obvious. For $(\Leftarrow)$, consider a
+  bargaining solution that satisfies the axioms, and fix $F, d$. Let
+  $z$ be the Nash solution, and map the problem to $F'$ affinely,
+  taking $z$ to $(\frac{1}{2}, \frac{1}{2})$, $d$ to $(0, 0)$. Then
+  show $f(F', 0) = (\frac{1}{2}, \frac{1}{2})$. First, show $v_{1} +
+  v_{2} \leq 1$ - which follows by taking a convex combination of $v$
+  with $v_{1} + v_{2} > 1$, and show that a small peturbation
+  increases the objective function, contradicting optimality.
+
+  Taking the closure under symmetry, by Pareto optimality and
+  symmetry, must have $f(F', 0) = (\frac{1}{2}, \frac{1}{2})$.
+\end{proof}
+
 \section{Stable Matchings}
 \label{sec:stable-matchings}
 
@@ -1109,7 +1271,7 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   order $\succ_{j} \subseteq S \times S$.  A matching is a function
   $\mu: S \cup A \rightarrow S \cup A$ such that $\mu(\mu(i)) = i$,
   $\mu(i) \in A$ for all $i \in S$, and $\mu(j) \in S$ for all $j \in
-  A$.  
+  A$.
 
   A pair $(i, j) \in S \times A$  is a \textbf{blocking pair} for
   matching $\mu$ if $i, j$ would rather be matched to each other than
@@ -1136,6 +1298,11 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   it does.
 \end{thm}
 
+\begin{proof}
+  Any blocking pair must have been proposed to by a preferable student
+  before the one it was eventually matched with.
+\end{proof}
+
 \begin{thm}
   \label{sec:stable-matchings-3}
   Call $j \in A$ achievable for $i \in S$ if there exists a stable
@@ -1150,7 +1317,7 @@ y')$ for all $y' \in Y$, so $(x, y)$ must be an equilibrium.
   \label{sec:stable-matchings-4}
   A matching $\mu$ is advisor pessimal if for all $j \in A$, $\mu(j)$
   is least preferred among the students achievable for $j$.
-  
+
   Every student-optimal stable matching is advisor-pessimal.
 \end{thm}
 
@@ -1260,7 +1427,7 @@ alternatives that are Pareto optimal and IIA.
   \label{sec:mecahnism-design-1}
   An SCF $f$ is \textbf{manipulable} if there exist $i \in N$, $\succ
   \in L(A)^{n}$, and $\succ_{i}' \in L(A)$ such that $f((\succ_{-i},
-  \succ_{i}') \succ_{i} f(\succ)$. 
+  \succ_{i}') \succ_{i} f(\succ)$.
   SCF $f$ is called
   \textbf{strategy-proof} if it is not manipulable.
 
@@ -1307,7 +1474,7 @@ alternatives that are Pareto optimal and IIA.
   \textbf{dominant strategy incentive compatible}, if for all $i \in
   N$, $\theta \in \Theta$, and $\theta_{i}' \in \Theta_{i}$,
   $u_{i}(g(\theta), \theta_{i}) \geq u_{i}(g(\theta_{i}',
-  \theta_{-i}), \theta_{i})$.  
+  \theta_{-i}), \theta_{i})$.
 \end{defn}
 
 \begin{thm}
@@ -1344,7 +1511,7 @@ alternatives that are Pareto optimal and IIA.
   depends on the types of all agents except for $i$.  The crucial
   component is the second term in $p_{i}$, the social welfare for all
   agents but $i$.
-  
+
 \end{defn}
 
 \begin{thm}

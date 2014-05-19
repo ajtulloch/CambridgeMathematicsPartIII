@@ -11,8 +11,8 @@
 
 \begin{defn}
   \label{sec:arbitrage-theory-1}
-  An investment/consumption strategy is an $n$-dimensional process
-  predictable $H$ satisfying the \textbf{self-financing} condition
+  An investment/consumption strategy is a predictable process $H$
+  satisfying the \textbf{self-financing} condition
   \begin{equation}
     \label{eq:1}
     H_{t-1} \cdot P_{t-1} \geq H_{t} \cdot P_{t-1}
@@ -747,7 +747,22 @@
   \frac{\partial^{2} C_{0}}{\partial K^{2}}(T, K)$.
 \end{thm}
 
-TODO - put in more on local volatility models?
+\begin{thm}
+  Assume that a banker hedges an option assuming constant volatility,
+  and delta hedges with wealth evolving with $dX_{t} = r(X_{t} -
+  \pi_{t} S_{t}) + \pi_{t} S_{t}$, with $\pi_{t} = V_{S}(t, S_{t},
+  \hat \sigma)$.  If the true dynamics are $dS_{t} = S_{t}(\mu dt +
+  \sigma_{t} dW_{t})$, then using the fact that $V$ solves the BS PDE
+  and that $dV_{t} = rV dt + \pi_{t}(dS_{t} - r S_{t} dt) +
+  \frac{1}{2} S_{t}^{2}(\sigma_{t}^{2} - \hat \sigma^{2}) V_{SS} dt$,
+  we obtain
+  \begin{equation}
+    \label{eq:32}
+    X_{T} - g(S_{T}) = \frac{1}{2} \int_{0}^{T} e^{r(T-t)}(\hat
+    \sigma^{2} - \sigma^{2}_{t}) S_{t}^{2} V_{SS}(t, S_{t}, \hat
+    \sigma) dt
+  \end{equation}
+\end{thm}
 
 \section{Interest Rate Models}
 \label{sec:interest-rate-models}
@@ -812,7 +827,6 @@ TODO - put in more on local volatility models?
   Then the discounted price process $\exp(-\int_{-}^{t} r_{s} ds) P(t,
   T)$ is a $\Q$-local martingale.
 \end{thm}
-
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
