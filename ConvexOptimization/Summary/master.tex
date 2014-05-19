@@ -336,11 +336,11 @@
 
 \begin{proof}
   $D \subseteq \con S$ as a convex set contains all convex
-  combinations of points in $S$, thus $D \subsetq \con S$.
+  combinations of points in $S$, thus $D \subseteq \con S$.
 
   $\con S \subseteq D$ as taking linear combination of $x, y \in D$,
   we have a convex combination of elements in $D$, which is in $D$, so
-  $\con S \subsetq D$.
+  $\con S \subseteq D$.
 
 \end{proof}
 
@@ -608,7 +608,7 @@
 \begin{proof}
   $(x, \alpha) \in \cl(\epi f) \iff \exists x^{k} \rightarrow x,
   \alpha^{k} \rightarrow \alpha, f(x^{k} \leq \alpha^{k}) \iff
-  \lininf_{y \rightarrow x} f(y) \leq \alpha \iff (x, \alpha) \in \epi
+  \liminf_{y \rightarrow x} f(y) \leq \alpha \iff (x, \alpha) \in \epi
   (\cl f)$.
 \end{proof}
 
@@ -901,13 +901,13 @@
   p^{\star \star}(0) \in \R$.
 
   $(\Rightarrow)$ follows as $p^{\star \star}(0) \leq \cl p(0) \leq
-  p(0)$, so $\lininf_{y \rightarrow 0} p(y) = \cl p(0) = p(0) \in \R$,
+  p(0)$, so $\liminf_{y \rightarrow 0} p(y) = \cl p(0) = p(0) \in \R$,
   so $p$ is lsc in $0$.
 
   $(\Leftarrow)$ follows from the claim thatif it holds then $\cl p$
   is proper lsc convex.  Convexity, lsc is clear, and an improper
   convex lsc function is always constant $\infty$ or $-\infty$,
-  contradiction $p(0) \in \R$. So $p^{\star}^{\star}(0) = ((\cl
+  contradiction $p(0) \in \R$. So $(p^{\star})^{\star}(0) = ((\cl
   p)^{\star})^{\star}(0) = \cl p(0) = p(0)$.
 \end{proof}
 
@@ -931,7 +931,8 @@
 \begin{proof}
   Follows from invertibility of sugbradient in terms of conjugate
   functions, showing $f(x', 0) = -f^{\star}(0, y') \iff \phi(x') =
-  \psi(y') \in \R$.
+  \psi(y') \in \R$, and equality with infinite value is explicitly
+  excluded by definition of $\argmin$.
 \end{proof}
 
 \begin{thm}
@@ -940,29 +941,51 @@
   lsc, and convex. Then
   \begin{enumerate}
   \item\label{item:1} $0 \in \interior \dom p$ or $0 \in \interior \dom q$ implies
-    $\inf_{x} \phi(x) = \sup_{y} \psi(y)$.
+    $\inf_{x} \phi(x) = \sup_{y} \psi(y)$. $(S')$
   \item\label{item:2} $0 \in \interior \dom p$ and $0 \int \interior \dom q$ implies
-    $\inf_{x} \phi(x) = \sup_{y} \psi(y) \in \R$.
+    $\inf_{x} \phi(x) = \sup_{y} \psi(y) \in \R$. $(S)$
   \item\label{item:3} $0 \in \int \dom p$ and $\inf_{x} \phi(x) \in \R$ if and only
-    if $\argmax_{y} \psi(y)$ is nonempty and bounded.
+    if $\argmax_{y} \psi(y)$ is nonempty and bounded. $(P)$
   \item\label{item:4} $0 \in \int \dom q$ and $\sup_{y} \psi(y) \in \R$ if and only
-    if $\argmin_{x} \phi(x)$ is nonempty and bounded.
+    if $\argmin_{x} \phi(x)$ is nonempty and bounded. $(D)$
   \end{enumerate}
-  In particular, if any of \ref{item:2}, \ref{item:3}, \ref{item:4}
-  hold, then strong duality holds - $\inf \phi = \sup \psi \in \R$.
-  If \ref{item:2}, or (\ref{item:3} and \ref{item:4} hold), then there
-  exists $x', y'$ satisfying the primal-dual optimality conditions.
-  Also, \ref{item:3} implies $\partial p(0) = \argmax_{y} \psi(y)$,
-  and \ref{item:4} implies $\partial q(0) = \argmin_{x} \phi(x)$.
+  In particular, if any of $S, P, D$ hold, then strong duality holds -
+  $\inf \phi = \sup \psi \in \R$. If $S$, or ($P$ and $D$) hold, then
+  there exists $x', y'$ satisfying the primal-dual optimality
+  conditions. Also, $P$ implies $\partial p(0) = \argmax_{y}
+  \psi(y)$, and $D$ implies $\partial q(0) = \argmin_{x}
+  \phi(x)$.
 \end{thm}
+
+\begin{proof}
+  \ref{item:1}: If $p(0) = -\infty$, then $p^{\star \star}(0) \leq
+  p(0) = -\infty$ Use $\cl p = p$ on $\int \dom p$, so $\sup \psi =
+  \inf \psi = -\infty$.  Otherwise, $p(0) \in \R$ so as $\cl p = p$ on
+  $\int \dom p$, we have $p$ is lsc in 0 and so $p^{\star \star}(0) =
+  p(0) \in \R$.
+
+  This follows symmetrically on $f'(x, y) = f^{\star}(y, x)$.
+
+  If both $0 \in \int \dom p,  0 \in \int \dom q$, then $+\infty >
+  p(0) \geq p^{\star \star}(0) = \sup \psi = -q(0) > -\infty$, which
+  is finite.
+
+  Nonemptyness and boundedness follows from $0 \in \int \dom p$ if and
+  only if $\psi $ is proper lsc convex and level bounded.
+
+  Subdifferential: if \ref{item:3} then $p(0) \in \R$, so $\cl p(0) =
+  p(0) \in \R$, $\cl p$ is then proper and lsc convex, so $\partial
+  (\cl p)(0) = \arg \max \psi$, but $\partial p(0) = \partial (\cl
+  p)(0)$.
+\end{proof}
 
 \begin{thm}
   \label{sec:duality-optimization-7}
   Assume $k: \R^{n} \rightarrow \overline \R$ and $h: \R^{m}
   \rightarrow \overline \R$ are both proper, lsc, convex, and $A \in
-  \R^{m \times n}, b \in \R^{m}, c \in \R^{n}$.  For $f(x, u) = \IP{c,
-  x} + k(x) + h(Ax - b + u)$, the primal and dual problems are of the
-form
+  \R^{m \times n}, b \in \R^{m}, c \in \R^{n}$. For $f(x, u) = \IP{c,
+    x} + k(x) + h(Ax - b + u)$, the primal and dual problems are of
+  the form
 \begin{align}
   \label{eq:43}
   \inf \phi(x), \phi(x) = \IP{c, x} + k(x) + h(Ax - b) \\
@@ -980,8 +1003,9 @@ and optimality conditoins
 \begin{align}
   \label{eq:47}
   \{ -A^{T} y' - c \in \partial k(x'), y' \in \partial h(Ax' - b) \}
+  \\
   \iff \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
-  \inf_{x} \phi(x) = \sup_{y} \psi(y) \} \iff \{ Ax' - b \in \partial
+  \inf_{x} \phi(x) = \sup_{y} \psi(y) \} \\ \iff \{ Ax' - b \in \partial
   h^{\star}(y'), x' \in \partial k^{\star}(-A^{T} y' - c) \}
 \end{align}
 \end{thm}
@@ -997,20 +1021,39 @@ and optimality conditoins
   \in \partial_{x} l(x, y) \text{ and } u \in \partial_{y}(-l)(x, y)$.
 \end{thm}
 
+\begin{proof}
+  Consider $g(x, y, u) = f(x, u) - \IP{y, u}$, which is proper lsc
+  convex. Then $l(\cdot, y) = \inf_{u} g(\cdot, y, u)$ is convex.Then
+  $f_{x}(y) = f(x, y)$, then $-l(x, \cdot) = f^{\star}_{x}(\cdot)$ so
+  $f_{x}$ is either $+\infty$ or proper lsc convex, and $-l(x, \cdot)$
+  is eiather $-\infty$ or proper lsc convex, but always lsc convex.
+
+  By subgradient definitino, $(v, y) \in \partial f(x, u) \iff
+  \inf_{u'} f(x', u') - \IP{y, u'} \geq f(x, u) - \IP{y, u} + \IP{v,
+    x' - x} \forall x'$, which evaluated at $x' = x$ impilies
+  $\inf_{u'} f(x, u') - \IP{y, u'} = f(x, u) - \IP{y, u}$.
+
+  Continuing, we obtain $(v, y) \in \partial f(x, u) \iff y
+  \in \partial_{u} f(x, u),  \in \partial_{x} l(x, y)$, and the first
+  condition is equlivanet to $u \in \partial f^{\star}_{x}(y)$, or $u
+  \in \partial (- l(x, \cdot))^{\star \star} = \partial_{y}(-l)(x, y)$
+  as required.
+\end{proof}
+
 \begin{defn}
   \label{sec:duality-optimization-9}
   For any function $l: \R^{n} \times \R^{m} \rightarrow \overline \R$
   we say that $(x', y')$ is a \textbf{saddle point} of $l$ if $l(x,
   y') \geq l(x', y') \geq l(x', y)$ for all $x, y$. The set of all
-  saddle points is denoted by $\sp l$.
+  saddle points is denoted by $\saddlepoint l$.
 
-  Evquivalently, $(x', y') \in \sp l$ if $\inf_{x} l(x, y') = l(x',
+  Evquivalently, $(x', y') \in \saddlepoint l$ if $\inf_{x} l(x, y') = l(x',
   y') = \sup_{y} l(x', y)$.
 \end{defn}
 
 \begin{thm}
   \label{sec:duality-optimization-10}
-  Assume $f$is proper, lsc, and convex with associated Lagrangian $l$.
+  Assume $f$ is proper, lsc, and convex with associated Lagrangian $l$.
   Then $\phi(x) = \sup_{y} l(x, y)$, and $\psi(y) = \inf_{x} l(x, y)$,
   and the primal problem is $\inf_{x} \phi(x) = \inf_{x} \sup_{y} l(x,
   y)$, and the dual problem is $\sup_{y} \psi(y) = \sup_{y} \inf_{x}
@@ -1018,8 +1061,9 @@ and optimality conditoins
   \begin{align}
     \label{eq:49}
     \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
-    \inf_{x} \phi(x) = \sup_{y} \psi(y) \}  \iff (x', y') \in \sp l
-    \iff \{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \}
+    \inf_{x} \phi(x) = \sup_{y} \psi(y) \}
+    \\ \iff (x', y') \in \saddlepoint l
+    \\ \iff \{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \}
   \end{align}
 \end{thm}
 
@@ -1036,8 +1080,19 @@ and optimality conditoins
   $f$ is proper, lsc, and convex, so the previous result applies with
   promal and dual problems $\phi(x) = \delta_{X}(x) + \sup_{y \in Y}
   L(x, y)$, $\psi(y) = -\delta_{Y}(y) + \int_{x \in X} L(x, y)$.
-  Moreover, if $X$ and $Y$ are bounded, then $\sp l$ is nonempty and bounded.
+  Moreover, if $X$ and $Y$ are bounded, then $\saddlepoint l$ is nonempty and bounded.
 \end{thm}
+
+\begin{proof}
+  For a fixed $y$, $\inf_{x} l(x, y) = -f^{\star}(0, y) = \psi(y)$,
+  and for a fixed $x$, $\sup_{y} l(x, y) = f(x, 0) = f^{\star
+    \star}_{x}(0) = f(x, 0) = \phi(x)$ as $f_{x}$ is either proper lsc
+  convex or $+\infty$.
+
+  The optimality condition is equivalent to $(0, y') \in f(x', 0) \iff
+  0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y')$, which
+  is the saddle point condition.
+\end{proof}
 
 \section{Numerical Optimality}
 \label{sec:numerical-optimality}
@@ -1097,6 +1152,11 @@ and optimality conditoins
   \{ \frac{1}{2} \| y - x \|_{2}^{2} + \tau f(y) \} $ and is therefore unique.
 \end{thm}
 
+\begin{proof}
+  $y \in B_{\tau f}(x) \iff 0 \in y - x + \tau \partial f(y) \iff y
+  \in \argmin_{y'} \{ \frac{1}{2} \| y' - x \|_{2}^{2} + \tau f(y') \}$
+\end{proof}
+
 \begin{thm}
   \label{sec:first-order-methods-3}
   Assume $f$ is proper lsc convex and $\argmin f \neq \emptyset$. The
@@ -1108,7 +1168,24 @@ and optimality conditoins
   are as hard as the original problem (but strictly convex).
 \end{thm}
 
-TODO - primal-dual methods, etc?
+\begin{enumerate}
+\item Forward stepping: $x^{k+1} \in F_{\tau_{k} f}(x^{k})$:
+\item Backward stepping: $x^{k+1} = B_{\tau_{k} f}(x^{k})$.
+\end{enumerate}
+
+If $f = g + h, \partial f = \partial g + \partial h$ with $f, g, h$
+proper lsc convex, $\argmin f \neq \emptyset$, we can do:
+
+\begin{enumerate}
+\item Backward-Backward stepping: $x^{k+1} = B_{\tau_{k} h}
+  B_{\tau_{k} g}(x^{k})$.
+\item Forward-Backward stepping: $x^{k+1} \in B_{\tau_{k} h}
+  F_{\tau_{k} g}(x^{k})$.  If $f(x) = g(x) + \delta_{C}(x)$, $g$
+  differentiable, $C \neq \emptyset$ closed and convex, then $x^{k+1}
+  \in \argmin_{x} \{ \frac{1}{2}  \| y - (x^{k} - \tau_{k} \Delta
+  g(x^{k})) \|_{2}^{2} + \delta_{C}(x) \} = \proj_{C}(x^{k} - \tau_{k}
+  \Delta g(x^{k}))$, which is a gradient projection.
+\end{enumerate}
 
 \section{Interior-Point Methods}
 \label{sec:inter-point-meth}
@@ -1146,6 +1223,10 @@ TODO - primal-dual methods, etc?
   \end{enumerate}
 \end{thm}
 
+\begin{proof}
+  Differentiate with respect to $t$ and let $t = 1$.
+\end{proof}
+
 \begin{thm}
   \label{sec:inter-point-meth-3}
   The \textbf{primal central path} is the mapping $t \mapsto x(t) =
@@ -1166,6 +1247,17 @@ TODO - primal-dual methods, etc?
   \end{align}
 \end{thm}
 
+\begin{proof}
+  $y = -\frac{1}{y} \Delta f(Ax - b) \in \dom F$ as $Ax - b \in \dom
+  F$ and $\dom F$ is a cone.  We also have that if $x$ is on the primal path,
+  then $A^{T} y = c$, so $y$ is feasible.
+
+  For dual optimality, we need $0 \in -tb + \grad F(y) + N_{A^{T} y =
+    c}$. As $-tb + \grad F(y) = -tAx \in \range A$, $y$ is the unique
+  dual solution.  Multiplying the dual optimality result by $A^{T}$
+  gives the optimality condition for the primal central point.
+\end{proof}
+
 \begin{thm}
   \label{sec:inter-point-meth-4}
   For feasible $x, y$ (so $Ax - b \in K$, $A^{T}y = c$, $y \in K$),
@@ -1173,6 +1265,11 @@ TODO - primal-dual methods, etc?
   for points $(x(t), y(t))$ on the central path, the duality gap is
   $\phi(x(t)) - \psi(y(t)) = \frac{\theta_{F}}{t}$.
 \end{thm}
+
+\begin{proof}
+  $\phi(x) - \psi(y) = \IP{c, x} - \IP{b, y} = \IP{y, Ax - b} =
+  \IP{-\frac{1}{t} \grad F(Ax(t) - b), Ax(t) - b} = \frac{\theta_{F}}{t}$.
+\end{proof}
 
 \begin{thm}
   \label{sec:inter-point-meth-5}
@@ -1184,6 +1281,13 @@ TODO - primal-dual methods, etc?
   $\dist(z, z(t)) \leq 1$ implies $\phi(x) - \psi(y) \leq 2(\phi(x(t))
   - \psi(y(t))) = 2 \frac{\theta_{F}}{t}$.
 \end{thm}
+
+\begin{proof}
+  If we linearize $\grad F(Ax^{k+1} - b) = \grad F(Ax^{k} - b + A
+  \Delta x) \approx \grad F(A x^{k} - b) + \grad^{2} F(Ax^{k} - b) A
+  \Delta x$, and solve the constraints $A^{T}(y) = c, ty + \grad F(Ax
+  - b) = 0$.
+\end{proof}
 
 \begin{thm}
   \label{sec:inter-point-meth-6}
@@ -1247,7 +1351,13 @@ TODO - primal-dual methods, etc?
   then $TV(\I{A}) = \mathcal{H}^{n-1}(\Omega \cap \partial A)$.
 \end{thm}
 
-\begin{thm}
+\begin{proof}
+  The lower bound follows from $TV(1_{A}) = \sup_{v \in
+    C_{c}^{1}(\Omega, \R^{n}), \| v \|_{\infty} \leq 1} \int_{\partial
+    A} \IP{v, n} ds$ by Gauss's theorem.
+\end{proof}
+
+\begin{thm}[Coarea formula]
   \label{sec:total-vari-appl-3}
   If $u \in BV(\Omega)$, then $TV(\I{x|u(x) > t}) < \infty$ for
   $\mathcal{L}^{1}$-a.e. $t \in \R$, and $TV(u) = \int_{\R} TV(\I{u >
@@ -1267,7 +1377,64 @@ BV(\Omega, R^{d^{k-1}}) \}$ and the higer-ordre total variation as
 \end{align}
 \end{defn}
 
-\todo{Fill in all the total variation stuff?}
+\section{Relaxation}
+\label{sec:relaxation}
+
+\begin{defn}
+  Consider the \textbf{Chan-Vese} model
+  \begin{equation}
+    \label{eq:58}
+    f_{CV}(C, c_{1}, c_{2}) = \int_{C} (g - c_{1}^{2} dx +
+    \int_{\Omega \backslash C} = (g - c_{2})^{2} dx + \lambda \mathcal{H}^{d-1}(C)).
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  Let $c_{1}, c_{2}$ be fixed, and consider $\inf_{u: \Omega
+    \rightarrow [0, 1], u \in BV(\Omega)} f(u), f(u) = \IP{u,
+    s}_{L^{1}} + \lambda TV(u)$.  Then if $u$ is a minimizer of $f$,
+  and $u(x) \in \{ 0, 1 \} a.e.$, then $C$ is a minimzer of
+  $f_{CV(\cdot, c_{1}, c_{2})}$.
+\end{thm}
+
+\begin{proof}
+  Follows by definitions - must have $u = 1_{C}$.
+\end{proof}
+
+\begin{defn}
+  Let $\mathcal{C} = BV(\Omega, [0, 1]) = \{ u \in BV(\Omega) | u(x)
+  \in [0, 1] a.e. \}$.  Then for $u \in \mathcal{C}$, $\alpha \in [0,
+  1]$.  Define $\overline u_{\alpha} = 1_{\{ u > \alpha \} }$. Then
+  $f: \mathcal{C} \rightarrow \R$ satisfies the \textbf{generalized
+    coarea condition} if and only if
+  \begin{equation}
+    \label{eq:59}
+    f(u) = \int_{0}^{1} f(\overline u_{\alpha}) d\alpha
+  \end{equation} for all $u \in \mathcal{C}$.
+\end{defn}
+
+\begin{thm}
+  Let $f*u$ = TV(u), the condition is the cooarea formula.  As the
+  condition is additivie, we need only show $\int_{\Omega} s(x) u(x)
+  = \int_{0}^{1} \int_{\Omega} s(x) 1_{\{ u(x) > \alpha \}} d\alpha$,
+  where we use Fubini due to $s \in L^{\infty}(\Omega)$.
+\end{thm}
+
+\begin{thm}
+  Assume $f: \mathcal{C} \rightarrow \R$ satisfies the generalized
+  coarea condition, and $u^{\star}$ satisfies $u^{\star} \in
+  \argmin_{u \in \mathcal{C}} f(u)$. Then for almost every $\alpha \in
+  [0, 1]$, the thresholded function statisfies $\overline
+  u_{\alpha}^{\star} \in \argmin_{u \in BV(\Omega, \{ 0, 1 \})} f(u)$.
+\end{thm}
+
+\begin{proof}
+  Follows by considering the set $S_{\epsilon} = \{ \alpha \in [0, 1]
+  | f(u^{\star}) \leq f(u^{\star}_{\alpha}) - \epsilon \} $ for some
+  $\epsilon > 0$, and showing that this implies $f(u^{\star} \leq
+  \int_{0}^{1} f(\overline u_{\alpha}^{\star})) d\alpha - \epsilon
+  L^{1}(S_{\epsilon})$ which contradicts the generalized coarea formula.
+\end{proof}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
