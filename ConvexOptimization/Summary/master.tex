@@ -632,7 +632,15 @@
 \end{thm}
 
 \begin{proof}
-  
+  $f$ lsc implies $\epi f$ is closed, $f$ is convex implies $\epi f$ is
+  convex, so $\epi $ f is the intersection of all half spaces
+  containing it.  Show $g$ affine $\iff$ there exists $(b, c), \beta$
+  with $c < -$, $\epi g = H_{(b, c), \beta}$.
+
+  Then as $\epi (\sup_{g \leq f} g(x)) = \cap_{g \leq f} \epi g$
+  where $g$ is affine and $g \leq f \iff \epi f \subseteq \epi g$, we
+  need only show $I_{1} = \cap_{(b, c), \beta \in S} H_{(b, c), \beta}
+  = \cap_{(b, c), \beta \in S, c < 0} H_{(b, c), \beta} = I_{2}$.
 \end{proof}
 
 \begin{defn}
@@ -657,6 +665,24 @@
   \star} = f$.
 \end{thm}
 
+\begin{proof}
+  $(v, \beta) \in \epi f^{\star} \iff (v, x) - \beta \leq f(x) \forall
+  x$ so $(v, \beta) \in \epi f\star$ define all affine functions
+  majorized by $f$.  Thus for every affine function $h$, $h \leq f
+  \iff h \leq \cl f \iff h \leq \con f \iff h \leq \cl \con f$.  Which
+  gives our result.
+
+  For the inquality, expand $f^{\star \star}(y) = \sup_{v} \IP{v, y} +
+  \inf_{x}( f(x) - \IP{v, x}) \leq f(y)$ at $y = x$.
+
+  As $\con f$ is proper, then $\cl \con f$ is proper, lsc, and
+  convex, so $\cl \con f = \sup_{g \leq \cl \con f} g(x)$ where $g$ is
+  affine,which equalis $f^{\star \star}$ by definition.
+
+  Finally, if $f$ is convex, then $\con f = f$, so $\con f$is proper,
+  and $\con f = f$ is lsc, so $f^{\star \star} = \cl \con f = \cl f = f$.
+\end{proof}
+
 \begin{thm}
   \label{sec:conjugate-functions-8}
   Assume $f: \R^{n} \rightarrow \overline \R$.  Then
@@ -666,6 +692,11 @@
   \item In particular, $f^{\star}$ proper implies $\con f$ is proper.
   \end{enumerate}
 \end{thm}
+
+\begin{proof}
+  If $\con f = \infty$ , then $f^{\star} (v) = -\infty$.  If $\con
+  f(x') = -\infty$, then $f^{\star}(v) = (\con f)^{\star}(v) \geq +\infty$.
+\end{proof}
 
 \begin{thm}
   \label{sec:conjugate-functions-9}
@@ -684,6 +715,11 @@
     \partial f^{\star}(x) = \argmax_{x'} \IP{v, x'} - f(x)
   \end{align}
 \end{thm}
+
+\begin{proof}
+  $f(x) + f^{\star}(v) = \IP{v, x}$ iff $x \in \argmax_{x'} \IP{v, x'}
+  - f(x') \iff v \in \partial f(x)$.
+\end{proof}
 
 \begin{thm}
   \label{sec:conjugate-functions-10}
@@ -711,6 +747,28 @@
   be proper and $f(x_{0}, \dots, x_{m}) = \sum_{i=0}^{m}
   f_{i}(x_{i})$.  Then $f^{\star}(v_{1}, \dots, v_{m}) = \sum_{i=0}^{m} f^{\star}_{i}(v_{i})$.
 \end{thm}
+
+\begin{proof}
+  For support functions, $f^{\star}(x) = \sigma_{C}(x)$, so $C$
+  nonempty closed convex implies $f^{\star}$ is proper lsc convex with
+  $f^{\star}(0) = 0$ and $f^{\star}(\lambda v) = \lambda
+  f^{\star}(v)$, so $f^{\star} = \sigma_{C}$ is positively homogenous.
+
+  If $g$ is positively homogenous lower semincontinuous, $g^{\star}(x)
+  \in \{ 0, \infty \} $, so $g^{\star}$ is an indicatior function,
+  which must be convex and nonempty by properness lsc convexity of
+  $g^{\star}$.
+
+  One to one follows from $\delta^{\star \star}_{C} = \delta_{C}$.
+
+  For cones, show $g$ is positively homogenous lsc convex proper
+  indicator function $\iff$ $g = \delta_{K}$ for $K$a convex closed
+  cone.
+
+  Taking any such indicator function $\delta_{K}$, then
+  $\delta_{K}^{\star}$ is an indicator function, with
+  $\delta_{K}^{\star}(v) < \infty \iff v \in K^{\star}$.
+\end{proof}
 
 \begin{defn}
   \label{sec:conjugate-functions-12}
@@ -804,6 +862,22 @@
   \end{enumerate}
 \end{thm}
 
+\begin{proof}
+  $f$ proper lsc convex implies $f^{\star}$ is proper lsc convex
+  implies $\pi, \psi$ lsc convex.
+
+  $p, q$ are convex from the strict epigraph set, with $E = \{ (u, a)
+  \in \R^{m } \times \R | p(u) = \inf_{x \in \R^{n}} f(x, u) < \alpha
+  \} = A(E')$, where $A$ is the lnear projection mapping $A(x, u,
+  \alpha) = (u, \alpha)$, and $E'$ is the strict epigraph of $f$ and
+  thus convex, so $A(E')$ is convex.
+
+  $p^{\star}(y) = -\psi(y)$, so $p^{\star \star}(0) = \sup_{y} \psi(y)$ .
+
+  $0 \in \dom p \iff p(0) < \infty \iff \inf_{x} f(x, 0) < \infty \iff
+  \inf \psi < \infty$.
+\end{proof}
+
 \begin{thm}
   \label{sec:duality-optimization-4}
   Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
@@ -821,6 +895,22 @@
   The difference $\inf \phi - \sup \psi$ is the \textbf{duality gap}.
 \end{thm}
 
+\begin{proof}
+  $\inf_{x} \phi(x) = p(0) \geq p^{\star \star}(0) = \sup_{y} \psi(y)$
+  so must show $p(0) \in \R$ and $p$ lsc in $0$ if and only if $p(0) =
+  p^{\star \star}(0) \in \R$.
+
+  $(\Rightarrow)$ follows as $p^{\star \star}(0) \leq \cl p(0) \leq
+  p(0)$, so $\lininf_{y \rightarrow 0} p(y) = \cl p(0) = p(0) \in \R$,
+  so $p$ is lsc in $0$.
+
+  $(\Leftarrow)$ follows from the claim thatif it holds then $\cl p$
+  is proper lsc convex.  Convexity, lsc is clear, and an improper
+  convex lsc function is always constant $\infty$ or $-\infty$,
+  contradiction $p(0) \in \R$. So $p^{\star}^{\star}(0) = ((\cl
+  p)^{\star})^{\star}(0) = \cl p(0) = p(0)$.
+\end{proof}
+
 \begin{thm}
   \label{sec:duality-optimization-5}
   Assume $f: \R^{n} \times \R^{m} \rightarrow \overline \R$ is proper,
@@ -837,6 +927,12 @@
   this equation is either empty or equal to $(\argmin \phi) \times
   (\argmax \psi)$.
 \end{thm}
+
+\begin{proof}
+  Follows from invertibility of sugbradient in terms of conjugate
+  functions, showing $f(x', 0) = -f^{\star}(0, y') \iff \phi(x') =
+  \psi(y') \in \R$.
+\end{proof}
 
 \begin{thm}
   \label{sec:duality-optimization-6}
