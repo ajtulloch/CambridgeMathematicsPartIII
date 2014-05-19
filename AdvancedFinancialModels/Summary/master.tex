@@ -150,7 +150,7 @@
 \end{thm}
 
 \begin{proof}
-  Fatau's Lemma.
+  Fatou's Lemma.
 \end{proof}
 
 \begin{thm}
@@ -338,6 +338,8 @@
 \section{Brownian Motion and Stochastic Calculus}
 \label{sec:brown-moti-stoch}
 
+\newcommand{\ito}{Ito\xspace}
+
 \begin{defn}
   \label{sec:brown-moti-stoch-1}
   A Brownian motion is a collection of random variables such that
@@ -366,7 +368,7 @@
   \end{align}
 \end{defn}
 
-\begin{thm}
+\begin{thm}[\ito's Isometry]
   \label{sec:brown-moti-stoch-3}
   For a simple predictable integrand $\alpha$, we have
   \begin{align}
@@ -401,7 +403,6 @@
   \geq 0$, then $X$ is a true martingale.
 \end{thm}
 
-\newcommand{\ito}{Ito\xspace}
 
 \begin{defn}
   \label{sec:brown-moti-stoch-7}
@@ -476,11 +477,15 @@
   $(\Omega, \mathcal{F}_{T}, \Q)$.
 \end{thm}
 
-\begin{thm}
+\begin{thm}[Novikov's Condition]
   \label{sec:brown-moti-stoch-12}
   If $\E{\exp(\frac{1}{2} \int_{0}^{T} \| \alpha_{s} \|^{2} ds)} <
-  \infty$, then $\E{\exp(-\frac{1}{2} \int_{0}^{T} \|\alpha_{s}\|^{2}
-    ds + \int_{0}^{T} \alpha_{s} \cdot dW_{s})} = 1$.
+  \infty$, then 
+  \begin{equation}
+    \label{eq:33}
+    \E{\exp(-\frac{1}{2} \int_{0}^{T} \|\alpha_{s}\|^{2}
+      ds + \int_{0}^{T} \alpha_{s} \cdot dW_{s})} = 1    
+  \end{equation}
 \end{thm}
 
 \begin{thm}
@@ -548,7 +553,7 @@
   \cdot d(Y_{t} P_{t}) - Y_{t} c_{t} dt$.
 
   Then if $YL$ is of class $D$, we can show $\E{\int_{0}^{T} H_{s}
-    \cdot d(Y_{s} P_{s}) + L_{T} Y_{T}} = \E{L_{T} Y_{T}}$ be Fatau's,
+    \cdot d(Y_{s} P_{s}) + L_{T} Y_{T}} = \E{L_{T} Y_{T}}$ be Fatou's,
   stopped local martingales, and uniform integrability.  Then we show
   $\E{\int_{0}^{T} Y_{s} c_{s} ds} = \E{\int_{0}^{T} H_{s} \cdot
   (dY_{s} P_{s})} \leq 0$ and so $c_{t} = 0$ a.s.
@@ -733,7 +738,7 @@
 \end{thm}
 
 \begin{proof}
-  Ito's formula on $dV(t, S_{t})$, and show $V(t, S_{t})= \phi_{t}
+  \ito's formula on $dV(t, S_{t})$, and show $V(t, S_{t})= \phi_{t}
   B_{t} + \pi_{t} S_{t}$, and $dV(t, S_{t}) = \phi_{t} dB_{t} =
   \pi_{t} \cdot dS_{t}$, so $H = (\phi, \pi)$ is a self-financing
   strategy that replicates $V(t, S_{t})$ as required.

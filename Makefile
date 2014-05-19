@@ -1,4 +1,4 @@
 DBOX=~/Dropbox/Sharing/CambridgeSummaries
 
 summaries:
-	find . -iname 'master.pdf' | grep Summary | xargs -I{} gcp --parents {} $(DBOX)
+	find . -iname 'master.pdf' | xargs -I{} gcp --parents {} $(DBOX)

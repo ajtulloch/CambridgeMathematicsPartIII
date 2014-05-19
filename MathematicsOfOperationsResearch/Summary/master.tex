@@ -686,11 +686,11 @@ j) \in T$.
 
 \begin{proof}
   $(\Rightarrow)$ is obvious. $(\Leftarrow)$ follows by assuming that
-  $G$ has no perfrect matching (so the max flow is less than $|L|$),
+  $G$ has no perfect matching (so the max flow is less than $|L|$),
   and so choose the cut $S \subseteq L \biguplus R \cup \{ s \}$ with
   $C(S) < |L|$ and set $L_{S} = L \cap S, R_{S} = R \cap S$, and
   $L_{T} = L \backslash S$.  Then by finiteness of the min-cut, all
-  neighbours of $x \in L_{S}$ are in the cut, so $N(L_{S}) \subseteq
+  neighbors of $x \in L_{S}$ are in the cut, so $N(L_{S}) \subseteq
   R_{S}$.  However, the capacity of the cut comes from $\{ s \}
   \times L_{T}$, $R_{S} \times \{ t \} $.  So $oN(L_{S})| \leq |R_{s}|
   = C(S) - |L_{T}| < |L| - L_{T}| = |L_{S}|$.
@@ -1253,7 +1253,7 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
   taking $z$ to $(\frac{1}{2}, \frac{1}{2})$, $d$ to $(0, 0)$. Then
   show $f(F', 0) = (\frac{1}{2}, \frac{1}{2})$. First, show $v_{1} +
   v_{2} \leq 1$ - which follows by taking a convex combination of $v$
-  with $v_{1} + v_{2} > 1$, and show that a small peturbation
+  with $v_{1} + v_{2} > 1$, and show that a small perturbation
   increases the objective function, contradicting optimality.
 
   Taking the closure under symmetry, by Pareto optimality and
