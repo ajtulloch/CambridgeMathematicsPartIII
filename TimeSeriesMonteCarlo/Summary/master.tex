@@ -10,8 +10,11 @@
   \label{defn:time_series:7}
   Define the mean function $\mu_{X}(t) = \E{X_{t}}$.
 
-  Define the covariance function $\gamma_{X}(t, s) = \Cov{X_{t}}{X_{s}}
-    = \E{(X_{t} - \mu_{X}(t))(X_{s} - \mu_{X}(s))}$.
+  Define the covariance function
+  \begin{align}
+    \gamma_{X}(t, s) = \Cov{X_{t}}{X_{s}} = \E{(X_{t} -
+      \mu_{X}(t))(X_{s} - \mu_{X}(s))}.\label{eq:11}
+  \end{align}
 \end{defn}
 
 \begin{defn}[Weak Stationarity]
@@ -131,6 +134,14 @@
   \infty$.
 \end{defn}
 
+\begin{thm}
+  The Taylor expansion of $\frac{1}{1-ax}$ is
+  \begin{align}
+    \label{eq:12}
+    \frac{1}{1-ax} = 1 + ax + a^{2} x^{2} + \dots
+  \end{align} converging for $|ax| \leq 1$
+\end{thm}
+
 A linear process is called a \textbf{moving average} or MA($\infty$)
 if $\psi_{j} = 0$ for all $j < 0$, so
 \begin{equation}
@@ -158,6 +169,17 @@ if $\psi_{j} = 0$ for all $j < 0$, so
   \end{equation}
 \end{proposition}
 
+\begin{thm}
+  For the case where $X_{t} = \phi X_{t-1} + Z_{t}$, we have that if
+  $|\phi| \leq 1$ then $X_{t} = \sum_{j \geq 0}^{} \phi^{j} X_{t-j}$,
+  with $\gamma_{X}(h) = \frac{\sigma^{2} \gamma^{h}}{1 - \phi^{2}}$.
+  This is unique in $L^{2}$ - take the difference of two solutions,
+  show the tail converges to zero.
+
+  If $|\phi| \geq 1$ then the unique solution is $X_{t} = -\sum_{j
+    \geq 1}^{} \phi^{-j} Z_{t+j}$.
+\end{thm}
+
 \subsection{Forecasting Stationary Time Series}
 \label{sec:forec-stat-time}
 
@@ -168,6 +190,26 @@ will be deonted by $P_{n} X_{n+h}$ and clearly has the form
 \begin{equation}
   P_{n}X_{n+h} = a_{0} + a_{1} X_{n} + \cdots + a_{n} X_{1}.
 \end{equation}
+
+This follows as
+\begin{align}
+  \label{eq:78}
+  U_{n} &= A_{n} X_{n} \\
+  \hat X_{n} &= X_{n} - U_{n} \\
+  C_{n} &= A_{n}^{-1} =
+  \begin{pmatrix}
+    1 &0 &\dots &0 \\
+    \theta_{1} &1 &\dots &0 \\
+    \dots &\dots & & \\
+    \theta_{n-1, n-1} &\theta_{n-1, n-2} &\dots &1
+  \end{pmatrix} \\
+  \hat X_{n} &= (C_{n} - I_{n} U_{n} = \Theta_{n} U_{n}. \\
+  \hat X_{n+1} &=
+  \begin{cases}
+    0 & n = 0 \\
+    \sum_{j=1}^{n} \theta_{n-j} (X_{n+1-j} - \hat X_{n+1-j}) 
+  \end{cases}
+\end{align}
 
 To find these equations, we solve the convex problem by setting
 derivatives to zero, and obtain the result given below.
@@ -200,7 +242,7 @@ derivatives to zero, and obtain the result given below.
   \end{enumerate}
 \end{thm}
 
-\begin{defn}[Prediction Operator $P(\cdot | \mathbf{W})$]
+ \begin{defn}[Prediction Operator $P(\cdot | \mathbf{W})$]
   \label{defn:stationary_processes:1}
   Suppose that $\E{U^{2}} < \infty$, $\E{V^{2}} < \infty$, $\Gamma =
   \Cov{\mathbf{W}}{\mathbf{W}}$, and $\beta, \alpha_{1}, \dots,
@@ -276,7 +318,6 @@ derivatives to zero, and obtain the result given below.
     v_{n} = \kappa(n+1, n+1) - \sum_{j=0}^{n-1} \theta^{2}_{n, n-j} v_{j}.
   \end{equation}
 \end{thm}
-
 
 \section{ARMA Processes}
 \label{sec:arma-processes}
@@ -434,6 +475,18 @@ derivatives to zero, and obtain the result given below.
   p$.  For $h < p$ we can compute numerically from the expression that
   $\mathbf{\phi}_{h} = \Gamma^{-1}_{h} \mathbf{\gamma}_{h}$.
 \end{thm}
+
+\begin{table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Model & ACF & PACF \\
+    \midrule
+    AR($p$) & decaying & 0 for $h > p$ \\
+    MA($q$) & $0$ for $h > q$ & decaying \\
+    ARMA($p, q$) & decaying & decaying
+  \end{tabular}
+\end{table}
 
 \subsection{Forecasting ARMA Processes}
 \label{sec:forec-arma-proc}
@@ -1040,7 +1093,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
     \geq 0$, then
     \begin{align}
       \label{eq:75}
-      \Cov{I_{n}(\omega_{j}), I_{n}(\omega_{k})} =
+      \Cov{I_{n}(\omega_{j})}{I_{n}(\omega_{k})} =
       \begin{cases}
         2(2 \pi)^{2} f^{2}(\omega_{j}) + O(n^{-\frac{1}{2} }) &
         \omega_{j} = \omega_{k} = \{ 0, \pi \} \\
@@ -1056,12 +1109,15 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
 \begin{defn}
   \label{sec:periodogram-3}
   The estimator $\hat f(\omega) = \hat f(g(n, \omega))$ with $\hat
-  f(\omega_{j})$ defined by $\frac{1}{2 \pi} \sum_{|k| \leq m_{n}}^{}
-  W_{n}(k) I_{n}(w_{j+k})$ with $m \rightarrow \infty$, $\frac{m}{n}
-  \rightarrow 0$, $W_{n}(k) = W_{n}(-k)$, $W_{n}(k) \geq 0$ for all
-  $k$, and $\sum_{|k| \leq m}^{} W_{n}(k) = 1$, and $\sum_{|k|}^{}
-  W_{n}^{2}(k) \rightarrow 0$ as $n \rightarrow \infty$ is called a
-  \textbf{discrete spectral average estimator} of $f(w)$.
+  f(\omega_{j})$ defined by
+  \begin{equation}
+    \frac{1}{2 \pi} \sum_{|k| \leq m_{n}}^{} W_{n}(k) I_{n}(w_{j+k})\label{eq:79}  
+  \end{equation}
+  with $m \rightarrow \infty$, $\frac{m}{n} \rightarrow 0$, $W_{n}(k)
+  = W_{n}(-k)$, $W_{n}(k) \geq 0$ for all $k$, and $\sum_{|k| \leq
+    m}^{} W_{n}(k) = 1$, and $\sum_{|k|}^{} W_{n}^{2}(k) \rightarrow
+  0$ as $n \rightarrow \infty$ is called a \textbf{discrete spectral
+    average estimator} of $f(w)$.
 \end{defn}
 
 \begin{thm}
@@ -1078,7 +1134,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
     \begin{align}
       \label{eq:76}
       \lim_{n \rightarrow \infty} \frac{1}{\sum_{|j| \leq m}^{}
-        W_{n}^{2}(j)} \Cov{\hat f(\omega), \hat f(\lambda)} =
+        W_{n}^{2}(j)} \Cov{\hat f(\omega)}{\hat f(\lambda)} =
       \begin{cases}
         2 f^{2}(\omega) & w = \lambda = \{ 0, \pi \} \\
         f^{2}(\omega) & 0 < \omega = \lambda < \pi \\ \\

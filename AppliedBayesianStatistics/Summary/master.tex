@@ -11,8 +11,8 @@
 
 \begin{defn}
   \label{sec:prob-bayes-theor-1}
-  Suppose we want to predict a random quanitity $X$, and we do so by
-  providign a probability distribution $P$.  Suppose we observed a
+  Suppose we want to predict a random quantity $X$, and we do so by
+  providing a probability distribution $P$.  Suppose we observed a
   specific value $x$, then a scoring rule $S$ provides a reward $S(P,
   x)$.  If the true distribution of $X$ is $Q$, then the expected
   score is denoted $S(P, Q)$, where $S(P, Q) = int SP(, x) Q(x) dx$.
@@ -33,8 +33,8 @@
 
 \begin{defn}
   \label{sec:prob-bayes-theor-3}
-  We have observed qunatities $y$ (the deta), have an unknonw
-  qunaitity taking on a set of discrete values $\theta_{i}, i \in 1,
+  We have observed quantities $y$ (the data), have an unknown
+  quantity taking on a set of discrete values $\theta_{i}, i \in 1,
   \dots, n$.  We specify a sampling model $p(y | \theta)$, a
   probability distribution $p(\theta_{i})$, and together define $p(y,
   \theta_{i}) = p(y | \theta_{i}) p(\theta_{i})$ - a ``full
@@ -49,7 +49,7 @@
     \alpha p(y | \theta_{i}) p(\theta_{i})
   \end{equation}
 
-  or equivalently, the posterior is propertional to the likeelihood
+  or equivalently, the posterior is proportional to the likelihood
   times the prior.
 \end{defn}
 
@@ -68,7 +68,7 @@
 
 \begin{thm}
   \label{sec:prob-bayes-theor-5}
-  Our parameteric sampling distribution $p(y | \theta)$ with
+  Our parametric sampling distribution $p(y | \theta)$ with
   uncertainty about $\theta$ given by a distribution $p(\theta)$ gives
   a predictive distribution $p(y) = \int p(y| \theta) p(\theta)
   d\theta$. 
@@ -106,14 +106,14 @@
 
 \begin{defn}
   \label{sec:prob-bayes-theor-8}
-  The Gamma distribution is a flexibile distibution for positive
+  The Gamma distribution is a flexible distribution for positive
   quantities.  If $Y \sim Gamma(a, b)$, then
   \begin{align}
     \label{eq:6}
-    p(y|a,b) = \frac{b^{a}}{\Gamma(a)} y^{a-1} e^{-by}, y \in (0,
+    p(y|a,b) &= \frac{b^{a}}{\Gamma(a)} y^{a-1} e^{-by}, y \in (0,
     \infty) \\
-    \E{Y|a, b} = \frac{a, b}{den} \\
-    \V(Y|a, b) = \frac{a}{b^{2}}
+    \E{Y|a, b} &= \frac{a, b}{den} \\
+    \V(Y|a, b) &= \frac{a}{b^{2}}
   \end{align}
 
   The $Gamma(1, b)$ distribution is exponential with mean
@@ -128,10 +128,10 @@
   \textbf{negative-binomial} with
   \begin{align}
     \label{eq:8}
-    p(y) = \frac{\Gamma(a+y)}{\Gamma(a) \Gamma(y+1)}
+    p(y) &= \frac{\Gamma(a+y)}{\Gamma(a) \Gamma(y+1)}
     \frac{b^{a}}{(b+1)^{a+y}}, y= 0, 1, 2, \dots \\
-    \E{Y} = \frac{a}{b} \\
-    \V{Y} = \frac{a}{b} + \frac{a}{b^{2}}
+    \E{Y} &= \frac{a}{b} \\
+    \V{Y} &= \frac{a}{b} + \frac{a}{b^{2}}
   \end{align}
 \end{thm}
 
@@ -141,13 +141,13 @@
   \begin{equation}
     \label{eq:9}
     p(y|\theta) = \exp(a(y) + b(\theta) + u(\theta)t(y))
-  \end{equation} where $u(\theta)$ is a \textbf{natural} or canoniacl
+  \end{equation} where $u(\theta)$ is a \textbf{natural} or canonical
   parameter, and $t(y)$ is the \textbf{natural sufficient statistic}.
 
   Suppose we have a conjugate prior distribution of the form
   $p(\theta) = \frac{1}{c(n_{0}, t_{0})} \exp(n_{0} b(\theta) + t_{0}
   \mu(0))$ where $c(n_{0}, t_{0}) = \int \exp(n_{0} b(\theta) + t_{0}
-  u(\theta)) d\theta$.  Then the predictive distribution iss
+  u(\theta)) d\theta$.  Then the predictive distribution is
   \begin{align}
     \label{eq:10}
     p(y) = e^{a(y)} \frac{c(n_{0} + 1, t_{0} + t(y))}{c(n_{0}, t_{0})}.
@@ -160,7 +160,7 @@
 
 \begin{thm}
   \label{sec:conjugate-analysis-1}
-  SUppose we have a indenpendent sample of data $y_{i} \sim
+  Suppose we have a independent sample of data $y_{i} \sim
   Normal(\mu, \sigma^{2})$, $i = 1, \dots, n$, with $\sigma^{2}$ known
   and $\mu$ unknown.  The conjugate prior for the normal mean is also
   normal, $\mu$, $\mu \sim Normal(\gamma, \tau^{2})$, where $\gamma$
@@ -219,11 +219,6 @@
   imaginary distributions.
 \end{thm}
 
-\section{BUGS/Monte Carlo sampling, etc.}
-\label{sec:bugsm-carlo-sampl}
-
-\todo{Fill this in?}
-
 \section{Prior Distributions}
 \label{sec:prior-distributions}
 
@@ -238,7 +233,7 @@
 
 \begin{defn}
   \label{sec:prior-distributions-3}
-  A jeffreys prior is compatible with a Jeffrey's prior for any $1-1$
+  A Jeffreys prior is compatible with a Jeffrey's prior for any $1-1$
   transformation $\phi = f(\Theta)$.
 \item $p_{}(\theta) \alpha I(\theta)^{\frac{1}{2}}$ where $I(\theta)$
   is the Fisher information for $\theta$,
@@ -248,7 +243,7 @@
       p(Y|\theta)}{\partial \theta^{2}}) =
     E_{Y|\theta}((\frac{\partial \log p(Y|\theta)}{\partial \theta})^{2})
   \end{equation}
-  This is invariant to reparameterization as
+  This is invariant to re-parameterization as
   \begin{align}
     \label{eq:14}
     \E_{Y | \phi}(\frac{\partial \log p(Y| \phi)}{\partial
@@ -277,12 +272,12 @@
   BUGS.
 
   This same prior is appropriate if $\theta$ is a rate parameter per
-  unit time - so $Y \sim Poission(\theta t)$.
+  unit time --- so $Y \sim Poission(\theta t)$.
 \end{defn}
 
 \begin{defn}
   \label{sec:prior-distributions-6}
-  $\sigma$ is a scal parameter if $p(y | \sigma) = \frac{1}{\sigma}
+  $\sigma$ is a scale parameter if $p(y | \sigma) = \frac{1}{\sigma}
   f(\frac{y}{\sigma})$ for some function $f$, so that the distribution
   of $\frac{Y}{\sigma} $ does not depend on $\sigma$. The Jeffreys
   prior is $p_{J}(\sigma) \alpha \sigma^{-1}$. This implies that
@@ -300,7 +295,7 @@
 
 \begin{defn}
 \label{sec:mult-distr-1}
-  Array of counts $(n_{1}, \dots, n_{k})$ in $K$ categories - the
+  Array of counts $(n_{1}, \dots, n_{k})$ in $K$ categories --- the
   multinomial density is $p(n|q) = \frac{(\sum_{}^{} n_{k})!}{\prod
     n_{k}!} \prod_{k=1}^{K} q_{k}^{n_{k}}$, with likelihood
   propertional to $\prod_{k=1}^{K} q_{k}^{n_{k}}$. The conjugate prior
@@ -308,7 +303,7 @@
   \begin{equation}
     \label{eq:15}
     p(q) = \frac{\Gamma(\sum_{}^{} \alpha_{k})}{\prod \Gamma(a_{k}!)}
-    q_{k}^{a_{k} - 1}
+    q_{k}^{a_{k} --- 1}
   \end{equation}  with $\sum_{k}^{} q_{k} = 1$.  The posterior is $p(q|n
   = Dirichlet(\alpha_{1} + n_{1}, \dots, \alpha_{k}))$.  The Jeffreys
   prior is $p(q) \alpha \prod_{k} q_{k}^{-\frac{1}{2}}$.
@@ -387,11 +382,11 @@ posterior $\beta_{i} | y, \sigma^{2} \sim N(\hat \beta_{i}, s_{i}^{2}
 \sigma^{2})$, where $s_{i}^{2} = (X^{T} X)^{-1}_{ii}$.
 
 
-\section{Categorial Data, Prediction, and Ranking}
+\section{Categorical Data, Prediction, and Ranking}
 \label{sec:categ-data-pred}
 
 Suppose $N$ individuals are classified according to two binary
-variables, into a $2 \times 2$table.  We have three situations - one
+variables, into a $2 \times 2$table.  We have three situations --- one
 margin fixed, both margins fixed, and the overall total fixed.
 
 If One
@@ -399,10 +394,10 @@ margin is fixed, then $n_{i}$, and $n_{2}$ are fixed.  Then $y_{i1}
 \sim Binomial(n_{i}, p_{i})$.
 
 If no margins are fixed, we only fix the total $N = sum y_{ij}$. With
-a full multinomail model $Y \sim Multinomial(q, N)$. Note if we just
-take a signle row, we have standard Beta-Binomal updateing, as $Y_{11}
+a full multinomial model $Y \sim Multinomial(q, N)$. Note if we just
+take a single row, we have standard Beta-Binomial updating, as $Y_{11}
 | n_{1} \sim Binomial(n_{1}, \frac{q_{11}}{q_{1.}} )$ from the
-properties of the mutinomial, and $\frac{q_{11}}{q_{1.}}$ from the
+properties of the multinomial, and $\frac{q_{11}}{q_{1.}}$ from the
 properties of the Dirichlet.
 
 \begin{defn}
@@ -411,7 +406,7 @@ properties of the Dirichlet.
   N$, then $Y|N \sim Multinomial(q, N)$.  Letting $Y_{k} \sim
   Poission(\mu_{k})$ and using log-link function $\log u_{k} = \lambda
   + \alpha_{k}$, give a uniform prior to $\lambda$.  This is
-  equivalent to assuming a multinomail distribution for $Y$ with
+  equivalent to assuming a multinomial distribution for $Y$ with
   parameters $q_{k} = \frac{e^{\alpha_{k}}}{sum_{k}} e^{\alpha_{k}}$,
   $N = \sum_{k}^{} Y_{k}$.
 \end{defn}
@@ -454,7 +449,7 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
 
 \begin{thm}
   \label{sec:sampl-prop-relat-2}
-  If an infinite sequence of binary variables is exchangable, then it
+  If an infinite sequence of binary variables is exchangeable, then it
   implies that any finite set $p(y_{1}, \dots, y_{n}) = \int
   \prod_{i=1}^{n} p(y_{i} | \theta) p(\theta) d \theta$ for some
   density $p(\theta)$ (with regularity conditions)
@@ -489,12 +484,12 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
     \frac{p(M_{0} | y)}{p(M_{1} | y)} = \frac{p(M_{0})}{p(M_{1})}
     \frac{p(y | M_{0})}{p(y | M_{1})}
   \end{equation}
-  or in words - posterior odds of $M_{0}$ equals the Bayes factor ($B_{01}$)
+  or in words --- posterior odds of $M_{0}$ equals the Bayes factor ($B_{01}$)
   times the prior odds of $M_{0}$.  This quantifies the weight of
-  evidence in favour of the hypothesis $H_{0}: M_{0}$ is true.
+  evidence in favor of the hypothesis $H_{0}: M_{0}$ is true.
 
   If both models are equally likely a priori, the Bayes factor is the
-  posterior odds in favour of $M_{0}$.
+  posterior odds in favor of $M_{0}$.
 \end{defn}
 
 \begin{defn}
@@ -504,7 +499,7 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
     \label{eq:20}
     BIC = -2 \log p(y | \hat \theta) + k \log n
   \end{equation} where $\hat \theta$ is the MLE.
-  $BIC_{0} - BIC_{1}$ is intendented to approximate $-2 \log B_{01}$
+  $BIC_{0} - BIC_{1}$ is intended to approximate $-2 \log B_{01}$
 \end{defn}
 
 \begin{defn}
@@ -563,7 +558,7 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   Suppose $y_{ij}$ is outcome for individual $j$, unit $i$, with
   unit-specific parameter $\theta_{i}$.  The assumption of partial
   exchangability of individuals within units can be represented by the
-  following model - $y_{ij} \sim p(y_{ij} | \theta_{i}, x_{ij})$,
+  following model --- $y_{ij} \sim p(y_{ij} | \theta_{i}, x_{ij})$,
   $\theta_{i} \sim p(\theta_{i})$.
 
   Assumption of exchangability of units can be represented by the
@@ -602,13 +597,13 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
 
   We can then show (reasonably easily) that $\E{\pi_{i}| y, \tau,
     \sigma} = \frac{n_{0} \hat \mu + n_{i} \overline y_{i}}{n_{0} +
-    n_{i}}$ - an appropriate weighted average of the observed
-  individual group mean and esatimated population mean.
+    n_{i}}$ --- an appropriate weighted average of the observed
+  individual group mean and estimated population mean.
 \end{defn}
 
 \begin{defn}
   \label{sec:heirachcial-models-3}
-  For normal heircarchical mdoels the Jeffreys prior can be
+  For normal hierarchical models the Jeffreys prior can be
   inconvenient.  Assume $y_{i} \sim N(\theta_{i}, \sigma_{i}^{2})$,
   $\sigma_{i}^{2}$ known, and $\theta_{i} \sim N(\mu, \tau^{2})$, $i =
   1, \dots, I$.  Then, integrating out the $\theta_{i}$, we get $y_{i}
@@ -620,7 +615,7 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   (\sigma_{i}^{2} + \tau^{2})^{-\frac{1}{2}} \exp(-\frac{1}{2}
   \\frac{(y_{i} - \mu)^{2}}{\sigma_{i}^{2} + \tau^{2}})$.
 
-  Lettting $\tau^{2} \rightarrow 0$, $p(y | \mu, \tau^{2})$ tends to a
+  Letting $\tau^{2} \rightarrow 0$, $p(y | \mu, \tau^{2})$ tends to a
   non-zero constant $c$, so $p(\tau^{2} < \epsilon | y) \alpha
   cP(\tau^{2} < \epsilon)$.
 
@@ -637,23 +632,23 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   Empirical Bayes methods proceed as before $y_{ij} \sim p(y_{ij} |
   \theta_{i})$, $\theta_{i} \sim p(\theta_{i} | \phi)$, but do not put
   a prior on $\phi$.  Estimate $\phi$ by, for example, maximum
-  marginal likelihood - the value $\hat \phi$ that maximimizes the
-  marginal likelihook
+  marginal likelihood --- the value $\hat \phi$ that maximizes the
+  marginal likelihood
   \begin{align}
     \label{eq:22}
     p(y | \phi) = \prod_{i} \int \prod_{j} p(y_{ij} | \theta_{i})
     p(\theta_{i} | \phi) d \theta_{i},
-  \end{align}  known as the \textbf{Type II Maximum Likelhood}.  Then
+  \end{align}  known as the \textbf{Type II Maximum Likelihood}.  Then
   use $\hat \phi$ as a ``plug-in'' estimate, as if the prior
   distribution was known.
 
-  Can think of it as \textbf{estimating} prior from the data -
-  understates uncertaintly since it ignores uncertainty in $\hat \phi$
-  - for large number of units and overservations, have similar results
+  Can think of it as \textbf{estimating} prior from the data ---
+  understates uncertainty since it ignores uncertainty in $\hat \phi$
+  --- for large number of units and observations, have similar results
   to the ``full Bayes'' approach.
 \end{defn}
 
-\todo{Further content on heirarchical model comparison}
+\todo{Further content on hierarchical model comparison}
 
 \section{Robustness and Outlier Detection}
 \label{sec:robustn-outl-detect}
@@ -662,17 +657,16 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   \label{sec:robustn-outl-detect-1}
   If we assume, say $Y \sim t_{k}(\theta, \tau)$, then estimates will
   be less influenced by outliers.  If we want to simultaneously find
-  outliers, we can fit a $t$-distribution as a mixture of nromals.
+  outliers, we can fit a $t$-distribution as a mixture of normals.
   Recall if $Y \sim Norm(\theta, \sigma^{2})$, and $\sigma^{2} =
   \frac{\tau^{2} k}{X^{2}} $, where $X^{2} \sim \chi^{2}_{k}$, then $Y
   \sim t_{k}(\theta, \tau)$.    So an equivalent model to $Y \sim
   t_{k}(\theta, \tau)$ is to assume $Y \sim normal(\theta,
   \sigma_{i}^{2})$, $\sigma_{i}^{2} = \frac{\tau^{2} k }{X_{i}^{2}} $,
   $X_{i}^{2} \sim \chi^{2}_{k}$, and monitor $s_{i} =
-  \frac{k}{X_{i}^{2}} $ - values of $s_{i}$ much great than $1$
-  indicate outlier.
+  \frac{k}{X_{i}^{2}} $ --- values of $s_{i}$ much great than $1$
+  indicate outliers.
 \end{defn}
-
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
