@@ -1070,6 +1070,32 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
     N} (Q^{T}x)_{k}$.
 \end{defn}
 
+\begin{defn}
+  \label{sec:equil-comp-2}
+  A bimatrix game if \textbf{non-degenerate} if for every $(x, y) \in
+  X \times Y$,  $|S(x)| \geq |S(y)|$ if $y$ is a best-response to $x$
+  and $|S(y)| \geq |S(x)|$ if $x$ is a best-response to $y$.
+\end{defn}
+
+\begin{defn}
+  \label{sec:equil-comp-3}
+  A pair of points is \textbf{fully-labelled} if $L(x) \cup L(y) = M
+  \cup N$, where $L(x)$ are the index sets of the constraints that
+  hold with equality - e.g. $\{ i \in M | x_{i} = 0 \} \cup \{ j \in N
+  | (Q^{T} x)_{i} = 1\}$ and vice versa for $y$.
+\end{defn}
+
+\begin{thm}
+  \label{a-2}
+  A pair of extreme points $(x, y) \neq (0, 0)$ is an equilibrium if
+  and only if it is fully-labelled.
+\end{thm}
+
+\begin{thm}
+  \label{a-3}
+  Every non-degenerate bimatrix game has an odd number of equilibria.
+\end{thm}
+
 \begin{thm}
   \begin{enumerate}
   \item Construct the tableau $Py + r = 1$, $Q^{T}x + s = 1$.

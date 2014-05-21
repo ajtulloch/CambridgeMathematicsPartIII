@@ -5,7 +5,7 @@
 \label{sec:introduction}
 
 Nonparametric regression is a regression which doesn't assume a
-paramateric relation between a design matrix $X$ and the response
+parametric relation between a design matrix $X$ and the response
 variable $Y$.
 
 In the univariate fixed design setting, the design $X$ consists of
@@ -36,7 +36,7 @@ The weight $K_{h}(x_{i} - x)$ is associated with the weight $(x_{i},
 Y_{i})$.
 
 More precisely, $\hat m_{h}(x; p) = \hat \beta_{0}$ where $\hat \beta =
-(\hat \beta_{0}, \hat \beta_{1}, \dots, \hat \beta_{p})$ whicch is
+(\hat \beta_{0}, \hat \beta_{1}, \dots, \hat \beta_{p})$ which is
 minimizing
 \begin{align}
   \label{eq:52}
@@ -82,14 +82,14 @@ All local polynomial estimators of the form
 This type of estimator is called a linear estimator.   This set of
 weights $\{ W(x_{i}, x) \}$ is called the \textbf{effective kernel}.
 
-\section{MSE approxmiations}
+\section{MSE approximations}
 \label{sec:mse-approxmiations}
 
 For convenience, let $x_{i} = \frac{i}{n}$.  We consider the following
 conditions:
 
 \begin{enumerate}
-\item $m$ is twice continuosuly differentiable on $[0, 1]$ and is bounded, $v$ is continuous.
+\item $m$ is twice continuously differentiable on $[0, 1]$ and is bounded, $v$ is continuous.
 \item $h = h_{n}, h_{n} \rightarrow 0$, $nh \rightarrow \infty$.
 \item $K$ is a nonnegative probability density, symmetric, has zeros
   outside of $[-1, 1]$. $R(K) = \int K^{2}(x) dx < \infty$, and
@@ -186,9 +186,9 @@ larger order than the bias at the interior point.
 
 
 \footnote{In the demonstration, asymmetry of $\textsc{Beta}(2, 4)$ distributions
-combined with the negative slope fo the true regression function, we
+combined with the negative slope of the true regression function, we
 see that local constant estimators has an upward bias.  In contrast,
-local linear estimators adapts fto this}
+local linear estimators adapts to this}
 
 \section{Splines}
 \label{sec:splines}
@@ -238,7 +238,7 @@ is very close to the linear regression line. As $\lambda \rightarrow
     \label{eq:59}
     \int_{a}^{b} g''(x)^{2}dx = g^{T}K g
   \end{equation}
-  We call $g$ the \textbf{natural cubic spline} interploant to $g$ at
+  We call $g$ the \textbf{natural cubic spline} interpolant to $g$ at
   $x_{1}, \dots, x_{n}$.
 \end{proposition}
 
@@ -422,11 +422,11 @@ have a generalized cross-validation
 \end{equation}
 
 $A_{ii}$ is analogous to the leverage of the $i$-th observation in the
-linear regression.  Modified (GCV) CV downweights observations with
+linear regression.  Modified (GCV) CV down-weights observations with
 high leverage.
 
 Consider the model $Y_{i} = m(x_{i}) + \sigma \epsilon_{i}$, with
-fixed design.  $m$ is twice contiuously differntiable on $[a, b]$, so
+fixed design.  $m$ is twice continuously differentiable on $[a, b]$, so
 \begin{equation}
   \label{eq:82}
   \sum_{i=1}^{n} (Y_{i} - \tilde g(x_{i}))^{2} + \lambda \int \tilde
@@ -503,7 +503,7 @@ The fitted curve corresponding to $\hat \beta_{\lambda}$ is called the
 \subsection{Equivalent Kernel}
 \label{sec:equivalent-kernel}
 
-From the soltuion $\hat g_{\lambda}(\mathbf{x}) = (I + \lambda K)^{-1}
+From the solution $\hat g_{\lambda}(\mathbf{x}) = (I + \lambda K)^{-1}
 Y$, we have
 \begin{equation}
   \label{eq:86}

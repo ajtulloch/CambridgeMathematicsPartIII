@@ -395,7 +395,7 @@ derivatives to zero, and obtain the result given below.
   A second approach is to multiple each side by $X_{t_k}$ and take
   expectations, and obtain a sequence of $m$ homogenous linear
   difference equations with constant coefficients.  These can be
-  solved to obtain the $\gamma(h)$ values. 
+  solved to obtain the $\gamma(h)$ values.
 \end{thm}
 
 \begin{defn}[PACF]
@@ -598,7 +598,7 @@ and $\hat \sigma^{2} = \hat \gamma(0) - \IP{\hat{\mathbf{\phi}}, \hat{\mathbf{\g
     X_{t} - \hat \theta_{m1} X_{t-1} - \cdots - \hat \theta_{mm}
     X_{t-m} = Z_{t}
   \end{equation} with $Z_{t} \sim WN(0, \hat v_{m})$.
-  
+
   If $\hat \gamma(0) > 0$, then the fitted autoregressive models for
   $m = 1, 2, \dots, n - 1$ can be determined recursively from the
   relations
@@ -645,7 +645,7 @@ and $\hat \sigma^{2} = \hat \gamma(0) - \IP{\hat{\mathbf{\phi}}, \hat{\mathbf{\g
   \begin{equation}
     \label{eq:51}
     \{ \hat \phi_{pj} \pm \Phi_{1-\frac{\alpha}{2}}
-    \frac{1}{n^{\frac{1}{2}}} \hat v_{jj}^{\frac{1}{2}} \} 
+    \frac{1}{n^{\frac{1}{2}}} \hat v_{jj}^{\frac{1}{2}} \}
   \end{equation} contains $\phi_{pj}$ with probability close to $(1 - \alpha)$.
 \end{thm}
 
@@ -719,7 +719,7 @@ Consider estimating
     \label{eq:58}
     \{ \theta \in R | |\theta - \hat \theta_{mj}| \leq \Phi_{1 -
       \frac{\alpha}{2}} \frac{1}{n^{\frac{1}{2}}}
-    (\sum_{k=0}^{j-1}\hat \theta_{mk}^{2})^{\frac{1}{2}} \} 
+    (\sum_{k=0}^{j-1}\hat \theta_{mk}^{2})^{\frac{1}{2}} \}
   \end{equation} is an $(1 - \alpha)$ confidence interval for $\theta_{mj}$.
 \end{thm}
 
@@ -757,7 +757,7 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
   \label{defn:estimation_arma:9}
   \begin{align}
     \label{eq:61}
-    \hat \sigma^{2} = \frac{1}{n} S(\hat{\mathbf{\phi}}, \hat{\mathbf{\theta}}) 
+    \hat \sigma^{2} = \frac{1}{n} S(\hat{\mathbf{\phi}}, \hat{\mathbf{\theta}})
   \end{align} where $\hat{\mathbf{\phi}}, \hat{\mathbf{\theta}}$ are the
   values of $\mathbf{\phi}, \mathbf{\theta}$ that minimize
   \begin{align}
@@ -1368,7 +1368,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   \begin{align}
     \label{eq:6}
     T_{i}^{\star} = \frac{w_{i} \sigma_{i}}{\sum_{j}^{} w_{j}
-      \sigma_{j}} n, 
+      \sigma_{j}} n,
   \end{align} known as \textbf{oracle stratified sampling}.  In this
   case, $\E{\hat \mu^{\star}} = \mu$, and $\V \hat \mu^{\star}_{n} =
   \frac{1}{n} (\sum_{i=1}^{K} w_{i} \sigma_{i})^{2}$.
@@ -1397,7 +1397,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
     \frac{k}{B+1} $.
   \item Simulate $T_{1}, \dots, T_{B}$ according to $F$.
   \item Let $\hat c_{\alpha} = T_{(k)}$ where $T_{(k)}$ is the $k$-th
-    order statistic of $T_{1}, \dots, T_{B}$. 
+    order statistic of $T_{1}, \dots, T_{B}$.
   \end{enumerate}
 \end{defn}
 
@@ -1468,6 +1468,21 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   Note that the samples $\overline \theta^{(t)}$ are \textbf{not independent}.
 \end{defn}
 
+\begin{proof}
+  The probability of transition from $a$ to $b$, $K(b, a)$ is given as
+  $K(b, a) = \min \{ \frac{\pi(b)}{\pi(a)}, 1 \} + (1 -
+  \sum_{b'=1}^{M} \min \{  \frac{\pi(b)}{\pi(a)}, 1 \}) \I{a = b}$.
+  Then
+  \begin{align}
+    \label{eq:10}
+    (K \pi)(b) &= \sum_{a=1}^{M} K(b, a) \pi(a) \\
+    &= \sum_{a=1}^{M} (\min \{ \frac{\pi(b)}{\pi(a)} , 1 \} + (1 -
+    \sum_{b'=1}^{M} \min \{ \frac{\pi(b')}{\pi(a)}, 1 \} ) \I{a=b})
+    \pi(a) \\
+    &= \pi(b)
+  \end{align} so $K \pi = \pi$ , and so $\pi$ is the invariant point
+  of $K$ and thus the stationary measure.
+\end{proof}
 
 \begin{defn}
   \label{sec:bayes-infer-assoc-3}
@@ -1479,7 +1494,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   Assume that $\pi$ is such that for any atom $x \in \mathcal{X}$, $\{
   x \} $ is measurable according to $\pi$.  For any $x \in
   \mathcal{X}$, define a transition measure $\mu(\cdot | x)$ on
-  $\mathcal{X}$.  
+  $\mathcal{X}$.
   The method proceeds as follows:
   \begin{enumerate}
   \item Set the initial vector $\theta^{(0)}$.

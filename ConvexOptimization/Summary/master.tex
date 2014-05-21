@@ -69,7 +69,7 @@
   \end{equation}
   $f$ is \textbf{lower semicontinuous} at $x'$ if and only if $f(x')
   \leq \liminf_{x \rightarrow x'} f(x)$.
-  $f$ is \textbf{lower semicontinous} if $f$ is lower semicontinous at
+  $f$ is \textbf{lower semicontinuous} if $f$ is lower semicontinuous at
   every $x' \in \R^{n}$.
 \end{defn}
 
@@ -131,7 +131,7 @@
 
 \begin{proof}
   Consider $\cap_{\alpha \in \R, a > \in f} = \argmin f$, then this is
-  countable interesction of nonempty, compact sets, so intersection is
+  countable intersection of nonempty, compact sets, so intersection is
   nonempty.
 
   Finiteness of inf is shown as for any $x \in \argmin f \neq
@@ -216,7 +216,7 @@
   \item $\argmin f$ is convex.
   \item $x$ is a local minimizer of $f$ implies $x$ is a global
     minimize of $f$.
-  \item $f$ is strictly convex and proper impiles $f$ has at most one
+  \item $f$ is strictly convex and proper implies $f$ has at most one
     global minimizer.
   \end{enumerate}
 \end{thm}
@@ -268,7 +268,7 @@
     \sum_{i=1}^{m} \lambda_{i} f_{i}$ is convex.  If at least one of
     the $f_{i}$ with $\lambda_{i} > 0$ is strictly convex, then $f$ is
     strictly convex.
-  \item Asssume $f_{i}: \R^{n_{i}} \rightarrow \overline \R$ are
+  \item Assume $f_{i}: \R^{n_{i}} \rightarrow \overline \R$ are
     convex.  Then
     \begin{align}
       \label{eq:7}
@@ -319,7 +319,7 @@
 
 \begin{defn}
   \label{sec:convexity-14}
-  For an arbitary set $S \subseteq \R^{n}$,
+  For an arbitrary set $S \subseteq \R^{n}$,
   \begin{equation}
     \label{eq:10}
     \con S = \bigcap_{\text{$C$ convex, $S \subseteq C$}} C
@@ -347,10 +347,10 @@
 \begin{thm}
   \label{sec:convexity-16}
   \begin{enumerate}
-  \item $\cl C = \{ x \in \R^{n} | \text{for all open neighbourhoods
+  \item $\cl C = \{ x \in \R^{n} | \text{for all open neighborhoods
       $N$ of $x$, $N \cap C \neq \emptyset$} \}$
   \item $\int C = \{ x \in \R^{n} | \text{there exists an open
-      neighbourhood $N$ of $x$ such that $N \subseteq C$} \} $
+      neighborhood $N$ of $x$ such that $N \subseteq C$} \} $
   \item $\bnd C = \cl C \backslash \int C$.
   \end{enumerate}
 \end{thm}
@@ -549,7 +549,7 @@
     \label{eq:15}
     \aff C = \cap_{\text{$A$ affine, $C \subseteq A$}} A \\
     \rint C = \{ x \in \R^{n} | \text{there exists an open
-      neighbourhood $N$ of $x$ with $N \cap \aff C \subseteq C$} \}.
+      neighborhood $N$ of $x$ with $N \cap \aff C \subseteq C$} \}.
     \label{eq:16}
   \end{align}
 \end{defn}
@@ -672,12 +672,12 @@
   \iff h \leq \cl f \iff h \leq \con f \iff h \leq \cl \con f$.  Which
   gives our result.
 
-  For the inquality, expand $f^{\star \star}(y) = \sup_{v} \IP{v, y} +
+  For the inequality, expand $f^{\star \star}(y) = \sup_{v} \IP{v, y} +
   \inf_{x}( f(x) - \IP{v, x}) \leq f(y)$ at $y = x$.
 
   As $\con f$ is proper, then $\cl \con f$ is proper, lsc, and
   convex, so $\cl \con f = \sup_{g \leq \cl \con f} g(x)$ where $g$ is
-  affine,which equalis $f^{\star \star}$ by definition.
+  affine,which equals $f^{\star \star}$ by definition.
 
   Finally, if $f$ is convex, then $\con f = f$, so $\con f$is proper,
   and $\con f = f$ is lsc, so $f^{\star \star} = \cl \con f = \cl f = f$.
@@ -752,16 +752,16 @@
   For support functions, $f^{\star}(x) = \sigma_{C}(x)$, so $C$
   nonempty closed convex implies $f^{\star}$ is proper lsc convex with
   $f^{\star}(0) = 0$ and $f^{\star}(\lambda v) = \lambda
-  f^{\star}(v)$, so $f^{\star} = \sigma_{C}$ is positively homogenous.
+  f^{\star}(v)$, so $f^{\star} = \sigma_{C}$ is positively homogeneous.
 
-  If $g$ is positively homogenous lower semincontinuous, $g^{\star}(x)
-  \in \{ 0, \infty \} $, so $g^{\star}$ is an indicatior function,
+  If $g$ is positively homogeneous lower semicontinuous, $g^{\star}(x)
+  \in \{ 0, \infty \} $, so $g^{\star}$ is an indicator function,
   which must be convex and nonempty by properness lsc convexity of
   $g^{\star}$.
 
   One to one follows from $\delta^{\star \star}_{C} = \delta_{C}$.
 
-  For cones, show $g$ is positively homogenous lsc convex proper
+  For cones, show $g$ is positively homogeneous lsc convex proper
   indicator function $\iff$ $g = \delta_{K}$ for $K$a convex closed
   cone.
 
@@ -779,13 +779,13 @@
 \begin{defn}
   \label{sec:conjugate-functions-13}
   A function $f: \R^{n} \rightarrow \overline \R$ is said to be
-  positively homogenous if and only if $0 \in \dom f$ and $f(\lambda
+  positively homogeneous if and only if $0 \in \dom f$ and $f(\lambda
   x) = \lambda f(x)$ for all $x \in \R^{n}$ and $\lambda > 0$.
 \end{defn}
 
 \begin{thm}
   \label{sec:conjugate-functions-14}
-  The set of positively homogenous proper lsc convex functions and the
+  The set of positively homogeneous proper lsc convex functions and the
   set of closed convex nonempty sets are in one-to-one correspondence
   through the Legendre-Fenchel transform:
   \begin{align}
@@ -834,7 +834,7 @@
     \label{eq:36}
     q(v) = \inf_{y} f^{\star}(v, y) = -\sup_{y} (-f^{\star}(v, y))
   \end{align}
-  $f$ is sometimes called a \textbf{peturbation function} for $\psi$,
+  $f$ is sometimes called a \textbf{perturbation function} for $\psi$,
   and $p$ the associated \textbf{marginal function}.
 \end{defn}
 
@@ -868,7 +868,7 @@
 
   $p, q$ are convex from the strict epigraph set, with $E = \{ (u, a)
   \in \R^{m } \times \R | p(u) = \inf_{x \in \R^{n}} f(x, u) < \alpha
-  \} = A(E')$, where $A$ is the lnear projection mapping $A(x, u,
+  \} = A(E')$, where $A$ is the linear projection mapping $A(x, u,
   \alpha) = (u, \alpha)$, and $E'$ is the strict epigraph of $f$ and
   thus convex, so $A(E')$ is convex.
 
@@ -904,7 +904,7 @@
   p(0)$, so $\liminf_{y \rightarrow 0} p(y) = \cl p(0) = p(0) \in \R$,
   so $p$ is lsc in $0$.
 
-  $(\Leftarrow)$ follows from the claim thatif it holds then $\cl p$
+  $(\Leftarrow)$ follows from the claim that if it holds then $\cl p$
   is proper lsc convex.  Convexity, lsc is clear, and an improper
   convex lsc function is always constant $\infty$ or $-\infty$,
   contradiction $p(0) \in \R$. So $(p^{\star})^{\star}(0) = ((\cl
@@ -918,9 +918,10 @@
     conditions},
   \begin{align}
     \label{eq:42}
-    (0, y') \in \partial f(x', 0) \iff \{ x' \in \argmin_{x} \phi(x),
-    y' \in \argmax_{y} \psi(y), \inf_{x} \psi(x) = \sup_{y} \psi(y) \}
-    \iff (x', 0) \in \partial f^{\star}(0, y').
+    &(0, y') \in \partial f(x', 0) \\
+    \iff &\{ x' \in \argmin_{x} \phi(x),
+    &y' \in \argmax_{y} \psi(y), \inf_{x} \psi(x) = \sup_{y} \psi(y) \} \\
+    \iff &(x', 0) \in \partial f^{\star}(0, y').
   \end{align}
 
   The set of \textbf{primal-dual optimal points} $(x', y')$ satisfying
@@ -929,7 +930,7 @@
 \end{thm}
 
 \begin{proof}
-  Follows from invertibility of sugbradient in terms of conjugate
+  Follows from invertibility of subgradient in terms of conjugate
   functions, showing $f(x', 0) = -f^{\star}(0, y') \iff \phi(x') =
   \psi(y') \in \R$, and equality with infinite value is explicitly
   excluded by definition of $\argmin$.
@@ -986,28 +987,27 @@
   \R^{m \times n}, b \in \R^{m}, c \in \R^{n}$. For $f(x, u) = \IP{c,
     x} + k(x) + h(Ax - b + u)$, the primal and dual problems are of
   the form
-\begin{align}
-  \label{eq:43}
-  \inf \phi(x), \phi(x) = \IP{c, x} + k(x) + h(Ax - b) \\
-  \label{eq:44}
-  \sup_{y} \psi(y), \psi(y) = -\IP{b, y} - h^{\star}(y) -
-  k^{\star}(-A^{T}y - c)
-\end{align} with
-\begin{align}
-  \label{eq:45}
-  \int \dom p = \int (\dom h - A \dom k) + b \\
-  \label{eq:46}
-  \int \dom q = \int(\dom k^{\star} - (-A^{T}) \dom h^{\star}) + c
-\end{align}
-and optimality conditoins
-\begin{align}
-  \label{eq:47}
-  \{ -A^{T} y' - c \in \partial k(x'), y' \in \partial h(Ax' - b) \}
-  \\
-  \iff \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
-  \inf_{x} \phi(x) = \sup_{y} \psi(y) \} \\ \iff \{ Ax' - b \in \partial
-  h^{\star}(y'), x' \in \partial k^{\star}(-A^{T} y' - c) \}
-\end{align}
+  \begin{align}
+    \label{eq:43}
+    \inf \phi(x), \phi(x) = \IP{c, x} + k(x) + h(Ax - b) \\
+    \label{eq:44}
+    \sup_{y} \psi(y), \psi(y) = -\IP{b, y} - h^{\star}(y) -
+    k^{\star}(-A^{T}y - c)
+  \end{align} with
+  \begin{align}
+    \label{eq:45}
+    \int \dom p = \int (\dom h - A \dom k) + b \\
+    \label{eq:46}
+    \int \dom q = \int(\dom k^{\star} - (-A^{T}) \dom h^{\star}) + c
+  \end{align}
+  and optimality conditions
+  \begin{align}
+    \label{eq:47}
+    & \{ -A^{T} y' - c \in \partial k(x'), y' \in \partial h(Ax' - b)
+    \} \\
+    \iff &\{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y), \inf_{x} \phi(x) = \sup_{y} \psi(y) \} \\
+    \iff &\{ Ax' - b \in \partial h^{\star}(y'), x' \in \partial k^{\star}(-A^{T} y' - c) \}
+  \end{align}
 \end{thm}
 
 \begin{thm}
@@ -1026,16 +1026,16 @@ and optimality conditoins
   convex. Then $l(\cdot, y) = \inf_{u} g(\cdot, y, u)$ is convex.Then
   $f_{x}(y) = f(x, y)$, then $-l(x, \cdot) = f^{\star}_{x}(\cdot)$ so
   $f_{x}$ is either $+\infty$ or proper lsc convex, and $-l(x, \cdot)$
-  is eiather $-\infty$ or proper lsc convex, but always lsc convex.
+  is either $-\infty$ or proper lsc convex, but always lsc convex.
 
-  By subgradient definitino, $(v, y) \in \partial f(x, u) \iff
+  By subgradient definition, $(v, y) \in \partial f(x, u) \iff
   \inf_{u'} f(x', u') - \IP{y, u'} \geq f(x, u) - \IP{y, u} + \IP{v,
-    x' - x} \forall x'$, which evaluated at $x' = x$ impilies
+    x' - x} \forall x'$, which evaluated at $x' = x$ implies
   $\inf_{u'} f(x, u') - \IP{y, u'} = f(x, u) - \IP{y, u}$.
 
   Continuing, we obtain $(v, y) \in \partial f(x, u) \iff y
   \in \partial_{u} f(x, u),  \in \partial_{x} l(x, y)$, and the first
-  condition is equlivanet to $u \in \partial f^{\star}_{x}(y)$, or $u
+  condition is equivalent to $u \in \partial f^{\star}_{x}(y)$, or $u
   \in \partial (- l(x, \cdot))^{\star \star} = \partial_{y}(-l)(x, y)$
   as required.
 \end{proof}
@@ -1057,13 +1057,13 @@ and optimality conditoins
   Then $\phi(x) = \sup_{y} l(x, y)$, and $\psi(y) = \inf_{x} l(x, y)$,
   and the primal problem is $\inf_{x} \phi(x) = \inf_{x} \sup_{y} l(x,
   y)$, and the dual problem is $\sup_{y} \psi(y) = \sup_{y} \inf_{x}
-  l(x, y)$.  Moreove, the optimality condition
+  l(x, y)$.  Moreover, the optimality condition
   \begin{align}
     \label{eq:49}
-    \{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
+    &\{ x' \in \argmin_{x} \phi(x), y' \in \argmax_{y} \psi(y),
     \inf_{x} \phi(x) = \sup_{y} \psi(y) \}
-    \\ \iff (x', y') \in \saddlepoint l
-    \\ \iff \{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \}
+    \\ \iff &(x', y') \in \saddlepoint l
+    \\ \iff &\{ 0 \in \partial_{x} l(x', y'), 0 \in \partial_{y}(-l)(x', y') \}
   \end{align}
 \end{thm}
 
@@ -1078,7 +1078,7 @@ and optimality conditoins
   l(x, y) + \IP{u, y} = (-l(x, \cdot))^{\star}(u)$.
 
   $f$ is proper, lsc, and convex, so the previous result applies with
-  promal and dual problems $\phi(x) = \delta_{X}(x) + \sup_{y \in Y}
+  primal and dual problems $\phi(x) = \delta_{X}(x) + \sup_{y \in Y}
   L(x, y)$, $\psi(y) = -\delta_{Y}(y) + \int_{x \in X} L(x, y)$.
   Moreover, if $X$ and $Y$ are bounded, then $\saddlepoint l$ is nonempty and bounded.
 \end{thm}
@@ -1164,7 +1164,7 @@ and optimality conditoins
   sequence is not unique, can get stuck if $x^{k}$ is infeasible.
 
   The \textbf{backward step} is $x^{k+1} = B_{\tau_{k} f}(x^{k})$ -
-  which is a \textbf{unique} sequence, and cannot get stuck.  Substeps
+  which is a \textbf{unique} sequence, and cannot get stuck.  Sub-steps
   are as hard as the original problem (but strictly convex).
 \end{thm}
 
@@ -1292,10 +1292,10 @@ proper lsc convex, $\argmin f \neq \emptyset$, we can do:
 \begin{thm}
   \label{sec:inter-point-meth-6}
   Assume $0 < \rho \leq \kappa < \frac{1}{10}$, $t^{k} > 0$ fixed, and
-  $z^{k} = (x^{k}, y^{k})$ stirctly feasible, so $Ax^{k} - b \in \dom
+  $z^{k} = (x^{k}, y^{k})$ strictly feasible, so $Ax^{k} - b \in \dom
   F$, $y^{k} \in \dom f$, such that $\dist(z^{k}, z(t^{k})) < \kappa$.
 
-  If we apply a full Netwton step with $\tau_{k} = 1$ and $t^{k+1} = (1
+  If we apply a full Newton step with $\tau_{k} = 1$ and $t^{k+1} = (1
   + \frac{\rho}{\sqrt{\theta_{F}}}) t^{k}$ to generate $z^{k+1}$, then
   $x^{k+1}, y^{k+1}$ are strictly primal and dual feasible, and
   $\dist(z^{k+1}, z(t^{k+1})) > \kappa$ as well.
@@ -1368,7 +1368,7 @@ proper lsc convex, $\argmin f \neq \emptyset$, we can do:
   \label{sec:total-vari-appl-4}
   For $\Omega \subseteq \R^{d}$ and $k \geq 1$, define the space
   $BV^{k}(\Omega)$ as $BV^{k} = \{ u \in W^{k-1, 1} | \grad^{k-1}u \in
-BV(\Omega, R^{d^{k-1}}) \}$ and the higer-ordre total variation as
+BV(\Omega, R^{d^{k-1}}) \}$ and the higher-order total variation as
 \begin{align}
   \label{eq:56}
   TV^{k}(u) = \sup_{v \in C_{c}^{k}(\Omega, \sym^{k}(\R^{d})), \| v
@@ -1393,7 +1393,7 @@ BV(\Omega, R^{d^{k-1}}) \}$ and the higer-ordre total variation as
   Let $c_{1}, c_{2}$ be fixed, and consider $\inf_{u: \Omega
     \rightarrow [0, 1], u \in BV(\Omega)} f(u), f(u) = \IP{u,
     s}_{L^{1}} + \lambda TV(u)$.  Then if $u$ is a minimizer of $f$,
-  and $u(x) \in \{ 0, 1 \} a.e.$, then $C$ is a minimzer of
+  and $u(x) \in \{ 0, 1 \} a.e.$, then $C$ is a minimizer of
   $f_{CV(\cdot, c_{1}, c_{2})}$.
 \end{thm}
 
@@ -1414,8 +1414,8 @@ BV(\Omega, R^{d^{k-1}}) \}$ and the higer-ordre total variation as
 \end{defn}
 
 \begin{thm}
-  Let $f*u$ = TV(u), the condition is the cooarea formula.  As the
-  condition is additivie, we need only show $\int_{\Omega} s(x) u(x)
+  Let $f*u = TV(u)$, the condition is the cooarea formula.  As the
+  condition is additive, we need only show $\int_{\Omega} s(x) u(x)
   = \int_{0}^{1} \int_{\Omega} s(x) 1_{\{ u(x) > \alpha \}} d\alpha$,
   where we use Fubini due to $s \in L^{\infty}(\Omega)$.
 \end{thm}
@@ -1424,7 +1424,7 @@ BV(\Omega, R^{d^{k-1}}) \}$ and the higer-ordre total variation as
   Assume $f: \mathcal{C} \rightarrow \R$ satisfies the generalized
   coarea condition, and $u^{\star}$ satisfies $u^{\star} \in
   \argmin_{u \in \mathcal{C}} f(u)$. Then for almost every $\alpha \in
-  [0, 1]$, the thresholded function statisfies $\overline
+  [0, 1]$, the thresholded function satisfies $\overline
   u_{\alpha}^{\star} \in \argmin_{u \in BV(\Omega, \{ 0, 1 \})} f(u)$.
 \end{thm}
 

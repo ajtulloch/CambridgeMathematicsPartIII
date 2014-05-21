@@ -1,11 +1,10 @@
-
 \chapter{Introduction}
 \label{cha:introduction}
 
 \begin{itemize}
 \item Sixteen lectures
 \item Three example sheets, three example classes.
-\item A closed book exame in term three.
+\item A closed book exam in term three.
 \end{itemize}
 
 Old lectures
@@ -29,7 +28,7 @@ References
 \section{Basic Concepts}
 \label{sec:basic-concepts}
 
-\subsection{Parameteric vs Nonparametric models}
+\subsection{Parametric vs Nonparametric models}
 \label{sec:param-vs-nonp}
 
 A statistical model postulates a family of possible data generating
@@ -231,18 +230,18 @@ define the Mean Integrated Squared Error ($MSIE$) as
   \frac[1]{h} ((K^{2}_{n} \star f)(x) - (K_{h} \star f)^{2}(x)) dx
 \end{align} which is justified by Fubini's theorem as the integrand
 is non-negative.
-JAlthough exact, this expression depends on $h$ in a complicated way.
-We therefore seek asymptotic approximation to calify this dependnence
-and faciliate an asymptotically optimal choice of $h$.
+Although exact, this expression depends on $h$ in a complicated way.
+We therefore seek asymptotic approximation to clarify this dependence
+and facilitate an asymptotically optimal choice of $h$.
 
-\section{Asynptotic MSE and MSIE approximation}
+\section{Asymptotic MSE and MSIE approximation}
 \label{sec:asynptotic-mse-msie}
 
 We need the following conditions:
 \begin{enumerate}
 \item \label{item:4} $f$ is twice differentiable, $f'$is bounded, and $R(f) =
   \int_{-\infty}^{\infty} f''(x)^{2} dx < \infty$.
-\item \label{item:5} $h = h_{n}$ is a non-random sequecne with $h \rightarrow 0$ and
+\item \label{item:5} $h = h_{n}$ is a non-random sequence with $h \rightarrow 0$ and
   $nh \rightarrow \infty$ as $n \rightarrow \infty$.
 \item \label{item:6} $K$ is non-negative, $\int_{-\infty}^{\infty} K(x) dx = 1$,
   $\int_{-\infty}^{\infty} x K(x) dx = 0$, $\mu_{2}(K) =
@@ -251,7 +250,7 @@ We need the following conditions:
 
 \begin{thm}
   \label{defn:Introduction:3}
-  Assume that the previous conditions hod. Then, for all $x \in \R$,
+  Assume that the previous conditions hold. Then, for all $x \in \R$,
   \begin{align}
     \label{eq:15}
     MSE(\hat f_{n}(x)) = \frac{R(K) f(x)}{nh} + \frac{1}{4} h^{4}
@@ -263,7 +262,7 @@ We need the following conditions:
   We first claim that $f$ is bounded. Otherwise, there would exists
   $(x_{n})$ such that $f(x_{n}) \geq n$.  Since $f$ is a density, the
   exists $x_{n, l} \in [x_{n} - \frac{2}{n}, x_{n}]$ such that
-  $f(x_{n, l}) \leq \frac{n}{2}$  and theere exists $x_{n, m} \in
+  $f(x_{n, l}) \leq \frac{n}{2}$  and there exists $x_{n, m} \in
   [x_{n}, x_{n} + \frac{2}{n}]$ such that $f(x_{n, m}) \leq
   \frac{n}{2}$.  y the mean value theorem, there exists $x^{\star}_{n,
   l} \in [x_{n, l}, x_{n}]$ such that $f'(x^{\star}_{n, l}) \geq
@@ -456,7 +455,7 @@ If $f$ is the $N(0, \sigma^{2})$ density, then $R(f'') = \frac{3}{8
   \sqrt{\pi}} \sigma^{-5}$.    The normal scale rate $\hat h_{NS}$
 consists of replacing $R(f'')$ in $h_{AMISE}$ with $\frac{3}{8
   \sqrt{\pi}} \hat \sigma^{-5}$, where $\hat \sigma$ is an estimate of
-$\sigma$.  This tends to oversmooth.
+$\sigma$.  This tends to over-smooth.
 
 \subsection{Least-squares Cross-Validation}
 \label{sec:least-squares-cross}
@@ -645,7 +644,7 @@ need not be a density.  However, we can define
 
 Theory suggests that we should choose $h(X_{i}) = h_{0}
 f^{-\frac{1}{2}}(X_{i})$, and, with four derivatives and a second
-order kerrenel, one can attan a ``fourth-order kernel'' rate of
+order kernel, one can attain a ``fourth-order kernel'' rate of
 $O(n^{-\frac{8}{9}})$.  There is no negativity problem, but we do
 require pilot bandwidth selection.  Difficult to tune well and rarely
 used in practice.
@@ -653,10 +652,10 @@ used in practice.
 \subsection{Transformation Methods}
 \label{sec:transf-meth}
 
-It may be that $f$ is difficult to estimat,e, but it may be that we
+It may be that $f$ is difficult to estimate, but it may be that we
 can construct a strictly increasing, continuously differentiable
 function $t$ on the support of $f$, such that, setting $Y_{i} =
-t(X_{i})$, the desntiy of $Y_{1}, \dots, Y_{n}$ is easier to estimate.
+t(X_{i})$, the density of $Y_{1}, \dots, Y_{n}$ is easier to estimate.
 We ``back transform'' the estimate to obtain
 \begin{align}
   \label{eq:46}
@@ -691,10 +690,10 @@ Thus the ``curse of dimensionality'', together with bandwidth
 selection problems, means that this is only really feasible for $d
 \leq 4$.
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "master"
-%%% End: 
+%%% End:
 
 \iffalse
 #+ORGTBL: SEND testtbl orgtbl-to-latex :splice nil :skip 0
