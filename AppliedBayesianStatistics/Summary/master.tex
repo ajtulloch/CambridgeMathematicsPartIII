@@ -46,7 +46,7 @@
     \label{eq:2}
     p(\theta_{i} | y) = \frac{p(y | \theta_{i})
       p(\theta_{i})}{\sum_{k}^{} p(y | \theta_{k}) p(\theta_{k})}
-    \alpha p(y | \theta_{i}) p(\theta_{i})
+    \propto p(y | \theta_{i}) p(\theta_{i})
   \end{equation}
 
   or equivalently, the posterior is proportional to the likelihood
@@ -55,7 +55,7 @@
 
 \begin{defn}
   \label{sec:prob-bayes-theor-4}
-  $\theta \sim Beta(a, b)$ represents a Beta distribution with
+  $\theta \sim \textsc{Beta}(a, b)$ represents a \textsc{Beta} distribution with
   properties
   \begin{align}
     p(\theta | a, b) &= \frac{\Gamma(a, b)}{\Gamma(a) \Gamma(b)} \theta^{a-1} (1 - \theta)^{b-1}), \theta \in (0, 1) \\
@@ -71,7 +71,7 @@
   Our parametric sampling distribution $p(y | \theta)$ with
   uncertainty about $\theta$ given by a distribution $p(\theta)$ gives
   a predictive distribution $p(y) = \int p(y| \theta) p(\theta)
-  d\theta$. 
+  d\theta$.
   The mean and variance of a predictive distribution can be obtained
   using
   \begin{align}
@@ -89,9 +89,9 @@
 
 \begin{defn}
   \label{sec:prob-bayes-theor-7}
-  Suppose $\theta \sim Beta(a, b)$, $Y \sim Binomial(\theta, n)$.  The
+  Suppose $\theta \sim \textsc{Beta}(a, b)$, $Y \sim \textsc{Binomial}(\theta, n)$.  The
   exact predictive distribution for $Y$ is known as the
-  \textbf{Beta-Binomial} with
+  \textsc{BetaBinomial} with
   \begin{equation}
     \label{eq:5}
     p(y) = \frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)}  {n \choose y}
@@ -100,14 +100,14 @@
   If $a = b = 1$ (the prior is uniform on $0, 1$), then $p(y)$ is
   uniform on $0, 1, \dots, n$.
 
-  The mean and variance of the beta-binomial is given as $\E{Y} =
+  The mean and variance of the \textsc{BetaBinomial} is given as $\E{Y} =
   \frac{na}{a+b}$ and $\V{Y} = n \frac{ab}{(a+b)^{2}} \frac{(n+a+b)}{(1+a+b)}$
 \end{defn}
 
 \begin{defn}
   \label{sec:prob-bayes-theor-8}
   The Gamma distribution is a flexible distribution for positive
-  quantities.  If $Y \sim Gamma(a, b)$, then
+  quantities.  If $Y \sim \textsc{Gamma}(a, b)$, then
   \begin{align}
     \label{eq:6}
     p(y|a,b) &= \frac{b^{a}}{\Gamma(a)} y^{a-1} e^{-by}, y \in (0,
@@ -116,14 +116,14 @@
     \V(Y|a, b) &= \frac{a}{b^{2}}
   \end{align}
 
-  The $Gamma(1, b)$ distribution is exponential with mean
-  $\frac{1}{b}$. The $Gamma(\frac{\nu}{2}, \frac{1}{2})$ is a
+  The $\textsc{Gamma}(1, b)$ distribution is exponential with mean
+  $\frac{1}{b}$. The $\textsc{Gamma}(\frac{\nu}{2}, \frac{1}{2})$ is a
   chi-squared $\chi^{2}_{\nu}$ with $\nu$ degrees of freedom.
 \end{defn}
 
 \begin{thm}
   \label{sec:prob-bayes-theor-9}
-  Suppose $\theta \sim Gamma(a, b)$, $Y \sim Poisson(\theta)$, then
+  Suppose $\theta \sim \textsc{Gamma}(a, b)$, $Y \sim \textsc{Poisson}(\theta)$, then
   the exact predictive distribution of $Y$ is
   \textbf{negative-binomial} with
   \begin{align}
@@ -161,18 +161,18 @@
 \begin{thm}
   \label{sec:conjugate-analysis-1}
   Suppose we have a independent sample of data $y_{i} \sim
-  Normal(\mu, \sigma^{2})$, $i = 1, \dots, n$, with $\sigma^{2}$ known
+  \textsc{Normal}(\mu, \sigma^{2})$, $i = 1, \dots, n$, with $\sigma^{2}$ known
   and $\mu$ unknown.  The conjugate prior for the normal mean is also
-  normal, $\mu$, $\mu \sim Normal(\gamma, \tau^{2})$, where $\gamma$
+  normal, $\mu$, $\mu \sim \textsc{Normal}(\gamma, \tau^{2})$, where $\gamma$
   and $\tau^{2} = \frac{\sigma^{2}}{n_{0}} $ are specified.  The posterior distribution is
   \begin{align}
     \label{eq:11}
-    p(\mu \ y) \alpha p(\mu) \prod_{i=1}^{n} p(y_{i} | \mu) =
-    Normal(y_{n}, \tau^{2}_{n})
+    p(\mu \ y) \propto p(\mu) \prod_{i=1}^{n} p(y_{i} | \mu) =
+    \textsc{Normal}(y_{n}, \tau^{2}_{n})
   \end{align} where $\gamma_{n} = \frac{n_{0} \gamma + n \overline
     y}{n_{0} + n}$ and $\tau^{2}_{n} = \frac{\sigma^{2}}{n_{0} + n}$.
 
-  The posterior predictive distribution is thus $Normal(\gamma_{n},
+  The posterior predictive distribution is thus $\textsc{Normal}(\gamma_{n},
   \sigma^{2} + \tau_{n}^{2})$.
 \end{thm}
 
@@ -182,12 +182,12 @@
   $\sigma^{2}$ is unknown.
 
   If we use precision $\omega = \frac{1}{\sigma^{2}}$, we have the
-  conjugate prior for $\omega$ as $\omega \sim Gamma(\alpha, \beta)$,
-  so $p(\omega) \alpha w^{\alpha-1} \exp(-\beta \omega)$.
+  conjugate prior for $\omega$ as $\omega \sim \textsc{Gamma}(\alpha, \beta)$,
+  so $p(\omega) \propto w^{\alpha-1} \exp(-\beta \omega)$.
   $\sigma^{2}$ has an \textbf{inverse-gamma} distribution.
 
   The posterior distribution has the form $p(\omega | \mu, y) =
-  Gamma(\alpha + \frac{n}{2}, \beta + \frac{1}{2} \sum_{i=1}^{n}
+  \textsc{Gamma}(\alpha + \frac{n}{2}, \beta + \frac{1}{2} \sum_{i=1}^{n}
   (y_{i} - \mu)^{2})$.
 \end{thm}
 
@@ -197,7 +197,7 @@
   weights $q_{i}$, then the mixture prior is $p(\theta) = \sum_{i}^{}
   q_{i} p_{i}(\theta)$.  If we now observe data $y$, the posterior for
   $\theta$is $p(\theta | y) = q'_{i}p(\theta | y, H_{i})$, where
-  $p(\theta | y, H_{i}) \alpha p(y | \theta) p(\theta | H_{i})$, where
+  $p(\theta | y, H_{i}) \propto p(y | \theta) p(\theta | H_{i})$, where
   $q'_{i} = p(H_{i} | y) = \frac{q_{i} p(y | H_{i})}{\sum_{i} q_{i} p
     (y|H_{i})}$ where $p(y | H_{i}) = \int p(y | \theta) p(\theta |
   H_{i}) d\theta$ is the predictive probability of the data $y$
@@ -208,11 +208,11 @@
   \label{sec:conjugate-analysis-4}
   In a general one-parameter exponential family, we have $p(y |
   \theta) = \exp(\sum_{i} a(y_{i}) + nb(\theta) + u(\theta)
-  \sum_{i}^{} t(y_{i}))$ and prior $p(\theta) \alpha \exp(n_{0}
+  \sum_{i}^{} t(y_{i}))$ and prior $p(\theta) \propto \exp(n_{0}
   b(\theta) = t_{0} u(\theta))$ so the posterior distribution is
   \begin{equation}
     \label{eq:12}
-    p(\theta | y) \alpha \exp((n + n_{0})b(\theta) +
+    p(\theta | y) \propto \exp((n + n_{0})b(\theta) +
     u(\theta)(\sum_{i}^{} t(y_{i}) + t_{0}))
   \end{equation} which is in the same family as the prior
   distribution.  $t_{0}$ can be thought of as the sum of $n_{0}$
@@ -224,10 +224,10 @@
 
 \begin{thm}
   \label{sec:prior-distributions-2}
-  If $\frac{1}{\sigma^{2}}|y \sim Gamma(\alpha, \beta)$, then $\frac{2
+  If $\frac{1}{\sigma^{2}}|y \sim \textsc{Gamma}(\alpha, \beta)$, then $\frac{2
     \beta}{\sigma^{2}} \sim \chi^{2}_{2 \alpha}$.
 
-  If $Z \sim Normal(0, 1)$, $X \sim \frac{\chi^{2}_{\nu}}{\nu} \sim
+  If $Z \sim \textsc{Normal}(0, 1)$, $X \sim \frac{\chi^{2}_{\nu}}{\nu} \sim
   t_{\nu}$.
 \end{thm}
 
@@ -235,7 +235,7 @@
   \label{sec:prior-distributions-3}
   A Jeffreys prior is compatible with a Jeffrey's prior for any $1-1$
   transformation $\phi = f(\Theta)$.
-\item $p_{}(\theta) \alpha I(\theta)^{\frac{1}{2}}$ where $I(\theta)$
+\item $p_{}(\theta) \propto I(\theta)^{\frac{1}{2}}$ where $I(\theta)$
   is the Fisher information for $\theta$,
   \begin{equation}
     \label{eq:13}
@@ -258,16 +258,16 @@
   \label{sec:prior-distributions-4}
   For location parameters, $p(y|\theta)$ is a function of $y -
   \theta$, and the distribution of $y - \theta$ is independent of
-  $\theta$, hence $p_{J}(\theta) \alpha C$ constant. Can us
+  $\theta$, hence $p_{J}(\theta) \propto C$ constant. Can us
   \texttt{dflat()} in winbugs or a proper distribution such as
   \texttt{dunif(-100, 100)}
 \end{defn}
 
 \begin{defn}
   \label{sec:prior-distributions-5}
-  For count/rate parameters, the Fisher information for Poisson data
+  For count/rate parameters, the Fisher information for \textsc{Poisson} data
   is $I(\theta) = \frac{1}{\theta}$, and so the Jeffreys prior is
-  $p_{J}(\theta) \alpha \frac{1}{\sqrt{\theta}}$, which can be
+  $p_{J}(\theta) \propto \frac{1}{\sqrt{\theta}}$, which can be
   approximated by a \texttt{dgamma(0.5, 0.000001)} distribution in
   BUGS.
 
@@ -280,15 +280,13 @@
   $\sigma$ is a scale parameter if $p(y | \sigma) = \frac{1}{\sigma}
   f(\frac{y}{\sigma})$ for some function $f$, so that the distribution
   of $\frac{Y}{\sigma} $ does not depend on $\sigma$. The Jeffreys
-  prior is $p_{J}(\sigma) \alpha \sigma^{-1}$. This implies that
-  $p_{j}(\sigma^{k}) \alpha \sigma^{-k}$, for any choice of $k$, and
+  prior is $p_{J}(\sigma) \propto \sigma^{-1}$. This implies that
+  $p_{j}(\sigma^{k}) \propto \sigma^{-k}$, for any choice of $k$, and
   thus for the precision of the normal distribution, we should have
-  $p_{J}(\omega) \alpha \omega^{-1}$, which can be approximated by
+  $p_{J}(\omega) \propto \omega^{-1}$, which can be approximated by
   \texttt{dgamma(0.0001, 0.0001)} in BUGS (an inverse-gamma
   distribution on the variance $\sigma^{2}$).
 \end{defn}
-
-\todo{Power calculations, etc?}
 
 \section{Multivariate Distributions}
 \label{sec:mult-distr}
@@ -299,13 +297,13 @@
   multinomial density is $p(n|q) = \frac{(\sum_{}^{} n_{k})!}{\prod
     n_{k}!} \prod_{k=1}^{K} q_{k}^{n_{k}}$, with likelihood
   propertional to $\prod_{k=1}^{K} q_{k}^{n_{k}}$. The conjugate prior
-  is a $Dirichlet(\alpha_{1}, \dots, \alpha_{k})$ distribution with
+  is a $\textsc{Dirichlet}(\alpha_{1}, \dots, \alpha_{k})$ distribution with
   \begin{equation}
     \label{eq:15}
     p(q) = \frac{\Gamma(\sum_{}^{} \alpha_{k})}{\prod \Gamma(a_{k}!)}
-    q_{k}^{a_{k} --- 1}
+    q_{k}^{a_{k}-1}
   \end{equation}  with $\sum_{k}^{} q_{k} = 1$.  The posterior is $p(q|n
-  = Dirichlet(\alpha_{1} + n_{1}, \dots, \alpha_{k}))$.  The Jeffreys
+  = \textsc{Dirichlet}(\alpha_{1} + n_{1}, \dots, \alpha_{k}))$.  The Jeffreys
   prior is $p(q) \alpha \prod_{k} q_{k}^{-\frac{1}{2}}$.
 \end{defn}
 
@@ -313,10 +311,13 @@
   \label{sec:mult-distr-2}
   The multivariate normal for a $p$-dimensional vector $y \sim
   Normal_{p}(\mu, \Sigma)$, or using $\Omega = \Sigma^{-1}$, so $p(y |
-  \mu, \Omega) \alpha \exp(-\frac{1}{2} (y-\mu)^{T} \Omega (y -
+  \mu, \Omega) \propto \exp(-\frac{1}{2} (y-\mu)^{T} \Omega (y -
   \mu))$, and conjugate prior for $\mu$ is also a multivariate normal,
-  $p(\mu | \psi_{0}, \Omega_{0}) \alpha \exp(-\frac{1}{2} (\mu -
-  \gamma_{0})^{T} \Omega_{0} (\mu - \gamma_{0}))$.
+  \begin{align}
+    p(\mu | \psi_{0}, \Omega_{0}) \propto \exp(-\frac{1}{2} (\mu -
+    \gamma_{0})^{T} \Omega_{0} (\mu - \gamma_{0})).\label{eq:3}    
+  \end{align}
+  
 
   We then have $\mu \sim Normal_{p}(\gamma_{n}, \Omega_{n}^{-1})$
   where $\Omega_{n} = \Omega_{0} + n \Omega$ and $\gamma_{n} =
@@ -330,20 +331,20 @@
   is the Wishart distribution (analogous to $Gamma$/$\chi^{2}$).
 
   The Wishart distribution $W_{p}(k, R)$ for a symmetric positive
-  definite $p \times p$ matrix $\Omega$ is $p(\Omega) \alpha
+  definite $p \times p$ matrix $\Omega$ is $p(\Omega) \propto
   |R|^{\frac{k}{2}} |\Omega|^{\frac{k-p-1}{2}} \exp (-\frac{1}{2}
   \tr(R \Omega))$.
 
   The sampling density of a MVN with known mean and unknown matrix is
-  $p(y_{1}, \dots, y_{n} | \mu, \Omega) \alpha |\Omega|^{\frac{n}{2}}
+  $p(y_{1}, \dots, y_{n} | \mu, \Omega) \propto |\Omega|^{\frac{n}{2}}
   \exp(-\frac{1}{2} \tr(S \Omega))$ where $S = \sum_{i}^{} (y_{i} -
   \mu)(y_{i} - \mu)^{T}$, and therefore
   \begin{equation}
     \label{eq:16}
-    p(\Omega | y) \alpha |\Omega|^{\frac{n+k-p-1}{2} \exp(-\frac{1}{2} \tr((S+R)\Omega))}
+    p(\Omega | y) \propto |\Omega|^{\frac{n+k-p-1}{2} \exp(-\frac{1}{2} \tr((S+R)\Omega))}
   \end{equation} which is a $W_{p}(k+n), R+S$ distribution.
 
-  The Jeffreys prior is $p(\Sigma) \alpha |\Sigma|^{-\frac{p+1}{2}}$,
+  The Jeffreys prior is $p(\Sigma) \propto |\Sigma|^{-\frac{p+1}{2}}$,
   equivalently $k \rightarrow 0$.
 \end{defn}
 
@@ -364,14 +365,14 @@ The least squares estimate and MLE is
 \end{align}
 
 With known variances, assume $\beta \sim N_{p}(\gamma_{0}, \sigma^{2}
-V)$.  Then $p(\beta | y) \alpha \exp(-\frac{1}{2 \sigma^{2}} ((\beta -
+V)$.  Then $p(\beta | y) \propto \exp(-\frac{1}{2 \sigma^{2}} ((\beta -
 \gamma_{n})^{T} D^{-1} (\beta - \gamma_{n}))$ where $D^{-1} = X^{T} X
 + V^{-1}$, $\gamma_{n} = D(X^{T} y + V^{-1} \gamma_{0}) = D(X^{T} X
 \hat \beta + V^{-1} \gamma_{0})$, so $\beta | y \sim N_{p}(\gamma_{n},
 \sigma^{2} D)$.  As $V^{-1} \rightarrow 0$, we have $B|y \sim
 N_{p}(\hat \beta, (X^{T} X)^{-1} \sigma^{2})$.
 
-With $p(\beta) \alpha C$ and $p(\sigma^{2}) \alpha \sigma^{-2}$, then
+With $p(\beta) \propto C$ and $p(\sigma^{2}) \propto \sigma^{-2}$, then
 conditional on $\sigma^{2}$, from the preceding general model $\beta |
 y, \sigma^{2} \sim N_{n}(\hat \beta, (X^{T} X)^{-1} \sigma^{2})$ where
 $\hat \beta = (X^{T} X)^{-1} X^{T} y$.
@@ -391,19 +392,19 @@ margin fixed, both margins fixed, and the overall total fixed.
 
 If One
 margin is fixed, then $n_{i}$, and $n_{2}$ are fixed.  Then $y_{i1}
-\sim Binomial(n_{i}, p_{i})$.
+\sim \textsc{Binomial}(n_{i}, p_{i})$.
 
 If no margins are fixed, we only fix the total $N = sum y_{ij}$. With
-a full multinomial model $Y \sim Multinomial(q, N)$. Note if we just
-take a single row, we have standard Beta-Binomial updating, as $Y_{11}
-| n_{1} \sim Binomial(n_{1}, \frac{q_{11}}{q_{1.}} )$ from the
+a full multinomial model $Y \sim \textsc{Multinomial}(q, N)$. Note if we just
+take a single row, we have standard \textsc{BetaBinomial} updating, as $Y_{11}
+| n_{1} \sim \textsc{Binomial}(n_{1}, \frac{q_{11}}{q_{1.}} )$ from the
 properties of the multinomial, and $\frac{q_{11}}{q_{1.}}$ from the
 properties of the Dirichlet.
 
 \begin{defn}
   \label{sec:categ-data-pred-1}
-  Recall if $Y_{k} \sim Poisson(\mu_{k})$, and $\sum_{k}^{} Y_{k} =
-  N$, then $Y|N \sim Multinomial(q, N)$.  Letting $Y_{k} \sim
+  Recall if $Y_{k} \sim \textsc{Poisson}(\mu_{k})$, and $\sum_{k}^{} Y_{k} =
+  N$, then $Y|N \sim \textsc{Multinomial}(q, N)$.  Letting $Y_{k} \sim
   Poission(\mu_{k})$ and using log-link function $\log u_{k} = \lambda
   + \alpha_{k}$, give a uniform prior to $\lambda$.  This is
   equivalent to assuming a multinomial distribution for $Y$ with
@@ -412,23 +413,23 @@ properties of the Dirichlet.
 \end{defn}
 
 For a $2 \times 2$ table, we can assume $Y_{ij} \sim
-Poisson(\mu_{ij})$ and assume $\log \mu_{ij} = \phi + \alpha_{i} +
+\textsc{Poisson}(\mu_{ij})$ and assume $\log \mu_{ij} = \phi + \alpha_{i} +
 \beta_{j} + \gamma_{ij}$ with the corner constraints $\alpha_{1} =
 \beta_{1} = \gamma_{12} + \gamma_{11} = \gamma_{21} = 0$.
 
 Assuming we have multinomial observations $Y_{i} \sim
-Multinomial(q_{i}, N_{i})$ with covariates $x_{i} = x_{i1}, \dots,
+\textsc{Multinomial}(q_{i}, N_{i})$ with covariates $x_{i} = x_{i1}, \dots,
 x_{iP}$.  Then we can express log odds of a category $k$ relative to a
 baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
 \sum_{p=1}^{P} \beta_{kp} x_{ip}$, with category probabilities $q_{ik}
-= \frac{\exp(sum_{p} \beta_{kp} x_{ip})}{\sum_{k}^{} \exp(\sum_{p}^{}
+= \frac{\exp(\sum_{p} \beta_{kp} x_{ip})}{\sum_{k}^{} \exp(\sum_{p}^{}
   \beta_{kp} x_{ip})}$.
 
 \begin{defn}
   \label{sec:categ-data-pred-2}
-  For ranking, assume $O_{i} \sim Poisson(\lambda_{i} E_{i})$, with
+  For ranking, assume $O_{i} \sim \textsc{Poisson}(\lambda_{i} E_{i})$, with
   $\lambda_{i}$ a standardized mortality rate, with Jeffreys prior
-  $\alpha \frac{1}{\sqrt{\lambda_{i}}}$.
+  $\propto \frac{1}{\sqrt{\lambda_{i}}}$.
 \end{defn}
 
 \section{Sampling Properties in Relation to Other Methods}
@@ -458,14 +459,14 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
 \begin{defn}
   \label{sec:sampl-prop-relat-3}
   The likelihood principle: all information about $\theta$ provided by
-  data $y$ is contained in the likelihood $\alpha p(y | \theta)$.
+  data $y$ is contained in the likelihood $\propto p(y | \theta)$.
 \end{defn}
 
 
 \begin{thm}
   \label{sec:sampl-prop-relat-5}
   The statistic $t(Y)$ is sufficient for $\theta$ if and only if we
-  can express the density $(y | \theta)$ in the form $p(y | \theta) = 
+  can express the density $(y | \theta)$ in the form $p(y | \theta) =
   h(y) g(t(y) | \theta)$.
 
   Trivially, the Bayesian posterior distribution only depends on the
@@ -583,7 +584,7 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   as $\tau^{2} = \frac{\sigma^{2}}{n_{0}}$.  From standard results,
   \begin{equation}
     \label{eq:21}
-    p(\theta_{i} | y, \mu, \tau, \sigma) = Normal(\frac{n_{0} \mu +
+    p(\theta_{i} | y, \mu, \tau, \sigma) = \textsc{Normal}(\frac{n_{0} \mu +
       n_{i} \overline y_{i}}{n_{0} + n_{i}}, \frac{\sigma^{2}}{n_{0} +
       n_{i}})
   \end{equation}
@@ -610,20 +611,20 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   | \mu, \tau^{2} \sim N(\mu, \sigma_{i}^{2} + \tau^{2})$ which are
   conditionally independent given $\mu, \tau^{2}$.
 
-  The posterior is $p(\tau^{2} | y) \alpha p(y | \mu, \tau^{2})
-  p(\tau^{2})$ where $p(y | \mu, \tau^{2}) \alpha \prod_{i}
+  The posterior is $p(\tau^{2} | y) \propto p(y | \mu, \tau^{2})
+  p(\tau^{2})$ where $p(y | \mu, \tau^{2}) \propto \prod_{i}
   (\sigma_{i}^{2} + \tau^{2})^{-\frac{1}{2}} \exp(-\frac{1}{2}
   \\frac{(y_{i} - \mu)^{2}}{\sigma_{i}^{2} + \tau^{2}})$.
 
   Letting $\tau^{2} \rightarrow 0$, $p(y | \mu, \tau^{2})$ tends to a
-  non-zero constant $c$, so $p(\tau^{2} < \epsilon | y) \alpha
+  non-zero constant $c$, so $p(\tau^{2} < \epsilon | y) \propto
   cP(\tau^{2} < \epsilon)$.
 
-  Using an improper Jeffreys prior $p(\tau^{2} \alpha \tau^{-2})$,
+  Using an improper Jeffreys prior $p(\tau^{2} \propto \tau^{-2})$,
   $p(\tau^{2} < \epsilon)$ is unbounded, and so $p(\tau^{2} < \epsilon
-  | y)$ is unbounded, hence the posterior is improper.  
+  | y)$ is unbounded, hence the posterior is improper.
 
-  Note that $\frac{1}{\tau^{2}} \sim Gamma(\epsilon, \epsilon)$ is
+  Note that $\frac{1}{\tau^{2}} \sim \textsc{Gamma}(\epsilon, \epsilon)$ is
   proper, but inference can be sensitive to the choice of $\epsilon$.
 \end{defn}
 
@@ -631,14 +632,14 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
   \label{sec:heirachcial-models-4}
   Empirical Bayes methods proceed as before $y_{ij} \sim p(y_{ij} |
   \theta_{i})$, $\theta_{i} \sim p(\theta_{i} | \phi)$, but do not put
-  a prior on $\phi$.  Estimate $\phi$ by, for example, maximum
-  marginal likelihood --- the value $\hat \phi$ that maximizes the
-  marginal likelihood
+  a prior on $\phi$. Estimate $\phi$ by, for example, maximum marginal
+  likelihood --- the value $\hat \phi$ that maximizes the marginal
+  likelihood
   \begin{align}
     \label{eq:22}
     p(y | \phi) = \prod_{i} \int \prod_{j} p(y_{ij} | \theta_{i})
     p(\theta_{i} | \phi) d \theta_{i},
-  \end{align}  known as the \textbf{Type II Maximum Likelihood}.  Then
+  \end{align} known as the \textbf{Type II Maximum Likelihood}. Then
   use $\hat \phi$ as a ``plug-in'' estimate, as if the prior
   distribution was known.
 
@@ -656,17 +657,78 @@ baseline category as $\phi_{k1} = \log \frac{q_{ik}}{q_{i1}} =
 \begin{defn}
   \label{sec:robustn-outl-detect-1}
   If we assume, say $Y \sim t_{k}(\theta, \tau)$, then estimates will
-  be less influenced by outliers.  If we want to simultaneously find
+  be less influenced by outliers. If we want to simultaneously find
   outliers, we can fit a $t$-distribution as a mixture of normals.
   Recall if $Y \sim Norm(\theta, \sigma^{2})$, and $\sigma^{2} =
   \frac{\tau^{2} k}{X^{2}} $, where $X^{2} \sim \chi^{2}_{k}$, then $Y
-  \sim t_{k}(\theta, \tau)$.    So an equivalent model to $Y \sim
-  t_{k}(\theta, \tau)$ is to assume $Y \sim normal(\theta,
+  \sim t_{k}(\theta, \tau)$. So an equivalent model to $Y \sim
+  t_{k}(\theta, \tau)$ is to assume $Y \sim \textsc{Normal}(\theta,
   \sigma_{i}^{2})$, $\sigma_{i}^{2} = \frac{\tau^{2} k }{X_{i}^{2}} $,
   $X_{i}^{2} \sim \chi^{2}_{k}$, and monitor $s_{i} =
   \frac{k}{X_{i}^{2}} $ --- values of $s_{i}$ much great than $1$
   indicate outliers.
 \end{defn}
+
+\section{Miscellaneous}
+\label{sec:miscelaneous}
+
+\begin{table*}[p]
+  \caption{Conjugate Prior Distributions}
+  % BEGIN RECEIVE ORGTBL Conjugates
+\begin{tabular}{lllll}
+\hline
+L & P & ConjP & Posterior & Predictive \\
+\hline
+\textsc{Binomial} & $\theta$ & $\textsc{Beta}(a, b)$ & $a + y$, $b + n - y$ & $\textsc{BetaBinomial}(y)$ \\
+\textsc{Poisson} & $\theta$ & $\textsc{Gamma}(a, b)$ & $a + y$, $b + n$ & $\textsc{NegativeBinomial}(y)$ \\
+\textsc{Normal} & $\mu$ & $\textsc{Normal}(\gamma, \frac{\sigma^{2}}{n_{0}})$ & $\frac{n_{0} \gamma + n \overline y}{n_0 + n}, \sigma^{2}_{n} = \frac{\sigma^{2}}{n_{0} + n}$ & $\textsc{Normal}(\gamma_{n}, \sigma^{2} + \sigma^{2}_{n})$ \\
+\textsc{Normal} & $\mu$ & $\textsc{Normal}(\gamma, \tau_{0})$ (precision) & $\frac{\tau_{0} \gamma + n \overline y}{\tau_{0} + n \tau}, \tau_{n} = \tau_{0} + n \tau$ & $\textsc{Normal}(\gamma_{n}, \frac{1}{\tau_{n}} + \frac{1}{\tau})$ \\
+\textsc{Normal} & $\sigma^{2} = \frac{1}{\omega}$ & $\omega \sim \textsc{Gamma}(\frac{n_{0}}{2}, \frac{n_{0} \sigma_{0}^{2}}{2})$ & $\frac{n_{0} + n}{2}, \frac{n_{0} \sigma_{0}^{2}}{2} + \frac{1}{2} \sum (y_{i} - \mu)^{2}$ &  \\
+\hline
+\end{tabular}
+  % END RECEIVE ORGTBL Conjugates
+\end{table*}
+
+\begin{table*}[p]
+\caption{Distributions}
+  % BEGIN RECEIVE ORGTBL Distributions
+\begin{tabular}{llll}
+\hline
+Distribution & Density & Mean & Variance \\
+\hline
+$\textsc{Normal}(\mu, \sigma^{2})$ & $\frac{1}{\sqrt{2 \pi \sigma^{2}}} exp(-\frac{(x - \mu)^{2}}{2 \sigma^{2}})$ & $\mu$ & $\sigma^{2}$ \\
+$\textsc{Poisson}(\lambda)$ & $\frac{e^{-\lambda} \lambda^{k}}{k!}$ & $\lambda$ & $\lambda$ \\
+$\textsc{Gamma}(a, b)$ & $\frac{b^{a}}{\Gamma(a)} x^{a-1} e^{-bx}$ & $\frac{a}{b}$ & $\frac{a}{b^{2}}$ \\
+$\textsc{Beta}(a, b)$ & $\frac{\Gamma(a + b)}{\Gamma(a) \Gamma(b)} x^{a-1}(1-x)^{b-1}$ & $\frac{a}{a+b}$ & $\frac{ab}{(a+b)^{2}(a + b + 1)}$ \\
+\hline
+\end{tabular}
+  % END RECEIVE ORGTBL Distributions
+\end{table*}
+
+\begin{comment}
+  #+ORGTBL: SEND Conjugates orgtbl-to-latex :splice nil :skip 0 :no-escape t
+  |-------------------+---------------------------------+-------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------------------|
+  | L                 | P                               | ConjP                                                                         | Posterior                                                                                     | Predictive                                                         |
+  |-------------------+---------------------------------+-------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------------------|
+  | \textsc{Binomial} | $\theta$                        | $\textsc{Beta}(a, b)$                                                         | $a + y$, $b + n - y$                                                                          | $\textsc{BetaBinomial}(y)$                                         |
+  | \textsc{Poisson}  | $\theta$                        | $\textsc{Gamma}(a, b)$                                                        | $a + y$, $b + n$                                                                              | $\textsc{NegativeBinomial}(y)$                                     |
+  | \textsc{Normal}   | $\mu$                           | $\textsc{Normal}(\gamma, \frac{\sigma^{2}}{n_{0}})$                           | $\frac{n_{0} \gamma + n \overline y}{n_0 + n}, \sigma^{2}_{n} = \frac{\sigma^{2}}{n_{0} + n}$ | $\textsc{Normal}(\gamma_{n}, \sigma^{2} + \sigma^{2}_{n})$         |
+  | \textsc{Normal}   | $\mu$                           | $\textsc{Normal}(\gamma, \tau_{0})$ (precision)                               | $\frac{\tau_{0} \gamma + n \overline y}{\tau_{0} + n \tau}, \tau_{n} = \tau_{0} + n \tau$     | $\textsc{Normal}(\gamma_{n}, \frac{1}{\tau_{n}} + \frac{1}{\tau})$ |
+  | \textsc{Normal}   | $\sigma^{2} = \frac{1}{\omega}$ | $\omega \sim \textsc{Gamma}(\frac{n_{0}}{2}, \frac{n_{0} \sigma_{0}^{2}}{2})$ | $\frac{n_{0} + n}{2}, \frac{n_{0} \sigma_{0}^{2}}{2} + \frac{1}{2} \sum (y_{i} - \mu)^{2}$    |                                                                    |
+  |-------------------+---------------------------------+-------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+--------------------------------------------------------------------|
+\end{comment}
+
+\begin{comment}
+  #+ORGTBL: SEND Distributions orgtbl-to-latex :splice nil :skip 0 :no-escape t
+  |------------------------------------+------------------------------------------------------------------------------+-----------------+-----------------------------------|
+  | Distribution                       | Density                                                                      | Mean            | Variance                          |
+  |------------------------------------+------------------------------------------------------------------------------+-----------------+-----------------------------------|
+  | $\textsc{Normal}(\mu, \sigma^{2})$ | $\frac{1}{\sqrt{2 \pi \sigma^{2}}} exp(-\frac{(x - \mu)^{2}}{2 \sigma^{2}})$ | $\mu$           | $\sigma^{2}$                      |
+  | $\textsc{Poisson}(\lambda)$        | $\frac{e^{-\lambda} \lambda^{k}}{k!}$                                        | $\lambda$       | $\lambda$                         |
+  | $\textsc{Gamma}(a, b)$             | $\frac{b^{a}}{\Gamma(a)} x^{a-1} e^{-bx}$                                    | $\frac{a}{b}$   | $\frac{a}{b^{2}}$                 |
+  | $\textsc{Beta}(a, b)$              | $\frac{\Gamma(a + b)}{\Gamma(a) \Gamma(b)} x^{a-1}(1-x)^{b-1}$               | $\frac{a}{a+b}$ | $\frac{ab}{(a+b)^{2}(a + b + 1)}$ |
+  |------------------------------------+------------------------------------------------------------------------------+-----------------+-----------------------------------|
+\end{comment}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}

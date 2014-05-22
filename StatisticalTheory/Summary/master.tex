@@ -114,7 +114,7 @@
 
 \begin{thm}
   Let $\mathcal{H}$ be a class of functions from a measurable space
-  $T$ to $\R$. Assume that for every $\epsilon > 0$ there exitss a
+  $T$ to $\R$. Assume that for every $\epsilon > 0$ there exists a
   finite set of brackets $[l_{j}, u_{j}]$, $j = 1, \dots,
   N(\epsilon)$, such that $\E{|l_{j}(X)|} < \infty$, $\E{|u_{j}(X)|} <
   \infty$, and $\E{|u_{j}(X) - l_{j}(X)|} < \epsilon$ for every $j$.
@@ -173,7 +173,7 @@
   \end{equation} as $n \rightarrow \infty$
 \end{thm}
 
-\begin{thm}
+\begin{thm}[Consistency of the Maximum Likelihood Estimator]
   Consider the model $f(\theta, y)$, $\theta \in \Theta \subseteq
   \R^{p}$, $y \in \mathcal{Y} \subset \R^{d}$.  Assume $f(\theta, y) >
   0$ for all $y \in \mathcal{Y}$ and all $\theta \in \Theta$, and that
@@ -195,10 +195,416 @@
   \rightarrow \infty$.
 \end{thm}
 
+
+\begin{defn}[Uniform Consistency]
+  \label{sec:cons-model-ftheta}
+  An estimator $T_{n}$ is \textbf{uniformly consistent} in $\theta \in
+  \Theta$, if for every $\delta > 0$,
+  \begin{equation}
+    \label{eq:25}
+    \sup_{\theta_{0} \in \Theta} P_{\theta_{0}}(\| T_{n} - \theta_{0}
+    \| > \delta) \rightarrow 0
+  \end{equation} as $n \rightarrow \infty$.
+\end{defn}
+
 \section{Asymptotic Distribution Theory}
 \label{sec:asympt-distr-theory}
 
+\begin{thm}
+  Consider the model $f(\theta, y), \theta \in \Theta \subset \R^{p}$,
+  $y \in \mathcal{Y} \subset \R^{d}$.  Assume $f(\theta, y) > 0$for
+  all $y \in \mathcal{Y}$ and all $\theta \in \Theta$, and that
+  $\int_{\mathcal{Y}} f(\theta, y) dy = 1$  for every $\theta \in
+  \Theta$. Let $Y_{1}, \dots, Y_{n}$ be \iid from density
+  $f(\theta_{0}, y)$ for some $\theta_{0} \in \Theta$.  Assume moreover
+  \begin{enumerate}
+  \item $\theta_{0}$ is an interior point on $\Theta$.
+  \item There exists an open set $U$ satisfying $\theta_{0} \in U
+    \subset \Theta$ such that $f(\theta, y)$ is, for every $y \in
+    \mathcal{Y}$, twice continuously differentiable with respect to
+    $\theta$ on $U$,
+  \item $\E_{\theta_{0}} \frac{\partial^{2} \log f(\theta_{0},
+      Y)}{\partial \theta \partial \theta^{T}} $ is nonsingular, and
+    \begin{equation}
+      \label{eq:3}
+      \E_{\theta_{0}} \| \frac{\partial \log f(\theta_{0},
+        Y)}{\partial \theta} \|^{2}  < \infty
+    \end{equation}
+  \item There exists a compact ball $K \subset U$ with nonempty
+    interior centered at $\theta_{0}$ such that
+    \begin{align}
+      \label{eq:7}
+      \E_{\theta_{0}} \sup_{\theta \in K} \| \frac{\partial^{2} \log
+        f(\theta, Y)}{\partial \theta \partial \theta^{T}} \| < \infty \\
+      \int_{\mathcal{Y}}^{} \sup_{\theta \in K} \| \frac{\partial
+        f(\theta, y)}{\partial \theta}  \| dy < \infty \\
+      \label{eq:14}
+      \int_{\mathcal{Y}}^{} \sup_{\theta \in K} \| \frac{\partial^{2}
+        f(\theta, y)}{\partial \theta \partial \theta^{T}}  \| dy < \infty
+    \end{align}
+  \end{enumerate}
 
+  Let $\hat \theta_{n}$ be the MLE in the model $\{ f(\theta, \cdot);
+  \theta \in \Theta \} $ based on the sample $Y_{1}, \dots, Y_{n}$,
+  and assume $\hat \theta_{n} \rightarrow^{P_{\theta_{0}}} \theta_{0}$
+  as $n \rightarrow \infty$.  Define the Fisher information
+  \begin{align}
+    \label{eq:15}
+    i(\theta_{0}) = \E_{\theta_{0}} \frac{\partial \log f(\theta_{0},
+      Y)}{\partial \theta} \frac{\partial \log f(\theta_{0},
+      Y)^{T}}{\partial \theta}
+  \end{align}
+  Then $i(\theta_{0})= - \E_{\theta_{0}} \frac{\partial^{2} \log
+    f(\theta_{0}, Y)}{\partial \theta \partial \theta^{T}}$, and
+  \begin{align}
+    \label{eq:16}
+    \sqrt{n} (\hat \theta_{n} - \theta_{0}) \cd N(0, i^{-i}(\theta_{0}))
+  \end{align} as $n \rightarrow \infty$.
+\end{thm}
+
+\begin{thm}
+  In the framework of the previous theorem with $p=1$ and for $n \in
+  \N$ fixed, let $\tilde \theta = \tilde \theta(Y_{1}, \dots, Y_{n})$,
+  be any unbiased estimator of $\theta$ --- that is, it satisfies
+  $\E_{\theta} \tilde \theta = \theta$ for all $\theta \in \Theta$.
+  Then
+  \begin{align}
+    \label{eq:17}
+    \Var_{\theta}(\tilde \theta_{n}) \geq \frac{1}{ni(\theta)} 
+  \end{align} for all $\theta \in \interior(\Theta)$.
+\end{thm}
+
+\begin{thm}[Delta Method]
+  Let $\Theta$ be an open subset of $\R^{p}$ and let $\Phi: \Theta
+  \rightarrow \R^{m}$ be differentiable at $\theta \in \Theta$, with
+  derivative $D \Phi_{\theta}$.  Let $r_{n}$ be a divergent sequence
+  of positive real numbers and let $X_{n}$ be random variables taking
+  values in $\Theta$ such that $r_{n}(X_{n} - \theta) \cd X$ as $n
+  \rightarrow \infty$.  Then
+  \begin{equation}
+    \label{eq:8}
+    r_{n}(\Phi(X_{n}) - \Phi(\theta)) \cd D \Phi_{\theta}(X)
+  \end{equation} as $n \rightarrow \infty$.  If $X \sim N(0,
+  i^{-1}(\theta))$, then
+  \begin{equation}
+    \label{eq:20}
+    D \Phi_{\theta}(X) \sim N(0, \Sigma(\Phi, \Theta)).
+  \end{equation}
+\end{thm}
+
+\begin{defn}[Likelihood Ratio test statistic]
+  \label{sec:param-test-theory-1}
+  Suppose we observe $Y_{1}, \dots, Y_{n}$ from $f(\theta, \cdot)$,
+  and consider the testing problem $H_{0}: \theta \in \Theta_{0}$
+  against $H_{1}: \theta \in \Theta$, where $\Theta_{0} \subset \Theta
+  \subset \R^{p}$. The Neyman-Pearson theory suggests to test these
+  hypothesis by the likelihood ratio test statistic
+  \begin{equation}
+    \label{eq:22}
+    \Lambda_{n}(\Theta, \Theta_{0}) = 2 \log \frac{\sup_{\theta \in
+        \Theta} \prod_{i=1}^{n} f(\theta, Y_{i})}{\sup_{\theta \in
+        \Theta_{0}} \prod_{i=1}^{n} f(\theta, Y_{i})}
+  \end{equation} which in terms of the maximum likelihood estimators
+  $\hat \theta_{n}, \hat \theta_{n, 0}$ of the models $\Theta,
+  \Theta_{0}$ is
+  \begin{equation}
+    \label{eq:23}
+    \Lambda_{n}(\Theta, \Theta_{0}) = -2 \sum_{i=1}^{n} \log f(\hat
+    \theta_{n, 0}, Y_{i}) - \log f(\hat \theta_{n}, Y_{i}).
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  Consider a parametric model $f(\theta, y), \theta \in \Theta \subset
+  \R^{p}$ that satisfies the assumptions of the theorem on asymptotic
+  normality of the MEL.  Consider the simple null hypothesis
+  $\Theta_{0} = \{ \theta_{0} \} $, $\theta_{0} \in \Theta$.  Then
+  under $H_{0}$, the likelihood ratio test statistic is asymptotically
+  chi-squared distributed, so
+  \begin{equation}
+    \label{eq:24}
+    \Lambda_{n}(\Theta, \Theta_{0}) \cd \chi_{p}^{2}
+  \end{equation} as $n \rightarrow \infty$ under $P_{\theta_{0}}$.
+\end{thm}
+
+\begin{thm}
+  Let $\{ f(\theta), \theta \in \Theta \} $ in which uniformly
+  consistent estimators $T_{n} = T(Y_{1}, \dots, Y_{n})$ exist.  Then
+  there exist tests $\phi_{n} = \phi(Y_{1}, \dots, Y_{n}, \theta_{0})$
+  for $H_{0}: \theta = \theta_{0}$ against $H_{1}: \theta \in \Theta
+  \backslash \{ \theta_{0} \} $ such that for every $\theta$
+  satisfying $\| \theta - \theta_{0} \| > \delta > 0$, for some
+  universal constant $C$,
+  \begin{equation}
+    \label{eq:26}
+    \max(\E_{\theta_{0}} \phi_{n}, \E_{\theta}(1 - \phi_{n})) \leq e^{-Cn}.
+  \end{equation}
+\end{thm}
+
+\begin{thm}
+  Let $\{ f(\theta) : \theta \in \Theta \} $ be a parametric model
+  that satisfies the conditions of the theorem on the asymptotic
+  behavior of the likelihood test statistic. Let $M_{n} \rightarrow
+  \infty$ as $n \rightarrow \infty$.  Then there exist test $\phi_{n}$
+  for $H_{0}: \theta = \theta_{0}$ against $H_{1}: \theta \in \Theta
+  \backslash \{ \theta_{0} \} $ such that $\E_{\theta_{0}} \phi_{n}
+  \rightarrow 0$ as $n \rightarrow \infty$ and, for every $\theta$
+  satisfying $\frac{M_{n}}{\sqrt{n}} < \| \theta - \theta_{0} \| \leq
+  \delta$ for some $\delta < 1$, we have for some universal constant
+  $D$,
+  \begin{equation}
+    \label{eq:27}
+    \E_{\theta}(1 - \phi_{n}) \leq \frac{1}{D} e^{-Dn \| \theta -
+      \theta_{0} \|^{2}} \rightarrow 0
+  \end{equation} as $n \rightarrow \infty$.
+\end{thm}
+
+\subsection{Local Asymptotic Normality and Contiguity}
+\label{sec:local-asympt-norm}
+
+\begin{defn}[Local Asymptotic Normality]
+  \label{sec:local-asympt-norm-1}
+  Consider a parametric model $f(\theta) \equiv f(\theta, \cdot),
+  \theta \in \Theta \subset \R^{p}$ and let $q(\theta, y) = - \log
+  f(\theta, y)$.  Suppose $\frac{\partial}{\partial \theta}
+  q(\theta_{0}, y)$ and the Fisher information $i(\theta_{0})$ exist
+  at the interior point $\theta_{0} \in \Theta$.  We say that the
+  model $\{ f(\theta): \theta \in \Theta \} $ is locally
+  asymptotically normal at $\theta_{0}$ if for every convergent
+  sequence $h_{n} \rightarrow h$ and for $Y_{1}, \dots, Y_{n}$ \iid
+  $\sim f(\theta_{0})$, we have, as $n \rightarrow \infty$,
+  \begin{align}
+    \label{eq:28}
+    \log \prod_{i=1}^{n} \frac{f(\theta_{0} +
+      \frac{h_{n}}{\sqrt{n}})}{f(\theta_{0})}(Y_{i}) = -
+    \frac{1}{\sqrt{n}} \sum_{i=1}^{n} h^{T} \frac{\partial
+      q(\theta_{0}, Y_{i})}{\partial \theta} - \frac{1}{2} h^{T}
+    i(\theta_{0}) h + o_{P_{\theta_{0}}}(1).
+  \end{align}
+
+  We say that the model $\{ f(\theta): \theta \in \Theta \} $ is
+  locally asymptotically normal if it is locally asymptotically normal
+  for every $\theta \in \interior \Theta$.
+\end{defn}
+
+\begin{thm}
+  Consider a parametric model $\{ f(\theta), \theta \in \Theta \} $,
+  $\Theta \subset \R^{p}$, that satisfies the assumptions of the
+  theorem on the asymptotic normality of the MLE.  Then $\{ f(\theta):
+\theta \in \Theta_{0} \} $ is locally asymptotically normal for every
+open subset $\Theta_{0}$ of $\Theta$.
+\end{thm}
+
+\begin{defn}[Contiguity]
+  \label{sec:cons-param-model}
+  Let $P_{n}$, $Q_{n}$ be two sequences of probability measures. We
+  say that $Q_{n}$ is contiguous with respect to $P-n$ if for every
+  sequence of measurable sets $A_{n}$, the hypothesis $P_{n}(A_{n}
+  \rightarrow 0)$ as $n \rightarrow \infty$ implies $Q_{n}(A_{n})
+  \rightarrow 0$  as $n \rightarrow \infty$, and write $Q_{n}
+  \triangleleft P-n$.  The sequences are mutually contiguous if both
+  $Q_{n} \triangleleft P_{n}$ and $P_{n} \triangleleft Q_{n}$, and
+  write $P_{n} \triangleleft \triangleright Q_{n}$.
+\end{defn}
+
+\begin{thm}[LeCam's First Lemma]
+  Let $P-n$, $Q_{n}$ be probability measures on measurable spaces
+  $(\Omega_{n}, \mathcal{A}_{n})$.  Then the following are equivalent:
+  \begin{enumerate}
+  \item $Q_{n} \triangleleft P_{n}$.
+  \item If $\frac{dP_{n}}{dQ_{n}} \rightarrow^{d}_{Q_{n}} U$ along a
+    subsequence of $n$, then $P(U > 0) = 1$.
+  \item If $\frac{dQ_{n}}{dP_{n}} \rightarrow^{d}_{P_{n}} V$ along a
+    subsequence of $n$, then $\E{V} = 1$.
+  \item For any sequence of statistics (measurable functions $T_{n}:
+    \Omega_{n} \rightarrow \R^{k}$), we have $T_{n}
+    \rightarrow^{P_{n}} 0$ as $n \rightarrow \infty$ implies $T_{n}
+    \rightarrow^{Q_{n}} 0$ as $n \rightarrow \infty$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \begin{enumerate}
+  \item Let $P_{n}$, $Q_{n}$ be sequences of probability measures on
+    measurable spaces $(\Omega_{n}, \mathcal{A}_{n})$ such that
+    $\frac{dP_{n}}{dQ_{n}} \rightarrow^{d}_{Q_{n}} e^{X}$ where $X
+    \sim N(-\frac{1}{2} \sigma^{2}, \sigma^{2})$, for some $\sigma^{2}
+    > 0$ as $n \rightarrow \infty$.  Then $P_{n} \triangleleft
+    \triangleright Q_{n}$.
+  \item If $\{ f(\theta): \theta \in \Theta \}$ is locally
+    asymptotically normal and if $h_{n} \rightarrow h \in \R^{p}$,
+    then the product measures $P^{n}_{\theta + \frac{h_{n}}{\sqrt{n}}
+    }$ and $P^{n}_{\theta}$ corresponding to samples $X_{1}, \dots,
+    X_{n}$ from densities $f(\theta + \frac{h_{n}}{\sqrt{n}})$ and
+    $f(\theta)$, respectively, are mutually contiguous.  In
+    particular, if a statistic $T(Y_{1}, \dots, Y_{n})$ converges to
+    zero in probability under $P^{n}_{\theta}$ then it also converges
+    to zero in $P^{n}_{\theta + \frac{h_{n}}{\sqrt{n}} }$-probability.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{sec:beginenumerate-}
+  $\| P - Q \|_{TV} = \sup_{B \in \mathcal{B}(\R^{p})} |P(B) - Q(B)|$
+  is the total variation distance on the set of probability measures
+  on the Borel $\sigma$-algebra $\mathcal{B}(\R^{p})$ of $\R^{p}$.
+\end{defn}
+
+\begin{thm}[Bernstein-von Mises Theorem]
+  Consider a parametric model $\{ f(\theta), \theta \in \Theta \} $,
+  $\Theta \subset \R^{p}$, that satisfies the assumptions of the
+  theorem on the asymptotic normality of the MLE.  Suppose the model
+  admits a uniformly consistent estimator $T_{n}$.  Let $X_{1}, \dots,
+  X_{n}$ be \iid from density $f(\theta_{0})$, let $\hat \theta_{n}$
+  be the MLE based on that sample, assume the prior measure $\Pi$ is
+  defined on the Borel sets of $\R^{p}$ and that $\Pi$ possesses a
+  Lebesgue-density $\pi$ that is continuous and positive in a
+  neighborhood of $\theta_{0}$. Then, if $\Pi(\cdot | X_{1}, \dots,
+  X_{n})$ is the posterior distribution given the sample, we have
+  \begin{equation}
+    \label{eq:29}
+    \| \Pi(\cdot | X_{1}, \dots, X_{n}) - N(\hat \theta_{n},
+    \frac{1}{n} i^{-1}(\theta_{0})) \|_{TV}
+    \rightarrow^{P_{\theta_{0}}} 0
+  \end{equation} as $n \rightarrow \infty$.
+\end{thm}
+
+
+\subsection{High Dimensional Linear Models}
+\label{sec:high-dimens-line}
+
+Here, we consider the model $Y = X \theta = \epsilon$, $\epsilon \sim
+N(0 \sigma^{2} I_{n})$, $\theta \in \Theta = \R^{p}, \sigma^{2} > 0$,
+where $X$ is an $n \times p$ design matrix, and $\epsilon$ is a
+standard Gaussian noise vector in $\R^{n}$.  Throughout, we denote the
+resulting $p \times p$ \textbf{Gram matrix} as $\hat \Sigma =
+\frac{1}{n} X^{T} X$ which is symmetric and positive semidefinite.
+
+Write $a \leqtilde b$ for $a \leq C b$ for some fixed (ideally
+harmless) constant $C > 0$.
+
+\begin{thm}
+  In the case $p \leq n$, the classical least squares estimator
+  introduced by Gauss solves the problem
+  \begin{equation}
+    \label{eq:30} \min_{\theta \in \R^{p}} \frac{\| Y - X \theta
+      \|^{2}}{n}
+  \end{equation}
+  with the solution $\hat \theta = (X^{T}X)^{-1} X^{T}Y \sim N(0,
+  \sigma^{2}(X^{T} X)^{-1})$ where we rely on $X$ having full column
+  rank so $X^{T} X$ is invertible.
+\end{thm}
+
+\begin{defn}
+  \label{sec:case-p-leq}
+  $\theta^{0} \in B_{0}(k) \equiv \{ \theta \in \R^{p}, \text{at most
+    $k$ nonzero entries} \} $.
+
+  For $\theta^{0} \in B_{0}(k)$, call $S_{0} = \{ j : \theta_{j}^{0}
+  \neq 0 \} $ the \textbf{active set} of $\theta^{0}$.
+\end{defn}
+
+\subsection{The LASSO}
+\label{sec:lasso}
+
+\begin{defn}[The LASSO]
+  \label{sec:case-p-leq-1}
+  The $\tilde \theta = \tilde \theta_{LASSO} = \argmin_{\theta \in
+    \R^{p}} \frac{\| Y - X \theta \|_{2}^{2}}{n}  + \lambda \| \theta \|_{1}$.
+\end{defn}
+
+\begin{thm}[The LASSO performs almost as well as the LS estimator]
+  Let $\theta^{0} \in B_{0}(k)$ be a $k$-sparse vector in $\R^{p}$
+  with active set $S_{0}$.  Suppose $Y = X \theta_{0} + \epsilon$
+  where $\epsilon \sim N(0, I_{n})$, and let $\tilde \theta$ be the
+  LASSO estimator with penalization parameter
+  \begin{align}
+    \label{eq:31}
+    \lambda = 4 \overline \sigma \sqrt{\frac{t^{2} + 2 \log p}{n} },
+    \overline \sigma^{2} = \max_{j = 1, \dots, p} \hat \Sigma_{jj},
+  \end{align} and assume the $n \times p$ matrix $X$ is such that, for
+  some $r_{0} > 0$,
+  \begin{equation}
+    \label{eq:33}
+    \frac{1}{n} \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1}^{2} \leq
+    k r_{0}(\tilde \theta - \theta^{0})^{T} \hat \Sigma (\tilde \theta
+    - \theta^{0})
+  \end{equation} on an event of probability at least $1 - \beta$.
+  Then with probability at least $1 - \beta - \exp^{-\frac{t^{2}}{2}}$
+  we have
+  \begin{align}
+    \label{eq:34}
+    \frac{1}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} + \lambda
+    \| \tilde \theta - \theta^{0} \|_{1} \leq 4 \lambda^{2} k r_{0}
+    \leqtilde \frac{k}{n} \times \log p.
+  \end{align}
+\end{thm}
+
+\begin{lem}
+  Let $\lambda_{0} = \frac{\lambda}{2}$.  The for all $t > 0$,
+  \begin{equation}
+    \label{eq:35}
+    \Prob{\max_{j = 1, \dots, p} \frac{2}{n} |(\epsilon^{T} X)_{j}|
+      \leq \lambda_{0}} \geq 1 - \exp(-\frac{t^{2}}{2}).
+  \end{equation}
+\end{lem}
+
+The critical condition is
+\begin{equation}
+  \label{eq:36}
+  \| \tilde \theta_{S_{0}} - \theta^{0} \|_{1}^{2} \leq k r_{0}(\tilde
+  \theta - \theta^{0})^{T} \hat \Sigma (\tilde \theta - \theta^{0})
+\end{equation} holding true with high probability.
+
+\begin{thm}
+  The theorem on LASSO holds true with the crucial condition
+  (\ref{eq:36}) replaced with the following condition: For $S_{0}$,
+  the active set of $\theta^{0} \in B_{0}(k)$, $k \leq p$, assume the
+  $n \times p$ matrix $X$ satisfies, for all $\theta$ in
+  \begin{equation}
+    \label{eq:37}
+    \{ \theta \in \R^{p} : \| \theta_{S_{0}^{c}} \|_{1} \leq 3 \|
+    \theta_{S_{0}} - \theta_{S_{0}}^{0} \|_{1} \} 
+  \end{equation} and some universal constant $r_{0}$,
+  \begin{equation}
+    \label{eq:38}
+    \| \theta_{S_{0}} - \theta^{0} \|_{1}^{2} \leq k r_{0} (\theta -
+    \theta^{0})^{T} \hat \Sigma (\theta - \theta^{0}).
+  \end{equation}
+\end{thm}
+
+\begin{thm}
+  Let the $n \times p$ matrix $X$ have entries $(X_{ij}) \sim^{\iid}
+  N(0, 1)$  and let $\hat \Sigma = \frac{X^{T} X}{n}$.  Suppose
+  $\frac{n}{\log p}  \rightarrow \infty$ as $\min(p, n) \rightarrow
+  \infty$.  Then for every $k \in \N$ fixed and every $0 < C <
+  \infty$, there exists $n$ large enough such that $\Prob{\theta^{T}
+    \hat \Sigma \theta \geq \frac{1}{2} \| \theta \|_{2}^{2}\, \forall
+  \theta \in B_{0}(k)} \geq 1 - 2 \exp(-Ck \log p)$.
+\end{thm}
+
+\begin{thm}
+  Under the conditions of the previous theorem, we have for some
+  universal constant $c_{0} > 0$, every $S \subset \{ 1, \dots, p \}$
+  such that $|S| = k$ and every $t > 0$,
+  \begin{equation}
+    \label{eq:39}
+    \Prob{\sup_{\theta \in \R^{p}_{S}, \| \theta \|_{2}^{2} \neq 0} |
+      \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta}  - 1 |
+      \geq 18 (\sqrt{\frac{t + c_{0} k}{n}} + \frac{t + c_{0} k}{n} )
+    } \leq 2 e^{-t}.
+  \end{equation}
+\end{thm}
+
+\begin{thm}
+  Let $g_{i}, $i = 1, \dots, n be \iid $N(0, 1)$, and set $X =
+  \sum_{i=1}^{n} (g_{i}^{2} - 1)$.  Then for all $t \geq 0$ and $n \in
+  \N$,
+  \begin{equation}
+    \label{eq:40}
+    \Prob{|X| \geq t} \leq 2 \exp(-\frac{t^{2}}{4(n+t)}).
+  \end{equation}
+\end{thm}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}

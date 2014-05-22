@@ -6,6 +6,9 @@
 
 \maketitle
 
+\section{Basic Concepts}
+\label{sec:basic-concepts}
+
 \begin{defn}[Mean, Covariance function]
   \label{defn:time_series:7}
   Define the mean function $\mu_{X}(t) = \E{X_{t}}$.
@@ -1051,6 +1054,25 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   $f(\lambda) = \frac{\sigma^{2}}{2 \pi}$.
 \end{thm}
 
+\begin{thm}
+  If we have a mean-zero stationary porcess with $\phi(B) X_{t} =
+  \theta(B) Z_{t}$,with $\phi(z) \theta(z) \neq 0$ for $|z| = 1$, then
+  factorizingyields
+  \begin{align}
+    \label{eq:80}
+    \phi(B) = \prod_{j=1}^{p} (1 - a_{j}^{-1} B) \\
+    \theta(B) = \prod_{j=1}^{q} (1-b_{j}^{-1} B)
+  \end{align} where $|a_{j} | > 1, 1 \leq j \leq r$, $|a_{j}| \leq 1$,
+  $r \leq j \leq p, |b_{j}| > 1, 1 \leq j \leq s, |b_{j}| \leq 1, s
+  \leq j \leq q$.
+
+  Noting that
+  \begin{align}
+    |1 - \overline b_{j} e^{-i\lambda}| &= |1 - b_{j} e^{-\lambda}| \\
+    &= |b_{j} e^{i\lambda} | 1 - b_{j}^{-1} e^{-i\lambda}| \\
+    &= | b_{j}| | 1 - b_{j}^{-1} e^{-i\lambda}|
+  \end{align}
+\end{thm}
 
 \subsection{The Periodogram}
 \label{sec:periodogram}
