@@ -86,10 +86,12 @@ g(\lambda) > -\infty \} $.
 \begin{thm}
   \label{sec:optimization-6}
   We have the \textbf{weak duality theorem},
-  $\inf_{x \in X(b)} \geq \max_{\lambda \in Y} g(\lambda)$.
-
+  \begin{equation}
+    \inf_{x \in X(b)} \geq \max_{\lambda \in Y} g(\lambda).\label{eq:16}
+  \end{equation}
   The primal problem satisfies \textbf{strong duality} if this holds
-  with equality --- so there exists $\lambda$ such that $\phi(b) = g(\lambda)$.
+  with equality --- so there exists $\lambda$ such that $\phi(b) =
+  g(\lambda)$.
 \end{thm}
 
 \begin{proof}
@@ -112,15 +114,18 @@ g(\lambda) > -\infty \} $.
 \end{thm}
 
 \begin{proof}
-  $(\Rightarrow)$ is to note that $\phi(b) \leq \inf_{c \in \R^{m}} \phi(c) -
-  \lambda^{T}(c - b) = \inf_{c \in \R^{m}} \inf_{x \in X(c)} f(x) -
-    \lambda^{T} (h(x) - b) = \inf_{x \in X} L(x, \lambda) =
-    g(\lambda)$.
+  $(\Rightarrow)$ is to note that
+  \begin{align}
+    \phi(b) &\leq \inf_{c \in \R^{m}} \phi(c) - \lambda^{T}(c - b) \\
+    &= \inf_{c \in \R^{m}} \inf_{x \in X(c)} f(x) - \lambda^{T} (h(x) -
+    b) \\
+    &= \inf_{x \in X} L(x, \lambda) = g(\lambda).
+  \end{align}
 
-    $(Leftarrow)$ is to choose the maximizing $\lambda$ that achieves
-    equality, so $\phi(b) \leq f(x) - \lambda^{T}(h(x) - b)$ and
-    minimize over $x \in X(c)$ obtains $\phi(b) - \lambda^{T}(b-c)
-    \leq \phi(c)$.
+  $(Leftarrow)$ is to choose the maximizing $\lambda$ that achieves
+  equality, so $\phi(b) \leq f(x) - \lambda^{T}(h(x) - b)$ and
+  minimize over $x \in X(c)$ obtains $\phi(b) - \lambda^{T}(b-c) \leq
+  \phi(c)$.
 \end{proof}
 
 \section{Linear Programming}
@@ -142,9 +147,11 @@ g(\lambda) > -\infty \} $.
 
 \begin{defn}
   \label{sec:linear-programming-3}
-  A linear program is in \textbf{general form} when written as $\min
-  \{ c^{T} x | Ax \geq x, x \geq 0 \}$.
-
+  A linear program is in \textbf{general form} when written as
+  \begin{equation}
+    \min
+    \{ c^{T} x | Ax \geq x, x \geq 0 \}.\label{eq:11}
+  \end{equation}
   A linear program of the form $\min \{ c^{T}x | Ax = b, x \geq 0 \} $
   is said to be in \textbf{standard form}.
 \end{defn}
@@ -301,7 +308,28 @@ g(\lambda) > -\infty \} $.
 just like in the primal algorithm.
 \end{defn}
 
-\todo{Cutting plane method?}
+\begin{thm}[Gomory's Cutting-Plane method]
+  If we constrain our variables to be integral, we can first solve the
+  linear program and add an extra constraint.
+  \begin{enumerate}
+  \item Find an optimal (fractional) solution to the LP.
+  \item If $x^{\star}$ is not integral, there is some row $i$ with
+    $a_{i0}$ not integral, and so for every feasible solution $x$,
+    \begin{equation}
+      \label{eq:20}
+      x_{i} + \sum_{j \in \N} \lfloor a_{ij} \rfloor x_{j} \leq x_{i} +
+      \sum_{j \in \N} a_{ij} x_{j} = a_{i0}
+    \end{equation} as $x \geq 0$ for feasibility.
+  \item If $x$is integral, the LHS is integral, and so the inequality
+    holds if the right-hand side is rounded down, so
+    \begin{equation}
+      x_{i} + \sum_{j \in N} \lfloor a_{ij} \rfloor x_{j} \leq \lfloor a_{i0} \rfloor.
+    \end{equation}
+  \item Thus, we can add this as a constraint and continue solving the
+    simplex method, and obtain a modified version of our original
+    problem.  Iterating this results in a solution to the IP.
+  \end{enumerate}
+\end{thm}
 
 \section{Complexity of Problems and Algorithms}
 \label{sec:compl-probl-algor}
@@ -383,8 +411,7 @@ just like in the primal algorithm.
     and $b$, and define $x_{0} = 0$, $D_{0} = n(nU)^{2n}I$, $E_{0} =
     E(x_{0}, D_{0})$, $V = (2n)^{n}(nU)^{n^{2}}$, $v =
     n^{-n}(nU)^{-n^{2}(n+1)}$, $t^{\star} = \lceil 2(n+1) \log
-    \frac{V}{v} \rceil$.\todo{Notify lecturer about $x_{0}$ not
-      specified in notes}
+    \frac{V}{v} \rceil$.
   \item For $t = 0, \dots, t^{\star}$, do
     \begin{enumerate}
     \item If $t = t^{\star}$, stop ($P$is empty)
@@ -845,8 +872,11 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
 \begin{defn}
   \label{sec:heuristic-algorithms-2}
   Simulated annealing considers a neighbor $y$ of the current
-  solution $x$ and moves to the new solution with probability $p_{xy}
-  = \min(1, \exp(-\frac{c(y) - c(x)}{T}))$ where $T \geq 0$ is a
+  solution $x$ and moves to the new solution with probability
+  \begin{equation}
+    p_{xy} = \min(1, \exp(-\frac{c(y) - c(x)}{T}))
+  \end{equation}
+  where $T \geq 0$ is a
   parameter (the \textbf{temperature}) that can vary over the time.
 
   It can be shown that with detailed balance, we have
@@ -946,7 +976,7 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
   \geq 0$ and obtaining the Lagrangian
   \begin{align}
     \label{eq:15}
-    L(v, x, z, w, y) = v + \sum_{j=1}^{n} y_{j}(\sum_{i=1}^{m} x_{ij}
+    L(v, x, z, w, y) &= v + \sum_{j=1}^{n} y_{j}(\sum_{i=1}^{m} x_{ij}
     - p_{ij} - z_{j} - v) - w(\sum_{i=1}^{m} x_{i} - 1) \\
     &= (1 - \sum_{j=1}^{n} y_{j}) v + \sum_{i=1}^{m} (\sum_{j=1}^{n}
     p_{ij} y_{j} - w)x_{i} - \sum_{j=1}^{n} y_{j} z_{j} + w
@@ -980,10 +1010,13 @@ B_{i} \succeq 0$, where $B_{i} \in S^{n}$ and $c \in \R^{k}$.
 \end{thm}
 
 \begin{proof}
-  $\min_{y' \in Y} \max_{x' \in X} p(x', y') \leq \max_{x' \in X}
-  p(x', y) \geq p(x, y) \geq \min_{y' \in Y} p(x, y') \leq \max_{x'
-    \in X} \min_{y' \in Y} p(x', y')$, and first and last terms are
-  equal from Von Neumann's theorem.
+  \begin{align}
+    \min_{y' \in Y} \max_{x' \in X} p(x', y') &\leq \max_{x' \in X}
+    p(x', y) \geq p(x, y) \\
+    p(x, y) &\geq \min_{y' \in Y} p(x, y') \leq \max_{x'
+      \in X} \min_{y' \in Y} p(x', y'),
+  \end{align}
+  and first and last terms are equal from Von Neumann's theorem.
 \end{proof}
 
 \begin{thm}
