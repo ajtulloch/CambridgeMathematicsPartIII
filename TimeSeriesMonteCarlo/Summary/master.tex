@@ -225,9 +225,9 @@ derivatives to zero, and obtain the result given below.
       P_{n}X_{n+h} = \mu + \sum_{i=1}^{n} a_{i} (X_{n+1-i} - \mu)
     \end{equation} where $\mathbf{a}_{n} = (a_{1}, \dots, a_{n})$ satisfies
     \begin{align}
-      \Gamma_{n} \mathbf{a}_{n} = \gamma_{n}(h) \\
-      \Gamma_{n} = [\gamma(i - j)]^{n}_{i,j = 1} \\
-      \gamma_{n}(h) = (\gamma(h), \gamma(h+1), \dots, \gamma(h + n - 1))
+      \Gamma_{n} \mathbf{a}_{n} &= \gamma_{n}(h) \\
+      \Gamma_{n} &= [\gamma(i - j)]^{n}_{i,j = 1} \\
+      \gamma_{n}(h) &= (\gamma(h), \gamma(h+1), \dots, \gamma(h + n - 1))
     \end{align}
   \item
     \begin{equation}
@@ -312,8 +312,8 @@ derivatives to zero, and obtain the result given below.
   computed recursively from the equations
   \begin{align}
     \label{eq:17}
-    v_{0} = \kappa(1, 1) \\
-    \theta_{n, n-k} = \frac{1}{v_{k}}(\kappa(n+1, k+1) -
+    v_{0} &= \kappa(1, 1) \\
+    \theta_{n, n-k} &= \frac{1}{v_{k}}(\kappa(n+1, k+1) -
     \sum_{j=0}^{k-1} \theta_{k, k-j} \theta_{n, n-j} v_{j})
   \end{align}  for $0 \leq k < n$, and
   \begin{equation}
@@ -322,12 +322,12 @@ derivatives to zero, and obtain the result given below.
   \end{equation}
 \end{thm}
 
-\section{ARMA Processes}
+\section{\textsc{ARMA} Processes}
 \label{sec:arma-processes}
 
 \begin{defn}
   \label{defn:arma_processes:1}
-  $X_{t}$ is an ARMA($p, q$) process if $X_{t}$ is stationary and if
+  $X_{t}$ is an \textsc{ARMA}($p, q$) process if $X_{t}$ is stationary and if
   for every $t$,
   \begin{equation}
     \label{eq:14}
@@ -344,8 +344,8 @@ derivatives to zero, and obtain the result given below.
   \end{equation}
   with $B$ the back-shift operator.
 
-  ARMA($0, q$) is a moving average process of order $q$ (MA($q$)).
-  ARMA($p, 0$) is an autoregressive process of order $p$ (AR($p$)).
+  \textsc{ARMA}($0, q$) is a moving average process of order $q$ (MA($q$)).
+  \textsc{ARMA}($p, 0$) is an autoregressive process of order $p$ (AR($p$)).
 \end{defn}
 
 \begin{thm}
@@ -360,7 +360,7 @@ derivatives to zero, and obtain the result given below.
 
 \begin{defn}
   \label{defn:arma_processes:3}
-  An ARMA($p, q$) process $X_{t}$ is causal (or a causal function of
+  An \textsc{ARMA}($p, q$) process $X_{t}$ is causal (or a causal function of
   $Z_{t}$) if there exists constants $\psi_{j}$ such that
   $\sum_{j=0}^{\infty} |\psi_{j}| < \infty$ and
   \begin{equation}
@@ -371,7 +371,7 @@ derivatives to zero, and obtain the result given below.
 
 \begin{thm}
   \label{defn:arma_processes:4}
-  An ARMA($p, q$) process is causal if and only if
+  An \textsc{ARMA}($p, q$) process is causal if and only if
   \begin{equation}
     \label{eq:22}
     \phi(z) = 1 - \phi_{1} z - \cdots - \phi_{p} z^{p} \neq 0
@@ -388,7 +388,7 @@ derivatives to zero, and obtain the result given below.
 
 \begin{defn}
   \label{defn:arma_processes:5}
-  An ARMA($p, q$) is invertible if there exist constants $\pi_{j}$
+  An \textsc{ARMA}($p, q$) is invertible if there exist constants $\pi_{j}$
   such that $\sum_{j=0}^{\infty} |\pi_{j}| < \infty$ and
   \begin{equation}
     \label{eq:23}
@@ -413,12 +413,12 @@ derivatives to zero, and obtain the result given below.
   \end{equation} for all $|z| \leq 1$.
 \end{thm}
 
-\subsection{ACF and PACF of an ARMA($p, q$) Process}
+\subsection{ACF and PACF of an \textsc{ARMA}($p, q$) Process}
 \label{sec:acf-pacf-an}
 
 \begin{thm}
   \label{defn:arma_processes:7}
-  For a causal ARMA($p, q$) process defined by
+  For a causal \textsc{ARMA}($p, q$) process defined by
   \begin{equation}
     \label{eq:28}
     \phi(B) X_{t} = \theta(B) Z_{t}
@@ -440,6 +440,18 @@ derivatives to zero, and obtain the result given below.
   expectations, and obtain a sequence of $m$ homogenous linear
   difference equations with constant coefficients.  These can be
   solved to obtain the $\gamma(h)$ values.
+
+  For example, for $X_{t} = \frac{1}{3} X_{t-1} + \frac{2}{9} X_{t-2}
+  + Z_{t}$, we obtain $\rho_{k} - \frac{1}{3} \rho_{k-1} - \frac{2}{9}
+  \rho_{k-2}$, $k \geq 2$.  We attempt a solution of the form $p_{k} =
+  A \lambda^{k}$, and thus must have $\lambda^{2} - \frac{1}{3}
+  \lambda - \frac{2}{9} = 0$, so $\lambda = \frac{2}{3},
+  \frac{-1}{3}$.  Thus, must have
+  \begin{align}
+    \label{eq:81}
+    p_{k} = A (\frac{2}{3})^{k} + B (\frac{-1}{3})^{k}
+  \end{align} with $p_{0} = A + B = 1$, $p_{1} = \frac{1}{3} +
+  \frac{2}{9} p_{1}$, so $p_{1} = \frac{3}{7}$.
 \end{thm}
 
 \begin{defn}[PACF]
@@ -487,14 +499,14 @@ derivatives to zero, and obtain the result given below.
     \midrule
     AR($p$) & decaying & 0 for $h > p$ \\
     MA($q$) & $0$ for $h > q$ & decaying \\
-    ARMA($p, q$) & decaying & decaying
+    \textsc{ARMA}($p, q$) & decaying & decaying
   \end{tabular}
 \end{table}
 
-\subsection{Forecasting ARMA Processes}
+\subsection{Forecasting \textsc{ARMA} Processes}
 \label{sec:forec-arma-proc}
 
-For the causal ARMA($p, q$) process
+For the causal \textsc{ARMA}($p, q$) process
 \begin{equation}
   \label{eq:35}
   \phi(B) X_{t} = \theta(B) Z_{t}, Z_{t} \sim WN(0, \sigma^{2})
@@ -569,8 +581,9 @@ for $j > q$.
     \hat X_{n+1} =
     \begin{cases}
       \sum_{j=1}^{n} \theta_{nj}(X_{n+1-j} - \hat X_{n+1-j}) & 1 \leq n < m \\
-      \phi_{1} X_{n} + \cdots + \phi_{p} X_{n+1-p} + \sum_{j=1}^{q}
-      \theta_{nj}(X_{n+1-j} - \hat X_{n+1-j}) & n \geq m
+      \phi_{1} X_{n} + \cdots + \phi_{p} X_{n+1-p} + \\
+      \quad \sum_{j=1}^{q} \theta_{nj}(X_{n+1-j} - \hat X_{n+1-j}) & n \geq
+      m
     \end{cases}
   \end{equation}
   and
@@ -583,7 +596,7 @@ for $j > q$.
 \end{lem}
 
 
-\section{Estimation of ARMA Processes}
+\section{Estimation of \textsc{ARMA} Processes}
 \label{sec:estim-arma-proc}
 
 \subsection{Yule-Walker Equations}
@@ -721,8 +734,8 @@ Consider estimating
   relations
   \begin{align}
     \label{eq:53}
-    \hat v_{0} = \hat \gamma(0) \\
-    \hat \theta_{m, m - k} = \frac{1}{\hat v_{k}}( \hat \gamma(m-k) -
+    \hat v_{0} &= \hat \gamma(0) \\
+    \hat \theta_{m, m - k} &= \frac{1}{\hat v_{k}}( \hat \gamma(m-k) -
     \sum_{j=0}^{k-1} \hat \theta_{m, m - j} \hat \theta_{k, k - j}
     \hat v_{j})
   \end{align} for $k = 0, \dots, m - 1$, and
@@ -735,7 +748,7 @@ Consider estimating
 
 \begin{thm}
   \label{defn:estimation_arma:6}
-  Let $X_{t}$ be the causal invertible ARMA process $\phi(B) X_{t} =
+  Let $X_{t}$ be the causal invertible \textsc{ARMA} process $\phi(B) X_{t} =
   \theta(B) Z_{t}$ with $Z_{t} \sim WN(0, \sigma^{2})$, $\E{Z_{t}^{4}}
   < \infty$, and let $\psi(z) = \sum_{j=0}^{\infty} \psi_{j} z^{j} =
   \frac{\theta(z)}{\phi(z)}$ for $|z| \leq 1$, and $\psi_{0} = 1$ and
@@ -746,7 +759,7 @@ Consider estimating
   \rightarrow \infty$, we have for each $k$,
   \begin{align}
     \label{eq:55}
-    \frac{n^{\frac{1}{2}}}(\hat \theta_{m1} - \psi_{1}, \dots, \hat
+    n^{\frac{1}{2}}(\hat \theta_{m1} - \psi_{1}, \dots, \hat
     \theta_{mk} - \psi_{k}) \cd N(0, A)
   \end{align} where $A = [a_{ij}]_{i, j = 1}^{k}$ and
   \begin{equation}
@@ -809,7 +822,7 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
   not $Z_{t}$ is Gaussian.
 \end{remark}
 
-\begin{thm}[Maximum Likelihood Estimators for ARMA processes]
+\begin{thm}[Maximum Likelihood Estimators for \textsc{ARMA} processes]
   \label{defn:estimation_arma:9}
   \begin{align}
     \label{eq:61}
@@ -831,7 +844,7 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
 
 \begin{thm}[Asyptotic Distribution of Maximum Likelihood Estimators]
   \label{defn:estimation_arma:10}
-  For a large sample from an ARMA($p, q$) process,
+  For a large sample from an \textsc{ARMA}($p, q$) process,
   \begin{align}
     \label{eq:64}
     \hat{\mathbf{\beta}} = N(\mathbf{\beta}, \frac{1}{n}V{\mathbf{\beta}})
@@ -871,7 +884,7 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
   relative to $f(\cdot; \theta)$.
 \end{defn}
 
-\begin{thm}[AICC of ARMA($p, q$) process]
+\begin{thm}[AICC of \textsc{ARMA}($p, q$) process]
   \label{defn:estimation_arma:12}
   \begin{align}
     \label{eq:68}
@@ -880,7 +893,7 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
   \end{align}
 \end{thm}
 
-\begin{thm}[AIC of ARMA($p, q$) process]
+\begin{thm}[AIC of \textsc{ARMA}($p, q$) process]
   \label{defn:estimation_arma:13}
   \begin{align}
     \label{eq:69}
@@ -888,13 +901,14 @@ assume $\Gamma_{n}$ is nonsingular.  The likelihood of $X_{n}$ is
   \end{align}
 \end{thm}
 
-\begin{thm}[BIC of ARMA($p, q$) process]
+\begin{thm}[BIC of \textsc{ARMA}($p, q$) process]
   \label{defn:estimation_arma:13}
   \begin{align}
     \label{eq:69}
     BIC(\mathbf{\beta}) = (n - p - q) \ln \frac{n \hat
-      \sigma^{2}}{n-p-q} + n(1 + \ln \sqrt{2 \pi}) + (p + q) \ln
-    \frac{\sum_{t=1}^{n} X_{t}^{2} - n \hat \sigma^{2}}{p + q}
+      \sigma^{2}}{n-p-q} + n(1 + \ln \sqrt{2 \pi}) + \\
+    \quad (p + q) \ln \frac{\sum_{t=1}^{n} X_{t}^{2} - n \hat
+      \sigma^{2}}{p + q}
   \end{align}
   where $\hat \sigma^{2}$ is the MLE estimate of the white noise
   variance.
@@ -1015,7 +1029,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   \end{enumerate}
 \end{thm}
 
-\subsection{The Spectral Density of an ARMA Process}
+\subsection{The Spectral Density of an \textsc{ARMA} Process}
 \label{sec:spectral-density-an}
 
 \begin{thm}
@@ -1036,7 +1050,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
 
 \begin{thm}
   \label{sec:spectral-density-an-3}
-  Let $X_{t}$ be an ARMA($p, q$) process, not necessarily causal or
+  Let $X_{t}$ be an \textsc{ARMA}($p, q$) process, not necessarily causal or
   invertible satisfying $\phi(B)X_{t} = \theta(B) Z_{t}$, $Z_{t} \sim
   WN(0, \sigma^{2})$ where $\phi(z) = 1 - \phi_{1} z - \dots -
   \phi_{p} z^{p}$ and $\theta(z) = 1 + \theta_{1} z + \dots +
@@ -1173,7 +1187,7 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
   \label{sec:arima-processes-1}
   If $d$ is a non-negative integer, $X_{t}$ is said to be an
   ARIMA($p,d,q$) process if $Y_{t} = (1 - B)^{d} X_{t}$ is a causal
-  ARMA($p, q$) process
+  \textsc{ARMA}($p, q$) process
 \end{defn}
 
 \begin{thm}
@@ -1240,10 +1254,10 @@ function $\gamma(\cdot)$ satisfying $\sum_{h=-\infty}^{\infty}
 
 \begin{thm}
   \label{sec:unit-roots-test}
-  Let $X_{t}$ be a causal and invertible ARMA($p, q$) process
+  Let $X_{t}$ be a causal and invertible \textsc{ARMA}($p, q$) process
   satisfying $\phi(B)X_{t} = \theta(B) Z_{t}$, $Z_{t} \sim WN(0,
   \sigma^{2})$.  Then the differenced series $Y_{t} = \Delta X_{t}$ is
-  a non-invertible ARMA($p, q+1$) process with moving average
+  a non-invertible \textsc{ARMA}($p, q+1$) process with moving average
   polynomial $\theta(z)(1-z)$.  Thus, testing for a unit root in a MA
   polynomial is equivalent to testing that the time series has not been
   over-differenced.

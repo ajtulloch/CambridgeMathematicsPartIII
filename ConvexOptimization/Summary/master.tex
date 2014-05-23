@@ -344,12 +344,13 @@
 
 \end{proof}
 
-\begin{thm}
+\begin{thm} We have
   \label{sec:convexity-16}
   \begin{enumerate}
-  \item $\cl C = \{ x \in \R^{n} | \text{for all open neighborhoods
+  \item
+    $\cl C = \{ x \in \R^{n} | \text{$\forall$ open neighborhoods
       $N$ of $x$, $N \cap C \neq \emptyset$} \}$
-  \item $\int C = \{ x \in \R^{n} | \text{there exists an open
+  \item $\interior C = \{ x \in \R^{n} | \text{$\exists$ open
       neighborhood $N$ of $x$ such that $N \subseteq C$} \} $
   \item $\bnd C = \cl C \backslash \int C$.
   \end{enumerate}
@@ -547,8 +548,8 @@
   interior by
   \begin{align}
     \label{eq:15}
-    \aff C = \cap_{\text{$A$ affine, $C \subseteq A$}} A \\
-    \rint C = \{ x \in \R^{n} | \text{there exists an open
+    \aff C &= \cap_{\text{$A$ affine, $C \subseteq A$}} A \\
+    \rint C &= \{ x \in \R^{n} | \text{$\exists$ open
       neighborhood $N$ of $x$ with $N \cap \aff C \subseteq C$} \}.
     \label{eq:16}
   \end{align}
@@ -614,9 +615,11 @@
 
 \begin{thm}
   \label{sec:conjugate-functions-4}
-  Assume $C \subseteq \R^{n}$ is closed and convex.  Then $C =
-  \bigcap_{(b, \beta), C \subseteq H_{b, \beta}} H_{b, \beta}$ where
-  $B_{b, \beta} = \{ x \in \R^{n} | \IP{x, b} - \beta \leq 0 \} $
+  Assume $C \subseteq \R^{n}$ is closed and convex.  Then
+  \begin{equation}
+    C = \bigcap_{(b, \beta), C \subseteq H_{b, \beta}} H_{b, \beta}
+  \end{equation}
+  where $B_{b, \beta} = \{ x \in \R^{n} | \IP{x, b} - \beta \leq 0 \}$
 \end{thm}
 
 \begin{proof}
@@ -1229,8 +1232,16 @@ proper lsc convex, $\argmin f \neq \emptyset$, we can do:
 
 \begin{thm}
   \label{sec:inter-point-meth-3}
-  The \textbf{primal central path} is the mapping $t \mapsto x(t) =
-  \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T}y = c} \} $
+  Consider the problem $\inf \IP{c, x}$ s.t. $Ax - b \geq_{K} 0$. The
+  dual problem is $\sup \IP{-b, y}$ s.t. $-A^{T} y = c$, $y
+  \geq_{K^{\star}} 0$.  Replacing $y$ by $-y$ and assuming $K$ is
+  self-dual $K^{\star} = K$ we obtain the dual as $\sup \IP{b, y}$
+  such that $A^{T} y = c, y \geq_{K} 0$.
+
+  The \textbf{primal central path} is the mapping
+  \begin{equation}
+    t \mapsto x(t) = \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T}y = c} \}
+  \end{equation}
 
   The \textbf{dual central path} is the mapping $t \mapsto y(t) =
   \argmin \{ -t \IP{b, y} + F(y) + \delta_{A^{T}y = c} \} $
@@ -1239,11 +1250,11 @@ proper lsc convex, $\argmin f \neq \emptyset$, we can do:
   = (x(t), y(t))$ for some $t > 0$, if and only if
   \begin{align}
     \label{eq:52}
-    Ax - b \in \dom F \\
+    &Ax - b \in \dom F \\
     \label{eq:53}
-    A^{T} y = c \\
+    &A^{T} y = c \\
     \label{eq:54}
-    ty + \grad F(Ax - b) = 0
+    &ty + \grad F(Ax - b) = 0
   \end{align}
 \end{thm}
 
@@ -1267,8 +1278,12 @@ proper lsc convex, $\argmin f \neq \emptyset$, we can do:
 \end{thm}
 
 \begin{proof}
-  $\phi(x) - \psi(y) = \IP{c, x} - \IP{b, y} = \IP{y, Ax - b} =
-  \IP{-\frac{1}{t} \grad F(Ax(t) - b), Ax(t) - b} = \frac{\theta_{F}}{t}$.
+  \begin{align}
+    \phi(x) - \psi(y) &= \IP{c, x} - \IP{b, y} \\
+    &= \IP{y, Ax - b} \\
+    &= \IP{-\frac{1}{t} \grad F(Ax(t) - b), Ax(t) - b} \\
+    &= \frac{\theta_{F}}{t}.
+  \end{align}
 \end{proof}
 
 \begin{thm}
@@ -1342,25 +1357,28 @@ proper lsc convex, $\argmin f \neq \emptyset$, we can do:
   Define
   \begin{equation}
     \label{eq:51}
-    \I{A}(x) =
+    1_{A}(x) =
     \begin{cases}
       1 & x \in A \\
       0 & x \notin A
     \end{cases}
   \end{equation}
-  then $TV(\I{A}) = \mathcal{H}^{n-1}(\Omega \cap \partial A)$.
+  then $TV(1_{A}) = \mathcal{H}^{n-1}(\Omega \cap \partial A)$.
 \end{thm}
 
 \begin{proof}
-  The lower bound follows from $TV(1_{A}) = \sup_{v \in
-    C_{c}^{1}(\Omega, \R^{n}), \| v \|_{\infty} \leq 1} \int_{\partial
-    A} \IP{v, n} ds$ by Gauss's theorem.
+  The lower bound follows from
+  \begin{align}
+    TV(1_{A}) = \sup_{v \in C_{c}^{1}(\Omega, \R^{n}), \| v
+      \|_{\infty} \leq 1} \int_{\partial A} \IP{v, n} ds
+  \end{align}
+  by Gauss's theorem.
 \end{proof}
 
 \begin{thm}[Coarea formula]
   \label{sec:total-vari-appl-3}
-  If $u \in BV(\Omega)$, then $TV(\I{x|u(x) > t}) < \infty$ for
-  $\mathcal{L}^{1}$-a.e. $t \in \R$, and $TV(u) = \int_{\R} TV(\I{u >
+  If $u \in BV(\Omega)$, then $TV(1_{u(x) > t}) < \infty$ for
+  $\mathcal{L}^{1}$-a.e. $t \in \R$, and $TV(u) = \int_{\R} TV(1_{u >
     t}) dt$.
 \end{thm}
 
