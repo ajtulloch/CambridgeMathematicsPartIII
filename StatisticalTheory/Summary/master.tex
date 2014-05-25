@@ -27,7 +27,7 @@
     \Prob{|X_{n} - X} > \epsilon) \rightarrow 0
   \end{equation} as $n \rightarrow \infty$.
   For random vectors, we define analogously with taking the norm in
-  $\mathbb{R}^{n}$. 
+  $\mathbb{R}^{n}$.
 \end{defn}
 
 \begin{defn}[Convergence in distribution]
@@ -53,32 +53,16 @@
   \item \textbf{Slutsky's lemma} If $X_{n} \cd X$ and $Y_{n} \cd c$ (a
     constant). Then
     \begin{enumerate}
-    \item
-      \begin{equation}
-        \label{eq:10}
-        Y_{n} \cp c
-      \end{equation}
-    \item
-      \begin{equation}
-        \label{eq:11}
-        X_{n} + Y_{n}\cd X + c
-      \end{equation}
-
-    \item
-      \begin{equation}
-        \label{eq:12}
-        X_{n} Y_{n} \cd cX
-      \end{equation} where $Y_{n} \in \R$.
-    \item
-      \begin{equation}
-        \label{eq:13}
-        X_{n} Y_{n}^{{-1}} \cd c^{-1} X
-      \end{equation} where $Y_{n} \in \R, c \neq 0$.
+    \item  $Y_{n} \cp c$
+    \item $X_{n} + Y_{n}\cd X + c$
+    \item $X_{n} Y_{n} \cd cX$ where $Y_{n} \in \R$.
+    \item $X_{n} Y_{n}^{{-1}} \cd c^{-1} X$ where $Y_{n} \in \R, c
+      \neq 0$.
     \end{enumerate}
   \item If $(A_{n}, n \in \N)$ are random matrices with
-    $(A_{n})_{{ij}} \cp A_{ij}$ for all $i, j$ and $X_{n} \cd X$, then
-    $A_{n} X_{n} \cd AX$, and if $A$ is invertible, $A_{n}^{-1} X_{n}
-    \cd A^{-1}X$, where $A = (A_{ij})$.
+    $(A_{n})_{{ij}} \cp A_{ij}$ for all $i, j$ and $X_{n} \cd X$,
+    then $A_{n} X_{n} \cd AX$, and if $A$ is invertible, $A_{n}^{-1}
+    X_{n} \cd A^{-1}X$, where $A = (A_{ij})$.
   \end{enumerate}
 \end{proposition}
 
@@ -109,8 +93,8 @@
   \end{equation}
 \end{thm}
 
-\section{Uniform Laws of Large Numbers}
-\label{sec:uniform-laws-large}
+\section{Uniform Laws of Large NUmbers}
+\label{sec:uniform-laws-large-1}
 
 \begin{thm}
   Let $\mathcal{H}$ be a class of functions from a measurable space
@@ -129,8 +113,30 @@
   \end{equation}
 \end{thm}
 
+\begin{proof}
+  Let $\epsilon > 0$, and choose brackets $[l_{j}, u_{j}]$ such that
+  $\E{|u_{j} - l_{j}}(X) < \frac{\epsilon}{2}$ by hypothesis. Then for
+  every $\omega \in T^{\infty}$ outside a null set $A$, there exists
+  $n_{0}(\omega, \epsilon)$ such that
+  \begin{align}
+    \label{eq:41}
+    \max_{j = 1, \dots, N(\frac{\epsilon}{2})} |\sum_{i=1}^{n} u_{j} -
+    \E{u_{j}}| < \frac{\epsilon}{2}
+  \end{align} by the strong law of large numbers and taking a union
+  over all $j$.
+
+  Then this gives for $h \in \mathcal{H}$, outside a set of zero
+  measure,
+  \begin{align}
+    \label{eq:42}
+    \frac{1}{n} \sum_{i=1}^{n} h(X_{i}) - \E{h(X)} \leq E_{n} u_{j} -  \E{h} \\
+    &= \E_{n} u_{j}  - E{u_{j}} + \E{u_{j}} - \E{h}
+  \end{align} which is bounded above by $\frac{\epsilon}{2} +
+  \frac{\epsilon}{2} = \epsilon$, as required.
+\end{proof}
+
 \section{Consistency of $M$-estimators}
-\label{sec:cons-m-estim}
+\label{sec:cons-m-estim-1}
 
 \begin{thm}
   \label{defn:parametric_statistical_models:1}
@@ -149,8 +155,29 @@
   then $\hat \theta_{n} \cp \theta_{0}$ as $n \rightarrow \infty$.
 \end{thm}
 
-\section{Verifying uniform convergence}
-\label{sec:verify-unif-conv}
+\begin{proof}
+  The key is to consider the set $S_{\epsilon} = \{ \theta \in \Theta
+  : \| \theta - \theta_{0} \| \geq \epsilon \} $.  This is compact,
+  with $Q$ continuous on this set, and so an infimum
+  $Q(\theta_{\epsilon}) > Q(\theta_{0})$ is attained on this set.
+  Choose $\delta > 0$ so $Q(\theta_{\epsilon}) - \delta >
+  Q(\theta_{0}) + \delta$.  Then consider the set $A_{n}(\epsilon) =
+  \{ \sup_{\theta \in \Theta} | Q_{n}(\theta) - Q(\theta) | < \delta
+  \} $.  On this set, we have
+  \begin{align}
+    \label{eq:43}
+    \inf_{S_{\epsilon}} Q_{n}(\theta) &\geq \inf_{S_{\epsilon}}
+    Q(\theta) - \delta = Q(\theta_{\epsilon}) - \delta > Q(\theta_{0})
+    + \delta \geq Q_{n}(\theta_{0}).
+  \end{align}
+  So if $\hat \theta_{n}$ lay in $S_{\epsilon}$, then
+  $Q_{n}(\delta_{0})$ would be strictly smaller than $Q_{n}(\hat
+  \theta_{n})$, contradicting that $\hat \theta_{n}$ is a minimizer.
+  Conclude that $A_{n}(\epsilon) \Rightarrow \| \hat \theta_{n} -
+  \theta_{0} \| < \epsilon$, but as $\Prob{A_{n}(\epsilon)}
+  \rightarrow 1$, we have $\Prob{\| \hat \theta_{n} - \theta_{0} \| <
+    \epsilon} \rightarrow 1$.
+\end{proof}
 
 \begin{thm}
   Let $\Theta$ be compact in $\R^{p}$, and let $\mathcal{X} \subseteq \R^{d}$
@@ -172,6 +199,30 @@
       \theta)} | \cas 0
   \end{equation} as $n \rightarrow \infty$
 \end{thm}
+
+\begin{proof}
+  We seek to find suitable bracketing functions and proceed via the
+  uniform law of large numbers. First, define the brackets $u(x,
+  \theta, \eta) = \sup_{\theta' \in B(0, \eta)}$, so $\E{|u(X, \theta,
+    \eta)|} < \infty$ by assumption. By continuity of $q(\cdot, x)$,
+  the supremum is achieved at points $\| \theta^{u}(\theta) - \theta
+  \| < \eta$, and so $\lim_{\eta \rightarrow 0} |u(x, \theta, \eta) -
+  q(\theta, x) \rightarrow 0$ at every $x$ and every $\theta$, and
+  using the dominated convergence theorem gives $\lim_{\eta
+    \rightarrow 0}\E{|u(X, \theta, \eta) - q(\theta, X)} \rightarrow
+  0$.
+
+  Then for $\epsilon > 0$ and $\theta \in \Theta$ we can choose
+  $\eta(\epsilon, \theta)$ small so that
+  \begin{equation}
+    \E{u(X, \theta, \eta) - l(X, \theta, \eta)} < \epsilon.
+  \end{equation}
+  The open balls $\{ B(\theta, \eta(\epsilon, \theta)) \} $ are an
+  open cover of the compact set $\Theta$, so there exists a finite
+  subcover by Heine-Borel. This finite subcover $u_{j}(\cdot,
+  \theta_{j}, \eta(\epsilon, \theta_{j}))$ constitutes a bracketing
+  set of the $q$, and so we apply the uniform law of large numbers.
+\end{proof}
 
 \begin{thm}[Consistency of the Maximum Likelihood Estimator]
   Consider the model $f(\theta, y)$, $\theta \in \Theta \subseteq
@@ -195,6 +246,15 @@
   \rightarrow \infty$.
 \end{thm}
 
+\begin{proof}
+  Setting
+  \begin{align}
+    q(\theta, y) &= -\log f(\theta, y), \\
+    Q(\theta) &= \E_{\theta_{0}}q(\theta, Y), \\
+    Q_{n}(\theta) &= \frac{1}{n} \sum_{i=1}^{n} q(\theta, Y_{i}),
+  \end{align}
+  this follows from the previous results.
+\end{proof}
 
 \begin{defn}[Uniform Consistency]
   \label{sec:cons-model-ftheta}
@@ -207,8 +267,23 @@
   \end{equation} as $n \rightarrow \infty$.
 \end{defn}
 
+\begin{thm}
+  An estimator is uniformly consistent if, for every $\epsilon > 0$,
+  \begin{align}
+    \label{eq:44}
+    \inf_{\theta_{0} \in \Theta} \inf_{\theta \in \Theta : \| \theta -
+    \theta_{0} \| \geq \epsilon} (Q(\theta) - Q(\theta_{0})) > 0
+  \end{align} and that
+  \begin{align}
+    \label{eq:46}
+    \sup_{\theta_{0} \in \Theta} \Prob_{\theta_{0}} (\sup_{\theta \in
+      \Theta} |Q_{n}(\theta; Y_{1}, \dots, Y_{n}) - Q(\theta) | >
+    \delta) \rightarrow 0.
+  \end{align}
+\end{thm}
+
 \section{Asymptotic Distribution Theory}
-\label{sec:asympt-distr-theory}
+\label{sec:asympt-distr-theory-2}
 
 \begin{thm}
   Consider the model $f(\theta, y), \theta \in \Theta \subset \R^{p}$,
@@ -262,6 +337,91 @@
   \end{align} as $n \rightarrow \infty$.
 \end{thm}
 
+\begin{proof}
+  First, note that as $\int f(\theta, y) dy = 1$ for all $\theta \in
+  J$, then $\frac{\partial}{\partial \theta} \int f(\theta, y) dy =
+  \int \frac{\partial \log f(\theta, y)}{\partial \theta} f(\theta, y)
+  dy= 0$
+  for every $\theta \in \interior K$, so
+  \begin{align}
+    \label{eq:47}
+    \E_{\theta_{0}} \frac{\partial \log f(\theta_{0}, Y)}{\partial
+      \theta}  = 0.
+  \end{align}
+
+  Since $\hat \theta_{n} \cp \theta_{0}$, we have $\hat \theta_{n}$ is
+  an interior point of $\Theta$ on events of probability approaching
+  one, so $\frac{\partial Q_{n}(\hat \theta_{n})}{\partial \theta} =
+  0$.  Applying the mean value theorem, we have
+  \begin{equation}
+    \label{eq:48}
+    0 = \sqrt{n} \frac{\partial Q_{n}(\theta_{0})}{\partial \theta}  +
+    \overline A_{n} \sqrt{n}(\hat \theta_{n} - \theta_{0})
+  \end{equation} where $\hat A_{n}$ is the matrix of second
+  derivatives of $Q_{n}$ evaluated at a mean value $\overline
+  \theta_{nj}$ on the line segment between $\theta_{0}$ and $\hat
+  \theta_{n}$.
+
+  \textbf{For the first component}, we have
+  \begin{align}
+    \label{eq:49}
+    \sqrt{n} \frac{\partial Q_{n}(\theta_{0})}{\partial \theta} = -
+    \frac{1}{\sqrt{n}} \sum_{i=1}^{n} \frac{\partial \log
+      f(\theta_{0}, Y_{i})}{\partial \theta} \cd N(0, i(\theta_{0}))
+  \end{align} by the central limit theorem.
+
+  \textbf{For the second component}, we show $\overline A_{n} \cp
+  -\E{\frac{\partial^{2} \log f(\theta_{0}, Y)}{\partial
+      \theta \partial \theta^{T}}}$, which we do componentwise. We
+  have $(\overline A_{n})_{kj} = \frac{1}{n} \sum_{i=1}^{n}
+  h_{kj}(\overline \theta_{nj}, Y_{i})$, where $h_{jk}$ is the second
+  mixed partial derivative of $-\log f(\theta, Y_{i})$, and we seek to
+  show each $h_{jk} \cp \E{h_{jk}(\theta_{0}, Y)}$. This follows by
+  \begin{align}
+    \label{eq:52}
+    &\left| \frac{1}{n} \sum_{i=1}^{n} h_{jk}(\theta_{nj}, Y_{i}) -
+      \E{h_{jk}(\theta_{0}, Y)} \right| \\
+    \quad &\leq \sup_{\theta \in K}
+    \left| \frac{1}{n} \sum_{i=1}^{n} h_{jk}(\theta, Y_{i}) -
+      \E{h_{jk}(\theta, Y)}\right| + \left| \E{h_{jk}(\overline
+        \theta_{nj}, Y)} - \E{h_{jk}(\theta_{0}, Y)} \right|
+  \end{align} then by the uniform law of large numbers, the first term
+  converges to zero, and the fact that $\overline \theta_{nj}
+  \rightarrow \theta_{0}$ in probability implies the second term
+  converges to zero.  Hence, $-\overline A_{n}
+  \rightarrow^{p_{\theta_{0}}} \E{\theta_{0}} \frac{\partial^{2} \log
+    f(\theta_{0}, Y)}{\partial \theta \partial \theta^{T}} \equiv
+  \Sigma(\theta_{0})$.
+
+  As the limit is invertible we have that $\overline A_{n}$ is
+  invertible on sets with measure approaching one, so we can rewrite
+  the previous result as
+  \begin{align}
+    \label{eq:53}
+    \sqrt{n}(\hat \theta_{n} - \theta_{0}) = -\overline A_{n}^{-1}
+    \sqrt{n} \frac{\partial Q_{n}(\theta_{0})}{\partial \theta} \cd
+    N(0, \Sigma^{-1}(\theta_{0} i(\theta_{0}) \Sigma^{-1}(\theta_{0}))).
+  \end{align} from Slutsky's lemma.
+
+  \textbf{Finally}, we show $\Sigma(\theta_{0}) = i(\theta_{0})$.
+  This follows from interchanging integration and differentation to show
+  \begin{equation}
+    \label{eq:54}
+    \frac{\partial}{\partial \theta^{T}} \int \frac{\partial f(\theta,
+      y)}{\partial \theta} dy = \int \frac{\partial^{2} f(\theta,
+      y)}{\partial \theta \partial \theta^{T}} dy = 0
+  \end{equation} for all $\theta \in \interior K$. Then, use the chain
+  rule to show
+  \begin{align}
+    \label{eq:55}
+    \frac{\partial^{2} \log f(\theta, y)}{\partial \theta \partial
+      \theta^{T}}  = \frac{1}{f(\theta, y)} \frac{\partial^{2}
+      f(\theta, y)}{\partial \theta \partial \theta^{T}}   -
+    \frac{\partial \log f(\theta, y)}{\partial \theta}  \frac{\partial
+    \log f(\theta, y)}{\partial \theta}^{T}
+  \end{align} and using this identity at $\theta_{0}$.
+\end{proof}
+
 \begin{thm}
   In the framework of the previous theorem with $p=1$ and for $n \in
   \N$ fixed, let $\tilde \theta = \tilde \theta(Y_{1}, \dots, Y_{n})$,
@@ -270,9 +430,30 @@
   Then
   \begin{align}
     \label{eq:17}
-    \Var_{\theta}(\tilde \theta_{n}) \geq \frac{1}{ni(\theta)} 
+    \Var_{\theta}(\tilde \theta_{n}) \geq \frac{1}{ni(\theta)}
   \end{align} for all $\theta \in \interior(\Theta)$.
 \end{thm}
+
+\begin{proof}
+  Cauchy-Swartz and $\E_{\theta_{0}}\frac{\partial \log f(\theta,
+    Y)}{\theta}$.
+  Specifically, letting $l(\theta, Y) = \sum_{i=1}^{n}
+  \frac{d}{d\theta} \log f(\theta, Y_{i})$,
+  \begin{align}
+    \label{eq:56}
+    \Var_{\theta}(\tilde \theta) \geq \frac{\Cov_{\theta}^{2}(\tilde
+      \theta, l'(\theta, Y))}{\Var_{\theta}(l'(\theta, Y))} =
+    \frac{1}{ni(\theta)}
+  \end{align} since
+  \begin{align}
+    \label{eq:57}
+    \Cov_{\theta}(\tilde \theta, l'(\theta, Y)) &= \int \tilde
+    \theta(y) l'(\theta, y) \prod_{i=1}^{n} f(\theta, y_{i}) dy \\
+    &= \int \tilde \theta(y) \frac{d}{d\theta}  f(\theta, y) dy =
+    \frac{d}{d\theta}  \E_{\theta} \tilde \theta = \frac{d}{d \theta}
+    \theta = 1.
+  \end{align}
+\end{proof}
 
 \begin{thm}[Delta Method]
   Let $\Theta$ be an open subset of $\R^{p}$ and let $\Phi: \Theta
@@ -317,7 +498,7 @@
 \begin{thm}
   Consider a parametric model $f(\theta, y), \theta \in \Theta \subset
   \R^{p}$ that satisfies the assumptions of the theorem on asymptotic
-  normality of the MEL.  Consider the simple null hypothesis
+  normality of the MLE.  Consider the simple null hypothesis
   $\Theta_{0} = \{ \theta_{0} \} $, $\theta_{0} \in \Theta$.  Then
   under $H_{0}$, the likelihood ratio test statistic is asymptotically
   chi-squared distributed, so
@@ -326,6 +507,43 @@
     \Lambda_{n}(\Theta, \Theta_{0}) \cd \chi_{p}^{2}
   \end{equation} as $n \rightarrow \infty$ under $P_{\theta_{0}}$.
 \end{thm}
+
+\begin{proof}
+  Since $\Lambda_{n}(\Theta, \Theta_{0}) = 2n Q_{n}(\theta_{0}) - 2n
+  Q_{n}(\hat \theta_{n})$, we can expand this in a Taylor series
+  around $\hat \theta_{n}$, obtaining
+  \begin{align}
+    \label{eq:58}
+    2 n \frac{\partial Q_{n}(\hat \theta_{n})}{\partial
+      \theta}^{T}(\theta_{0} - \hat \theta_{n}) + n(\theta_{0} - \hat
+    \theta_{n})^{T} \frac{\partial^{2} Q(\overline
+      \theta_{n})}{\partial \theta \partial \theta^{T}} (\theta_{0} -
+    \hat \theta_{n})
+  \end{align} for some vector $\overline \theta_{n}$ on the line
+  segment between $\hat \theta_{n}$and $\theta_{0}$.
+
+  As in the proof of the previous theorem, we show that $\overline
+  A_{n}$ converges to $i(\theta_{0})$ in probability.  Thus, by
+  Slutsky's lemma and consistency, $\sqrt{n}(\hat \theta_{n} -
+  \theta_{0})^{T}(\overline A_{n} - i(\theta_{0}))$ converges to zero
+  in distrubiton and probability (as the limit is constant), so we can
+  repeate the argument and obtain
+  \begin{align}
+    \label{eq:59}
+    \sqrt{n} (\hat \theta_{n} - \theta_{0})^{T} (\overline A_{n} -
+    i(\theta_{0})) \sqrt{n}(\hat \theta_{n} - \theta_{0})
+    \rightarrow^{p_{\theta_{0}}} 0
+  \end{align} and so $\Lambda_{n}(\Theta, \Theta_{0})$ has the same
+  limit distribution as the random variable
+  \begin{equation}
+    \label{eq:60}
+    \sqrt{n}(\hat \theta_{n} - \theta_{0})^{T} i(\theta_{0})
+    \sqrt{n}(\hat \theta_{n} - \theta_{0}).
+  \end{equation}  By continuity of $x \mapsto x^{T} i(\theta_{0} x)$,
+  we obtain the limiting distribution is $X^{T} i(\theta_{0} X)$, iwth
+  $X \sim N(0, i^{-1})(\theta_{0})$, which is the squared Euclidean
+  norm of the MVN  $N(0, I_{p})$, which has a $\chi^{2}_{p}$ idstribution.
+\end{proof}
 
 \begin{thm}
   Let $\{ f(\theta), \theta \in \Theta \} $ in which uniformly
@@ -340,6 +558,28 @@
     \max(\E_{\theta_{0}} \phi_{n}, \E_{\theta}(1 - \phi_{n})) \leq e^{-Cn}.
   \end{equation}
 \end{thm}
+
+\begin{proof}
+  Consider $\psi_{n} = 1_{\{ \| T_{n} - \theta_{0} \| \geq
+    \frac{\delta}{2} \} }$ which converges to zero under
+  $P_{\theta_{0}}$.  By the triangle inequality, we have
+  \begin{align}
+    \label{eq:62}
+    \sup_{\theta : \| \theta - \theta_{0} \| \geq \delta}
+    \E_{\theta}(1 - \psi_{n}) \leq \sup_{\theta: \| \theta -
+      \theta_{0} \| \geq \delta} P^{n}_{\theta}(\| T_{n} - \theta \| >
+    \frac{\delta}{2}) \rightarrow 0
+  \end{align} as $n \rightarrow \infty$.
+
+  Then set $k \in \N$ so $\E_{\theta_{0}} \psi_{k}$ and $\E_{\theta}(1
+  - \psi_{k})$ for all $\| \theta - \theta_{0} \| > \delta$.  Then
+  group each sample into groups of size $k$, with $Y_{nj}$ the
+  statistic $\psi_{n}$ for the $j-th$ group, and consider the sample
+  average $\overline Y_{nm} = \frac{1}{m} \sum_{j=1}^{m} Y_{nj}$.
+
+  As $\E_{\theta} Y_{nj} \geq \frac{3}{4}$, we can use the test
+  $\phi_{n} = 1_{\overline Y_{nm} < \frac{1}{2}} \leq \exp(-\frac{m}{8})$ by Hoeffding's inequality.
+\end{proof}
 
 \begin{thm}
   Let $\{ f(\theta) : \theta \in \Theta \} $ be a parametric model
@@ -358,9 +598,8 @@
       \theta_{0} \|^{2}} \rightarrow 0
   \end{equation} as $n \rightarrow \infty$.
 \end{thm}
-
 \subsection{Local Asymptotic Normality and Contiguity}
-\label{sec:local-asympt-norm}
+\label{sec:loccal-asympt-norm}
 
 \begin{defn}[Local Asymptotic Normality]
   \label{sec:local-asympt-norm-1}
@@ -395,6 +634,27 @@
 open subset $\Theta_{0}$ of $\Theta$.
 \end{thm}
 
+\begin{proof}
+  We prove for $n_{n} = h$ fixed.  As before, we can expand $\log
+  f(\theta_{0} + \frac{h}{\sqrt{n}})$ about $\log f(\theta_{0})$ up to
+  second order, and obtain
+  \begin{align}
+    \label{eq:10}
+    -\frac{1}{\sqrt{n}} \sum_{i=1}^{n} h^{T} \frac{\partial
+      q(\theta_{0}, Y_{i})}{\partial \theta}  - \frac{1}{2n} h^{T}
+    \sum_{i=1}^{n} \frac{\partial^{2} q(\overline \theta_{n},
+      Y_{i})}{\partial \theta \partial \theta^{T}} h
+  \end{align} for some vector $\overline \theta_{n}$ on the line
+  segment between $\theta_{0}$ and $\theta_{0} + \frac{h}{\sqrt{n}}$.
+  By the uniform law of large numbers, we have
+  \begin{align}
+    \label{eq:11}
+    \frac{1}{2n} h^{T} \sum_{i=1}^{n} \frac{\partial^{2} q(\overline
+      \theta_{n}, Y_{i})}{\partial \theta \partial \theta^{T}}  h -
+    \frac{1}{2} h^{T} i(\theta_{0} h) \rightarrow^{p_{\theta_{0}}} 0
+  \end{align} as $n \rightarrow \infty$.
+\end{proof}
+
 \begin{defn}[Contiguity]
   \label{sec:cons-param-model}
   Let $P_{n}$, $Q_{n}$ be two sequences of probability measures. We
@@ -411,37 +671,62 @@ open subset $\Theta_{0}$ of $\Theta$.
   Let $P-n$, $Q_{n}$ be probability measures on measurable spaces
   $(\Omega_{n}, \mathcal{A}_{n})$.  Then the following are equivalent:
   \begin{enumerate}
-  \item $Q_{n} \triangleleft P_{n}$.
-  \item If $\frac{dP_{n}}{dQ_{n}} \rightarrow^{d}_{Q_{n}} U$ along a
+  \item\label{item:1} $Q_{n} \triangleleft P_{n}$.
+  \item\label{item:2} If $\frac{dP_{n}}{dQ_{n}} \rightarrow^{d}_{Q_{n}} U$ along a
     subsequence of $n$, then $P(U > 0) = 1$.
-  \item If $\frac{dQ_{n}}{dP_{n}} \rightarrow^{d}_{P_{n}} V$ along a
+  \item\label{item:3} If $\frac{dQ_{n}}{dP_{n}} \rightarrow^{d}_{P_{n}} V$ along a
     subsequence of $n$, then $\E{V} = 1$.
-  \item For any sequence of statistics (measurable functions $T_{n}:
+  \item\label{item:4} For any sequence of statistics (measurable functions $T_{n}:
     \Omega_{n} \rightarrow \R^{k}$), we have $T_{n}
     \rightarrow^{P_{n}} 0$ as $n \rightarrow \infty$ implies $T_{n}
     \rightarrow^{Q_{n}} 0$ as $n \rightarrow \infty$.
   \end{enumerate}
 \end{thm}
 
+\begin{proof}
+  \ref{item:1} $\iff$ \ref{item:4}: follows by taking $A_{n} =
+    \{ \| T_{n} \| > \epsilon \},$ so $Q_{n}(A_{n}) \rightarrow 0$
+    implies $T_{n} \rightarrow^{Q_{n}} 0$.  Conversely, take $T_{n} = 1_{A_{n}}$.
+  \ref{item:1} $\Rightarrow$ \ref{item:2}
+  \todo{Complete proof?}
+\end{proof}
+
+
 \begin{thm}
-  \begin{enumerate}
-  \item Let $P_{n}$, $Q_{n}$ be sequences of probability measures on
-    measurable spaces $(\Omega_{n}, \mathcal{A}_{n})$ such that
-    $\frac{dP_{n}}{dQ_{n}} \rightarrow^{d}_{Q_{n}} e^{X}$ where $X
-    \sim N(-\frac{1}{2} \sigma^{2}, \sigma^{2})$, for some $\sigma^{2}
-    > 0$ as $n \rightarrow \infty$.  Then $P_{n} \triangleleft
-    \triangleright Q_{n}$.
-  \item If $\{ f(\theta): \theta \in \Theta \}$ is locally
-    asymptotically normal and if $h_{n} \rightarrow h \in \R^{p}$,
-    then the product measures $P^{n}_{\theta + \frac{h_{n}}{\sqrt{n}}
-    }$ and $P^{n}_{\theta}$ corresponding to samples $X_{1}, \dots,
-    X_{n}$ from densities $f(\theta + \frac{h_{n}}{\sqrt{n}})$ and
-    $f(\theta)$, respectively, are mutually contiguous.  In
-    particular, if a statistic $T(Y_{1}, \dots, Y_{n})$ converges to
-    zero in probability under $P^{n}_{\theta}$ then it also converges
-    to zero in $P^{n}_{\theta + \frac{h_{n}}{\sqrt{n}} }$-probability.
-  \end{enumerate}
+  Let $P_{n}$, $Q_{n}$ be sequences of probability measures on
+  measurable spaces $(\Omega_{n}, \mathcal{A}_{n})$ such that
+  $\frac{dP_{n}}{dQ_{n}} \rightarrow^{d}_{Q_{n}} e^{X}$ where $X \sim
+  N(-\frac{1}{2} \sigma^{2}, \sigma^{2})$, for some $\sigma^{2} > 0$
+  as $n \rightarrow \infty$. Then $P_{n} \triangleleft \triangleright
+  Q_{n}$.
 \end{thm}
+
+\begin{proof}
+  Since $P(e^{X} > 0) = 1$, so $Q_{n} \triangleleft P_{n}$ from
+  \ref{item:2} and since $\E{e^{N(\mu, \sigma^{2})}} = 1 \iff \mu = -
+  \frac{\sigma^{2}}{2}$, this follows from \ref{item:3}.
+\end{proof}
+
+\begin{thm}
+  If $\{ f(\theta): \theta \in \Theta \}$ is locally asymptotically
+  normal and if $h_{n} \rightarrow h \in \R^{p}$, then the product
+  measures $P^{n}_{\theta + \frac{h_{n}}{\sqrt{n}} }$ and
+  $P^{n}_{\theta}$ corresponding to samples $X_{1}, \dots, X_{n}$ from
+  densities $f(\theta + \frac{h_{n}}{\sqrt{n}})$ and $f(\theta)$,
+  respectively, are mutually contiguous. In particular, if a statistic
+  $T(Y_{1}, \dots, Y_{n})$ converges to zero in probability under
+  $P^{n}_{\theta}$ then it also converges to zero in $P^{n}_{\theta +
+    \frac{h_{n}}{\sqrt{n}} }$-probability.
+\end{thm}
+
+\begin{proof}
+  This follows from the fact that the asymptotic expansion converges
+  to $N(-\frac{h^{T} i(\theta) h}{2}, h^{T} i(\theta) h)$ under
+  $P_{\theta}$.  Then we can apply \ref{item:4}.
+\end{proof}
+
+\subsection{Bayesian Inference}
+\label{sec:bayesian-inference}
 
 \begin{defn}
   \label{sec:beginenumerate-}
@@ -470,8 +755,8 @@ open subset $\Theta_{0}$ of $\Theta$.
 \end{thm}
 
 
-\subsection{High Dimensional Linear Models}
-\label{sec:high-dimens-line}
+\section{High Dimensional Linear Models}
+\label{sec:high-dimens-line-1}
 
 Here, we consider the model $Y = X \theta = \epsilon$, $\epsilon \sim
 N(0 \sigma^{2} I_{n})$, $\theta \in \Theta = \R^{p}, \sigma^{2} > 0$,
@@ -492,7 +777,14 @@ harmless) constant $C > 0$.
   \end{equation}
   with the solution $\hat \theta = (X^{T}X)^{-1} X^{T}Y \sim N(0,
   \sigma^{2}(X^{T} X)^{-1})$ where we rely on $X$ having full column
-  rank so $X^{T} X$ is invertible.
+  rank so $X^{T} X$ is invertible.  Assuming $\frac{X^{T} X}{n} =
+  I_{p}$, we have
+  \begin{align}
+    \label{eq:13}
+    \frac{1}{n} \E_{\theta} \| X(\hat \theta - \theta) \|_{2e^{2}} =
+    \E_{\theta} \| \hat \theta - \theta \|_{2}^{2} \
+    \frac{\sigma^{2}}{n} \tr(I_{p}) = \frac{\sigma^{2} p }{n}.
+  \end{align}
 \end{thm}
 
 \begin{defn}
@@ -540,14 +832,91 @@ harmless) constant $C > 0$.
   \end{align}
 \end{thm}
 
-\begin{lem}
+\begin{proof}
+  Note that by definition we have
+  \begin{align}
+    \frac{1}{n} \| Y - X \tilde{ \theta{ \|_2}}^2 + \lambda{ \|
+      \tilde{ \theta{ \|_1}}} \leq \frac{1}{n} \| Y - X \theta{^0}
+    \|_{2}^{2} + \lambda \| \theta^{0} \|_{1} \\
+    \frac{1}{n} \| X(\theta^{0} - \tilde \theta) \|_{2}^{2} + \lambda
+    \| \tilde \theta \|_{1} \leq \frac{2}{n} \epsilon^{T}X(\tilde
+    \theta - \theta^{0}) + \lambda \| \theta^{0} \|_{1}.
+  \end{align} by inserting the model equation.
+
+  Using the tail bound on the next theorem, we have on an event $A$,
+  \begin{align}
+    \label{eq:12}
+    |\frac{2 \epsilon^{T} X(\tilde \theta - \theta^{0})}{n}| \leq
+    \frac{\lambda}{2} \| \tilde \theta - \theta^{0} \|_{1}.
+  \end{align}
+  and thus combining with the above result obtain
+  \begin{align}
+    \label{eq:45}
+    \frac{2}{n} \| X(\theta^{0} - \tilde \theta) \|_{2}^{2} + 2
+    \lambda \| \tilde \theta \|_{1} \leq \setminus \| \tilde \theta -
+    \theta^{0} \|_{1} + 2 \lambda \| \theta^{0} \|_{1}.
+  \end{align}
+
+  Using $\|\tilde \theta \|_{1} = \| \tilde \theta_{S_{0}} \|_{1} + \|
+  \tilde \theta_{S_{0}^{c}} \|_{1} \geq \| \theta_{S_{0}}^{0} \|_{1} -
+  \| \tilde \theta_{S_{0}} - \theta^{0}_{S_{0}} \|_{1} + \| \tilde
+  \theta_{S_{0}}^{c} \|_{1}$ we obtain on this event, noting
+  $\theta_{S_{0}^{c}}^{0} = 0$ by definition of $S_{0}$
+  \begin{align}
+    \label{eq:61}
+    \frac{2}{n} \| X(\theta^{0} - \tilde \theta) \|_{2}^{2} + 2
+    \lambda \| \tilde \theta_{S_{0}^{c}} \|_{1} \leq 3 \lambda \|
+    \tilde \theta_{S_{0}} - \theta^{0}_{S_{0}} \|_{1} + \lambda \|
+    \tilde \theta_{S_{0}^{c}} \|_{1}
+  \end{align} and so
+  \begin{align}
+    \label{eq:63}
+    \frac{2}{n} \|X(\theta^{0} - \tilde \theta) \|_{2}^{2} + \lambda
+    \| \tilde \theta_{S_{0}^{c}} \|_{1} \leq 3 \lambda \| \tilde
+    \theta_{S_{0}} - \theta^{0}_{S_{0}} \|_{1}
+  \end{align} holds on the event.
+
+  Then we have
+  \begin{align}
+    \label{eq:64}
+    \frac{2}{n} \| X(\tilde \theta - \theta^{0})\|_{2}^{2} + \lambda
+    \| \tilde \theta - \theta^{0} \|_{1} &= \frac{2}{n} \| X(\tilde
+    \theta - \theta^{0}) \|_{2}^{2} + \lambda\ |\tilde \theta_{S_{0}}
+    - \theta^{0}_{S_{0}} \|_{1} + \lambda \| \tilde \theta_{S_{0}^{c}}
+    \|_{1} \\
+    &\leq 4 \lambda \| \tilde \theta_{S_{0}} - \theta^{0}_{S_{0}}
+    \|_{1} \\
+    &\leq 4 \lambda \sqrt{\frac{kr_{0}}{n}} \| X(\tilde \theta -
+    \theta^{0}) \|_{2} \\
+    &\leq \frac{1}{n} \| X(\tilde \theta - \theta^{0}) \|_{2}^{2} + 4
+    \lambda^{2} k r_{0}
+  \end{align} using the previous inequalities and $4ab \leq a^{2} + 4b^{2}$.
+\end{proof}
+
+\begin{thm}
   Let $\lambda_{0} = \frac{\lambda}{2}$.  The for all $t > 0$,
   \begin{equation}
     \label{eq:35}
     \Prob{\max_{j = 1, \dots, p} \frac{2}{n} |(\epsilon^{T} X)_{j}|
       \leq \lambda_{0}} \geq 1 - \exp(-\frac{t^{2}}{2}).
   \end{equation}
-\end{lem}
+\end{thm}
+
+\begin{proof}
+  Note that $\frac{\epsilon^{T} X}{\sqrt{n}}$ are $N(0, \hat \Sigma)$
+  distributed.  We then have the probability in questions exceeds one
+  minus
+  \begin{align}
+    \label{eq:65}
+    \Prob{\max_{j = 1, \dots, p} \frac{1}{\sqrt{n}} |(\epsilon^{T} X)
+      | > \overline \sigma \sqrt{t^{2} + 2 \log p}} &\leq
+    \sum_{j=1}^{p} \Prob{|Z| > \sqrt{t^{2} + 2 \log p}}\\
+    &\leq pe^{-\frac{t^{2}}{2} \exp^{-\log p}} = e^{-\frac{t^{2}}{2}}.
+  \end{align}
+\end{proof}
+
+\subsection{Coherence Conditions for Design Matrices}
+\label{sec:coher-cond-design}
 
 The critical condition is
 \begin{equation}
@@ -564,7 +933,7 @@ The critical condition is
   \begin{equation}
     \label{eq:37}
     \{ \theta \in \R^{p} : \| \theta_{S_{0}^{c}} \|_{1} \leq 3 \|
-    \theta_{S_{0}} - \theta_{S_{0}}^{0} \|_{1} \} 
+    \theta_{S_{0}} - \theta_{S_{0}}^{0} \|_{1} \}
   \end{equation} and some universal constant $r_{0}$,
   \begin{equation}
     \label{eq:38}
@@ -605,6 +974,29 @@ The critical condition is
     \Prob{|X| \geq t} \leq 2 \exp(-\frac{t^{2}}{4(n+t)}).
   \end{equation}
 \end{thm}
+
+\begin{proof}
+  For $| \lambda | < \frac{1}{2}$, we can compute the MGF of
+  $\E{e^{\lambda(g^{2} - 1)}} = \frac{e^{-\lambda}}{\sqrt{1 -
+      2\lambda}} = \exp(\frac{1}{2} -\log(1 - 2 \lambda) - 2
+  \lambda)$.
+
+  Then taking Taylor expansions, we have
+  \begin{align}
+    \label{eq:66}
+    \frac{1}{2} [- \log (1 - 2 \lambda) - 2 \lambda] = \lambda^{2} (1
+    + \frac{2}{3} 2 \lambda + \dots + \frac{2}{k+2}(2\lambda)^{k} +
+    \dots) \leq \frac{\lambda^{2}}{1 - 2 \lambda}
+  \end{align} and by IID, $\log \E{e^{\lambda X}} \leq \frac{n
+    \lambda^{2}}{1 - 2 \lambda} $.
+
+  Then by Markov's inequality, $\Prob{X > t} \leq \E{e^{\lambda X -
+      \lambda t}} \leq e\exp(\frac{n\lambda^{2}}{1-2\lambda} - \lambda
+  t) = \exp(-\frac{t^{2}}{4(n+t)})$, when taking $\lambda =
+  \frac{t}{2n + 2t}$.
+
+  Then taking $t = 4(\sqrt{nz} + z)$, we obtain the required result.
+\end{proof}
 
 \bibliographystyle{plainnat}
 \bibliography{../../common/bibliography}
