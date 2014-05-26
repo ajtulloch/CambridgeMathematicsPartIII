@@ -16,7 +16,6 @@
     \Prob{X_{n} \rightarrow X} = \mu(\omega \in \Omega | X_{n}(\omega)
     \rightarrow X(\omega)) = 1
   \end{equation}
-
   We say that $X_{n} \cas X$.
 \end{defn}
 
@@ -24,7 +23,7 @@
   $X_{n} \cp X$ (in probability) if for all $\epsilon > 0$,
   \begin{equation}
     \label{eq:5}
-    \Prob{|X_{n} - X} > \epsilon) \rightarrow 0
+    \Prob{|X_{n} - X| > \epsilon} \rightarrow 0
   \end{equation} as $n \rightarrow \infty$.
   For random vectors, we define analogously with taking the norm in
   $\mathbb{R}^{n}$.
@@ -93,7 +92,40 @@
   \end{equation}
 \end{thm}
 
-\section{Uniform Laws of Large NUmbers}
+\begin{thm}[Gaussian Tail Inequality]
+  If $X \sim N(0, 1)$, then
+  \begin{align}
+    \label{eq:68}
+    \Prob{|X| > \epsilon} \leq \frac{2e^{-\epsilon^{2}}}{\epsilon}.
+  \end{align}
+\end{thm}
+
+\begin{thm}[Chebyshev's Inequality]
+  Let $\mu = \E{X}$, $\sigma^{2} = \Var{X}$. Then
+  \begin{align}
+    \label{eq:69}
+    \Prob{|X - \mu | \geq t} \leq \frac{\sigma^{2}}{t^{2}}
+  \end{align}
+\end{thm}
+
+\begin{thm}[Markov's Inequality]
+  Let $X$ be a non-negative random variable and suppose $E{X}$ exists.
+  Then for any $t > 0$,
+  \begin{align}
+    \label{eq:67}
+    \Prob{X > t} \leq \frac{\E{X}}{t}
+  \end{align}
+\end{thm}
+
+\begin{thm}[Hoeffding's Inequality]
+  Suppose $E{X} = 0$, and $a \leq X \leq b$. Then
+  \begin{align}
+    \label{eq:70}
+    \E{e^{tX}} \leq e^{\frac{t^{2}(b-a)^{2}}{8}}.
+  \end{align}
+\end{thm}
+
+\section{Uniform Laws of Large Numbers}
 \label{sec:uniform-laws-large-1}
 
 \begin{thm}
@@ -129,8 +161,8 @@
   measure,
   \begin{align}
     \label{eq:42}
-    \frac{1}{n} \sum_{i=1}^{n} h(X_{i}) - \E{h(X)} \leq E_{n} u_{j} -  \E{h} \\
-    &= \E_{n} u_{j}  - E{u_{j}} + \E{u_{j}} - \E{h}
+    \frac{1}{n} \sum_{i=1}^{n} h(X_{i}) - \E{h(X)} & \frac{1}{n} \sum_{i=1}^{n} u_{j} -  \E{h} \\
+    &= \frac{1}{n} \sum_{i=1}^{n} u_{j} - \E{u_{j}} + \E{u_{j}} - \E{h}
   \end{align} which is bounded above by $\frac{\epsilon}{2} +
   \frac{\epsilon}{2} = \epsilon$, as required.
 \end{proof}
@@ -372,7 +404,7 @@
 
   \textbf{For the second component}, we show $\overline A_{n} \cp
   -\E{\frac{\partial^{2} \log f(\theta_{0}, Y)}{\partial
-      \theta \partial \theta^{T}}}$, which we do componentwise. We
+      \theta \partial \theta^{T}}}$, which we do component-wise. We
   have $(\overline A_{n})_{kj} = \frac{1}{n} \sum_{i=1}^{n}
   h_{kj}(\overline \theta_{nj}, Y_{i})$, where $h_{jk}$ is the second
   mixed partial derivative of $-\log f(\theta, Y_{i})$, and we seek to
@@ -404,7 +436,7 @@
   \end{align} from Slutsky's lemma.
 
   \textbf{Finally}, we show $\Sigma(\theta_{0}) = i(\theta_{0})$.
-  This follows from interchanging integration and differentation to show
+  This follows from interchanging integration and differentiation to show
   \begin{equation}
     \label{eq:54}
     \frac{\partial}{\partial \theta^{T}} \int \frac{\partial f(\theta,
@@ -526,8 +558,8 @@
   A_{n}$ converges to $i(\theta_{0})$ in probability.  Thus, by
   Slutsky's lemma and consistency, $\sqrt{n}(\hat \theta_{n} -
   \theta_{0})^{T}(\overline A_{n} - i(\theta_{0}))$ converges to zero
-  in distrubiton and probability (as the limit is constant), so we can
-  repeate the argument and obtain
+  in distribution and probability (as the limit is constant), so we can
+  repeat the argument and obtain
   \begin{align}
     \label{eq:59}
     \sqrt{n} (\hat \theta_{n} - \theta_{0})^{T} (\overline A_{n} -
@@ -540,64 +572,64 @@
     \sqrt{n}(\hat \theta_{n} - \theta_{0})^{T} i(\theta_{0})
     \sqrt{n}(\hat \theta_{n} - \theta_{0}).
   \end{equation}  By continuity of $x \mapsto x^{T} i(\theta_{0} x)$,
-  we obtain the limiting distribution is $X^{T} i(\theta_{0} X)$, iwth
+  we obtain the limiting distribution is $X^{T} i(\theta_{0} X)$, with
   $X \sim N(0, i^{-1})(\theta_{0})$, which is the squared Euclidean
-  norm of the MVN  $N(0, I_{p})$, which has a $\chi^{2}_{p}$ idstribution.
+  norm of the MVN  $N(0, I_{p})$, which has a $\chi^{2}_{p}$ distribution.
 \end{proof}
 
-\begin{thm}
-  Let $\{ f(\theta), \theta \in \Theta \} $ in which uniformly
-  consistent estimators $T_{n} = T(Y_{1}, \dots, Y_{n})$ exist.  Then
-  there exist tests $\phi_{n} = \phi(Y_{1}, \dots, Y_{n}, \theta_{0})$
-  for $H_{0}: \theta = \theta_{0}$ against $H_{1}: \theta \in \Theta
-  \backslash \{ \theta_{0} \} $ such that for every $\theta$
-  satisfying $\| \theta - \theta_{0} \| > \delta > 0$, for some
-  universal constant $C$,
-  \begin{equation}
-    \label{eq:26}
-    \max(\E_{\theta_{0}} \phi_{n}, \E_{\theta}(1 - \phi_{n})) \leq e^{-Cn}.
-  \end{equation}
-\end{thm}
+% \begin{thm}
+%   Let $\{ f(\theta), \theta \in \Theta \} $ in which uniformly
+%   consistent estimators $T_{n} = T(Y_{1}, \dots, Y_{n})$ exist.  Then
+%   there exist tests $\phi_{n} = \phi(Y_{1}, \dots, Y_{n}, \theta_{0})$
+%   for $H_{0}: \theta = \theta_{0}$ against $H_{1}: \theta \in \Theta
+%   \backslash \{ \theta_{0} \} $ such that for every $\theta$
+%   satisfying $\| \theta - \theta_{0} \| > \delta > 0$, for some
+%   universal constant $C$,
+%   \begin{equation}
+%     \label{eq:26}
+%     \max(\E_{\theta_{0}} \phi_{n}, \E_{\theta}(1 - \phi_{n})) \leq e^{-Cn}.
+%   \end{equation}
+% \end{thm}
 
-\begin{proof}
-  Consider $\psi_{n} = 1_{\{ \| T_{n} - \theta_{0} \| \geq
-    \frac{\delta}{2} \} }$ which converges to zero under
-  $P_{\theta_{0}}$.  By the triangle inequality, we have
-  \begin{align}
-    \label{eq:62}
-    \sup_{\theta : \| \theta - \theta_{0} \| \geq \delta}
-    \E_{\theta}(1 - \psi_{n}) \leq \sup_{\theta: \| \theta -
-      \theta_{0} \| \geq \delta} P^{n}_{\theta}(\| T_{n} - \theta \| >
-    \frac{\delta}{2}) \rightarrow 0
-  \end{align} as $n \rightarrow \infty$.
+% \begin{proof}
+%   Consider $\psi_{n} = 1_{\{ \| T_{n} - \theta_{0} \| \geq
+%     \frac{\delta}{2} \} }$ which converges to zero under
+%   $P_{\theta_{0}}$.  By the triangle inequality, we have
+%   \begin{align}
+%     \label{eq:62}
+%     \sup_{\theta : \| \theta - \theta_{0} \| \geq \delta}
+%     \E_{\theta}(1 - \psi_{n}) \leq \sup_{\theta: \| \theta -
+%       \theta_{0} \| \geq \delta} P^{n}_{\theta}(\| T_{n} - \theta \| >
+%     \frac{\delta}{2}) \rightarrow 0
+%   \end{align} as $n \rightarrow \infty$.
 
-  Then set $k \in \N$ so $\E_{\theta_{0}} \psi_{k}$ and $\E_{\theta}(1
-  - \psi_{k})$ for all $\| \theta - \theta_{0} \| > \delta$.  Then
-  group each sample into groups of size $k$, with $Y_{nj}$ the
-  statistic $\psi_{n}$ for the $j-th$ group, and consider the sample
-  average $\overline Y_{nm} = \frac{1}{m} \sum_{j=1}^{m} Y_{nj}$.
+%   Then set $k \in \N$ so $\E_{\theta_{0}} \psi_{k}$ and $\E_{\theta}(1
+%   - \psi_{k})$ for all $\| \theta - \theta_{0} \| > \delta$.  Then
+%   group each sample into groups of size $k$, with $Y_{nj}$ the
+%   statistic $\psi_{n}$ for the $j-th$ group, and consider the sample
+%   average $\overline Y_{nm} = \frac{1}{m} \sum_{j=1}^{m} Y_{nj}$.
 
-  As $\E_{\theta} Y_{nj} \geq \frac{3}{4}$, we can use the test
-  $\phi_{n} = 1_{\overline Y_{nm} < \frac{1}{2}} \leq \exp(-\frac{m}{8})$ by Hoeffding's inequality.
-\end{proof}
+%   As $\E_{\theta} Y_{nj} \geq \frac{3}{4}$, we can use the test
+%   $\phi_{n} = 1_{\overline Y_{nm} < \frac{1}{2}} \leq \exp(-\frac{m}{8})$ by Hoeffding's inequality.
+% \end{proof}
 
-\begin{thm}
-  Let $\{ f(\theta) : \theta \in \Theta \} $ be a parametric model
-  that satisfies the conditions of the theorem on the asymptotic
-  behavior of the likelihood test statistic. Let $M_{n} \rightarrow
-  \infty$ as $n \rightarrow \infty$.  Then there exist test $\phi_{n}$
-  for $H_{0}: \theta = \theta_{0}$ against $H_{1}: \theta \in \Theta
-  \backslash \{ \theta_{0} \} $ such that $\E_{\theta_{0}} \phi_{n}
-  \rightarrow 0$ as $n \rightarrow \infty$ and, for every $\theta$
-  satisfying $\frac{M_{n}}{\sqrt{n}} < \| \theta - \theta_{0} \| \leq
-  \delta$ for some $\delta < 1$, we have for some universal constant
-  $D$,
-  \begin{equation}
-    \label{eq:27}
-    \E_{\theta}(1 - \phi_{n}) \leq \frac{1}{D} e^{-Dn \| \theta -
-      \theta_{0} \|^{2}} \rightarrow 0
-  \end{equation} as $n \rightarrow \infty$.
-\end{thm}
+% \begin{thm}
+%   Let $\{ f(\theta) : \theta \in \Theta \} $ be a parametric model
+%   that satisfies the conditions of the theorem on the asymptotic
+%   behavior of the likelihood test statistic. Let $M_{n} \rightarrow
+%   \infty$ as $n \rightarrow \infty$.  Then there exist test $\phi_{n}$
+%   for $H_{0}: \theta = \theta_{0}$ against $H_{1}: \theta \in \Theta
+%   \backslash \{ \theta_{0} \} $ such that $\E_{\theta_{0}} \phi_{n}
+%   \rightarrow 0$ as $n \rightarrow \infty$ and, for every $\theta$
+%   satisfying $\frac{M_{n}}{\sqrt{n}} < \| \theta - \theta_{0} \| \leq
+%   \delta$ for some $\delta < 1$, we have for some universal constant
+%   $D$,
+%   \begin{equation}
+%     \label{eq:27}
+%     \E_{\theta}(1 - \phi_{n}) \leq \frac{1}{D} e^{-Dn \| \theta -
+%       \theta_{0} \|^{2}} \rightarrow 0
+%   \end{equation} as $n \rightarrow \infty$.
+% \end{thm}
 \subsection{Local Asymptotic Normality and Contiguity}
 \label{sec:loccal-asympt-norm}
 
@@ -759,7 +791,7 @@ open subset $\Theta_{0}$ of $\Theta$.
 \label{sec:high-dimens-line-1}
 
 Here, we consider the model $Y = X \theta = \epsilon$, $\epsilon \sim
-N(0 \sigma^{2} I_{n})$, $\theta \in \Theta = \R^{p}, \sigma^{2} > 0$,
+N(0, \sigma^{2} I_{n})$, $\theta \in \Theta = \R^{p}, \sigma^{2} > 0$,
 where $X$ is an $n \times p$ design matrix, and $\epsilon$ is a
 standard Gaussian noise vector in $\R^{n}$.  Throughout, we denote the
 resulting $p \times p$ \textbf{Gram matrix} as $\hat \Sigma =
@@ -908,9 +940,9 @@ harmless) constant $C > 0$.
   minus
   \begin{align}
     \label{eq:65}
-    \Prob{\max_{j = 1, \dots, p} \frac{1}{\sqrt{n}} |(\epsilon^{T} X)
-      | > \overline \sigma \sqrt{t^{2} + 2 \log p}} &\leq
-    \sum_{j=1}^{p} \Prob{|Z| > \sqrt{t^{2} + 2 \log p}}\\
+    &\Prob{\max_{j = 1, \dots, p} \frac{1}{\sqrt{n}} |(\epsilon^{T} X)
+      | > \overline \sigma \sqrt{t^{2} + 2 \log p}} \\
+    &\leq \sum_{j=1}^{p} \Prob{|Z| > \sqrt{t^{2} + 2 \log p}} \\
     &\leq pe^{-\frac{t^{2}}{2} \exp^{-\log p}} = e^{-\frac{t^{2}}{2}}.
   \end{align}
 \end{proof}
@@ -952,6 +984,38 @@ The critical condition is
   \theta \in B_{0}(k)} \geq 1 - 2 \exp(-Ck \log p)$.
 \end{thm}
 
+\begin{proof}
+  For $\theta = 0$, the result is trivial.  Thus, it suffices to bound
+  \begin{align}
+    \label{eq:71}
+    &\Prob{\theta^{T} \hat \Sigma \theta \geq \frac{1}{2} \| \theta
+      \|_{2}^{2} \forall \theta \in B_{0}(k) \backslash \{ 0 \}} \\
+    &= \Prob{\frac{\theta^{T} \hat \Sigma \theta}{\| \theta
+        \|_{2}^{2}} - 1 \geq -\frac{1}{2} \forall \theta \in B_{0}(k)
+      \backslash \{ 0 \}  } \\
+    &\geq \Prob{\sup_{\theta \in B_{0}(k), \| \theta \|_{2}^{2} \neq
+        0} \left| \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T}
+          \theta} - 1 \right| \leq \frac{1}{2}}
+  \end{align} from below by $1 - 2 \exp(-C k \log p)$.  We can then do
+  this over each $k$-dimensional subspace $\R_{S}^{p}$ for each $S
+  \subset \{ 1, \dots, p \} $ with $|S| = k$, then use
+  \begin{align}
+    \label{eq:72}
+    &\Prob{\sup_{\theta \in B_{0}(k), \| \theta \|_{2}^{2} \neq
+        0} \left| \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T}
+          \theta} - 1 \right| \leq \frac{1}{2}} \\
+    &\leq \sum_{S
+      \subseteq \{ 1, \dots, p \}}^{} \Prob{\sup_{\theta \in
+        \R^{p}_{S}, \| \theta \|_{2}^{2} \neq 0} \left|
+        \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} - 1
+      \right| \geq \frac{1}{2} }.
+  \end{align}
+  Then we just need a bound of $2e^{-(C+1) k \log p)} = 2e^{-Ck \log
+    p} p^{-k}$  and sum over the ${p \choose k}  \leq p^{k}$ subsets.
+
+  Using the below result and taking $t = (C+1) k \log p$ is then sufficient.
+\end{proof}
+
 \begin{thm}
   Under the conditions of the previous theorem, we have for some
   universal constant $c_{0} > 0$, every $S \subset \{ 1, \dots, p \}$
@@ -964,6 +1028,69 @@ The critical condition is
     } \leq 2 e^{-t}.
   \end{equation}
 \end{thm}
+
+\begin{proof}[Nontrivial!]
+  Note
+  \begin{align}
+    \label{eq:73}
+    \sup_{\theta \in \R_{S}^{p}, \| \theta \|_{2}^{2} \neq 0} \left|
+      \frac{\theta^{T} \hat \Sigma \theta}{\theta^{T} \theta} - 1
+    \right| = \sup_{\theta \in \R^{p}_{S}, \| \theta \|_{2}^{2} \leq
+      1}  | \theta^{T} (\hat \Sigma - 1) \theta|
+  \end{align}
+
+  By compactness, we can cover the unit ball $B(S) = \{ \theta \in
+  \R^{p}_{S} : \| \theta \|_{2} \leq 1 \}$ by a net of points
+  $\theta^{l}$  such that for every $\theta \in B(S)$ there exists $l$
+  with $\| \theta - \theta^{l}\|_{2} \leq \delta$.  Then with $\Phi =
+  \hat \Sigma - I$, we have
+  \begin{align}
+    \label{eq:74}
+    \theta^{T}  \Phi \theta = (\theta - \theta^{l}) \Phi (\theta -
+    \theta^{l}) + (\lambda^{l})^{T} \Phi \theta^{l} + 2(\theta -
+    \theta^{l})^{T} \Phi \theta^{l}.
+  \end{align}
+  The second term is bounded by $\delta^{2} \sup_{v \in B(S)}  |v^{T}
+  \Phi v|$. The third term is bounded by $2 \delta \sup_{v \in B(S)} |
+  v^{T} \Phi v |$.  Thus,
+  \begin{align}
+    \label{eq:75}
+    \sup_{\theta \in B(S)} | \theta^{T} \Phi \theta | \leq \max_{l \in
+    1, \dots, n(\theta)} | \theta^{l} \Phi \theta^{l}| + (\delta^{2} +
+  2 \delta)\sup_{v \in B(S)} |v^{T} \Phi v |
+  \end{align} which gives the bound
+  \begin{align}
+    \label{eq:76}
+    \sup_{\theta \in B(S)} | \theta^{T} \Phi \theta | \leq \frac{9}{2}
+    \max_{l = 1, \dots, N(\delta)} |\theta^{l} \Phi \theta^{l}|
+  \end{align} at $\delta = \frac{1}{3}$.
+
+  At $\theta^{l} \in B(S)$ fixed, we have
+  \begin{align}
+    \label{eq:77}
+    (\theta^{l})^{T} \Phi \theta^{l} = \frac{1}{n} \sum_{i=1}^{n} ((X
+    \theta^{l})_{i}^{2} - \E{(X \theta^{l})_{i}^{2}})
+  \end{align} and the random variables $(X \theta^{l})_{i}$ are IID
+  $N(0, \| \theta^{l}\|_{2}^{2})$ distributed with variance $\|
+  \theta^{l} \|_{2}^{2} \leq 1$.  Thus for $g_{i} \iid N(0, 1)$, we
+  have
+  \begin{align}
+    \label{eq:78}
+    &\Prob{\frac{9}{2} \max_{l = 1, \dots, N(\frac{1}{3})} |
+      (\theta^{l})^{T} \Phi \theta^{l} | > 18 \left(\sqrt{\frac{t +
+            c_{0} k}{n}} + \frac{t + c_{0} k}{n} \right)} \\
+    &\leq \sum_{l=1}^{N(\frac{1}{3})} \Prob{|(\theta^{l})^{T} \Phi
+      \theta^{l}| > 4 \| \theta^{l} \|_{2}^{2} \left( \sqrt{\frac{t +
+            c_{0} k}{n}} + \frac{t + c_{0} k}{n} \right)} \\
+    &= \sum_{l=1}^{N(\frac{1}{3})}  \Prob{\left|\sum_{i=1}^{n} (g_{i}^{2} -
+        1) \right| > 4 (\sqrt{n(t+ c_{0}k)} + t + c_{0}k)} \\
+    &\leq 2N(\frac{1}{3} )e^{-t} e^{-c_{0} k} \\
+    &\leq 2e^{-t}
+  \end{align} where we apply the next inequality with $z = t +
+  c_{0}k$, and rely on the covering numbers of hte unit ball in
+  $k$-dimensional Euclidean space satisfying $N(\delta) \leq
+  \left(\frac{A}{\delta}\right)^{k}$ for some universal $A > 0$.
+\end{proof}
 
 \begin{thm}
   Let $g_{i}, $i = 1, \dots, n be \iid $N(0, 1)$, and set $X =
@@ -991,7 +1118,7 @@ The critical condition is
     \lambda^{2}}{1 - 2 \lambda} $.
 
   Then by Markov's inequality, $\Prob{X > t} \leq \E{e^{\lambda X -
-      \lambda t}} \leq e\exp(\frac{n\lambda^{2}}{1-2\lambda} - \lambda
+      \lambda t}} \leq \exp(\frac{n\lambda^{2}}{1-2\lambda} - \lambda
   t) = \exp(-\frac{t^{2}}{4(n+t)})$, when taking $\lambda =
   \frac{t}{2n + 2t}$.
 
