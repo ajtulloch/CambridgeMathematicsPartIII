@@ -1,5 +1,5 @@
 
-\chapter{Nearest Neighbour Classification}
+\chapter{Nearest Neighbor Classification}
 \label{cha:near-neighb-class}
 
 We have $(X_{1}, Y_{1}), \dots, (X_{n}, Y_{n})$ where $Y_{i} \in \{ 0,
@@ -14,7 +14,7 @@ The minimizer $g^{\star}$ is called a Bayes classifier, and $L(g^{d})$
 is called the Bayes risk.
 
 \begin{lem}
-  For a classifier $\tilde g$ whcih has the form
+  For a classifier $\tilde g$ which has the form
   \begin{equation}
     \label{eq:90}
     \tilde g(x) =
@@ -30,11 +30,11 @@ is called the Bayes risk.
 \end{lem}
 
 When we have data $\{ (X_{1}, Y_{1}), \dots, (X_{n}, Y_{n}) \}$, we
-want to construct a seqeunce of classifiers $\{ g_{n} \}$ such that
+want to construct a sequence of classifiers $\{ g_{n} \}$ such that
 the risk using $g_{n}$ is close to the Bayes risk with high
 probability.
 
-\begin{defn}[$k$-nearest neighbour classification]
+\begin{defn}[$k$-nearest neighbor classification]
   \label{defn:nearest_neighbour_classification:1}
   A \knn classifier $g_{n}$ is defined by
   \begin{align}
@@ -57,12 +57,12 @@ probability.
   \begin{align}
     \label{eq:95}
     W_{ni}(X) = \frac{1}{k} 
-  \end{align} if $X_{i}$ is a $k$-nearest neighbour of $X$, and zero otherwise.
+  \end{align} if $X_{i}$ is a $k$-nearest neighbor of $X$, and zero otherwise.
 \end{defn}
 
 \begin{defn}
   \label{defn:nearest_neighbour_classification:2}
-  For a certain distirbution of $(X, Y)$, we say $g_{n}$ is consistent
+  For a certain distribution of $(X, Y)$, we say $g_{n}$ is consistent
   if $\Prob{g_{n}(X) \neq Y} - L^{\star} \rightarrow 0$ .
 
   We say $g_{n}$ is strongly consistent if
@@ -85,60 +85,102 @@ probability.
     \begin{equation}
       \label{eq:98}
       \Prob{g_{n}(X) \neq Y | D_{n}} - L^{\star}\leq 2
-      \sqrt{\int_{\R^{d}} (\nu_{n}(x) - \nu(x))^{2} d \mu(x)}
+      \sqrt{\int_{\R^{d}} (\eta_{n}(x) - \eta(x))^{2} d \mu(x)}
     \end{equation}
   \item If $k \rightarrow \infty$, $\frac{k}{n} \rightarrow 0$, then
     \begin{equation}
       \label{eq:99}
       \| X_{(k)}(X) - X \| \cas 0
     \end{equation} (examples class)
-  \item Stones Lemma -
+  \item Stones Lemma - for any integrable function $f$, any $n$, 
     \begin{equation}
       \label{eq:100}
-      \frac{1}{k} \sum_{i=1}^{n} \E{|f(X_{i}(X))|} \leq \E{|f(X)|}
-    \end{equation}
+      \frac{1}{k} \sum_{i=1}^{k} \E{|f(X_{i}(X))|} \leq  \gamma_{d} \E{|f(X)|}
+    \end{equation} where $\gamma_{d}$ is a constant only depending on $d$.
   \end{enumerate}
 
   We can now complete the proof.  By the first result, it suffices to
   prove
   \begin{equation}
     \label{eq:101}
-    \E{(\nu_{n}(X) - \nu(X))^{2}} \rightarrow 0
-  \end{equation} with $\nu_{n}(X) = \sum_{i=1}^{n} W_{ni}(X) Y_{i}$.
+    \E{(\eta_{n}(X) - \eta(X))^{2}} \rightarrow 0
+  \end{equation} with $\eta_{n}(X) = \sum_{i=1}^{n} W_{ni}(X) Y_{i}$.
 
-  Consider $\hat \nu(X) = \E{\nu_{n}(X) | X_{1}, \dots, X_{n}} =
-  \sum_{i=1}^{n} W_{ni}(X) \nu(X_{i}) = \sum_{i=1}^{n} W_{ni}(X)
-  \E{Y_{i} | X_{1}, \dots, X_{n}}$ and the last summand is
-  $\nu(X_{i})$.
-
-  So we have the bias variance decomposition
+  Recall that $\eta_{n}(X) = \sum_{i=1}^{n} W_{ni}(X) Y_{i}$ and
+  $W_{ni}(X)$ is $\frac{1}{k}$ if and only if $X_{i}$ is among the
+  $k$-nearest neighbors of $X$. In order to use the bias-variance
+  decomposition, let $\E{\eta_{n}(X) | X, X_{1}, \dots, X_{n}} =
+  \sum_{i=1}^{n} W_{ni}(X) \eta(X_{i}) := \tilde \eta(X_{i})$.  Then
   \begin{align}
-    \label{eq:102}
-    \E{(\nu_{n}(X) - \nu(X))^{2}} \leq 2 \E{(\nu_{n}(X) - \tilde
-      \nu(X))^{2}} + 2 \E{(\tilde \nu(X) - \nu(X))^{2}} 
+    \label{eq:154}
+    \E{(\eta_{n}(X) - \eta(X))^{2}} \leq 2 \E{(\eta_{n}(X) - \tilde
+      \eta(X))^{2}} + 2 \E{(\tilde \eta(X) - \eta(X))^{2}}
+  \end{align} or 2 time variance + 2 times Bias squared.
+
+  As $\sum_{i=1}^{n} W_{ni}(X) = 1$, and Cauchy-Swartz, we have
+  \begin{align}
+    \label{eq:159}
+    \textsc{bias}^{2} &= \E{(\sum_{i=1}^{n} W_{ni}(X)(\eta(X_{i}) -
+      \eta(X)))^{2}} \\
+    \label{eq:160}
+    &\leq \E{(\sum_{i=1}^{n} W_{ni}(X)(\eta(X_{i}) - \eta(X))^{2})}
   \end{align}
 
-  For the second term, we have
-  \begin{align}
-    \label{eq:103}
-    \E{(\tilde \nu(X) - \nu(X))^{2}} = \E{(\sum_{i=1}^{n} W_{ni}(X)
-      \nu(X_{i}) - \sum_{i=1}^{n} W_{ni}(X) \nu(X))^{2}} \\
-    &= \E{(\sum_{i=1}^{n} W_{ni}(X)(\nu(X_{i} - \nu(X))))^{2}} \\
-    &\leq \E{\sum_{i=1}^{n} W_{ni}(X) (\nu(X_{i}) - \nu(X))^{2}}
-  \end{align} by Cauchy swatch on the inner sum ($W_{ni}$ are a
-  probability). For $0 \leq \nu^{\star} \leq 1$, continuous with
-  bounded supporty, implies uniformly continuous. Thus $\nu^{\star}$
-  can be chosen such for any $\epsilon > 0$ that $\E{\nu^{\star}(X) -
-    \nu(X))^{2}} \leq \epsilon$,  by continuous functions being densie
-  in $L_{2}(\mu)$.
+  Now, consider a continous function $0 \leq \eta^{\star} \leq 1$
+  which approximates $\eta$ such that (there exists $\eta^{\star}$
+  since a constinuous function is dense in $L^{2}(\mu)$),
+  $\E{(\eta^{\star}(X) - \eta(X))^{2}} \leq \epsilon$.
 
-  Then
-  \begin{equation}
-    \label{eq:104}
-    ...
-  \end{equation}
-  \todo{Fill in rest of proof}
-  
+  Also, we require $\eta^{\star}$ statisfies (using uniform continuity
+  of $\eta^{\star}$) that, for a given $\epsilon > 0$, there esxists
+  $\delta > 0$ such that $(\eta^{\star}(x) - \eta^{\star}(y))^{2} leq
+  \epsilon$ when $\| x - y \| \leq \delta$.  Then, by using the
+  previous result, uniform continuity of $\eta^{\star}$, and the
+  approximating property of $\eta^{\star}$ for each three splitted
+  terms,
+  \begin{align}
+    \label{eq:162}
+    \textsc{bias}^{2} &\leq \E{\sum_{i=1}^{n} W_{ni}(X)(\eta(X_{i}) -
+      \eta(X))^{2}} \\
+    \label{eq:163}
+    &\leq 3 \E{\sum_{i=1}^{n} W_{ni}((\eta(X_{i}) - \eta^{\star}(X_{i}))^{2}
+    + (\eta^{\star}(X_{i}) - \eta^{\star}(X))^{2} + (\eta^{\star}(X) -
+    \eta(X))^{2})} \\
+  \label{eq:164}
+  &\leq 3 ((\gamma_{d} \E{(\eta(X) - \eta^{\star}(X))^{2}} +
+  \sum_{i=1}^{n} W_{ni}(X) (\epsilon + \I{\| X_{i} - X \| > \delta}))
+  + \epsilon) \\
+  \label{eq:165}
+  &\leq 3(\gamma_{d} \epsilon + 2 \epsilon + \sum_{i=1}^{n} W_{ni}(X)
+  \I{\| X_{i} - X \| > \delta}) \\
+  \label{eq:166}
+  &\rightarrow 0.
+  \end{align}
+
+  For the variance term, we use the fact that for $i \neq j$,
+  $\E{(Y_{i} - \eta(X_{i}))(Y_{j} - \eta(X_{j})) | X, X_{1}, \dots,
+    X_{n}} = 0$. Then
+  \begin{align}
+    \label{eq:167}
+    \textsc{Variance} &= \E{(\eta_{n}(X) - \tilde \eta(X))^{2}} \\
+    \label{eq:168}
+    &= \E{(\sum_{i=1}^{n} W_{ni}(X)(Y_{i} - \eta(X_{i})))^{2}} \\
+    \label{eq:169}
+    &= \E{\E{\sum_{i=1}^{n} \sum_{j=1}^{n} (W_{ni}(X) W_{nj}(X)(Y_{i}
+        - \eta(X_{i})(Y_{j} - \eta(X_{j})))) | X, X_{1}, \dots,
+        X_{n}}} \\
+    \label{eq:170}
+    &= \E{\sum_{i=1}^{n} W_{ni}(X)^{2} (Y_{i} - \eta(X_{i}))^{2}} \\
+    \label{eq:171}
+    &\leq \E{\sum_{i=1}^{n} W_{ni}(X)^{2}} \\
+    \label{eq:172}
+    &\leq \E{\max_{i} W_{ni}(\sum_{i=1}^{n} W_{ni}(X))} \\
+    \label{eq:173}
+    &= \E{\max_{i} W_{ni}} \\
+    \label{eq:174}
+    &= \frac{1}{k} \rightarrow 0.
+  \end{align} where the second last line follows as $|Y_{i} -
+  \eta(X_{i}) | \leq 1$.
 \end{proof} 
 
 %%% Local Variables: 

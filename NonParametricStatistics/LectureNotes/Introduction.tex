@@ -1,3 +1,4 @@
+
 \chapter{Introduction}
 \label{cha:introduction}
 
@@ -27,6 +28,28 @@ References
 
 \section{Basic Concepts}
 \label{sec:basic-concepts}
+
+\begin{thm}[The Delta Method]
+  Let $Y_{n}$ be a sequence of random vectors in $\R^{d}$ such that
+  for some $\mu \in \R^{d}$ and a random vector $Z$, we have
+  $n^{\frac{1}{2}}(Y_{n} - \mu) \cd Z$.  If $g: \R^{d} \rightarrow \R$
+  is differentiable at $\mu$, then $n^{\frac{1}{2}}(g(Y_{n}) - g(\mu))
+  \cd \grad g(\mu)^{T} Z$.
+\end{thm}
+\begin{proof}
+  For $d = 1$.  Let $g'(\mu) = \grad g(\mu)$, and let $h: \R
+  \rightarrow \R$, by
+  \begin{equation}
+    \label{eq:134}
+    h(y) =
+    \begin{cases}
+      \frac{g(y) - g(\mu)}{y - \mu}  & y \neq \mu \\
+      g'(\mu) & y = \mu
+    \end{cases}
+  \end{equation}  Then by the continuous mapping theorem and Sltusky's
+  theorem, $n^{\frac{1}{2}}(g(Y_{n}) - g(\mu)) = h(Y_{n})
+  n^{\frac{1}{2}}(Y_{n} - \mu) \cd g'(\mu) Z$.
+\end{proof}
 
 \subsection{Parametric vs Nonparametric models}
 \label{sec:param-vs-nonp}
@@ -139,11 +162,9 @@ Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
       \hat F_{n}(x) - F(x) \right| \leq \frac{1}{m} \}} \\
   &= \lim_{m \rightarrow \infty} \Prob{\Omega_{\frac{1}{2m}}} = 1
 \end{align}
-
 \end{proof}
 
-
-\begin{thm}
+\begin{thm}[Dvortesky-Kiefer-Wolfowizt]
   \label{defn:Introduction:1}
   Let $X_{1}, \dots, X_{n} \sim F$ \iid.  Then for every $\epsilon >
   0$,
@@ -213,10 +234,139 @@ strengthened by studying $\{ n^{\frac{1}{2}}(\hat F_{n}(x) - F(x)), x
   \end{align}
 \end{proposition}
 
-\todo{Fill in lecture from Friday on KDE (variance and bias)}
+\begin{defn}
+  \label{sec:let-x_1-dots}
+  For $p \in (0, 1]$, the quartile function is defined by $F^{-1}(p) =
+  \inf \{x \in \R: F(x) \geq p \}$ and is left-continuous.
+
+  The sample quartile function is $\hat F_{n}^{-1}(p) = \inf \{ x \in
+  \R: \hat F_{n}(x) \geq p \} $. 
+\end{defn}
+
+\begin{thm}
+  Let $U_{1}, U_{2}, \dots, U_{n} \sim U(0, 1)$ \iid and $p \in (0,
+  1)$.  Then
+  \begin{equation}
+    \label{eq:135}
+    \sqrt{n}(U_{\lceil np \rceil} - p) \cd N(0, p(1-p)).
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Let $Y_{1}, \dots, Y_{n}$ \iid \textsc{Exp}(1), let $V_{n} = Y_{1} + \dots +
+  Y_{\lceil np \rceil}$ and $W_{n} = Y_{\lceil np \rceil + 1}, \dots,
+  Y_{n+1}$.  Note that $V_{n}, W_{n}$ are independent and
+  \begin{equation}
+    \label{eq:136}
+    \frac{V_{n}}{V_{n} + W_{n}} =^{d} U_{\upperbound{np}}
+  \end{equation} by previous proposition.
+  Then
+  \begin{align}
+    \label{eq:137}
+    \sqrt{n}(\frac{V_{n}}{n} - p) =
+    \frac{\sqrt{\upperbound{np}}}{\sqrt{n}} (\frac{V_{n} -
+      \upperbound{np}}{\sqrt{\upperbound{np}}} ) +
+    \frac{\upperbound{np} - np}{\sqrt{n}} \cd N(0, p)
+  \end{align} by the CLT and Slutsky's theorem.
+
+  Similarly, $\sqrt{n}(\frac{W_{n}}{n} - q) \cd N(0, q)$, where $q = 1
+  - p$, then by the delta method, with $g(x, y) = \frac{x}{x+y}$,
+  \begin{align}
+    \label{eq:138}
+    \sqrt{n}(U_{\upperbound{np}} - p) &=^{d}
+    \sqrt{n}(g(\frac{V_{n}}{n}, \frac{W_{n}}{n}) - g(p, q)) \\
+    &\cd N(0, \grad g(p, q)^{T}
+    \begin{pmatrix}
+      p & 0 \\
+      0 & q
+    \end{pmatrix} \grad g(p, q)) \\
+    \label{eq:140}
+    &=^{d} n(0, p(1-p))
+  \end{align}
+\end{proof}
+
+\begin{thm}
+  Let $p \in (0, 1)$ and let $X_{1}, \dots, X_{n} \iid F$ where $F$ is
+  differentiable at $F^{-1}(p)$ with positive derivative
+  $f(F^{-1}(p))$.  Then
+  \begin{align}
+    \label{eq:141}
+    \sqrt{n}(X_{\upperbound{np}} - F^{-1}(p)) \cd N(0, \frac{p(1-p)}{f(F^{-1}(p))^{2}} )
+  \end{align}
+\end{thm}
+
+\begin{proof}
+  Let $U_{1}, \dots, U_{n} \iid U(0, 1)$ so that
+  $F^{-1}(U_{\upperbound{np}}) =^{d} X_{\upperbound{np}}$.  Then by
+  the previous theorem and the delta method with $g = F^{-1}$,
+  \begin{align}
+    \label{eq:142}
+    \sqrt{n} (X_{\upperbound{np}} - F^{-1}(p)) &=^{d}
+    \sqrt{n}(g(U_{\upperbound{np}}) - g(p)) \\
+    \label{eq:143}
+    \cd N(0, \frac{p(1-p)}{f(F^{-1}(p))^{2}} )
+  \end{align}
+\end{proof}
 
 \section{Density Estimators}
 \label{sec:density-estimators}
+
+\begin{defn}[Histogram Estimator]
+  \label{sec:density-estimators-1}
+  \begin{align}
+    \label{eq:144}
+    \tilde f_{b}(x) = \frac{1}{nb} \sum_{i=1}^{n} \I{X_{i} \in [x_{k},
+      x_{k+1})}
+  \end{align}
+\end{defn}
+
+\begin{defn}[Kernel Density Estimator]
+  \label{sec:density-estimators-2}
+  \begin{align}
+    \label{eq:145}
+    \hat f_{h}(x) = \frac{1}{nh} \sum_{i=1}^{n} K(\frac{x - X_{i}}{h}).
+  \end{align} where $K: \R \rightarrow \R$ satisfies $\int_{\R} K(x)
+  dx = 1$ is called the kernel, $h > 0$ is the bandwidth.
+
+  Write $K_{h}(x) = \frac{1}{h} K(\frac{x}{h})$ so that
+  \begin{align}
+    \label{eq:146}
+    \hat f_{h}(x) = \frac{1}{n} \sum_{i=1}^{n} K_{h}(x - X_{i}).
+  \end{align}
+\end{defn}
+
+\begin{defn}[MSE]
+  \label{sec:density-estimators-3}
+  \begin{align}
+    \label{eq:147}
+    MSE(\hat f_{h}(x)) &= \E{(\hat f_{h}(x) - f(x))^{2}} \\
+    \label{eq:148}
+    &= \E{(\hat f_{h}(x) - \E{\hat f_{h}(x)}^{2})^{2}} + (\E{\hat
+      f_{h}(x)} - f(x))^{2}.
+  \end{align}
+
+  Write $(f \star g)(x) = \int_{\R} f(x - y) g(y) dy$
+\end{defn}
+
+\begin{thm}
+  For the KDE, we can write
+  \begin{align}
+    \label{eq:149}
+    Bias(\hat f_{h}(x)) &= \E{K_{h}(x - X_{1})} - f(x) \\
+    &= \int_{\R} K_{h}(x - y) f(y) dy - f(x) \\
+    \label{eq:150}
+    &= (K_{h} \star f)(x) - f(x)
+  \end{align}
+
+  Similarly,
+  \begin{align}
+    \label{eq:152}
+    \Var(\hat f_{h}(x)) = \frac{1}{n} ((K_{h}^{2} \star f)(x) - (K_{h}
+    \star f)(x)^{2})
+  \end{align}
+\end{thm}
+
+
 
 Usually, we prefer to choose $h$ to minimize some expression measuring
 how well $\hat f_{h}$ estimates $f$ as a function.  We therefore
@@ -227,7 +377,7 @@ define the Mean Integrated Squared Error ($MSIE$) as
     f(x) \}^{2} dx} \\
   &= \int_{-\infty}^{\infty} MSE(\hat f_{h}(x)) dx \\
   &= \int_{\infty}^{\infty} ((K_{h} \star f)(x) - f(x))^{2} +
-  \frac[1]{h} ((K^{2}_{n} \star f)(x) - (K_{h} \star f)^{2}(x)) dx
+  \frac{1}{h} ((K^{2}_{n} \star f)(x) - (K_{h} \star f)^{2}(x)) dx
 \end{align} which is justified by Fubini's theorem as the integrand
 is non-negative.
 Although exact, this expression depends on $h$ in a complicated way.
@@ -260,118 +410,119 @@ We need the following conditions:
 
 \begin{proof}
   We first claim that $f$ is bounded. Otherwise, there would exists
-  $(x_{n})$ such that $f(x_{n}) \geq n$.  Since $f$ is a density, the
+  $(x_{n})$ such that $f(x_{n}) \geq n$. Since $f$ is a density, the
   exists $x_{n, l} \in [x_{n} - \frac{2}{n}, x_{n}]$ such that
-  $f(x_{n, l}) \leq \frac{n}{2}$  and there exists $x_{n, m} \in
+  $f(x_{n, l}) \leq \frac{n}{2}$ and there exists $x_{n, m} \in
   [x_{n}, x_{n} + \frac{2}{n}]$ such that $f(x_{n, m}) \leq
-  \frac{n}{2}$.  y the mean value theorem, there exists $x^{\star}_{n,
-  l} \in [x_{n, l}, x_{n}]$ such that $f'(x^{\star}_{n, l}) \geq
-\frac{n^{2}}{4}$ and there exists $x^{\star}_{n, m} \in [x_{n}, x_{n,
-  m}]$ such that $f'(x^{\star}_{n, m}) \leq -\frac{n^{2}}{4}$.  By the
-mean value theorem again, we have that there exists $x_{n}^{\star
-  \star} \in [x_{n, l}^{\star}, x_{n, m}^{\star}]$ such that
-$f''(x_{n}^{\star \star}) \leq -\frac{n^{3}}{8}$, contradicting
-boundedness of $f''$.
+  \frac{n}{2}$. y the mean value theorem, there exists $x^{\star}_{n,
+    l} \in [x_{n, l}, x_{n}]$ such that $f'(x^{\star}_{n, l}) \geq
+  \frac{n^{2}}{4}$ and there exists $x^{\star}_{n, m} \in [x_{n},
+  x_{n, m}]$ such that $f'(x^{\star}_{n, m}) \leq -\frac{n^{2}}{4}$.
+  By the mean value theorem again, we have that there exists
+  $x_{n}^{\star \star} \in [x_{n, l}^{\star}, x_{n, m}^{\star}]$ such
+  that $f''(x_{n}^{\star \star}) \leq -\frac{n^{3}}{8}$, contradicting
+  boundedness of $f''$.
 
-We can therefore define $C_{0} = \sup_{x \in \R} f(x)$ and $C_{2} =
-\sup_{x \in \R} |f''(x)|$.
+  We can therefore define $C_{0} = \sup_{x \in \R} f(x)$ and $C_{2} =
+  \sup_{x \in \R} |f''(x)|$.
 
-Now,
-\begin{align}
-  \label{eq:16}
-  \E{\hat f_{h}(x)} &= \int_{-\infty}^{\infty} \frac{1}{h}
-  K(\frac{x-y}{h}) f(y) dy \\
-  &= \int_{-\infty}^{\infty}  K(z) f(x - hz) dz \\
-  &= \int_{-\infty}^{\infty} K(z)(f(x) - hz f'(x) + \frac{1}{2} h^{2}
-  z^{2} f''(x)) dz + REM_{1} \\
-  &= f(x) + \frac{1}{2} h^{2} \mu_{2}(K) f''(x) + REM_{1}.
-\end{align}
+  Now,
+  \begin{align}
+    \label{eq:16}
+    \E{\hat f_{h}(x)} &= \int_{-\infty}^{\infty} \frac{1}{h}
+    K(\frac{x-y}{h}) f(y) dy \\
+    &= \int_{-\infty}^{\infty}  K(z) f(x - hz) dz \\
+    &= \int_{-\infty}^{\infty} K(z)(f(x) - hz f'(x) + \frac{1}{2} h^{2}
+    z^{2} f''(x)) dz + REM_{1} \\
+    &= f(x) + \frac{1}{2} h^{2} \mu_{2}(K) f''(x) + REM_{1}.
+  \end{align}
 
-To control the remainder, given $\epsilon > 0$, choose $\delta > 0$
-such that
-\begin{align}
-  \label{eq:17}
-  |f(x - hz) - (f(x) - hz f'(x) + \frac{1}{2} h^{2} z^{2} f''(x))|
-  \leq \epsilon h^{2} z^{2}
-\end{align} for all $|hz| \leq \delta$.
+  To control the remainder, given $\epsilon > 0$, choose $\delta > 0$
+  such that
+  \begin{align}
+    \label{eq:17}
+    |f(x - hz) - (f(x) - hz f'(x) + \frac{1}{2} h^{2} z^{2} f''(x))|
+    \leq \epsilon h^{2} z^{2}
+  \end{align} for all $|hz| \leq \delta$.
 
-Then
-\begin{align}
-  \label{eq:18}
-  |REM_{1}| &= | \int_{-\infty}^{\infty} K(z) f(x - hz) dz -
-  \int_{-\infty}^{\infty} K(x)(f(x) + \frac{1}{2} h^{2} z^{2} f''(x))
-  dz | \\
-  &\leq | \int_{|z| > \frac{\delta}{h}} K(z) f(x - hz) dz| +
-  \int_{|z| \leq \frac{\delta}{h}} K(z)|f(x-hz) - (f(z) +
-  \frac{1}{2}h^{2} z^{2} f''x)| dz + | \int_{|z| > \frac{\delta}{h}}
-  K(z) (f(x) + \frac{1}{2} h^{2} z^{2} f''(x)) dz| \\
-  &\leq C_{0} \frac{h^{2}}{\delta^{2}} \int_{|z| > \frac{\delta}{h}}
-  z^{2} K(x) dz + \epsilon h^{2} \int_{|z| \leq \frac{\delta}{h}}
-  z^{2} K(z) dz + C_{0} \frac{h^{2}}{\delta^{2}} \int_{|z| >
-    \frac{\delta}{h}} z^{2} K(z) dz + \frac{1}{2} h^{2} C_{2}
-  \int_{|z| > \frac{\delta}{h}} z^{2} K(z) dz \\
-  &\leq \epsilon h^{2}{1 + \mu_{2}(K)}
-\end{align}
-since $\int_{-\infty}^{\infty} z K(z) dx = 0$, Markov's inequality, etc.
-Thus,
-\begin{equation}
-  \label{eq:19}
-  BIAS(\hat f_{h}(x)) = \frac{1}{2} h^{2} \mu_{2}(K) f''(x) + o(h^{4}).
-\end{equation}
+  Then
+  \begin{align}
+    \label{eq:18}
+    |REM_{1}| &= | \int_{-\infty}^{\infty} K(z) f(x - hz) dz -
+    \int_{-\infty}^{\infty} K(x)(f(x) + \frac{1}{2} h^{2} z^{2} f''(x))
+    dz | \\
+    &\leq | \int_{|z| > \frac{\delta}{h}} K(z) f(x - hz) dz| +
+    \int_{|z| \leq \frac{\delta}{h}} K(z)|f(x-hz) - (f(z) +
+    \frac{1}{2}h^{2} z^{2} f''x)| dz \\
+    &\qquad+ | \int_{|z| > \frac{\delta}{h}}
+    K(z) (f(x) + \frac{1}{2} h^{2} z^{2} f''(x)) dz| \\
+    &\leq C_{0} \frac{h^{2}}{\delta^{2}} \int_{|z| > \frac{\delta}{h}}
+    z^{2} K(x) dz \\
+    &\qquad+ \epsilon h^{2} \int_{|z| \leq \frac{\delta}{h}}
+    z^{2} K(z) dz + C_{0} \frac{h^{2}}{\delta^{2}} \int_{|z| >
+      \frac{\delta}{h}} z^{2} K(z) dz + \frac{1}{2} h^{2} C_{2}
+    \int_{|z| > \frac{\delta}{h}} z^{2} K(z) dz \\
+    &\leq \epsilon h^{2}{1 + \mu_{2}(K)}
+  \end{align}
+  since $\int_{-\infty}^{\infty} z K(z) dx = 0$, Markov's inequality, etc.
+  Thus,
+  \begin{equation}
+    \label{eq:19}
+    BIAS(\hat f_{h}(x)) = \frac{1}{2} h^{2} \mu_{2}(K) f''(x) + o(h^{4}).
+  \end{equation}
 
-For the variance,
-\begin{align}
-  \label{eq:20}
-  \Var{\hat f_{h}(x)} &= \frac{1}{nh^{2}} \int_{-\infty}^{\infty}
-  K^{2}(\frac{x-y}{h}) f(y) dy - \frac{1}{n} \{\E{\hat f_{h}(x)}
-  \}^{2} \\
-  &= \frac{1}{nh} \int_{-\infty}^{\infty} K^{2}(z) f(x - hz) dz -
-  \frac{1}{n} (f(x) + o(1))^{2} \\
-  &= \frac{1}{nh} \int_{-\infty}^{\infty} K^{2}(z) f(x) dz + REM_{2} +
-  O(\frac{1}{n}) \\
-  &= \frac{R(K) f(x)}{nh} + REM_{2} + O(\frac{1}{n})
-\end{align}
+  For the variance,
+  \begin{align}
+    \label{eq:20}
+    \Var{\hat f_{h}(x)} &= \frac{1}{nh^{2}} \int_{-\infty}^{\infty}
+    K^{2}(\frac{x-y}{h}) f(y) dy - \frac{1}{n} \{\E{\hat f_{h}(x)}
+    \}^{2} \\
+    &= \frac{1}{nh} \int_{-\infty}^{\infty} K^{2}(z) f(x - hz) dz -
+    \frac{1}{n} (f(x) + o(1))^{2} \\
+    &= \frac{1}{nh} \int_{-\infty}^{\infty} K^{2}(z) f(x) dz + REM_{2} +
+    O(\frac{1}{n}) \\
+    &= \frac{R(K) f(x)}{nh} + REM_{2} + O(\frac{1}{n})
+  \end{align}
 
-To control $REM_{2}$, given $\epsilon > 0$, choose $y > 0$ such that
-$|f(x - hz) - f(x)| \leq \epsilon$ for $|hz| \leq y$.  Then
-\begin{align}
-  \label{eq:21}
-  nh | REM_{2} | = | \int_{-\infty}^{\infty} K^{2}(z) (f(x - hz) -
-  f(x)) dz | \\
-  &\leq \epsilon \int_{|z| \leq \frac{y}{h}} K^{2}(z) + 2 C_{0}
-  \int_{|z| > \frac{y}{h}} K^{2}(z) dz \\
-  &\leq \epsilon(R(K) + 1)
-\end{align}
-for large $n$.
+  To control $REM_{2}$, given $\epsilon > 0$, choose $y > 0$ such that
+  $|f(x - hz) - f(x)| \leq \epsilon$ for $|hz| \leq y$.  Then
+  \begin{align}
+    \label{eq:21}
+    nh | REM_{2} | &= | \int_{-\infty}^{\infty} K^{2}(z) (f(x - hz) -
+    f(x)) dz | \\
+    &\leq \epsilon \int_{|z| \leq \frac{y}{h}} K^{2}(z) + 2 C_{0}
+    \int_{|z| > \frac{y}{h}} K^{2}(z) dz \\
+    &\leq \epsilon(R(K) + 1)
+  \end{align}
+  for large $n$.
 
-We deduce that $\Var{\hat f_{h}(x)} = \frac{R(K) f(x)}{nh} +
-o(\frac{1}{nh})$ and
-\begin{align}
-  \label{eq:22}
-  MSE( \hat f_{h}(x)) = \frac{R(K) f(x)}{nh} + \frac{1}{4} h^{4}
-  \mu_{2}^{2}(K) f''(x)^{2} + o(\frac{1}{nh} + h^{2})
-\end{align}
+  We deduce that $\Var{\hat f_{h}(x)} = \frac{R(K) f(x)}{nh} +
+  o(\frac{1}{nh})$ and 
+  \begin{align}
+    \label{eq:22}
+    MSE( \hat f_{h}(x)) = \frac{R(K) f(x)}{nh} + \frac{1}{4} h^{4}
+    \mu_{2}^{2}(K) f''(x)^{2} + o(\frac{1}{nh} + h^{2})
+  \end{align}
 
-The hope is that to compute the MSIE, we can just integrate the MSE
-over range of the RV.  We need to be careful - in general we cannot
-integrate asymptotic pointwise estimates - need to understand
-dependency on $x$.
+  The hope is that to compute the MSIE, we can just integrate the MSE
+  over range of the RV.  We need to be careful - in general we cannot
+  integrate asymptotic pointwise estimates - need to understand
+  dependency on $x$.
 
-With mild additional conditions and further work (see the example
-sheet), it can be shown that
-\begin{align}
-  \label{eq:23}
-  MISE(\hat f_{h})= \frac{R(K)}{nh} + \frac{1}{4} h^{4}
-  \mu_{2}^{2}(K)R(f'') + o(\frac{1}{nh} + h^{4})
-\end{align}
+  With mild additional conditions and further work (see the example
+  sheet), it can be shown that
+  \begin{align}
+    \label{eq:23}
+    MISE(\hat f_{h})= \frac{R(K)}{nh} + \frac{1}{4} h^{4}
+    \mu_{2}^{2}(K)R(f'') + o(\frac{1}{nh} + h^{4})
+  \end{align}
 
-We see that asymptotically the integrated variance term decreases with
-$h$ while the integrated squared bias term increases with $h$.  This
-is the \textbf{bias-variance tradeoff}.
+  We see that asymptotically the integrated variance term decreases with
+  $h$ while the integrated squared bias term increases with $h$.  This
+  is the \textbf{bias-variance tradeoff}.
 
-This \textbf{bias-variance tradeoff} summarizes the critical role of
-the bandwidth.
-
+  This \textbf{bias-variance tradeoff} summarizes the critical role of
+  the bandwidth.
 \end{proof}
 
 Consider now minimizing the asymptotic MISE (AMISE) $\frac{R(K)}{nh} +
@@ -421,7 +572,7 @@ harder to estimate.
   K(\frac{x - X_{i}}{h})$.  We have
   \begin{align}
     \label{eq:28}
-    \Var{Y_{ni}} = \frac{1}{h} \int_{-\infty}^{\infty}
+    \Var{Y_{ni}} &= \frac{1}{h} \int_{-\infty}^{\infty}
     K^{2}(\frac{x-y}{n}) f(y) - h(\E{\hat f_{h}(x)})^{2} \\
     &= \int_{-\infty}^{\infty} K^{2}(z) f(x - hz) dz - h(f(x) +
     o(1))^{2} \\
@@ -571,7 +722,6 @@ Uniform & 0.930 \\
 \subsection{Derivative Estimation}
 \label{sec:deriv-estim-1}
 
-
 A natural estimator of the $r$-th derivative $f^{(r)}$ of $f$ is given
 by
 \begin{align}
@@ -591,10 +741,8 @@ Under regularity conditions,
 This leads to an optimal bandwidth of order $n^{-\frac{1}{2r + 5}}$
 and a rate of converge of $n^{-\frac{4}{2r+5}}$.
 
-\begin{boxthm}
-  Estimating derivatives of densities is harder than estimating
-  densities themselves.
-\end{boxthm}
+The intuition is that estimating derivatives of densities is harder
+than estimating densities themselves.
 
 \subsection{Higher Order Kernels}
 \label{sec:higher-order-kernels}

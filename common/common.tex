@@ -187,4 +187,15 @@
     {%
       \left \langle #1 \right \rangle
     }%
+  }
+
+  % Indicator
+\NewDocumentCommand{\upperbound}{g}{%
+  \IfNoValueTF{#1}
+    {%
+      \lceil \rceil
+    }    
+    {%
+      \lceil#1\rceil
+    }%
 }

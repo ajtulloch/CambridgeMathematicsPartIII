@@ -12,12 +12,10 @@ we consider a minimax risk,
 
 If we can find our $\hat \theta^{\star}$, which minimizes
 $\sup_{\theta \in \Theta} \E_{\theta} L(\tilde \theta, \theta)$ we
-call $\hat \theta^{\star}$ our minimax estimator.
-
-However, it is very difficult to find $\hat \theta^{\star}$.
-
-Let $c \gamma_{n} \leq R(\Theta) \leq C \gamma_{n}$, we call
-$\gamma_{n}$ is minimax rate of convergence.
+call $\hat \theta^{\star}$ our minimax estimator. However, it is very
+difficult to find $\hat \theta^{\star}$. Let $c \gamma_{n} \leq
+R(\Theta) \leq C \gamma_{n}$, we call $\gamma_{n}$ is minimax rate of
+convergence.
 
 For instance, for $\Theta = \{ \text{$m$, $m$ is twice continuously
   differentiable on $[0, 1]$, $m''(x) < \infty$} \}$, then
@@ -26,7 +24,7 @@ For instance, for $\Theta = \{ \text{$m$, $m$ is twice continuously
   \sup_{m \in \Theta} \E{(\hat m_{h}(x; 1) - m(x))^{2}} \leq C n^{-\frac{4}{5}}
 \end{equation}
 
-Question - can we also calculate
+Question --- can we also calculate
 \begin{equation}
   \label{eq:107}
   \int_{\tilde m} \sup_{m \in \Theta} \E{(\tilde m(x_{0}) - m(x_{0}))^{2}} \geq cn^{-\frac{4}{5}}
@@ -66,7 +64,7 @@ Question - can we also calculate
 \begin{proof}
   \begin{align}
     \label{eq:111}
-    \sup_{P \in \mathcal{P}} \E_{P} d(\tilde \theta, \theta(P)) \geq
+    \sup_{P \in \mathcal{P}} \E_{P} d(\tilde \theta, \theta(P)) &\geq
     \max_{P \in \{ P_{0}, P_{1} \}} \E_{P} d(\tilde \theta, \theta(P))
     \\
     &\geq \frac{1}{2} (\E_{P_{0}} d(\tilde \theta, \theta(P_{0})) +
@@ -84,8 +82,7 @@ Then our RHS is given as
 \begin{align}
   \label{eq:112}
   \frac{1}{2} (\E_{P_{0}}(f_{0} \cdot DEN) + \E_{P_{1}} (f_{1} \cdot
-  DEN)) \\
-  &\geq \frac{1}{2} A \delta (\E_{P_{0}} f_{0} + \E_{P_{1}} f_{1})
+  DEN)) \geq \frac{1}{2} A \delta (\E_{P_{0}} f_{0} + \E_{P_{1}} f_{1})
 \end{align}
 
 By the Neyman-Pearson lemma, we have
@@ -100,27 +97,21 @@ From the third example sheet, we can show that $(TV(P_{0}, P_{1}))^{2}
 $C$.  Using this result, we have
 \begin{align}
   \label{eq:114}
-  \geq \frac{1}{2} \delta (1 - \sqrt{C})
+  \geq \frac{1}{2} A \delta (1 - \sqrt{C})
 \end{align}
 
 \end{proof}
 
-\begin{remark}
+\begin{remark} From the proof,
   \begin{enumerate}
   \item Sample size $n$ does not seem to appear in the lemma.
     However, $P$ is usually the joint distribution of $n$ samples.
-
     Thus, the condition on the Hellinger distance gives some
     conditions on $n$.
-  \item THe two conditions work also in the opposite direction.
+  \item The two conditions work also in the opposite direction.
   \item We can extend the two points lemma to the multiple testing case.
   \end{enumerate}
 \end{remark}
-
-See Tsybakov (2008), Yu (1997)
-\url{http://www.stat.berkeley.edu/~binyu/ps/LeCam.pdf}, Festshrif for
-Lucrem Le Cam.
-
 
 \begin{thm}[Nonparametric regression]
   \label{defn:minimax_lower_bounds:1}
@@ -140,19 +131,18 @@ Lucrem Le Cam.
   Y_{n}$ with $Y_{i} = m(x_{i}) + \epsilon_{i}$ and $\epsilon_{i} \sim
   N(0, 1)$, $m \in \Theta$. Let $\Theta$ be as given before.
 
-  Then Using $(x - y)^{2} + (y - z)^{2} \geq \frac{1}{4} (x - z)^{2}$,
+  Then using $(x - y)^{2} + (y - z)^{2} \geq \frac{1}{4} (x - z)^{2}$,
   we have
   \begin{equation}
     \label{eq:116}
     d(m_{0}, m_{1}) =  (m_{0}(x_{0}) - m_{1}(x_{0}))^{2}
   \end{equation} with $A = \frac{1}{4}$.
 
-  Let $m_{0} = 0$ on $x \in [0, 1]$.  Let $m_{1}$ be bounded away from
-  zero at some point $x_{0} > 0$.  Thus $m_{1}(x) = h^{2} K(\frac{x -
+  Let $m_{0} = 0$ on $x \in [0, 1]$. Let $m_{1}$ be bounded away from
+  zero at some point $x_{0} > 0$. Thus $m_{1}(x) = h^{2} K(\frac{x -
     x_{0}}{h})$ , where $K(t) = a \exp(- \frac{1}{1 - t^{2}})$ for $t
-  \leq 1$ and $a$ a normalizing constant so $K(t)$ is a kernel.
-
-  With $h = \tilde c n^{-\frac{1}{5}}$.
+  \leq 1$ and $a$ a normalizing constant so $K(t)$ is a kernel, and
+  let $h = \tilde c n^{-\frac{1}{5}}$.
 
   Let $P_{0}$ be the distribution of $Y_{1}, \dots, Y_{n}$, with
   $Y_{i} = m_{0}(x_{i}) + \epsilon_{i} = \epsilon_{i}$, and $P_{1}$ be
@@ -163,7 +153,9 @@ Lucrem Le Cam.
   Checking the second condition, we have
   \begin{align}
     \label{eq:117}
-    h^{2}(P_{0}, P_{1}) \leq KL(P_{0}, P_{1}) &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \log
+    h^{2}(P_{0}, P_{1}) &\leq KL(P_{0}, P_{1}) \\
+    \label{eq:102}
+    &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \log
     \frac{\prod_{i=1}^{n} \phi(i_{i})}{\prod_{i=1}^{n} \phi(u_{i} -
       m_{1}(x_{i}))} d u_{1} \dots d u_{n} \\
     &= \int \dots \int \prod_{i=1}^{n} \phi(u_{i}) \sum_{i=1}^{n} \log

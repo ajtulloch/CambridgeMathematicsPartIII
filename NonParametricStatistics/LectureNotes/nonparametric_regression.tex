@@ -50,7 +50,7 @@ The theory of weighted least squares gives
   (X^{T} K X) \hat \beta = X^{T} K y
 \end{align}
 
-For $p = 0$, then a simple expression (Nodorya-Watson, local constant)
+For $p = 0$, then a simple expression (Nodoraya-Watson, local constant)
 exists:
 \begin{align}
   \label{eq:54}
@@ -63,14 +63,14 @@ For $p= 1$, we call this a local linear estimator, and we have the
 explicit result
 \begin{align}
   \label{eq:55}
-  \hat m_{h}(x; 1) = \frac{1}{n} \sum_{i=1}^{n} \frac{S_{0, h}(x) -
+  \hat m_{h}(x; 1) = \frac{1}{n} \sum_{i=1}^{n} \frac{S_{2, h}(x) -
     S_{1, h}(x)(x_{i} - x)}{S_{2, h}(x) S_{0, h}(x) - S_{1, h}(x)^{2}}
   K_{h}(x_{i} - x) Y_{i}
 \end{align}
 with
 \begin{align}
   \label{eq:56}
-  S_{r, h}(x) = \frac{1}{2} \sum_{i=1}^{n} (x_{i} - x)^{r} K_{h}(x_{i}
+  S_{r, h}(x) = \frac{1}{n} \sum_{i=1}^{n} (x_{i} - x)^{r} K_{h}(x_{i}
   - x)
 \end{align}
 
@@ -102,7 +102,7 @@ conditions:
   \begin{align}
     \label{eq:58}
     MSE(\hat m_{h}(x; 1)) = \frac{1}{nh} R(K) v(x) + \frac{1}{4} h^{4}
-    (m''(x))^{2} \mu_{2}^{2}(K) + o(\frac{1}{nh} + h^{4})
+    (m''(x))^{2} \mu_{2}(K) + o(\frac{1}{nh} + h^{4})
   \end{align}
 \end{thm}
 
@@ -112,7 +112,7 @@ conditions:
 
   \begin{align}
     \label{eq:60}
-    \textsc{bias} = \E{\hat m_{h}, x; 1} - m(x) \\
+    \textsc{bias} &= \E{\hat m_{h}, x; 1} - m(x) \\
     &= \E{\frac{1}{n} \sum_{i=1}^{n} \frac{S_{0, h}(x) - S_{1,
           h}(x)(x_{i} - x)}{DEN} K_{h}(x_{i} - x) Y_{i}} - m(x) \\
     &= \frac{1}{n} \sum_{i=1}^{n} \frac{S_{2, h}(x) - S_{1,
@@ -120,15 +120,18 @@ conditions:
     \underbrace{m(x_{i})}_{m(x) + (x_{i} - x) m'(x) + \frac{1}{2}
       (x_{i} - x)^{2} m''(x)} - m(x) \\
     &= \frac{m(x)}{DEN} \{ \frac{S_{2, h}(x) S_{0, h}(x) - S_{1,
-        h}^{2}(x)}{...} \} + \frac{m'(x)}{DEN} \{ \frac{S_{2, h}(x)
-      S_{1, h}(x) - S_{1, h}(x) S_{2, h}(x)}{DEN} \} + \frac{1}{2}
+        h}^{2}(x)}{...} \} \\
+    &\qquad + \frac{m'(x)}{DEN} \{ \frac{S_{2, h}(x)
+      S_{1, h}(x) - S_{1, h}(x) S_{2, h}(x)}{DEN} \} \\
+    \label{eq:139}
+    &\qquad + \frac{1}{2}
     m''(x) \{ \frac{S_{2, h}^{2}(x) - S_{1, h}(x) S_{3, h}(x)}{S_{2,
         h}(x) S_{0, h}(x) - S_{1, h}^{2}(x)} \} - m(x) \\
     &= m(x) + 0 + \frac{1}{2} m''(x) \{ \frac{(h^{2} \mu_{2}(K) +
       o(h^{2}))^{2} - o(h) o(h^{3})}{h^{2} \mu_{2}(K)(1 + o(1)) -
       o(h^{2})} \} - m(x) \\
     &= m(x) + \frac{1}{2} m''(x) \frac{h^{4} \mu_{2}^{2}(K) +
-      o(h^{4})}{h^{2} \mu_{2}(K) + o(h^{2})} - m(x)
+      o(h^{4})}{h^{2} \mu_{2}(K) + o(h^{2})} - m(x) \\
     &= m(x) + \frac{1}{2} m''(x) h^{2} \mu_{2}(K) + o(h^{2}) + REM -
     m(x) \\
     &= \frac{1}{2} m''(x) h^{2} \mu_{2}(K) + o(h^{2})
@@ -175,20 +178,17 @@ conditions:
       o(h^{3})}{h^{4} \mu_{2}^{2}(K) + o(h^{4})} + REM_{2} \\
       &= \frac{v(x)}{n}  \frac{1}{h}  R(K) + o(\frac{1}{nh})
     \end{align} where $|REM_{2}| = o(\frac{1}{nh})$
-
     With some further work, we can integrate term by term the
     asymptotic expansion to obtain $MISE(\hat m(\cdot; 1))$.
 \end{proof}
 
-For $p$ even, the bias is more complicated.  Moreover, for $p$ even,
+For $p$ even, the bias is more complicated. Moreover, for $p$ even,
 the bias at boundary point $x = \alpha h$, $\alpha \in [0, 1)$ has
-larger order than the bias at the interior point.
-
-
-\footnote{In the demonstration, asymmetry of $\textsc{Beta}(2, 4)$ distributions
-combined with the negative slope of the true regression function, we
-see that local constant estimators has an upward bias.  In contrast,
-local linear estimators adapts to this}
+larger order than the bias at the interior point.\footnote{In the
+  demonstration, asymmetry of $\textsc{Beta}(2, 4)$ distributions
+  combined with the negative slope of the true regression function, we
+  see that local constant estimators has an upward bias. In contrast,
+  local linear estimators adapts to this}
 
 \section{Splines}
 \label{sec:splines}
@@ -267,7 +267,7 @@ is very close to the linear regression line. As $\lambda \rightarrow
   Then
   \begin{align}
     \label{eq:68}
-    \int_{a}^{b} h''(x) g''(x) = -\int_{a}^{b} g'''(x) h'(x) dx +
+    \int_{a}^{b} h''(x) g''(x) &= -\int_{a}^{b} g'''(x) h'(x) dx +
     g''h'(x)|_{a}^{b} \\
     &= -\int_{x_{1}}^{x_{n}} g'''(x) h'(x) dx \\
     &= -\sum_{i=1}^{n-1} \int_{x_{i}}^{x_{i+1}} g'''(x) h'(x) dx \\
@@ -293,7 +293,7 @@ S_{2}[a,b]$, $0 < x_{1} < \dots < x_{n} < b$.  We seek to minimize
 \begin{align}
   \label{eq:70}
   \mathcal{G}_{\lambda}(\tilde g) = \sum_{i=1}^{n} (Y_{i} - \tilde
-  g(x_{i}))^{2} + \lambda \int_{a}^{b}  \tilde g''(x)^{2} dx 
+  g(x_{i}))^{2} + \lambda \int_{a}^{b}  \tilde g''(x)^{2} dx
 \end{align} over $\tilde g \in S_{2}[a, b]$.
 
 \begin{thm}
@@ -304,7 +304,7 @@ S_{2}[a,b]$, $0 < x_{1} < \dots < x_{n} < b$.  We seek to minimize
   \begin{equation}
     \label{eq:71}
     \hat g = (I + \lambda K)^{-1} Y
-  \end{equation}  
+  \end{equation}
 \end{thm}
 
 \begin{proof}
@@ -329,7 +329,9 @@ S_{2}[a,b]$, $0 < x_{1} < \dots < x_{n} < b$.  We seek to minimize
     &= \mathbf{g}^{T}(I + \lambda K) \mathbf{g} + Y^{T} Y - 2
     \mathbf{g}^{T} Y \\
     &= (\mathbf{g} - (I + \lambda K)^{-1} Y)^{T} (I + \lambda K)(g -
-    (I + \lambda K)^{-1} Y) + Y^{T} Y - Y^{T}(1 + \lambda K)^{-1} Y
+    (I + \lambda K)^{-1} Y) \\
+    \label{eq:151}
+    &\qquad + Y^{T} Y - Y^{T}(1 + \lambda K)^{-1} Y
   \end{align}
 
   We know $K$ is nonnegative definite and $\lambda > 0$, so $I +
@@ -359,8 +361,8 @@ $\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
 \begin{align}
   \label{eq:76}
   \sum_{j \neq i}^{n} (Y_{j} - \tilde g(x_{j}))^{2} + \lambda
-  \int_{a}^{b} \tilde g''(x)^{2} dx
-\end{align} (*)
+  \int_{a}^{b} \tilde g''(x)^{2} dx \tag{$\star$}
+\end{align}
 
 \begin{thm}
   \label{defn:nonparametric_regression:5}
@@ -378,14 +380,19 @@ $\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
 \end{thm}
 
 \begin{proof}
-  Note that $\hat g_{-i, \lambda}$ also minimizes $(\star \star) =
-  \hat g_{-i, \lambda}(x_{i}) - \tilde g(x_{i})^{2} + (\star)$   over
-  $\tilde g \in S_{2}[a, b]$
+  Note that $\hat g_{-i, \lambda}$ also minimizes
+  \begin{equation}
+    \label{eq:153}
+    \hat g_{-i, \lambda}(x_{i}) - \tilde g(x_{i})^{2} + (\star)
+    \tag{$\star \star$}
+  \end{equation} over
+  $\tilde g \in S_{2}[a, b]$.
 
   Then
   \begin{align}
     \label{eq:77}
-    (**) \geq (*) \geq \sum_{j \neq i}^{n} (Y_{j} - \hat g_{-i,
+    (\star \star) &\geq (\star) \\
+    &\geq \sum_{j \neq i}^{n} (Y_{j} - \hat g_{-i,
       \lambda} (x_{j}))^{2} + \int_{a}^{b} \hat g_{-i,
       \lambda}(x)^{2} dx \\
     &= (\hat g_{-i, \lambda}(x_{i}) - \mathbf{ \hat g_{-i,
@@ -409,9 +416,29 @@ $\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
   original problem, so
   \begin{align}
     \label{eq:79}
-    ...
+    \hat g_{-i, \lambda} = (I + \lambda K)^{-1} Y^{[i]} = A Y^{[i]} \\
+    \hat g_{-i, \lambda}(x_{i}) = \sum_{j=1}^{n} A_{ij} Y_{j}^{[i]} =
+    A_{ii} \hat g_{-i, \lambda}(x_{i}) + \sum_{j \neq i} A_{ij} Y_{j}.
+  \end{align} and so
+  \begin{align}
+    \label{eq:155}
+    \hat g_{-i, \lambda}(x_{i}) = \frac{sum_{j \neq i} A_{ij} Y_{j}}{1
+    - A_{ii}}.
   \end{align}
 \end{proof}
+
+Therefore
+\begin{align}
+  \label{eq:156}
+  CV(\lambda) &= \frac{1}{n} \sum_{i=1}^{n} (Y_{i} - \frac{\sum_{j \neq
+      i} A_{ij} Y_{j}}{1 - A_{ii}})^{2} \\
+  \label{eq:157}
+  &= \frac{1}{n} \sum_{i=1}^{n} (\frac{Y_{i} - \sum_{j=1}^{n} A_{ij}
+    Y_{j}}{1 - A_{ii}}) \\
+  \label{eq:158}
+  &= \frac{1}{n} \sum_{i=1}^{n} (\frac{Y_{i} - \hat
+    g_{\lambda}(x_{i})}{1 - A_{ii}})^{2}.
+\end{align}
 
 By replacing $A_{ii}$ with the average of diagonal elements of $A$, we
 have a generalized cross-validation
@@ -462,7 +489,7 @@ Using a matrix form, this is equivalent to $\| Y - X \beta
     1 & x_{1} & x_{1}^{2} & ... & x_{1}^{p} & (x_{1} -
     \xi_{1})_{+}^{p} & ... & (x_{1} - \xi_{N})_{+}^{p} \\
     1 & x_{2} & x_{2}^{2} & ... & x_{2}^{p} & (x_{2} -
-    \xi_{1})_{+}^{p} & ... & (x_{2} - \xi_{N})_{+}^{p} 
+    \xi_{1})_{+}^{p} & ... & (x_{2} - \xi_{N})_{+}^{p}
   \end{Bmatrix}
 \end{align}
 
@@ -562,14 +589,14 @@ We have then a backfitting algorithm that solves the minimization problem
 \item For $j = 1, \dots, d$,
   \begin{equation}
     \label{eq:92}
-    \hat g_{j} = Smmoth ((x_{i}, Y_{i} - \hat \alpha  - \sum_{k \neq
+    \hat g_{j} = \textsc{Smooth} ((x_{i}, Y_{i} - \hat \alpha  - \sum_{k \neq
       j}^{} \hat g_{k}(x_{ik})) \forall i
   \end{equation}
   and $\hat g_{j} = \hat g_{j} - \frac{1}{n} \sum_{i=1}^{n} \hat g_{j}(x_{ij})$
+\item Repeat until convergence.
 \end{enumerate}
 
-
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "master"
-%%% End: 
+%%% End:

@@ -17,7 +17,7 @@ We may ask if there exists $\{ a_{n} \} > 0$, $\{ b_{n} \} > 0$, and a
 nondegenerate $G$ such that
 \begin{equation}
   \label{eq:118}
-  \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} \rightarrow G(x)  
+  \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} \rightarrow G(x)
 \end{equation} for all continuity points $x$ of $G$
 
 Classical extreme value theory starts by asking:
@@ -52,11 +52,12 @@ then $G_{1}$ and $G_{2}$ are of the same type.
 \begin{lem}
   Suppose $X_{n}$ is an IID sample from $F$ and there exists $\{ a_{n}
   \} > 0, \{ b_{n} \}$ and non-degenerate $G$ such that $F(a_{n} x
-  +b_{n})^{n} \hookrightarrow G(x)$ .  Then there exists $\{ \alpha_{n} \} > 0,
-, \{ \beta_{n} \}$ and non-degenerate $G_{\star}$ such that
-$F(\alpha_{n} x _{ \beta_{n}})^{n} \hookrightarrow G_{\star}(x)$. if and
-only if $\frac{\alpha_{n}}{a_{n}} \rightarrow a$ for some $a > 0$, and
-$\frac{\beta_{n} - \beta}{a_{n}} \rightarrow b$ for some $b$.
+  +b_{n})^{n} \hookrightarrow G(x)$. Then there exists $\{ \alpha_{n}
+  \} > 0, , \{ \beta_{n} \}$ and non-degenerate $G_{\star}$ such that
+  $F(\alpha_{n} x _{ \beta_{n}})^{n} \hookrightarrow G_{\star}(x)$. if
+  and only if $\frac{\alpha_{n}}{a_{n}} \rightarrow a$ for some $a >
+  0$, and $\frac{\beta_{n} - \beta}{a_{n}} \rightarrow b$ for some
+  $b$.
 
 Then we can let $G_{\star}(x) = G(ax + b)$.
 \end{lem}
@@ -85,7 +86,7 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
   each $k \in \N$, we replace $n$ by $nk$, and then
   \begin{align}
     \label{eq:121}
-    F^{nk}(a_{nk} x + b_{nk}) \hookrightarrow G(x) 
+    F^{nk}(a_{nk} x + b_{nk}) \hookrightarrow G(x)
   \end{align}
   Thus $F^{n}(a_{nk} x + b_{nk}) \hookrightarrow G^{\frac{1}{k}}(x)$.
   Since $G^{\frac{1}{k}}$ is also non-degenerate, $G^{\frac{1}{k}}(x)
@@ -110,14 +111,15 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
 \end{thm}
 
 \begin{remark}
+  We have
   \begin{enumerate}
   \item Using $X_{(1)} = -\max \{ -X_{1}, \dots, -x_{n} \} $, we have
     equivalent theorems in terms of normalized minima.
-  \item Sometimes, we cannot have nondegenreate $G$ of normalized
+  \item Sometimes, we cannot have nondegenerate $G$ of normalized
     maxima  - for example $X_{1}, \dots, X_{n} \sim
     Bern(\frac{1}{2})$, $X_{(n)}$.
   \item We can combine these three types into Generalized Extreme
-    Value Distribution (GEV) -
+    Value Distribution (GEV) ---
     \begin{equation}
       \label{eq:122}
       G(x; \mu, \sigma, \gamma) = \exp(- (1 + \gamma(\frac{x-\mu}{\sigma}))^{-\frac{1}{\gamma}})
@@ -136,7 +138,7 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
   $G_{\gamma}(x) = \exp(- (1 + rx)^{-\frac{1}{r}})$
 
   Then, using Helly's theorem, we have $\E{z(Y_{n})} \rightarrow
-  \E{z(Y)}$ for all continuous bounded $z$.  Then the LHS is given by 
+  \E{z(Y)}$ for all continuous bounded $z$.  Then the LHS is given by
   \begin{align}
     \label{eq:123}
     \int_{}^{} z \frac{x - b_{n}}{a_{n}} d F_{X_{(n)}}(x) = n
@@ -150,7 +152,7 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
 We say a function $l: [C, \infty] \rightarrow (0, \infty)$ is ``slowly
 varying'' if $\lim_{x \rightarrow \infty} \frac{l(tx)}{l(x)} = 1$ for
 all $t > 0$.  For example, $l (x) = \log x, \log \log x, (\log
-x)^{\alpha}$.  
+x)^{\alpha}$.
 
 We say a function $r_{\alpha}: [C, \infty) \rightarrow (0, \infty)$ is
 ``regularly varying'' with an index $a \in \R$ if $r_{\alpha}(x) =
@@ -186,41 +188,47 @@ $\overline F(x) = 1 - F(x)$
   = R(b_{n})$.
 \end{thm}
 
+\begin{exmp}
+  \label{sec:f-in-dg_1}
+  \begin{enumerate}
+  \item Let $F(x) = 1 - \frac{\log_{2}(x+1)}{x^{2}}$ where $ x\ geq
+    1$. Then $F \in G_{1, 2}$.
+  \item Let $F(x) = 1 - (x_{\star} - x)^{3}$ where $x_{\star} - 1 \leq
+    x \leq x_{\star}$ for some $x_{\star} \in \R$.  Then $F \in G_{2, 3}$.
+  \item Let $F(x) = 1 - \frac{1}{1 + e^{x}}$.  Then $F \in G_{3}$.
+  \end{enumerate}
+\end{exmp}
+
+\begin{lem}
+  Suppose there exists $a_{n} > 0$, $b_{n}$ such that $n(1 - F(a_{n}
+  x + b_{n})) \rightarrow{ u(x)}$.  Then
+  \begin{align}
+    \label{eq:125}
+    F^{n}(a_{n} x + b_{n}) \hookrightarrow \exp(-u(x))
+  \end{align}
+\end{lem}
+
 \begin{proof}
-  See Galambos (1978), Ch 2.1, 2.4, 2.5, De Haan (2006), Theorem 1.2.1
-
-  For the proof, we need a statement.
-
-  \begin{lem}[$\star$]
-    Suppose there exists $a_{n} > 0$, $b_{n}$ such that $n(1 - F(a_{n}
-    x + b_{n})) \rightarrow{ u(x)}$.  Then
-    \begin{align}
-      \label{eq:125}
-      F^{n}(a_{n} x + b_{n}) \hookrightarrow \exp(-u(x))
-    \end{align}
-  \end{lem}
-
-  \begin{proof}
-    Taking the log of the left hand side, we have
-    \begin{align}
-      \label{eq:126}
-      n \log F(a_{n} x + b_{n}) &= n \log (1 - (1 - F(a_{n} x +
-      b_{n}))) \\
-      &= n (-(1 - F(a_{n} x + b_{n})) - \frac{1}{2} (1 - F(a_{n}x +
-      b_{n}))^{2} + \dots) \\
-      &= -u(x)
-    \end{align}
-    Thus the left hand side converges to $\exp(-u(x))$.
-  \end{proof}
+  Taking the log of the left hand side, we have
+  \begin{align}
+    \label{eq:126}
+    n \log F(a_{n} x + b_{n}) &= n \log (1 - (1 - F(a_{n} x +
+    b_{n}))) \\
+    &= n (-(1 - F(a_{n} x + b_{n})) - \frac{1}{2} (1 - F(a_{n}x +
+    b_{n}))^{2} + \dots) \\
+    &= -u(x)
+  \end{align}
+  Thus the left hand side converges to $\exp(-u(x))$.
 \end{proof}
+
 
 \begin{proof}[Proof of sufficient part of first part of theorem]
   Proof of (1) - the sufficient part.  Supopse $x_{\star} = \infty$,
   $\overline F(x) = x^{-\alpha} l(x)$.  Use $a_{n}$ and $b_{n}$ as in
   the theorem.  Then we want to prove $F^{n}(a_{n} x + b_{n})
-  \hookrightarrow G_{1, \alpha}(x) = \exp(-x^{-\alpha} \I{x > 0})$.  
+  \hookrightarrow G_{1, \alpha}(x) = \exp(-x^{-\alpha} \I{x > 0})$.
 
-  Using $\star$, we instead prove
+  Using the lemma, we instead prove
   \begin{align}
     \label{eq:127}
     n(1 - F(a_{n} x)) \rightarrow x^{-\alpha} \I{x > 0} + \infty \I{x
@@ -246,7 +254,7 @@ $\overline F(x) = 1 - F(x)$
   Note that
   \begin{align}
     \label{eq:129}
-    1 \geq n(1 - F(a_{n})) \\
+    1 &\geq n(1 - F(a_{n})) \\
     &\geq \frac{1-F(a_{n})}{1 - F(a_{n} - \delta)} \\
     &\geq \frac{1 - F(a_{n})}{1 - F(a_{n}(1 - \epsilon))}  \\
     &= \frac{a_{n}^{-\alpha} l(a_{n})}{a_{n}^{-\alpha}
@@ -263,7 +271,7 @@ $\overline F(x) = 1 - F(x)$
     \label{eq:130}
     \frac{\overline F(x + t R(x))}{\overline F(x)} \rightarrow e^{-t}
   \end{align} and we use $a_{n}$, $b_{n}$ as in the theorem.  As in
-  $\star$, we seek to prove
+  the lemma, we seek to prove
   \begin{align}
     \label{eq:131}
     n(1 - F(a_{n} x + b_{n})) = n(1 - F(R(b_{n}) x_{n} + b_{n})) \rightarrow e^{-x}.
@@ -282,11 +290,11 @@ $\overline F(x) = 1 - F(x)$
     &\geq \frac{1 - F(b_{n})}{1 - F(b_{n} - \delta)} \\
   &\geq \frac{1 - F(b_{n})}{1 - F(b_{n} - \epsilon R(b_{n}))} \\
   &\rightarrow \frac{1}{e^{-(-\epsilon)}}  = e^{-\epsilon} \rightarrow 1
-  \end{align} Choose $\epsilon$ such that $1 - F(b_{n} - \delta \leq 1
+  \end{align} Choose $\epsilon$ such that $1 - F(b_{n} - \delta) \leq 1
   - F(b_{n} - \epsilon R(b_{n}))$.
 \end{proof}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "master"
-%%% End: 
+%%% End:
