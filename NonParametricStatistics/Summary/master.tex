@@ -6,6 +6,29 @@
 
 \maketitle
 
+\section{Basics}
+\begin{thm}[The Delta Method]
+  Let $Y_{n}$ be a sequence of random vectors in $\R^{d}$ such that
+  for some $\mu \in \R^{d}$ and a random vector $Z$, we have
+  $n^{\frac{1}{2}}(Y_{n} - \mu) \cd Z$.  If $g: \R^{d} \rightarrow \R$
+  is differentiable at $\mu$, then $n^{\frac{1}{2}}(g(Y_{n}) - g(\mu))
+  \cd \grad g(\mu)^{T} Z$.
+\end{thm}
+\begin{proof}
+  For $d = 1$.  Let $g'(\mu) = \grad g(\mu)$, and let $h: \R
+  \rightarrow \R$, by
+  \begin{equation}
+    \label{eq:134}
+    h(y) =
+    \begin{cases}
+      \frac{g(y) - g(\mu)}{y - \mu}  & y \neq \mu \\
+      g'(\mu) & y = \mu
+    \end{cases}
+  \end{equation}  Then by the continuous mapping theorem and Sltusky's
+  theorem, $n^{\frac{1}{2}}(g(Y_{n}) - g(\mu)) = h(Y_{n})
+  n^{\frac{1}{2}}(Y_{n} - \mu) \cd g'(\mu) Z$.
+\end{proof}
+
 Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
 \mathcal{F}, \Prob)$ with distribution function $F$.  The
 \textbf{empirical distribution function} $\hat F_{n}$ is defined by
@@ -31,6 +54,80 @@ Let $X_{1}, \dots, X_{n}$ be \iid on a probability space $(\Omega,
     \Prob{\sup_{x \in \R}|\hat F_{n}(x) - F(x)| \geq \epsilon} \leq 2 e^{-2n\epsilon^{2}}.
   \end{align}
 \end{thm}
+
+\begin{defn}
+  \label{sec:let-x_1-dots}
+  For $p \in (0, 1]$, the quartile function is defined by $F^{-1}(p) =
+  \inf \{x \in \R: F(x) \geq p \}$ and is left-continuous.
+
+  The sample quartile function is $\hat F_{n}^{-1}(p) = \inf \{ x \in
+  \R: \hat F_{n}(x) \geq p \} $. 
+\end{defn}
+
+\begin{thm}
+  Let $U_{1}, U_{2}, \dots, U_{n} \sim U(0, 1)$ \iid and $p \in (0,
+  1)$.  Then
+  \begin{equation}
+    \label{eq:135}
+    \sqrt{n}(U_{\lceil np \rceil} - p) \cd N(0, p(1-p)).
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Let $Y_{1}, \dots, Y_{n}$ \iid \textsc{Exp}(1), let $V_{n} = Y_{1} + \dots +
+  Y_{\lceil np \rceil}$ and $W_{n} = Y_{\lceil np \rceil + 1}, \dots,
+  Y_{n+1}$.  Note that $V_{n}, W_{n}$ are independent and
+  \begin{equation}
+    \label{eq:136}
+    \frac{V_{n}}{V_{n} + W_{n}} =^{d} U_{\upperbound{np}}
+  \end{equation} by previous proposition.
+  Then
+  \begin{align}
+    \label{eq:137}
+    \sqrt{n}(\frac{V_{n}}{n} - p) =
+    \frac{\sqrt{\upperbound{np}}}{\sqrt{n}} (\frac{V_{n} -
+      \upperbound{np}}{\sqrt{\upperbound{np}}} ) +
+    \frac{\upperbound{np} - np}{\sqrt{n}} \cd N(0, p)
+  \end{align} by the CLT and Slutsky's theorem.
+
+  Similarly, $\sqrt{n}(\frac{W_{n}}{n} - q) \cd N(0, q)$, where $q = 1
+  - p$, then by the delta method, with $g(x, y) = \frac{x}{x+y}$,
+  \begin{align}
+    \label{eq:138}
+    \sqrt{n}(U_{\upperbound{np}} - p) &=^{d}
+    \sqrt{n}(g(\frac{V_{n}}{n}, \frac{W_{n}}{n}) - g(p, q)) \\
+    &\cd N(0, \grad g(p, q)^{T}
+    \begin{pmatrix}
+      p & 0 \\
+      0 & q
+    \end{pmatrix} \grad g(p, q)) \\
+    \label{eq:140}
+    &=^{d} n(0, p(1-p))
+  \end{align}
+\end{proof}
+
+\begin{thm}
+  Let $p \in (0, 1)$ and let $X_{1}, \dots, X_{n} \iid F$ where $F$ is
+  differentiable at $F^{-1}(p)$ with positive derivative
+  $f(F^{-1}(p))$.  Then
+  \begin{align}
+    \label{eq:141}
+    \sqrt{n}(X_{\upperbound{np}} - F^{-1}(p)) \cd N(0, \frac{p(1-p)}{f(F^{-1}(p))^{2}} )
+  \end{align}
+\end{thm}
+
+\begin{proof}
+  Let $U_{1}, \dots, U_{n} \iid U(0, 1)$ so that
+  $F^{-1}(U_{\upperbound{np}}) =^{d} X_{\upperbound{np}}$.  Then by
+  the previous theorem and the delta method with $g = F^{-1}$,
+  \begin{align}
+    \label{eq:142}
+    \sqrt{n} (X_{\upperbound{np}} - F^{-1}(p)) &=^{d}
+    \sqrt{n}(g(U_{\upperbound{np}}) - g(p)) \\
+    \label{eq:143}
+    \cd N(0, \frac{p(1-p)}{f(F^{-1}(p))^{2}} )
+  \end{align}
+\end{proof}
 
 \begin{defn}
   Usually, we prefer to choose $h$ to minimize some expression measuring
@@ -237,19 +334,18 @@ exists:
     x)Y_{i}}{\sum_{i=1}^{n} k_{h}(x_{i} - x)}
 \end{align}
 
-
 For $p= 1$, we call this a local linear estimator, and we have the
 explicit result
 \begin{align}
   \label{eq:55}
-  \hat m_{h}(x; 1) = \frac{1}{n} \sum_{i=1}^{n} \frac{S_{0, h}(x) -
+  \hat m_{h}(x; 1) = \frac{1}{n} \sum_{i=1}^{n} \frac{S_{2, h}(x) -
     S_{1, h}(x)(x_{i} - x)}{S_{2, h}(x) S_{0, h}(x) - S_{1, h}(x)^{2}}
   K_{h}(x_{i} - x) Y_{i}
 \end{align}
 with
 \begin{align}
   \label{eq:56}
-  S_{r, h}(x) = \frac{1}{2} \sum_{i=1}^{n} (x_{i} - x)^{r} K_{h}(x_{i}
+  S_{r, h}(x) = \frac{1}{n} \sum_{i=1}^{n} (x_{i} - x)^{r} K_{h}(x_{i}
   - x)
 \end{align}
 
@@ -280,7 +376,7 @@ conditions:
   \begin{align}
     \label{eq:58}
     MSE(\hat m_{h}(x; 1)) = \frac{1}{nh} R(K) v(x) + \frac{1}{4} h^{4}
-    (m''(x))^{2} \mu_{2}^{2}(K) + o(\frac{1}{nh} + h^{4})
+    (m''(x))^{2} \mu_{2}(K) + o(\frac{1}{nh} + h^{4})
   \end{align}
 \end{thm}
 
@@ -474,7 +570,7 @@ $\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
   we consider a minimax risk,
   \begin{equation}
     \label{eq:105}
-    R(\Theta) = \int_{\tilde \theta} \sup_{\theta \in \Theta}
+    R(\Theta) = \inf_{\tilde \theta} \sup_{\theta \in \Theta}
     \E_{\theta} L(\tilde j, \theta).
   \end{equation}
 \end{defn}
