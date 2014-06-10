@@ -14,7 +14,7 @@ degenerate (we call $F$ non-degenerate if there does not exists $a \in
 \R$ such that $F(x) = \I{x \geq a}$)
 
 We may ask if there exists $\{ a_{n} \} > 0$, $\{ b_{n} \} > 0$, and a
-nondegenerate $G$ such that
+non-degenerate $G$ such that
 \begin{equation}
   \label{eq:118}
   \Prob{\frac{X_{(n)} - b_{n}}{a_{n}} \leq x} \rightarrow G(x)
@@ -23,7 +23,7 @@ nondegenerate $G$ such that
 Classical extreme value theory starts by asking:
 \begin{enumerate}
 \item What kind of $G$ appears in the limit of \eqref{eq:118}?
-\item Cna we characterize $F$ such that \eqref{eq:118} holds for a
+\item Can we characterize $F$ such that \eqref{eq:118} holds for a
   specific limit distribution $G$?
 \end{enumerate}
 
@@ -31,7 +31,7 @@ For the first question, we have the Extremal Types theorem. For the
 second question, we have the ``domain of attraction'' problem.
 
 
-\section{Prelimiaries}
+\section{Preliminaries}
 \label{sec:prelimiaries}
 
 Recall that $\Prob{X_{(n)} \leq x} = F(x)^{n}$.  We say that $F$ is in
@@ -78,10 +78,10 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
 \end{thm}
 
 \begin{proof}
-  (<=) If $G$ is max-stable, $G^{n}(a_{n} x + b_{n}) \hookrightarrow
-  G(x)$.  Thus, by definitino, $G \in D(G)$.
+  ($\Leftarrow$) If $G$ is max-stable, $G^{n}(a_{n} x + b_{n}) \hookrightarrow
+  G(x)$.  Thus, by definition, $G \in D(G)$.
 
-  (=>) Let $F \in D(G)$. Then, there exists $\{ a_{n} \} > 0, \{ b_{n}
+  ($\Rightarrow$) Let $F \in D(G)$. Then, there exists $\{ a_{n} \} > 0, \{ b_{n}
   \}$ such that $F^{n}(a_{n} x + b_{n}) \hookrightarrow G(x)$.  For
   each $k \in \N$, we replace $n$ by $nk$, and then
   \begin{align}
@@ -100,11 +100,11 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
   (within type):
 
   \begin{enumerate}
-  \item Frechet - $G_{1, \alpha}(x) = \exp(-x^{-\alpha})$, $x > 0$,
+  \item Frechet --- $G_{1, \alpha}(x) = \exp(-x^{-\alpha})$, $x > 0$,
     $\alpha > 0$
-  \item Negative Weibull - $G_{2, \alpha} = \exp(- (-x)^{\alpha})$, $x
+  \item Negative Weibull --- $G_{2, \alpha} = \exp(- (-x)^{\alpha})$, $x
     < 0$, $\alpha > 0$
-  \item Gumbel - $G_{3}(x) = \exp(-\exp(-x))$, $x \in \R$.
+  \item Gumbel --- $G_{3}(x) = \exp(-\exp(-x))$, $x \in \R$.
   \end{enumerate}
 
   Conversely, these distributions can appear as such limits in \eqref{eq:118}.
@@ -115,8 +115,8 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
   \begin{enumerate}
   \item Using $X_{(1)} = -\max \{ -X_{1}, \dots, -x_{n} \} $, we have
     equivalent theorems in terms of normalized minima.
-  \item Sometimes, we cannot have nondegenerate $G$ of normalized
-    maxima  - for example $X_{1}, \dots, X_{n} \sim
+  \item Sometimes, we cannot have non-degenerate $G$ of normalized
+    maxima --- for example $X_{1}, \dots, X_{n} \sim
     Bern(\frac{1}{2})$, $X_{(n)}$.
   \item We can combine these three types into Generalized Extreme
     Value Distribution (GEV) ---
@@ -143,7 +143,7 @@ Then we can let $G_{\star}(x) = G(ax + b)$.
     \label{eq:123}
     \int_{}^{} z \frac{x - b_{n}}{a_{n}} d F_{X_{(n)}}(x) = n
     \int_{}^{} z(\frac{x - b_{n}}{a_{n}}) F(x)^{n-1} dF(x)
-  \end{align} and changinge variables so $F(x) = 1 - \frac{v}{n}, x = \dots$
+  \end{align} and changing variables so $F(x) = 1 - \frac{v}{n}, x = \dots$
 \end{proof}
 
 \section{Necessary and Sufficient Conditions for Convergence}
@@ -223,7 +223,7 @@ $\overline F(x) = 1 - F(x)$
 
 
 \begin{proof}[Proof of sufficient part of first part of theorem]
-  Proof of (1) - the sufficient part.  Supopse $x_{\star} = \infty$,
+  Proof of (1) - the sufficient part.  Suppose $x_{\star} = \infty$,
   $\overline F(x) = x^{-\alpha} l(x)$.  Use $a_{n}$ and $b_{n}$ as in
   the theorem.  Then we want to prove $F^{n}(a_{n} x + b_{n})
   \hookrightarrow G_{1, \alpha}(x) = \exp(-x^{-\alpha} \I{x > 0})$.

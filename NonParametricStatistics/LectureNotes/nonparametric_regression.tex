@@ -1,4 +1,4 @@
-\ref\chapter{Nonparametric Regression}
+\chapter{Nonparametric Regression}
 \label{cha:nonp-regr}
 
 \section{Introduction}
@@ -422,7 +422,7 @@ $\mathcal{G}_{\lambda}$ over all data points except the $i$-th,
   \end{align} and so
   \begin{align}
     \label{eq:155}
-    \hat g_{-i, \lambda}(x_{i}) = \frac{sum_{j \neq i} A_{ij} Y_{j}}{1
+    \hat g_{-i, \lambda}(x_{i}) = \frac{\sum_{j \neq i} A_{ij} Y_{j}}{1
     - A_{ii}}.
   \end{align}
 \end{proof}
@@ -444,8 +444,8 @@ By replacing $A_{ii}$ with the average of diagonal elements of $A$, we
 have a generalized cross-validation
 \begin{equation}
   \label{eq:81}
-  GCV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} (\frac{Y_{i} - \hat
-    g_{\lambda}(x_{i})}{1 - \frac{1}{n} \Tr{A}} )^{2}
+  GCV(\lambda) = \frac{1}{n} \sum_{i=1}^{n} \left(\frac{Y_{i} - \hat
+    g_{\lambda}(x_{i})}{1 - \frac{1}{n} \Tr{A}} \right)^{2}
 \end{equation}
 
 $A_{ii}$ is analogous to the leverage of the $i$-th observation in the

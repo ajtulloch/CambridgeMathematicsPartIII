@@ -1,4 +1,4 @@
-\documentclass[10pt, reqno, oneside]{amsbook} 
+\documentclass[10pt, reqno, oneside]{amsbook}
 % \documentclass{tufte-book}
 
 % Utility packages
@@ -91,7 +91,7 @@
 
 % Shortcuts
 % convergence in probability
-\newcommand{\cd}{\overset{d}{\rightarrow}}    
+\newcommand{\cd}{\overset{d}{\rightarrow}}
 % convergence in distribution
 \newcommand{\cp}{\overset{p}{\rightarrow}}
 % convergence almost surely
@@ -100,7 +100,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\np}{\textsc{np}\xspace}
-\newcommand{\iid}{\textsc{iid}\xspace}
+\newcommand{\iid}{\xspace\textsc{iid}\xspace}
 \newcommand{\knn}{$k$-\textsc{nn}\xspace}
 
 % Expectation
@@ -108,7 +108,7 @@
   \IfNoValueTF{#1}
     {%
       \mathbb{E}
-    }    
+    }
     {%
       \IfNoValueTF{#2}
       {%
@@ -125,7 +125,7 @@
   \IfNoValueTF{#1}
     {%
       \mathbb{P}
-    }    
+    }
     {%
       \IfNoValueTF{#2}
       {%
@@ -142,7 +142,7 @@
   \IfNoValueTF{#1}
     {%
       \mathbb{Q}
-    }    
+    }
     {%
       \mathbb{Q}\!\left(#1\right)
     }%
@@ -154,7 +154,7 @@
   \IfNoValueTF{#1}
     {%
       \mathbb{I}
-    }    
+    }
     {%
       \mathbb{I}\!\left(#1\right)
     }%
@@ -165,7 +165,7 @@
   \IfNoValueTF{#1}
     {%
       \mathbb{V}
-    }    
+    }
     {%
       \mathbb{V}\!\left(#1\right)
     }%
@@ -176,7 +176,7 @@
   \IfNoValueTF{#1}
     {%
       \text{Cov}
-    }   
+    }
     {%
       \text{Cov}\!\left(#1, #2\right)
     }%
@@ -194,7 +194,7 @@
   \IfNoValueTF{#1}
     {%
       \lceil \rceil
-    }    
+    }
     {%
       \lceil#1\rceil
     }%
