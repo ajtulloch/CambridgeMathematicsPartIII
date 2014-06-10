@@ -1,4 +1,3 @@
-
 \chapter{Nearest Neighbor Classification}
 \label{cha:near-neighb-class}
 
@@ -126,13 +125,13 @@ probability.
     &\leq \E{(\sum_{i=1}^{n} W_{ni}(X)(\eta(X_{i}) - \eta(X))^{2})}
   \end{align}
 
-  Now, consider a continous function $0 \leq \eta^{\star} \leq 1$
+  Now, consider a continuous function $0 \leq \eta^{\star} \leq 1$
   which approximates $\eta$ such that (there exists $\eta^{\star}$
-  since a constinuous function is dense in $L^{2}(\mu)$),
+  since a continuous function is dense in $L^{2}(\mu)$),
   $\E{(\eta^{\star}(X) - \eta(X))^{2}} \leq \epsilon$.
 
-  Also, we require $\eta^{\star}$ statisfies (using uniform continuity
-  of $\eta^{\star}$) that, for a given $\epsilon > 0$, there esxists
+  Also, we require $\eta^{\star}$ satisfies (using uniform continuity
+  of $\eta^{\star}$) that, for a given $\epsilon > 0$, there exists
   $\delta > 0$ such that $(\eta^{\star}(x) - \eta^{\star}(y))^{2} leq
   \epsilon$ when $\| x - y \| \leq \delta$.  Then, by using the
   previous result, uniform continuity of $\eta^{\star}$, and the

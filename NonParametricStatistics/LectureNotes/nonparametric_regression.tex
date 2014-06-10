@@ -50,7 +50,7 @@ The theory of weighted least squares gives
   (X^{T} K X) \hat \beta = X^{T} K y
 \end{align}
 
-For $p = 0$, then a simple expression (Nodoraya-Watson, local constant)
+For $p = 0$, then a simple expression (Nadaraya-Watson, local constant)
 exists:
 \begin{align}
   \label{eq:54}
@@ -583,7 +583,7 @@ This motivates us to use
 Note that $g_{j}(x_{ij}) = Y_i - \alpha - \sum_{k \neq j}^{}
 g_{k}(x_{ik})$.
 
-We have then a backfitting algorithm that solves the minimization problem
+We have then a back-fitting algorithm that solves the minimization problem
 \begin{enumerate}
 \item $\hat \alpha = 0, \hat g_{j} = 0, j = 1, \dots, d$.
 \item For $j = 1, \dots, d$,
